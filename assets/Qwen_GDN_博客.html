@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Qwen Gated DeltaNet 实现细节与 Chunkwise 并行推导</title>
+  <meta name="description" content="深入解析 Qwen3-Next 的 Gated DeltaNet 架构、核心公式、实现细节与 Chunkwise 并行训练的完整推导。" />
+
+  <!-- KaTeX：公式渲染（CSS + 核心 JS + auto-render） -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+"
+        crossorigin="anonymous" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+          integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+          crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+          integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk"
+          crossorigin="anonymous"></script>
+
+  <!-- highlight.js：代码高亮 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css" />
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/python.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============ 设计变量 ============ */
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f8fa;
+      --bg-card: #ffffff;
+      --bg-code: #282c34;
+      --text: #1a1a2e;
+      --text-soft: #4a4a68;
+      --text-muted: #8a8aa3;
+      --border: #e4e6eb;
+      --border-soft: #f0f1f4;
+      --primary: #4f46e5;
+      --primary-light: #eef2ff;
+      --primary-dark: #3730a3;
+      --accent: #7c3aed;
+      --accent-soft: #f5f3ff;
+      --green: #059669;
+      --orange: #ea580c;
+      --red: #dc2626;
+      --blue: #2563eb;
+      --table-stripe: #fafbfc;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --max-w: 820px;
+      --sidebar-w: 280px;
+      --header-h: 64px;
+    }
+    [data-theme="dark"] {
+      --bg: #0f1117;
+      --bg-soft: #161821;
+      --bg-card: #1a1d27;
+      --bg-code: #0d1117;
+      --text: #e6e7ee;
+      --text-soft: #b4b6c5;
+      --text-muted: #6b6d80;
+      --border: #2a2d38;
+      --border-soft: #21232c;
+      --primary: #818cf8;
+      --primary-light: #1e1e3f;
+      --primary-dark: #a5b4fc;
+      --accent: #c4b5fd;
+      --accent-soft: #1e1b3a;
+      --table-stripe: #161821;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.5);
+    }
+
+    /* ============ 基础重置 ============ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body {
+      font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    a { color: var(--primary); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--accent); }
+
+    /* ============ 顶部进度条 ============ */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      z-index: 1000; transition: width 0.1s ease-out;
+      box-shadow: 0 0 8px rgba(79,70,229,0.5);
+    }
+
+    /* ============ 导航栏 ============ */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; height: var(--header-h);
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-soft);
+      z-index: 900; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 15px; color: var(--text); }
+    .nav-brand .logo {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex; align-items: center; justify-content: center; color: #fff;
+      font-size: 16px; font-weight: 800;
+    }
+    .nav-actions { display: flex; align-items: center; gap: 14px; }
+    .theme-toggle {
+      width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--border);
+      background: var(--bg-soft); color: var(--text-soft); cursor: pointer;
+      display: flex; align-items: center; justify-content: center; font-size: 18px;
+      transition: all 0.2s;
+    }
+    .theme-toggle:hover { border-color: var(--primary); color: var(--primary); }
+    .nav-link {
+      font-size: 14px; color: var(--text-soft); padding: 8px 14px; border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .nav-link:hover { background: var(--bg-soft); color: var(--primary); }
+
+    /* ============ 布局 ============ */
+    .layout { display: flex; max-width: 1280px; margin: 0 auto; padding-top: var(--header-h); }
+    .sidebar {
+      width: var(--sidebar-w); flex-shrink: 0; position: sticky; top: var(--header-h);
+      height: calc(100vh - var(--header-h)); overflow-y: auto;
+      padding: 32px 20px 40px; border-right: 1px solid var(--border-soft);
+    }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    .toc-title {
+      font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+      color: var(--text-muted); margin-bottom: 16px; padding-left: 14px;
+    }
+    .toc { list-style: none; }
+    .toc li { margin-bottom: 2px; }
+    .toc a {
+      display: block; padding: 7px 14px; font-size: 13.5px; color: var(--text-soft);
+      border-radius: 7px; border-left: 2px solid transparent; transition: all 0.15s; line-height: 1.5;
+    }
+    .toc a:hover { background: var(--bg-soft); color: var(--primary); }
+    .toc a.active { background: var(--primary-light); color: var(--primary); border-left-color: var(--primary); font-weight: 600; }
+    .toc .toc-sub a { padding-left: 28px; font-size: 13px; color: var(--text-muted); }
+
+    /* ============ 主体内容 ============ */
+    .content-wrap { flex: 1; min-width: 0; padding: 0 24px 80px; }
+
+    /* Hero */
+    .hero {
+      max-width: var(--max-w); margin: 0 auto; padding: 56px 0 40px;
+      border-bottom: 1px solid var(--border-soft); margin-bottom: 48px;
+    }
+    .hero .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .tag {
+      font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px;
+      background: var(--primary-light); color: var(--primary);
+    }
+    .tag.t-accent { background: var(--accent-soft); color: var(--accent); }
+    .tag.t-green { background: #ecfdf5; color: var(--green); }
+    [data-theme="dark"] .tag.t-green { background: rgba(5,150,105,0.15); }
+    .hero h1 {
+      font-size: 38px; font-weight: 800; line-height: 1.25; letter-spacing: -0.5px;
+      margin-bottom: 16px; color: var(--text);
+    }
+    .hero .subtitle { font-size: 17px; color: var(--text-soft); line-height: 1.6; max-width: 680px; }
+    .hero .meta {
+      display: flex; align-items: center; gap: 20px; margin-top: 28px; font-size: 14px; color: var(--text-muted);
+    }
+    .hero .meta .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--text-muted); }
+    .hero .meta .reading { display: flex; align-items: center; gap: 6px; }
+
+    /* 文章正文 */
+    .article { max-width: var(--max-w); margin: 0 auto; }
+
+    h2 {
+      font-size: 28px; font-weight: 700; margin-top: 56px; margin-bottom: 20px;
+      padding-bottom: 12px; border-bottom: 2px solid var(--border-soft);
+      scroll-margin-top: 80px; letter-spacing: -0.3px;
+    }
+    h2:first-of-type { margin-top: 0; }
+    h2 .h2-num {
+      display: inline-block; margin-right: 10px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    h3 {
+      font-size: 21px; font-weight: 700; margin-top: 36px; margin-bottom: 14px;
+      scroll-margin-top: 80px; color: var(--text);
+    }
+    h4 {
+      font-size: 17px; font-weight: 600; margin-top: 24px; margin-bottom: 10px;
+      color: var(--text); display: flex; align-items: center; gap: 8px;
+    }
+    h4::before { content: ''; width: 4px; height: 16px; border-radius: 2px; background: var(--primary); }
+
+    p { margin-bottom: 16px; color: var(--text-soft); }
+    strong { color: var(--text); font-weight: 600; }
+    em { font-style: italic; }
+
+    ul, ol { margin: 0 0 18px; padding-left: 24px; }
+    li { margin-bottom: 8px; color: var(--text-soft); }
+    li::marker { color: var(--primary); }
+
+    /* 行内代码 */
+    code:not([class*="language-"]) {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.88em;
+      background: var(--bg-soft); color: var(--accent); padding: 2px 6px; border-radius: 5px;
+      border: 1px solid var(--border-soft); white-space: nowrap;
+    }
+
+    /* 代码块 */
+    .code-block {
+      position: relative; margin: 20px 0; border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow-md); border: 1px solid var(--border);
+    }
+    .code-block pre {
+      margin: 0; padding: 18px 20px; overflow-x: auto; background: var(--bg-code) !important;
+    }
+    .code-block pre code {
+      font-family: 'JetBrains Mono', monospace; font-size: 13.5px; line-height: 1.65;
+      background: none; border: none; padding: 0; color: #abb2bf; white-space: pre;
+    }
+    .code-block .code-lang {
+      position: absolute; top: 0; right: 0; padding: 4px 12px; font-size: 11px; font-weight: 600;
+      color: #6b7280; background: rgba(0,0,0,0.3); border-bottom-left-radius: 8px;
+      text-transform: uppercase; letter-spacing: 0.5px; font-family: 'JetBrains Mono', monospace;
+    }
+    .code-block .copy-btn {
+      position: absolute; top: 8px; right: 12px; padding: 4px 10px; font-size: 11px;
+      border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.08);
+      color: #c9d1d9; cursor: pointer; opacity: 0; transition: opacity 0.2s;
+      font-family: 'Inter', sans-serif; z-index: 2;
+    }
+    .code-block:hover .copy-btn { opacity: 1; }
+    .code-block .copy-btn:hover { background: rgba(255,255,255,0.15); }
+    .code-block .copy-btn.copied { background: var(--green); border-color: var(--green); color: #fff; }
+
+    /* KaTeX 公式 */
+    .katex-display {
+      margin: 24px 0; padding: 20px 24px; background: var(--bg-soft); border-radius: var(--radius);
+      border: 1px solid var(--border-soft); overflow-x: auto; overflow-y: hidden;
+    }
+    [data-theme="dark"] .katex-display { background: var(--bg-card); }
+    .katex { font-size: 1.05em; }
+    .formula-box {
+      margin: 28px 0; padding: 24px 28px; background: linear-gradient(135deg, var(--primary-light), var(--accent-soft));
+      border-radius: var(--radius); border: 1px solid var(--border); position: relative; overflow-x: auto;
+    }
+    [data-theme="dark"] .formula-box { background: var(--accent-soft); }
+    .formula-box .katex-display { margin: 0; padding: 0; background: none; border: none; }
+
+    /* 表格 */
+    .table-wrap { margin: 24px 0; overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+    thead { background: var(--bg-soft); }
+    th {
+      padding: 13px 18px; text-align: left; font-weight: 600; color: var(--text);
+      border-bottom: 2px solid var(--border); white-space: nowrap;
+    }
+    td { padding: 12px 18px; border-bottom: 1px solid var(--border-soft); color: var(--text-soft); }
+    tbody tr:nth-child(even) { background: var(--table-stripe); }
+    tbody tr:hover { background: var(--primary-light); }
+    tbody tr:last-child td { border-bottom: none; }
+
+    /* 引用块 */
+    blockquote {
+      margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--primary);
+      background: var(--primary-light); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+    [data-theme="dark"] blockquote { background: rgba(79,70,229,0.1); }
+    blockquote p { margin: 0; color: var(--text); }
+    blockquote p:last-child { margin-bottom: 0; }
+
+    /* 提示框 */
+    .callout {
+      margin: 24px 0; padding: 18px 22px; border-radius: var(--radius);
+      border: 1px solid; display: flex; gap: 14px; align-items: flex-start;
+    }
+    .callout-icon { font-size: 20px; flex-shrink: 0; line-height: 1.4; }
+    .callout-body { flex: 1; }
+    .callout-body p { margin: 0; color: var(--text); }
+    .callout.tip { background: #ecfdf5; border-color: #a7f3d0; }
+    .callout.tip .callout-icon { color: var(--green); }
+    .callout.warn { background: #fffbeb; border-color: #fde68a; }
+    .callout.warn .callout-icon { color: var(--orange); }
+    [data-theme="dark"] .callout.tip { background: rgba(5,150,105,0.1); border-color: rgba(5,150,105,0.3); }
+    [data-theme="dark"] .callout.warn { background: rgba(234,88,12,0.1); border-color: rgba(234,88,12,0.3); }
+
+    /* 分隔线 */
+    hr { border: none; height: 1px; background: var(--border-soft); margin: 48px 0; }
+
+    /* 参考链接 */
+    .references { list-style: none; padding: 0; counter-reset: ref; }
+    .references li {
+      counter-increment: ref; padding: 12px 0 12px 40px; position: relative;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .references li::before {
+      content: counter(ref); position: absolute; left: 0; top: 12px;
+      width: 26px; height: 26px; border-radius: 50%; background: var(--primary-light);
+      color: var(--primary); font-size: 12px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .references li a { color: var(--primary); font-weight: 500; word-break: break-all; }
+
+    /* 页脚 */
+    .footer {
+      max-width: var(--max-w); margin: 64px auto 0; padding: 32px 0;
+      border-top: 1px solid var(--border-soft); text-align: center; color: var(--text-muted); font-size: 14px;
+    }
+    .footer .heart { color: var(--red); }
+
+    /* 返回顶部 */
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px; border-radius: 50%;
+      background: var(--primary); color: #fff; border: none; cursor: pointer; font-size: 18px;
+      display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none;
+      transition: all 0.3s; box-shadow: var(--shadow-md); z-index: 800;
+    }
+    .back-to-top.show { opacity: 1; pointer-events: auto; }
+    .back-to-top:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+    /* 移动端响应式 */
+    @media (max-width: 1024px) {
+      .sidebar { display: none; }
+      .content-wrap { padding: 0 20px 60px; }
+      .hero h1 { font-size: 30px; }
+      h2 { font-size: 24px; }
+      h3 { font-size: 19px; }
+    }
+    @media (max-width: 640px) {
+      .navbar { padding: 0 16px; }
+      .nav-brand span { display: none; }
+      .hero { padding: 36px 0 28px; }
+      .hero h1 { font-size: 24px; }
+      .hero .meta { flex-wrap: wrap; gap: 10px; }
+      .content-wrap { padding: 0 14px 40px; }
+      .katex-display { padding: 14px; font-size: 0.9em; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 阅读进度条 -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <div class="logo">Q</div>
+      <span>Qwen GDN 笔记</span>
+    </div>
+    <div class="nav-actions">
+      <a href="https://github.com/" class="nav-link" target="_blank" rel="noopener">GitHub</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+        <span id="themeIcon">🌙</span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="layout">
+    <!-- 侧边目录 -->
+    <aside class="sidebar">
+      <div class="toc-title">目录</div>
+      <ul class="toc" id="toc">
+        <li><a href="#sec1">一、架构概述</a></li>
+        <li><a href="#sec2">二、核心公式：Gated Delta Rule</a></li>
+        <li class="toc-sub"><a href="#sec2-1">2.1 符号说明</a></li>
+        <li class="toc-sub"><a href="#sec2-2">2.2 门控参数计算</a></li>
+        <li class="toc-sub"><a href="#sec2-3">2.3 两层门控的语义</a></li>
+        <li class="toc-sub"><a href="#sec2-4">2.4 与前代模型的关系</a></li>
+        <li><a href="#sec3">三、q k v 的角色变化</a></li>
+        <li class="toc-sub"><a href="#sec3-1">3.1 传统 Attention</a></li>
+        <li class="toc-sub"><a href="#sec3-2">3.2 GDN 中</a></li>
+        <li class="toc-sub"><a href="#sec3-3">3.3 对比总结</a></li>
+        <li class="toc-sub"><a href="#sec3-4">3.4 Delta Rule 在线学习</a></li>
+        <li><a href="#sec4">四、α 全局门控的时序特性</a></li>
+        <li><a href="#sec5">五、实现细节</a></li>
+        <li class="toc-sub"><a href="#sec5-1">5.1 投影与拆分</a></li>
+        <li class="toc-sub"><a href="#sec5-2">5.2 α 和 β 的计算</a></li>
+        <li class="toc-sub"><a href="#sec5-3">5.3 因果一维卷积</a></li>
+        <li class="toc-sub"><a href="#sec5-4">5.4 双模式算子</a></li>
+        <li class="toc-sub"><a href="#sec5-5">5.5 数值稳定性优化</a></li>
+        <li><a href="#sec6">六、Chunkwise 并行推导</a></li>
+        <li class="toc-sub"><a href="#sec6-1">6.1 纯递归无法并行</a></li>
+        <li class="toc-sub"><a href="#sec6-2">6.2 引入修正值 u</a></li>
+        <li class="toc-sub"><a href="#sec6-3">6.3 线性方程组</a></li>
+        <li class="toc-sub"><a href="#sec6-4">6.4 核心结果</a></li>
+        <li class="toc-sub"><a href="#sec6-5">6.5 块内输出与块末状态</a></li>
+        <li class="toc-sub"><a href="#sec6-6">6.6 分离 S₀ 相关项</a></li>
+        <li class="toc-sub"><a href="#sec6-7">6.7 加入 α 门控扩展</a></li>
+        <li class="toc-sub"><a href="#sec6-8">6.8 计算量对比</a></li>
+        <li><a href="#sec7">七、如何减少计算量</a></li>
+        <li><a href="#sec8">八、统一视角</a></li>
+        <li><a href="#sec9">九、数学工具总结</a></li>
+        <li><a href="#refs">参考资料</a></li>
+      </ul>
+    </aside>
+
+    <!-- 主内容 -->
+    <div class="content-wrap">
+      <!-- Hero -->
+      <header class="hero">
+        <div class="tags">
+          <span class="tag">Large Language Model</span>
+          <span class="tag t-accent">Linear Attention</span>
+          <span class="tag t-green">Qwen3-Next</span>
+        </div>
+        <h1>Qwen Gated DeltaNet 实现细节与 Chunkwise 并行推导</h1>
+        <p class="subtitle">深入解析 Qwen3-Next 混合注意力架构中的 Gated DeltaNet（GDN）层——从核心公式、门控机制、实现细节，到 Chunkwise 并行训练的完整数学推导。</p>
+        <div class="meta">
+          <span>📖 技术深度解析</span>
+          <span class="dot"></span>
+          <span class="reading">⏱ 约 25 分钟阅读</span>
+          <span class="dot"></span>
+          <span>🧮 含数学公式推导</span>
+        </div>
+      </header>
+
+      <!-- 正文 -->
+      <article class="article">
+
+        <!-- 一、架构概述 -->
+        <h2 id="sec1"><span class="h2-num">一、</span>架构概述</h2>
+        <p>Qwen3-Next（及后续 Qwen3.5/3.6 系列）采用<strong>混合注意力机制</strong>，在 48 层中每 4 层为一组，其中 3 层用 Gated DeltaNet（线性注意力），1 层用 Gated Attention（标准 GQA 全注意力），比例为 <strong>75% : 25%</strong>。</p>
+        <ul>
+          <li><strong>Gated DeltaNet（75%）</strong>：负责长序列的高效建模，复杂度 $O(L)$，推理时状态固定</li>
+          <li><strong>Gated Attention（25%）</strong>：放在关键语义锚点，保证精准召回能力</li>
+        </ul>
+        <div class="callout tip">
+          <span class="callout-icon">💡</span>
+          <div class="callout-body"><p>该设计将 256K 上下文的计算开销减少约 <strong>95%</strong>。</p></div>
+        </div>
+        <hr />
+
+        <!-- 二、核心公式 -->
+        <h2 id="sec2"><span class="h2-num">二、</span>核心公式：Gated Delta Rule</h2>
+        <div class="formula-box">
+          $$S_t = S_{t-1}\big(\alpha_t(I - \beta_t k_t k_t^\top)\big) + \beta_t v_t k_t^\top$$
+          $$o_t = S_t\, q_t$$
+        </div>
+
+        <h3 id="sec2-1">2.1 符号说明</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>符号</th><th>维度</th><th>含义</th></tr></thead>
+            <tbody>
+              <tr><td>$S_t$</td><td>$\mathbb{R}^{d_v \times d_k}$</td><td>状态矩阵（记忆），每个头一个，固定大小，不随序列增长</td></tr>
+              <tr><td>$S_{t-1}$</td><td>$\mathbb{R}^{d_v \times d_k}$</td><td>上一时刻的记忆</td></tr>
+              <tr><td>$q_t$</td><td>$\mathbb{R}^{d_k}$</td><td>查询向量（读取记忆的"钥匙"）</td></tr>
+              <tr><td>$k_t$</td><td>$\mathbb{R}^{d_k}$</td><td>键向量（写入/擦除记忆的"地址"）</td></tr>
+              <tr><td>$v_t$</td><td>$\mathbb{R}^{d_v}$</td><td>值向量（要写入的内容）</td></tr>
+              <tr><td>$\alpha_t$</td><td>标量 $\in (0,1)$</td><td>全局遗忘门（控制整体记忆保留率）</td></tr>
+              <tr><td>$\beta_t$</td><td>标量 $\in (0,1)$</td><td>局部更新强度（在线学习率）</td></tr>
+              <tr><td>$I$</td><td>$\mathbb{R}^{d_k \times d_k}$</td><td>单位矩阵</td></tr>
+              <tr><td>$o_t$</td><td>$\mathbb{R}^{d_v}$</td><td>输出向量</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>其中 $t$ 是 <strong>token 索引</strong>（非层索引），在一个 GDN 层内从 1 遍历到 $L$。</p>
+
+        <h3 id="sec2-2">2.2 门控参数 $\alpha_t$ 和 $\beta_t$ 的计算</h3>
+        <p>$\alpha_t$ 和 $\beta_t$ 都是 <em>data-dependent（内容驱动）</em>的，由当前 token 的 hidden_states $x_t$ 投影后经非线性变换得到。</p>
+
+        <h4>$\beta_t$ 的计算（局部更新强度）</h4>
+        <p>$$\beta_t = \sigma(b_t), \quad b_t = W_{\beta}\, x_t \in \mathbb{R}^{N_v}$$</p>
+        <p>其中 $\sigma$ 是 sigmoid 函数，$W_\beta \in \mathbb{R}^{N_v \times d}$ 是投影权重，$N_v$ 为 value head 数。每个 value head 独立一个 $\beta_t$ 标量，控制写入强度。</p>
+
+        <h4>$\alpha_t$ 的计算（全局遗忘门）</h4>
+        <p>$$\alpha_t = \exp(g_t), \quad g_t = -\exp(A_{\log}) \odot \text{softplus}(a_t + dt_{bias})$$</p>
+        <p>$$a_t = W_{\alpha}\, x_t \in \mathbb{R}^{N_v}$$</p>
+        <p>其中：</p>
+        <ul>
+          <li>$A_{\log} \in \mathbb{R}^{N_v}$：可学习参数，初始化为 $\log(\text{Uniform}(0, 16))$，控制每个头的基础衰减率</li>
+          <li>$dt_{bias} \in \mathbb{R}^{N_v}$：可学习偏置，初始化为 1</li>
+          <li>$a_t$：由当前 token 内容投影得到，实现内容驱动的动态衰减</li>
+          <li>$\text{softplus}$ 保证衰减速率为正，外层 $\exp$ + 负号保证 $\alpha_t \in (0, 1)$</li>
+          <li>$\odot$ 表示逐元素乘法</li>
+        </ul>
+        <div class="callout tip">
+          <span class="callout-icon">💡</span>
+          <div class="callout-body"><p><strong>直觉</strong>：$A_{\log}$ 设置每个头的衰减基准，$a_t$ 根据当前内容动态调制。话题切换时 $a_t$ 较大 $\to$ $\alpha_t$ 较小 $\to$ 快速遗忘；需要长期记忆时 $a_t$ 较小 $\to$ $\alpha_t \to 1$ $\to$ 保留历史。</p></div>
+        </div>
+
+        <h3 id="sec2-3">2.3 两层门控的语义</h3>
+        <ul>
+          <li><strong>$\alpha_t$（全局门控）</strong>：控制历史信息的整体保留率。$\alpha_t \to 0$ 时快速清空记忆（话题切换），$\alpha_t \to 1$ 时保留全部历史</li>
+          <li><strong>$\beta_t$（局部更新强度）</strong>：控制新信息的写入力度。$\beta_t \to 1$ 时完全覆盖旧记忆</li>
+        </ul>
+        <p>两者正交解耦：公式中 $\alpha_t$ 乘在 $(I - \beta_t k_t k_t^\top)$ 整体外面，意味着<strong>先做局部精准擦除-写入，再对整体做全局衰减</strong>。</p>
+
+        <h3 id="sec2-4">2.4 与前代模型的关系</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>模型</th><th>状态更新公式</th><th>与 GDN 的关系</th></tr></thead>
+            <tbody>
+              <tr><td>线性 RNN</td><td>$S_t = S_{t-1} + v_t k_t^\top$</td><td>GDN 中 $\alpha_t=1, \beta_t=1$ 的退化</td></tr>
+              <tr><td>Mamba2</td><td>$S_t = \alpha_t S_{t-1} + v_t k_t^\top$</td><td>GDN 中 $\beta_t \to 0$ 的退化</td></tr>
+              <tr><td>DeltaNet</td><td>$S_t = S_{t-1} + \beta_t(v_t - S_{t-1}k_t)k_t^\top$</td><td>GDN 中 $\alpha_t = 1$ 的退化</td></tr>
+              <tr><td><strong>Gated DeltaNet</strong></td><td>$S_t = S_{t-1}\big(\alpha_t(I - \beta_t k_t k_t^\top)\big) + \beta_t v_t k_t^\top$</td><td>统一全局遗忘 + 局部精确更新</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <hr />
+
+        <!-- 三、q k v 的角色变化 -->
+        <h2 id="sec3"><span class="h2-num">三、</span>q k v 的角色变化</h2>
+
+        <h3 id="sec3-1">3.1 传统 Attention 中</h3>
+        <p>$$O = \text{softmax}(QK^\top / \sqrt{d})\, V$$</p>
+        <ul>
+          <li><strong>q</strong>：与所有 k 做点积，算"该关注谁"</li>
+          <li><strong>k</strong>：被所有 q 匹配，决定"有多相关"</li>
+          <li><strong>v</strong>：被注意力权重加权求和，是"输出内容"</li>
+        </ul>
+        <p>核心特征：所有 token 同时存在，两两交互，复杂度 $O(L^2)$。</p>
+
+        <h3 id="sec3-2">3.2 GDN 中</h3>
+        <p>q k v 仍由 hidden_states 线性投影得到，但作用完全改变：</p>
+        <p><strong>写入（k 和 v）：</strong></p>
+        <p>$$\beta_t v_t k_t^\top \quad \text{-- 写入新信息}$$</p>
+        <ul>
+          <li>$k_t$ 不再用于"被匹配"，而是作为<strong>写入地址</strong>：$k_t k_t^\top$ 形成低秩投影算子，定位要修改的记忆位置</li>
+          <li>$v_t$ 不再被"加权聚合"，而是作为<strong>写入内容</strong>，通过外积 $v_t k_t^\top$ 叠加到 $S$ 上</li>
+        </ul>
+        <p><strong>擦除（k 的第二作用）：</strong></p>
+        <p>$$S_{t-1} \cdot \beta_t k_t k_t^\top \quad \text{-- 擦除旧信息}$$</p>
+        <ul>
+          <li>$k_t k_t^\top$ 把 $S_{t-1}$ 中与 $k_t$ 方向对齐的部分"抠掉"</li>
+        </ul>
+        <p><strong>读取（q）：</strong></p>
+        <p>$$o_t = S_t\, q_t \quad \text{-- 读取记忆}$$</p>
+        <ul>
+          <li>$q_t$ 不再与任何 k 做点积，而是直接乘状态矩阵 $S_t$</li>
+          <li>这是一次矩阵-向量乘法，$O(d_v \cdot d_k)$</li>
+        </ul>
+
+        <h3 id="sec3-3">3.3 对比总结</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th></th><th>传统 Attention</th><th>Gated DeltaNet</th></tr></thead>
+            <tbody>
+              <tr><td>q 的作用</td><td>与所有 k 算权重</td><td>乘状态矩阵读取 $o_t = S_t q_t$</td></tr>
+              <tr><td>k 的作用</td><td>被 q 匹配</td><td>写入地址 + 擦除算子 $k_t k_t^\top$</td></tr>
+              <tr><td>v 的作用</td><td>被加权聚合</td><td>写入内容 $v_t k_t^\top$</td></tr>
+              <tr><td>交互方式</td><td>token 间两两交互</td><td>通过共享状态矩阵 $S$ 间接交互</td></tr>
+              <tr><td>复杂度</td><td>$O(L^2 d)$</td><td>$O(L \cdot d_v d_k)$</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="sec3-4">3.4 Delta Rule 的在线学习解释</h3>
+        <p>把 $S$ 看作关联记忆，存储 $k \to v$ 的映射。Delta rule 本质是在线梯度下降：</p>
+        <ol>
+          <li>当前预测：$\hat{v}_t = S_{t-1} k_t$</li>
+          <li>误差：$e_t = v_t - \hat{v}_t = v_t - S_{t-1} k_t$</li>
+          <li>梯度下降更新：</li>
+        </ol>
+        <p>$$S_t = S_{t-1} + \beta_t\, e_t\, k_t^\top = S_{t-1} + \beta_t(v_t - S_{t-1}k_t)k_t^\top$$</p>
+        <p>展开整理：</p>
+        <p>$$S_t = S_{t-1}(I - \beta_t k_t k_t^\top) + \beta_t v_t k_t^\top$$</p>
+        <p>这正是 GDN 公式中 $\alpha_t = 1$ 的特例。$\beta_t$ 就是在线学习的学习率。</p>
+        <hr />
+
+        <!-- 四、α 全局门控的时序特性 -->
+        <h2 id="sec4"><span class="h2-num">四、</span>$\alpha$ 全局门控的时序特性</h2>
+
+        <h3>4.1 生成方式：内容驱动，非位置驱动</h3>
+        <p>$\alpha_t$ 不依赖位置编码，而是 <em>data-dependent（内容相关）</em>的。从 Qwen 实现看：</p>
+        <div class="code-block">
+          <span class="code-lang">python</span>
+          <button class="copy-btn">复制</button>
+          <pre><code class="language-python"># A_log: 可学习参数 [num_v_heads]
+# dt_bias: 可学习偏置 [num_v_heads]
+# a, b: 由当前 token 的 hidden_states 投影得到
+
+g = -exp(A_log) * softplus(a + dt_bias)
+alpha_t = exp(g)   # ∈ (0, 1)</code></pre>
+        </div>
+        <p>模型学会的是"看到某些内容时该遗忘多少"，而非"到了第几个位置就该遗忘"。</p>
+
+        <h3>4.2 作用效果：时序指数衰减</h3>
+        <p>$\alpha_t$ 作用于递推 $S_{t-1} \to S_t$，效果上是时序的。从第 $i$ 个 token 到第 $t$ 个 token，信息保留比例为：</p>
+        <p>$$\text{保留率} = \prod_{s=i+1}^{t} \alpha_s$$</p>
+        <p>若区间内 $\alpha$ 恒等于 $\alpha$，则保留率 $= \alpha^{t-i}$，呈指数衰减。</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>问题</th><th>答案</th></tr></thead>
+            <tbody>
+              <tr><td>$\alpha_t$ 是否依赖位置编码？</td><td>否，由 token 内容计算</td></tr>
+              <tr><td>$\alpha_t$ 是否随时间步变化？</td><td>是，每个 token 有不同 $\alpha_t$</td></tr>
+              <tr><td>$\alpha$ 的效果是否时序相关？</td><td>是，通过递推产生指数衰减</td></tr>
+              <tr><td>衰减率是否固定？</td><td>否，模型可按内容动态调整</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <hr />
+
+        <!-- 五、实现细节 -->
+        <h2 id="sec5"><span class="h2-num">五、</span>实现细节</h2>
+        <p>源码位于 <code>transformers/models/qwen3_next/modeling_qwen3_next.py</code> 的 <code>Qwen3NextGatedDeltaNet</code> 类。</p>
+
+        <h3 id="sec5-1">5.1 投影与拆分</h3>
+        <div class="code-block">
+          <span class="code-lang">text</span>
+          <button class="copy-btn">复制</button>
+          <pre><code class="language-text">hidden_states -> in_proj_qkvz -> q, k, v, z  (query/key/value/output_gate)
+             -> in_proj_ba    -> b, a          (用于计算 β 和 α 的门控参数)</code></pre>
+        </div>
+        <ul>
+          <li><code>in_proj_qkvz</code>: <code>Linear(hidden_size, key_dim*2 + value_dim*2)</code>，投影出 q, k, v, z</li>
+          <li><code>in_proj_ba</code>: <code>Linear(hidden_size, num_v_heads*2)</code>，投影出 b, a</li>
+          <li>Qwen3-Next 配置：64 个 value 头、16 个 key 头，头维度 128</li>
+        </ul>
+        <p>通过 <code>fix_query_key_value_ordering</code> 函数将混合投影输出拆分为结构化的多头 Q、K、V、Z 矩阵及门控参数 b、a。</p>
+
+        <h3 id="sec5-2">5.2 $\alpha$ 和 $\beta$ 的计算</h3>
+        <p>$\alpha$（全局遗忘门）和 $\beta$（局部更新强度）都是 <strong>data-dependent（内容驱动）</strong>的，由当前 token 的 hidden_states 投影后经非线性变换得到。</p>
+
+        <h4>5.2.1 $\beta$ 的计算（局部更新强度 / 输入门）</h4>
+        <p>$\beta$ 由投影得到的 <code>b</code> 经 sigmoid 激活得到：</p>
+        <div class="code-block">
+          <span class="code-lang">python</span>
+          <button class="copy-btn">复制</button>
+          <pre><code class="language-python">beta = b.sigmoid()   # β ∈ (0, 1)</code></pre>
+        </div>
+        <ul>
+          <li><code>b</code> 来自 <code>in_proj_ba</code> 投影，shape 为 <code>[batch, seq_len, num_v_heads]</code></li>
+          <li>sigmoid 保证 $\beta \in (0, 1)$</li>
+          <li>每个 value head 独立一个 $\beta$ 标量</li>
+          <li>$\beta$ 控制新信息的写入强度：$\beta \to 1$ 完全覆盖旧记忆，$\beta \to 0$ 不写入</li>
+        </ul>
+
+        <h4>5.2.2 $\alpha$ 的计算（全局遗忘门 / 衰减率）</h4>
+        <p>$\alpha$ 的计算更复杂，融合了<strong>可学习参数</strong>和<strong>数据相关参数</strong>：</p>
+        <div class="code-block">
+          <span class="code-lang">python</span>
+          <button class="copy-btn">复制</button>
+          <pre><code class="language-python"># 可学习参数（每个 value head 一组，所有 token 共享）
+A_log = log(A)       # A ~ Uniform(0, 16), 初始化时采样
+dt_bias = ones(num_v_heads)  # 可学习偏置
+
+# 数据相关参数（由当前 token 内容投影得到）
+a   # 来自 in_proj_ba, shape [batch, seq_len, num_v_heads]
+
+# 计算衰减速率 g
+g = -exp(A_log) * softplus(a + dt_bias)    # g < 0
+
+# 转换为门控值 α
+alpha = exp(g)   # α ∈ (0, 1)</code></pre>
+        </div>
+        <p>数学表达：</p>
+        <p>$$\alpha_t = \exp\Big(-\exp(A_{\log}) \cdot \text{softplus}(a_t + dt_{bias})\Big)$$</p>
+        <p>各组件的作用：</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>组件</th><th>类型</th><th>作用</th></tr></thead>
+            <tbody>
+              <tr><td>$A_{\log}$</td><td>可学习参数 <code>[num_v_heads]</code></td><td>控制<strong>每个头的基础衰减率</strong>，初始化为 $\log(\text{Uniform}(0, 16))$</td></tr>
+              <tr><td>$dt_{bias}$</td><td>可学习偏置 <code>[num_v_heads]</code></td><td>对衰减速率的偏移修正，初始化为 1</td></tr>
+              <tr><td>$a_t$</td><td>数据相关</td><td>由当前 token 内容投影，实现<strong>内容驱动的动态衰减</strong></td></tr>
+              <tr><td>$\text{softplus}$</td><td>非线性激活</td><td>保证衰减速率为正（$\text{softplus}(x) > 0$）</td></tr>
+              <tr><td>外层 $\exp$ + 负号</td><td>约束</td><td>保证 $\alpha \in (0, 1)$，即可作为门控值</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>5.2.3 设计直觉</h4>
+        <p>这个计算方式借鉴了 <strong>Mamba 的离散化方案</strong>（SSM 中的 $\Delta t$ 离散化）：</p>
+        <ol>
+          <li><strong>$A_{\log}$（基础衰减率）</strong>：每个头有一个全局可学习的衰减基准。取指数后 $\exp(A_{\log})$ 是正实数，表示"单位时间的衰减速率"。初始化范围 $(0, 16)$ 使得初始衰减速率覆盖从快遗忘到慢遗忘的各种模式。</li>
+          <li><strong>$\text{softplus}(a_t + dt_{bias})$（内容调制）</strong>：<code>softplus</code> 保证为正，<code>a_t</code> 由 token 内容决定衰减的加速/减速：
+            <ul>
+              <li>话题切换时 $a_t$ 较大 $\to$ $\text{softplus}$ 较大 $\to$ $g$ 更负 $\to$ $\alpha$ 更小 $\to$ 快速遗忘</li>
+              <li>需要长期记忆时 $a_t$ 较小 $\to$ $\text{softplus}$ 接近 0 $\to$ $g$ 接近 0 $\to$ $\alpha$ 接近 1 $\to$ 保留记忆</li>
+            </ul>
+          </li>
+          <li><strong>乘积形式 $-\exp(A_{\log}) \cdot \text{softplus}(\cdot)$</strong>：基础衰减率与内容调制的乘积，使得衰减既受头的全局特性控制，又受当前内容动态调节。</li>
+        </ol>
+
+        <h4>5.2.4 fp32 精度要求</h4>
+        <p>$\alpha$ 的计算<strong>强制在 fp32 下进行</strong>：</p>
+        <div class="code-block">
+          <span class="code-lang">python</span>
+          <button class="copy-btn">复制</button>
+          <pre><code class="language-python">g = -self.A_log.exp() * F.softplus(a.float() + self.dt_bias)</code></pre>
+        </div>
+        <div class="callout warn">
+          <span class="callout-icon">⚠️</span>
+          <div class="callout-body"><p>原因：$A_{\log}$ 取指数后，bf16 的舍入误差会变成衰减率的<strong>比例误差</strong>，而这个误差会在递推过程中被<strong>逐级放大</strong>（每步乘一次 $\alpha$，误差累积）。因此 NVIDIA 的 NeMo 实现中专门创建了 <code>Qwen3NextFp32GatedDeltaNet</code> 子类，将 <code>A_log</code>/<code>dt_bias</code> 放入 native fp32 holder，确保门控计算全程在 fp32 下执行。</p></div>
+        </div>
+
+        <h4>5.2.5 完整的前向数据流</h4>
+        <div class="code-block">
+          <span class="code-lang">text</span>
+          <button class="copy-btn">复制</button>
+          <pre><code class="language-text">hidden_states [b, s, hidden_size]
+    │
+    ├── in_proj_qkvz ──► q, k, v, z
+    │                     │
+    │                     ▼
+    │              causal_conv1d (K=4)
+    │                     │
+    │                     ▼
+    │              q, k, v (卷积后)
+    │
+    └── in_proj_ba ────► b, a
+                          │
+                    ┌─────┴─────┐
+                    ▼           ▼
+              β = σ(b)     g = -exp(A_log)·softplus(a+dt_bias)
+                              │
+                              ▼
+                        α = exp(g)
+                              │
+              ┌───────────────┼───────────────┐
+              ▼               ▼               ▼
+              q, k, v,  α, β  ──────────────► chunk_gated_delta_rule
+              或 fused_recurrent_gated_delta_rule
+                              │
+                              ▼
+                          output
+                              │
+                    z (output gate)
+                    ▼
+              RMSNormGated: norm(output) * silu(z)
+                              │
+                              ▼
+                    out_proj ──► final output</code></pre>
+        </div>
+        <p>其中 <code>z</code> 是输出门控，通过 <code>RMSNormGated</code> 对输出进行归一化和门控：先 RMSNorm，再乘以 <code>silu(z)</code>，控制输出信息的通过量。</p>
+
+        <h3 id="sec5-3">5.3 因果一维卷积（Causal Conv1d, K=4）</h3>
+        <p>在进入递归之前，对 Q/K/V 拼接后做深度因果卷积，捕获局部依赖：</p>
+        <div class="code-block">
+          <span class="code-lang">python</span>
+          <button class="copy-btn">复制</button>
+          <pre><code class="language-python">self.conv1d = nn.Conv1d(
+    in_channels=self.conv_dim,
+    out_channels=self.conv_dim,
+    bias=False,
+    kernel_size=self.conv_kernel_size,  # 4
+    groups=self.conv_dim,               # depthwise
+    padding=self.conv_kernel_size - 1,
+)</code></pre>
+        </div>
+        <p>引入卷积的原因：</p>
+        <ul>
+          <li>补足线性注意力在局部模式建模上的弱点</li>
+          <li>比 attention 便宜（$O(n)$ vs $O(n^2)$）</li>
+          <li>具备平移不变性，适合固定短语、边界模式</li>
+        </ul>
+
+        <h3 id="sec5-4">5.4 双模式算子</h3>
+        <p>系统提供两套实现，运行时自动选择高性能版本：</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>算子</th><th>用途</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td><code>causal_conv1d_fn</code></td><td>训练/全序列</td><td>CUDA fused 因果卷积</td></tr>
+              <tr><td><code>causal_conv1d_update</code></td><td>增量推理</td><td>用 conv_state 缓存，O(1) 单步</td></tr>
+              <tr><td><code>chunk_gated_delta_rule</code></td><td>训练/预填充</td><td>分块并行计算 delta rule</td></tr>
+              <tr><td><code>fused_recurrent_gated_delta_rule</code></td><td>逐 token 解码</td><td>纯递归形式，固定状态</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>每个算子有高性能 Triton/CUDA 版本和 PyTorch 参考版本（回退方案），两者计算等价。</p>
+
+        <h3 id="sec5-5">5.5 数值稳定性优化</h3>
+        <ul>
+          <li><strong>fp32 门控计算</strong>：<code>A_log</code>/<code>dt_bias</code> 放入 native fp32 holder，避免 bf16 舍入误差在递推中被放大</li>
+          <li><strong>零中心化 RMSNorm</strong>：替代传统 QK-Norm，解决归一化权重异常增长</li>
+          <li><strong>权重衰减的 LayerNorm</strong>：增强预训练稳定性</li>
+          <li><strong>padding 清零</strong>：<code>apply_mask_to_padding_states</code> 防止 padding token 污染递归状态</li>
+        </ul>
+        <hr />
+
+        <!-- 六、Chunkwise 并行推导 -->
+        <h2 id="sec6"><span class="h2-num">六、</span>Chunkwise 并行训练的完整推导</h2>
+
+        <h3 id="sec6-1">6.1 问题：纯递推无法并行</h3>
+        <p>纯递推 $S_t = f(S_{t-1}, x_t)$ 必须串行执行 $L$ 步，GPU 利用率极低。</p>
+        <p>需要将递推转换为可并行的矩阵运算，且<strong>保持数学精确性（无近似）</strong>。</p>
+
+        <h3 id="sec6-2">6.2 推导起点：引入"修正值" $u_t$</h3>
+        <p>为简化推导，先考虑 $\alpha_t = 1$（纯 DeltaNet）的情况。</p>
+        <p>定义中间变量（修正后的值）：</p>
+        <p>$$u_t = \beta_t(v_t - S_{t-1} k_t)$$</p>
+        <p>则递推变为：</p>
+        <p>$$S_t = S_{t-1} + u_t k_t^\top$$</p>
+        <p>$S_t$ 是 $S_0$ 加上一系列秩-1 修正的累加：</p>
+        <p>$$S_t = S_0 + \sum_{i=1}^{t} u_i k_i^\top$$</p>
+
+        <h3 id="sec6-3">6.3 发现 $u_t$ 满足线性方程组</h3>
+        <p>将 $S_{t-1} = S_0 + \sum_{i=1}^{t-1} u_i k_i^\top$ 代入 $u_t$ 定义：</p>
+        <p>$$u_t = \beta_t v_t - \beta_t S_0 k_t - \beta_t \sum_{i=1}^{t-1} u_i (k_i^\top k_t)$$</p>
+        <blockquote><p><strong>关键观察</strong>：$k_i^\top k_t$ 是<em>标量</em>。</p></blockquote>
+        <p>将 $C$ 个 $u_t$ 堆叠成矩阵 $U = [u_1; u_2; ...; u_C] \in \mathbb{R}^{C \times d_v}$，写成矩阵形式：</p>
+        <p>$$U = \text{diag}(\beta)\,V - \text{diag}(\beta)\,K\,S_0^\top - \text{diag}(\beta)\,\underbrace{(K K^\top \odot M_{strict})}_{C \times C}\,U$$</p>
+        <p>其中：</p>
+        <ul>
+          <li>$K = [k_1; ...; k_C] \in \mathbb{R}^{C \times d_k}$</li>
+          <li>$V = [v_1; ...; v_C] \in \mathbb{R}^{C \times d_v}$</li>
+          <li>$K K^\top \in \mathbb{R}^{C \times C}$：所有 key 的两两点积</li>
+          <li>$M_{strict}$：严格下三角掩码（保证因果性）</li>
+        </ul>
+        <p>整理得：</p>
+        <p>$$\big[I + \text{diag}(\beta)\,(K K^\top \odot M_{strict})\big]\,U = \text{diag}(\beta)\,(V - K S_0^\top)$$</p>
+
+        <h3 id="sec6-4">6.4 核心结果：$d_k \times d_k$ 连乘转换为 $C \times C$ 求逆</h3>
+        <p>定义：</p>
+        <div class="formula-box">
+          $$\boxed{P = I + \text{strictLower}\big(\text{diag}(\beta)\,K K^\top\big) \in \mathbb{R}^{C \times C}}$$
+        </div>
+        <p>则：</p>
+        <div class="formula-box">
+          $$\boxed{U = P^{-1}\,\text{diag}(\beta)\,(V - K S_0^\top)}$$
+        </div>
+        <div class="callout tip">
+          <span class="callout-icon">🎯</span>
+          <div class="callout-body"><p><strong>$d_k \times d_k$ 的矩阵连乘，变成了 $C \times C$ 矩阵 $P$ 的求逆。</strong> 这是整个 chunkwise 并行的核心。</p></div>
+        </div>
+
+        <h3 id="sec6-5">6.5 块内输出与块末状态</h3>
+        <p>有了 $U$，块内输出和块末状态都可以用矩阵乘法算出：</p>
+        <p><strong>块内输出 $O = [o_1; ...; o_C]$：</strong></p>
+        <p>$$o_t = S_t q_t = \big(S_0 + \sum_{i=1}^{t} u_i k_i^\top\big) q_t = S_0 q_t + \sum_{i=1}^{t} u_i (k_i^\top q_t)$$</p>
+        <p>矩阵形式：</p>
+        <div class="formula-box">
+          $$\boxed{O = Q\,S_0^\top + (Q K^\top \odot M)\,U}$$
+        </div>
+        <p>其中 $Q = [q_1; ...; q_C] \in \mathbb{R}^{C \times d_k}$，$M$ 是下三角因果掩码。</p>
+        <p><strong>块末状态 $S_C$：</strong></p>
+        <div class="formula-box">
+          $$\boxed{S_C = S_0 + U^\top K}$$
+        </div>
+
+        <h3 id="sec6-6">6.6 分离 $S_0$ 相关项</h3>
+        <p>令 $\tilde{U} = P^{-1}\text{diag}(\beta)V$，$\tilde{W} = P^{-1}\text{diag}(\beta)K$，则 $U = \tilde{U} - \tilde{W}S_0^\top$。</p>
+        <p>代入输出公式：</p>
+        <p>$$O = \big[Q - (QK^\top \odot M)\tilde{W}\big]\,S_0^\top + (QK^\top \odot M)\tilde{U}$$</p>
+        <p>代入状态公式：</p>
+        <p>$$S_C = S_0\big(I - \tilde{W}^\top K\big) + \tilde{U}^\top K$$</p>
+        <p>$S_0$ 相关项和无关项分离，块间只需传递 $S_0$。</p>
+
+        <h3 id="sec6-7">6.7 加入 $\alpha$ 门控的扩展</h3>
+        <p>加入 $\alpha_t$ 后，递推变为：</p>
+        <p>$$S_t = \alpha_t\, S_{t-1}(I - \beta_t k_t k_t^\top) + \beta_t v_t k_t^\top$$</p>
+        <p>$\alpha_t$ 的效果是给每步乘一个标量衰减，展开后衰减累积为：</p>
+        <p>$$\Gamma_{ij} = \prod_{s=i+1}^{j} \alpha_s \quad (i < j)$$</p>
+        <p>这是 $C \times C$ 的衰减掩码，替代原来的 $\{0,1\}$ 因果掩码 $M$。公式形式不变，只是掩码从二值变成连续值：</p>
+        <p>$$P = I + \text{strictLower}\big(\text{diag}(\beta)\,(\Gamma \odot K K^\top)\big)$$</p>
+        <div class="callout tip">
+          <span class="callout-icon">✅</span>
+          <div class="callout-body"><p>$\Gamma$ 可预先算出（$\alpha_t$ 在前向时已知），<strong>仍然精确，无近似</strong>。</p></div>
+        </div>
+
+        <h3 id="sec6-8">6.8 计算量对比</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>方案</th><th>块内计算</th><th>块间</th><th>总计算量</th></tr></thead>
+            <tbody>
+              <tr><td>纯递推</td><td>$O(C \cdot d_v d_k)$</td><td>$L/C$ 步串行</td><td>$O(L \cdot d_v d_k)$</td></tr>
+              <tr><td>chunkwise</td><td>$O(C^2 d_k + C^3)$</td><td>$L/C$ 步串行</td><td>$O(LC d_k + \frac{L}{C} d_v d_k)$</td></tr>
+              <tr><td>full attention</td><td>--</td><td>全并行</td><td>$O(L^2 d_k)$</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>以 $C=64, d_k=128$ 为例：</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>操作</th><th>原始连乘</th><th>转换后</th></tr></thead>
+            <tbody>
+              <tr><td>矩阵大小</td><td>$d_k \times d_k = 128 \times 128$</td><td>$C \times C = 64 \times 64$</td></tr>
+              <tr><td>运算量</td><td>$C \cdot d_k^3 \approx 1.3 \times 10^8$</td><td>$C^2 d_k + C^3 \approx 7.9 \times 10^5$</td></tr>
+              <tr><td>并行性</td><td>串行</td><td>可并行</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout tip">
+          <span class="callout-icon">⚡</span>
+          <div class="callout-body"><p>计算量减少约 <strong>160 倍</strong>，且从串行变为可并行。</p></div>
+        </div>
+        <hr />
+
+        <!-- 七、如何减少计算量 -->
+        <h2 id="sec7"><span class="h2-num">七、</span>如何减少计算量</h2>
+
+        <h3>7.1 复杂度从 $O(L^2)$ 降到 $O(L)$</h3>
+        <p>标准注意力计算和显存都是 $O(L^2)$。GDN 用固定大小状态矩阵 $S \in \mathbb{R}^{d_v \times d_k}$ 做递推，每个 token 只需 $O(d_v \cdot d_k)$，总复杂度 $O(L)$。</p>
+        <ul>
+          <li>4K $\to$ 256K：标准注意力计算量增加 4096 倍，GDN 仅增加 64 倍</li>
+        </ul>
+
+        <h3>7.2 推理时固定大小缓存</h3>
+        <p>标准 Transformer 推理时 KV cache 随序列线性增长。GDN 的递归状态 $S_t$ 大小恒定（$d_v \times d_k$），与序列长度无关：</p>
+        <ul>
+          <li>增量解码时每步只需更新固定矩阵，$O(1)$ 单步开销</li>
+          <li>conv_state 固定为 kernel_size - 1 长度</li>
+          <li>256K 上下文下显存峰值从 78GB 压到 42GB（FP16, A100-80G）</li>
+        </ul>
+
+        <h3>7.3 Chunkwise 并行解决训练并行性</h3>
+        <p>纯递推无法利用 GPU 并行。chunkwise 方案把序列切成块：</p>
+        <ul>
+          <li>块内：$C \times C$ 矩阵运算高度并行</li>
+          <li>块间：只递推小状态矩阵 $S$</li>
+          <li>chunk size $C$ 是核心调参点（通常 64-128）</li>
+        </ul>
+
+        <h3>7.4 混合架构只保留 25% 全注意力</h3>
+        <p>48 层中仅 12 层用标准 GQA，其余 36 层用 GDN：</p>
+        <ul>
+          <li>75% 的层享受 $O(L)$ 复杂度和固定缓存</li>
+          <li>25% 的层提供高精度全局交互</li>
+          <li>4K 上下文预填充场景实现近 7 倍加速</li>
+        </ul>
+
+        <h3>7.5 与超稀疏 MoE 协同</h3>
+        <p>Qwen3-Next 的 MoE 有 512 个专家、仅激活 10+1 个，激活率 3.7%。GDN 的低计算开销与稀疏 MoE 叠加，使 80B 总参数模型仅激活 3B 参数，整体推理速度提升约 10 倍。</p>
+        <hr />
+
+        <!-- 八、统一视角 -->
+        <h2 id="sec8"><span class="h2-num">八、</span>统一视角：RNN、Mamba、Transformer 的等价关系</h2>
+
+        <h3>8.1 统一框架：都是"状态压缩 + 检索"</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>模型</th><th>状态更新</th><th>读取</th><th>压缩方式</th></tr></thead>
+            <tbody>
+              <tr><td>线性 RNN</td><td>$S_t = S_{t-1} + v_t k_t^\top$</td><td>$o_t = S_t q_t$</td><td>纯累加，无遗忘</td></tr>
+              <tr><td>Mamba2</td><td>$S_t = \alpha_t S_{t-1} + v_t k_t^\top$</td><td>$o_t = S_t q_t$</td><td>累加 + 标量遗忘</td></tr>
+              <tr><td>DeltaNet</td><td>$S_t = S_{t-1}(I-\beta_t k_t k_t^\top) + \beta_t v_t k_t^\top$</td><td>$o_t = S_t q_t$</td><td>delta rule（擦除+写入）</td></tr>
+              <tr><td>Gated DeltaNet</td><td>上式 + $\alpha_t$</td><td>$o_t = S_t q_t$</td><td>delta rule + 门控遗忘</td></tr>
+              <tr><td>Transformer</td><td><strong>无显式状态</strong></td><td>$o_t = \sum_j \text{softmax}(q_t^\top k_j) v_j$</td><td><strong>不压缩</strong>，保留全部历史</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>8.2 精确等价关系</h3>
+        <ol>
+          <li><strong>线性 Attention $\equiv$ 线性 RNN</strong>（精确）：Katharopoulos et al. (2020) 证明，用线性核替代 softmax 后，attention 可精确重写为 RNN</li>
+          <li><strong>Mamba2 $\equiv$ 带门控的线性 Attention</strong>（精确）：Mamba2 论文（Dao &amp; Gu, 2024）建立双向映射</li>
+          <li><strong>GDN = 线性 Attention + delta rule 修正</strong>：$\beta \to 0$ 时退化为线性 attention</li>
+          <li><strong>Softmax Attention $\approx$ 线性 Attention</strong>（近似）：当 attention 分布较平坦时成立</li>
+        </ol>
+
+        <h3>8.3 Chunk Size 连续谱</h3>
+        <p>RNN 和 Transformer 是 chunk size 谱的两个端点：</p>
+        <div class="code-block">
+          <span class="code-lang">text</span>
+          <button class="copy-btn">复制</button>
+          <pre><code class="language-text">C = 1                          C = L
+ |                               |
+ v                               v
+纯 RNN                       Full Attention
+完全串行                      完全并行
+O(L) 计算量                  O(L²) 计算量
+零块内交互                   全部 token 交互
+状态固定大小                 保留全部 KV</code></pre>
+        </div>
+        <ul>
+          <li>$C = 1$：每步一个 token，纯递推（RNN/Mamba 推理模式）</li>
+          <li>$C = L$：整个序列一个块，$L \times L$ 矩阵运算（Attention）</li>
+          <li>$1 < C < L$：chunkwise，块内并行 + 块间递推（GDN/Mamba2 训练模式）</li>
+        </ul>
+
+        <h3>8.4 不同模型的块内交互矩阵</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>模型</th><th>块内 $C \times C$ 矩阵</th><th>含义</th></tr></thead>
+            <tbody>
+              <tr><td>Linear Attention</td><td>$QK^\top$</td><td>query-key 读取交互</td></tr>
+              <tr><td>Mamba2</td><td>$\Gamma \odot QK^\top$</td><td>带衰减的读取交互</td></tr>
+              <tr><td>GDN</td><td>$P^{-1}$ 涉及 $\Gamma \odot KK^\top$</td><td><strong>写入交互</strong> + 读取交互</td></tr>
+              <tr><td>Softmax Attention</td><td>$\text{softmax}(QK^\top)$</td><td>非线性读取交互</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>GDN 多了 $KK^\top$ 是因为 delta rule 的擦除操作——写入新 key 时要考虑与旧 key 的冲突。纯加法模型（RNN/Mamba）没有这个项。</p>
+
+        <h3>8.5 GDN 与 Attention 的形式对比</h3>
+        <p>当 $\beta$ 很小时，$P \approx I$，$U \approx \text{diag}(\beta) V$，GDN 的 chunkwise 输出退化为：</p>
+        <p>$$O \approx Q S_0^\top + (Q K^\top \odot M)\,\text{diag}(\beta)\,V$$</p>
+        <p>这几乎就是 causal linear attention：$(QK^\top \odot M) V$。</p>
+        <p>$P^{-1}$ 的修正项涉及 $KK^\top$，捕获的是"key 之间的写入冲突"：</p>
+        <ul>
+          <li>Attention 的 $QK^\top$：<strong>读取时</strong>交互（query 选 key）</li>
+          <li>GDN 的 $KK^\top$：<strong>写入时</strong>交互（新 key 擦除旧 key）</li>
+        </ul>
+        <hr />
+
+        <!-- 九、数学工具总结 -->
+        <h2 id="sec9"><span class="h2-num">九、</span>用到的数学工具总结</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>数学工具</th><th>在哪里用</th><th>作用</th></tr></thead>
+            <tbody>
+              <tr><td>秩-1扰动结构</td><td>$A_t = I - \beta_t k_t k_t^\top$</td><td>连乘可降维到 $C \times C$</td></tr>
+              <tr><td>外积求和</td><td>$S_t = S_0 + \sum u_i k_i^\top$</td><td>把矩阵递推变成向量序列</td></tr>
+              <tr><td>线性方程组</td><td>$PU = B$</td><td>$C \times C$ 方程组替代 $d_k \times d_k$ 连乘</td></tr>
+              <tr><td>下三角矩阵求逆</td><td>$P^{-1}$</td><td>$P$ 是下三角+单位阵，求逆高效稳定</td></tr>
+              <tr><td>因果/衰减掩码</td><td>$M_{strict}$, $\Gamma$</td><td>保证因果性，编码时序依赖</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout tip">
+          <span class="callout-icon">📌</span>
+          <div class="callout-body"><p><strong>核心一句话</strong>：利用 $A_t = I - \beta_t k_t k_t^\top$ 的秩-1结构，把 $d_k \times d_k$ 的矩阵连乘等价转换为 $C \times C$ 的线性方程组求解，从而把计算量从 $O(C \cdot d_k^3)$ 降到 $O(C^2 d_k + C^3)$，同时获得并行性。</p></div>
+        </div>
+        <hr />
+
+        <!-- 参考资料 -->
+        <h2 id="refs"><span class="h2-num">📖</span>参考资料</h2>
+        <ol class="references">
+          <li><a href="https://arxiv.org/pdf/2412.06464" target="_blank" rel="noopener">Gated Delta networks: Improving Mamba 2 with Delta rule (ICLR 2025)</a></li>
+          <li><a href="https://github.com/huggingface/transformers/blob/main/src/transformers/models/qwen3_next/modeling_qwen3_next.py" target="_blank" rel="noopener">Qwen3NextGatedDeltaNet 源码</a></li>
+          <li><a href="https://arxiv.org/abs/2006.16236" target="_blank" rel="noopener">Transformers are RNNs (Katharopoulos et al., 2020)</a></li>
+          <li><a href="https://arxiv.org/abs/2405.21060" target="_blank" rel="noopener">Transformers are SSMs (Mamba2, Dao &amp; Gu, 2024)</a></li>
+          <li><a href="https://qwenlm.github.io/blog/qwen3_next/" target="_blank" rel="noopener">Qwen3-Next 官方博客</a></li>
+          <li><a href="https://developer.nvidia.com/blog/new-open-source-qwen3-next-models-preview-hybrid-moe-architecture-delivering-improved-accuracy-and-accelerated-parallel-processing-across-nvidia-platform/" target="_blank" rel="noopener">NVIDIA Qwen3-Next 技术博客</a></li>
+        </ol>
+
+      </article>
+
+      <!-- 页脚 -->
+      <footer class="footer">
+        <p>本文基于 Qwen3-Next 官方实现与相关论文整理 · 公式渲染由 <a href="https://katex.org/" target="_blank" rel="noopener">KaTeX</a> 驱动</p>
+        <p style="margin-top:8px;">部署于 GitHub Pages · 持续学习，持续更新 <span class="heart">❤</span></p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- 返回顶部 -->
+  <button class="back-to-top" id="backToTop" aria-label="返回顶部">↑</button>
+
+  <script>
+    // ============ KaTeX 自动渲染 ============
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+        delimiters: [
+          {left: '$$', right: '$$', display: true},
+          {left: '$', right: '$', display: false},
+          {left: '\\(', right: '\\)', display: false},
+          {left: '\\[', right: '\\]', display: true}
+        ],
+        throwOnError: false,
+        ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+        ignoredClasses: ["language-text", "language-python"]
+      });
+      // 代码高亮
+      if (window.hljs) {
+        document.querySelectorAll('pre code').forEach((block) => {
+          hljs.highlightElement(block);
+        });
+      }
+    });
+
+    // ============ 主题切换 ============
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+    themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      themeIcon.textContent = next === 'dark' ? '☀️' : '🌙';
+      localStorage.setItem('theme', next);
+    });
+
+    // ============ 阅读进度条 ============
+    const progressBar = document.getElementById('progressBar');
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (scrollTop / docHeight) * 100;
+      progressBar.style.width = progress + '%';
+      backToTop.classList.toggle('show', scrollTop > 600);
+    });
+    backToTop.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+
+    // ============ TOC 高亮当前章节 ============
+    const tocLinks = document.querySelectorAll('.toc a');
+    const sections = document.querySelectorAll('h2[id], h3[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    sections.forEach(s => observer.observe(s));
+
+    // ============ 代码块复制 ============
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const code = btn.parentElement.querySelector('code').innerText;
+        navigator.clipboard.writeText(code).then(() => {
+          btn.textContent = '已复制';
+          btn.classList.add('copied');
+          setTimeout(() => { btn.textContent = '复制'; btn.classList.remove('copied'); }, 2000);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
