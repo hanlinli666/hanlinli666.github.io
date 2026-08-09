@@ -1,0 +1,14 @@
+# manifest.json 由 scripts/generate-manifest.js 自动生成，
+# 本地预览与 CI 部署时都会重新生成，无需提交
+manifest.json
+
+# 发布目录
+dist/
+
+# 系统与编辑器杂物
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
+.vscode/
+.idea/

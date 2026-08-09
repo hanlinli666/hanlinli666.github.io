@@ -1152,9 +1152,110 @@ footer .sources .src-url {
 </div>
 </footer>
 
-<script src="#"></script>
-<script src="#"></script>
-<script src="#"></script>
+<!-- 图表依赖：仅本文章加载，不影响主页速度 -->
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js"></script>
+<script>
+(function () {
+  var blue = '#2563eb', green = '#10b981', amber = '#f59e0b';
+  var muted = '#6b7280', rule = '#d9dee8';
+  var ages = ['25','26','27','28','29','30','31','32','33','34'];
 
+  // Mermaid 流程图
+  if (window.mermaid) {
+    mermaid.initialize({ startOnLoad: true, theme: 'default', flowchart: { curve: 'basis', useMaxWidth: true } });
+  }
+
+  if (!window.echarts) return;
+  var charts = [];
+  function mk(id, opt) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var c = echarts.init(el);
+    c.setOption(opt);
+    charts.push(c);
+  }
+
+  // 图1：1000万净资产来源构成（饼图）
+  mk('chart-composition', {
+    color: [blue, green, amber],
+    tooltip: { trigger: 'item', formatter: '{b}: {c}万 ({d}%)' },
+    legend: { bottom: 0, textStyle: { color: muted } },
+    series: [{
+      type: 'pie',
+      radius: ['42%', '70%'],
+      avoidLabelOverlap: true,
+      itemStyle: { borderRadius: 8, borderColor: '#fff', borderWidth: 2 },
+      label: { formatter: '{b}\n{d}%', color: '#1a1f36' },
+      data: [
+        { value: 709, name: '现金储蓄' },
+        { value: 154, name: '投资复利' },
+        { value: 114, name: '股票/期权' }
+      ]
+    }]
+  });
+
+  // 图3：10年净资产增长曲线（三种情景）
+  mk('chart-networth', {
+    color: [muted, blue, green],
+    tooltip: { trigger: 'axis', formatter: function (p) {
+      var s = p[0].axisValue + '岁';
+      p.forEach(function (i) { s += '<br/>' + i.marker + i.seriesName + ': ' + i.value + '万'; });
+      return s;
+    }},
+    legend: { data: ['保守方案', '基准方案', '乐观方案'], bottom: 0, textStyle: { color: muted } },
+    grid: { left: 55, right: 24, top: 24, bottom: 56 },
+    xAxis: { type: 'category', data: ages, axisLabel: { color: muted }, name: '岁', nameTextStyle: { color: muted } },
+    yAxis: { type: 'value', name: '万元', axisLabel: { color: muted }, splitLine: { lineStyle: { color: rule } } },
+    series: [
+      { name: '保守方案', type: 'line', smooth: true, data: [26, 55, 89, 137, 189, 249, 325, 413, 514, 637] },
+      { name: '基准方案', type: 'line', smooth: true, data: [40, 85, 137, 210, 290, 382, 498, 633, 788, 977],
+        markLine: { silent: true, symbol: 'none', lineStyle: { type: 'dashed', color: amber },
+          data: [{ yAxis: 1000, label: { formatter: '1000万目标', color: amber } }] } },
+      { name: '乐观方案', type: 'line', smooth: true, data: [66, 140, 225, 345, 477, 628, 818, 1040, 1295, 1606] }
+    ]
+  });
+
+  // 图4：年薪构成变化（Base / 奖金 / 股票，堆叠柱状图）
+  mk('chart-income', {
+    color: [blue, green, amber],
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, formatter: function (p) {
+      var s = p[0].axisValue + '岁', t = 0;
+      p.forEach(function (i) { s += '<br/>' + i.marker + i.seriesName + ': ' + i.value + '万'; t += i.value; });
+      return s + '<br/>合计: ' + Math.round(t) + '万';
+    }},
+    legend: { data: ['Base', '奖金', '股票'], bottom: 0, textStyle: { color: muted } },
+    grid: { left: 55, right: 24, top: 24, bottom: 56 },
+    xAxis: { type: 'category', data: ages, axisLabel: { color: muted }, name: '岁', nameTextStyle: { color: muted } },
+    yAxis: { type: 'value', name: '万元', axisLabel: { color: muted }, splitLine: { lineStyle: { color: rule } } },
+    series: [
+      { name: 'Base', type: 'bar', stack: 't', data: [50.25, 54.75, 60.75, 80.25, 87.75, 101.25, 120, 136.5, 157.5, 191.25] },
+      { name: '奖金', type: 'bar', stack: 't', data: [16.75, 18.25, 20.25, 26.75, 29.25, 33.75, 40, 45.5, 52.5, 63.75] },
+      { name: '股票', type: 'bar', stack: 't', data: [3, 3, 4, 8, 8, 10, 15, 18, 20, 25] }
+    ]
+  });
+
+  // 图5：分阶段资产配置变化（堆叠柱状图）
+  mk('chart-alloc', {
+    color: [blue, green, amber],
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, formatter: function (p) {
+      var s = p[0].axisValue;
+      p.forEach(function (i) { s += '<br/>' + i.marker + i.seriesName + ': ' + i.value + '%'; });
+      return s;
+    }},
+    legend: { data: ['权益类(指数基金)', '固收类(债基/存款)', '另类(黄金/REITs)'], bottom: 0, textStyle: { color: muted } },
+    grid: { left: 55, right: 24, top: 24, bottom: 60 },
+    xAxis: { type: 'category', data: ['积累期\n25-27', '增长期\n28-30', '攻坚期\n31-33', '冲刺期\n34-35'], axisLabel: { color: muted, interval: 0 } },
+    yAxis: { type: 'value', max: 100, name: '占比%', axisLabel: { color: muted, formatter: '{value}%' }, splitLine: { lineStyle: { color: rule } } },
+    series: [
+      { name: '权益类(指数基金)', type: 'bar', stack: 'a', data: [60, 65, 55, 45] },
+      { name: '固收类(债基/存款)', type: 'bar', stack: 'a', data: [35, 25, 30, 40] },
+      { name: '另类(黄金/REITs)', type: 'bar', stack: 'a', data: [5, 10, 15, 15] }
+    ]
+  });
+
+  window.addEventListener('resize', function () { charts.forEach(function (c) { c.resize(); }); });
+})();
+</script>
 
 </body></html>
