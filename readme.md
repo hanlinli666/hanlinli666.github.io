@@ -61,7 +61,7 @@ GitHub Pages 是纯静态托管，浏览器无法直接“列出目录”，因�
 2. **Build and deployment → Source** 选择 **GitHub Actions**；
 3. 推送代码到 `main` 分支，工作流会自动构建并部署。
 
-部署完成后访问地址为：<https://hanlinli666.github.io/Personal/>
+部署完成后访问地址为：<https://hanlinli666.github.io/hanlinli666/>
 （所有资源均使用相对路径，因此在子路径下也能正常工作。）
 
 ## 本地预览
