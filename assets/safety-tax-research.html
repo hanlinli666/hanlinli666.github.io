@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety Tax 研究：大模型安全对齐的代价与出路 | 综述</title>
+    <meta name="description" content="Safety Tax（安全税）研究全景综述：从概念定义、根因分析到六大类缓解方法，涵盖 27+ 篇前沿论文。">
+    <style>
+        /* ========== Theme Variables ========== */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f6f8fa;
+            --bg-tertiary: #eef1f4;
+            --bg-card: #ffffff;
+            --bg-hover: #f0f2f5;
+            --bg-code: #f0f2f5;
+            --text-primary: #1f2328;
+            --text-secondary: #59636e;
+            --text-muted: #818b96;
+            --accent-blue: #0969da;
+            --accent-green: #1a7f37;
+            --accent-orange: #9a6700;
+            --accent-red: #cf222e;
+            --accent-purple: #8250df;
+            --accent-cyan: #0598bc;
+            --border-color: #d0d7de;
+            --border-light: #e3e8ec;
+            --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+            --shadow-hover: 0 2px 8px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.06);
+            --sidebar-width: 280px;
+            --content-max-width: 860px;
+            --radius: 10px;
+            --radius-sm: 6px;
+            --transition: 0.2s ease;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #1c2128;
+            --bg-card: #1a1f2e;
+            --bg-hover: #22272e;
+            --bg-code: #1c2128;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --accent-blue: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-orange: #d29922;
+            --accent-red: #f85149;
+            --accent-purple: #bc8cff;
+            --accent-cyan: #39d2c0;
+            --border-color: #30363d;
+            --border-light: #21262d;
+            --shadow: 0 3px 12px rgba(0,0,0,0.4);
+            --shadow-hover: 0 4px 16px rgba(0,0,0,0.5);
+        }
+
+        /* ========== Reset ========== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 30px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* ========== Layout ========== */
+        .layout { display: flex; min-height: 100vh; }
+
+        /* ========== Sidebar ========== */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            z-index: 100;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .sidebar-header {
+            padding: 24px 20px 16px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .sidebar-header h1 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.4;
+            margin-bottom: 6px;
+        }
+
+        .sidebar-header .subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .sidebar-header .badge {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 2px 10px;
+            background: rgba(9,105,218,0.1);
+            color: var(--accent-blue);
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        [data-theme="dark"] .sidebar-header .badge {
+            background: rgba(88,166,255,0.15);
+        }
+
+        .nav-section { padding: 12px 0; }
+
+        .nav-section-title {
+            padding: 4px 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+        }
+
+        .nav-link {
+            display: block;
+            padding: 6px 20px 6px 28px;
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all var(--transition);
+            border-left: 2px solid transparent;
+            line-height: 1.5;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            background: var(--bg-hover);
+            border-left-color: var(--accent-blue);
+        }
+
+        .nav-link.active {
+            color: var(--accent-blue);
+            border-left-color: var(--accent-blue);
+            background: rgba(9,105,218,0.06);
+            font-weight: 600;
+        }
+
+        [data-theme="dark"] .nav-link.active {
+            background: rgba(88,166,255,0.08);
+        }
+
+        /* ========== Top Bar ========== */
+        .topbar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: var(--sidebar-width);
+            height: 52px;
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 24px;
+            z-index: 90;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .topbar-breadcrumb {
+            margin-right: auto;
+            font-size: 13px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .topbar-breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .topbar-breadcrumb a:hover {
+            color: var(--accent-blue);
+        }
+
+        .topbar-breadcrumb .sep {
+            color: var(--text-muted);
+            opacity: 0.5;
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 13px;
+            font-family: inherit;
+            transition: all var(--transition);
+            white-space: nowrap;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .theme-toggle .icon {
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        /* ========== Main Content ========== */
+        .main {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 0;
+            min-width: 0;
+        }
+
+        .content {
+            max-width: var(--content-max-width);
+            margin: 0 auto;
+            padding: 80px 40px 80px;
+        }
+
+        /* ========== Typography ========== */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.35;
+            scroll-margin-top: 70px;
+        }
+
+        .content h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content .meta {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 36px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .content .meta span { margin-right: 16px; }
+
+        h2 {
+            font-size: 24px;
+            margin-top: 56px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        h2 .section-num {
+            color: var(--accent-blue);
+            margin-right: 8px;
+        }
+
+        h3 {
+            font-size: 19px;
+            margin-top: 36px;
+            margin-bottom: 14px;
+            color: var(--text-primary);
+        }
+
+        h4 {
+            font-size: 16px;
+            margin-top: 24px;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        a:hover { text-decoration: underline; }
+
+        strong { color: var(--text-primary); font-weight: 700; }
+
+        code {
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.88em;
+            background: var(--bg-code);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--accent-orange);
+        }
+
+        ul, ol { margin-bottom: 16px; padding-left: 24px; }
+        li { margin-bottom: 8px; color: var(--text-primary); }
+
+        blockquote {
+            border-left: 3px solid var(--accent-blue);
+            padding: 12px 20px;
+            margin: 20px 0;
+            background: rgba(9,105,218,0.05);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            color: var(--text-secondary);
+        }
+
+        [data-theme="dark"] blockquote {
+            background: rgba(88,166,255,0.06);
+        }
+
+        blockquote p { margin-bottom: 0; }
+
+        /* ========== Cards ========== */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-title .icon { font-size: 20px; }
+
+        /* ========== Method Cards ========== */
+        .method-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            margin: 24px 0;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: box-shadow var(--transition), border-color var(--transition);
+        }
+
+        .method-card:hover {
+            border-color: var(--accent-blue);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .method-header {
+            padding: 14px 24px;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            background: var(--bg-secondary);
+        }
+
+        .method-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .method-name a { color: inherit; }
+
+        .method-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .tag-blue { background: rgba(9,105,218,0.1); color: var(--accent-blue); }
+        .tag-green { background: rgba(26,127,55,0.1); color: var(--accent-green); }
+        .tag-orange { background: rgba(154,103,0,0.1); color: var(--accent-orange); }
+        .tag-purple { background: rgba(130,80,223,0.1); color: var(--accent-purple); }
+        .tag-red { background: rgba(207,34,46,0.1); color: var(--accent-red); }
+        .tag-cyan { background: rgba(5,152,188,0.1); color: var(--accent-cyan); }
+
+        [data-theme="dark"] .tag-blue { background: rgba(88,166,255,0.15); color: var(--accent-blue); }
+        [data-theme="dark"] .tag-green { background: rgba(63,185,80,0.15); color: var(--accent-green); }
+        [data-theme="dark"] .tag-orange { background: rgba(210,153,34,0.15); color: var(--accent-orange); }
+        [data-theme="dark"] .tag-purple { background: rgba(188,140,255,0.15); color: var(--accent-purple); }
+        [data-theme="dark"] .tag-red { background: rgba(248,81,73,0.15); color: var(--accent-red); }
+        [data-theme="dark"] .tag-cyan { background: rgba(57,210,192,0.15); color: var(--accent-cyan); }
+
+        .method-body { padding: 20px 24px; }
+
+        .method-body p {
+            font-size: 14.5px;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+        }
+
+        .method-body p strong { color: var(--text-primary); }
+
+        .method-result {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 10px 14px;
+            background: rgba(26,127,55,0.06);
+            border-radius: var(--radius-sm);
+            font-size: 13.5px;
+            color: var(--accent-green);
+            margin-top: 8px;
+        }
+
+        [data-theme="dark"] .method-result {
+            background: rgba(63,185,80,0.08);
+            color: var(--accent-green);
+        }
+
+        .method-result::before { content: "→"; font-weight: 700; flex-shrink: 0; }
+
+        /* ========== Diagrams ========== */
+        .diagram {
+            margin: 28px 0;
+            text-align: center;
+        }
+
+        .diagram svg { max-width: 100%; height: auto; }
+
+        .diagram-caption {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        /* ========== Tables ========== */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+        }
+
+        table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+
+        th {
+            background: var(--bg-secondary);
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 700;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-primary);
+        }
+
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--bg-hover); }
+
+        /* ========== Timeline ========== */
+        .timeline {
+            position: relative;
+            padding-left: 28px;
+            margin: 28px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item { position: relative; margin-bottom: 24px; }
+
+        .timeline-dot {
+            position: absolute;
+            left: -28px;
+            top: 4px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 2px solid var(--accent-blue);
+        }
+
+        .timeline-item.highlight .timeline-dot {
+            border-color: var(--accent-orange);
+            background: var(--accent-orange);
+        }
+
+        .timeline-date {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 4px;
+        }
+
+        .timeline-item.highlight .timeline-date { color: var(--accent-orange); }
+
+        .timeline-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .timeline-desc {
+            font-size: 13.5px;
+            color: var(--text-secondary);
+        }
+
+        /* ========== Callout ========== */
+        .callout {
+            padding: 16px 20px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            font-size: 14.5px;
+        }
+
+        .callout-warning { background: rgba(154,103,0,0.06); border-left: 3px solid var(--accent-orange); }
+        .callout-info { background: rgba(9,105,218,0.05); border-left: 3px solid var(--accent-blue); }
+        .callout-success { background: rgba(26,127,55,0.05); border-left: 3px solid var(--accent-green); }
+
+        [data-theme="dark"] .callout-warning { background: rgba(210,153,34,0.1); }
+        [data-theme="dark"] .callout-info { background: rgba(88,166,255,0.08); }
+        [data-theme="dark"] .callout-success { background: rgba(63,185,80,0.08); }
+
+        /* ========== Stats Grid ========== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* ========== Category Grid ========== */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .category-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 20px;
+            text-align: center;
+            transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .category-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-blue);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .category-icon { font-size: 28px; margin-bottom: 10px; }
+        .category-name { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+        .category-count { font-size: 12px; color: var(--text-muted); }
+
+        /* ========== Reference List ========== */
+        .ref-list { list-style: none; padding-left: 0; counter-reset: ref-counter; }
+
+        .ref-list li {
+            counter-increment: ref-counter;
+            padding-left: 36px;
+            position: relative;
+            margin-bottom: 14px;
+            font-size: 13.5px;
+            line-height: 1.7;
+        }
+
+        .ref-list li::before {
+            content: "[" counter(ref-counter) "]";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        /* ========== Mobile Toggle ========== */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 200;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 99;
+        }
+
+        /* ========== Footer ========== */
+        .footer-note {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        /* ========== Responsive ========== */
+        @media (max-width: 1024px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .menu-toggle { display: block; }
+            .overlay.show { display: block; }
+            .main { margin-left: 0; }
+            .topbar { left: 0; }
+            .content { padding: 70px 24px 60px; }
+        }
+
+        @media (max-width: 640px) {
+            .content { padding: 70px 16px 60px; }
+            .content h1 { font-size: 24px; }
+            h2 { font-size: 20px; }
+            h3 { font-size: 17px; }
+            .method-header { flex-direction: column; align-items: flex-start; }
+            .topbar { padding: 0 12px; }
+            .topbar-breadcrumb { font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+    <div class="layout">
+        <!-- ========== Sidebar Navigation ========== -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>Safety Tax 研究<br>全景综述</h1>
+                <p class="subtitle">大模型安全对齐的代价与出路</p>
+                <span class="badge">27+ 篇论文</span>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">概述</div>
+                <a class="nav-link" href="#intro">什么是 Safety Tax</a>
+                <a class="nav-link" href="#timeline">研究演进时间线</a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">概念起源</div>
+                <a class="nav-link" href="#shallow">浅层对齐问题</a>
+                <a class="nav-link" href="#naming">Safety Tax 正式命名</a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">根因分析</div>
+                <a class="nav-link" href="#cause-distribution">分布偏移</a>
+                <a class="nav-link" href="#cause-parameter">参数干扰</a>
+                <a class="nav-link" href="#cause-neuron">神经元重叠</a>
+                <a class="nav-link" href="#cause-shallow">浅层对齐</a>
+                <a class="nav-link" href="#cause-sequential">顺序训练叠加</a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">缓解方法</div>
+                <a class="nav-link" href="#mitigation-overview">方法总览</a>
+                <a class="nav-link" href="#cat-data">一、安全数据构建</a>
+                <a class="nav-link" href="#cat-param">二、参数空间约束</a>
+                <a class="nav-link" href="#cat-reasoning">三、推理式对齐</a>
+                <a class="nav-link" href="#cat-online">四、在线自生成</a>
+                <a class="nav-link" href="#cat-inference">五、推理时干预</a>
+                <a class="nav-link" href="#cat-merge">六、参数合并修复</a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">机制与理论</div>
+                <a class="nav-link" href="#mechanism">机制理解</a>
+                <a class="nav-link" href="#industry">工业实践数据</a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">总结</div>
+                <a class="nav-link" href="#stage">研究阶段判断</a>
+                <a class="nav-link" href="#refs">完整论文清单</a>
+            </div>
+        </nav>
+
+        <!-- ========== Main Content ========== -->
+        <main class="main">
+            <!-- Top Bar -->
+            <div class="topbar">
+                <div class="topbar-breadcrumb">
+                    <a href="#">Blog</a>
+                    <span class="sep">/</span>
+                    <span>Safety Tax 综述</span>
+                </div>
+                <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
+                    <span class="icon" id="themeIcon">🌙</span>
+                    <span id="themeText">深色</span>
+                </button>
+            </div>
+
+            <div class="content">
+
+                <!-- ===== Hero ===== -->
+                <h1>Safety Tax：大模型安全对齐的代价与出路</h1>
+                <div class="meta">
+                    <span>📅 2026-08-10</span>
+                    <span>🏷️ LLM Safety · Alignment · Reasoning</span>
+                </div>
+
+                <!-- ===== 1. 什么是 Safety Tax ===== -->
+                <h2 id="intro"><span class="section-num">1</span>什么是 Safety Tax</h2>
+
+                <p><strong>Safety Tax（安全税）</strong>，又称 <strong>Alignment Tax（对齐税）</strong>，指的是在对大语言模型（LLM）进行安全对齐（safety alignment）后，模型在<strong>推理能力、通用知识、有用性</strong>等方面出现的可量化的性能退化。简单来说：<strong>模型变得更安全了，但变"笨"了</strong>。</p>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">7-32%</div>
+                        <div class="stat-label">推理能力损失</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">37.6%</div>
+                        <div class="stat-label">跨文化 Safety Tax</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">0.878</div>
+                        <div class="stat-label">安全-过度拒绝相关系数</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">27+</div>
+                        <div class="stat-label">相关论文</div>
+                    </div>
+                </div>
+
+                <p>这一概念最早可追溯到 RLHF 被提出时（Ouyang et al., 2022；Askell et al., 2021），但"Safety Tax"这一术语由 <strong>Huang 等人（Georgia Tech, 2025 年 3 月）</strong>在论文《Safety Tax: Safety Alignment Makes Your Large Reasoning Models Less Reasonable》中正式命名，并聚焦于<strong>大推理模型（LRM）</strong>场景。</p>
+
+                <!-- ===== 2. Timeline ===== -->
+                <h2 id="timeline"><span class="section-num">2</span>研究演进时间线</h2>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2022</div>
+                        <div class="timeline-title">RLHF 引入 alignment tax 概念</div>
+                        <div class="timeline-desc">Ouyang et al. 在 InstructGPT 论文中最早观察到安全对齐带来能力损失的现象。Askell et al. 提出 HHH（Helpful, Honest, Harmless）框架。</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2024.06</div>
+                        <div class="timeline-title">Shallow Alignment 发现（ICLR 2025 杰出论文）</div>
+                        <div class="timeline-desc">Qi et al. 发现安全对齐仅修改前几个 token 的分布，揭示了 safety tax 的结构性根因。</div>
+                    </div>
+                    <div class="timeline-item highlight">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2025.02</div>
+                        <div class="timeline-title">SafeChain &amp; STAIR 发布</div>
+                        <div class="timeline-desc">SafeChain（Jiang et al.）构建首个 CoT 安全数据集；STAIR（清华，ICML 2025 Oral）引入 System 2 思考进行安全对齐。</div>
+                    </div>
+                    <div class="timeline-item highlight">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2025.03</div>
+                        <div class="timeline-title">Safety Tax 正式命名</div>
+                        <div class="timeline-desc">Huang et al.（Georgia Tech）系统量化了 LRM 安全对齐后 7-23% 的推理损失，正式命名"Safety Tax"。</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2025.04-08</div>
+                        <div class="timeline-title">数据集与方法爆发</div>
+                        <div class="timeline-desc">STAR-1（1K 数据，AAAI 2026）、RealSafe-R1、R1-Act（激活潜在安全知识）、LoRA Safety（UCLA）相继发布。</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2025.09-12</div>
+                        <div class="timeline-title">机制理解深化</div>
+                        <div class="timeline-desc">Safety Neurons（NeurIPS 2025）发现 5% 稀疏安全神经元；NSPO（零空间约束）、IPO（干预式偏好优化）、RECAP（Meta）提出。</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2026.01-06</div>
+                        <div class="timeline-title">多元化缓解与 Pareto 优化</div>
+                        <div class="timeline-desc">DGR（分布锚定精炼）、OGPSA（正交梯度投影）、THINKSafe（自生成）、OPSA（在线自蒸馏）、SafeThink（推理时干预）等前沿方法涌现。</div>
+                    </div>
+                </div>
+
+                <!-- ===== 3. 概念起源 ===== -->
+                <h2 id="shallow"><span class="section-num">3</span>浅层对齐：Safety Tax 的结构性根因</h2>
+
+                <div class="card">
+                    <div class="card-title"><span class="icon">📄</span> Safety Alignment Should Be Made More Than Just a Few Tokens Deep</div>
+                    <p><strong>作者:</strong> Qi et al. (Princeton &amp; Google DeepMind) ｜ <strong>会议:</strong> ICLR 2025 Outstanding Paper ｜ <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2406.05946" target="_blank">2406.05946</a></p>
+                    <p>这是 Safety Tax 研究的理论基石。论文发现当前安全对齐本质上是<strong>浅层</strong>的：对齐后的模型与基座模型的 KL 散度几乎全部集中在<strong>前几个 token 位置</strong>。Llama-2-7B-Chat 在 HEx-PHI 上 96.1% 的回复以"I cannot"或"I apologize"开头。</p>
+                    <p>这意味着安全行为是一个<strong>"学来的反射"而非深层理解</strong>。微调攻击仅需几步梯度即可破坏--Princeton 团队仅用 10 个样本、$0.20 成本就解除了 GPT-3.5 的安全护栏。这一发现揭示了 safety tax 的结构性根因，为后续所有缓解方法奠定了理论基础。</p>
+                </div>
+
+                <!-- Diagram: Shallow Alignment -->
+                <div class="diagram">
+                    <svg viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="20" y="20" width="560" height="100" rx="8" fill="var(--bg-secondary)" stroke="var(--border-color)"/>
+                        <text x="30" y="40" fill="var(--text-muted)" font-size="12" font-family="sans-serif">基座模型 (Base Model)</text>
+                        <g>
+                            <rect x="40" y="55" width="30" height="50" rx="3" fill="#cf222e" opacity="0.7"/>
+                            <rect x="80" y="55" width="30" height="50" rx="3" fill="#cf222e" opacity="0.6"/>
+                            <rect x="120" y="65" width="30" height="40" rx="3" fill="#9a6700" opacity="0.5"/>
+                            <rect x="160" y="70" width="30" height="35" rx="3" fill="#9a6700" opacity="0.4"/>
+                            <rect x="200" y="75" width="30" height="30" rx="3" fill="#1a7f37" opacity="0.3"/>
+                            <rect x="240" y="78" width="30" height="27" rx="3" fill="#1a7f37" opacity="0.25"/>
+                            <rect x="280" y="80" width="30" height="25" rx="3" fill="#1a7f37" opacity="0.2"/>
+                            <rect x="320" y="82" width="30" height="23" rx="3" fill="#1a7f37" opacity="0.15"/>
+                            <rect x="360" y="84" width="30" height="21" rx="3" fill="#1a7f37" opacity="0.1"/>
+                            <rect x="400" y="85" width="30" height="20" rx="3" fill="#1a7f37" opacity="0.08"/>
+                            <rect x="440" y="86" width="30" height="19" rx="3" fill="#1a7f37" opacity="0.06"/>
+                            <rect x="480" y="87" width="30" height="18" rx="3" fill="#1a7f37" opacity="0.04"/>
+                        </g>
+                        <text x="55" y="125" fill="#cf222e" font-size="10" text-anchor="middle" font-family="sans-serif">Token 1</text>
+                        <text x="95" y="125" fill="#cf222e" font-size="10" text-anchor="middle" font-family="sans-serif">Token 2</text>
+                        <text x="135" y="125" fill="#9a6700" font-size="10" text-anchor="middle" font-family="sans-serif">Token 3</text>
+                        <text x="320" y="148" fill="var(--text-muted)" font-size="11" text-anchor="middle" font-family="sans-serif">← KL 散度集中在前几个 token →</text>
+
+                        <rect x="20" y="165" width="560" height="80" rx="8" fill="var(--bg-secondary)" stroke="var(--border-color)"/>
+                        <text x="30" y="185" fill="var(--text-muted)" font-size="12" font-family="sans-serif">对齐后模型 (Aligned Model)</text>
+                        <g>
+                            <rect x="40" y="200" width="30" height="35" rx="3" fill="#0969da" opacity="0.8"/>
+                            <text x="55" y="220" fill="#0969da" font-size="9" text-anchor="middle" font-family="sans-serif">"I"</text>
+                            <rect x="80" y="200" width="30" height="35" rx="3" fill="#0969da" opacity="0.7"/>
+                            <text x="95" y="220" fill="#0969da" font-size="9" text-anchor="middle" font-family="sans-serif">"cannot"</text>
+                            <rect x="120" y="202" width="30" height="33" rx="3" fill="#0969da" opacity="0.3"/>
+                            <rect x="160" y="204" width="30" height="31" rx="3" fill="#0969da" opacity="0.15"/>
+                            <rect x="200" y="206" width="30" height="29" rx="3" fill="#0969da" opacity="0.08"/>
+                            <rect x="240" y="207" width="30" height="28" rx="3" fill="#0969da" opacity="0.04"/>
+                            <rect x="280" y="208" width="30" height="27" rx="3" fill="#0969da" opacity="0.02"/>
+                        </g>
+                        <path d="M 250 155 Q 300 145 350 155" stroke="#0969da" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/>
+                        <text x="300" y="143" fill="#0969da" font-size="10" text-anchor="middle" font-family="sans-serif">仅修改前几个 token</text>
+                    </svg>
+                    <div class="diagram-caption">图 1：浅层对齐现象--安全对齐的 KL 散度几乎全部集中在前几个 token 位置</div>
+                </div>
+
+                <h2 id="naming"><span class="section-num">4</span>Safety Tax 正式命名</h2>
+
+                <div class="card">
+                    <div class="card-title"><span class="icon">📄</span> Safety Tax: Safety Alignment Makes Your Large Reasoning Models Less Reasonable</div>
+                    <p><strong>作者:</strong> Huang et al. (Georgia Tech) ｜ <strong>时间:</strong> 2025.03 ｜ <strong>arXiv:</strong> <a href="https://arxiv.org/pdf/2503.00555v2" target="_blank">2503.00555</a> ｜ <strong>代码:</strong> <a href="https://github.com/git-disl/Safety-Tax" target="_blank">GitHub</a></p>
+                    <p><strong>背景：</strong>DeepSeek-R1 的生产流水线包含两阶段：① 推理训练（GRPO 强化学习）→ ② 安全对齐（SFT on safety data）。研究发现该顺序流水线导致损失叠加。</p>
+                    <p><strong>实验设计：</strong>在多种 LRM 上使用两类安全数据进行安全对齐--DirectRefusal（自建，固定短思维模式 + 直接拒答）和 SafeChain（CoT 安全推理数据）。</p>
+                    <p><strong>核心发现：</strong></p>
+                    <ul>
+                        <li>安全对齐确实能恢复 LRM 安全性（有害性降低 <strong>29.6%–59.6%</strong>）</li>
+                        <li>但推理能力显著退化（GPQA 准确率下降 <strong>7.07%–23.24%</strong>）</li>
+                        <li><strong>直接反驳了 SafeChain 论文</strong>"安全对齐可同时提升推理"的结论</li>
+                        <li>推理与安全之间存在不可回避的 trade-off</li>
+                    </ul>
+                </div>
+
+                <!-- Diagram: Safety Tax Pipeline -->
+                <div class="diagram">
+                    <svg viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="60" width="120" height="80" rx="10" fill="var(--bg-card)" stroke="#1a7f37" stroke-width="2"/>
+                        <text x="70" y="88" fill="#1a7f37" font-size="13" text-anchor="middle" font-weight="bold" font-family="sans-serif">基座模型</text>
+                        <text x="70" y="108" fill="var(--text-muted)" font-size="11" text-anchor="middle" font-family="sans-serif">推理: ✓</text>
+                        <text x="70" y="124" fill="var(--text-muted)" font-size="11" text-anchor="middle" font-family="sans-serif">安全: ✗</text>
+
+                        <path d="M 135 100 L 185 100" stroke="var(--border-color)" stroke-width="2" marker-end="url(#arrow1)"/>
+
+                        <rect x="190" y="60" width="120" height="80" rx="10" fill="var(--bg-card)" stroke="#0969da" stroke-width="2"/>
+                        <text x="250" y="88" fill="#0969da" font-size="13" text-anchor="middle" font-weight="bold" font-family="sans-serif">推理训练</text>
+                        <text x="250" y="108" fill="var(--text-muted)" font-size="11" text-anchor="middle" font-family="sans-serif">推理: ✓✓</text>
+                        <text x="250" y="124" fill="#cf222e" font-size="11" text-anchor="middle" font-family="sans-serif">安全: ✗✗</text>
+
+                        <path d="M 315 100 L 365 100" stroke="var(--border-color)" stroke-width="2" marker-end="url(#arrow1)"/>
+
+                        <rect x="370" y="60" width="120" height="80" rx="10" fill="var(--bg-card)" stroke="#cf222e" stroke-width="2"/>
+                        <text x="430" y="88" fill="#cf222e" font-size="13" text-anchor="middle" font-weight="bold" font-family="sans-serif">安全对齐</text>
+                        <text x="430" y="108" fill="#9a6700" font-size="11" text-anchor="middle" font-family="sans-serif">推理: ✓ (↓tax)</text>
+                        <text x="430" y="124" fill="#1a7f37" font-size="11" text-anchor="middle" font-family="sans-serif">安全: ✓</text>
+
+                        <path d="M 430 145 Q 430 165 430 175" stroke="#cf222e" stroke-width="1.5" stroke-dasharray="3,3" fill="none"/>
+                        <rect x="370" y="170" width="120" height="22" rx="5" fill="rgba(207,34,46,0.1)" stroke="#cf222e" stroke-width="1"/>
+                        <text x="430" y="185" fill="#cf222e" font-size="11" text-anchor="middle" font-weight="bold" font-family="sans-serif">Safety Tax: -7~23%</text>
+
+                        <defs>
+                            <marker id="arrow1" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                                <path d="M0,0 L0,6 L8,3 z" fill="var(--border-color)"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                    <div class="diagram-caption">图 2：Safety Tax 产生机制--推理训练后安全对齐导致推理能力退化</div>
+                </div>
+
+                <!-- ===== 5. Root Causes ===== -->
+                <h2 id="cause-distribution"><span class="section-num">5</span>Safety Tax 的五大根因</h2>
+
+                <p>综合所有研究，safety tax 的成因可归纳为五个层面，它们相互交织、共同作用：</p>
+
+                <h3 id="cause-distribution">5.1 分布偏移（Distributional Mismatch）</h3>
+                <p>外部教师（如 DeepSeek-R1）或人工编写的安全数据偏离目标模型的内部分布。当目标模型被迫模仿外部教师的推理风格时，训练数据不可避免地偏离自身的生成分布，导致优化压力覆盖了推理相关行为。<strong>DGR 论文</strong>证实：推理退化程度与分布偏移程度<strong>强相关</strong>。<strong>OPSA 论文</strong>进一步指出，即使数据来自模型自身（自蒸馏），off-policy SFT 在固定示范上训练而非从当前策略采样，仍会产生 safety tax。</p>
+
+                <h3 id="cause-parameter">5.2 参数干扰（Parameter Interference）</h3>
+                <p>安全目标与能力目标编码在<strong>重叠的参数子空间</strong>中。全参数微调产生高秩权重变化，不必要地扰动了推理相关权重。<strong>OGPSA 论文</strong>从持续学习视角证实：安全梯度会覆盖能力方向。LoRA Safety 论文发现全参数安全对齐在各层产生相对高秩的变化，而安全行为实际上由低维子空间主导--这就是为什么低秩约束可以缓解 tax。</p>
+
+                <!-- Diagram: Parameter Interference -->
+                <div class="diagram">
+                    <svg viewBox="0 0 580 220" xmlns="http://www.w3.org/2000/svg">
+                        <text x="145" y="25" fill="#cf222e" font-size="13" text-anchor="middle" font-weight="bold" font-family="sans-serif">全参数微调 (Full FT)</text>
+                        <rect x="30" y="35" width="230" height="70" rx="8" fill="var(--bg-card)" stroke="#cf222e" stroke-width="1.5"/>
+                        <circle cx="80" cy="70" r="22" fill="rgba(9,105,218,0.15)" stroke="#0969da" stroke-width="1.5"/>
+                        <text x="80" y="74" fill="#0969da" font-size="10" text-anchor="middle" font-family="sans-serif">能力</text>
+                        <circle cx="105" cy="70" r="22" fill="rgba(207,34,46,0.15)" stroke="#cf222e" stroke-width="1.5"/>
+                        <text x="120" y="74" fill="#cf222e" font-size="10" text-anchor="middle" font-family="sans-serif">安全</text>
+                        <ellipse cx="92" cy="70" rx="12" ry="18" fill="rgba(154,103,0,0.25)"/>
+                        <text x="145" y="125" fill="#9a6700" font-size="11" text-anchor="middle" font-family="sans-serif">⚠ 高秩干扰 → 推理退化</text>
+
+                        <text x="435" y="25" fill="#1a7f37" font-size="13" text-anchor="middle" font-weight="bold" font-family="sans-serif">LoRA (Rank-1)</text>
+                        <rect x="320" y="35" width="230" height="70" rx="8" fill="var(--bg-card)" stroke="#1a7f37" stroke-width="1.5"/>
+                        <circle cx="395" cy="70" r="22" fill="rgba(9,105,218,0.15)" stroke="#0969da" stroke-width="1.5"/>
+                        <text x="395" y="74" fill="#0969da" font-size="10" text-anchor="middle" font-family="sans-serif">能力</text>
+                        <circle cx="430" cy="70" r="8" fill="rgba(26,127,55,0.3)" stroke="#1a7f37" stroke-width="1.5"/>
+                        <text x="450" y="74" fill="#1a7f37" font-size="10" text-anchor="middle" font-family="sans-serif">安全</text>
+                        <text x="435" y="125" fill="#1a7f37" font-size="11" text-anchor="middle" font-family="sans-serif">✓ 低秩约束 → 最小干扰</text>
+
+                        <path d="M 270 70 L 310 70" stroke="var(--border-color)" stroke-width="2" marker-end="url(#arrow2)"/>
+                        <defs>
+                            <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                                <path d="M0,0 L0,6 L8,3 z" fill="var(--border-color)"/>
+                            </marker>
+                        </defs>
+
+                        <text x="290" y="165" fill="#8250df" font-size="13" text-anchor="middle" font-weight="bold" font-family="sans-serif">OGPSA / NSPO</text>
+                        <rect x="150" y="175" width="280" height="35" rx="6" fill="var(--bg-card)" stroke="#8250df" stroke-width="1.5"/>
+                        <text x="200" y="197" fill="#0969da" font-size="10" text-anchor="middle" font-family="sans-serif">能力子空间</text>
+                        <line x1="275" y1="180" x2="275" y2="205" stroke="#8250df" stroke-width="1.5" stroke-dasharray="3,2"/>
+                        <text x="335" y="197" fill="#8250df" font-size="10" text-anchor="middle" font-family="sans-serif">安全梯度(正交补)</text>
+                    </svg>
+                    <div class="diagram-caption">图 3：参数干扰机制--全参数微调 vs LoRA vs 正交/零空间投影</div>
+                </div>
+
+                <h3 id="cause-neuron">5.3 神经元重叠（Neuron Overlap）</h3>
+                <p><strong>Safety Neurons</strong>（NeurIPS 2025）发现 LLM 中约 <strong>5% 的稀疏安全神经元</strong>，仅修补这些神经元即可恢复 90%+ 安全性能。但安全与有用性的关键神经元<strong>显著重叠</strong>，只是需要不同的激活模式。这从神经元级别解释了为什么修改安全行为容易"误伤"能力。</p>
+
+                <h3 id="cause-shallow">5.4 浅层对齐导致过度拒绝</h3>
+                <p>安全对齐仅修改前几个 token 的分布，导致模型对模式匹配的过度依赖。OR-Bench 显示安全性与过度拒绝的相关系数高达 <strong>0.878</strong>；Claude-3-Opus 甚至拒绝了 <strong>91%</strong> 的安全提示。在生产环境中，这表现为软拒绝（"我很乐意帮忙，但需要注意..."）、过度对冲和冗长膨胀。</p>
+
+                <h3 id="cause-sequential">5.5 顺序训练叠加损失</h3>
+                <p>推理训练 → 安全对齐的流水线中，每个阶段部分抵消前一阶段的成果。<strong>Alignment-Calibration Trade-off</strong> 论文进一步发现，alignment tax 不仅降准确率，还导致<strong>严重的校准性退化</strong>--模式坍缩使模型过度自信、输出多样性降低。</p>
+
+                <!-- ===== 6. Mitigation Overview ===== -->
+                <h2 id="mitigation-overview"><span class="section-num">6</span>缓解方法总览</h2>
+
+                <p>当前已有<strong>六大类、27+ 篇论文</strong>探索缓解 safety tax 的方法。下图展示了各方法的核心思路与关系：</p>
+
+                <!-- Diagram: Mitigation Overview -->
+                <div class="diagram">
+                    <svg viewBox="0 0 620 380" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="310" cy="190" r="50" fill="rgba(207,34,46,0.08)" stroke="#cf222e" stroke-width="2"/>
+                        <text x="310" y="185" fill="#cf222e" font-size="14" text-anchor="middle" font-weight="bold" font-family="sans-serif">Safety</text>
+                        <text x="310" y="202" fill="#cf222e" font-size="14" text-anchor="middle" font-weight="bold" font-family="sans-serif">Tax</text>
+
+                        <rect x="30" y="20" width="130" height="55" rx="8" fill="rgba(26,127,55,0.06)" stroke="#1a7f37" stroke-width="1.5"/>
+                        <text x="95" y="40" fill="#1a7f37" font-size="12" text-anchor="middle" font-weight="bold" font-family="sans-serif">① 安全数据构建</text>
+                        <text x="95" y="58" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="sans-serif">DGR · STAR-1</text>
+                        <text x="95" y="68" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="sans-serif">SafeChain · R1-Act</text>
+                        <line x1="160" y1="60" x2="265" y2="165" stroke="#1a7f37" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+
+                        <rect x="460" y="20" width="130" height="55" rx="8" fill="rgba(9,105,218,0.06)" stroke="#0969da" stroke-width="1.5"/>
+                        <text x="525" y="40" fill="#0969da" font-size="12" text-anchor="middle" font-weight="bold" font-family="sans-serif">② 参数空间约束</text>
+                        <text x="525" y="58" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="sans-serif">LoRA · NSPO</text>
+                        <text x="525" y="68" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="sans-serif">OGPSA</text>
+                        <line x1="460" y1="60" x2="355" y2="165" stroke="#0969da" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+
+                        <rect x="30" y="120" width="130" height="55" rx="8" fill="rgba(130,80,223,0.06)" stroke="#8250df" stroke-width="1.5"/>
+                        <text x="95" y="140" fill="#8250df" font-size="12" text-anchor="middle" font-weight="bold" font-family="sans-serif">③ 推理式对齐</text>
+                        <text x="95" y="158" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="sans-serif">STAIR · RECAP</text>
+                        <text x="95" y="168" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="sans-serif">IPO · ReSA</text>
+                        <line x1="160" y1="150" x2="262" y2="180" stroke="#8250df" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+
+                        <rect x="460" y="120" width="130" height="55" rx="8" fill="rgba(5,152,188,0.06)" stroke="#0598bc" stroke-width="1.5"/>
+                        <text x="525" y="140" fill="#0598bc" font-size="12" text-anchor="middle" font-weight="bold" font-family="sans-serif">④ 在线自生成</text>
+                        <text x="525" y="158" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="sans-serif">THINKSafe · OPSA</text>
+                        <text x="525" y="168" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="sans-serif">Constitutional OPSD</text>
+                        <line x1="460" y1="150" x2="358" y2="180" stroke="#0598bc" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+
+                        <rect x="30" y="260" width="130" height="55" rx="8" fill="rgba(154,103,0,0.06)" stroke="#9a6700" stroke-width="1.5"/>
+                        <text x="95" y="280" fill="#9a6700" font-size="12" text-anchor="middle" font-weight="bold" font-family="sans-serif">⑤ 推理时干预</text>
+                        <text x="95" y="298" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="sans-serif">SafeThink</text>
+                        <text x="95" y="308" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="sans-serif">Zero/Less/MoreThink</text>
+                        <line x1="160" y1="280" x2="265" y2="215" stroke="#9a6700" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+
+                        <rect x="460" y="260" width="130" height="55" rx="8" fill="rgba(207,34,46,0.06)" stroke="#cf222e" stroke-width="1.5" stroke-opacity="0.6"/>
+                        <text x="525" y="280" fill="#cf222e" font-size="12" text-anchor="middle" font-weight="bold" font-family="sans-serif">⑥ 参数合并修复</text>
+                        <text x="525" y="298" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="sans-serif">Model Merging</text>
+                        <text x="525" y="308" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="sans-serif">LOMO-CV · B-DPO</text>
+                        <line x1="460" y1="280" x2="355" y2="215" stroke="#cf222e" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+
+                        <text x="310" y="355" fill="var(--text-muted)" font-size="11" text-anchor="middle" font-family="sans-serif">训练前/数据层 ← 数据构建 · 参数约束 → 训练中/算法层</text>
+                        <text x="310" y="370" fill="var(--text-muted)" font-size="11" text-anchor="middle" font-family="sans-serif">训练后/推理层 ← 推理干预 · 参数合并 →</text>
+                    </svg>
+                    <div class="diagram-caption">图 4：六大类缓解方法全景图</div>
+                </div>
+
+                <!-- ===== Category 1: Data ===== -->
+                <h3 id="cat-data">类别一：安全数据构建优化</h3>
+                <p>核心思路：<strong>通过改善安全训练数据的质量和分布一致性来减少 safety tax</strong>。这是最实用、计算成本最低的路线。</p>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-name">📄 SafeChain</div>
+                        <div class="method-tags">
+                            <span class="tag tag-green">数据集</span>
+                            <span class="tag tag-blue">SFT</span>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <p><strong>论文:</strong> Jiang et al. (UW) ｜ <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2502.12025" target="_blank">2502.12025</a> ｜ <strong>时间:</strong> 2025.02</p>
+                        <p>构建了首个 <strong>CoT 风格的安全训练数据集</strong>（40K 条），从 R1-Distill-Llama-70B 蒸馏安全推理链并筛选安全内容。同时提出三种无需训练的解码策略（ZeroThink/LessThink/MoreThink）来调节推理深度以改善安全性。</p>
+                        <p><strong>局限：</strong>声称安全对齐可同时提升推理，但被 Safety Tax 论文的实验直接反驳--其 CoT 数据仍偏离目标模型分布，导致推理退化。</p>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-name">📄 STAR-1</div>
+                        <div class="method-tags">
+                            <span class="tag tag-green">数据集</span>
+                            <span class="tag tag-orange">AAAI 2026</span>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <p><strong>论文:</strong> Wang et al. (UCSC) ｜ <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2504.01903" target="_blank">2504.01903</a> ｜ <strong>时间:</strong> 2025.04</p>
+                        <p>用<strong>仅 1K 条</strong>高质量安全数据实现有效对齐，三大原则：<strong>多样性</strong>（整合 18 个数据集的 53 万有害指令）、<strong>审议推理</strong>（基于安全政策生成结构化推理过程）、<strong>严格过滤</strong>（GPT-4o 评分筛选最佳样本）。</p>
+                        <div class="method-result">安全性能平均 +40%，推理能力仅降 1.1%；8B 模型仅需 45 分钟训练（8×A5000）</div>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-name">📄 R1-Act</div>
+                        <div class="method-tags">
+                            <span class="tag tag-green">数据集</span>
+                            <span class="tag tag-cyan">激活机制</span>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <p><strong>论文:</strong> In et al. (KAIST) ｜ <strong>arXiv:</strong> <a href="https://arxiv.org/html/2508.00324v1" target="_blank">2508.00324</a> ｜ <strong>时间:</strong> 2025.08</p>
+                        <p><strong>关键洞察：</strong>LRM 安全风险的根因不是"缺乏安全知识"，而是<strong>已有安全知识但未能激活</strong>。模型能够准确区分有害/无害指令，但在推理过程中未能触发安全行为。</p>
+                        <p>提出结构化推理模板：<strong>"问题理解 → 危害评估 → 解决方案推理"</strong>，显式激活模型内在的安全知识。仅用 1,000 个训练样本，单张 RTX A6000 GPU 训练 90 分钟即可生效。</p>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-name">📄 DGR: Distribution-Grounded Refinement</div>
+                        <div class="method-tags">
+                            <span class="tag tag-green">数据精炼</span>
+                            <span class="tag tag-purple">分布对齐</span>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <p><strong>论文:</strong> Xie et al. (中山大学/港科大) ｜ <strong>arXiv:</strong> <a href="https://arxiv.org/pdf/2602.02136" target="_blank">2602.02136</a> ｜ <strong>时间:</strong> 2026.02</p>
+                        <p><strong>核心假设：</strong>Safety tax 的罪魁祸首是外部蒸馏安全数据与目标 LRM 之间的<strong>分布差距</strong>。直接使用 OOD 数据进行安全对齐会迫使模型偏离自身的推理分布。</p>
+                        <p><strong>两阶段管道：</strong></p>
+                        <ul>
+                            <li><strong>阶段一（数据精炼）：</strong>让目标 LRM 用自己的话重述外部蒸馏的 CoT 推理链和答案，使数据回归目标模型的内部分布</li>
+                            <li><strong>阶段二（质量控制）：</strong>过滤"过度思考"样本（推理链超过 5000 token 未终止）和"元思维"样本（产生自我评论而非实质内容），不合格的回退到原始数据</li>
+                        </ul>
+                        <div class="method-result">DirectRefusal 推理准确率 +30.2%，R1-ACT +21.2%；<strong>仅 10 个样本即可激活有效拒答行为</strong>--暗示安全对齐本质是激活潜在知识而非学习新知识</div>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-name">📄 RealSafe-R1</div>
+                        <div class="method-tags">
+                            <span class="tag tag-green">模型</span>
+                            <span class="tag tag-purple">DeepSeek-R1</span>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <p><strong>论文:</strong> Zhang et al. (清华) ｜ <strong>arXiv:</strong> <a href="https://arxiv.org/abs/2504.10081" target="_blank">2504.10081</a> ｜ <strong>时间:</strong> 2025.04</p>
+                        <p>基于 STAIR 的理论框架，率先针对开源 DeepSeek-R1 进行安全对齐。从 DeepSeek-R1 蒸馏 15K 安全响应数据，筛选带有显式拒绝的响应进行 SFT。核心是<strong>在不牺牲推理能力的前提下大幅提升安全性</strong>。</p>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-name">📄 UnsafeChain</div>
+                        <div class="method-tags">
+                            <span class="tag tag-green">数据集</span>
+                            <span class="tag tag-red">困难样本</span>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <p><strong>论文:</strong> Tomar et al. (MBZUAI) ｜ <strong>arXiv:</strong> <a href="https://arxiv.org/html/2507.21652v2" target="_blank">2507.21652</a> ｜ <strong>时间:</strong> 2025.07</p>
+                        <p>与 SafeChain/STAR-1 的"筛选安全响应"思路不同，UnsafeChain 从<strong>困难样本</strong>（始终引发有害输出的提示）出发，识别不安全输出并<strong>显式修正</strong>为安全响应。通过暴露模型于不安全行为并引导其修正，增强安全性同时保留推理能力。13.6K 数据，21/36 设定优于 SafeChain 和 STAR-1。</p>
+                    </div>
+                </div>
+
+                <!-- ===== Category 2: Parameter ===== -->
+                <h3 id="cat-param">类别二：参数空间约束法</h3>
+                <p>核心思路：<strong>通过限制安全更新的参数空间，使其不干扰推理相关权重</strong>。理论最优美，有数学保证。</p>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-name">📄 LoRA Safety</div>
+                        <div class="method-tags">
+                            <span class="tag tag-blue">LoRA</span>
+                            <span class="tag tag-orange">UCLA</span>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <p><strong>论文:</strong> Xue &amp; Mirzasoleiman (UCLA) ｜ <strong>arXiv:</strong> <a href="https://arxiv.org/pdf/2507.17075v4" target="_blank">2507.17075</a> ｜ <strong>时间:</strong> 2025.07</p>
+                        <p><strong>核心发现：</strong>安全行为在 LLM 中由<strong>少数主导方向</strong>控制（低维子空间），而全参数微调产生<strong>高秩权重变化</strong>，不必要地扰动了推理权重。因此，用低秩约束（LoRA）将安全更新限制在低维空间即可。</p>
+                        <p><strong>三个关键消融发现：</strong></p>
+                        <ul>
+                            <li><strong>Rank-1 足够</strong>：rank=1 即可达到最佳安全-推理权衡，增大 rank 反而退化</li>
+                            <li><strong>Up-projection 层最关键</strong>：仅对 MLP 的 up-projection 应用 LoRA 即可超越全 MLP 更新</li>
+                            <li><strong>中间层最有效</strong>：更新中间层比早期或晚期层更有效</li>
+                        </ul>
+                        <div class="method-result">安全水平与全参数微调相当，推理几乎无损。理论证明：rank 过大时退化率与基座任务内在维度成反比</div>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-name">📄 NSPO: Null-Space Constrained Policy Optimization</div>
+                        <div class="method-tags">
+                            <span class="tag tag-blue">梯度投影</span>
+                            <span class="tag tag-purple">RL</span>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <p><strong>论文:</strong> Niu et al. (HKUST-GZ) ｜ <strong>arXiv:</strong> <a href="https://arxiv.org/html/2512.11391v2" target="_blank">2512.11391</a> ｜ <strong>时间:</strong> 2025.12</p>
+                        <p>将安全策略梯度<strong>几何投影到通用任务梯度的零空间</strong>中。数学上保证：安全更新在<strong>一阶意义上零干扰</strong>已有能力，同时仍保证安全对齐的有效下降方向。</p>
+                        <div class="method-result">SOTA 安全性能不牺牲数学/代码/指令跟随准确率；仅需 40% 安全数据即达 promising 性能</div>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-name">📄 OGPSA: Orthogonal Gradient Projection for Safety Alignment</div>
+                        <div class="method-tags">
+                            <span class="tag tag-blue">梯度投影</span>
+                            <span class="tag tag-cyan">持续学习</span>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <p><strong>论文:</strong> Sun et al. (清华) ｜ <strong>arXiv:</strong> <a href="https://arxiv.org/html/2602.07892" target="_blank">2602.07892</a> ｜ <strong>时间:</strong> 2026.02</p>
+                        <p>将安全对齐视为<strong>持续学习（Continual Learning）</strong>问题：需平衡可塑性（获取安全约束）和稳定性（保持通用能力）。从少量参考集上的梯度估计一个<strong>低秩能力子空间</strong>，将安全梯度投影到其<strong>正交补空间</strong>后再更新。</p>
+                        <p><strong>即插即用</strong>，无需大规模回放或辅助目标，适配 SFT/DPO/SFT→DPO 流水线。</p>
+                        <div class="method-result">Qwen2.5-7B-Instruct: SimpleQA 0.53%→3.03%，IFEval 51.94%→63.96%，同时保持强安全性</div>
+                    </div>
+                </div>
+
+                <!-- ===== Category 3: Reasoning ===== -->
+                <h3 id="cat-reasoning">类别三：推理式安全对齐</h3>
+                <p>核心思路：<strong>从"条件反射式拒答"走向"深度自省推理"</strong>，让模型真正理解风险而非机械拒绝。这是从浅对齐到深对齐的范式转变。</p>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-name">📄 STAIR</div>
+                        <div class="method-tags">
+                            <span class="tag tag-purple">System 2</span>
+                            <span class="tag tag-orange">ICML 2025 Oral</span>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <p><strong>论文:</strong> Zhang et al. (清华) ｜ <strong>arXiv:</strong> <a href="https://arxiv.org/pdf/2502.02384" target="_blank">2502.02384</a> ｜ <strong>时间:</strong> 2025.02 ｜ <strong>代码:</strong> <a href="https://github.com/thu-ml/STAIR" target="_blank">GitHub</a></p>
+                        <p>将 <strong>System 2 慢思考引入安全对齐</strong>，教模型"先思考再开口"而非"条件反射式闭嘴"。三阶段框架：</p>
+                        <ul>
+                            <li><strong>阶段一：</strong>通过少量结构化 CoT 数据进行 SFT，使模型获得分步推理能力</li>
+                            <li><strong>阶段二：</strong>用<strong>安全感知蒙特卡洛树搜索（SI-MCTS）</strong>生成步级推理数据，进行迭代偏好优化</li>
+                            <li><strong>阶段三：</strong>训练过程奖励模型，引导测试时搜索以获得更优响应</li>
+                        </ul>
+                        <div class="method-result">StrongReject 上超越 Claude-3.5；不降低通用能力的前提下显著提升抗越狱鲁棒性</div>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-name">📄 RECAP</div>
+                        <div class="method-tags">
+                            <span class="tag tag-purple">RL</span>
+                            <span class="tag tag-red">Meta</span>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <p><strong>论文:</strong> Peng et al. (Meta 超级智能实验室/Georgia Tech) ｜ <strong>arXiv:</strong> <a href="https://arxiv.org/pdf/2510.00938" target="_blank">2510.00938</a> ｜ <strong>时间:</strong> 2025.10</p>
+                        <p><strong>核心洞察：</strong>LRM 一旦从有缺陷的 CoT 开始，就会沿不安全推理路径继续并无法自我恢复。RECAP 反其道而行--在训练中<strong>主动注入"反向对齐"的有缺陷 CoT 前缀</strong>（如对有害提示注入不安全推理，对良性提示注入拒绝推理），强迫模型学会<strong>从错误推理中纠偏</strong>到安全响应。</p>
+                        <p>无需修改标准 RLHF 管道，不增加训练成本。</p>
+                        <div class="method-result">提升安全 + 降低过度拒绝 + 保留推理能力 + 维持推理 token 预算</div>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-name">📄 IPO: Intervened Preference Optimization</div>
+                        <div class="method-tags">
+                            <span class="tag tag-purple">偏好优化</span>
+                            <span class="tag tag-cyan">过程监督</span>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <p><strong>论文:</strong> Zhang et al. (清华) ｜ <strong>arXiv:</strong> <a href="https://arxiv.org/html/2509.24393v2" target="_blank">2509.24393</a> ｜ <strong>时间:</strong> 2025.09</p>
+                        <p>关注<strong>推理过程本身的安全性</strong>而非仅最终回答。发现三个关键洞察：①安全推理常由少数"安全触发器"关键步骤巩固；②合规线索强烈关联不安全续写；③纠正干预能可靠地将不安全轨迹引导至安全方向。</p>
+                        <p>方法：将合规步骤替换为安全触发器，构建强信号偏好对进行偏好优化。</p>
+                        <div class="method-result">有害性相对降低 &gt;30%，保留多样推理任务性能</div>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-name">📄 ReSA: Reasoned Safety Alignment</div>
+                        <div class="method-tags">
+                            <span class="tag tag-purple">CoT</span>
+                            <span class="tag tag-blue">SFT</span>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <p><strong>论文:</strong> <strong>arXiv:</strong> <a href="https://arxiv.org/html/2509.11629v1" target="_blank">2509.11629</a> ｜ <strong>时间:</strong> 2025.09</p>
+                        <p>采用<strong>"先答后查"</strong>（Answer-Then-Check）推理模板：模型先给出预期答案的摘要，再进行安全分析，最终输出安全完成。对比 13 个 baseline 方法表现优异。</p>
+                    </div>
+                </div>
+
+                <!-- ===== Category 4: Online ===== -->
+                <h3 id="cat-online">类别四：在线/自生成方法</h3>
+                <p>核心思路：<strong>让模型生成自己的安全数据，消除外部教师的分布偏移</strong>。这是解决分布偏移根本之道。</p>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-name">📄 THINKSafe</div>
+                        <div class="method-tags">
+                            <span class="tag tag-cyan">自生成</span>
+                            <span class="tag tag-green">KAIST</span>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <p><strong>论文:</strong> Lee et al. (KAIST) ｜ <strong>arXiv:</strong> <a href="https://arxiv.org/pdf/2601.23143v1" target="_blank">2601.23143</a> ｜ <strong>时间:</strong> 2026.01</p>
+                        <p><strong>问题：</strong>外部教师蒸馏引入分布偏移；但模型自身的合规优化压制了安全机制，导致自蒸馏也无法生成有效拒绝。</p>
+                        <p><strong>方案：</strong>通过<strong>轻量级拒绝引导</strong>（refusal steering）解锁模型的潜在安全知识--在推理时注入简短的安全引导提示，使模型生成分布内的安全推理轨迹，再用这些自生成的响应进行 SFT。</p>
+                        <div class="method-result">DeepSeek-R1-Distill 和 Qwen3 上显著提升安全，推理与 GRPO 相当但计算成本大幅降低</div>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-name">📄 OPSA: On-Policy Self-Distillation</div>
+                        <div class="method-tags">
+                            <span class="tag tag-cyan">在线策略</span>
+                            <span class="tag tag-red">Microsoft</span>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <p><strong>论文:</strong> Fu et al. (UC Riverside/Microsoft/Berkeley Lab) ｜ <strong>arXiv:</strong> <a href="https://arxiv.org/html/2605.15239v1" target="_blank">2605.15239</a> ｜ <strong>时间:</strong> 2026.05</p>
+                        <p>识别 <strong>off-policy 训练不匹配</strong>为 safety tax 的第二来源：即使数据来自模型自身（自蒸馏），SFT 仍在固定示范上训练而非从当前策略采样。安全修正集中在<strong>早期拒绝决策和安全关键 token</strong> 上，而序列级 SFT 在全响应上均匀模仿。</p>
+                        <p>方案：在<strong>学生采样的 rollout</strong> 上训练，用冻结的特权上下文教师（privileged-context teacher）提供<strong>密集 token 级监督</strong>。</p>
+                        <div class="method-result">减少分布偏移的同时保持安全；对数据规模和组成变化不敏感</div>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-name">📄 Constitutional On-Policy Safe Distillation</div>
+                        <div class="method-tags">
+                            <span class="tag tag-cyan">宪法AI</span>
+                            <span class="tag tag-blue">在线蒸馏</span>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <p><strong>论文:</strong> Wen et al. ｜ <strong>arXiv:</strong> <a href="https://arxiv.org/pdf/2606.03089.pdf" target="_blank">2606.03089</a> ｜ <strong>时间:</strong> 2026.06</p>
+                        <p>将<strong>宪法 AI（Constitutional AI）</strong>与在线策略自蒸馏结合。用教师模型在特权信息条件下提供密集 token 级监督，同时通过宪法原则约束安全行为。</p>
+                    </div>
+                </div>
+
+                <!-- ===== Category 5: Inference-time ===== -->
+                <h3 id="cat-inference">类别五：推理时干预方法</h3>
+                <p>核心思路：<strong>不修改模型权重，在推理时实时监控并引导安全行为</strong>。无需重训练，轻量灵活。</p>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-name">📄 SafeThink</div>
+                        <div class="method-tags">
+                            <span class="tag tag-orange">推理时</span>
+                            <span class="tag tag-cyan">充足化约束</span>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <p><strong>论文:</strong> Ghosal et al. (UMD/IIT Bombay/UCF) ｜ <strong>arXiv:</strong> <a href="https://arxiv.org/pdf/2602.11096v1" target="_blank">2602.11096</a> ｜ <strong>时间:</strong> 2026.02</p>
+                        <p>将安全恢复建模为<strong>充足化约束</strong>（satisficing constraint）而非最大化目标--"安全够了就专注任务，不够才介入"。</p>
+                        <p><strong>机制：</strong>用安全奖励模型实时监控推理链的每一步，当安全分数低于阈值时，条件性注入优化过的短修正前缀（如 <code>"Wait, think safely"</code>），将推理引导回安全方向。</p>
+                        <p><strong>关键发现：</strong>安全恢复通常只需干预推理链的<strong>前 1-3 步</strong>即可重定向整个生成过程。</p>
+                        <div class="method-result">ASR 降低 30-60%（如 LlamaV-o1: 63.33%→5.74%），MathVista 精度几乎不变（65.20%→65.00%）</div>
+                    </div>
+                </div>
+
+                <!-- ===== Category 6: Merge ===== -->
+                <h3 id="cat-merge">类别六：参数合并与校准修复</h3>
+                <p>核心思路：<strong>通过插值或合并模型权重来恢复被安全对齐破坏的能力和校准性</strong>。最简单，且能同时修复准确率和校准性。</p>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-name">📄 Model Merging for Alignment-Calibration</div>
+                        <div class="method-tags">
+                            <span class="tag tag-red">参数插值</span>
+                            <span class="tag tag-blue">校准修复</span>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <p><strong>论文:</strong> Hu et al. (Cambridge) ｜ <strong>arXiv:</strong> <a href="https://arxiv.org/html/2510.17426v2" target="_blank">2510.17426</a> ｜ <strong>时间:</strong> 2025.10</p>
+                        <p>发现 alignment tax 不仅降准确率，还导致<strong>严重校准退化</strong>--模式坍缩使模型过度自信、输出多样性降低。通过简单的<strong>对齐前后权重插值</strong>，发现 <strong>Pareto 最优插值点</strong>：准确率超越双亲模型，同时恢复校准性。合并在大规模模型上更有效更鲁棒。</p>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-name">📄 LOMO-CV</div>
+                        <div class="method-tags">
+                            <span class="tag tag-green">数据筛选</span>
+                            <span class="tag tag-orange">无梯度</span>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <p><strong>论文:</strong> Shen et al. (CUHK-SZ/ZJU) ｜ <strong>来源:</strong> <a href="https://openreview.net/pdf/98f7f08a1bd27a1d195098ca915a7fa6abc7882b.pdf" target="_blank">OpenReview</a></p>
+                        <p>假设 safety tax 主要由<strong>分布偏移</strong>（困惑度代理）和<strong>安全约束</strong>（基座模型生成的毒性代理）驱动。提出轻量、无梯度的管道：学习可解释的线性评分器对安全数据集排序过滤，用留一模型交叉验证池化多模型排名。</p>
+                        <div class="method-result">DeepSeek-R1-Distill-Qwen-7B: 数学 +6.66 分，安全分 99.0</div>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-name">📄 B-DPO &amp; Contrastive Learning</div>
+                        <div class="method-tags">
+                            <span class="tag tag-purple">DPO</span>
+                            <span class="tag tag-cyan">对比学习</span>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <p><strong>B-DPO</strong> (<a href="https://arxiv.org/abs/2603.22829v1" target="_blank">2603.22829</a>, 2026.03)：基于互信息自适应调节偏好优化强度，缓解 DPO 过拟合，改善安全同时保持通用能力。</p>
+                        <p><strong>Contrastive Learning</strong> (<a href="https://arxiv.org/pdf/2505.19327" target="_blank">2505.19327</a>, Imperial/IBM)：通过正负样本对显式建模去偏与保真，<strong>首个同时改善毒性和准确性</strong>的方法，避免现有方法的能力退化。</p>
+                    </div>
+                </div>
+
+                <!-- ===== 7. Mechanism ===== -->
+                <h2 id="mechanism"><span class="section-num">7</span>机制理解与理论框架</h2>
+
+                <h3>7.1 Safety Neurons：5% 的稀疏安全神经元</h3>
+                <div class="card">
+                    <div class="card-title"><span class="icon">🧠</span> Towards Understanding Safety Alignment: A Mechanistic Perspective from Safety Neurons</div>
+                    <p><strong>会议:</strong> NeurIPS 2025 ｜ <strong>arXiv:</strong> <a href="https://arxiv.org/html/2406.14144" target="_blank">2406.14144</a> ｜ <strong>机构:</strong> 清华 KEG ｜ <strong>代码:</strong> <a href="https://github.com/THU-KEG/SafetyNeuron" target="_blank">GitHub</a></p>
+                    <p>通过机制可解释性发现 LLM 中约 <strong>5% 的稀疏"安全神经元"</strong>。仅修补（patching）这些神经元的激活即可恢复 <strong>90%+ 安全性能</strong>而不影响通用能力。关键发现：</p>
+                    <ul>
+                        <li>安全与有用性的关键神经元<strong>显著重叠</strong>，但需要<strong>不同的激活模式</strong>--这从神经元级别解释了 alignment tax</li>
+                        <li>安全神经元具有<strong>跨模型可迁移性</strong>和<strong>对训练随机性的鲁棒性</strong></li>
+                        <li>为设计更精准的安全对齐算法提供了神经元级别的靶点</li>
+                    </ul>
+                </div>
+
+                <h3>7.2 AlignmentVeto：跨文化安全税</h3>
+                <div class="card">
+                    <div class="card-title"><span class="icon">🌍</span> The Alignment Veto: How Safety Training Suppresses Cultural Knowledge</div>
+                    <p><strong>arXiv:</strong> <a href="https://arxiv.org/html/2510.13154v2" target="_blank">2510.13154</a> ｜ <strong>机构:</strong> UIUC/QCRI</p>
+                    <p>覆盖 16 个 MENA 国家、26 个模型、153 万人类调查响应。发现安全训练在跨文化场景中<strong>抑制了模型已有的文化知识</strong>（suppression 而非 erasure）--模型内部 logit 分布与人类调查数据的相关性<strong>高于</strong>其自由生成的回答。</p>
+                    <p>Safety tax 在跨文化场景高达 <strong>37.6%</strong>，不同国家间存在 19.8% 的对齐质量差距，母语提示<strong>加剧而非缩小</strong>差距。</p>
+                </div>
+
+                <h3>7.3 Value Alignment Tax（VAT）</h3>
+                <div class="card">
+                    <div class="card-title"><span class="icon">⚖️</span> Value Alignment Tax: Measuring Value Trade-offs in LLM Alignment</div>
+                    <p><strong>arXiv:</strong> <a href="https://arxiv.org/pdf/2602.12134" target="_blank">2602.12134</a> ｜ <strong>机构:</strong> NYU</p>
+                    <p>将 alignment tax 从标量性能损失扩展为<strong>多维价值系统位移度量</strong>。基于 Schwartz 价值理论，覆盖 56 个微观价值、10 个宏观价值。揭示对齐干预如何在<strong>互连的价值网络</strong>中产生系统性连锁反应--改善一个目标价值会引发非目标价值的协调性重配置。</p>
+                </div>
+
+                <!-- ===== 8. Industry ===== -->
+                <h2 id="industry"><span class="section-num">8</span>工业实践数据</h2>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>维度</th>
+                                <th>数据</th>
+                                <th>来源</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>推理能力损失</td>
+                                <td><strong>7%–32%</strong>（取决于模型和场景）</td>
+                                <td>多论文综合</td>
+                            </tr>
+                            <tr>
+                                <td>开发周期延长</td>
+                                <td>安全对齐占 <strong>30-40%</strong> 开发周期</td>
+                                <td>Anthropic/OpenAI 报告</td>
+                            </tr>
+                            <tr>
+                                <td>额外计算成本</td>
+                                <td>每个主要模型发布 <strong>$8-15M</strong></td>
+                                <td>行业估算</td>
+                            </tr>
+                            <tr>
+                                <td>RLHF 量化损失</td>
+                                <td>OpenLLaMA-3B 奖励 0.16→0.35：SQuAD F1 -16，DROP F1 -17</td>
+                                <td>RLHF 研究</td>
+                            </tr>
+                            <tr>
+                                <td>Claude-3-Opus 过度拒绝</td>
+                                <td><strong>91%</strong> 安全提示被拒绝</td>
+                                <td>OR-Bench</td>
+                            </tr>
+                            <tr>
+                                <td>GPT-4o 过度拒绝</td>
+                                <td><strong>6.7%</strong>（最佳校准之一）</td>
+                                <td>OR-Bench</td>
+                            </tr>
+                            <tr>
+                                <td>安全-过度拒绝相关系数</td>
+                                <td><strong>0.878</strong>（Spearman）</td>
+                                <td>OR-Bench</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout callout-warning">
+                    <p><strong>生产环境中的隐性 Safety Tax：</strong>多数情况下不表现为明确错误，而是<strong>软拒绝</strong>（"我很乐意帮忙，但需要注意..."消耗半数响应）、<strong>过度对冲</strong>（"这取决于..."）、<strong>话题回避</strong>和<strong>冗长膨胀</strong>。这些模式不会触发传统错误监控（HTTP 200、响应正常解析），但用户没有获得所需内容。</p>
+                </div>
+
+                <!-- ===== 9. Stage Assessment ===== -->
+                <h2 id="stage"><span class="section-num">9</span>研究阶段判断</h2>
+
+                <div class="category-grid">
+                    <div class="category-card">
+                        <div class="category-icon">✅</div>
+                        <div class="category-name">问题已充分确立</div>
+                        <div class="category-count">7%-37.6% 损失被量化</div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">🔬</div>
+                        <div class="category-name">根因已多层面理解</div>
+                        <div class="category-count">5 个层面有理论支撑</div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">🌐</div>
+                        <div class="category-name">方法百花齐放</div>
+                        <div class="category-count">6 大类 27+ 篇论文</div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">⚠️</div>
+                        <div class="category-name">尚未收敛</div>
+                        <div class="category-count">无完全 tax-free 方案</div>
+                    </div>
+                </div>
+
+                <h3>核心洞察</h3>
+                <ol>
+                    <li><strong>安全对齐本质是"激活"而非"学习"</strong>--DGR 发现 10 个样本即可激活拒答；R1-Act 发现模型已有安全知识但未激活；Safety Neurons 发现仅需修补 5% 神经元</li>
+                    <li><strong>根本原因是安全与能力共享底层表征</strong>--神经元重叠、参数子空间重叠、前几个 token 集中</li>
+                    <li><strong>浅层对齐是结构性根因</strong>--需要从"条件反射式拒答"走向"深度自省推理"</li>
+                    <li><strong>分布一致性是关键</strong>--自生成数据（THINKSafe/OPSA）或分布精炼（DGR）是最根本的解决方向</li>
+                </ol>
+
+                <h3>尚未解决的核心挑战</h3>
+                <ul>
+                    <li>没有任何方法能<strong>完全消除</strong> tax（"tax-free" 仍是理想目标）</li>
+                    <li>各方法在安全-能力 <strong>Pareto 前沿</strong>上各有取舍，无法同时最优化所有维度</li>
+                    <li>大多数方法仅在特定模型和 benchmark 上验证，<strong>泛化性存疑</strong></li>
+                    <li>工业实践中多数团队甚至<strong>未量化</strong>自己付出的 alignment tax</li>
+                    <li><strong>跨文化、多模态</strong>场景的 safety tax 问题更加尖锐且研究不足</li>
+                </ul>
+
+                <div class="callout callout-info">
+                    <p><strong>总结：</strong>Safety Tax 研究正处于<strong>从"发现问题+理解机制"向"工程化缓解"过渡</strong>的关键阶段。2025 年是爆发年（概念命名 + 大量数据集/方法涌现），2026 年是深化年（机制理解 + Pareto 优化 + 在线方法）。该领域是 LRM 时代安全研究的<strong>核心挑战之一</strong>，预计未来 1-2 年仍将持续活跃。</p>
+                </div>
+
+                <!-- ===== References ===== -->
+                <h2 id="refs"><span class="section-num">10</span>完整论文清单</h2>
+
+                <h3>基础概念与现象发现</h3>
+                <ol class="ref-list">
+                    <li>Qi et al., "Safety Alignment Should Be Made More Than Just a Few Tokens Deep," ICLR 2025 Outstanding Paper. <a href="https://arxiv.org/abs/2406.05946" target="_blank">arXiv:2406.05946</a></li>
+                    <li>Huang et al., "Safety Tax: Safety Alignment Makes Your Large Reasoning Models Less Reasonable," 2025. <a href="https://arxiv.org/pdf/2503.00555v2" target="_blank">arXiv:2503.00555</a></li>
+                </ol>
+
+                <h3>安全数据集构建</h3>
+                <ol class="ref-list" start="3">
+                    <li>Jiang et al., "SafeChain: Safety of Language Models with Long Chain-of-Thought Reasoning Capabilities," 2025. <a href="https://arxiv.org/abs/2502.12025" target="_blank">arXiv:2502.12025</a></li>
+                    <li>Wang et al., "STAR-1: Safer Alignment of Reasoning LLMs with 1K Data," AAAI 2026. <a href="https://arxiv.org/abs/2504.01903" target="_blank">arXiv:2504.01903</a></li>
+                    <li>Zhang et al., "RealSafe-R1: Safety-Aligned DeepSeek-R1 without Compromising Reasoning Capability," 2025. <a href="https://arxiv.org/abs/2504.10081" target="_blank">arXiv:2504.10081</a></li>
+                    <li>In et al., "R1-Act: Efficient Reasoning Model Safety Alignment by Activating Safety Knowledge," 2025. <a href="https://arxiv.org/html/2508.00324v1" target="_blank">arXiv:2508.00324</a></li>
+                    <li>Tomar et al., "UnsafeChain: Enhancing Reasoning Model Safety via Hard Cases," 2025. <a href="https://arxiv.org/html/2507.21652v2" target="_blank">arXiv:2507.21652</a></li>
+                    <li>Xie et al., "Mitigating Safety Tax via Distribution-Grounded Refinement in Large Reasoning Models," 2026. <a href="https://arxiv.org/pdf/2602.02136" target="_blank">arXiv:2602.02136</a></li>
+                </ol>
+
+                <h3>参数空间约束</h3>
+                <ol class="ref-list" start="9">
+                    <li>Xue &amp; Mirzasoleiman, "LoRA is All You Need for Safety Alignment of Reasoning LLMs," UCLA, 2025. <a href="https://arxiv.org/pdf/2507.17075v4" target="_blank">arXiv:2507.17075</a></li>
+                    <li>Niu et al., "NSPO: Mitigating the Safety Alignment Tax with Null-Space Constrained Policy Optimization," HKUST, 2025. <a href="https://arxiv.org/html/2512.11391v2" target="_blank">arXiv:2512.11391</a></li>
+                    <li>Sun et al., "OGPSA: Safety Alignment as Continual Learning via Orthogonal Gradient Projection," 清华, 2026. <a href="https://arxiv.org/html/2602.07892" target="_blank">arXiv:2602.07892</a></li>
+                </ol>
+
+                <h3>推理式安全对齐</h3>
+                <ol class="ref-list" start="12">
+                    <li>Zhang et al., "STAIR: Improving Safety Alignment with Introspective Reasoning," ICML 2025 Oral, 清华. <a href="https://arxiv.org/pdf/2502.02384" target="_blank">arXiv:2502.02384</a></li>
+                    <li>Peng et al., "RECAP: Large Reasoning Models Learn Better Alignment from Flawed Thinking," Meta, 2025. <a href="https://arxiv.org/pdf/2510.00938" target="_blank">arXiv:2510.00938</a></li>
+                    <li>Zhang et al., "IPO: Towards Safe Reasoning via Corrective Intervention," 清华, 2025. <a href="https://arxiv.org/html/2509.24393v2" target="_blank">arXiv:2509.24393</a></li>
+                    <li>"ReSA: Reasoned Safety Alignment via Answer-Then-Check," 2025. <a href="https://arxiv.org/html/2509.11629v1" target="_blank">arXiv:2509.11629</a></li>
+                </ol>
+
+                <h3>在线/自生成方法</h3>
+                <ol class="ref-list" start="16">
+                    <li>Lee et al., "THINKSafe: Self-Generated Safety Alignment for Reasoning Models," KAIST, 2026. <a href="https://arxiv.org/pdf/2601.23143v1" target="_blank">arXiv:2601.23143</a></li>
+                    <li>Fu et al., "OPSA: Reducing the Safety Tax with On-Policy Self-Distillation," UCR/Microsoft, 2026. <a href="https://arxiv.org/html/2605.15239v1" target="_blank">arXiv:2605.15239</a></li>
+                    <li>Wen et al., "Constitutional On-Policy Safe Distillation," 2026. <a href="https://arxiv.org/pdf/2606.03089.pdf" target="_blank">arXiv:2606.03089</a></li>
+                </ol>
+
+                <h3>推理时干预</h3>
+                <ol class="ref-list" start="19">
+                    <li>Ghosal et al., "SafeThink: Safety Recovery Is Only a Few Early Steering Steps Away," UMD, 2026. <a href="https://arxiv.org/pdf/2602.11096v1" target="_blank">arXiv:2602.11096</a></li>
+                </ol>
+
+                <h3>机制理解</h3>
+                <ol class="ref-list" start="20">
+                    <li>"Towards Understanding Safety Alignment: Safety Neurons," NeurIPS 2025, 清华 KEG. <a href="https://arxiv.org/html/2406.14144" target="_blank">arXiv:2406.14144</a></li>
+                    <li>"AlignmentVeto: How Safety Training Suppresses Cultural Knowledge," UIUC, 2025. <a href="https://arxiv.org/html/2510.13154v2" target="_blank">arXiv:2510.13154</a></li>
+                </ol>
+
+                <h3>度量框架与理论扩展</h3>
+                <ol class="ref-list" start="22">
+                    <li>"Value Alignment Tax: Measuring Value Trade-offs," NYU, 2026. <a href="https://arxiv.org/pdf/2602.12134" target="_blank">arXiv:2602.12134</a></li>
+                    <li>Hu et al., "Navigating the Alignment-Calibration Trade-off via Model Merging," Cambridge, 2025. <a href="https://arxiv.org/html/2510.17426v2" target="_blank">arXiv:2510.17426</a></li>
+                    <li>"Online Merging Optimizers for Boosting Rewards and Mitigating Tax," 2024. <a href="https://arxiv.org/pdf/2405.17931" target="_blank">arXiv:2405.17931</a></li>
+                    <li>"LOMO-CV: Towards Tax-Free Safety Alignment," CUHK-SZ/ZJU. <a href="https://openreview.net/pdf/98f7f08a1bd27a1d195098ca915a7fa6abc7882b.pdf" target="_blank">OpenReview</a></li>
+                    <li>"B-DPO: Improving Safety Alignment via Balanced DPO," 2026. <a href="https://arxiv.org/abs/2603.22829v1" target="_blank">arXiv:2603.22829</a></li>
+                    <li>"Paying Alignment Tax with Contrastive Learning," Imperial/IBM, 2025. <a href="https://arxiv.org/pdf/2505.19327" target="_blank">arXiv:2505.19327</a></li>
+                </ol>
+
+                <h3>工业分析</h3>
+                <ol class="ref-list" start="28">
+                    <li>Tian Pan, "The Alignment Tax: When Safety Tuning Hurts Your Production LLM," 2026. <a href="http://web-guiguio.b-cdn.net/blog/2026-04-13-the-alignment-tax-when-safety-tuning-hurts-your-production-llm" target="_blank">Blog</a></li>
+                    <li>"Alignment Tax Analysis," AI Wiki, 2025. <a href="https://www.artificial-intelligence-wiki.com/ai-security/model-safety-and-alignment/alignment-tax-analysis/" target="_blank">Link</a></li>
+                </ol>
+
+                <div class="footer-note">
+                    <p>本综述基于公开论文和网络资源整理，最后更新于 2026-08-10。</p>
+                    <p>如有遗漏或错误，欢迎指正。</p>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // ========== Theme Toggle ==========
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            document.getElementById('themeIcon').textContent = next === 'dark' ? '☀️' : '🌙';
+            document.getElementById('themeText').textContent = next === 'dark' ? '浅色' : '深色';
+            try { localStorage.setItem('theme', next); } catch(e) {}
+        }
+
+        // Load saved theme
+        (function() {
+            try {
+                const saved = localStorage.getItem('theme');
+                if (saved && saved !== 'light') {
+                    document.documentElement.setAttribute('data-theme', saved);
+                    document.getElementById('themeIcon').textContent = saved === 'dark' ? '☀️' : '🌙';
+                    document.getElementById('themeText').textContent = saved === 'dark' ? '浅色' : '深色';
+                }
+            } catch(e) {}
+        })();
+
+        // ========== Sidebar Toggle ==========
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('show');
+        }
+
+        // ========== Active Nav Link on Scroll ==========
+        const sections = document.querySelectorAll('h2[id], h3[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function updateActiveLink() {
+            let current = '';
+            const scrollPos = window.scrollY + 80;
+
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                if (scrollPos >= top && scrollPos < top + height) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            if (!current && sections.length > 0) {
+                for (let i = sections.length - 1; i >= 0; i--) {
+                    if (sections[i].offsetTop <= scrollPos) {
+                        current = sections[i].getAttribute('id');
+                        break;
+                    }
+                }
+            }
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveLink);
+        window.addEventListener('load', updateActiveLink);
+
+        // Close sidebar on nav click (mobile)
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 1024) {
+                    toggleSidebar();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
