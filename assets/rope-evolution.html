@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoPE 旋转位置编码：从诞生到百万长上下文的完整演进</title>
+    <meta name="description" content="详细梳理 LLM 中 RoPE（旋转位置编码）机制的发展脉络，从 2021 年诞生到 2026 年百万 token 长上下文的完整技术演进。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- KaTeX for math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <style>
+        /* ========== CSS Variables ========== */
+        :root {
+            --sidebar-bg: #ffffff;
+            --sidebar-fg: #475569;
+            --sidebar-active: #4f46e5;
+            --sidebar-border: #e2e8f0;
+            --sidebar-hover: #f1f5f9;
+            --sidebar-scrollbar: #cbd5e1;
+            --sidebar-group: #94a3b8;
+            --content-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --accent-dark: #4f46e5;
+            --pink: #ec4899;
+            --green: #10b981;
+            --orange: #f59e0b;
+            --red: #ef4444;
+            --cyan: #06b6d4;
+            --border: #e2e8f0;
+            --code-bg: #1e293b;
+            --code-fg: #e2e8f0;
+            --code-label-bg: #334155;
+            --bar-track-bg: #f1f5f9;
+            --thead-bg: #f8fafc;
+            --svg-text: #1e293b;
+            --svg-text-sub: #64748b;
+            --svg-text-muted: #94a3b8;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.05);
+            --radius: 12px;
+            --sidebar-w: 280px;
+            --content-max: 900px;
+        }
+
+        /* ========== Dark Mode Variables ========== */
+        [data-theme="dark"] {
+            --sidebar-bg: #0a0a14;
+            --sidebar-fg: #94a3b8;
+            --sidebar-active: #a5b4fc;
+            --sidebar-border: #1e1e2e;
+            --sidebar-hover: #1a1a2e;
+            --sidebar-scrollbar: #2a2a3e;
+            --sidebar-group: #64748b;
+            --content-bg: #0d1117;
+            --card-bg: #161b22;
+            --text-primary: #e6edf3;
+            --text-secondary: #9198a1;
+            --text-muted: #6e7681;
+            --border: #21262d;
+            --code-bg: #0d1117;
+            --code-fg: #e6edf3;
+            --code-label-bg: #21262d;
+            --bar-track-bg: #21262d;
+            --thead-bg: #1c2128;
+            --svg-text: #e6edf3;
+            --svg-text-sub: #9198a1;
+            --svg-text-muted: #6e7681;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4), 0 2px 4px -2px rgba(0,0,0,0.3);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.5), 0 4px 6px -4px rgba(0,0,0,0.3);
+        }
+        [data-theme="dark"] .hero h1 {
+            background: linear-gradient(135deg, #e6edf3 0%, #818cf8 60%, #ec4899 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        [data-theme="dark"] .callout.info { background: rgba(6,182,212,0.1); }
+        [data-theme="dark"] .callout.warn { background: rgba(245,158,11,0.1); }
+        [data-theme="dark"] .callout.tip  { background: rgba(16,185,129,0.1); }
+        [data-theme="dark"] .callout.key  { background: rgba(99,102,241,0.1); }
+        [data-theme="dark"] .callout p    { color: var(--text-secondary); }
+        [data-theme="dark"] code          { background: rgba(99,102,241,0.15); color: var(--accent-light); }
+        [data-theme="dark"] .bar-track    { background: #21262d; }
+        [data-theme="dark"] .katex        { color: var(--text-primary); }
+        [data-theme="dark"] .timeline-item::before { background: var(--card-bg); }
+
+        /* Dark mode SVG text overrides */
+        [data-theme="dark"] .figure svg text { fill: var(--svg-text); }
+        [data-theme="dark"] .figure svg text[fill="#64748b"],
+        [data-theme="dark"] .figure svg text[fill="#475569"] { fill: var(--svg-text-sub); }
+        [data-theme="dark"] .figure svg text[fill="#94a3b8"] { fill: var(--svg-text-muted); }
+        [data-theme="dark"] .figure svg text[fill="#1e293b"] { fill: var(--svg-text); }
+        [data-theme="dark"] .figure svg text[fill="#fff"],
+        [data-theme="dark"] .figure svg text[fill="#ffffff"] { fill: #0d1117; }
+        [data-theme="dark"] .figure svg rect[fill="#f8fafc"] { fill: var(--card-bg); }
+        [data-theme="dark"] .figure svg rect[fill="#f1f5f9"] { fill: var(--bar-track-bg); }
+        [data-theme="dark"] .figure svg line[stroke="#cbd5e1"],
+        [data-theme="dark"] .figure svg line[stroke="#e2e8f0"] { stroke: var(--border); }
+        [data-theme="dark"] .figure svg path[stroke="#94a3b8"] { stroke: var(--svg-text-muted); }
+        [data-theme="dark"] .figure svg polygon[fill="#cbd5e1"] { fill: var(--border); }
+        [data-theme="dark"] .figure svg polygon[fill="#94a3b8"] { fill: var(--svg-text-muted); }
+        [data-theme="dark"] .figure svg path[stroke="#cbd5e1"] { stroke: var(--border); }
+
+        /* Smooth theme transition */
+        body, .math-block, .code-block, .card, .figure, .callout, table, #theme-toggle, #sidebar {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* ========== Theme Toggle Button ========== */
+        #theme-toggle {
+            position: fixed;
+            top: 14px; right: 20px;
+            z-index: 200;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            color: var(--text-secondary);
+        }
+        #theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+        #theme-toggle .icon-moon { display: none; }
+        [data-theme="dark"] #theme-toggle .icon-sun  { display: none; }
+        [data-theme="dark"] #theme-toggle .icon-moon { display: block; }
+        @media (max-width: 1024px) { #theme-toggle { top: 16px; right: 16px; } }
+
+        /* ========== Reset ========== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; scroll-padding-top: 30px; }
+
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            background: var(--content-bg);
+            color: var(--text-primary);
+            line-height: 1.75;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========== Progress Bar ========== */
+        #progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent), var(--pink));
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+
+        /* ========== Sidebar ========== */
+        #sidebar {
+            position: fixed;
+            top: 0; left: 0;
+            width: var(--sidebar-w);
+            height: 100vh;
+            background: var(--sidebar-bg);
+            overflow-y: auto;
+            padding: 32px 0;
+            z-index: 100;
+            transition: transform 0.3s ease;
+            border-right: 1px solid var(--border);
+        }
+
+        #sidebar::-webkit-scrollbar { width: 4px; }
+        #sidebar::-webkit-scrollbar-track { background: transparent; }
+        #sidebar::-webkit-scrollbar-thumb { background: var(--sidebar-scrollbar); border-radius: 2px; }
+
+        .sidebar-header {
+            padding: 0 24px 24px;
+            border-bottom: 1px solid var(--sidebar-border);
+            margin-bottom: 16px;
+        }
+        .sidebar-header .logo {
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-light), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4px;
+        }
+        .sidebar-header .subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .nav-section { padding: 0 12px; }
+        .nav-group-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--sidebar-group);
+            padding: 16px 12px 6px;
+        }
+        .nav-link {
+            display: block;
+            padding: 7px 12px;
+            color: var(--sidebar-fg);
+            text-decoration: none;
+            font-size: 13.5px;
+            font-weight: 400;
+            border-radius: 6px;
+            margin-bottom: 2px;
+            transition: all 0.2s;
+            border-left: 2px solid transparent;
+        }
+        .nav-link:hover {
+            background: var(--sidebar-hover);
+            color: var(--text-primary);
+        }
+        .nav-link.active {
+            background: rgba(99,102,241,0.12);
+            color: var(--sidebar-active);
+            border-left-color: var(--sidebar-active);
+            font-weight: 500;
+        }
+        .nav-link .nav-num {
+            display: inline-block;
+            width: 20px;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+        }
+        .nav-link.active .nav-num { color: var(--sidebar-active); }
+
+        /* ========== Main Content ========== */
+        #main {
+            margin-left: var(--sidebar-w);
+            padding: 0 48px 80px;
+            max-width: calc(var(--content-max) + var(--sidebar-w) + 96px);
+        }
+
+        .content-wrapper {
+            max-width: var(--content-max);
+            margin: 0 auto;
+        }
+
+        /* ========== Hero ========== */
+        .hero {
+            position: relative;
+            padding: 80px 0 60px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 48px;
+        }
+        .hero-tag {
+            display: inline-block;
+            padding: 5px 14px;
+            background: rgba(99,102,241,0.1);
+            color: var(--accent);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #1e293b 0%, #4f46e5 60%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero .lead {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 680px;
+            line-height: 1.7;
+        }
+        .hero-meta {
+            display: flex;
+            gap: 24px;
+            margin-top: 24px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+        /* ========== Sections ========== */
+        section {
+            margin-bottom: 64px;
+            scroll-margin-top: 24px;
+        }
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        h2 .section-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 16px;
+            color: var(--accent);
+            background: rgba(99,102,241,0.1);
+            padding: 3px 10px;
+            border-radius: 6px;
+        }
+        h3 {
+            font-size: 21px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 32px 0 12px;
+        }
+        h4 {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 24px 0 10px;
+        }
+        p {
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+        strong { color: var(--text-primary); font-weight: 600; }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* ========== Code Blocks ========== */
+        .code-block {
+            background: var(--code-bg);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            margin: 16px 0;
+            overflow-x: auto;
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+        .code-block pre {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13.5px;
+            line-height: 1.7;
+            color: var(--code-fg);
+            white-space: pre;
+        }
+        .code-block .code-label {
+            position: absolute;
+            top: 0; right: 0;
+            background: var(--code-label-bg);
+            color: var(--text-muted);
+            font-size: 11px;
+            padding: 3px 12px;
+            border-radius: 0 var(--radius) 0 8px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .code-block .c-keyword { color: #c084fc; }
+        .code-block .c-func { color: #60a5fa; }
+        .code-block .c-string { color: #34d399; }
+        .code-block .c-comment { color: #64748b; }
+        .code-block .c-num { color: #fbbf24; }
+
+        /* Inline code */
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.88em;
+            background: rgba(99,102,241,0.08);
+            color: var(--accent-dark);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* Math blocks */
+        .math-block {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px 28px;
+            margin: 16px 0;
+            text-align: center;
+            font-size: 17px;
+            color: var(--text-primary);
+            overflow-x: auto;
+            box-shadow: var(--shadow-sm);
+        }
+        .math-block .math-label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* ========== Callouts ========== */
+        .callout {
+            border-radius: var(--radius);
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-left: 4px solid;
+            font-size: 15px;
+        }
+        .callout-title {
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .callout.info {
+            background: rgba(6,182,212,0.06);
+            border-color: var(--cyan);
+        }
+        .callout.info .callout-title { color: #0891b2; }
+        .callout.warn {
+            background: rgba(245,158,11,0.06);
+            border-color: var(--orange);
+        }
+        .callout.warn .callout-title { color: #d97706; }
+        .callout.tip {
+            background: rgba(16,185,129,0.06);
+            border-color: var(--green);
+        }
+        .callout.tip .callout-title { color: #059669; }
+        .callout.key {
+            background: rgba(99,102,241,0.06);
+            border-color: var(--accent);
+        }
+        .callout.key .callout-title { color: var(--accent-dark); }
+        .callout p { margin-bottom: 0; color: var(--text-secondary); }
+
+        /* ========== Tables ========== */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            background: var(--card-bg);
+        }
+        thead {
+            background: var(--thead-bg);
+            border-bottom: 2px solid var(--border);
+        }
+        th {
+            padding: 12px 16px;
+            text-align: left;
+            color: var(--text-primary);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        td {
+            padding: 11px 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+        tbody tr:hover { background: rgba(99,102,241,0.03); }
+        tbody tr:last-child td { border-bottom: none; }
+        .tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .tag-green { background: rgba(16,185,129,0.12); color: #059669; }
+        .tag-red { background: rgba(239,68,68,0.12); color: #dc2626; }
+        .tag-yellow { background: rgba(245,158,11,0.12); color: #d97706; }
+        .tag-blue { background: rgba(99,102,241,0.12); color: var(--accent-dark); }
+        .tag-pink { background: rgba(236,72,153,0.12); color: #be185d; }
+
+        /* ========== Cards ========== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        .card-icon {
+            width: 44px; height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 14px;
+        }
+        .card h4 { margin-top: 0; }
+        .card p { font-size: 14px; margin-bottom: 0; }
+
+        /* ========== SVG Figure Containers ========== */
+        .figure {
+            margin: 32px 0;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 28px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+        }
+        .figure-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .figure-caption {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 12px;
+            line-height: 1.6;
+        }
+        .figure svg { display: block; margin: 0 auto; max-width: 100%; }
+
+        /* ========== Timeline ========== */
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+            margin: 32px 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px; top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent), var(--pink));
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 28px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -28px; top: 4px;
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 3px solid var(--accent);
+            z-index: 1;
+        }
+        .timeline-item.highlight::before {
+            border-color: var(--pink);
+            background: var(--pink);
+        }
+        .timeline-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        .timeline-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 2px 0 4px;
+        }
+        .timeline-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* ========== Comparison Bars ========== */
+        .bar-chart { margin: 16px 0; }
+        .bar-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .bar-label {
+            width: 120px;
+            font-size: 13px;
+            font-weight: 500;
+            text-align: right;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+        .bar-track {
+            flex: 1;
+            height: 28px;
+            background: var(--bar-track-bg);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+        .bar-fill {
+            height: 100%;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+            transition: width 0.8s ease;
+        }
+
+        /* ========== Mobile ========== */
+        #sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 16px; left: 16px;
+            z-index: 200;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            width: 40px; height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 99;
+        }
+
+        @media (max-width: 1024px) {
+            #sidebar { transform: translateX(-100%); }
+            #sidebar.open { transform: translateX(0); }
+            #sidebar-toggle { display: block; }
+            .overlay.show { display: block; }
+            #main { margin-left: 0; padding: 0 24px 60px; }
+            .hero h1 { font-size: 30px; }
+        }
+        @media (max-width: 640px) {
+            #main { padding: 0 16px 40px; }
+            .hero { padding: 60px 0 40px; }
+            .hero h1 { font-size: 24px; }
+            h2 { font-size: 22px; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ========== Footer ========== */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding-top: 32px;
+            margin-top: 48px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        .footer a { color: var(--accent); }
+
+        /* ========== Misc ========== */
+        .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+        .method-flow {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 16px 0;
+        }
+        .flow-step {
+            background: var(--card-bg);
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            padding: 10px 18px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-dark);
+            box-shadow: var(--shadow-sm);
+        }
+        .flow-arrow {
+            color: var(--text-muted);
+            font-size: 20px;
+        }
+        .highlight-text {
+            background: linear-gradient(120deg, rgba(99,102,241,0.15) 0%, rgba(236,72,153,0.15) 100%);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        /* ========== Back to Top ========== */
+        #back-to-top {
+            position: fixed;
+            bottom: 32px; right: 32px;
+            z-index: 200;
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s, transform 0.3s, background 0.2s;
+        }
+        #back-to-top.show { opacity: 1; transform: translateY(0); }
+        #back-to-top:hover { background: var(--accent-dark); }
+        @media (max-width: 640px) { #back-to-top { bottom: 20px; right: 20px; } }
+
+        /* ========== Hero decoration ========== */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; right: -10%;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* ========== Section hover anchor ========== */
+        h2 .section-num { transition: transform 0.2s; }
+        section:hover h2 .section-num { transform: rotate(-5deg) scale(1.05); }
+
+        /* ========== KaTeX dark mode fix ========== */
+        [data-theme="dark"] .katex { color: var(--text-primary); }
+        [data-theme="dark"] .math-block { background: var(--card-bg); }
+
+        /* ========== Tag dark mode ========== */
+        [data-theme="dark"] .tag-green { background: rgba(16,185,129,0.18); color: #34d399; }
+        [data-theme="dark"] .tag-red { background: rgba(239,68,68,0.18); color: #f87171; }
+        [data-theme="dark"] .tag-yellow { background: rgba(245,158,11,0.18); color: #fbbf24; }
+        [data-theme="dark"] .tag-blue { background: rgba(99,102,241,0.18); color: var(--accent-light); }
+        [data-theme="dark"] .tag-pink { background: rgba(236,72,153,0.18); color: #f472b6; }
+
+        /* ========== Flow step dark mode ========== */
+        [data-theme="dark"] .flow-step { background: var(--card-bg); }
+
+        /* ========== Card icon dark mode ========== */
+        [data-theme="dark"] .card-icon[style*="rgba(99,102,241,0.1)"] { background: rgba(99,102,241,0.2) !important; }
+        [data-theme="dark"] .card-icon[style*="rgba(236,72,153,0.1)"] { background: rgba(236,72,153,0.2) !important; }
+        [data-theme="dark"] .card-icon[style*="rgba(245,158,11,0.1)"] { background: rgba(245,158,11,0.2) !important; }
+        [data-theme="dark"] .card-icon[style*="rgba(16,185,129,0.1)"] { background: rgba(16,185,129,0.2) !important; }
+        [data-theme="dark"] .card-icon[style*="rgba(6,182,212,0.1)"] { background: rgba(6,182,212,0.2) !important; }
+
+        /* ========== Selection ========== */
+        ::selection { background: rgba(99,102,241,0.25); }
+    </style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- Theme toggle -->
+<button id="theme-toggle" aria-label="切换主题" title="切换深色/浅色模式">
+    <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+</button>
+
+<!-- Mobile toggle -->
+<button id="sidebar-toggle">&#9776;</button>
+<div class="overlay" id="overlay"></div>
+
+<!-- Back to top -->
+<button id="back-to-top" aria-label="回到顶部" title="回到顶部">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
+
+<!-- ========== Sidebar ========== -->
+<aside id="sidebar">
+    <div class="sidebar-header">
+        <div class="logo">RoPE 演进全解</div>
+        <div class="subtitle">从 2021 到百万 Token 上下文</div>
+    </div>
+    <nav class="nav-section">
+        <div class="nav-group-title">概述</div>
+        <a class="nav-link" href="#hero"><span class="nav-num">00</span>引言</a>
+
+        <div class="nav-group-title">背景与演进</div>
+        <a class="nav-link" href="#background"><span class="nav-num">01</span>为什么需要位置编码</a>
+        <a class="nav-link" href="#evolution"><span class="nav-num">02</span>RoPE 之前的方案</a>
+
+        <div class="nav-group-title">RoPE 核心</div>
+        <a class="nav-link" href="#rope-birth"><span class="nav-num">03</span>RoPE 的诞生</a>
+        <a class="nav-link" href="#rope-math"><span class="nav-num">04</span>核心数学原理</a>
+        <a class="nav-link" href="#rope-freq"><span class="nav-num">05</span>频率分层设计</a>
+        <a class="nav-link" href="#rope-problem"><span class="nav-num">06</span>外推失败问题</a>
+
+        <div class="nav-group-title">长上下文扩展</div>
+        <a class="nav-link" href="#pi"><span class="nav-num">07</span>位置插值 PI</a>
+        <a class="nav-link" href="#ntk"><span class="nav-num">08</span>NTK-aware</a>
+        <a class="nav-link" href="#yarn"><span class="nav-num">09</span>YaRN</a>
+        <a class="nav-link" href="#abf"><span class="nav-num">10</span>ABF 大 Base</a>
+        <a class="nav-link" href="#longrope"><span class="nav-num">11</span>LongRoPE 百万Token</a>
+
+        <div class="nav-group-title">前沿与总结</div>
+        <a class="nav-link" href="#latest"><span class="nav-num">12</span>2025-2026 新进展</a>
+        <a class="nav-link" href="#models"><span class="nav-num">13</span>主流模型配置</a>
+        <a class="nav-link" href="#summary"><span class="nav-num">14</span>完整脉络总结</a>
+    </nav>
+</aside>
+
+<!-- ========== Main Content ========== -->
+<main id="main">
+<div class="content-wrapper">
+
+<!-- ===== Hero ===== -->
+<section id="hero" class="hero">
+    <span class="hero-tag">Deep Dive &middot; 位置编码</span>
+    <h1>RoPE 旋转位置编码<br>从诞生到百万长上下文的完整演进</h1>
+    <p class="lead">
+        RoPE（Rotary Position Embedding）是当今几乎所有主流大语言模型的标准位置编码方案。
+        本文将从数学原理出发，完整梳理 RoPE 从 2021 年诞生到 2026 年支持百万 Token 上下文的技术演进脉络，
+        深入解析每种扩展方法的核心思想与工程实践。
+    </p>
+    <div class="hero-meta">
+        <span>&#128197; 2026.08</span>
+        <span>&#128218; LLM &middot; Position Encoding</span>
+        <span>&#9889; 阅读约 25 分钟</span>
+    </div>
+</section>
+
+<!-- ===== 1. Background ===== -->
+<section id="background">
+    <h2><span class="section-num">01</span> 为什么需要位置编码</h2>
+
+    <p>
+        Transformer 的自注意力机制本质上是<strong>置换不变（permutation-invariant）</strong>的——
+        打乱输入序列的词序，注意力分数矩阵的数值关系保持不变。这意味着在没有位置信息时，
+        <span class="highlight-text">"猫追老鼠"和"老鼠追猫"对模型来说完全等价</span>。
+        位置编码的根本使命就是向模型注入"谁在哪个位置"以及"token 之间相距多远"的信息。
+    </p>
+
+    <div class="figure">
+        <div class="figure-title">图 1：自注意力的置换不变性问题</div>
+        <svg viewBox="0 0 720 220" width="100%" style="max-width:720px">
+            <!-- Left: original order -->
+            <text x="140" y="25" text-anchor="middle" font-size="14" font-weight="600" fill="#1e293b">原始顺序</text>
+            <rect x="60" y="40" width="60" height="36" rx="8" fill="#6366f1" opacity="0.9"/>
+            <text x="90" y="63" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">猫</text>
+            <rect x="130" y="40" width="60" height="36" rx="8" fill="#818cf8" opacity="0.9"/>
+            <text x="160" y="63" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">追</text>
+            <rect x="200" y="40" width="60" height="36" rx="8" fill="#a5b4fc" opacity="0.9"/>
+            <text x="230" y="63" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">老鼠</text>
+            <!-- attention arrows -->
+            <path d="M 90 80 Q 160 110 230 80" stroke="#94a3b8" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/>
+            <text x="160" y="115" text-anchor="middle" font-size="11" fill="#64748b">Attention = 0.85</text>
+
+            <!-- Right: shuffled order -->
+            <text x="540" y="25" text-anchor="middle" font-size="14" font-weight="600" fill="#1e293b">打乱顺序</text>
+            <rect x="460" y="40" width="60" height="36" rx="8" fill="#a5b4fc" opacity="0.9"/>
+            <text x="490" y="63" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">老鼠</text>
+            <rect x="530" y="40" width="60" height="36" rx="8" fill="#818cf8" opacity="0.9"/>
+            <text x="560" y="63" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">追</text>
+            <rect x="600" y="40" width="60" height="36" rx="8" fill="#6366f1" opacity="0.9"/>
+            <text x="630" y="63" text-anchor="middle" font-size="13" fill="#fff" font-weight="600">猫</text>
+            <path d="M 490 80 Q 560 110 630 80" stroke="#94a3b8" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/>
+            <text x="560" y="115" text-anchor="middle" font-size="11" fill="#64748b">Attention = 0.85</text>
+
+            <!-- Equal sign -->
+            <text x="360" y="65" text-anchor="middle" font-size="28" fill="#ef4444" font-weight="700">=</text>
+            <text x="360" y="95" text-anchor="middle" font-size="11" fill="#ef4444">语义完全相同!</text>
+
+            <!-- Solution -->
+            <rect x="120" y="145" width="480" height="50" rx="10" fill="#f0fdf4" stroke="#10b981" stroke-width="1.5"/>
+            <text x="360" y="168" text-anchor="middle" font-size="13" fill="#059669" font-weight="600">位置编码：为每个 token 注入位置信息</text>
+            <text x="360" y="184" text-anchor="middle" font-size="12" fill="#059669">让模型区分"谁在前、谁在后"以及"相距多远"</text>
+        </svg>
+        <div class="figure-caption">
+            没有 Position Encoding 的 Transformer 无法区分词序——这正是位置编码要解决的核心问题。
+        </div>
+    </div>
+</section>
+
+<!-- ===== 2. Evolution before RoPE ===== -->
+<section id="evolution">
+    <h2><span class="section-num">02</span> RoPE 之前的方案演进</h2>
+
+    <p>在 RoPE 诞生之前，位置编码经历了四代演进，每一代都在试图解决前一代的核心缺陷：</p>
+
+    <div class="card-grid">
+        <div class="card">
+            <div class="card-icon" style="background:rgba(99,102,241,0.1);">&#128344;</div>
+            <h4>Sinusoidal PE <small style="color:var(--text-muted);font-weight:400">2017</small></h4>
+            <p>用 sin/cos 函数生成固定位置向量，<strong>加到</strong> Token Embedding 上。无需训练参数，但无法显式建模相对距离，加法操作可能污染语义信息。</p>
+            <div class="badge-row"><span class="tag tag-green">无参数</span><span class="tag tag-red">无相对位置</span></div>
+        </div>
+        <div class="card">
+            <div class="card-icon" style="background:rgba(236,72,153,0.1);">&#128221;</div>
+            <h4>Learnable PE <small style="color:var(--text-muted);font-weight:400">2018</small></h4>
+            <p>为每个位置学习一个独立向量（BERT/GPT-2 采用）。灵活但<strong>训练长度即上限</strong>，推理时超出训练长度就完全崩溃，无法外推。</p>
+            <div class="badge-row"><span class="tag tag-blue">灵活</span><span class="tag tag-red">无法外推</span></div>
+        </div>
+        <div class="card">
+            <div class="card-icon" style="background:rgba(245,158,11,0.1);">&#128260;</div>
+            <h4>Relative PE <small style="color:var(--text-muted);font-weight:400">2019</small></h4>
+            <p>Transformer-XL/T5 引入相对距离偏置，直接在注意力分数上加可学习偏置。关注"相距多远"而非"第几位"，但需修改 Attention 结构且参数较多。</p>
+            <div class="badge-row"><span class="tag tag-green">相对位置</span><span class="tag tag-yellow">结构复杂</span></div>
+        </div>
+        <div class="card">
+            <div class="card-icon" style="background:rgba(6,182,212,0.1);">&#128207;</div>
+            <h4>ALiBi <small style="color:var(--text-muted);font-weight:400">2021</small></h4>
+            <p>在注意力分数上加线性距离惩罚（距离越远惩罚越大）。简单有效，BLOOM 采用。但数学形式固定，对超长上下文效果下降。</p>
+            <div class="badge-row"><span class="tag tag-blue">简单</span><span class="tag tag-yellow">长上下文差</span></div>
+        </div>
+    </div>
+
+    <div class="callout warn">
+        <div class="callout-title">&#9888;&#65039; 共同痛点</div>
+        <p>这些方案要么无法外推到训练长度之外，要么无法自然编码相对位置，要么需要额外的可学习参数或结构修改。<strong>能否有一种方案同时满足：相对位置 + 零参数 + 不改结构 + 可外推？</strong></p>
+    </div>
+</section>
+
+<!-- ===== 3. RoPE Birth ===== -->
+<section id="rope-birth">
+    <h2><span class="section-num">03</span> RoPE 的诞生（2021）</h2>
+
+    <p>
+        <strong>RoPE（Rotary Position Embedding）</strong> 由苏剑林等人于 2021 年在论文
+        <em>RoFormer: Enhanced Transformer with Rotary Position Embedding</em> 中提出。
+        它的核心思想彻底改变了位置编码的范式：
+        <span class="highlight-text">不把位置加到 embedding 上，而是旋转 Query 和 Key 向量</span>。
+    </p>
+
+    <div class="callout key">
+        <div class="callout-title">&#128273; 设计目标</div>
+        <p>两个 Token 的注意力分数，<strong>只应依赖它们的相对距离</strong>，而非绝对位置。形式化地：</p>
+    </div>
+
+    <div class="math-block">
+        <span class="math-label">目标：内积只依赖相对位置差 m - n</span>
+        $$ \langle f(\mathbf{q}, m),\; f(\mathbf{k}, n) \rangle = g(\mathbf{q}, \mathbf{k}, m - n) $$
+    </div>
+
+    <p>
+        即无论 token A 在位置 5、token B 在位置 8，还是 A 在位置 500、B 在位置 503，
+        只要它们的<strong>相对距离</strong>是 3，注意力分数就应该相同。
+    </p>
+
+    <div class="figure">
+        <div class="figure-title">图 2：RoPE 的核心直觉——旋转即编码</div>
+        <svg viewBox="0 0 720 280" width="100%" style="max-width:720px">
+            <!-- Position 0 -->
+            <circle cx="130" cy="130" r="70" fill="none" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+            <line x1="130" y1="130" x2="130" y2="70" stroke="#6366f1" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="130" cy="70" r="6" fill="#6366f1"/>
+            <text x="130" y="225" text-anchor="middle" font-size="13" font-weight="600" fill="#1e293b">位置 m=0</text>
+            <text x="130" y="242" text-anchor="middle" font-size="11" fill="#64748b">旋转 0°</text>
+            <text x="130" y="258" text-anchor="middle" font-size="11" fill="#6366f1" font-family="monospace">θ=0</text>
+
+            <!-- Position 1 -->
+            <circle cx="360" cy="130" r="70" fill="none" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+            <line x1="360" y1="130" x2="422" y2="97" stroke="#818cf8" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="422" cy="97" r="6" fill="#818cf8"/>
+            <!-- angle arc -->
+            <path d="M 360 100 A 30 30 0 0 1 386 108" fill="none" stroke="#ec4899" stroke-width="1.5"/>
+            <text x="375" y="120" font-size="10" fill="#ec4899" font-weight="600">θ</text>
+            <text x="360" y="225" text-anchor="middle" font-size="13" font-weight="600" fill="#1e293b">位置 m=1</text>
+            <text x="360" y="242" text-anchor="middle" font-size="11" fill="#64748b">旋转 θ°</text>
+            <text x="360" y="258" text-anchor="middle" font-size="11" fill="#818cf8" font-family="monospace">θ=1×θᵢ</text>
+
+            <!-- Position 2 -->
+            <circle cx="590" cy="130" r="70" fill="none" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+            <line x1="590" y1="130" x2="647" y2="64" stroke="#a5b4fc" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="647" cy="64" r="6" fill="#a5b4fc"/>
+            <path d="M 590 100 A 30 30 0 0 1 617 71" fill="none" stroke="#ec4899" stroke-width="1.5"/>
+            <text x="602" y="115" font-size="10" fill="#ec4899" font-weight="600">2θ</text>
+            <text x="590" y="225" text-anchor="middle" font-size="13" font-weight="600" fill="#1e293b">位置 m=2</text>
+            <text x="590" y="242" text-anchor="middle" font-size="11" fill="#64748b">旋转 2θ°</text>
+            <text x="590" y="258" text-anchor="middle" font-size="11" fill="#a5b4fc" font-family="monospace">θ=2×θᵢ</text>
+
+            <!-- Bottom note -->
+            <rect x="80" y="10" width="560" height="0" fill="none"/>
+            <text x="360" y="20" text-anchor="middle" font-size="12" fill="#059669" font-weight="600">
+                关键：位置 m 的旋转角度 = m × θᵢ，相对角度差 = (m-n) × θᵢ
+            </text>
+        </svg>
+        <div class="figure-caption">
+            每个 token 的向量根据其位置被旋转不同角度。两个 token 之间的"相对角度差"天然编码了它们的距离。
+        </div>
+    </div>
+</section>
+
+<!-- ===== 4. RoPE Math ===== -->
+<section id="rope-math">
+    <h2><span class="section-num">04</span> 核心数学原理</h2>
+
+    <h3>旋转操作</h3>
+    <p>将 $d$ 维向量按维度两两分组，视为 $d/2$ 个复数。对第 $i$ 组二维向量 $(x_{2i}, x_{2i+1})$，在位置 $m$ 处施加旋转角度 $m \cdot \theta_i$：</p>
+
+    <div class="math-block">
+        <span class="math-label">二维旋转矩阵（第 i 组维度，位置 m）</span>
+        $$ \begin{pmatrix} x'_{2i} \\ x'_{2i+1} \end{pmatrix} = \begin{pmatrix} \cos(m\theta_i) & -\sin(m\theta_i) \\ \sin(m\theta_i) & \cos(m\theta_i) \end{pmatrix} \begin{pmatrix} x_{2i} \\ x_{2i+1} \end{pmatrix} $$
+    </div>
+
+    <p>其中每组对应的频率为：</p>
+
+    <div class="math-block">
+        <span class="math-label">频率公式（几何级数）</span>
+        $$ \theta_i = \text{base}^{-2i/d}, \quad \text{base} = 10000 \text{（原始默认值）} $$
+    </div>
+
+    <h3>关键性质：相对位置自动涌现</h3>
+    <p>对位置 $m$ 的 Query $\mathbf{q}$ 和位置 $n$ 的 Key $\mathbf{k}$ 分别旋转后，计算内积：</p>
+
+    <div class="math-block">
+        <span class="math-label">旋转矩阵的正交性使得绝对位置消失</span>
+        $$ \langle R_m \mathbf{q},\; R_n \mathbf{k} \rangle = \mathbf{q}^T R_m^T R_n \mathbf{k} = \mathbf{q}^T R_{n-m} \mathbf{k} $$
+    </div>
+
+    <div class="callout tip">
+        <div class="callout-title">&#9989; 核心结论</div>
+        <p>因为旋转矩阵满足 $R_m^T R_n = R_{n-m}$，所以<strong>注意力分数自动只依赖于相对位置 $m-n$</strong>，无需任何额外的可学习参数！这就是 RoPE 的数学之美。</p>
+    </div>
+
+    <h3>代码实现</h3>
+    <div class="code-block">
+        <div class="code-label">Python</div>
+<pre><span class="c-keyword">import</span> torch, math
+
+<span class="c-keyword">def</span> <span class="c-func">apply_rope</span>(q, k, positions, head_dim, base=<span class="c-num">10000</span>):
+    <span class="c-string">"""对 Query 和 Key 应用 RoPE 旋转位置编码"""</span>
+    <span class="c-comment"># 计算每组维度的频率: θ_i = base^(-2i/d)</span>
+    freqs = <span class="c-num">1.0</span> / (base ** (torch.arange(<span class="c-num">0</span>, head_dim, <span class="c-num">2</span>).float() / head_dim))
+    
+    <span class="c-comment"># 位置 × 频率 = 旋转角度</span>
+    angles = positions[:, <span class="c-keyword">None</span>] * freqs[<span class="c-keyword">None</span>, :]  <span class="c-comment"># [seq_len, head_dim/2]</span>
+    
+    <span class="c-comment"># 构造 cos/sin 表</span>
+    cos = torch.cos(angles).unsqueeze(-<span class="c-num">1</span>)  <span class="c-comment"># [seq, dim/2, 1]</span>
+    sin = torch.sin(angles).unsqueeze(-<span class="c-num">1</span>)
+    
+    <span class="c-comment"># 将 q/k 拆成 (x_even, x_odd) 对，应用 2D 旋转</span>
+    q_even, q_odd = q[..., <span class="c-num">0</span>::<span class="c-num">2</span>], q[..., <span class="c-num">1</span>::<span class="c-num">2</span>]
+    k_even, k_odd = k[..., <span class="c-num">0</span>::<span class="c-num">2</span>], k[..., <span class="c-num">1</span>::<span class="c-num">2</span>]
+    
+    <span class="c-comment"># 旋转: [cos -sin; sin cos] × [x_even; x_odd]</span>
+    q_rot = torch.stack([q_even * cos - q_odd * sin,
+                         q_even * sin + q_odd * cos], dim=-<span class="c-num">1</span>).flatten(-<span class="c-num">2</span>)
+    k_rot = torch.stack([k_even * cos - k_odd * sin,
+                         k_even * sin + k_odd * cos], dim=-<span class="c-num">1</span>).flatten(-<span class="c-num">2</span>)
+    
+    <span class="c-keyword">return</span> q_rot, k_rot</pre>
+    </div>
+</section>
+
+<!-- ===== 5. Frequency Design ===== -->
+<section id="rope-freq">
+    <h2><span class="section-num">05</span> 频率分层设计哲学</h2>
+
+    <p>
+        RoPE 的频率 $\theta_i$ 构成一个<strong>几何级数</strong>，从高到低递减。
+        这种设计赋予了 RoPE "多尺度望远镜"的能力——不同维度负责不同粒度的位置信息。
+    </p>
+
+    <div class="figure">
+        <div class="figure-title">图 3：RoPE 频率谱——多尺度位置编码</div>
+        <svg viewBox="0 0 720 300" width="100%" style="max-width:720px">
+            <!-- Axis -->
+            <line x1="60" y1="240" x2="680" y2="240" stroke="#cbd5e1" stroke-width="1.5"/>
+            <line x1="60" y1="40" x2="60" y2="240" stroke="#cbd5e1" stroke-width="1.5"/>
+            <text x="370" y="275" text-anchor="middle" font-size="12" fill="#64748b">维度索引 i (从低到高)</text>
+            <text x="20" y="140" text-anchor="middle" font-size="12" fill="#64748b" transform="rotate(-90 20 140)">旋转速度</text>
+
+            <!-- High frequency wave (left) -->
+            <text x="110" y="35" text-anchor="middle" font-size="11" font-weight="600" fill="#6366f1">高频维度</text>
+            <text x="110" y="50" text-anchor="middle" font-size="10" fill="#818cf8">i=0,1,2...</text>
+            <path d="M 70 180 Q 80 120 90 180 Q 100 240 110 180 Q 120 120 130 180 Q 140 240 150 180" 
+                  stroke="#6366f1" stroke-width="2" fill="none"/>
+            <text x="110" y="260" text-anchor="middle" font-size="10" fill="#6366f1">每~6 token一周</text>
+
+            <!-- Mid frequency -->
+            <text x="300" y="35" text-anchor="middle" font-size="11" font-weight="600" fill="#8b5cf6">中频维度</text>
+            <text x="300" y="50" text-anchor="middle" font-size="10" fill="#a78bfa">i=d/4...</text>
+            <path d="M 230 180 Q 265 130 300 180 Q 335 230 370 180" 
+                  stroke="#8b5cf6" stroke-width="2" fill="none"/>
+            <text x="300" y="260" text-anchor="middle" font-size="10" fill="#8b5cf6">每~40 token一周</text>
+
+            <!-- Low frequency wave (right) -->
+            <text x="550" y="35" text-anchor="middle" font-size="11" font-weight="600" fill="#ec4899">低频维度</text>
+            <text x="550" y="50" text-anchor="middle" font-size="10" fill="#f472b6">i=d-1,d-2...</text>
+            <path d="M 450 180 Q 550 150 650 180" 
+                  stroke="#ec4899" stroke-width="2" fill="none"/>
+            <text x="550" y="260" text-anchor="middle" font-size="10" fill="#ec4899">训练长度内不完一周</text>
+
+            <!-- Labels -->
+            <rect x="70" y="155" width="80" height="50" fill="rgba(99,102,241,0.05)" rx="4"/>
+            <text x="110" y="172" text-anchor="middle" font-size="10" fill="#4f46e5" font-weight="600">局部位置</text>
+            <text x="110" y="186" text-anchor="middle" font-size="9" fill="#64748b">相邻token关系</text>
+
+            <rect x="460" y="155" width="180" height="50" fill="rgba(236,72,153,0.05)" rx="4"/>
+            <text x="550" y="172" text-anchor="middle" font-size="10" fill="#be185d" font-weight="600">全局位置</text>
+            <text x="550" y="186" text-anchor="middle" font-size="9" fill="#64748b">远距离token关系</text>
+
+            <!-- Arrow -->
+            <path d="M 80 225 L 650 225" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="5,3"/>
+            <polygon points="650,225 642,221 642,229" fill="#cbd5e1"/>
+        </svg>
+        <div class="figure-caption">
+            高频维度旋转快，编码精细的局部位置（相邻 token 关系）；低频维度旋转慢，编码粗粒度的全局位置（远距离关系）。
+        </div>
+    </div>
+
+    <div class="card-grid">
+        <div class="card" style="border-left:4px solid var(--accent);">
+            <h4 style="color:var(--accent-dark);">&#128270; 高频维度（小的 i）</h4>
+            <p>$\theta_i$ 大，旋转快，约每 6.28 个 token 完成一个完整旋转周期。负责编码<strong>局部、精细</strong>的位置关系——"这两个词相邻吗？"</p>
+        </div>
+        <div class="card" style="border-left:4px solid var(--pink);">
+            <h4 style="color:#be185d;">&#127760; 低频维度（大的 i）</h4>
+            <p>$\theta_i$ 小，旋转慢，在整个训练长度内可能只扫过一小段弧。负责编码<strong>全局、粗粒度</strong>的位置关系——"这两个词相距很远吗？"</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 6. Extrapolation Problem ===== -->
+<section id="rope-problem">
+    <h2><span class="section-num">06</span> 致命问题：长度外推失败</h2>
+
+    <p>
+        RoPE 虽然编码了相对位置，但<strong>并不意味着可以无限外推</strong>。训练时模型只在 $[0, L_{\text{train}}]$ 范围内见过旋转角度，
+        推理时超出这个范围就会出现严重问题。
+    </p>
+
+    <div class="figure">
+        <div class="figure-title">图 4：RoPE 外推失败的两个原因</div>
+        <svg viewBox="0 0 720 340" width="100%" style="max-width:720px">
+            <!-- Training range -->
+            <rect x="40" y="40" width="280" height="260" fill="rgba(16,185,129,0.05)" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5,3" rx="8"/>
+            <text x="180" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="#059669">训练范围 [0, L_train]</text>
+            
+            <!-- Beyond training -->
+            <rect x="340" y="40" width="340" height="260" fill="rgba(239,68,68,0.05)" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="5,3" rx="8"/>
+            <text x="510" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="#dc2626">超出训练范围</text>
+
+            <!-- High freq problem -->
+            <circle cx="100" cy="110" r="35" fill="none" stroke="#10b981" stroke-width="1.5"/>
+            <path d="M 100 75 A 35 35 0 1 1 99 75" fill="none" stroke="#6366f1" stroke-width="2.5"/>
+            <text x="100" y="165" text-anchor="middle" font-size="11" font-weight="600" fill="#4f46e5">高频：已见完整周期</text>
+            
+            <text x="210" y="115" font-size="20" fill="#94a3b8">→</text>
+
+            <circle cx="380" cy="110" r="35" fill="none" stroke="#ef4444" stroke-width="1.5"/>
+            <path d="M 380 75 A 35 35 0 1 1 379 75" fill="none" stroke="#ef4444" stroke-width="2.5"/>
+            <path d="M 380 75 A 35 35 0 0 1 415 110" fill="none" stroke="#f59e0b" stroke-width="3"/>
+            <text x="380" y="165" text-anchor="middle" font-size="11" font-weight="600" fill="#dc2626">OOD 相位！</text>
+            <text x="380" y="180" text-anchor="middle" font-size="10" fill="#94a3b8">遇到未见过的角度</text>
+
+            <line x1="40" y1="200" x2="680" y2="200" stroke="#e2e8f0" stroke-width="1"/>
+
+            <!-- Low freq problem -->
+            <circle cx="100" cy="250" r="35" fill="none" stroke="#10b981" stroke-width="1.5"/>
+            <path d="M 100 250 L 120 230" stroke="#ec4899" stroke-width="3" stroke-linecap="round"/>
+            <text x="100" y="300" text-anchor="middle" font-size="11" font-weight="600" fill="#4f46e5">低频：只扫过小弧</text>
+            
+            <text x="210" y="255" font-size="20" fill="#94a3b8">→</text>
+
+            <circle cx="380" cy="250" r="35" fill="none" stroke="#ef4444" stroke-width="1.5"/>
+            <path d="M 380 250 L 400 230" stroke="#ec4899" stroke-width="3" stroke-linecap="round"/>
+            <path d="M 380 250 L 395 240" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+            <text x="380" y="300" text-anchor="middle" font-size="11" font-weight="600" fill="#dc2626">远距离无区分！</text>
+            <text x="380" y="315" text-anchor="middle" font-size="10" fill="#94a3b8">角度差趋近于0</text>
+
+            <!-- Right side labels -->
+            <rect x="500" y="80" width="160" height="80" fill="rgba(239,68,68,0.08)" rx="8"/>
+            <text x="580" y="105" text-anchor="middle" font-size="12" font-weight="700" fill="#dc2626">问题 1: OOD 相位</text>
+            <text x="580" y="125" text-anchor="middle" font-size="10" fill="#64748b">高频维度超出训练范围后</text>
+            <text x="580" y="138" text-anchor="middle" font-size="10" fill="#64748b">遇到未见过的新角度</text>
+            <text x="580" y="151" text-anchor="middle" font-size="10" fill="#64748b">→ 注意力分数漂移</text>
+
+            <rect x="500" y="220" width="160" height="80" fill="rgba(239,68,68,0.08)" rx="8"/>
+            <text x="580" y="245" text-anchor="middle" font-size="12" font-weight="700" fill="#dc2626">问题 2: 分辨率丢失</text>
+            <text x="580" y="265" text-anchor="middle" font-size="10" fill="#64748b">低频维度旋转太慢</text>
+            <text x="580" y="278" text-anchor="middle" font-size="10" fill="#64748b">远距离位置角度差异→0</text>
+            <text x="580" y="291" text-anchor="middle" font-size="10" fill="#64748b">→ 无法区分远处位置</text>
+        </svg>
+        <div class="figure-caption">
+            左：训练范围内的正常状态。右：超出训练范围后，高频维度遇到 OOD 相位，低频维度失去远距离区分能力。
+        </div>
+    </div>
+
+    <div class="callout warn">
+        <div class="callout-title">&#9888;&#65039; 实际影响</div>
+        <p>例如 LLaMA-2 训练在 4096 token，直接推理到 32768 时，perplexity 急剧上升，输出完全不可用。<strong>必须通过 RoPE 扩展技术来突破训练长度限制。</strong></p>
+    </div>
+</section>
+
+<!-- ===== 7. Position Interpolation ===== -->
+<section id="pi">
+    <h2><span class="section-num">07</span> 方案一：位置插值 PI（2023.6）</h2>
+
+    <p><strong>论文：</strong> <em>Extending Context Window of Large Language Models via Position Interpolation</em>（Chen et al.）</p>
+
+    <h3>核心思想：压缩位置索引</h3>
+    <p>
+        最直接的思路：如果超出的位置是问题，那就把所有位置<strong>等比例压缩</strong>回训练范围内。
+        例如 4K → 32K 扩展，所有位置除以 8，模型看到的旋转角度始终在训练范围内。
+    </p>
+
+    <div class="math-block">
+        <span class="math-label">位置插值：线性压缩</span>
+        $$ m' = \frac{m}{s}, \quad s = \frac{L_{\text{target}}}{L_{\text{train}}} $$
+    </div>
+
+    <div class="figure">
+        <div class="figure-title">图 5：Position Interpolation 原理</div>
+        <svg viewBox="0 0 720 200" width="100%" style="max-width:720px">
+            <!-- Original positions -->
+            <text x="360" y="25" text-anchor="middle" font-size="12" font-weight="600" fill="#1e293b">原始位置: 0 ────── 4096 ──────────────── 32768</text>
+            <rect x="40" y="40" width="640" height="30" fill="#f1f5f9" rx="6"/>
+            <rect x="40" y="40" width="80" height="30" fill="rgba(16,185,129,0.3)" rx="6"/>
+            <text x="80" y="60" text-anchor="middle" font-size="10" fill="#059669" font-weight="600">训练范围</text>
+
+            <!-- Arrow -->
+            <text x="360" y="90" text-anchor="middle" font-size="13" fill="#6366f1" font-weight="600">↓ 除以 s=8（位置插值）</text>
+
+            <!-- Compressed positions -->
+            <text x="360" y="115" text-anchor="middle" font-size="12" font-weight="600" fill="#1e293b">压缩后: 0 ─── 512 ───────────────── 4096</text>
+            <rect x="40" y="130" width="640" height="30" fill="rgba(16,185,129,0.15)" rx="6"/>
+            <rect x="40" y="130" width="640" height="30" fill="rgba(99,102,241,0.2)" rx="6"/>
+            <text x="360" y="150" text-anchor="middle" font-size="10" fill="#4f46e5" font-weight="600">全部落入训练范围 ✓</text>
+            
+            <text x="360" y="185" text-anchor="middle" font-size="11" fill="#ef4444">⚠ 但所有频率维度被均匀压缩 → 局部分辨率下降</text>
+        </svg>
+    </div>
+
+    <div class="card-grid">
+        <div class="card" style="border-top:3px solid var(--green);">
+            <h4 style="color:#059669;">&#9989; 优点</h4>
+            <p>简单直接，只需少量微调（约 1000 步）即可适配新长度。Llama 2 的 4K→32K 扩展采用了此方案。</p>
+        </div>
+        <div class="card" style="border-top:3px solid var(--red);">
+            <h4 style="color:#dc2626;">&#10060; 缺点</h4>
+            <p>所有频率维度<strong>均匀压缩</strong>——高频维度（编码局部信息）也被压缩，导致 4 个物理 token 共享一个角度槽位，<strong>短上下文性能下降明显</strong>。</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 8. NTK-aware ===== -->
+<section id="ntk">
+    <h2><span class="section-num">08</span> 方案二：NTK-aware RoPE（2023.6）</h2>
+
+    <p><strong>来源：</strong> bloc97 在 Reddit r/LocalLLaMA 社区发布（非正式论文），借鉴 Neural Tangent Kernel 理论。</p>
+
+    <h3>核心洞察：不同频率需要不同对待</h3>
+    <p>
+        PI 的问题在于"一刀切"地压缩所有维度。NTK-aware 的关键洞察是：
+        <span class="highlight-text">高频维度应该外推（保持不变），低频维度才需要插值（压缩）</span>。
+    </p>
+
+    <div class="callout info">
+        <div class="callout-title">&#128161; 直觉解释</div>
+        <p>高频维度在训练范围内已经完成了多个完整旋转周期，它们对位置的编码已经"饱和"，超出范围不会产生全新的信息——所以可以安全外推。低频维度在训练范围内只扫过一小段弧，超出后角度差异趋零——所以需要压缩。</p>
+    </div>
+
+    <h3>方法：修改 Base 而非位置</h3>
+    <p>NTK-aware 不是缩放位置索引，而是修改 RoPE 的 base 值：</p>
+
+    <div class="math-block">
+        <span class="math-label">NTK-aware：修改 base 频率</span>
+        $$ b' = b \times s^{\,d/(d-2)} $$
+    </div>
+
+    <p>这等效于让低频维度旋转更慢（压缩角度），高频维度几乎不受影响。</p>
+
+    <div class="figure">
+        <div class="figure-title">图 6：PI vs NTK-aware 对不同维度的处理对比</div>
+        <svg viewBox="0 0 720 260" width="100%" style="max-width:720px">
+            <!-- Axis -->
+            <text x="360" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">RoPE 维度（低频 ←→ 高频）</text>
+            <line x1="40" y1="40" x2="680" y2="40" stroke="#cbd5e1" stroke-width="1.5"/>
+            <polygon points="680,40 672,36 672,44" fill="#cbd5e1"/>
+            <text x="60" y="35" font-size="10" fill="#94a3b8">i=d-1 (低频)</text>
+            <text x="620" y="35" font-size="10" fill="#94a3b8">i=0 (高频)</text>
+
+            <!-- PI: uniform compression -->
+            <text x="30" y="85" font-size="12" font-weight="600" fill="#4f46e5">PI</text>
+            <rect x="60" y="65" width="620" height="30" fill="rgba(99,102,241,0.3)" rx="4"/>
+            <text x="370" y="85" text-anchor="middle" font-size="11" fill="#fff" font-weight="600">全部均匀压缩 1/s</text>
+            <text x="370" y="108" text-anchor="middle" font-size="10" fill="#dc2626">⚠ 高频也被压缩 → 局部精度损失</text>
+
+            <!-- NTK-aware -->
+            <text x="20" y="155" font-size="12" font-weight="600" fill="#10b981">NTK</text>
+            <rect x="60" y="135" width="200" height="30" fill="rgba(239,68,68,0.25)" rx="4"/>
+            <text x="160" y="155" text-anchor="middle" font-size="11" fill="#dc2626" font-weight="600">低频：压缩</text>
+            <rect x="260" y="135" width="200" height="30" fill="rgba(245,158,11,0.25)" rx="4"/>
+            <text x="360" y="155" text-anchor="middle" font-size="11" fill="#d97706" font-weight="600">中频：部分压缩</text>
+            <rect x="460" y="135" width="220" height="30" fill="rgba(16,185,129,0.25)" rx="4"/>
+            <text x="570" y="155" text-anchor="middle" font-size="11" fill="#059669" font-weight="600">高频：不变（外推）</text>
+            <text x="370" y="180" text-anchor="middle" font-size="10" fill="#059669">✓ 高频保持 → 局部精度保留</text>
+
+            <!-- YaRN preview -->
+            <text x="20" y="225" font-size="12" font-weight="600" fill="#ec4899">YaRN</text>
+            <rect x="60" y="205" width="180" height="30" fill="rgba(239,68,68,0.3)" rx="4"/>
+            <text x="150" y="225" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="600">低频：完全插值</text>
+            <rect x="240" y="205" width="220" height="30" fill="rgba(245,158,11,0.3)" rx="4"/>
+            <text x="350" y="225" text-anchor="middle" font-size="10" fill="#d97706" font-weight="600">中频：渐进斜坡过渡</text>
+            <rect x="460" y="205" width="220" height="30" fill="rgba(16,185,129,0.3)" rx="4"/>
+            <text x="570" y="225" text-anchor="middle" font-size="10" fill="#059669" font-weight="600">高频：直接外推</text>
+            <text x="370" y="250" text-anchor="middle" font-size="10" fill="#ec4899">✓ 三段式精细化处理 → 最优效果</text>
+        </svg>
+        <div class="figure-caption">
+            PI 对所有维度一刀切压缩；NTK-aware 区分高低频但仍然较粗；YaRN 进一步精细化分为三段处理。
+        </div>
+    </div>
+
+    <div class="card-grid">
+        <div class="card" style="border-top:3px solid var(--green);">
+            <h4 style="color:#059669;">&#9989; 优点</h4>
+            <p>无需微调即可实现 4-8 倍扩展。Code Llama 和早期 Qwen 采用了此方案。</p>
+        </div>
+        <div class="card" style="border-top:3px solid var(--orange);">
+            <h4 style="color:#d97706;">&#9888;&#65039; 局限</h4>
+            <p>对所有维度一刀切地修改 base，精度有限；超过 8 倍后效果显著下降。</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 9. YaRN ===== -->
+<section id="yarn">
+    <h2><span class="section-num">09</span> 方案三：YaRN（2023.9）</h2>
+
+    <p><strong>论文：</strong> <em>YaRN: Efficient Context Window Extension of Large Language Models</em>（Peng et al., Nous Research）</p>
+
+    <p>
+        YaRN 是对 NTK-aware 的精细化升级，也是 <strong>2023-2024 年最主流的长上下文扩展方案</strong>。
+        它的核心创新是将 RoPE 维度按波长分为三组，分别应用不同策略——即 <strong>NTK-by-parts</strong>。
+    </p>
+
+    <h3>分频段差异化处理</h3>
+
+    <div class="code-block">
+        <div class="code-label">YaRN 核心逻辑（伪代码）</div>
+<pre><span class="c-keyword">for</span> each frequency dimension i:
+    wavelength_i = <span class="c-num">2</span>π / θ_i
+
+    <span class="c-keyword">if</span> wavelength_i < L_train / <span class="c-num">32</span>:        <span class="c-comment"># 高频维度（波长短，旋转快）</span>
+        scale_i = <span class="c-num">1.0</span>                     <span class="c-comment"># → 不插值，直接外推</span>
+    
+    <span class="c-keyword">elif</span> wavelength_i > L_train / <span class="c-num">1</span>:     <span class="c-comment"># 低频维度（波长长，旋转慢）</span>
+        scale_i = s                        <span class="c-comment"># → 完全插值，压缩到训练范围</span>
+    
+    <span class="c-keyword">else</span>:                                <span class="c-comment"># 中间维度</span>
+        scale_i = ramp(wavelength_i)       <span class="c-comment"># → 渐进式斜坡过渡</span>
+
+    θ'_i = θ_i / scale_i</pre>
+    </div>
+
+    <div class="math-block">
+        <span class="math-label">YaRN 频率缩放公式</span>
+        $$ \theta'_i = \theta_i \cdot s^{-\,\text{ramp}(\lambda_i)}, \quad \text{ramp} \in [0, 1] $$
+    </div>
+
+    <h3>额外创新：注意力温度缩放</h3>
+    <p>长序列下注意力会过度分散，YaRN 引入温度因子来增加注意力锐度：</p>
+
+    <div class="math-block">
+        <span class="math-label">注意力温度缩放（mscale）</span>
+        $$ \text{Attention} = \text{softmax}\!\left(\frac{QK^T}{t \cdot \sqrt{d}}\right), \quad t = 0.1 \cdot \ln(s) + 1 $$
+    </div>
+
+    <div class="figure">
+        <div class="figure-title">图 7：YaRN 三段式频率处理策略</div>
+        <svg viewBox="0 0 720 240" width="100%" style="max-width:720px">
+            <!-- Background -->
+            <rect x="40" y="60" width="640" height="120" fill="#f8fafc" rx="8" stroke="#e2e8f0"/>
+            
+            <!-- Three regions -->
+            <rect x="40" y="60" width="200" height="120" fill="rgba(239,68,68,0.08)" rx="8"/>
+            <rect x="250" y="60" width="200" height="120" fill="rgba(245,158,11,0.08)"/>
+            <rect x="460" y="60" width="220" height="120" fill="rgba(16,185,129,0.08)" rx="8"/>
+            
+            <!-- Labels -->
+            <text x="140" y="85" text-anchor="middle" font-size="12" font-weight="700" fill="#dc2626">低频维度</text>
+            <text x="140" y="102" text-anchor="middle" font-size="10" fill="#64748b">波长 > L_train</text>
+            <rect x="80" y="115" width="120" height="25" fill="rgba(239,68,68,0.3)" rx="4"/>
+            <text x="140" y="132" text-anchor="middle" font-size="11" font-weight="600" fill="#dc2626">完全插值</text>
+            <text x="140" y="165" text-anchor="middle" font-size="9" fill="#64748b">压缩到训练范围</text>
+
+            <text x="350" y="85" text-anchor="middle" font-size="12" font-weight="700" fill="#d97706">中间维度</text>
+            <text x="350" y="102" text-anchor="middle" font-size="10" fill="#64748b">L_train/32 < 波长 < L_train</text>
+            <rect x="290" y="115" width="120" height="25" fill="rgba(245,158,11,0.3)" rx="4"/>
+            <text x="350" y="132" text-anchor="middle" font-size="11" font-weight="600" fill="#d97706">渐进斜坡</text>
+            <text x="350" y="165" text-anchor="middle" font-size="9" fill="#64748b">0→1 平滑过渡</text>
+
+            <text x="570" y="85" text-anchor="middle" font-size="12" font-weight="700" fill="#059669">高频维度</text>
+            <text x="570" y="102" text-anchor="middle" font-size="10" fill="#64748b">波长 < L_train/32</text>
+            <rect x="510" y="115" width="120" height="25" fill="rgba(16,185,129,0.3)" rx="4"/>
+            <text x="570" y="132" text-anchor="middle" font-size="11" font-weight="600" fill="#059669">直接外推</text>
+            <text x="570" y="165" text-anchor="middle" font-size="9" fill="#64748b">保持不变</text>
+
+            <!-- Ramp curve -->
+            <path d="M 250 140 Q 300 140 350 128 Q 400 115 460 115" stroke="#8b5cf6" stroke-width="2" fill="none" stroke-dasharray="4,2"/>
+            <text x="355" y="200" text-anchor="middle" font-size="10" fill="#8b5cf6" font-weight="600">← ramp 函数：从 0（外推）平滑过渡到 1（插值） →</text>
+
+            <!-- Bottom axis -->
+            <line x1="40" y1="220" x2="680" y2="220" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="40" y="235" font-size="10" fill="#94a3b8">低频 (i 大)</text>
+            <text x="620" y="235" font-size="10" fill="#94a3b8">高频 (i 小)</text>
+        </svg>
+    </div>
+
+    <h3>效果数据</h3>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr><th>指标</th><th>PI</th><th>NTK-aware</th><th>YaRN</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>微调数据量</td><td>~1B tokens</td><td>可选</td><td><strong>0.1% 预训练数据</strong></td></tr>
+                <tr><td>训练步数</td><td>~1000 步</td><td>0</td><td><strong>减少 2.5 倍</strong></td></tr>
+                <tr><td>最大扩展倍数</td><td>4-8×</td><td>4-8×</td><td><strong>4-32×</strong></td></tr>
+                <tr><td>短上下文保持</td><td><span class="tag tag-red">下降明显</span></td><td><span class="tag tag-yellow">较好</span></td><td><span class="tag tag-green">优秀</span></td></tr>
+                <tr><td>代表采用者</td><td>Llama 2 Long</td><td>Code Llama</td><td>Mistral, 社区模型</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- ===== 10. ABF ===== -->
+<section id="abf">
+    <h2><span class="section-num">10</span> 方案四：ABF 大 Base 频率（2023）</h2>
+
+    <p><strong>论文：</strong> <em>Extending LLMs' Context Window with 100 Samples</em>（Zhang et al.）</p>
+
+    <p>
+        ABF（Adjusted Base Frequency）提出了一个惊人简单的方案：
+        <span class="highlight-text">直接增大 RoPE 的 base 值</span>（如从 10000 调到 500000），配合注意力缩放。
+    </p>
+
+    <h3>核心原理</h3>
+    <p>
+        base 越大，所有维度的旋转速度越慢——等效于在不改变位置索引的情况下，让模型在更长的序列上仍能保持角度差异。
+        特别是低频维度（原本旋转极慢），增大 base 后在长序列上仍能保持可区分的角度差。
+    </p>
+
+    <div class="figure">
+        <div class="figure-title">图 8：不同 Base 值下的旋转角度对比</div>
+        <svg viewBox="0 0 720 220" width="100%" style="max-width:720px">
+            <!-- base=10000 -->
+            <text x="180" y="25" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">base = 10,000</text>
+            <rect x="40" y="40" width="280" height="30" fill="rgba(239,68,68,0.1)" rx="4"/>
+            <rect x="40" y="40" width="70" height="30" fill="rgba(16,185,129,0.3)" rx="4"/>
+            <text x="75" y="60" text-anchor="middle" font-size="10" fill="#059669" font-weight="600">4K 训练</text>
+            <text x="220" y="60" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="600">→ 32K 时角度溢出</text>
+            <text x="180" y="90" text-anchor="middle" font-size="11" fill="#64748b">低频维度在 4K 内只转了一小段弧</text>
+            <text x="180" y="106" text-anchor="middle" font-size="11" fill="#ef4444">到 32K 时远距离位置无法区分</text>
+
+            <!-- Divider -->
+            <line x1="360" y1="20" x2="360" y2="120" stroke="#e2e8f0" stroke-width="2"/>
+
+            <!-- base=500000 -->
+            <text x="540" y="25" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">base = 500,000</text>
+            <rect x="400" y="40" width="280" height="30" fill="rgba(16,185,129,0.1)" rx="4"/>
+            <rect x="400" y="40" width="280" height="30" fill="rgba(16,185,129,0.2)" rx="4"/>
+            <text x="540" y="60" text-anchor="middle" font-size="10" fill="#059669" font-weight="600">128K 范围内角度可区分 ✓</text>
+            <text x="540" y="90" text-anchor="middle" font-size="11" fill="#64748b">低频维度转得更慢但范围更大</text>
+            <text x="540" y="106" text-anchor="middle" font-size="11" fill="#059669">128K 内仍有足够角度差</text>
+
+            <!-- Key insight -->
+            <rect x="40" y="135" width="640" height="60" fill="rgba(99,102,241,0.06)" rx="8" stroke="rgba(99,102,241,0.2)"/>
+            <text x="360" y="160" text-anchor="middle" font-size="13" font-weight="700" fill="#4f46e5">关键发现：长上下文扩展的本质 = 维持注意力熵的稳定性</text>
+            <text x="360" y="180" text-anchor="middle" font-size="12" fill="#64748b">仅用 100 个样本、6 步训练，就将 LLaMA-2-7B-Chat 从 4K 扩展到 16K</text>
+        </svg>
+    </div>
+
+    <div class="callout tip">
+        <div class="callout-title">&#128640; 实际影响</div>
+        <p><strong>Llama 3 将 base 从 10000 提升到 500000</strong>，原生支持 128K 上下文。这是目前最简单有效的长上下文方案——只需修改一个配置参数。Qwen 2.5/3 和 Mistral Large 2 更进一步使用 base = 1,000,000。</p>
+    </div>
+</section>
+
+<!-- ===== 11. LongRoPE ===== -->
+<section id="longrope">
+    <h2><span class="section-num">11</span> 百万 Token：LongRoPE（2024.2）</h2>
+
+    <p><strong>论文：</strong> <em>LongRoPE: Extending LLM Context Window Beyond 2 Million Tokens</em>（Microsoft Research, ICML 2024）</p>
+
+    <p>
+        LongRoPE 首次将预训练 LLM 的上下文窗口扩展到 <strong>2048K（200万）token</strong>——从 4K 到 2M，512 倍跨越。
+        它通过三大核心创新实现了这一突破。
+    </p>
+
+    <h3>创新一：非均匀 RoPE 插值</h3>
+    <p>
+        LongRoPE 发现 RoPE 中存在<strong>两种非均匀性</strong>，之前的方法都没有充分利用：
+    </p>
+    <div class="card-grid">
+        <div class="card">
+            <div class="card-icon" style="background:rgba(99,102,241,0.1);">&#128202;</div>
+            <h4>维度非均匀性</h4>
+            <p>不同 RoPE 维度需要不同的缩放因子。低维（高频）需要更少插值，高维（低频）需要更多插值——但最优解取决于目标长度。</p>
+        </div>
+        <div class="card">
+            <div class="card-icon" style="background:rgba(236,72,153,0.1);">&#127919;</div>
+            <h4>位置非均匀性</h4>
+            <p>序列起始的 token 位置可以不插值（直接外推），因为它们对应高频旋转，在训练中已经见过完整周期。</p>
+        </div>
+    </div>
+
+    <p>使用<strong>进化搜索算法</strong>为每个维度和位置段搜索最优的非均匀缩放因子。仅靠非均匀插值（不微调），就能实现 8 倍扩展。</p>
+
+    <h3>创新二：渐进式扩展策略</h3>
+    <p>直接从 4K 跳到 2048K 不现实（90% 以上是新位置）。LongRoPE 采用<strong>两步走</strong>：</p>
+
+    <div class="figure">
+        <div class="figure-title">图 9：LongRoPE 渐进式扩展流程</div>
+        <svg viewBox="0 0 720 200" width="100%" style="max-width:720px">
+            <!-- Step 1 -->
+            <rect x="20" y="60" width="120" height="70" fill="rgba(99,102,241,0.1)" stroke="#6366f1" stroke-width="2" rx="10"/>
+            <text x="80" y="85" text-anchor="middle" font-size="13" font-weight="700" fill="#4f46e5">4K 模型</text>
+            <text x="80" y="102" text-anchor="middle" font-size="10" fill="#64748b">预训练原始</text>
+            <text x="80" y="117" text-anchor="middle" font-size="10" fill="#64748b">Llama 2 7B</text>
+
+            <!-- Arrow 1 -->
+            <path d="M 145 95 L 185 95" stroke="#6366f1" stroke-width="2" fill="none"/>
+            <polygon points="185,95 178,90 178,100" fill="#6366f1"/>
+            <text x="165" y="82" text-anchor="middle" font-size="9" fill="#6366f1">Step 1</text>
+
+            <!-- Step 1 box -->
+            <rect x="190" y="55" width="160" height="80" fill="rgba(16,185,129,0.08)" stroke="#10b981" stroke-width="2" rx="10"/>
+            <text x="270" y="78" text-anchor="middle" font-size="12" font-weight="700" fill="#059669">进化搜索 + 微调</text>
+            <text x="270" y="95" text-anchor="middle" font-size="10" fill="#64748b">搜索 256K 缩放因子</text>
+            <text x="270" y="110" text-anchor="middle" font-size="10" fill="#64748b">~1000 步微调</text>
+            <text x="270" y="125" text-anchor="middle" font-size="10" fill="#059669" font-weight="600">@ 256K 长度</text>
+
+            <!-- Arrow 2 -->
+            <path d="M 355 95 L 395 95" stroke="#10b981" stroke-width="2" fill="none"/>
+            <polygon points="395,95 388,90 388,100" fill="#10b981"/>
+            <text x="375" y="82" text-anchor="middle" font-size="9" fill="#10b981">Step 2</text>
+
+            <!-- 256K model -->
+            <rect x="400" y="60" width="120" height="70" fill="rgba(16,185,129,0.1)" stroke="#10b981" stroke-width="2" rx="10"/>
+            <text x="460" y="85" text-anchor="middle" font-size="13" font-weight="700" fill="#059669">256K 模型</text>
+            <text x="460" y="102" text-anchor="middle" font-size="10" fill="#64748b">已微调适配</text>
+            <text x="460" y="117" text-anchor="middle" font-size="10" fill="#64748b">64× 扩展</text>
+
+            <!-- Arrow 3 -->
+            <path d="M 525 95 L 565 95" stroke="#ec4899" stroke-width="2" fill="none"/>
+            <polygon points="565,95 558,90 558,100" fill="#ec4899"/>
+            <text x="545" y="82" text-anchor="middle" font-size="9" fill="#ec4899">Step 3</text>
+
+            <!-- 2048K -->
+            <rect x="570" y="55" width="130" height="80" fill="rgba(236,72,153,0.1)" stroke="#ec4899" stroke-width="2" rx="10"/>
+            <text x="635" y="78" text-anchor="middle" font-size="13" font-weight="700" fill="#be185d">2048K 模型</text>
+            <text x="635" y="95" text-anchor="middle" font-size="10" fill="#64748b">第二次位置插值</text>
+            <text x="635" y="110" text-anchor="middle" font-size="10" fill="#64748b">8× 免微调扩展</text>
+            <text x="635" y="125" text-anchor="middle" font-size="10" fill="#be185d" font-weight="600">512× 总扩展!</text>
+
+            <!-- Bottom note -->
+            <text x="360" y="165" text-anchor="middle" font-size="11" fill="#4f46e5" font-weight="600">
+                Step 3 不需要额外微调 —— 利用非均匀插值的 8× 免微调能力
+            </text>
+            <text x="360" y="183" text-anchor="middle" font-size="10" fill="#94a3b8">
+                避免了在 2M 长度上直接训练（数据稀缺 + 计算成本极高）
+            </text>
+        </svg>
+    </div>
+
+    <h3>创新三：短上下文性能恢复</h3>
+    <p>扩展到超长上下文后，注意力分散在大量位置上，导致短上下文性能退化。解决方案：</p>
+    <div class="method-flow">
+        <div class="flow-step">重新调整缩放因子</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step" style="border-color:var(--pink);color:#be185d;">在 8K 上减少插值</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step" style="border-color:var(--green);color:#059669;">注意力温度调整</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step" style="border-color:var(--green);color:#059669;background:rgba(16,185,129,0.1);">恢复短上下文性能 ✓</div>
+    </div>
+
+    <div class="callout key">
+        <div class="callout-title">&#127942; LongRoPE 的实际影响</div>
+        <p><strong>Llama 2 7B：4K → 2048K（512 倍）</strong>，仅 1000 步微调。Phi-3-128k 系列的 128K 变体均使用 LongRoPE。后续 LongRoPE2（2025.2, ICML 2025）进一步优化，在 Llama-3 8B 上达到 128K，保留 98.5%+ 短上下文性能。</p>
+    </div>
+</section>
+
+<!-- ===== 12. Latest ===== -->
+<section id="latest">
+    <h2><span class="section-num">12</span> 2025-2026 最新进展</h2>
+
+    <h3>MrRoPE：统一理论框架（ICLR 2026）</h3>
+    <p>
+        提出基于<strong>混合基数系统转换</strong>的统一理论框架，将 PI、NTK、YaRN 等所有 RoPE 扩展方法统一为不同的"基数转换策略"。
+        基于此理论提出的 MrRoPE-Pro 免微调方案，在 128K Needle-in-a-Haystack 测试中保持 85%+ 召回率，
+        在 Infinite-Bench 上准确率是 YaRN 的两倍以上。
+    </p>
+
+    <h3>多模态 RoPE：从 1D 到多维</h3>
+
+    <div class="card-grid">
+        <div class="card">
+            <div class="card-icon" style="background:rgba(99,102,241,0.1);">&#128247;</div>
+            <h4>M-RoPE <small style="color:var(--text-muted);font-weight:400">Qwen2-VL, 2024.9</small></h4>
+            <p>将 RoPE 频率维度分为三段，分别编码<strong>时间(t)、高度(h)、宽度(w)</strong>。文本 token 三轴共享递增值→退化为标准 1D RoPE；视觉 token 用 h/w 编码 2D 网格位置。</p>
+        </div>
+        <div class="card">
+            <div class="card-icon" style="background:rgba(236,72,153,0.1);">&#127910;</div>
+            <h4>VideoRoPE <small style="color:var(--text-muted);font-weight:400">2025.2</small></h4>
+            <p>针对视频场景优化：将时间维度分配给<strong>低频维度</strong>（避免周期性震荡），采用对角空间布局保持对称性，可调时间间距解耦时空索引。</p>
+        </div>
+        <div class="card">
+            <div class="card-icon" style="background:rgba(16,185,129,0.1);">&#129516;</div>
+            <h4>MHRoPE & MRoPE-I <small style="color:var(--text-muted);font-weight:400">ICLR 2026</small></h4>
+            <p>Qwen 团队系统性分析多模态 RoPE，提出三条设计准则：<strong>位置一致性、全频段利用、文本先验保持</strong>。MHRoPE 按注意力头分配频率，MRoPE-I 采用交错分配。</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 13. Model Configs ===== -->
+<section id="models">
+    <h2><span class="section-num">13</span> 主流模型 RoPE 配置现状</h2>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>模型</th>
+                    <th>RoPE Base</th>
+                    <th>训练长度</th>
+                    <th>支持长度</th>
+                    <th>扩展方法</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Llama 2</strong></td>
+                    <td><code>10,000</code></td>
+                    <td>4K</td>
+                    <td>4K (32K via PI)</td>
+                    <td><span class="tag tag-blue">Position Interpolation</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Llama 3</strong></td>
+                    <td><code>500,000</code></td>
+                    <td>8K</td>
+                    <td>8K</td>
+                    <td><span class="tag tag-green">原生大 Base</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Llama 3.1</strong></td>
+                    <td><code>500,000</code></td>
+                    <td>128K</td>
+                    <td>128K</td>
+                    <td><span class="tag tag-green">大 Base + 微调</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Qwen 2.5 / 3</strong></td>
+                    <td><code>1,000,000</code></td>
+                    <td>32K-128K</td>
+                    <td>128K+</td>
+                    <td><span class="tag tag-pink">大 Base + YaRN</span></td>
+                </tr>
+                <tr>
+                    <td><strong>DeepSeek-V3</strong></td>
+                    <td><code>10,000</code></td>
+                    <td>128K</td>
+                    <td>128K</td>
+                    <td><span class="tag tag-green">原生训练</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Mistral Large 2</strong></td>
+                    <td><code>1,000,000</code></td>
+                    <td>128K</td>
+                    <td>128K</td>
+                    <td><span class="tag tag-green">大 Base</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Phi-3-128K</strong></td>
+                    <td><code>10,000</code></td>
+                    <td>4K</td>
+                    <td>128K</td>
+                    <td><span class="tag tag-yellow">LongRoPE</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout info">
+        <div class="callout-title">&#128202; 趋势观察</div>
+        <p>现代模型普遍采用 <strong>大 Base（50万-100万）+ 原生长上下文训练</strong> 的路线，而非后处理扩展。这表明业界正在从"训练后扩展"转向"训练时原生支持长上下文"。</p>
+    </div>
+</section>
+
+<!-- ===== 14. Summary ===== -->
+<section id="summary">
+    <h2><span class="section-num">14</span> 完整发展脉络总结</h2>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-date">2017</div>
+            <div class="timeline-title">Sinusoidal PE</div>
+            <div class="timeline-desc">正余弦绝对位置编码，加法式注入。无法编码相对距离。</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">2018</div>
+            <div class="timeline-title">Learnable PE</div>
+            <div class="timeline-desc">可学习绝对位置编码（BERT/GPT-2）。训练长度即上限，无法外推。</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">2019</div>
+            <div class="timeline-title">Relative PE</div>
+            <div class="timeline-desc">相对位置偏置（Transformer-XL/T5）。需修改 Attention 结构。</div>
+        </div>
+        <div class="timeline-item highlight">
+            <div class="timeline-date">2021</div>
+            <div class="timeline-title">★ RoPE 诞生</div>
+            <div class="timeline-desc">旋转编码，天然相对位置，零参数，不改结构。被 LLaMA 等主流模型采用。</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">2023.6</div>
+            <div class="timeline-title">Position Interpolation (PI)</div>
+            <div class="timeline-desc">均匀压缩位置索引。简单但高频维度也被压缩，短上下文性能下降。</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">2023.6</div>
+            <div class="timeline-title">NTK-aware RoPE</div>
+            <div class="timeline-desc">修改 base 频率，高频不压缩低频压缩。免微调 4-8× 扩展。</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">2023.9</div>
+            <div class="timeline-title">YaRN（NTK-by-parts）</div>
+            <div class="timeline-desc">分频段处理 + 温度缩放。主流方案，4-32× 扩展，短上下文保持优秀。</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">2024.1</div>
+            <div class="timeline-title">ABF（大 Base 频率）</div>
+            <div class="timeline-desc">直接增大 base 到 50万-100万。Llama 3 采用，100 样本即可扩展。</div>
+        </div>
+        <div class="timeline-item highlight">
+            <div class="timeline-date">2024.2</div>
+            <div class="timeline-title">★ LongRoPE — 百万 Token</div>
+            <div class="timeline-desc">非均匀搜索 + 渐进扩展。4K→2048K（512倍），仅 1000 步微调。ICML 2024。</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">2024.9</div>
+            <div class="timeline-title">M-RoPE（多模态）</div>
+            <div class="timeline-desc">Qwen2-VL 引入 3D 位置编码（时间/高度/宽度），支持视觉语言模型。</div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">2025.2</div>
+            <div class="timeline-title">VideoRoPE / LongRoPE2</div>
+            <div class="timeline-desc">视频专用 RoPE 优化；LongRoPE2 用 needle-driven 搜索，128K 保留 98.5% 性能。</div>
+        </div>
+        <div class="timeline-item highlight">
+            <div class="timeline-date">2026</div>
+            <div class="timeline-title">★ MrRoPE / MHRoPE</div>
+            <div class="timeline-desc">统一理论框架（ICLR 2026）；多模态 RoPE 系统化设计准则。免训练 128K 85%+ 召回。</div>
+        </div>
+    </div>
+
+    <h3>核心技术路线总结</h3>
+
+    <div class="figure">
+        <div class="figure-title">图 10：从 4K 到百万 Token 的核心技术路线</div>
+        <svg viewBox="0 0 720 280" width="100%" style="max-width:720px">
+            <!-- Four pillars -->
+            <rect x="30" y="50" width="150" height="180" fill="rgba(99,102,241,0.06)" stroke="#6366f1" stroke-width="1.5" rx="10"/>
+            <text x="105" y="75" text-anchor="middle" font-size="12" font-weight="700" fill="#4f46e5">增大 Base 频率</text>
+            <text x="105" y="95" text-anchor="middle" font-size="10" fill="#64748b">10K → 500K-1M</text>
+            <text x="105" y="120" text-anchor="middle" font-size="10" fill="#475569">让低频维度在</text>
+            <text x="105" y="135" text-anchor="middle" font-size="10" fill="#475569">长序列上仍保持</text>
+            <text x="105" y="150" text-anchor="middle" font-size="10" fill="#475569">角度差异</text>
+            <text x="105" y="185" text-anchor="middle" font-size="10" fill="#059669" font-weight="600">Llama 3</text>
+            <text x="105" y="200" text-anchor="middle" font-size="10" fill="#059669" font-weight="600">Qwen 2.5/3</text>
+            <text x="105" y="215" text-anchor="middle" font-size="10" fill="#059669" font-weight="600">Mistral</text>
+
+            <rect x="200" y="50" width="150" height="180" fill="rgba(236,72,153,0.06)" stroke="#ec4899" stroke-width="1.5" rx="10"/>
+            <text x="275" y="75" text-anchor="middle" font-size="12" font-weight="700" fill="#be185d">分频段差异化</text>
+            <text x="275" y="95" text-anchor="middle" font-size="10" fill="#64748b">YaRN NTK-by-parts</text>
+            <text x="275" y="120" text-anchor="middle" font-size="10" fill="#475569">高频外推</text>
+            <text x="275" y="135" text-anchor="middle" font-size="10" fill="#475569">低频插值</text>
+            <text x="275" y="150" text-anchor="middle" font-size="10" fill="#475569">中频斜坡过渡</text>
+            <text x="275" y="185" text-anchor="middle" font-size="10" fill="#059669" font-weight="600">YaRN</text>
+            <text x="275" y="200" text-anchor="middle" font-size="10" fill="#059669" font-weight="600">+ 温度缩放</text>
+
+            <rect x="370" y="50" width="150" height="180" fill="rgba(245,158,11,0.06)" stroke="#f59e0b" stroke-width="1.5" rx="10"/>
+            <text x="445" y="75" text-anchor="middle" font-size="12" font-weight="700" fill="#d97706">非均匀搜索</text>
+            <text x="445" y="95" text-anchor="middle" font-size="10" fill="#64748b">LongRoPE</text>
+            <text x="445" y="120" text-anchor="middle" font-size="10" fill="#475569">进化搜索每维</text>
+            <text x="445" y="135" text-anchor="middle" font-size="10" fill="#475569">最优缩放因子</text>
+            <text x="445" y="150" text-anchor="middle" font-size="10" fill="#475569">渐进式两步扩展</text>
+            <text x="445" y="185" text-anchor="middle" font-size="10" fill="#059669" font-weight="600">Phi-3-128K</text>
+            <text x="445" y="200" text-anchor="middle" font-size="10" fill="#059669" font-weight="600">4K→2048K</text>
+
+            <rect x="540" y="50" width="150" height="180" fill="rgba(16,185,129,0.06)" stroke="#10b981" stroke-width="1.5" rx="10"/>
+            <text x="615" y="75" text-anchor="middle" font-size="12" font-weight="700" fill="#059669">注意力温度调整</text>
+            <text x="615" y="95" text-anchor="middle" font-size="10" fill="#64748b">mscale</text>
+            <text x="615" y="120" text-anchor="middle" font-size="10" fill="#475569">防止长序列</text>
+            <text x="615" y="135" text-anchor="middle" font-size="10" fill="#475569">注意力过度分散</text>
+            <text x="615" y="150" text-anchor="middle" font-size="10" fill="#475569">增加锐度</text>
+            <text x="615" y="185" text-anchor="middle" font-size="10" fill="#059669" font-weight="600">YaRN</text>
+            <text x="615" y="200" text-anchor="middle" font-size="10" fill="#059669" font-weight="600">LongRoPE</text>
+            <text x="615" y="215" text-anchor="middle" font-size="10" fill="#059669" font-weight="600">ABF</text>
+
+            <!-- Bottom summary -->
+            <text x="360" y="260" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">
+                从"简单均匀压缩" → "精细化非均匀优化"，每步解决前一步的精度损失
+            </text>
+            <text x="360" y="275" text-anchor="middle" font-size="12" fill="#6366f1" font-weight="600">
+                最终实现 4K → 2048K 的 512 倍跨越
+            </text>
+        </svg>
+    </div>
+
+    <div class="callout key">
+        <div class="callout-title">&#128272; 一句话总结</div>
+        <p>
+            RoPE 能成为 LLM 位置编码的绝对主流（2025 年开源 7B+ 模型中采用率约 92%），
+            根本原因是它在数学上的优雅性：<strong>通过旋转操作，在不增加任何参数、不修改 Attention 结构的前提下，让注意力分数自动编码相对位置</strong>。
+            从 4K 到百万 token 的跨越，本质上是"简单的均匀压缩"逐步演进到"精细化的非均匀优化"的过程。
+        </p>
+    </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<div class="footer">
+    <p>
+        RoPE 旋转位置编码演进全解 &middot; 2026<br>
+        基于 <a href="https://arxiv.org/abs/2104.09864" target="_blank" rel="noopener">RoFormer</a>、
+        <a href="https://arxiv.org/abs/2309.00071" target="_blank" rel="noopener">YaRN</a>、
+        <a href="https://arxiv.org/abs/2402.13753" target="_blank" rel="noopener">LongRoPE</a> 等论文整理<br>
+        <small>Deployed on GitHub Pages</small>
+    </p>
+</div>
+
+</div><!-- /content-wrapper -->
+</main>
+
+<script>
+    // ========== Progress Bar ==========
+    const progressBar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+        const winHeight = window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight - winHeight;
+        const scrolled = (window.scrollY / docHeight) * 100;
+        progressBar.style.width = scrolled + '%';
+    });
+
+    // ========== Scroll Spy ==========
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    function updateActiveNav() {
+        let current = '';
+        const scrollPos = window.scrollY + 100;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        // If at the very bottom, highlight last
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
+            const lastSection = sections[sections.length - 1];
+            if (lastSection) current = lastSection.getAttribute('id');
+        }
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href').substring(1);
+            if (href === current) {
+                link.classList.add('active');
+                // Scroll the active link into view in the sidebar
+                const linkTop = link.offsetTop - sidebar.offsetTop;
+                const sidebarScroll = sidebar.scrollTop;
+                const sidebarHeight = sidebar.clientHeight;
+                if (linkTop < sidebarScroll || linkTop > sidebarScroll + sidebarHeight - 60) {
+                    sidebar.scrollTo({ top: linkTop - sidebarHeight / 3, behavior: 'smooth' });
+                }
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    updateActiveNav();
+
+    // ========== Mobile Sidebar Toggle ==========
+    const toggleBtn = document.getElementById('sidebar-toggle');
+    toggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('show');
+    });
+    overlay.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('show');
+    });
+
+    // Close sidebar when clicking a nav link on mobile
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 1024) {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('show');
+            }
+        });
+    });
+
+    // ========== Smooth Scroll (fallback for non-supporting browsers) ==========
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const targetId = link.getAttribute('href').substring(1);
+            const target = document.getElementById(targetId);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    // ========== Back to Top ==========
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            backToTop.classList.add('show');
+        } else {
+            backToTop.classList.remove('show');
+        }
+    }, { passive: true });
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
+
+<!-- KaTeX auto-render for math formulas -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ],
+        throwOnError: false,
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    });"></script>
+
+<!-- Dark mode toggle -->
+<script>
+    (function() {
+        const toggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        // Load saved preference or default to light
+        const saved = localStorage.getItem('rope-theme');
+        if (saved === 'dark') {
+            html.setAttribute('data-theme', 'dark');
+        }
+
+        toggle.addEventListener('click', () => {
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                html.removeAttribute('data-theme');
+                localStorage.setItem('rope-theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('rope-theme', 'dark');
+            }
+        });
+    })();
+</script>
+
+</body>
+</html>
