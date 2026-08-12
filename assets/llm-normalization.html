@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>还不清楚 Norm？一文搞定 LLM 里的归一化全家桶</title>
+<meta name="description" content="从 LayerNorm、RMSNorm 到 Pre/Post-Norm、QK-Norm、DyT，一篇图文化、公式化讲透大语言模型里的所有归一化。" />
+
+<!-- KaTeX 公式渲染（CDN 依赖） -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});">
+</script>
+
+<style>
+  /* ================================================================
+     主题变量 —— 白天
+  ================================================================ */
+  :root{
+    --bg:#f6f7fb;
+    --card:#ffffff;
+    --ink:#1f2430;
+    --muted:#5b6472;
+    --line:#e6e9f0;
+    --brand:#4f6df5;
+    --brand-2:#7c5cf0;
+    --grad:linear-gradient(135deg,#4f6df5,#7c5cf0 60%,#e0569f);
+    --green:#18a06b;
+    --amber:#c97b12;
+    --red:#d64545;
+    --code-bg:#0f172a;
+    --code-ink:#e6edf7;
+    --topbar-bg:rgba(255,255,255,.82);
+    --eq-bg:#fafbff;
+    --callout-bg:#eef2ff;
+    --callout-warn-bg:#fdf6e8;
+    --callout-good-bg:#e9f8f1;
+    --callout-info-bg:#eef6fd;
+    --callout-info-bd:#3b9df5;
+    --table-th-bg:#f3f5fc;
+    --table-even-bg:#fafbff;
+    --shadow:0 4px 18px -10px rgba(20,30,60,.12);
+    --hero-shadow:0 14px 40px -14px rgba(79,109,245,.5);
+    --toggle-bg:#eef0f7;
+    --toggle-hover:#e0e3f0;
+    --pill-new-bg:#fdeff6;
+    --pill-new-ink:#c2255c;
+    --pill-dep-bg:#fbecec;
+    --sidebar-w:240px;
+
+    /* SVG 专用 */
+    --svg-input-bg:#f0f3ff;
+    --svg-input-bd:#4f6df5;
+    --svg-output-bg:#e9f8f1;
+    --svg-output-bd:#18a06b;
+    --svg-param-bg:#fdf6e8;
+    --svg-param-bd:#c97b12;
+    --svg-step-bg:#eef2ff;
+    --svg-step-bd:#7c5cf0;
+    --svg-bg:#ffffff;
+    --svg-grid:#e6e9f0;
+    --svg-arrow:#9aa4b8;
+    --svg-text:#5b6472;
+    --svg-text-d:#3a4a7a;
+    --svg-text-out:#186448;
+    --svg-text-param:#8a5b00;
+    --svg-curve:#4f6df5;
+  }
+
+  /* ================================================================
+     主题变量 —— 黑夜
+  ================================================================ */
+  [data-theme="dark"]{
+    --bg:#0f1117;
+    --card:#1a1d27;
+    --ink:#e4e7f0;
+    --muted:#8b94a8;
+    --line:#2a2e3a;
+    --brand:#6b8aff;
+    --brand-2:#9d7cf0;
+    --grad:linear-gradient(135deg,#6b8aff,#9d7cf0 60%,#e0569f);
+    --green:#2ac97f;
+    --amber:#e8a23a;
+    --red:#e85a5a;
+    --code-bg:#0a0d14;
+    --code-ink:#c8d4e8;
+    --topbar-bg:rgba(26,29,39,.82);
+    --eq-bg:#161922;
+    --callout-bg:#1e2235;
+    --callout-warn-bg:#2a2418;
+    --callout-good-bg:#16291f;
+    --callout-info-bg:#152035;
+    --callout-info-bd:#3b9df5;
+    --table-th-bg:#1e2235;
+    --table-even-bg:#161922;
+    --shadow:0 4px 18px -10px rgba(0,0,0,.35);
+    --hero-shadow:0 14px 40px -14px rgba(107,138,255,.35);
+    --toggle-bg:#2a2e3a;
+    --toggle-hover:#363b48;
+    --pill-new-bg:#2a1a22;
+    --pill-new-ink:#f08a5d;
+    --pill-dep-bg:#221a1a;
+
+    --svg-input-bg:#1e2235;
+    --svg-input-bd:#6b8aff;
+    --svg-output-bg:#16291f;
+    --svg-output-bd:#2ac97f;
+    --svg-param-bg:#2a2418;
+    --svg-param-bd:#e8a23a;
+    --svg-step-bg:#1e2235;
+    --svg-step-bd:#9d7cf0;
+    --svg-bg:#1a1d27;
+    --svg-grid:#2a2e3a;
+    --svg-arrow:#5a6378;
+    --svg-text:#8b94a8;
+    --svg-text-d:#b8c4e8;
+    --svg-text-out:#5fd6a0;
+    --svg-text-param:#e8a23a;
+    --svg-curve:#6b8aff;
+  }
+
+  /* ================================================================
+     基础
+  ================================================================ */
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.85;
+    font-size:16px;
+  }
+  body,.topbar,.card,.figure,.callout,.eq,pre,.toc-card,footer,
+  table th,table td,.theme-toggle,.pill,nav.sidebar a{
+    transition:background-color .3s ease,border-color .3s ease,color .3s ease;
+  }
+
+  /* ================================================================
+     顶部条 + 主题切换
+  ================================================================ */
+  .topbar{
+    position:fixed;top:0;left:0;right:0;height:56px;z-index:50;
+    background:var(--topbar-bg);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 24px 0 calc(var(--sidebar-w) + 24px);
+  }
+  .topbar-left{display:flex;align-items:center;gap:12px;font-weight:600}
+  .topbar .logo{
+    width:30px;height:30px;border-radius:8px;background:var(--grad);
+    display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:15px;
+  }
+  .topbar .badge{
+    font-size:12px;color:var(--muted);font-weight:400;
+    background:var(--eq-bg);padding:2px 10px;border-radius:20px;
+    border:1px solid var(--line);
+  }
+  .theme-toggle{
+    background:var(--toggle-bg);border:1px solid var(--line);
+    border-radius:10px;padding:0;width:38px;height:38px;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+    color:var(--ink);
+  }
+  .theme-toggle:hover{background:var(--toggle-hover)}
+  .theme-toggle svg{width:20px;height:20px}
+  .moon-icon{display:block}
+  .sun-icon{display:none}
+  [data-theme="dark"] .moon-icon{display:none}
+  [data-theme="dark"] .sun-icon{display:block}
+
+  /* ================================================================
+     侧边导航栏 -- 从顶栏下方开始
+  ================================================================ */
+  nav.sidebar{
+    position:fixed;top:56px;left:0;bottom:0;width:var(--sidebar-w);z-index:40;
+    background:var(--card);border-right:1px solid var(--line);
+    overflow-y:auto;padding:20px 14px 40px;
+  }
+  nav.sidebar .stitle{
+    font-size:12px;letter-spacing:.12em;color:var(--muted);font-weight:700;
+    padding:0 10px 8px;
+  }
+  nav.sidebar a{
+    display:block;color:var(--ink);text-decoration:none;font-size:14px;
+    padding:7px 12px;border-radius:8px;margin:1px 0;line-height:1.4;
+    border-left:3px solid transparent;
+    transition:background .15s,color .15s,border-color .15s;
+  }
+  nav.sidebar a.sub{padding-left:26px;font-size:13px;color:var(--muted)}
+  nav.sidebar a:hover{background:var(--eq-bg);color:var(--brand)}
+  nav.sidebar a.active{
+    background:var(--callout-bg);color:var(--brand);font-weight:600;border-left-color:var(--brand);
+  }
+  nav.sidebar .foot{
+    margin-top:22px;padding:10px 12px;font-size:12px;color:var(--muted);
+    border-top:1px dashed var(--line);
+  }
+
+  /* ================================================================
+     主体 -- 居中（在侧边栏右侧的空间内居中）
+  ================================================================ */
+  main{
+    max-width:calc(820px + var(--sidebar-w));
+    margin:0 auto;
+    padding:84px 24px 50px var(--sidebar-w);
+  }
+
+  /* ================================================================
+     Hero
+  ================================================================ */
+  .hero{
+    background:var(--grad);color:#fff;border-radius:20px;padding:40px 36px;
+    margin-bottom:32px;box-shadow:var(--hero-shadow);
+    text-align:center;
+  }
+  .hero .kicker{
+    display:inline-block;font-size:12px;letter-spacing:.14em;font-weight:700;
+    background:rgba(255,255,255,.18);padding:4px 14px;border-radius:20px;margin-bottom:14px;
+  }
+  .hero h1{margin:0 0 10px;font-size:32px;line-height:1.35}
+  .hero p{margin:0;opacity:.92;max-width:620px;margin:0 auto}
+  .hero .tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .hero .tags span{
+    font-size:12px;background:rgba(255,255,255,.16);padding:3px 12px;border-radius:14px;
+  }
+
+  /* ================================================================
+     TOC 导航卡片
+  ================================================================ */
+  .toc-card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:22px 28px;margin-bottom:28px;box-shadow:var(--shadow);
+  }
+  .toc-card .label{font-size:13px;color:var(--muted);font-weight:700;display:block;margin-bottom:12px}
+  .toc-links{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+  .toc-links:last-child{margin-bottom:0}
+  .toc-links a{
+    display:inline-block;font-size:13px;color:var(--ink);text-decoration:none;
+    padding:5px 14px;border-radius:20px;background:var(--eq-bg);
+    border:1px solid var(--line);transition:all .2s;
+  }
+  .toc-links a:hover,.toc-links a.active{
+    background:var(--callout-bg);color:var(--brand);border-color:var(--brand);font-weight:600;
+  }
+  .toc-outcomes ul{columns:2;-webkit-columns:2;margin:0;list-style:none;padding:0}
+  .toc-outcomes li{margin:6px 0;padding-left:18px;position:relative;font-size:14px}
+  .toc-outcomes li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700}
+
+  /* ================================================================
+     标题 & 文本
+  ================================================================ */
+  h2{
+    font-size:25px;margin:52px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line);
+    scroll-margin-top:72px;
+  }
+  h2 .num{color:var(--brand);font-weight:800;margin-right:8px;font-family:ui-monospace,monospace}
+  h3{font-size:19px;margin:30px 0 10px;scroll-margin-top:72px}
+  p{margin:12px 0}
+  .lead{font-size:17px;color:var(--ink)}
+
+  /* ================================================================
+     卡片 & Callout
+  ================================================================ */
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:22px 24px;margin:18px 0;box-shadow:var(--shadow);
+  }
+  .card.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .card.grid2 > div{padding:0}
+  @media(max-width:680px){.card.grid2{grid-template-columns:1fr}}
+
+  .callout{
+    border-left:4px solid var(--brand);background:var(--callout-bg);
+    border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0;font-size:15px;
+  }
+  .callout.warn{border-color:var(--amber);background:var(--callout-warn-bg)}
+  .callout.good{border-color:var(--green);background:var(--callout-good-bg)}
+  .callout.info{border-color:var(--callout-info-bd);background:var(--callout-info-bg)}
+
+  /* ================================================================
+     公式 & 代码
+  ================================================================ */
+  .eq{
+    text-align:center;background:var(--eq-bg);border:1px solid var(--line);
+    border-radius:12px;padding:18px;margin:16px 0;overflow-x:auto;
+  }
+  pre{
+    background:var(--code-bg);color:var(--code-ink);border-radius:12px;
+    padding:18px 20px;overflow-x:auto;font-size:13.5px;line-height:1.7;
+    font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+  }
+  pre .c{color:#7f8ea8}
+  pre .k{color:#7ee0c3}
+  code.inline{
+    background:var(--eq-bg);color:var(--brand);padding:2px 8px;border-radius:6px;
+    font-family:ui-monospace,monospace;font-size:.9em;border:1px solid var(--line);
+  }
+
+  /* ================================================================
+     表格
+  ================================================================ */
+  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14.5px}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:var(--table-th-bg);font-weight:600}
+  tr:nth-child(even) td{background:var(--table-even-bg)}
+
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:20px}
+  .pill.used{background:var(--callout-good-bg);color:var(--green)}
+  .pill.niche{background:var(--callout-warn-bg);color:var(--amber)}
+  .pill.new{background:var(--pill-new-bg);color:var(--pill-new-ink)}
+  .pill.dep{background:var(--pill-dep-bg);color:var(--red)}
+
+  /* ================================================================
+     SVG 图形
+  ================================================================ */
+  .figure{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:20px;margin:18px 0;overflow-x:auto;box-shadow:var(--shadow);
+  }
+  .figure svg{display:block;margin:0 auto;max-width:100%;height:auto}
+  .figcap{text-align:center;font-size:13px;color:var(--muted);margin-top:12px}
+
+  /* SVG 主题类 */
+  svg .s-bg{fill:var(--svg-bg)}
+  svg .s-input{fill:var(--svg-input-bg);stroke:var(--svg-input-bd);stroke-width:2}
+  svg .s-output{fill:var(--svg-output-bg);stroke:var(--svg-output-bd);stroke-width:2}
+  svg .s-param{fill:var(--svg-param-bg);stroke:var(--svg-param-bd);stroke-width:2}
+  svg .s-step{fill:var(--svg-step-bg);stroke:var(--svg-step-bd);stroke-width:2}
+  svg .s-warn{fill:var(--pill-dep-bg);stroke:var(--red);stroke-width:2}
+  svg .s-txt{fill:var(--svg-text)}
+  svg .s-txt-d{fill:var(--svg-text-d)}
+  svg .s-txt-out{fill:var(--svg-text-out)}
+  svg .s-txt-param{fill:var(--svg-text-param)}
+  svg .s-grid{stroke:var(--svg-grid);stroke-width:1.5}
+  svg .s-arrow{stroke:var(--svg-arrow);stroke-width:2.5;fill:none}
+  svg .s-curve{stroke:var(--svg-curve);stroke-width:3;fill:none}
+  svg .s-dash{stroke:var(--svg-arrow);stroke-width:2;stroke-dasharray:5,4;fill:none}
+  svg marker path{fill:var(--svg-arrow)}
+
+  /* ================================================================
+     其他
+  ================================================================ */
+  .progress{
+    position:fixed;top:0;left:0;height:3px;width:0;z-index:60;
+    background:var(--grad);transition:width .1s linear;
+  }
+  ul.clean{padding-left:20px}
+  ul.clean li{margin:8px 0}
+
+  footer{
+    max-width:calc(820px + var(--sidebar-w));margin:0 auto;padding:28px 24px 28px var(--sidebar-w);color:var(--muted);
+    border-top:1px solid var(--line);font-size:13px;text-align:center;
+  }
+
+  /* ================================================================
+     响应式
+  ================================================================ */
+  @media(max-width:900px){
+    nav.sidebar{display:none}
+    main{padding:72px 16px 40px;max-width:820px}
+    footer{padding:28px 16px;max-width:820px}
+    .topbar{padding:0 16px}
+    .topbar .badge{display:none}
+    .toc-outcomes ul{columns:1;-webkit-columns:1}
+    .figure{padding:14px 10px}
+    .hero{padding:28px 22px}
+    .hero h1{font-size:24px}
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<!-- ======================= 顶部条 ======================= -->
+<header class="topbar">
+  <div class="topbar-left">
+    <span class="logo">N</span>
+    <span>Norm 全家桶</span>
+    <span class="badge">LLM · 归一化 · 图解</span>
+  </div>
+  <button class="theme-toggle" id="themeToggle" aria-label="切换白天/黑夜主题">
+    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+  </button>
+</header>
+
+<!-- ======================= 侧边导航 ======================= -->
+<nav class="sidebar" id="sidebar">
+  <div class="stitle">目录导航</div>
+  <a href="#intro">1 为什么要归一化</a>
+  <a href="#tensor" class="sub">· 张量形状先搞懂</a>
+  <a href="#bn">2 BatchNorm：为什么被弃</a>
+  <a href="#ln">3 LayerNorm：经典答案</a>
+  <a href="#rmsnorm">4 RMSNorm：现代主流</a>
+  <a href="#ln-vs-rms">5 LN vs RMS 对比</a>
+  <a href="#prepost">6 Pre-Norm vs Post-Norm</a>
+  <a href="#variants">7 其他重要变体</a>
+  <a href="#qk" class="sub">· QK-Norm / QueryNorm</a>
+  <a href="#sandwich" class="sub">· Sandwich / DeepNorm</a>
+  <a href="#hybrid" class="sub">· HybridNorm 等</a>
+  <a href="#dyt">8 新方向：无归一化</a>
+  <a href="#compare">9 全览对比表</a>
+  <a href="#imp">10 工程实现细节</a>
+  <a href="#ref">11 总结 &amp; 参考资料</a>
+  <div class="foot">GitHub Pages · 单文件无构建</div>
+</nav>
+
+<!-- ======================= 主体 ======================= -->
+<main>
+  <div class="hero">
+    <span class="kicker">LLM 内部结构 · 图解系列</span>
+    <h1>还不清楚 Norm？一文搞定</h1>
+    <p>大模型里的归一化（Normalization）听起来玄乎，其实就是"把每层的数据拉回一个稳定的尺度"。从 LayerNorm、RMSNorm 到 Pre/Post-Norm、QK-Norm，再到 2025 年的 DyT 无归一化新浪潮，这一篇带你看懂整个家族，每一张图都画清楚向量形状。</p>
+    <div class="tags">
+      <span>LayerNorm</span><span>RMSNorm</span><span>Pre/Post-Norm</span>
+      <span>QK-Norm</span><span>DeepNorm</span><span>DyT</span><span>图解</span>
+    </div>
+  </div>
+
+  <!-- ============ 学习要点 ============ -->
+  <div class="toc-card">
+    <div class="toc-outcomes">
+      <span class="label">本篇你将搞懂</span>
+      <ul>
+        <li>归一化到底在做什么</li>
+        <li>BatchNorm 为何在 LLM 里"阵亡"</li>
+        <li>LayerNorm 的两步：去均值 + 归一</li>
+        <li>RMSNorm 的简化与优势</li>
+        <li>Pre-Norm 与 Post-Norm 谁赢</li>
+        <li>QK-Norm、SandwichNorm 等变体</li>
+        <li>DyT 带来的"无归一化"新浪潮</li>
+        <li>工程实现时的坑（fp32、eps）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============ 1 为什么 ============ -->
+  <h2 id="intro"><span class="num">1</span>为什么要归一化？</h2>
+  <p class="lead">一句话：<b>深度网络训练不稳定的根源，是每一层的输入分布一直在变</b>（术语叫<b>内部协变量偏移，Internal Covariate Shift</b>）。前一层参数一更新，后一层的输入分布就"搬家"，后一层只能不断重新适应，导致收敛慢、对学习率敏感。</p>
+  <p>归一化层的本质，就是在每层内部把激活值<b>重新中心化、重新缩放</b>，让分布稳定。它能带来三个直接好处：</p>
+  <div class="card grid2">
+    <div class="callout good" style="margin:0">允许更大的学习率，训练更快更稳</div>
+    <div class="callout good" style="margin:0">缓解梯度消失 / 爆炸，能堆很深</div>
+    <div class="callout good" style="margin:0">降低对初始化的敏感度，更鲁棒</div>
+    <div class="callout info" style="margin:0">关键问题：<b>沿哪个维度做统计？</b> 这是所有 Norm 的分水岭。</div>
+  </div>
+
+  <!-- ============ 张量形状 ============ -->
+  <h3 id="tensor">先搞懂张量形状，后面才不晕</h3>
+  <p>在 LLM 里，一层的数据通常是三维的 <code class="inline">(B, T, C)</code>，其中：</p>
+  <div class="figure">
+    <svg viewBox="0 0 760 210" style="width:100%;max-width:760px" font-family="inherit">
+      <defs>
+        <linearGradient id="gB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f6df5"/><stop offset="1" stop-color="#7c5cf0"/></linearGradient>
+        <linearGradient id="gT" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#18a06b"/><stop offset="1" stop-color="#2ac97f"/></linearGradient>
+        <linearGradient id="gC" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e0569f"/><stop offset="1" stop-color="#f08a5d"/></linearGradient>
+        <filter id="shadow1"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.15"/></filter>
+      </defs>
+
+      <!-- B -->
+      <g transform="translate(30,40)" filter="url(#shadow1)">
+        <rect width="140" height="100" rx="14" fill="url(#gB)"/>
+        <text x="70" y="42" fill="#fff" font-size="20" font-weight="800" text-anchor="middle">B</text>
+        <text x="70" y="64" fill="rgba(255,255,255,.85)" font-size="12" text-anchor="middle">batch</text>
+        <text x="70" y="82" fill="rgba(255,255,255,.75)" font-size="11" text-anchor="middle">一批里的样本</text>
+      </g>
+      <text x="195" y="98" font-size="28" class="s-arrow" stroke="none" style="fill:var(--svg-arrow)" text-anchor="middle">×</text>
+
+      <!-- T -->
+      <g transform="translate(220,40)" filter="url(#shadow1)">
+        <rect width="140" height="100" rx="14" fill="url(#gT)"/>
+        <text x="70" y="42" fill="#fff" font-size="20" font-weight="800" text-anchor="middle">T</text>
+        <text x="70" y="64" fill="rgba(255,255,255,.85)" font-size="12" text-anchor="middle">time / seq</text>
+        <text x="70" y="82" fill="rgba(255,255,255,.75)" font-size="11" text-anchor="middle">序列长度</text>
+      </g>
+      <text x="385" y="98" font-size="28" style="fill:var(--svg-arrow)" text-anchor="middle">×</text>
+
+      <!-- C -->
+      <g transform="translate(410,40)" filter="url(#shadow1)">
+        <rect width="140" height="100" rx="14" fill="url(#gC)"/>
+        <text x="70" y="42" fill="#fff" font-size="20" font-weight="800" text-anchor="middle">C</text>
+        <text x="70" y="64" fill="rgba(255,255,255,.85)" font-size="12" text-anchor="middle">channel / model</text>
+        <text x="70" y="82" fill="rgba(255,255,255,.75)" font-size="11" text-anchor="middle">隐藏维度 d</text>
+      </g>
+
+      <!-- 箭头到下方 -->
+      <path d="M310 145 Q 310 165 310 175" class="s-arrow" marker-end="url(#arrowDown)"/>
+      <defs><marker id="arrowDown" markerWidth="8" markerHeight="8" refX="4" refY="7" orient="auto"><path d="M0,0 L8,0 L4,7 z"/></marker></defs>
+
+      <!-- token 向量 -->
+      <g transform="translate(180,175)">
+        <rect x="0" y="0" width="260" height="28" rx="8" class="s-input"/>
+        <text x="130" y="19" class="s-txt-d" font-size="12" text-anchor="middle" font-weight="600">每个 token = 一个 d 维向量  x ∈ ℝ^d</text>
+      </g>
+    </svg>
+    <div class="figcap">图 1：LLM 中一层的张量形状 (B, T, C)。归一化通常作用在最后那个 d 维（特征维）上。</div>
+  </div>
+  <div class="callout">记住关键结论：<b>LLM 的 Norm 几乎都沿 C（特征）维做统计</b>，每个 token 独立处理。后面你会看到这就是 LayerNorm / RMSNorm 的核心。</div>
+
+  <!-- ============ 2 BatchNorm ============ -->
+  <h2 id="bn"><span class="num">2</span>BatchNorm：为什么在 LLM 里被弃？</h2>
+  <p>BatchNorm（BN）是 CV 领域的标配，它<b>沿 batch 维统计</b>每个通道的均值与方差：</p>
+  <div class="eq">$$ \hat{x}_{:,d} = \frac{x_{:,d}-\mu_d}{\sqrt{\sigma_d^2+\epsilon}}, \qquad \mu_d = \frac{1}{N}\sum_{n=1}^N x_{n,d} $$</div>
+  <p>它把"同一批里所有样本"混在一起统计。这在图像里没问题，但在 LLM 里有<b>三个致命伤</b>：</p>
+  <div class="card">
+    <ul class="clean">
+      <li><b>① 对 batch size 极度敏感</b> —— LLM 显存受限、batch 往往很小，统计量噪声大、归一化不准。</li>
+      <li><b>② 训练/推理不一致，自回归生成直接失效</b> —— 推理是逐个 token 生成的（batch=1），批统计退化成单样本统计，与训练分布严重偏离。</li>
+      <li><b>③ 破坏变长与位置结构</b> —— 把不同位置的 token 混在一起统计，抹掉了位置独立性，padding token 还会污染统计量。</li>
+    </ul>
+  </div>
+  <div class="callout warn">一句话：BN 依赖"批内同分布 + 固定尺寸 + 非生成式推理"，与 LLM 的"小批、变长、自回归生成"本质冲突。因此 <b>Transformer 从诞生起就选 LayerNorm</b>。</div>
+
+  <!-- ============ 3 LayerNorm ============ -->
+  <h2 id="ln"><span class="num">3</span>LayerNorm：Transformer 的经典答案</h2>
+  <p>LayerNorm（LN）<b>沿特征维、对每个 token 独立归一化</b>，完全不依赖 batch。对单个 token 向量 <code class="inline">x ∈ ℝ^d</code>：</p>
+  <div class="eq">$$ \mu = \frac{1}{d}\sum_{i=1}^d x_i,\qquad \sigma^2 = \frac{1}{d}\sum_{i=1}^d (x_i-\mu)^2 $$</div>
+  <div class="eq">$$ \operatorname{LayerNorm}(x) = \gamma \odot \frac{x-\mu}{\sqrt{\sigma^2+\epsilon}} + \beta $$</div>
+  <p>它做<b>两步</b>：先减均值 <code class="inline">μ</code>（中心化），再除标准差 <code class="inline">σ</code>（缩放），最后乘可学习 <code class="inline">γ</code>、加可学习 <code class="inline">β</code>（仿射，让输出落回任意范围）。</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 760 200" style="width:100%;max-width:760px" font-family="inherit">
+      <defs>
+        <filter id="shadow2"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.1"/></filter>
+        <marker id="arrL" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L8,5 L0,10 z"/></marker>
+      </defs>
+
+      <!-- 输入 -->
+      <g transform="translate(20,35)" filter="url(#shadow2)">
+        <text x="65" y="-8" class="s-txt" font-size="12" text-anchor="middle">输入 x</text>
+        <rect width="130" height="120" rx="12" class="s-input"/>
+        <rect x="12" y="12" width="106" height="20" rx="5" style="fill:var(--svg-input-bd)" opacity="0.25"/>
+        <rect x="12" y="38" width="106" height="20" rx="5" style="fill:var(--svg-input-bd)" opacity="0.2"/>
+        <rect x="12" y="64" width="106" height="20" rx="5" style="fill:var(--svg-input-bd)" opacity="0.15"/>
+        <rect x="12" y="90" width="106" height="20" rx="5" style="fill:var(--svg-input-bd)" opacity="0.1"/>
+        <text x="65" y="72" class="s-txt-d" font-size="12" text-anchor="middle" font-weight="700">d 个元素</text>
+      </g>
+
+      <!-- 箭头 -->
+      <path d="M155 95 H195" class="s-arrow" marker-end="url(#arrL)"/>
+
+      <!-- 步骤1: 减均值 -->
+      <g transform="translate(200,55)" filter="url(#shadow2)">
+        <text x="60" y="-8" class="s-txt" font-size="11" text-anchor="middle">① 减均值 μ</text>
+        <rect width="120" height="80" rx="10" class="s-step"/>
+        <text x="60" y="38" class="s-txt-d" font-size="12" text-anchor="middle" font-weight="600">x − μ</text>
+        <text x="60" y="58" class="s-txt" font-size="11" text-anchor="middle">中心化</text>
+      </g>
+
+      <path d="M325 95 H365" class="s-arrow" marker-end="url(#arrL)"/>
+
+      <!-- 步骤2: 除标准差 -->
+      <g transform="translate(370,55)" filter="url(#shadow2)">
+        <text x="60" y="-8" class="s-txt" font-size="11" text-anchor="middle">② 除标准差 σ</text>
+        <rect width="120" height="80" rx="10" class="s-step"/>
+        <text x="60" y="38" class="s-txt-d" font-size="12" text-anchor="middle" font-weight="600">(x−μ) / σ</text>
+        <text x="60" y="58" class="s-txt" font-size="11" text-anchor="middle">~ N(0,1)</text>
+      </g>
+
+      <path d="M495 95 H535" class="s-arrow" marker-end="url(#arrL)"/>
+
+      <!-- 输出 -->
+      <g transform="translate(540,35)" filter="url(#shadow2)">
+        <text x="65" y="-8" class="s-txt" font-size="12" text-anchor="middle">输出 y</text>
+        <rect width="130" height="120" rx="12" class="s-output"/>
+        <rect x="12" y="12" width="106" height="20" rx="5" style="fill:var(--svg-output-bd)" opacity="0.25"/>
+        <rect x="12" y="38" width="106" height="20" rx="5" style="fill:var(--svg-output-bd)" opacity="0.2"/>
+        <rect x="12" y="64" width="106" height="20" rx="5" style="fill:var(--svg-output-bd)" opacity="0.15"/>
+        <rect x="12" y="90" width="106" height="20" rx="5" style="fill:var(--svg-output-bd)" opacity="0.1"/>
+        <text x="65" y="72" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">γ·(x−μ)/σ + β</text>
+      </g>
+
+      <!-- γ β 参数 -->
+      <g transform="translate(200,155)">
+        <rect x="0" y="0" width="290" height="32" rx="8" class="s-param"/>
+        <text x="145" y="21" class="s-txt-param" font-size="12" text-anchor="middle" font-weight="600">可学习参数：γ (scale) + β (shift)，形状均为 (d,)</text>
+      </g>
+    </svg>
+    <div class="figcap">图 2：LayerNorm 两步走 —— 先中心化再缩放，形状全程保持 (d,)。γ、β 形状也都是 (d,)。</div>
+  </div>
+
+  <div class="callout">早期 Transformer、BERT、GPT-2 都用 LayerNorm。注意 γ 与 β 的形状是 <code class="inline">(d,)</code>，与 token 向量逐元素相乘。</div>
+
+  <!-- ============ 4 RMSNorm ============ -->
+  <h2 id="rmsnorm"><span class="num">4</span>RMSNorm：现代 LLM 的主流</h2>
+  <p>RMSNorm（Zhang &amp; Sennrich, 2019）是 LayerNorm 的<b>极简版</b>：<b>去掉"减均值"这一步</b>，也去掉偏置 β。它只用均方根（Root Mean Square）控制向量整体尺度：</p>
+  <div class="eq">$$ \operatorname{RMS}(x) = \sqrt{\frac{1}{d}\sum_{i=1}^d x_i^2 + \epsilon} $$</div>
+  <div class="eq">$$ \operatorname{RMSNorm}(x) = \gamma \odot \frac{x}{\operatorname{RMS}(x)} $$</div>
+  <p>为什么可以省掉均值？经验上，Transformer 里的激活值均值本来就接近 0，<b>中心化几乎不带来收益</b>，省掉它换来更少算子、更少参数、更快，效果还持平甚至更好。</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 760 180" style="width:100%;max-width:760px" font-family="inherit">
+      <defs>
+        <filter id="shadow3"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.1"/></filter>
+        <marker id="arrR" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L8,5 L0,10 z"/></marker>
+      </defs>
+
+      <!-- 输入 -->
+      <g transform="translate(20,40)" filter="url(#shadow3)">
+        <text x="65" y="-8" class="s-txt" font-size="12" text-anchor="middle">输入 x</text>
+        <rect width="130" height="100" rx="12" class="s-input"/>
+        <text x="65" y="58" class="s-txt-d" font-size="13" text-anchor="middle" font-weight="700">x  (d,)</text>
+      </g>
+
+      <path d="M155 90 H195" class="s-arrow" marker-end="url(#arrR)"/>
+
+      <!-- 除以 RMS -->
+      <g transform="translate(200,40)" filter="url(#shadow3)">
+        <text x="65" y="-8" class="s-txt" font-size="12" text-anchor="middle">÷ RMS(x)</text>
+        <rect width="130" height="100" rx="12" class="s-step"/>
+        <text x="65" y="45" class="s-txt-d" font-size="13" text-anchor="middle" font-weight="700">1 / RMS(x)</text>
+        <text x="65" y="65" class="s-txt" font-size="11" text-anchor="middle">一个标量</text>
+        <text x="65" y="82" class="s-txt" font-size="11" text-anchor="middle">对所有 d 相同</text>
+      </g>
+
+      <path d="M335 90 H375" class="s-arrow" marker-end="url(#arrR)"/>
+
+      <!-- × γ -->
+      <g transform="translate(380,40)" filter="url(#shadow3)">
+        <text x="65" y="-8" class="s-txt" font-size="12" text-anchor="middle">× γ</text>
+        <rect width="130" height="100" rx="12" class="s-param"/>
+        <text x="65" y="45" class="s-txt-param" font-size="13" text-anchor="middle" font-weight="700">γ  (d,)</text>
+        <text x="65" y="65" class="s-txt-param" font-size="11" text-anchor="middle">仅此一个参数</text>
+        <text x="65" y="82" class="s-txt-param" font-size="11" text-anchor="middle">无 β</text>
+      </g>
+
+      <path d="M515 90 H555" class="s-arrow" marker-end="url(#arrR)"/>
+
+      <!-- 输出 -->
+      <g transform="translate(560,40)" filter="url(#shadow3)">
+        <text x="65" y="-8" class="s-txt" font-size="12" text-anchor="middle">输出</text>
+        <rect width="130" height="100" rx="12" class="s-output"/>
+        <text x="65" y="58" class="s-txt-out" font-size="13" text-anchor="middle" font-weight="700">γ·x / RMS(x)</text>
+      </g>
+
+      <!-- 对比标注 -->
+      <g transform="translate(20,158)">
+        <text x="0" y="0" class="s-txt" font-size="12" font-weight="600">vs LayerNorm：省去了"减均值 μ"和"偏置 β"，只留一个缩放因子。</text>
+      </g>
+    </svg>
+    <div class="figcap">图 3：RMSNorm —— 一个标量 1/RMS(x) 缩放整个向量，只留一个可学习 γ。比 LayerNorm 少了均值统计和 β。</div>
+  </div>
+
+  <div class="callout good">结果：<b>现代 LLM（LLaMA 系、Mistral、Gemma、Qwen 等）几乎清一色采用 Pre-Norm + RMSNorm</b>。它已成为 2024–2026 所有主流开源模型的标配。</div>
+
+  <!-- ============ 5 对比 ============ -->
+  <h2 id="ln-vs-rms"><span class="num">5</span>LayerNorm vs RMSNorm：一张表看懂</h2>
+  <div class="card">
+    <table>
+      <tr><th>维度</th><th>LayerNorm</th><th>RMSNorm</th></tr>
+      <tr><td>减均值（中心化）</td><td>有 μ</td><td>无</td></tr>
+      <tr><td>可学习偏置 β</td><td>有</td><td>无</td></tr>
+      <tr><td>可学习缩放 γ</td><td>有</td><td>有</td></tr>
+      <tr><td>统计量</td><td>均值 + 方差</td><td>均方根 RMS</td></tr>
+      <tr><td>计算量 / 参数</td><td>更多</td><td>更少</td></tr>
+      <tr><td>速度</td><td>较慢</td><td>更快（省一步）</td></tr>
+      <tr><td>代表性模型</td><td>BERT、GPT-2</td><td>LLaMA、Mistral、Qwen</td></tr>
+    </table>
+  </div>
+
+  <!-- ============ 6 Pre/Post ============ -->
+  <h2 id="prepost"><span class="num">6</span>Pre-Norm vs Post-Norm：放哪比用哪种更关键</h2>
+  <p>Transformer block 里有两个子层（Attention 和 FFN），外面套着残差连接。Norm 放在残差的<b>前面还是后面</b>，决定了训练稳定性。这比选 LayerNorm 还是 RMSNorm 更重要。</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 760 280" style="width:100%;max-width:760px" font-family="inherit">
+      <defs>
+        <filter id="shadow4"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.1"/></filter>
+        <marker id="arrP" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L8,5 L0,10 z"/></marker>
+      </defs>
+
+      <!-- ====== Post-Norm ====== -->
+      <g transform="translate(0,10)">
+        <text x="380" y="18" class="s-txt-d" font-size="14" font-weight="700" text-anchor="middle">Post-Norm（原始 Transformer）</text>
+        <text x="380" y="38" class="s-txt" font-size="12" text-anchor="middle">x' = Norm( x + F(x) )</text>
+
+        <!-- 残差线 -->
+        <path d="M40 70 H150" class="s-dash" style="stroke:var(--amber)"/>
+        <text x="50" y="60" style="fill:var(--amber)" font-size="11" font-weight="600">残差 x</text>
+
+        <!-- F -->
+        <g transform="translate(50,85)" filter="url(#shadow4)">
+          <rect width="100" height="40" rx="10" class="s-step"/>
+          <text x="50" y="26" class="s-txt-d" font-size="12" text-anchor="middle" font-weight="600">子层 F(·)</text>
+        </g>
+        <path d="M100 70 V85" class="s-arrow"/>
+
+        <!-- 加号 -->
+        <g transform="translate(165,60)">
+          <circle cx="15" cy="15" r="16" class="s-bg" style="stroke:var(--brand)" stroke-width="2.5"/>
+          <text x="15" y="21" style="fill:var(--brand)" font-size="18" font-weight="800" text-anchor="middle">+</text>
+        </g>
+        <path d="M150 105 H165 V75" class="s-arrow"/>
+        <path d="M150 75 H165" class="s-arrow"/>
+
+        <!-- Norm -->
+        <g transform="translate(205,55)" filter="url(#shadow4)">
+          <rect width="90" height="40" rx="10" class="s-output"/>
+          <text x="45" y="26" class="s-txt-out" font-size="12" text-anchor="middle" font-weight="600">Norm</text>
+        </g>
+        <path d="M196 75 H205" class="s-arrow"/>
+
+        <!-- 输出 -->
+        <path d="M295 75 H340" class="s-arrow" marker-end="url(#arrP)"/>
+        <text x="360" y="70" class="s-txt" font-size="12">x'</text>
+
+        <!-- 标注 -->
+        <text x="440" y="78" style="fill:var(--red)" font-size="12" font-weight="600">深层不易训练</text>
+      </g>
+
+      <!-- 分隔线 -->
+      <line x1="50" y1="145" x2="710" y2="145" class="s-grid" stroke-dasharray="4,4"/>
+
+      <!-- ====== Pre-Norm ====== -->
+      <g transform="translate(0,160)">
+        <text x="380" y="18" class="s-txt-d" font-size="14" font-weight="700" text-anchor="middle">Pre-Norm（现代 LLM）</text>
+        <text x="380" y="38" class="s-txt" font-size="12" text-anchor="middle">x' = x + F( Norm(x) )</text>
+
+        <!-- 残差线（直通） -->
+        <path d="M40 75 H310" class="s-dash" style="stroke:var(--amber)"/>
+        <text x="50" y="65" style="fill:var(--amber)" font-size="11" font-weight="600">残差（原始 x，直通）</text>
+
+        <!-- Norm -->
+        <g transform="translate(50,85)" filter="url(#shadow4)">
+          <rect width="90" height="40" rx="10" class="s-output"/>
+          <text x="45" y="26" class="s-txt-out" font-size="12" text-anchor="middle" font-weight="600">Norm</text>
+        </g>
+        <path d="M95 75 V85" class="s-arrow"/>
+
+        <!-- F -->
+        <g transform="translate(160,85)" filter="url(#shadow4)">
+          <rect width="100" height="40" rx="10" class="s-step"/>
+          <text x="50" y="26" class="s-txt-d" font-size="12" text-anchor="middle" font-weight="600">子层 F(·)</text>
+        </g>
+        <path d="M140 105 H160" class="s-arrow" marker-end="url(#arrP)"/>
+
+        <!-- 加号 -->
+        <g transform="translate(295,60)">
+          <circle cx="15" cy="15" r="16" class="s-bg" style="stroke:var(--brand)" stroke-width="2.5"/>
+          <text x="15" y="21" style="fill:var(--brand)" font-size="18" font-weight="800" text-anchor="middle">+</text>
+        </g>
+        <path d="M260 105 H295 V75" class="s-arrow"/>
+        <path d="M285 75 H295" class="s-arrow"/>
+
+        <!-- 输出 -->
+        <path d="M325 75 H370" class="s-arrow" marker-end="url(#arrP)"/>
+        <text x="390" y="70" class="s-txt" font-size="12">x'</text>
+
+        <!-- 标注 -->
+        <text x="450" y="78" style="fill:var(--green)" font-size="12" font-weight="600">残差路径干净，梯度通畅</text>
+      </g>
+    </svg>
+    <div class="figcap">图 4：Post-Norm 先残差相加再归一化；Pre-Norm 先归一化再进子层，残差流保持原始状态。现代 LLM 全用 Pre-Norm。</div>
+  </div>
+
+  <div class="card grid2">
+    <div><b>Post-Norm</b>
+      <p style="font-size:14px;margin-top:6px">先 <code class="inline">x + F(x)</code> 再归一化。早期结构简单，但<b>深层模型训练不稳定</b>，激活值在残差相加后尺度容易失控。</p>
+    </div>
+    <div><b>Pre-Norm</b>
+      <p style="font-size:14px;margin-top:6px">先归一化再进子层，最后加残差。残差路径保持"身份映射"，<b>梯度流更干净、深层更易训练</b>，因此成为现代主流。</p>
+    </div>
+  </div>
+  <div class="callout">一个小代价：纯 Pre-Norm 在较浅层时性能通常略逊于 Post-Norm，所以有研究尝试<b>混合方案</b>（见下文的 HybridNorm）。</div>
+
+  <!-- ============ 7 变体 ============ -->
+  <h2 id="variants"><span class="num">7</span>其他重要（&amp; 冷门）变体</h2>
+
+  <h3 id="qk">QK-Norm / QueryNorm</h3>
+  <p>不在 hidden state 上归一化，而是对 <b>Attention 的 Q 和 K 单独做归一化</b>。原始 softmax 点积随维度增大容易饱和（softmax 退化成一端接近 1、其余接近 0）。对 Q、K 做 <code class="inline">L2</code> 归一化后再乘一个可学习标量，能让注意力分布更"均匀、可塑"。Gemma、部分新模型使用 <code class="inline">QK-Norm</code>。</p>
+  <div class="eq">$$ \operatorname{Attention}(Q,K,V) = \operatorname{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V $$</div>
+  <div class="figure">
+    <svg viewBox="0 0 760 130" style="width:100%;max-width:760px" font-family="inherit">
+      <defs>
+        <filter id="shadow5"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.1"/></filter>
+        <marker id="arrQ" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L8,5 L0,10 z"/></marker>
+      </defs>
+
+      <!-- Q -->
+      <g transform="translate(20,30)" filter="url(#shadow5)">
+        <text x="55" y="-8" class="s-txt" font-size="11" text-anchor="middle">Q (query)</text>
+        <rect width="110" height="60" rx="10" class="s-input"/>
+        <text x="55" y="38" class="s-txt-d" font-size="12" text-anchor="middle" font-weight="600">head 维</text>
+      </g>
+
+      <path d="M135 60 H165" class="s-arrow" marker-end="url(#arrQ)"/>
+
+      <!-- L2 norm Q -->
+      <g transform="translate(170,30)" filter="url(#shadow5)">
+        <rect width="110" height="60" rx="10" class="s-output"/>
+        <text x="55" y="30" class="s-txt-out" font-size="12" text-anchor="middle" font-weight="600">Q̂ (单位长度)</text>
+        <text x="55" y="48" class="s-txt-out" font-size="11" text-anchor="middle">× 可学习标量 s</text>
+      </g>
+
+      <!-- 分隔 -->
+      <text x="320" y="65" font-size="20" class="s-txt" text-anchor="middle">+</text>
+
+      <!-- K -->
+      <g transform="translate(350,30)" filter="url(#shadow5)">
+        <text x="55" y="-8" class="s-txt" font-size="11" text-anchor="middle">K (key)</text>
+        <rect width="110" height="60" rx="10" class="s-input"/>
+        <text x="55" y="38" class="s-txt-d" font-size="12" text-anchor="middle" font-weight="600">head 维</text>
+      </g>
+
+      <path d="M465 60 H495" class="s-arrow" marker-end="url(#arrQ)"/>
+
+      <!-- L2 norm K -->
+      <g transform="translate(500,30)" filter="url(#shadow5)">
+        <rect width="110" height="60" rx="10" class="s-output"/>
+        <text x="55" y="30" class="s-txt-out" font-size="12" text-anchor="middle" font-weight="600">K̂ (单位长度)</text>
+        <text x="55" y="48" class="s-txt-out" font-size="11" text-anchor="middle">shape 不变</text>
+      </g>
+
+      <!-- 标注 -->
+      <text x="635" y="55" class="s-txt" font-size="11" text-anchor="middle">等价于用</text>
+      <text x="635" y="72" class="s-txt" font-size="11" text-anchor="middle" font-weight="600">余弦相似度</text>
+      <text x="635" y="89" class="s-txt" font-size="11" text-anchor="middle">做注意力</text>
+    </svg>
+    <div class="figcap">图 5：QK-Norm —— 把 Q、K 归一成单位向量，再乘以可学习缩放，等价于用"余弦相似度"做注意力。</div>
+  </div>
+  <p>相关术语：<b>QueryNorm</b>（只归 Q）、<b>QKV-Norm</b>（Q、K、V 都归）是 QK-Norm 的扩展。另外 FlashNorm 还能把带 QKV-Norm 的模型进一步加速。</p>
+
+  <h3 id="sandwich">Sandwich Norm / DeepNorm：为更深的网络而生</h3>
+  <ul class="clean">
+    <li><b>Sandwich Norm（夹心归一化）</b>：在子层前后各放一个 Norm（pre 一个、残差相加前再一个），即 <code class="inline">x' = x + Norm(f(Norm(x)))</code>，用于稳定很深的网络。</li>
+    <li><b>DeepNorm</b>：在残差连接处对激活按系数 <code class="inline">α</code> 缩放，配合特殊初始化让<b>上千层 Transformer</b> 也能训练（GLM-130B 用过）。</li>
+  </ul>
+  <div class="eq">$$ \operatorname{DeepNorm}(x) = \operatorname{LayerNorm}\big(\alpha\cdot x + \operatorname{Sublayer}(x)\big) $$</div>
+
+  <h3 id="hybrid">HybridNorm 与其他混合方案</h3>
+  <p>纯 Pre-Norm 训练稳但浅层性能略差，纯 Post-Norm 性能好但训练难。于是出现了<b>混合方案</b>：<b>HybridNorm</b> 在 Attention 里用 QKV-Norm（类 Pre-Norm 的稳定），在 FFN 上用 Post-Norm（类 Post-Norm 的性能），在密集和 MoE 模型上都取得更好效果。</p>
+
+  <h3>ScaleNorm / Embedding Norm / Final Norm / 注意力缩放</h3>
+  <ul class="clean">
+    <li><b>ScaleNorm</b>：只归一化范数、不做中心化，思路与 RMSNorm 类似，是更早的简化尝试。</li>
+    <li><b>Embedding Norm</b>：对 token embedding（或 embedding 相加后）做一次归一化，BERT 常见。</li>
+    <li><b>Final Norm</b>：最后一层 block 之后再归一化，再接语言模型头，几乎每个 decoder-only LLM 都有。</li>
+    <li><b>注意力缩放（attention scaling）</b>：<code class="inline">√d_k</code> 缩放<b>严格说不是 Norm</b>，但它也是一种尺度控制，常和 Norm 一起被讨论。</li>
+  </ul>
+
+  <!-- ============ 8 无归一化 ============ -->
+  <h2 id="dyt"><span class="num">8</span>新方向：DyT —— 不要 Norm 也能训？</h2>
+  <p>2025 年 Meta 的一篇工作（Zhu et al.）提出了一个激进但惊艳的想法：<b>直接用激活函数替换 Norm</b>。他们观察到 LayerNorm 的输入输出关系往往呈 S 形（类似 tanh），于是提出 <b>DyT（Dynamic Tanh）</b>：</p>
+  <div class="eq">$$ \operatorname{DyT}(x) = \tanh(\alpha \cdot x), \qquad \alpha \text{ 是可学习标量} $$</div>
+  <p>DyT 是一个<b>逐元素操作</b>：小值时近似线性缩放，大值时被 tanh 压扁（squash），从而模拟归一化的效果，但<b>完全不计算激活统计量</b>，因此更快。实验表明它在视觉与语言 Transformer 上都能匹配甚至超过带归一化的模型。</p>
+
+  <div class="figure">
+    <svg viewBox="0 0 760 200" style="width:100%;max-width:760px" font-family="inherit">
+      <defs>
+        <filter id="shadow6"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.1"/></filter>
+        <marker id="arrD" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L8,5 L0,10 z"/></marker>
+      </defs>
+
+      <!-- tanh 曲线图 -->
+      <g transform="translate(30,20)">
+        <rect x="0" y="0" width="300" height="160" rx="12" class="s-bg" style="stroke:var(--line)" stroke-width="1"/>
+        <text x="150" y="18" class="s-txt" font-size="12" text-anchor="middle" font-weight="600">tanh(α·x) —— S 形曲线</text>
+
+        <!-- 坐标轴 -->
+        <line x1="30" y1="90" x2="270" y2="90" class="s-grid"/>
+        <line x1="150" y1="35" x2="150" y2="145" class="s-grid"/>
+
+        <!-- 箭头 -->
+        <path d="M265 90 L272 90" class="s-arrow" marker-end="url(#arrD)"/>
+        <path d="M150 38 L150 32" class="s-arrow" marker-end="url(#arrD)"/>
+
+        <!-- tanh 曲线 -->
+        <path d="M35 138 C 80 138, 115 125, 135 100 C 142 88, 148 50, 150 42 C 152 50, 158 88, 165 100 C 185 125, 220 138, 265 138" class="s-curve"/>
+
+        <!-- 标注 -->
+        <text x="275" y="94" class="s-txt" font-size="10">x</text>
+        <text x="155" y="35" class="s-txt" font-size="10">y</text>
+        <text x="80" y="130" class="s-txt" font-size="10">压扁极值</text>
+        <text x="200" y="130" class="s-txt" font-size="10">压扁极值</text>
+        <text x="155" y="58" class="s-txt" font-size="10">线性区</text>
+      </g>
+
+      <!-- 替换图 -->
+      <g transform="translate(380,50)">
+        <text x="170" y="0" class="s-txt" font-size="13" font-weight="700" text-anchor="middle">Norm 层直接替换</text>
+
+        <!-- LayerNorm -->
+        <g transform="translate(0,20)" filter="url(#shadow6)">
+          <rect width="120" height="50" rx="10" class="s-warn"/>
+          <text x="60" y="32" style="fill:var(--red)" font-size="13" text-anchor="middle" font-weight="600">LayerNorm</text>
+        </g>
+
+        <!-- 箭头 -->
+        <path d="M125 45 H165" class="s-arrow" marker-end="url(#arrD)"/>
+
+        <!-- DyT -->
+        <g transform="translate(170,20)" filter="url(#shadow6)">
+          <rect width="120" height="50" rx="10" class="s-output"/>
+          <text x="60" y="32" class="s-txt-out" font-size="13" text-anchor="middle" font-weight="600">DyT(x)</text>
+        </g>
+
+        <text x="155" y="95" class="s-txt" font-size="12" text-anchor="middle">只需学习一个标量 α</text>
+        <text x="155" y="113" class="s-txt" font-size="12" text-anchor="middle">无需统计量</text>
+        <text x="155" y="131" class="s-txt" font-size="12" text-anchor="middle">逐元素操作，更快</text>
+      </g>
+    </svg>
+    <div class="figcap">图 6：DyT 用一个可学习标量 α 的逐元素 tanh 模拟归一化，去掉了统计量计算。</div>
+  </div>
+  <p>相关后续工作：<b>DyISRU</b>（Dynamic Inverse Square Root Unit，从 RMSNorm 精确导出的逐元素等价形式）、<b>BHyT</b>（Bound tanh 变体，进一步结合方差近似提升速度）。这条"无归一化"路线目前还在探索，传统 Norm 仍是绝对主流。</p>
+
+  <!-- ============ 9 对比表 ============ -->
+  <h2 id="compare"><span class="num">9</span>全览对比表</h2>
+  <div class="card">
+    <table>
+      <tr><th>方法</th><th>统计维度</th><th>作用位置</th><th>代表作 / 用途</th><th>状态</th></tr>
+      <tr><td>BatchNorm</td><td>batch 维</td><td>层内</td><td>CNN</td><td><span class="pill dep">LLM 弃用</span></td></tr>
+      <tr><td>LayerNorm</td><td>特征维</td><td>层内</td><td>BERT、GPT-2</td><td><span class="pill used">经典</span></td></tr>
+      <tr><td>RMSNorm</td><td>特征维（无均值）</td><td>层内</td><td>LLaMA、Mistral、Qwen</td><td><span class="pill used">主流</span></td></tr>
+      <tr><td>Pre-Norm / Post-Norm</td><td>-</td><td>残差前后</td><td>现代 LLM 用 Pre</td><td><span class="pill used">主流</span></td></tr>
+      <tr><td>Sandwich Norm</td><td>特征维</td><td>子层前后</td><td>深层网络稳定</td><td><span class="pill niche">小众</span></td></tr>
+      <tr><td>DeepNorm</td><td>特征维</td><td>残差缩放</td><td>GLM-130B，千层</td><td><span class="pill niche">小众</span></td></tr>
+      <tr><td>QK-Norm / QueryNorm</td><td>特征维（Q/K）</td><td>注意力内</td><td>Gemma 等</td><td><span class="pill niche">渐热</span></td></tr>
+      <tr><td>HybridNorm</td><td>特征维</td><td>混合 Pre/Post</td><td>ICML 2025 研究</td><td><span class="pill niche">研究</span></td></tr>
+      <tr><td>ScaleNorm</td><td>特征维</td><td>层内</td><td>低资源翻译</td><td><span class="pill niche">小众</span></td></tr>
+      <tr><td>DyT / DyISRU / BHyT</td><td>无（逐元素）</td><td>替代 Norm</td><td>Meta 2025 研究</td><td><span class="pill new">新方向</span></td></tr>
+      <tr><td>FlashNorm</td><td>-（加速）</td><td>Norm+线性层</td><td>推理加速</td><td><span class="pill new">工程优化</span></td></tr>
+    </table>
+  </div>
+
+  <!-- ============ 10 工程细节 ============ -->
+  <h2 id="imp"><span class="num">10</span>工程实现：那些坑</h2>
+  <ul class="clean">
+    <li><b>用 fp32 算统计量</b>：即使激活是 bf16/fp16，<code class="inline">RMS</code> / 方差也要在 fp32 下算，否则训练激进时容易 NaN。算完再转回原精度。</li>
+    <li><b>eps 不能省</b>：<code class="inline">ϵ</code> 防除零，也影响数值稳定性，常用 <code class="inline">1e-5 ~ 1e-6</code>。</li>
+    <li><b>用 rsqrt</b>：<code class="inline">torch.rsqrt(x)</code>（倒数平方根）底层走专用 CUDA 指令，比 <code class="inline">1/sqrt(x)</code> 快。</li>
+    <li><b>PyTorch 原生支持</b>：PyTorch 2.4+ 内置 <code class="inline">nn.RMSNorm</code>，直接用即可。</li>
+    <li><b>Final Norm 别漏</b>：最后一个 block 后通常还要一个 RMSNorm 再接 LM head。</li>
+  </ul>
+
+  <h3>RMSNorm 的标准实现（LLaMA 风格）</h3>
+  <pre><span class="c"># x: [..., d]，在最后一维做归一化；统计量在 fp32 下计算更稳</span>
+<span class="k">class</span> RMSNorm(nn.Module):
+    <span class="k">def</span> __init__(<span class="k">self</span>, d, eps=1e-6):
+        <span class="k">super</span>().__init__()
+        <span class="k">self</span>.eps = eps
+        <span class="k">self</span>.weight = nn.Parameter(torch.ones(d))   <span class="c"># shape (d,)</span>
+
+    <span class="k">def</span> forward(<span class="k">self</span>, x):
+        x = x.float()                            <span class="c"># 提精度，稳定方差</span>
+        rms = torch.sqrt(x.pow(2).mean(-1, keepdim=True) + <span class="k">self</span>.eps)
+        x = x * torch.rsqrt(x.pow(2).mean(-1, keepdim=True) + <span class="k">self</span>.eps)
+        <span class="k">return</span> (<span class="k">self</span>.weight * x).to(x.dtype)</pre>
+
+  <!-- ============ 11 总结 ============ -->
+  <h2 id="ref"><span class="num">11</span>总结 &amp; 参考资料</h2>
+  <p class="lead">一句话收尾：<b>LLM 的归一化家族 = "哪种"（LayerNorm → RMSNorm）+ "放哪"（Pre/Post-Norm）+ 若干变体（QK-Norm、DeepNorm、SandwichNorm）+ 新浪潮（DyT 无归一化）</b>。现代主流答案是 <b>Pre-Norm + RMSNorm</b>，记住这一条，其余都是锦上添花。</p>
+
+  <div class="card">
+    <b>参考来源</b>
+    <ul class="clean" style="font-size:14px;margin-top:8px">
+      <li>Ba et al., <i>Layer Normalization</i> (2016)</li>
+      <li>Zhang &amp; Sennrich, <i>Root Mean Square Layer Normalization</i> (2019)</li>
+      <li>Henry et al., <i>Query-Key Normalization for Transformers</i> (EMNLP 2020)</li>
+      <li>Zhu et al., <i>Transformers without Normalization: Dynamic Tanh (DyT)</i> (2025)</li>
+      <li>Graef et al., <i>FlashNorm: Fast Normalization for Transformers</i> (2024)</li>
+      <li>Zhuo et al., <i>HybridNorm</i> (2025)</li>
+      <li>《大模型的归一化》(cnblogs) · LLM 技术全景系列 (CSDN)</li>
+    </ul>
+  </div>
+  <p style="font-size:13px;color:var(--muted)">本文为学习笔记，图文与公式用于梳理概念；如需引用请以原始论文为准。</p>
+</main>
+
+<footer>
+  部署于 GitHub Pages · 单文件 HTML（KaTeX 走 CDN）· 本页仅作学习参考
+</footer>
+
+<script>
+  // ===== 主题切换 =====
+  const html = document.documentElement;
+  const themeToggle = document.getElementById('themeToggle');
+  const saved = localStorage.getItem('theme');
+  if (saved) {
+    html.setAttribute('data-theme', saved);
+  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    html.setAttribute('data-theme', 'dark');
+  } else {
+    html.setAttribute('data-theme', 'light');
+  }
+  themeToggle.addEventListener('click', () => {
+    const cur = html.getAttribute('data-theme');
+    const next = cur === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+
+  // ===== 侧边导航滚动高亮（scrollspy）=====
+  const navLinks = document.querySelectorAll('nav.sidebar a[href^="#"]');
+  const linkMap = {};
+  navLinks.forEach(a => {
+    const sec = document.querySelector(a.getAttribute('href'));
+    if (sec) linkMap[a.getAttribute('href')] = { link: a, sec };
+  });
+  function setActive(hash) {
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === hash));
+  }
+  navLinks.forEach(a => a.addEventListener('click', () => setActive(a.getAttribute('href'))));
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) setActive('#' + en.target.id);
+    });
+  }, { rootMargin: '-70px 0px -70% 0px', threshold: 0 });
+  Object.values(linkMap).forEach(({ sec }) => io.observe(sec));
+
+  // ===== 顶部阅读进度条 =====
+  const bar = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+  }, { passive: true });
+</script>
+</body>
+</html>
