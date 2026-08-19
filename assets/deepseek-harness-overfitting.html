@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DeepSeek V4 Pro 降智风波全解构：harness 级过拟合、self-generate / self-train 训练循环的结构性风险，以及一篇延伸论文清单。">
+<title>当模型过拟合了自己的 Harness —— DeepSeek V4 Pro 风波与 Self-Loop 的代价</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%234d6bfe'/%3E%3Ccircle cx='16' cy='16' r='14' fill='black' fill-opacity='0.5' clip-path='circle(14px at 16 16)'/%3E%3Cpath d='M16 2a14 14 0 0 1 0 28z' fill='%230f1115'/%3E%3C/svg%3E">
+<script>
+/* 提前应用主题，避免闪烁（默认白天，仅当用户明确选过黑夜才切换） */
+(function () {
+  if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+})();
+</script>
+<style>
+/* ============ 主题变量 ============ */
+:root {
+  color-scheme: light;
+  --bg: #faf9f6;
+  --bg-surface: #ffffff;
+  --bg-sidebar: #f2f0ea;
+  --bg-code: #f0eee7;
+  --text: #23272e;
+  --text-2: #55606b;
+  --text-3: #8a93a0;
+  --accent: #4d6bfe;
+  --accent-strong: #3550d8;
+  --accent-soft: rgba(77, 107, 254, 0.09);
+  --accent-soft-2: rgba(77, 107, 254, 0.16);
+  --border: #e5e1d8;
+  --border-soft: #eceae2;
+  --stripe: #f6f5f0;
+  --shadow: 0 1px 2px rgba(30, 32, 38, 0.05), 0 4px 16px rgba(30, 32, 38, 0.05);
+  --quote-bg: #f5f4ef;
+  --warn-border: #d9a441;
+  --warn-bg: #faf5e9;
+  --ok-border: #3e9b6c;
+  --ok-bg: #eef6f1;
+  --key-border: #4d6bfe;
+  --key-bg: #f0f3ff;
+  --bar-track: #e9e6dd;
+  --serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", Georgia, serif;
+  --sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", "Segoe UI", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
+}
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0f1115;
+  --bg-surface: #16191f;
+  --bg-sidebar: #12141a;
+  --bg-code: #1b1f27;
+  --text: #e4e2dc;
+  --text-2: #a7adb8;
+  --text-3: #6c7380;
+  --accent: #7d94ff;
+  --accent-strong: #93a7ff;
+  --accent-soft: rgba(125, 148, 255, 0.12);
+  --accent-soft-2: rgba(125, 148, 255, 0.2);
+  --border: #262b35;
+  --border-soft: #1e222b;
+  --stripe: #191d25;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 6px 20px rgba(0, 0, 0, 0.3);
+  --quote-bg: #191c23;
+  --warn-border: #a8843c;
+  --warn-bg: #201c12;
+  --ok-border: #4d9a72;
+  --ok-bg: #12201a;
+  --key-border: #5c74e8;
+  --key-bg: #171b2c;
+  --bar-track: #232833;
+}
+
+/* ============ 基础 ============ */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16.5px;
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+a { color: var(--accent-strong); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+::selection { background: var(--accent-soft-2); }
+mark { background: var(--accent-soft-2); color: inherit; padding: 0 3px; border-radius: 3px; }
+kbd {
+  font-family: var(--mono); font-size: 0.78em; padding: 1px 6px;
+  border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 5px;
+  background: var(--bg-surface); color: var(--text-2);
+}
+
+/* ============ 顶部进度条 ============ */
+#progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+  z-index: 300; transition: width 0.1s linear;
+}
+
+/* ============ 布局 ============ */
+.layout { display: flex; min-height: 100vh; }
+
+/* ---- 左侧目录 ---- */
+.sidebar {
+  width: 300px; flex-shrink: 0;
+  position: sticky; top: 0; height: 100vh;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  padding: 28px 0 16px;
+  transition: background 0.35s ease;
+}
+.sidebar-header { padding: 0 26px 20px; border-bottom: 1px solid var(--border); }
+.sidebar-brand {
+  font-size: 12px; letter-spacing: 2px; color: var(--text-3);
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.sidebar-title {
+  font-family: var(--serif); font-size: 16.5px; font-weight: 700;
+  line-height: 1.55; color: var(--text);
+}
+.sidebar-sub { font-size: 12.5px; color: var(--text-3); margin-top: 6px; }
+
+.toc { flex: 1; overflow-y: auto; padding: 18px 12px 24px; }
+.toc::-webkit-scrollbar { width: 5px; }
+.toc::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+.toc-label {
+  font-size: 11.5px; letter-spacing: 2px; color: var(--text-3);
+  padding: 0 14px 10px; text-transform: uppercase;
+}
+.toc ol { list-style: none; margin: 0; padding: 0; counter-reset: toc; }
+.toc li { counter-increment: toc; }
+.toc a {
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 7px 14px; border-radius: 8px;
+  color: var(--text-2); font-size: 13.5px; line-height: 1.5;
+  transition: background 0.2s, color 0.2s;
+}
+.toc a::before {
+  content: counter(toc, decimal-leading-zero);
+  font-family: var(--mono); font-size: 11px; color: var(--text-3);
+  flex-shrink: 0; transition: color 0.2s;
+}
+.toc a:hover { background: var(--accent-soft); color: var(--text); text-decoration: none; }
+.toc a.active { background: var(--accent-soft); color: var(--accent-strong); font-weight: 600; }
+.toc a.active::before { color: var(--accent-strong); }
+
+.sidebar-footer {
+  padding: 14px 26px 4px; border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--text-3); line-height: 1.8;
+}
+
+/* ---- 主内容 ---- */
+.main-wrap { flex: 1; display: flex; justify-content: center; min-width: 0; }
+main { width: 100%; max-width: 820px; padding: 56px 56px 80px; }
+
+/* ============ 文章头部 ============ */
+.post-header { margin-bottom: 48px; }
+.post-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--accent-strong); font-weight: 600;
+  letter-spacing: 1px; margin-bottom: 18px;
+}
+.post-eyebrow::before {
+  content: ""; width: 26px; height: 2px; background: var(--accent); border-radius: 2px;
+}
+h1.post-title {
+  font-family: var(--serif); font-size: clamp(28px, 4.5vw, 40px);
+  line-height: 1.4; margin: 0 0 18px; font-weight: 800;
+  letter-spacing: 0.5px;
+}
+.post-sub { font-size: 17px; color: var(--text-2); line-height: 1.8; margin: 0 0 26px; }
+.post-meta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; font-size: 13.5px; color: var(--text-3); }
+.post-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-3); }
+.tag-chip {
+  display: inline-block; padding: 2px 11px; border-radius: 20px;
+  background: var(--accent-soft); color: var(--accent-strong);
+  font-size: 12.5px; font-weight: 500;
+}
+
+/* ============ 章节与标题 ============ */
+article section { scroll-margin-top: 28px; margin-bottom: 20px; }
+h2 {
+  font-family: var(--serif); font-size: 25px; font-weight: 700;
+  margin: 64px 0 8px; line-height: 1.5; letter-spacing: 0.3px;
+  display: flex; align-items: baseline; gap: 14px;
+}
+h2 .sec-no {
+  font-family: var(--mono); font-size: 15px; font-weight: 600;
+  color: var(--accent); flex-shrink: 0; position: relative; top: -1px;
+}
+h2::after { content: ""; }
+.sec-rule { height: 1px; background: var(--border); margin: 10px 0 26px; }
+h3 {
+  font-size: 19px; font-weight: 700; margin: 40px 0 14px;
+  line-height: 1.6; color: var(--text);
+}
+h3 .h3-no { color: var(--accent); font-family: var(--mono); font-size: 15px; margin-right: 8px; }
+p { margin: 0 0 20px; }
+strong { font-weight: 700; color: var(--text); }
+em { font-style: normal; color: var(--text-2); }
+
+/* ============ 引用块 ============ */
+blockquote {
+  margin: 26px 0; padding: 16px 22px;
+  border-left: 3px solid var(--accent);
+  background: var(--quote-bg); border-radius: 0 10px 10px 0;
+  color: var(--text-2); font-size: 15.5px;
+}
+blockquote p:last-child { margin-bottom: 0; }
+blockquote .quote-src { display: block; margin-top: 8px; font-size: 13px; color: var(--text-3); }
+
+/* ============ 提示框 ============ */
+.callout {
+  margin: 26px 0; padding: 18px 22px; border-radius: 12px;
+  border: 1px solid var(--border); border-left: 4px solid var(--accent);
+  background: var(--bg-surface); box-shadow: var(--shadow);
+}
+.callout-title {
+  display: flex; align-items: center; gap: 8px;
+  font-weight: 700; font-size: 14.5px; margin-bottom: 10px; letter-spacing: 0.5px;
+}
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+.callout ul { margin: 0 0 4px; padding-left: 20px; }
+.callout li { margin-bottom: 8px; }
+.callout li:last-child { margin-bottom: 0; }
+.callout-key { border-left-color: var(--key-border); background: var(--key-bg); }
+.callout-key .callout-title { color: var(--accent-strong); }
+.callout-warn { border-left-color: var(--warn-border); background: var(--warn-bg); }
+.callout-warn .callout-title { color: var(--warn-border); }
+.callout-ok { border-left-color: var(--ok-border); background: var(--ok-bg); }
+.callout-ok .callout-title { color: var(--ok-border); }
+
+/* ============ 代码 ============ */
+code {
+  font-family: var(--mono); font-size: 0.86em;
+  background: var(--bg-code); padding: 2px 6px; border-radius: 5px;
+  color: var(--text);
+}
+pre {
+  background: var(--bg-code); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 20px; overflow-x: auto;
+  margin: 22px 0; font-size: 13.5px; line-height: 1.75;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+.commit-line {
+  font-family: var(--mono); font-size: 14px;
+  padding: 12px 18px; border-radius: 10px;
+  background: var(--bg-code); border: 1px dashed var(--accent);
+  color: var(--accent-strong); margin: 18px 0; overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* ============ 表格 ============ */
+.table-wrap { overflow-x: auto; margin: 26px 0; border-radius: 12px; border: 1px solid var(--border); box-shadow: var(--shadow); }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; background: var(--bg-surface); }
+th, td { padding: 11px 16px; text-align: left; border-bottom: 1px solid var(--border-soft); vertical-align: top; }
+th {
+  font-size: 13px; letter-spacing: 0.5px; color: var(--text-2); font-weight: 600;
+  background: var(--stripe); white-space: nowrap;
+}
+tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) { background: var(--stripe); }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.delta-down { color: #c0564f; font-weight: 600; }
+.delta-up { color: #3e9b6c; font-weight: 600; }
+[data-theme="dark"] .delta-down { color: #e07a72; }
+[data-theme="dark"] .delta-up { color: #6cbd93; }
+.table-note { font-size: 13px; color: var(--text-3); margin-top: -16px; margin-bottom: 24px; }
+
+/* ============ 横向条形图 ============ */
+.bars { margin: 28px 0; display: flex; flex-direction: column; gap: 12px; }
+.bar-row { display: grid; grid-template-columns: 220px 1fr 52px; align-items: center; gap: 14px; }
+.bar-label { font-size: 13.5px; color: var(--text-2); text-align: right; line-height: 1.45; }
+.bar-track { height: 22px; background: var(--bar-track); border-radius: 6px; overflow: hidden; }
+.bar-fill {
+  height: 100%; width: 0; border-radius: 6px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+  transition: width 1s cubic-bezier(0.25, 0.8, 0.3, 1);
+}
+.bar-fill.dim { background: var(--text-3); opacity: 0.55; }
+.bar-fill.gold { background: linear-gradient(90deg, #d9a441, #c4882a); }
+.bar-value {
+  font-family: var(--mono); font-size: 13.5px; color: var(--text);
+  font-variant-numeric: tabular-nums; text-align: left;
+}
+.bars-caption { font-size: 13px; color: var(--text-3); margin-top: -14px; }
+
+/* ============ 循环示意图 ============ */
+.loop {
+  display: flex; flex-wrap: wrap; align-items: stretch; gap: 10px;
+  margin: 28px 0; padding: 22px; border-radius: 14px;
+  background: var(--bg-surface); border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.loop-node {
+  flex: 1 1 150px; min-width: 140px; padding: 14px 14px;
+  border: 1.5px solid var(--accent); border-radius: 10px;
+  background: var(--accent-soft); font-size: 13.5px; line-height: 1.65;
+  display: flex; flex-direction: column; justify-content: center; text-align: center;
+}
+.loop-node b { display: block; font-size: 14px; margin-bottom: 4px; color: var(--accent-strong); }
+.loop-node.gray { border-color: var(--text-3); background: transparent; }
+.loop-node.gray b { color: var(--text-2); }
+.loop-arrow {
+  align-self: center; font-size: 18px; color: var(--accent);
+  flex: 0 0 auto; padding: 0 2px;
+}
+.loop-foot {
+  flex-basis: 100%; text-align: center; font-size: 13px;
+  color: var(--text-3); border-top: 1px dashed var(--border);
+  padding-top: 14px; margin-top: 6px;
+}
+
+/* ============ 时间线 ============ */
+.timeline { margin: 28px 0; padding-left: 6px; }
+.timeline-item { position: relative; padding: 0 0 26px 30px; border-left: 2px solid var(--border); }
+.timeline-item:last-child { padding-bottom: 4px; border-left-color: transparent; }
+.timeline-item::before {
+  content: ""; position: absolute; left: -6.5px; top: 6px;
+  width: 11px; height: 11px; border-radius: 50%;
+  background: var(--bg); border: 2.5px solid var(--accent);
+}
+.timeline-item.red::before { border-color: #c0564f; }
+.timeline-time {
+  font-family: var(--mono); font-size: 12.5px; color: var(--accent-strong);
+  margin-bottom: 4px; letter-spacing: 0.3px;
+}
+.timeline-title { font-weight: 700; font-size: 15.5px; margin-bottom: 4px; }
+.timeline-body { font-size: 14.5px; color: var(--text-2); line-height: 1.8; }
+.timeline-body p { margin-bottom: 8px; }
+.timeline-body p:last-child { margin-bottom: 0; }
+
+/* ============ 论文清单 ============ */
+.paper-group-title {
+  font-size: 13px; letter-spacing: 1.5px; color: var(--text-3);
+  margin: 34px 0 6px; text-transform: uppercase; font-weight: 600;
+  display: flex; align-items: center; gap: 10px;
+}
+.paper-group-title::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+.paper-list { list-style: none; margin: 0; padding: 0; }
+.paper {
+  padding: 16px 2px 15px; border-bottom: 1px solid var(--border-soft);
+}
+.paper:last-child { border-bottom: none; }
+.paper-title { font-size: 15.5px; font-weight: 600; line-height: 1.6; margin-bottom: 6px; }
+.paper-title a { color: var(--text); }
+.paper-title a:hover { color: var(--accent-strong); }
+.paper-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 7px; }
+.ptag {
+  font-size: 11.5px; padding: 1px 9px; border-radius: 20px;
+  border: 1px solid var(--border); color: var(--text-2);
+  font-family: var(--mono); letter-spacing: 0.2px; white-space: nowrap;
+}
+.ptag.hl { border-color: var(--accent); color: var(--accent-strong); background: var(--accent-soft); }
+.paper-note { font-size: 14px; color: var(--text-2); line-height: 1.75; margin: 0; }
+
+/* ============ 主题切换按钮 ============ */
+.theme-toggle {
+  position: fixed; top: 18px; right: 22px; z-index: 250;
+  width: 42px; height: 42px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--bg-surface);
+  color: var(--text-2); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow); transition: transform 0.2s, background 0.35s, color 0.2s;
+}
+.theme-toggle:hover { transform: rotate(20deg) scale(1.06); color: var(--accent-strong); border-color: var(--accent); }
+.theme-toggle svg { width: 20px; height: 20px; }
+.theme-toggle .icon-moon { display: none; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: block; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: none; }
+
+/* ============ 移动端抽屉 ============ */
+.mobile-bar {
+  display: none; position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 54px; background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  align-items: center; gap: 12px; padding: 0 16px;
+}
+.menu-btn {
+  width: 38px; height: 38px; border-radius: 9px; border: 1px solid var(--border);
+  background: transparent; color: var(--text); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.menu-btn svg { width: 19px; height: 19px; }
+.mobile-title {
+  font-family: var(--serif); font-size: 14.5px; font-weight: 700;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.overlay {
+  display: none; position: fixed; inset: 0; z-index: 220;
+  background: rgba(10, 12, 16, 0.45); backdrop-filter: blur(2px);
+}
+body.drawer-open .overlay { display: block; }
+
+/* ============ 页脚 ============ */
+.post-footer {
+  margin-top: 72px; padding-top: 28px; border-top: 1px solid var(--border);
+  font-size: 13.5px; color: var(--text-3); line-height: 2;
+}
+.post-footer .ref-list { padding-left: 18px; margin: 10px 0 0; }
+.post-footer .ref-list li { margin-bottom: 4px; }
+.back-top {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 14px;
+  font-size: 13px; color: var(--text-3);
+}
+.back-top:hover { color: var(--accent-strong); }
+
+/* ============ 响应式 ============ */
+@media (max-width: 1080px) {
+  .mobile-bar { display: flex; }
+  .sidebar {
+    position: fixed; left: 0; top: 0; z-index: 240;
+    transform: translateX(-102%); transition: transform 0.3s ease;
+    padding-top: 66px; box-shadow: none;
+  }
+  body.drawer-open .sidebar { transform: translateX(0); box-shadow: 0 0 60px rgba(0,0,0,0.35); }
+  .main-wrap { padding-top: 54px; }
+  main { padding: 36px 26px 64px; }
+  .theme-toggle { top: 68px; right: 16px; }
+  .bar-row { grid-template-columns: 130px 1fr 44px; }
+  .bar-label { font-size: 12px; }
+  h2 { font-size: 22px; }
+}
+@media (max-width: 560px) {
+  main { padding: 28px 18px 56px; }
+  body { font-size: 15.5px; }
+  .bar-row { grid-template-columns: 1fr; gap: 4px; }
+  .bar-label { text-align: left; }
+  .bar-value { grid-row: 1; grid-column: 2; text-align: right; }
+  .bar-track { grid-column: 1 / -1; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- 移动端顶栏 -->
+<div class="mobile-bar">
+  <button class="menu-btn" id="menuBtn" aria-label="打开目录">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+  <div class="mobile-title">当模型过拟合了自己的 Harness</div>
+</div>
+<div class="overlay" id="overlay"></div>
+
+<div class="layout">
+
+  <!-- 左侧目录 -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">Blog · 模型安全笔记</div>
+      <div class="sidebar-title">当模型过拟合了自己的 Harness</div>
+      <div class="sidebar-sub">DeepSeek V4 Pro 风波与 Self-Loop 的代价</div>
+    </div>
+    <nav class="toc" id="toc" aria-label="文章目录">
+      <div class="toc-label">目录</div>
+      <ol>
+        <li><a href="#intro">引言：深夜上线与「降智」热搜</a></li>
+        <li><a href="#event">事件回顾：三重乌龙与三张脸</a></li>
+        <li><a href="#evidence">实锤证据：一行 commit 与四组数字</a></li>
+        <li><a href="#claim1">论点一：后训练远未过拟合</a></li>
+        <li><a href="#claim2">论点二：用力过猛与自我加速</a></li>
+        <li><a href="#self">Self 哲学：自我吞噬的循环</a></li>
+        <li><a href="#others">不止 DeepSeek：谁还有这毛病</a></li>
+        <li><a href="#papers">论文清单：延伸阅读</a></li>
+        <li><a href="#outlook">展望：harness-agnostic 时代</a></li>
+        <li><a href="#epilogue">后记：过拟合只是被看见了</a></li>
+      </ol>
+    </nav>
+    <div class="sidebar-footer">
+      整理于 2026 年 8 月<br>
+      按 <kbd>T</kbd> 可切换日 / 夜模式
+    </div>
+  </aside>
+
+  <div class="main-wrap">
+  <main>
+
+    <!-- 主题切换（右上角） -->
+    <button class="theme-toggle" id="themeToggle" aria-label="切换日间 / 夜间模式" title="切换日间 / 夜间模式（快捷键 T）">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5 5l1.6 1.6M17.4 17.4L19 19M19 5l-1.6 1.6M6.6 17.4L5 19"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 14.2A8.8 8.8 0 0 1 9.8 3.4a8.8 8.8 0 1 0 10.8 10.8z"/></svg>
+    </button>
+
+    <!-- 文章头部 -->
+    <header class="post-header">
+      <div class="post-eyebrow">后训练 · Agent · Model Collapse</div>
+      <h1 class="post-title">当模型过拟合了自己的 Harness</h1>
+      <p class="post-sub">DeepSeek V4 Pro「降智」风波全解构：从一行 commit 出发，拆解 harness 级过拟合的机理，把它放回 self-generate / self-train 时代的更大图景里。</p>
+      <div class="post-meta">
+        <span>2026-08-19</span>
+        <span class="dot"></span>
+        <span>约 18 分钟</span>
+        <span class="dot"></span>
+        <span class="tag-chip">DeepSeek V4 Pro</span>
+        <span class="tag-chip">Harness Overfitting</span>
+        <span class="tag-chip">Self-Consuming Loop</span>
+      </div>
+    </header>
+
+    <article>
+
+      <!-- 01 引言 -->
+      <section id="intro">
+        <h2><span class="sec-no">01</span>引言：深夜上线与「降智」热搜</h2>
+        <div class="sec-rule"></div>
+        <p>8 月 12 日深夜，DeepSeek 没有发布会、没有预热、连一份正经的更新日志都没有，只是悄悄把 API 文档里 V4 Pro 的状态从「预览」改成了「正式版」，版本号 0813。24 小时之内，开发者社区炸了——不是因为太好，而是因为太「差」：大量实测发现，这个输出价格是 Flash 三倍的模型，在日常任务里和 Flash 几乎没区别，长程代码任务还会中途「躺平」。<mark>「降智」两个字，瞬间冲上 AI 圈热搜</mark>。</p>
+        <p>但这个故事最有意思的部分，恰恰发生在「降智」定性之后。社区顺藤摸瓜，在两天内完成了一场教科书级的尸检：同一套模型权重，换个运行环境，分数从 91 分拉到 99 分；一凌晨合入 Harness 仓库的 commit，直接坐实了病灶。结论不是「模型不行」，而是一个更刺耳的判断——<strong>它过拟合了自己的训练环境</strong>。</p>
+        <div class="callout callout-key">
+          <div class="callout-title">TL;DR</div>
+          <ul>
+            <li>V4 Pro-0813 大概率没有「降智」，而是<strong>过拟合了 RL 训练时的环境</strong>——DeepSeek Harness 的 Minimal 配置（一个持久 shell + 一个文件编辑器，共两件工具）。</li>
+            <li>换回训练时的环境，分数从 91 回到 99。这是社区第一次把「harness 级过拟合」从猜测变成<strong>可复现的实锤</strong>：证据链包括一行 commit、一组对照实验、一个完美的对照组模型（Flash）。</li>
+            <li>它不是孤例。独立评测显示 Codex、Claude Code、Qwen Code 的 harness 都对自家大模型存在<strong>耦合优化</strong>；DeepSeek 只是第一个症状足够戏剧化、证据链足够完整的。</li>
+            <li>把镜头拉远：后训练还没有到经典意义的过拟合上限（数据规模收益仍在），但 <strong>self-generate / self-train 循环 + 固定 harness 环境</strong>的组合，正在一个新的维度上制造过拟合——上下文维度。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 02 事件回顾 -->
+      <section id="event">
+        <h2><span class="sec-no">02</span>事件回顾：三重乌龙与三张脸</h2>
+        <div class="sec-rule"></div>
+        <p>要理解这场风波，得先把拧巴的时间线捋清楚。整个发布从头到尾透着一股赶工味，一共踩了三重乌龙：</p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">2026-04-24</div>
+            <div class="timeline-title">V4-Pro Preview 灰度上线</div>
+            <div class="timeline-body"><p>1600B 总参数 / 49B 激活，CSA + HCA 混合注意力，原生 1M 上下文，MIT 开源。技术报告同步发布，社区口碑不错。</p></div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">2026-07-31</div>
+            <div class="timeline-title">尴尬期：Flash 反超 Pro</div>
+            <div class="timeline-body"><p>更小的 V4 Flash（284B / 13B 激活）抢先转正，且经过再训练的 Flash 在多个 agent / 编程基准上<strong>反超了四个月前的 Pro Preview</strong>。官方承诺 Pro 转正「很快跟进」。</p></div>
+          </div>
+          <div class="timeline-item red">
+            <div class="timeline-time">2026-08-12 深夜</div>
+            <div class="timeline-title">乌龙一：静默上线又撤回</div>
+            <div class="timeline-body"><p>API 文档里 Pro 转正式版（0813），但不到 24 小时，官网横幅和公告又被撤下，官方更新日志对这一版本只字未提。开发者无法确认它到底「正式」了没有。</p></div>
+          </div>
+          <div class="timeline-item red">
+            <div class="timeline-time">2026-08-13 傍晚</div>
+            <div class="timeline-title">乌龙二：权重传错</div>
+            <div class="timeline-body"><p>0813 权重上传 HuggingFace，约 1 小时后火速撤回——因为正式版的 config 和 Flash 版<strong>完全一致</strong>（hidden_size=4096、256 个路由专家、43 层），而灰测 Preview 是另一套（7168 / 384 / 61）。社区调侃：「通过开源邀请全世界帮你 debug 是吧。」</p></div>
+          </div>
+          <div class="timeline-item red">
+            <div class="timeline-time">2026-08-13 起</div>
+            <div class="timeline-title">乌龙三：表现对不上预期</div>
+            <div class="timeline-body"><p>日常任务与 Flash 体验几乎无差别；Artificial Analysis 智能指数 Pro 53 vs Flash 52——花 3 倍的输出价（6 元 vs 2 元 / 百万 token），买 1 分的提升。8 月 17 日峰谷定价再补一刀：高峰时段 Pro 缓存命中输入价上调 1100%。</p></div>
+          </div>
+        </div>
+
+        <blockquote>
+          <p>「恩情还完了。」</p>
+          <span class="quote-src">—— 定价方案公示后的评论区高赞</span>
+        </blockquote>
+
+        <h3><span class="h3-no">2.1</span>神秘的三张脸</h3>
+        <p>就在质疑声最响的时候，社区发现了更离奇的现象：调用同一个 <code>deepseek-v4-pro</code> 接口，换个 IP、新建个会话，模型的「说话风格」会变。有人总结出三张脸——</p>
+        <p>一种以 <code>Let me...</code> 开头，像之前的 Preview 版；一种说 <code>The user wants me...</code>，像 Flash；还有一种用 <code>We need...</code> 最多、推理最强，被社区封为<strong>「上帝模式 0813」</strong>。大家一度怀疑 DeepSeek 在单个 API 后面藏了三个模型偷偷路由。这个猜测后来被证伪了，但「三张脸」这个观察，事后看正是整个病例里最重要的症状——我们在第 5 节会回来解释它。</p>
+      </section>
+
+      <!-- 03 实锤证据 -->
+      <section id="evidence">
+        <h2><span class="sec-no">03</span>实锤证据：一行 commit 与四组数字</h2>
+        <div class="sec-rule"></div>
+        <p>真正的突破口，是 DeepSeek 同步开源的 Agent 运行时——<strong>DeepSeek Harness（DSH）</strong>。8 月 10 日，也就是正式发布前两天，Harness 代码库里悄然合入了一个提交：</p>
+        <div class="commit-line">fix(preset): align minimal agent with RL composition</div>
+        <p>翻译成人话：<strong>让极简模式与强化学习时的训练环境对齐</strong>。官方评测 V4 Pro 用的那个「极简环境」，必须和模型训练时所处的环境一模一样，模型才能发挥出真正水平。这行 commit 等于官方自供：RL 训练环境就是 Minimal 那套配置——</p>
+        <pre><code># apps/cli/config/agent-presets/minimal/agent.cordis.yml（节选）
+- id: persona
+  config:
+    text: You are a helpful software engineer assistant.  # 就这一句开场白
+    complete: true            # 它是「全部」，不再叠加任何话
+    includeRuntimeContext: false  # 不注入运行时上下文快照
+- id: persistent-shell       # 工具一：持久 bash
+- id: str-replace-editor     # 工具二：字符串替换编辑器</code></pre>
+        <p>社区顺着这条线索做了实验。同一个 V4 Pro，放在 Harness 的不同模式里跑 Project2（越接近训练环境，分数越高）：</p>
+
+        <div class="bars" id="barsDsh">
+          <div class="bar-row"><span class="bar-label">Standard 模式（约 25 件工具）</span><div class="bar-track"><div class="bar-fill dim" data-w="91"></div></div><span class="bar-value">91</span></div>
+          <div class="bar-row"><span class="bar-label">PTC 模式</span><div class="bar-track"><div class="bar-fill dim" data-w="92"></div></div><span class="bar-value">92</span></div>
+          <div class="bar-row"><span class="bar-label">Minimal 模式 · 第 1 次</span><div class="bar-track"><div class="bar-fill gold" data-w="99"></div></div><span class="bar-value">99</span></div>
+          <div class="bar-row"><span class="bar-label">Minimal 模式 · 第 2 次</span><div class="bar-track"><div class="bar-fill gold" data-w="96"></div></div><span class="bar-value">96</span></div>
+          <div class="bar-row"><span class="bar-label">两阶段锚定 · 第 1 次</span><div class="bar-track"><div class="bar-fill" data-w="98"></div></div><span class="bar-value">98</span></div>
+          <div class="bar-row"><span class="bar-label">两阶段锚定 · 第 2 次</span><div class="bar-track"><div class="bar-fill" data-w="99"></div></div><span class="bar-value">99</span></div>
+        </div>
+        <p class="bars-caption">同一套权重，只换运行环境。「两阶段锚定」= 第一轮按 Minimal 喂、模型开始调用工具后再解锁 Standard 全套工具。</p>
+
+        <p>模型没换，换的是它第一次「睁眼」看到的环境。差距一目了然。但真正让「过拟合」定性站住脚的，是下面三条证据链的闭环：</p>
+
+        <div class="callout callout-key">
+          <div class="callout-title">证据链</div>
+          <ul>
+            <li><strong>commit 自供</strong>：RL 训练环境 = Minimal 配置（一句话 persona + 两件工具，上下文零噪声）。评测高分环境恰好就是训练环境。</li>
+            <li><strong>Flash 对照组</strong>：V4 Flash 在所有 Harness 模式下分数稳定在 90–95，切极简模式毫无变化。<em>排除了「Harness 有魔力」的解释——这是 Pro 的专项 agent 后训练独有的病。</em></li>
+            <li><strong>两阶段不塌</strong>：先 Minimal 起手、模型开始调工具后再灌入 25 件工具，分数不回落。说明不是能力缺失，而是<strong>冷启动时初始 token 分布决定后续推理轨迹</strong>——点火点歪了，不是发动机没马力。</li>
+          </ul>
+        </div>
+
+        <div class="callout callout-warn">
+          <div class="callout-title">一个更隐蔽的推论</div>
+          <p>官方把 Minimal 定义为「跑基准测试的标准环境」，而 Minimal = RL 训练环境。这等于：<strong>所有官方跑分都在训练分布内进行</strong>。这比传统的 benchmark 题目泄漏更隐蔽——不是题泄漏了，是<mark>环境泄漏了</mark>。第三方（如 Artificial Analysis）测的才是真正的 OOD 分数。</p>
+        </div>
+      </section>
+
+      <!-- 04 论点一 -->
+      <section id="claim1">
+        <h2><span class="sec-no">04</span>论点一：后训练远未过拟合</h2>
+        <div class="sec-rule"></div>
+        <p>先把镜头拉远。一个流行的判断是：受模型规模、数据量等限制，此前的后训练<strong>远远没有达到经典意义的过拟合</strong>，所以各家的各种后训练策略都有效，增大数据规模的效果也远未触顶。这个判断基本成立，而且有一批 2025–2026 年的论文给出定量支撑：</p>
+
+        <h3><span class="h3-no">4.1</span>RL 后训练有自己的 scaling law，且还没撞墙</h3>
+        <p>对 Qwen2.5 全系列（0.5B → 72B）的系统实验给出了几条结论：固定算力预算下，大模型少步训练优于小模型多步训练；在<strong>数据受限场景下，重复利用高质量数据依然有效</strong>——最终性能主要由优化步数而非样本唯一性决定。学习效率 k(N) = K<sub>max</sub> / (1 + N₀/N) 呈饱和曲线，但那是「效率」饱和，不是「收益」归零。</p>
+        <p>快手开源的 <strong>Klear-AgentForge</strong> 管线（Qwen3-8B 起步的完整 agent 后训练）也展示了同样的趋势：SFT 数据从单轨迹扩到多轨迹，SWE-Bench 持续上涨，未见平台期。<mark>「堆 agent 轨迹数据还有收益」是各家共识，不是错觉。</mark></p>
+
+        <h3><span class="h3-no">4.2</span>为什么各家策略「都有用」：RL 在把模型往泛化推</h3>
+        <p>一篇很有意思的污染研究（arXiv 2601.06103）做了受控实验：把基准测试题注入预训练数据，再分别过 SFT 和 GRPO。结果——<strong>SFT 只在污染任务上涨分（纯记忆化），而 GRPO 能把泄漏转化为对未污染任务的泛化增益</strong>。换句话说，RL 类后训练至今仍在把模型往「泛化」方向拽，这为「各家 RL 策略都有用」提供了机理层面的解释。</p>
+
+        <div class="callout callout-ok">
+          <div class="callout-title">但要修正一个变量</div>
+          <p>「上限」不在数据量，而在<strong>多样性</strong>。RL scaling 的饱和 + 输出熵坍缩（见下节）意味着这个游戏的真实天花板是<mark>探索能力的耗尽</mark>，不是 token 不够。一旦训练环境的多样性被锁死，堆再多数据也只是在同一个分布里打转。</p>
+        </div>
+      </section>
+
+      <!-- 05 论点二 -->
+      <section id="claim2">
+        <h2><span class="sec-no">05</span>论点二：用力过猛与自我加速</h2>
+        <div class="sec-rule"></div>
+        <p>第二个判断是：Pro 这次的问题来自「用力过猛」——大量 Agent Harness 构建 + self-generate / self-train，大大加快了过拟合甚至崩溃的风险。方向对，但值得把这个机理拆得更精确，因为这里的「过拟合」和经典统计学习里的<strong>不是一回事</strong>，而且结构性地更危险。</p>
+
+        <h3><span class="h3-no">5.1</span>Agent RL 的轨迹，是所有自训练循环里最窄的一种</h3>
+        <p>纯文本的 self-train（STL）至少还保留了开放域的表层多样性。而 agent RL 的训练数据是模型<strong>在同一个环境里</strong>滚出来的轨迹：每次 rollout 的 system prompt、工具 schema、消息格式逐字相同。这意味着前缀上下文（harness 配置）在训练分布里是一个<strong>零方差常量</strong>。</p>
+        <div class="loop">
+          <div class="loop-node gray"><b>固定环境</b>同一套 system prompt 与工具 schema</div>
+          <div class="loop-arrow">→</div>
+          <div class="loop-node"><b>rollout</b>模型在环境内生成轨迹</div>
+          <div class="loop-arrow">→</div>
+          <div class="loop-node"><b>奖励</b>benchmark 通过率</div>
+          <div class="loop-arrow">→</div>
+          <div class="loop-node"><b>更新</b>策略权重强化这套轨迹</div>
+          <div class="loop-foot">循环往复：环境前缀逐字不变 → 模型学到的不是「如何用工具」，而是「<strong>看到这套开场白时</strong>如何用工具」。Harness 从外挂变成了条件策略的一部分。</div>
+        </div>
+        <p>这就是 Flash（没做重 agent 后训练）不受影响、而 Pro 中招的原因。</p>
+
+        <h3><span class="h3-no">5.2</span>这不是经典过拟合，是 policy / entropy collapse</h3>
+        <p>ICLR 2026 的 Self-Critique 论文给出了关键观察：RL 后训练会使输出熵坍缩到稀疏模式——<strong>pass@1 涨、pass@k 跌</strong>，模型收敛到窄推理路径。回到第 2 节的伏笔：「三张脸」正是这个——不同的初始上下文把坍缩后的窄策略「选」到不同的模式上。极简模式高分不是玄学加成，是<mark>把模型推回了训练分布</mark>；Standard 模式低分是纯 OOD。</p>
+        <p>所以严格说，「Pro 在极简模式下过拟合」这个表述应该反过来看：<strong>模型过拟合于极简环境，在一切非该环境下性能坍塌</strong>。</p>
+
+        <h3><span class="h3-no">5.3</span>能力极化：崩溃不是均匀退化</h3>
+        <p>2026 年的新工作（KITE）发现，collapse 不是均匀的性能下滑，而是<strong>能力的极化</strong>——合成数据强化已有强项、进一步侵蚀弱项。对 agent 训练这尤其致命：模型在「标准 agentic loop」上无限自我强化，在「陌生开场 / 陌生工具集」上加速荒废。<mark>Harness 锁定，就是能力极化在上下文维度上的投影。</mark></p>
+
+        <h3><span class="h3-no">5.4</span>「用力过猛」的定量侧写</h3>
+        <p>四个多月的专项 agent 后训练，换来 DeepSWE 62.7 / Terminal-Bench 2.1 87.9 的官方成绩，代价是 CoT 对自身训练分布的过拟合：裸 API 下推理时好时坏、长程任务中途放弃、输出风格随初始上下文漂移。用一句话概括这个训练策略：<strong>在一条一维的环境坐标轴上做了极限扫描——效率极高，泛化面极窄。</strong></p>
+      </section>
+
+      <!-- 06 Self 哲学 -->
+      <section id="self">
+        <h2><span class="sec-no">06</span>Self 哲学：自我吞噬的循环</h2>
+        <div class="sec-rule"></div>
+        <p>把 DeepSeek 事件放进「self-*」这条更大的技术脉络里，它的位置会更清晰。过去三年，后训练的主线其实是一场<mark>用自己喂自己的运动</mark>：</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>阶段</th><th>代表工作</th><th>「自我」的浓度</th></tr></thead>
+            <tbody>
+              <tr><td>Self-Instruct（2022–23）</td><td>用模型生成指令数据做 SFT</td><td>自我只出题，人类数据仍为主食</td></tr>
+              <tr><td>SPIN / Self-Rewarding（2024）</td><td>自我对弈微调；自我打分当奖励</td><td>「自我」进入监督信号</td></tr>
+              <tr><td>Absolute Zero / R-Zero（2025）</td><td>proposer–solver 从单一基座共演化，零人类任务</td><td>循环完全闭合</td></tr>
+              <tr><td>Agent RL（2025–26）</td><td>固定 harness 内 self-rollout + 通过率奖励</td><td>循环闭合 <strong>且环境冻结</strong></td></tr>
+              <tr><td>RSI 展望（2026）</td><td>部署期自我改写 harness、自我做研究</td><td>循环闭合且自我修改脚手架</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">「自我浓度」：训练信号中源自模型自身输出的比例，以及循环闭合的程度。</p>
+
+        <h3><span class="h3-no">6.1</span>一个反直觉的理论锚点：自我对弈的均衡是「自己」</h3>
+        <p>SPIN 的收敛性证明常被当作好消息引用，但换个角度读它很吓人：<strong>self-play 微调可证明地收敛到模型自身的分布</strong>。换句话说，自我对弈的数学终点不是「更好」，是「更像自己」。每一代迭代都在消耗分布的方差——这不正是 Shumailov 等人在 Nature 2024 里描述的 model collapse（尾部消失、方差坍缩）的动力学吗？</p>
+
+        <h3><span class="h3-no">6.2</span>验证层级：self 循环的隐秘主角</h3>
+        <p>2026 年一篇综述了 1250 篇 arXiv 论文的 RSI survey 给出了最有用的分析框架：<strong>验证层级</strong>。已证明的自改进强度沿这个层级递减：</p>
+        <blockquote>
+          <p>形式化验证（最强）→ 程序化验证 / 可验证奖励 → LLM 裁判 → 内在自我评估（最弱）</p>
+          <span class="quote-src">—— 自改进的强度跟随验证信号的强度；失败模式（自我确认循环、model collapse、多样性坍缩）都源于对层级的违反</span>
+        </blockquote>
+        <p>用这个框架看 agent 训练：它的 verifier 是「环境内通过率」——只验证「在这个环境里能不能完成任务」，<strong>从不过问「换个环境还行不行」</strong>。整个循环在优化一个单环境指标，自我强化到 99 分，同时 OOD 能力静默流失。DeepSeek 事件只是这个流失第一次被社区撞见。</p>
+
+        <h3><span class="h3-no">6.3</span>健康循环的三个条件（以及 DeepSeek 如何全部踩线）</h3>
+        <p>综合 2026 年的几篇 self-play 论文（ICML 2026 的 learnable-information-gain 框架、SOAR、Tufa 的 Self Rewarding Self Improving），一个自训练循环要健康，至少要满足：</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>条件</th><th>论文出处</th><th>Pro 的踩线方式</th></tr></thead>
+            <tbody>
+              <tr><td><strong>可学习信息增量单调上升</strong>，否则 plateau</td><td>ICML 2026（PROPOSER / SOLVER / VERIFIER 三位一体）</td><td>环境冻结 → proposer 探索空间被锁死，信息增益单调递减</td></tr>
+              <tr><td><strong>真实数据恒定配比回流</strong>，保证 recursive stability</td><td>ICLR 2025 理论工作：恒定比例真实数据可保证 STL 收敛</td><td>self-trajectory 占比随 agent 后训练飙升，真实回流不足</td></tr>
+              <tr><td><strong>多样性 / 探索保持</strong>，防熵坍缩与极化</td><td>Self-Critique（ICLR 2026）：熵坍缩、pass@k 下降</td><td>「三张脸」就是熵坍缩的可见指纹</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">文献里反复出现的另一个失败模式叫 self-delusion：verifier 自己失准后，整个循环会自信地强化错误。Tufa 的解法是利用「生成难、验证易」的不对称性；SOAR 的发现是 grounded reward（以学生在留出难题上的真实进步为准）优于任何内在可学习性奖励。</p>
+
+        <h3><span class="h3-no">6.4</span>两个趋势相乘，context 级过拟合只是时间问题</h3>
+        <p>最后把视野拉到最宽。今天的后训练正在同时发生两件事：</p>
+        <p><strong>其一，「自我」浓度上升</strong>——每一代模型都在吃上一代（或自己）的输出；<strong>其二，部署环境越来越定制化</strong>——每家一套 harness、一套开场白、一套工具目录。两个趋势相乘，得到一个结构性结论：<mark>上下文级别的过拟合不是某家的失误，而是整个 self-train 时代的系统性风险</mark>。谁先在随机化的环境里做训练，谁就先免疫。</p>
+      </section>
+
+      <!-- 07 不止 DeepSeek -->
+      <section id="others">
+        <h2><span class="sec-no">07</span>不止 DeepSeek：谁还有这毛病</h2>
+        <div class="sec-rule"></div>
+        <p>那句被很多人引用的话值得展开：<strong>DeepSeek 不是第一个有这毛病的，是第一个症状足够戏剧化、证据链足够完整以至于被社区逮到实锤的。</strong>它撞上了四个条件同时成立：开源权重、Harness 同步开源、那行 commit 留痕、还有一个完美的对照组模型（Flash）。闭源厂商即使有同样的病，也没有尸检条件。但间接证据遍地都是：</p>
+
+        <h3><span class="h3-no">7.1</span>厂商 harness 全面「偏科」：Delangue 转发的 10-harness 研究</h3>
+        <p>2026 年 8 月初，Joël Niklaus 做了一组后来被 HuggingFace CEO Clément Delangue 放大的实验：<strong>10 个 agent harness × 2 个模型</strong>（GLM-5.2 与 Gemma-4 26B-A4B），同一批 SWE-bench Pro 250 题。结论相当残酷——</p>
+        <ul>
+          <li>同一模型只换 harness，pass@1 从 <strong>23% 摆到 52%</strong>（GLM-5.2）、15% 到 36%（Gemma-4）：比多数模型版本升级带来的差距还大；</li>
+          <li>两个模型的 harness 排名相关系数 <strong>−0.05</strong>——harness 排行榜完全不可迁移；</li>
+          <li>Delangue 的原话：<em>「Codex is overoptimised for large models.」</em></li>
+        </ul>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Harness</th><th>GLM-5.2 排名</th><th>Gemma-4 26B 排名</th><th>迁移表现</th></tr></thead>
+            <tbody>
+              <tr><td>Codex（OpenAI）</td><td class="num">2</td><td class="num">9</td><td class="delta-down">↓ 7 位</td></tr>
+              <tr><td>Claude Code（Anthropic）</td><td class="num">3</td><td class="num">7</td><td class="delta-down">↓ 4 位</td></tr>
+              <tr><td>Qwen Code（阿里）</td><td class="num">4</td><td class="num">6</td><td class="delta-down">↓ 2 位</td></tr>
+              <tr><td>crush（模型无关）</td><td class="num">7</td><td class="num">1</td><td class="delta-up">↑ 6 位</td></tr>
+              <tr><td>opencode（模型无关）</td><td class="num">8</td><td class="num">2</td><td class="delta-up">↑ 6 位</td></tr>
+              <tr><td>pi（模型无关）</td><td class="num">9</td><td class="num">4</td><td class="delta-up">↑ 5 位</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">所有厂商自研 harness 换到别家 / 小模型上集体下滑，模型无关的 harness 集体上升。26B 模型配对 harness（36%，$0.84/题）能逼近 744B 模型配错 harness 的水平。</p>
+        <p>注意这里的方向和 DeepSeek 案例相反但本质相同：<strong>DeepSeek 是模型过拟合 harness，这里是 harness 过拟合模型</strong>。合起来说明 model + harness 已经被共同优化成一个不可分割的复合系统——「Agent = Model + Harness」正在从工程等式变成耦合契约。</p>
+
+        <h3><span class="h3-no">7.2</span>同模型换 harness 的摆动幅度：Terminal-Bench</h3>
+        <p>Terminal-Bench 2.0 榜单上的名场面：同一个 Claude Opus 4.6，在自家 Claude Code 的 harness 里只有 58.0%，换 ForgeCode 跑到 81.8%——<strong>23.8 个百分点的差距，全部来自脚手架</strong>。</p>
+        <div class="bars" id="barsTb">
+          <div class="bar-row"><span class="bar-label">Claude Code（自家 harness）</span><div class="bar-track"><div class="bar-fill dim" data-w="58"></div></div><span class="bar-value">58.0</span></div>
+          <div class="bar-row"><span class="bar-label">Terminus-KIRA</span><div class="bar-track"><div class="bar-fill" data-w="74.7"></div></div><span class="bar-value">74.7</span></div>
+          <div class="bar-row"><span class="bar-label">Meta-Harness</span><div class="bar-track"><div class="bar-fill" data-w="76.4"></div></div><span class="bar-value">76.4</span></div>
+          <div class="bar-row"><span class="bar-label">ForgeCode</span><div class="bar-track"><div class="bar-fill gold" data-w="81.8"></div></div><span class="bar-value">81.8</span></div>
+        </div>
+        <p class="bars-caption">同一 Claude Opus 4.6 权重，Terminal-Bench 2.0 得分（%）。Holistic Agent Leaderboard 报告过同一模型在不同 scaffold 下最高近 48 pp 的摆动。</p>
+        <p>顺带一提，这个方向还存在第三层过拟合：harness 对 benchmark 本身的过拟合（社区所谓 benchmaxxing）——比如只给某个 harness 加一个搜索子代理，就能翻转 SWE-bench Pro 上两个模型的排名。</p>
+
+        <h3><span class="h3-no">7.3</span>零散的旁证</h3>
+        <ul>
+          <li><strong>sentdex 实验</strong>：同一套 V4 Flash 权重，博主自制简陋工具过 44/89 题，换社区完整 Harness 后 64/89——多过 20 题，权重一字未动。</li>
+          <li><strong>「三张脸」与锚定效应</strong>：模型把第一次看到的工具列表当思考锚点。社区开源的 <code>dsh-anchored-standard</code> 就是利用这一点打的补丁：第一轮按 Minimal 喂，稳住推理轨迹后再解锁全套工具。</li>
+          <li><strong>97% 的输入 token 是重发的会话前缀</strong>（同上研究）——这意味着 harness 的每一处设计都在和模型的上下文分布深度纠缠，也解释了为什么 prompt caching 成了成本命脉。</li>
+        </ul>
+
+        <h3><span class="h3-no">7.4</span>自查清单：你的模型是否「认环境不认任务」</h3>
+        <div class="callout callout-warn">
+          <div class="callout-title">四个症状</div>
+          <ul>
+            <li>官方跑分与第三方 / 裸 API 成绩差距悬殊，且官方环境恰好等于训练环境；</li>
+            <li>换 harness 出现断崖式掉分，而非平滑衰减；</li>
+            <li>同家族小模型（未做同款后训练）在各环境下表现稳定——它是天然对照组；</li>
+            <li>输出风格随初始上下文（开场白、工具目录）切换——熵坍缩的指纹。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 08 论文清单 -->
+      <section id="papers">
+        <h2><span class="sec-no">08</span>论文清单：延伸阅读</h2>
+        <div class="sec-rule"></div>
+        <p>按主题分组，每篇附一句话结论。标 <span class="ptag hl">核心</span> 的是理解本次事件最直接的读物。</p>
+
+        <div class="paper-group-title">A · 崩塌理论</div>
+        <ul class="paper-list">
+          <li class="paper">
+            <div class="paper-title"><a href="https://www.nature.com/articles/s41586-024-07566-y" target="_blank" rel="noopener">AI models collapse when trained on recursively generated data</a></div>
+            <div class="paper-meta"><span class="ptag">Nature 2024</span><span class="ptag">Shumailov et al.</span><span class="ptag hl">核心</span></div>
+            <p class="paper-note">奠基之作：递归自训练导致分布尾部消失、方差坍缩。所有后续讨论的原点。</p>
+          </li>
+          <li class="paper">
+            <div class="paper-title"><a href="https://arxiv.org/abs/2502.18865" target="_blank" rel="noopener">A Theoretical Perspective on How to Prevent Model Collapse in Self-Consuming Training Loops</a></div>
+            <div class="paper-meta"><span class="ptag">ICLR 2025</span><span class="ptag">arXiv 2502.18865</span></div>
+            <p class="paper-note">提出 recursive stability：只要掺入恒定比例真实数据，自吞噬循环可收敛——「以前各家没崩」的理论解释。</p>
+          </li>
+          <li class="paper">
+            <div class="paper-title"><a href="https://arxiv.org/abs/2607.17043" target="_blank" rel="noopener">Learning from Synthetic Data without Model Collapse in Iterative Instruction Tuning（KITE）</a></div>
+            <div class="paper-meta"><span class="ptag">arXiv 2607.17043</span><span class="ptag hl">核心</span></div>
+            <p class="paper-note">collapse 不是均匀退化而是能力极化：合成数据强化强项、侵蚀弱项。harness 锁定即极化在上下文维度的投影。</p>
+          </li>
+        </ul>
+
+        <div class="paper-group-title">B · 后训练 Scaling 与污染</div>
+        <ul class="paper-list">
+          <li class="paper">
+            <div class="paper-title"><a href="https://openreview.net/forum?id=KBut2YCZ4g" target="_blank" rel="noopener">Scaling Behaviors of LLM Reinforcement Learning Post-Training</a></div>
+            <div class="paper-meta"><span class="ptag">OpenReview</span><span class="ptag">Qwen2.5 0.5B–72B</span></div>
+            <p class="paper-note">RL 后训练的 scaling law：数据受限时重复利用高质量数据依然有效，性能由优化步数主导——「增数据还有收益」的定量依据。</p>
+          </li>
+          <li class="paper">
+            <div class="paper-title"><a href="https://arxiv.org/abs/2511.05951" target="_blank" rel="noopener">Klear-AgentForge: Forging Agentic Intelligence through Posttraining Scaling</a></div>
+            <div class="paper-meta"><span class="ptag">快手</span><span class="ptag">arXiv 2511.05951</span></div>
+            <p class="paper-note">全开源 agent 后训练管线（SFT + 多轮 RL）：多轨迹数据扩展持续涨分，未见平台期。</p>
+          </li>
+          <li class="paper">
+            <div class="paper-title"><a href="https://arxiv.org/abs/2601.06103" target="_blank" rel="noopener">The Impact of Post-training on Data Contamination</a></div>
+            <div class="paper-meta"><span class="ptag">arXiv 2601.06103</span></div>
+            <p class="paper-note">SFT 只把污染变成记忆，GRPO 却能把泄漏转化为未污染任务上的泛化——RL 后训练仍在把模型往泛化方向推。</p>
+          </li>
+        </ul>
+
+        <div class="paper-group-title">C · 熵坍缩与检测</div>
+        <ul class="paper-list">
+          <li class="paper">
+            <div class="paper-title"><a href="https://arxiv.org/abs/2510.09259" target="_blank" rel="noopener">Detecting Data Contamination from RL Post-training（Self-Critique）</a></div>
+            <div class="paper-meta"><span class="ptag">ICLR 2026</span><span class="ptag hl">核心</span></div>
+            <p class="paper-note">RL 后输出熵坍缩到稀疏模式，pass@1 涨 pass@k 跌。「三张脸」的理论解释，也是检测 RL 阶段污染的新方法。</p>
+          </li>
+        </ul>
+
+        <div class="paper-group-title">D · Self 系统设计与哲学</div>
+        <ul class="paper-list">
+          <li class="paper">
+            <div class="paper-title"><a href="https://arxiv.org/abs/2607.07663" target="_blank" rel="noopener">Recursive Self-Improvement in AI: From Bounded Self-Refinement to Autonomous Research Loops</a></div>
+            <div class="paper-meta"><span class="ptag">综述 · 1250 篇</span><span class="ptag">arXiv 2607.07663</span><span class="ptag hl">核心</span></div>
+            <p class="paper-note">self-* 家族的统一分类学 + 验证层级（形式化 &gt; 程序化 &gt; LLM 裁判 &gt; 自我评估）。自改进强度跟随验证信号强度。</p>
+          </li>
+          <li class="paper">
+            <div class="paper-title"><a href="https://arxiv.org/abs/2603.02218" target="_blank" rel="noopener">Self-Play Only Evolves When Self-Synthetic Pipeline Ensures Learnable Information Gain</a></div>
+            <div class="paper-meta"><span class="ptag">ICML 2026</span><span class="ptag">arXiv 2603.02218</span></div>
+            <p class="paper-note">PROPOSER / SOLVER / VERIFIER 三位一体；多数 self-play 快速 plateau，因为每轮合成的数据没有带来可学习信息增量。</p>
+          </li>
+          <li class="paper">
+            <div class="paper-title"><a href="https://arxiv.org/abs/2505.08827" target="_blank" rel="noopener">Self Rewarding Self Improving</a></div>
+            <div class="paper-meta"><span class="ptag">Tufa Labs</span><span class="ptag">arXiv 2505.08827</span></div>
+            <p class="paper-note">利用「生成难、验证易」的不对称，让模型自己出题、自己解、自己判，7B 在积分任务上超过 GPT-4o——自我循环可行的证据。</p>
+          </li>
+          <li class="paper">
+            <div class="paper-title"><a href="https://openreview.net/forum?id=GnqHK8Ww98" target="_blank" rel="noopener">Teaching Models to Teach Themselves（SOAR）</a></div>
+            <div class="paper-meta"><span class="ptag">ICML 2026 Spotlight</span></div>
+            <p class="paper-note">老师出题、奖励只看学生在留出难题上的真实进步（grounded reward），可靠避开 self-play 典型的不稳定性与多样性坍缩。</p>
+          </li>
+          <li class="paper">
+            <div class="paper-title"><a href="https://arxiv.org/abs/2605.16727" target="_blank" rel="noopener">PopuLoRA: Co-Evolving LLM Populations for Reasoning Self-Play</a></div>
+            <div class="paper-meta"><span class="ptag">arXiv 2605.16727</span></div>
+            <p class="paper-note">用种群（师生 LoRA 共演化 + 权重空间进化算子）替代单一智能体的自我校准——对抗 self-delusion 的一种工程答案。</p>
+          </li>
+        </ul>
+
+        <div class="paper-group-title">E · Harness 与评测</div>
+        <ul class="paper-list">
+          <li class="paper">
+            <div class="paper-title"><a href="https://www.preprints.org/manuscript/202605.0711" target="_blank" rel="noopener">Stop Comparing LLM Agents Without Disclosing the Harness</a></div>
+            <div class="paper-meta"><span class="ptag">Preprints 2026</span><span class="ptag hl">核心</span></div>
+            <p class="paper-note">约束主导论（Binding Constraint Thesis）：长程任务上 harness 引起的方差可超过模型本身，甚至翻转排名。呼吁 harness 披露标准。</p>
+          </li>
+          <li class="paper">
+            <div class="paper-title"><a href="https://x.com/ClementDelangue/status/2086560605507305974" target="_blank" rel="noopener">10 Harnesses × 2 Models（Niklaus 实验，Delangue 转发）</a></div>
+            <div class="paper-meta"><span class="ptag">社区实验 · 2026-08</span><span class="ptag hl">核心</span></div>
+            <p class="paper-note">Codex / Claude Code / Qwen Code 换到别家模型集体下滑，排名相关系数 −0.05——厂商 harness 普遍耦合优化于自家大模型。</p>
+          </li>
+          <li class="paper">
+            <div class="paper-title"><a href="https://www.tbench.ai/" target="_blank" rel="noopener">Terminal-Bench 2.0 / 2.1</a></div>
+            <div class="paper-meta"><span class="ptag">ICLR 2026</span></div>
+            <p class="paper-note">89 个 Docker 任务、自动验证；同模型不同 harness 摆动 20+ pp 的系统性证据源。</p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 09 展望 -->
+      <section id="outlook">
+        <h2><span class="sec-no">09</span>展望：harness-agnostic 时代</h2>
+        <div class="sec-rule"></div>
+        <p>往前看，这个事件会留下几条路线的竞争：</p>
+        <h3><span class="h3-no">9.1</span>训练侧：对 harness 做数据增强</h3>
+        <p>最直接的解法是把「环境」从一个常量变成一个随机变量：<strong>训练时随机化 persona、工具集、上下文前缀、消息顺序</strong>——相当于对 harness 做数据增强。deep 的教训等于替全行业做了一次消融实验：固定环境训练 = 单环境过拟合；那么随机环境训练理应换来 harness 无关的泛化。谁先做出 harness-agnostic 的 agent 后训练管线，谁就同时拿下「官方跑分」和「裸 API 体验」两个战场。</p>
+        <h3><span class="h3-no">9.2</span>部署侧：把锚定显式化</h3>
+        <p>在训练侧解决之前，部署侧已经在打补丁：dsh-anchored-standard 的两阶段方案（先 Minimal 锚定、再解锁全套工具）证明锚定可以显式设计。把它产品化成 context warmup 机制——先给模型一个干净的开场，稳住推理轨迹后再扩上下文——是从下游为上游训练分布的窄化买单。</p>
+        <h3><span class="h3-no">9.3</span>评测侧：harness 披露成为标配</h3>
+        <p>当 harness 引起的方差超过模型换代带来的差距，只报分数不报环境就是在误导。约束主导论一文提出的披露卡（harness 配置规格 + 扰动压力测试）大概率会演变成社区共识：同一模型至少要报「自家环境」和「中立环境」两组成绩，差距本身就是一个新的评测维度——<mark>环境敏感性，也许该成为 agent 模型的标配体检项</mark>。</p>
+        <h3><span class="h3-no">9.4</span>生态侧：开源权重，事实封闭</h3>
+        <p>更冷峻的一层：每家模型绑定自家 harness、换 harness 即降智，这实质上是用开源权重实现了事实上的生态封闭。权重你随便拿走，能力留在我的脚手架里。「Agent = Model + Harness」从工程等式变成耦合契约的那天，开源的定义就被悄悄改写了。</p>
+      </section>
+
+      <!-- 10 后记 -->
+      <section id="epilogue">
+        <h2><span class="sec-no">10</span>后记：过拟合只是被看见了</h2>
+        <div class="sec-rule"></div>
+        <p>最后修正一下自己最初那个框架。「之前的后训练远未过拟合，所以各家策略都有用」——成立，但要补一个变量：<strong>不是没人过拟合，而是过拟合的维度还没被暴露</strong>。传统后训练（对话、推理）的训练环境 = 部署环境——都是聊天窗口，过拟合被部署的同质性掩盖了。Agent 时代第一次让「训练环境 ≠ 部署环境」成为常态（harness 生态碎片化），这才把上下文级别的过拟合暴露成一个真问题。</p>
+        <p>而在这个维度上，DeepSeek 0813 是第一个被逮到实锤的，但 self-loop 的物理规律对每家一视同仁：</p>
+        <blockquote>
+          <p>Self-loop 的燃料是环境的多样性。当模型开始吃自己产出的数据，它就在消耗自己分布的方差——每一次迭代，世界都更像它自己一点。过拟合不是意外，而是这个过程第一次被肉眼看见。</p>
+        </blockquote>
+      </section>
+
+    </article>
+
+    <footer class="post-footer">
+      <div>整理于 2026 年 8 月 · 本页为个人学习笔记，事实与数据基于公开社区讨论及论文，欢迎指正。</div>
+      <ul class="ref-list">
+        <li>社区讨论与实验数据：<a href="https://m.toutiao.com/group/7674848404303839744/" target="_blank" rel="noopener">V4 Pro「降智」风波</a> · <a href="https://m.163.com/dy/article/L4EEVAHH0556B41U.html" target="_blank" rel="noopener">极简模式真相</a> · <a href="https://m.toutiao.com/group/7674293561118851584/" target="_blank" rel="noopener">Harness 邪修实测</a></li>
+        <li>CoT 过拟合分析：<a href="https://www.ctol-fr.com/news/deepseek-v4-pro-ga-0813-cot-overfitting-analysis/" target="_blank" rel="noopener">CTOL: V4-Pro 0813 GA Analysis</a> · <a href="https://codex.danielvaughan.com/2026/04/09/harness-performance-terminal-bench/" target="_blank" rel="noopener">Harness Performance on Terminal-Bench</a></li>
+        <li>10-harness 研究：<a href="https://theagenttimes.com/articles/study-finds-coding-agent-harness-design-outweighs-model-size-583dcf0c" target="_blank" rel="noopener">The Agent Times 报道</a> · <a href="https://x.com/ClementDelangue/status/2086560605507305974" target="_blank" rel="noopener">Delangue 原帖</a></li>
+      </ul>
+      <a class="back-top" href="#intro">↑ 回到顶部</a>
+    </footer>
+
+  </main>
+  </div>
+</div>
+
+<script>
+/* ============ 主题切换（默认白天，右上角按钮 + 快捷键 T） ============ */
+(function () {
+  var root = document.documentElement;
+  var btn = document.getElementById('themeToggle');
+  function apply(t) {
+    if (t === 'dark') root.setAttribute('data-theme', 'dark');
+    else root.removeAttribute('data-theme');
+    localStorage.setItem('theme', t);
+  }
+  btn.addEventListener('click', function () {
+    apply(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+  document.addEventListener('keydown', function (e) {
+    if ((e.key === 't' || e.key === 'T') && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      apply(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    }
+  });
+})();
+
+/* ============ 阅读进度条 ============ */
+(function () {
+  var bar = document.getElementById('progress');
+  function update() {
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+
+/* ============ 目录滚动高亮（scrollspy） ============ */
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  var ids = links.map(function (a) { return a.getAttribute('href').slice(1); });
+  var sections = ids.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  function update() {
+    var pos = window.scrollY + window.innerHeight * 0.28;
+    var current = ids[0];
+    sections.forEach(function (s) { if (s.offsetTop <= pos) current = s.id; });
+    links.forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      requestAnimationFrame(function () { update(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+  update();
+})();
+
+/* ============ 条形图入场动画（滚入视口时生长） ============ */
+(function () {
+  var fills = document.querySelectorAll('.bar-fill[data-w]');
+  if (!('IntersectionObserver' in window)) {
+    fills.forEach(function (f) { f.style.width = f.dataset.w + '%'; });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) {
+        var f = en.target;
+        setTimeout(function () { f.style.width = f.dataset.w + '%'; }, 80);
+        io.unobserve(f);
+      }
+    });
+  }, { threshold: 0.4 });
+  fills.forEach(function (f) { io.observe(f); });
+})();
+
+/* ============ 移动端抽屉目录 ============ */
+(function () {
+  var menuBtn = document.getElementById('menuBtn');
+  var overlay = document.getElementById('overlay');
+  function close() { document.body.classList.remove('drawer-open'); }
+  menuBtn.addEventListener('click', function () {
+    document.body.classList.toggle('drawer-open');
+  });
+  overlay.addEventListener('click', close);
+  document.querySelectorAll('.toc a').forEach(function (a) {
+    a.addEventListener('click', close);
+  });
+})();
+</script>
+</body>
+</html>
