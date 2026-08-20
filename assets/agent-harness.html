@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="LLM Agent Harness 全景笔记：定义、组件、经典实现、评测纠缠、后训练暗面与设计原则">
+<title>给猛兽套上缰绳 —— Agent Harness 全景笔记</title>
+<style>
+/* ============ 主题变量 ============ */
+:root {
+  --bg: #f7f4ef;
+  --surface: #ffffff;
+  --surface-2: #f1ece4;
+  --text: #2b2620;
+  --text-2: #6b6156;
+  --text-3: #98897a;
+  --accent: #b3541e;
+  --accent-strong: #8f3f12;
+  --accent-soft: rgba(179, 84, 30, 0.09);
+  --border: #e5ddd1;
+  --border-2: #d8cebe;
+  --code-bg: #2d2a26;
+  --code-text: #eae4d9;
+  --shadow: 0 2px 14px rgba(60, 45, 25, 0.07);
+  --tip: #2e7d52;
+  --tip-bg: rgba(46, 125, 82, 0.08);
+  --warn: #a8641a;
+  --warn-bg: rgba(168, 100, 26, 0.08);
+  --note: #3a6b9c;
+  --note-bg: rgba(58, 107, 156, 0.08);
+  --header-bg: rgba(247, 244, 239, 0.82);
+  --toc-active-bg: var(--accent-soft);
+}
+[data-theme="dark"] {
+  --bg: #15130f;
+  --surface: #1e1b16;
+  --surface-2: #26221c;
+  --text: #e9e2d6;
+  --text-2: #b3a895;
+  --text-3: #7d7466;
+  --accent: #e08d4c;
+  --accent-strong: #eda368;
+  --accent-soft: rgba(224, 141, 76, 0.12);
+  --border: #322d25;
+  --border-2: #3e382e;
+  --code-bg: #12100d;
+  --code-text: #e0d8c8;
+  --shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+  --tip: #6cc08c;
+  --tip-bg: rgba(108, 192, 140, 0.1);
+  --warn: #e0a458;
+  --warn-bg: rgba(224, 164, 88, 0.1);
+  --note: #7aa7d4;
+  --note-bg: rgba(122, 167, 212, 0.1);
+  --header-bg: rgba(21, 19, 15, 0.82);
+}
+
+/* ============ 基础 ============ */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+main { display: block; }
+
+::selection { background: var(--accent-soft); }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ============ 顶部进度条 & 头部 ============ */
+#progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+  z-index: 100; transition: width 0.08s linear;
+}
+header.site {
+  position: sticky; top: 0; z-index: 90;
+  background: var(--header-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  height: 60px; display: flex; align-items: center; gap: 14px;
+}
+.brand {
+  font-weight: 700; font-size: 15px; color: var(--text);
+  display: flex; align-items: center; gap: 10px; white-space: nowrap;
+}
+.brand .rein {
+  width: 22px; height: 22px; color: var(--accent); flex: none;
+}
+.brand small { font-weight: 400; color: var(--text-3); }
+.header-spacer { flex: 1; }
+#toc-toggle {
+  display: none;
+  border: 1px solid var(--border-2); background: var(--surface);
+  color: var(--text-2); border-radius: 8px; padding: 6px 10px;
+  font-size: 13px; cursor: pointer; line-height: 1;
+}
+#theme-toggle {
+  border: 1px solid var(--border-2); background: var(--surface);
+  color: var(--text-2); width: 36px; height: 36px; border-radius: 50%;
+  cursor: pointer; display: grid; place-items: center; flex: none;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+#theme-toggle:hover { transform: rotate(20deg); border-color: var(--accent); color: var(--accent); }
+#theme-toggle svg { width: 18px; height: 18px; }
+.icon-sun { display: none; }
+[data-theme="dark"] .icon-sun { display: block; }
+[data-theme="dark"] .icon-moon { display: none; }
+.icon-sun { color: #f0b429; }
+
+/* ============ 布局 ============ */
+.layout {
+  max-width: 1200px; margin: 0 auto; padding: 40px 24px 80px;
+  display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 60px;
+}
+
+/* ============ 目录 ============ */
+aside.toc-wrap {
+  position: sticky; top: 92px; align-self: start;
+  max-height: calc(100vh - 120px); overflow-y: auto;
+  font-size: 13.5px; padding: 4px 0 20px;
+  scrollbar-width: thin;
+}
+aside.toc-wrap .toc-title {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
+  color: var(--text-3); text-transform: uppercase; margin: 0 0 10px 12px;
+}
+nav.toc ul { list-style: none; margin: 0; padding: 0; }
+nav.toc a {
+  display: block; padding: 5px 12px; color: var(--text-2);
+  border-left: 2px solid transparent; border-radius: 0 6px 6px 0;
+  line-height: 1.5;
+}
+nav.toc a:hover { color: var(--accent); text-decoration: none; background: var(--accent-soft); }
+nav.toc a.active {
+  color: var(--accent-strong); font-weight: 600;
+  border-left-color: var(--accent); background: var(--toc-active-bg);
+}
+nav.toc .sub a { padding-left: 30px; font-size: 12.8px; color: var(--text-3); }
+
+/* ============ 正文排版 ============ */
+.content { min-width: 0; max-width: 800px; }
+.hero { margin: 8px 0 40px; }
+.hero .kicker {
+  font-size: 13px; letter-spacing: 0.18em; color: var(--accent);
+  font-weight: 700; text-transform: uppercase; margin-bottom: 10px;
+}
+h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.3; margin: 0 0 14px;
+  letter-spacing: 0.01em; text-wrap: balance;
+}
+.hero .subtitle { color: var(--text-2); font-size: 1.05rem; margin: 0 0 18px; }
+.hero .meta {
+  display: flex; flex-wrap: wrap; gap: 8px; font-size: 12.5px; color: var(--text-3);
+}
+.hero .meta span {
+  border: 1px solid var(--border-2); border-radius: 999px; padding: 2px 12px;
+  background: var(--surface);
+}
+
+h2 {
+  font-size: 1.5rem; margin: 64px 0 18px; padding-top: 10px;
+  letter-spacing: 0.01em; scroll-margin-top: 84px; text-wrap: balance;
+  display: flex; align-items: baseline; gap: 12px;
+}
+h2 .sec-no {
+  font-size: 0.85em; color: var(--accent); font-weight: 800;
+  font-variant-numeric: tabular-nums; flex: none;
+}
+h3 {
+  font-size: 1.15rem; margin: 40px 0 12px; scroll-margin-top: 84px;
+  color: var(--text);
+}
+h3::before { content: ""; display: inline-block; width: 8px; height: 8px;
+  border-radius: 2px; background: var(--accent); margin-right: 10px;
+  transform: rotate(45deg) translateY(-1px); opacity: 0.75; }
+p { margin: 0 0 16px; }
+ul, ol { padding-left: 1.4em; margin: 0 0 16px; }
+li { margin-bottom: 6px; }
+li::marker { color: var(--accent); }
+strong { color: var(--text); font-weight: 700; }
+hr {
+  border: none; border-top: 1px dashed var(--border-2); margin: 48px 0;
+}
+
+blockquote {
+  margin: 20px 0; padding: 12px 20px; border-left: 3px solid var(--accent);
+  background: var(--accent-soft); border-radius: 0 8px 8px 0; color: var(--text-2);
+}
+blockquote p { margin: 0; }
+
+/* 行内代码 */
+code {
+  font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.87em;
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: 5px; padding: 1px 6px; color: var(--accent-strong);
+  word-break: break-all;
+}
+
+/* 代码块 */
+pre {
+  background: var(--code-bg); color: var(--code-text);
+  border-radius: 10px; padding: 18px 20px; overflow-x: auto;
+  font-size: 13.5px; line-height: 1.65; margin: 20px 0;
+  box-shadow: var(--shadow);
+}
+pre code {
+  background: none; border: none; padding: 0; color: inherit;
+  font-size: inherit; word-break: normal;
+}
+
+/* 提示框 */
+.callout {
+  border-radius: 10px; padding: 14px 18px; margin: 22px 0;
+  border: 1px solid transparent; font-size: 0.96em;
+}
+.callout p { margin: 0; }
+.callout .co-label { font-weight: 700; margin-right: 6px; }
+.callout.tip   { background: var(--tip-bg);   border-color: color-mix(in srgb, var(--tip) 35%, transparent); }
+.callout.tip .co-label   { color: var(--tip); }
+.callout.warn  { background: var(--warn-bg);  border-color: color-mix(in srgb, var(--warn) 35%, transparent); }
+.callout.warn .co-label  { color: var(--warn); }
+.callout.note  { background: var(--note-bg);  border-color: color-mix(in srgb, var(--note) 35%, transparent); }
+.callout.note .co-label  { color: var(--note); }
+
+/* 表格 */
+.table-wrap { overflow-x: auto; margin: 22px 0; }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+th, td { border: 1px solid var(--border-2); padding: 9px 14px; text-align: left; vertical-align: top; }
+th { background: var(--surface-2); font-weight: 700; white-space: nowrap; }
+tbody tr:nth-child(even) { background: var(--surface); }
+tbody tr:hover { background: var(--accent-soft); }
+
+/* 卡片网格 */
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 22px 0; }
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px 18px; box-shadow: var(--shadow);
+}
+.card h4 { margin: 0 0 8px; font-size: 1rem; color: var(--accent-strong); }
+.card p { margin: 0; font-size: 0.92em; color: var(--text-2); }
+
+/* 页脚 */
+footer.site {
+  border-top: 1px solid var(--border); margin-top: 20px; padding: 28px 24px 40px;
+  text-align: center; color: var(--text-3); font-size: 13px;
+}
+
+/* 返回顶部 */
+#backtop {
+  position: fixed; right: 22px; bottom: 26px; width: 42px; height: 42px;
+  border-radius: 50%; border: 1px solid var(--border-2); background: var(--surface);
+  color: var(--text-2); cursor: pointer; display: grid; place-items: center;
+  opacity: 0; pointer-events: none; transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: var(--shadow); z-index: 80;
+}
+#backtop.show { opacity: 1; pointer-events: auto; transform: none; }
+#backtop:hover { color: var(--accent); border-color: var(--accent); }
+#backtop svg { width: 18px; height: 18px; }
+
+/* 移动端目录抽屉 */
+#toc-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35);
+  z-index: 94; opacity: 0; transition: opacity 0.2s ease;
+}
+@media (max-width: 960px) {
+  #toc-toggle { display: block; }
+  .layout { grid-template-columns: 1fr; gap: 0; padding-top: 24px; }
+  aside.toc-wrap {
+    position: fixed; left: 0; top: 0; bottom: 0; z-index: 95;
+    width: 270px; max-height: none; background: var(--surface);
+    border-right: 1px solid var(--border); padding: 20px 8px;
+    transform: translateX(-100%); transition: transform 0.25s ease;
+    box-shadow: var(--shadow);
+  }
+  aside.toc-wrap.open { transform: none; }
+  #toc-overlay.show { display: block; opacity: 1; }
+  h2 { margin-top: 48px; }
+}
+@media (max-width: 560px) {
+  .brand small { display: none; }
+  .hero .meta { font-size: 11.5px; }
+}
+
+/* 打印友好 */
+@media print {
+  header.site, aside.toc-wrap, #backtop, #progress { display: none !important; }
+  .layout { display: block; }
+  body { background: #fff; color: #000; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<header class="site">
+  <div class="header-inner">
+    <button id="toc-toggle" aria-label="打开目录">目录</button>
+    <div class="brand">
+      <svg class="rein" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 4c4 2 6 5 6 8s-2 6-6 8"/><path d="M21 4c-4 2-6 5-6 8s2 6 6 8"/><path d="M9 12h6"/>
+      </svg>
+      Harness 全景笔记 <small>· 缰绳与猛兽</small>
+    </div>
+    <div class="header-spacer"></div>
+    <button id="theme-toggle" aria-label="切换白天/黑夜模式" title="切换白天/黑夜模式">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<div id="toc-overlay"></div>
+
+<div class="layout">
+
+  <!-- ============ 左侧目录 ============ -->
+  <aside class="toc-wrap" id="toc-wrap">
+    <div class="toc-title">目录</div>
+    <nav class="toc" id="toc">
+      <ul>
+        <li><a href="#tldr">太长不看</a></li>
+        <li><a href="#sec-what">1. 缘起：从一个马的名词说起</a></li>
+        <li><a href="#sec-equation">2. Agent = Model + Harness</a></li>
+        <li><a href="#sec-anatomy">3. 解剖一只 Harness</a></li>
+        <li class="sub"><a href="#sec-anatomy-prompt">3.1 指令层</a></li>
+        <li class="sub"><a href="#sec-anatomy-tools">3.2 工具层</a></li>
+        <li class="sub"><a href="#sec-anatomy-loop">3.3 Agent Loop</a></li>
+        <li class="sub"><a href="#sec-anatomy-context">3.4 上下文管理</a></li>
+        <li class="sub"><a href="#sec-anatomy-parse">3.5 解析与容错</a></li>
+        <li class="sub"><a href="#sec-anatomy-sandbox">3.6 沙箱与执行环境</a></li>
+        <li class="sub"><a href="#sec-anatomy-memory">3.7 记忆与可观测性</a></li>
+        <li><a href="#sec-classics">4. 经典 Harness 巡礼</a></li>
+        <li class="sub"><a href="#sec-classics-react">4.1 ReAct</a></li>
+        <li class="sub"><a href="#sec-classics-codeact">4.2 CodeAct</a></li>
+        <li class="sub"><a href="#sec-classics-sweagent">4.3 SWE-agent 与 ACI</a></li>
+        <li class="sub"><a href="#sec-classics-industry">4.4 工业界与 MCP</a></li>
+        <li><a href="#sec-eval">5. Harness 与评测的罗生门</a></li>
+        <li><a href="#sec-posttrain">6. Harness 与后训练的暗面</a></li>
+        <li class="sub"><a href="#sec-pt-locking">6.2 Harness 锁定</a></li>
+        <li class="sub"><a href="#sec-pt-collapse">6.3 Entropy Collapse</a></li>
+        <li class="sub"><a href="#sec-pt-anchor">6.4 Context Anchoring</a></li>
+        <li><a href="#sec-agnostic">7. 走向 Harness-agnostic 后训练</a></li>
+        <li><a href="#sec-principles">8. 好 Harness 的设计原则</a></li>
+        <li><a href="#sec-glossary">9. 术语速查表</a></li>
+        <li><a href="#sec-summary">10. 一页总结</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- ============ 正文 ============ -->
+  <main class="content">
+
+    <div class="hero">
+      <div class="kicker">LLM Agent · 学习笔记</div>
+      <h1>给猛兽套上缰绳<br>Agent Harness 全景笔记</h1>
+      <p class="subtitle">模型决定上限，Harness 决定下限 —— 一篇把「缰绳」讲透的自我复习材料。</p>
+      <div class="meta">
+        <span>Agent 工程</span><span>后训练</span><span>评测方法</span><span>2026.08</span>
+      </div>
+    </div>
+
+    <h2 id="tldr"><span class="sec-no">0</span>太长不看</h2>
+    <ul>
+      <li><strong>Harness</strong> 是包裹在模型之外、决定模型「看到什么、能做什么、结果如何被使用」的整个工程系统：prompt、工具、循环、上下文管理、解析、沙箱……</li>
+      <li><strong>Agent = Model + Harness</strong>。同一款模型换一套 harness，benchmark 分数可以差出一大截。</li>
+      <li>榜单上的分数从来不只是模型的分数，而是<strong>「模型 × harness」组合</strong>的分数。</li>
+      <li>后训练（尤其 RL）会把 policy 「焊」在训练时的 harness 上 —— 这叫 <strong>harness 锁定</strong>，伴随 entropy collapse、context anchoring 和 OOD 退化。</li>
+      <li>下一站：<strong>harness-agnostic 的 agent 后训练</strong> —— 把 harness 差异当作需要泛化的环境噪声。</li>
+    </ul>
+
+    <h2 id="sec-what"><span class="sec-no">1</span>缘起：从一个马的名词说起</h2>
+    <p><strong>harness</strong> 的本义是马具 —— 套在马身上、让蛮力为人所用的那套皮带与缰绳。马再壮，没有马具也拉不了犁；力气如何被引导、约束、分配，全看这套装备。</p>
+    <p>软件工程里早就有这个词：<strong>test harness（测试治具）</strong>。它指的不是测试逻辑本身，而是那套「把被测物架起来、喂输入、收输出、监控行为」的脚手架。硬件测试里的夹具同样叫 harness。</p>
+    <p>LLM 社区完整继承了这层含义，并把它扩展成：</p>
+    <blockquote><p><strong>Harness = 包裹在模型之外、决定模型如何被调用的整个工程系统。</strong>它决定模型看到什么（上下文）、能做什么（工具）、怎么做（流程约束）、做错了怎么办（容错）。</p></blockquote>
+    <p>一句话记法：<strong>模型是发动机，harness 是整辆车</strong> —— 方向盘、变速箱、仪表盘、安全带，一个都不能少。</p>
+
+    <h2 id="sec-equation"><span class="sec-no">2</span>Agent = Model + Harness</h2>
+    <p>这个等式是理解当下 agent 生态的关键视角。它说的是：你使用的「agent」从来不是模型本身，而是「模型 + 一整套工程系统」的复合体。换个说法：<strong>换模型是换引擎，换 harness 是重新调整辆车的操控。</strong></p>
+    <p>三个思想实验：</p>
+    <ol>
+      <li>同一个模型，裸 API 只能聊天；接上工具、沙箱和循环，就能修 bug、跑数据 —— 差的是 harness。</li>
+      <li>同一个模型，两套不同的工具命名与描述，工具调用成功率可以明显不同 —— 差的还是 harness。</li>
+      <li>同一个模型、同一个 benchmark、两套 scaffold，分数差异可达 1.5 倍甚至数倍 —— SWE-bench 社区的共识是：<strong>不同 harness 的结果不可直接比较</strong>。</li>
+    </ol>
+    <div class="callout note"><p><span class="co-label">视角切换</span>「模型强不强」和「agent 好不好」是两个问题，中间那根传动轴就是 harness。评估一个 agent 产品时，先拆开看：哪些能力来自权重，哪些能力来自缰绳。</p></div>
+
+    <h2 id="sec-anatomy"><span class="sec-no">3</span>解剖一只 Harness</h2>
+    <p>一只典型的 agent harness 长这样（自下而上调用模型，自上而下约束模型）：</p>
+<pre><code>┌─────────────────────────────────────┐
+│            Agent Harness            │
+│  ┌───────────────────────────────┐  │
+│  │ 指令层：system prompt / 流程   │  │
+│  ├───────────────────────────────┤  │
+│  │ 工具层：schema + 描述 + 注册   │  │
+│  ├───────────────────────────────┤  │
+│  │ Agent Loop：控制流与终止条件   │  │
+│  ├───────────────────────────────┤  │
+│  │ 上下文管理：裁剪 / 摘要 / 预算 │  │
+│  ├───────────────────────────────┤  │
+│  │ 解析与容错：结构化输出 / 重试  │  │
+│  ├───────────────────────────────┤  │
+│  │ 沙箱：执行环境与权限边界       │  │
+│  ├───────────────────────────────┤  │
+│  │ 记忆 / 状态 / 可观测性         │  │
+│  └───────────────────────────────┘  │
+└─────────────────────────────────────┘</code></pre>
+
+    <h3 id="sec-anatomy-prompt">3.1 指令层：模型的「出厂设置」</h3>
+    <ul>
+      <li><strong>系统提示词</strong>：角色设定、工作流程、安全约束、输出格式，是 harness 中最常被低估的组件。</li>
+      <li><strong>few-shot 示例</strong>：示范「好的轨迹长什么样」，等价于在推理期做了一次轻量对齐。</li>
+      <li><strong>scratchpad 约定</strong>：规定思考区、行动区、观察区如何组织（ReAct 格式就是最经典的约定）。</li>
+    </ul>
+    <p>很多「模型变笨了 / 变聪明了」的观感，其实是 prompt 层改动带来的行为漂移。</p>
+
+    <h3 id="sec-anatomy-tools">3.2 工具层：模型的双手</h3>
+    <ul>
+      <li><strong>Function Calling</strong>：以 JSON Schema 声明工具的名称、描述与参数，模型生成结构化调用。</li>
+      <li><strong>设计维度</strong>：粒度（大而全 vs 小而正交）、数量、命名、描述质量。工具描述改几个词，调用成功率就可能波动 —— 模型对工具文本极度敏感。</li>
+      <li><strong>报错也是接口</strong>：错误信息是写给模型看的，要可读、可定位、可行动。<code>No such file</code> 远不如 <code>No such file: src/util.js. Did you mean src/utils.js? Run ls to list files.</code></li>
+      <li><strong>MCP（Model Context Protocol）</strong>：把工具/资源接入标准化为 server/client 架构，一次接入、处处可用。它本质上是「harness 接口层」的标准化努力。</li>
+    </ul>
+
+    <h3 id="sec-anatomy-loop">3.3 Agent Loop：心脏起搏器</h3>
+    <p>几乎所有 agent 的核心都是这个循环：</p>
+<pre><code>while not done and steps &lt; MAX_STEPS:
+    resp = llm(messages, tools)        # 思考 + 决策
+    if resp.has_tool_call:
+        obs = sandbox.execute(resp.tool_call)  # 行动
+        messages.append(obs)           # 观察
+    else:
+        done = True                    # 模型认为完成了</code></pre>
+    <p>关键设计点：</p>
+    <ul>
+      <li><strong>终止条件</strong>：自然停止、强制截断、预算（token/步数/时间）耗尽。</li>
+      <li><strong>防打转</strong>：检测重复动作、重复观察，及时注入提示或强制换路。</li>
+      <li><strong>编排形态</strong>：单 agent 大循环 vs 多 agent 分工（planner / executor / critic），本质都是在改这个循环的结构。</li>
+    </ul>
+
+    <h3 id="sec-anatomy-context">3.4 上下文管理：稀缺资源的分配器</h3>
+    <ul>
+      <li>context window 是硬预算：<code>system + 工具定义 + 历史 + 观察 + scratchpad</code> 六方争抢。</li>
+      <li>最膨胀的往往是<strong>观察</strong>（一条命令输出几千行）→ 需要<strong>截断、折叠、摘要</strong>。</li>
+      <li>高级策略：<strong>把长内容外置到文件系统，用 grep / read 按需取回</strong>（Claude Code 的经典做法）—— 等于给模型一个「硬盘」当扩展记忆。</li>
+    </ul>
+    <div class="callout tip"><p><span class="co-label">要点</span>上下文管理策略决定了「模型所处的世界」长什么样。它不是性能优化，而是世界观设计。</p></div>
+
+    <h3 id="sec-anatomy-parse">3.5 输出解析与容错：翻译官 + 安全气囊</h3>
+    <ul>
+      <li><strong>结构化输出</strong>：JSON mode、structured outputs、grammar 约束（如 GBNF），把「希望模型守格式」变成「格式上不可能出错」。</li>
+      <li><strong>解析失败三连</strong>：重试、修复（截断补全 / 正则抢救）、降级（退回纯文本）。</li>
+      <li><strong>参数校验</strong>：工具调用参数过 schema validation，脏输入不进沙箱。</li>
+    </ul>
+
+    <h3 id="sec-anatomy-sandbox">3.6 沙箱与执行环境：世界，也是围栏</h3>
+    <ul>
+      <li>代码执行：容器 / microVM、超时、CPU 与内存限制。</li>
+      <li>文件系统与网络权限：只读挂载、出口白名单。</li>
+      <li>harness 是 agent 的全部世界；沙箱边界就是世界的边界。<strong>同一个模型在不同沙箱里的「能力」，其实测量的是不同的世界。</strong></li>
+    </ul>
+
+    <h3 id="sec-anatomy-memory">3.7 记忆、状态与可观测性</h3>
+    <ul>
+      <li><strong>短期记忆</strong> = 对话历史本身；<strong>长期记忆</strong> = 文件 / 向量库 / 外部存储。</li>
+      <li><strong>状态</strong>：任务清单（todo list）、中间产物（patch、diff、日志）。</li>
+      <li><strong>可观测性</strong>：轨迹日志、回放、token 与成本统计。debug 一个 agent = debug 它的 harness + debug 模型，没有日志寸步难行。</li>
+    </ul>
+
+    <h2 id="sec-classics"><span class="sec-no">4</span>经典 Harness 巡礼</h2>
+
+    <h3 id="sec-classics-react">4.1 ReAct：祖师爷（2022）</h3>
+    <p>用纯文本约定出 <code>Thought → Action → Observation</code> 的循环协议，把「推理」和「行动」交织进同一个上下文。今天所有 agent loop 都能看出它的影子。</p>
+
+    <h3 id="sec-classics-codeact">4.2 CodeAct：用代码当动作（2024）</h3>
+    <p>把「动作」从 JSON 换成<strong>可执行代码</strong>。一个代码块可以组合多个动作、传递变量、写循环 —— 表达能力直接拉满。现代编码 agent（Claude Code、OpenHands 等）的主流范式都受它影响。</p>
+    <div class="table-wrap">
+    <table>
+      <tr><th></th><th>JSON 动作（ReAct 式）</th><th>代码动作（CodeAct 式）</th></tr>
+      <tr><td>单步表达力</td><td>一个动作</td><td>任意长的动作序列</td></tr>
+      <tr><td>状态传递</td><td>靠上下文复述</td><td>变量直接复用</td></tr>
+      <tr><td>出错成本</td><td>低（结构受限）</td><td>高（代码可能有 bug），需要沙箱兜底</td></tr>
+    </table>
+    </div>
+
+    <h3 id="sec-classics-sweagent">4.3 SWE-agent 与 ACI：接口设计学的开山（2024）</h3>
+    <p>SWE-agent 提出 <strong>ACI（Agent-Computer Interface）</strong> 概念：正如 GUI 是为人类设计的接口，工具与反馈也应该<strong>专为 agent 设计</strong>。核心组件：</p>
+    <ul>
+      <li>简洁的文件浏览器（每行带行号、限制输出行数）</li>
+      <li>带滚动窗口的编辑器 + <strong>编辑后自动 lint</strong>（信号前置）</li>
+      <li>防呆设计：危险命令给出信息丰富的报错，而不是静默失败</li>
+    </ul>
+    <p>结论极其震撼：<strong>模型不变，仅优化 ACI，SWE-bench 解决率成倍提升</strong>（论文中 GPT-4 达到全集 12% 量级，而朴素接口设计几乎不可用）。这是「harness 值多少分」最著名的定量证据。</p>
+
+    <h3 id="sec-classics-industry">4.4 工业界与 MCP：缰绳的产品化与标准化</h3>
+    <ul>
+      <li><strong>Claude Code / Codex CLI / 各类 coding agent</strong>：harness 即产品。产品间的体验差异，大部分来自缰绳而非引擎。</li>
+      <li><strong>OpenHands（原 OpenDevin）</strong>：开源 agent 基础设施的代表，适合逐行研读学 harness 工程。</li>
+      <li><strong>MCP</strong>：把工具接入标准化，让「换缰绳」更容易 —— 也让人看清：模型能力 ≠ 生态能力。</li>
+    </ul>
+    <div class="callout tip"><p><span class="co-label">学习建议</span>各家 agent 的 system prompt 很多已公开（Claude Code、OpenHands 等），是最好的 harness 设计教材。读三份，对比它们如何组织指令、工具与上下文。</p></div>
+
+    <h2 id="sec-eval"><span class="sec-no">5</span>Harness 与评测的罗生门</h2>
+
+    <h3>5.1 分数到底是谁的分数</h3>
+    <p>榜单报的永远是 <code>(model, harness)</code> 二元组的分数。SWE-bench 官方长期强调：<strong>不同 agent scaffold 的结果不可直接比较</strong>。裸模型的 pass@k 和套上 harness 后的 resolve rate，是两种完全不同的测量。</p>
+    <p>看分数前先问三件事：用了什么 scaffold？给了哪些工具？上下文怎么管理？答案不明的分数，参考价值存疑。</p>
+
+    <h3>5.2 评测环境泄漏（harness leakage）</h3>
+    <ul>
+      <li><strong>定义</strong>：后训练所用的 harness 与评测 harness 一致或高度相似，导致分数虚高。</li>
+      <li><strong>极端形式</strong>：在评测同款 scaffold 上做 RL，等于把测试环境搬进了训练环境。</li>
+      <li><strong>灰色地带</strong>：如果真实部署环境就是评测环境，这算「对齐」还是「作弊」？社区至今没有共识，但趋势很明确 —— <strong>必须披露</strong>。</li>
+    </ul>
+
+    <h3>5.3 Minimal mode 的启示</h3>
+    <p>社区曾观察到一类现象：某些模型的「极简工具模式」在特定基准上反超自家「满配模式」—— 工具更少，分数更高。一种解释是：<strong>RL 训练锁定的就是那套极简 harness</strong>，其 observation 分布与 action schema 和评测环境高度对齐；满配模式反而把模型推入了 OOD 区。</p>
+    <div class="callout warn"><p><span class="co-label">教训</span>报分数必须报 harness 配置；做对比实验必须控制 harness 变量。否则你测的不是模型，而是「模型和某根缰绳的默契度」。</p></div>
+
+    <h2 id="sec-posttrain"><span class="sec-no">6</span>Harness 与后训练的暗面</h2>
+
+    <h3>6.1 RL 环境即 harness</h3>
+    <p>Agent RL 的「环境」= 沙箱 + 工具集 + loop 结构 + 奖励函数 —— 每一项都是 harness 组件。因此 policy 学到的不只是「怎么解题」，还有「<strong>在这个 harness 里</strong>怎么解题」。训练环境的每一个工程细节，都会被梯度默默写进权重。</p>
+
+    <h3 id="sec-pt-locking">6.2 Harness 锁定（harness locking）</h3>
+    <p><strong>定义：policy 的行为分布过拟合于训练 harness 的特定 observation 格式与 action schema。</strong>典型症状：</p>
+    <ul>
+      <li>换一套 harness（哪怕公认更好用），分数不升反降；</li>
+      <li>prompt 模板稍作改动，成功率明显下滑；</li>
+      <li>工具偏好固化：明明有更合适的工具，仍反复调用训练期常用的那个。</li>
+    </ul>
+
+    <h3 id="sec-pt-collapse">6.3 Policy / Entropy Collapse：分布越训越尖</h3>
+    <p>自生成轨迹 + 窄环境 + 强奖励信号，会让动作分布的熵急剧收缩：模型只走那几条「在训练环境里被证明有效」的路，探索性丧失，遇到新环境极度脆弱。这与 RLHF 中反复被观察到的 entropy 崩塌同源 —— 优化压力总在「榨干」分布的多样性，而窄 harness 把这个过程加速了。</p>
+
+    <h3 id="sec-pt-anchor">6.4 Context Anchoring：缰绳成了「第二权重」</h3>
+    <p>policy 会学会依赖特定的上下文组织方式：历史的排列、系统提示的措辞、观察的格式。上下文稍有重组，模型表现判若两人。本质上，<strong>harness 成了 policy 的第二套参数 —— 只不过它不在权重里，而在工程代码里</strong>。权重你可以 checkpoint，缰绳可没有版本管理。</p>
+
+    <h3>6.5 为什么现在才显形</h3>
+    <ul>
+      <li>模型规模与训练数据多样性仍在上行，RL scaling law 尚有余量，锁定被「能力增长」掩盖；</li>
+      <li>评测维度长期单一，harness 敏感性不是显学；</li>
+      <li>随着 agent RL 规模化（Klear-AgentForge 等训练环境工作涌现），训练 harness 的多样性和评测 harness 的披露问题会越来越刺眼。</li>
+    </ul>
+
+    <h2 id="sec-agnostic"><span class="sec-no">7</span>走向 Harness-agnostic 的后训练</h2>
+    <p>核心思想：借用机器人领域的 <strong>domain randomization</strong>（sim2real 的经典技巧）—— 训练时把环境随机得越狠，部署时越稳。对 agent 来说，<strong>harness 就是那个需要被随机化的环境</strong>。</p>
+    <div class="grid-2">
+      <div class="card"><h4>随机化组件</h4><p>训练期随机变换 prompt 模板、工具命名与描述、观察格式、上下文裁剪策略，让 policy 不绑定任何特定文本形态。</p></div>
+      <div class="card"><h4>多 harness 混合 rollout</h4><p>多套 harness 交替采样轨迹，等价于对「环境表面形态」做数据增强。</p></div>
+      <div class="card"><h4>评测矩阵化</h4><p>报告 model × harness 矩阵而非单点分数；方差本身就是重要的能力指标。</p></div>
+      <div class="card"><h4>泛化即目标</h4><p>把「对 harness 的不敏感性」直接作为训练目标或评测维度来优化。</p></div>
+    </div>
+    <p>终局想象：模型像适应不同操作系统一样适应不同 harness —— 换根缰绳，照样跑得又快又稳。</p>
+
+    <h2 id="sec-principles"><span class="sec-no">8</span>好 Harness 的设计原则</h2>
+    <p>以下原则大量借鉴 SWE-agent 的 ACI 设计经验，加上工程实践的总结：</p>
+    <ol>
+      <li><strong>Token 效率优先</strong>：每一屏观察都要「值回票价」。模型读上下文是要花预算的，废话就是税。</li>
+      <li><strong>信号前置</strong>：lint、类型检查、单测即时反馈，别让错误攒到最后爆炸。</li>
+      <li><strong>动作空间小而正交</strong>：工具少而精，命名自解释，一个工具只做一件事。</li>
+      <li><strong>报错给模型看</strong>：错误消息要可读、可定位、可行动 —— 它是 harness 里信息密度最高的 prompt。</li>
+      <li><strong>防呆不防手</strong>：危险操作要摩擦（确认 / 备份），正常操作要丝滑。</li>
+      <li><strong>可复现</strong>：轨迹可回放，随机性可固定 —— 否则 debug 是玄学。</li>
+      <li><strong>失败要体面</strong>：超时、死循环、预算耗尽都要有优雅出口，而不是留下半摊子烂摊子。</li>
+    </ol>
+
+    <h2 id="sec-glossary"><span class="sec-no">9</span>术语速查表</h2>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>术语</th><th>一句话解释</th></tr></thead>
+      <tbody>
+        <tr><td>Harness / Scaffold</td><td>包裹模型的工程系统：prompt + 工具 + 循环 + 上下文管理 + 沙箱</td></tr>
+        <tr><td>ACI</td><td>Agent-Computer Interface，像为人类设计 GUI 一样为 agent 设计接口</td></tr>
+        <tr><td>ReAct</td><td>Thought–Action–Observation 文本循环协议，agent loop 的祖师爷</td></tr>
+        <tr><td>CodeAct</td><td>以可执行代码为动作的 agent 范式</td></tr>
+        <tr><td>MCP</td><td>Model Context Protocol，工具/资源接入的协议标准</td></tr>
+        <tr><td>Function Calling</td><td>模型按 JSON Schema 生成结构化工具调用</td></tr>
+        <tr><td>Agent Loop</td><td>感知–决策–行动–观察的循环控制流</td></tr>
+        <tr><td>Harness 锁定</td><td>policy 过拟合训练 harness 的 observation 格式与 action schema</td></tr>
+        <tr><td>Entropy Collapse</td><td>动作分布熵坍缩，探索性丧失，路径单一化</td></tr>
+        <tr><td>Context Anchoring</td><td>policy 对特定上下文组织结构形成依赖</td></tr>
+        <tr><td>Harness Leakage</td><td>训练 harness 与评测 harness 重合导致的分数虚高</td></tr>
+        <tr><td>Domain Randomization</td><td>训练期随机化环境以换取部署泛化（sim2real 经典技巧）</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h2 id="sec-summary"><span class="sec-no">10</span>一页总结</h2>
+    <ul>
+      <li>Harness 不是模型的附属品，而是 agent 的<strong>另一半</strong>；Agent = Model + Harness 是理解一切 agent 问题的第一公式。</li>
+      <li>看分数先问 harness，做训练先防锁定，写工具先想「模型读起来累不累」。</li>
+      <li>评测的公信力取决于 harness 披露；后训练的上限取决于 harness 多样性。</li>
+      <li>未来的核心能力之一：<strong>让模型在任何缰绳下都能跑</strong>。</li>
+    </ul>
+    <blockquote><p>延伸阅读：ReAct、CodeAct、SWE-agent 论文；MCP 规范；OpenHands 源码；各家公开的 agent system prompt。读完这些，你对「缰绳」的理解就超过了绝大多数只看榜单的人。</p></blockquote>
+
+  </main>
+</div>
+
+<footer class="site">
+  <p>缰绳与猛兽 · Agent Harness 全景笔记 — 个人学习笔记，随缘更新</p>
+</footer>
+
+<button id="backtop" aria-label="返回顶部" title="返回顶部">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 19V5M5 12l7-7 7 7"/>
+  </svg>
+</button>
+
+<script>
+(function () {
+  /* ---------- 主题切换 ---------- */
+  var root = document.documentElement;
+  var stored = null;
+  try { stored = localStorage.getItem("theme"); } catch (e) {}
+  if (stored === "dark" || stored === "light") {
+    root.setAttribute("data-theme", stored);
+  } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    root.setAttribute("data-theme", "dark");
+  }
+  document.getElementById("theme-toggle").addEventListener("click", function () {
+    var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("theme", next); } catch (e) {}
+  });
+
+  /* ---------- 阅读进度条 ---------- */
+  var bar = document.getElementById("progress");
+  var backtop = document.getElementById("backtop");
+  function onScroll() {
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    var p = max > 0 ? h.scrollTop / max : 0;
+    bar.style.width = (p * 100).toFixed(2) + "%";
+    if (h.scrollTop > 400) { backtop.classList.add("show"); }
+    else { backtop.classList.remove("show"); }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  backtop.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  /* ---------- 目录 scrollspy ---------- */
+  var links = Array.prototype.slice.call(document.querySelectorAll("nav.toc a"));
+  var targets = links.map(function (a) { return document.getElementById(a.getAttribute("href").slice(1)); });
+  function setActive(id) {
+    links.forEach(function (a) {
+      a.classList.toggle("active", a.getAttribute("href") === "#" + id);
+    });
+  }
+  if ("IntersectionObserver" in window) {
+    var visible = {};
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        visible[en.target.id] = en.isIntersecting ? en.intersectionRatio : 0;
+      });
+      var bestId = null, bestRatio = 0;
+      links.forEach(function (a, i) {
+        var t = targets[i];
+        if (!t) return;
+        var top = t.getBoundingClientRect().top;
+        var r = visible[t.id] || 0;
+        var score = r + (top < 120 ? 1 : 0);
+        if (r > 0 && score > bestRatio) { bestRatio = score; bestId = t.id; }
+      });
+      if (bestId) setActive(bestId);
+    }, {
+      rootMargin: "-84px 0px -55% 0px",
+      threshold: [0, 0.1, 0.25, 0.5, 1]
+    });
+    targets.forEach(function (t) { if (t) io.observe(t); });
+  }
+
+  /* ---------- 移动端目录抽屉 ---------- */
+  var tocWrap = document.getElementById("toc-wrap");
+  var overlay = document.getElementById("toc-overlay");
+  var tocToggle = document.getElementById("toc-toggle");
+  function closeDrawer() {
+    tocWrap.classList.remove("open");
+    overlay.classList.remove("show");
+  }
+  tocToggle.addEventListener("click", function () {
+    var open = tocWrap.classList.toggle("open");
+    overlay.classList.toggle("show", open);
+  });
+  overlay.addEventListener("click", closeDrawer);
+  links.forEach(function (a) { a.addEventListener("click", closeDrawer); });
+})();
+</script>
+
+</body>
+</html>
