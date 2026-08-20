@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一文吃透 Attention：从 MHA 到 FlashAttention 的完全体指南</title>
+<meta name="description" content="Attention 全家桶详解：Q/K/V、MHA、MQA、GQA、MLA、SWA、KV Cache、PagedAttention、FlashAttention、Ring Attention，一篇讲完结构演化与速度革命。">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<style>
+/* ============ 主题变量 ============ */
+:root{
+  --bg:#f6f7fb; --bg-card:#ffffff;
+  --text:#1c2333; --text-2:#3d4a5f; --muted:#68758c;
+  --border:#e3e8f0; --border-2:#d3dbe8;
+  --accent:#5b5bd6; --accent-2:#8b5cf6;
+  --accent-soft:rgba(91,91,214,.09);
+  --link:#4f46e5; --link-hover:#312e9e;
+  --code-bg:#f1f3f9; --code-text:#31415e;
+  --icode-bg:rgba(91,91,214,.11); --icode-text:#4338ca;
+  --fig-bg:#ffffff; --fig-border:#e3e8f0;
+  --fig-line:#94a3b8; --fig-text:#475569; --fig-node-fill:#eef1f8;
+  --fq:#5856d6; --fq-fill:rgba(88,86,214,.12);
+  --fk:#0b9e70; --fk-fill:rgba(11,158,112,.12);
+  --fv:#d97706; --fv-fill:rgba(217,119,6,.13);
+  --fkv:#db2777; --fkv-fill:rgba(219,39,119,.11);
+  --fwarn:#dc2626; --fwarn-fill:rgba(220,38,38,.10);
+  --fgray:#94a3b8;
+  --shadow:0 1px 3px rgba(15,23,42,.06),0 10px 30px rgba(15,23,42,.06);
+  --header-bg:rgba(246,247,251,.86);
+  --toc-active:rgba(91,91,214,.10);
+  --zebra:#f8fafc;
+  --note-bg:#eef1fd; --note-bd:#5856d6;
+  --tip-bg:#e9f8f2; --tip-bd:#0b9e70;
+  --warn-bg:#fdf4e3; --warn-bd:#d97706;
+  --hero-grad:linear-gradient(120deg,#4f46e5 0%,#7c3aed 45%,#db2777 100%);
+}
+html[data-theme="dark"]{
+  --bg:#0c1120; --bg-card:#121a2c;
+  --text:#dde4f2; --text-2:#b7c2d6; --muted:#7f8ca6;
+  --border:#232d45; --border-2:#2e3a57;
+  --accent:#8b93ff; --accent-2:#b79bff;
+  --accent-soft:rgba(129,140,248,.13);
+  --link:#a8b2ff; --link-hover:#cdd3ff;
+  --code-bg:#0e1626; --code-text:#c6d2e8;
+  --icode-bg:rgba(129,140,248,.17); --icode-text:#b3bcff;
+  --fig-bg:#101a2e; --fig-border:#243050;
+  --fig-line:#5c6b8c; --fig-text:#aebad0; --fig-node-fill:#1a2338;
+  --fq:#8b93ff; --fq-fill:rgba(129,140,248,.15);
+  --fk:#2fd6a5; --fk-fill:rgba(47,214,165,.13);
+  --fv:#f5b545; --fv-fill:rgba(245,181,69,.14);
+  --fkv:#f472b6; --fkv-fill:rgba(244,114,182,.14);
+  --fwarn:#f87171; --fwarn-fill:rgba(248,113,113,.12);
+  --fgray:#64748b;
+  --shadow:0 1px 3px rgba(0,0,0,.5),0 10px 30px rgba(0,0,0,.35);
+  --header-bg:rgba(12,17,32,.86);
+  --toc-active:rgba(129,140,248,.15);
+  --zebra:#151e33;
+  --note-bg:rgba(129,140,248,.10); --note-bd:#8b93ff;
+  --tip-bg:rgba(47,214,165,.09); --tip-bd:#2fd6a5;
+  --warn-bg:rgba(245,181,69,.10); --warn-bd:#f5b545;
+  --hero-grad:linear-gradient(120deg,#818cf8 0%,#a78bfa 45%,#f472b6 100%);
+}
+/* ============ 基础 ============ */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+  font-size:16.5px; line-height:1.85; -webkit-font-smoothing:antialiased;
+  transition:background .35s ease,color .35s ease;
+}
+::selection{background:var(--accent);color:#fff}
+a{color:var(--link);text-decoration:none}
+a:hover{color:var(--link-hover);text-decoration:underline;text-underline-offset:3px}
+code,pre,.mono{font-family:ui-monospace,SFMono-Regular,"JetBrains Mono",Menlo,Consolas,"Liberation Mono",monospace}
+p{margin:.9em 0}
+img,svg{max-width:100%}
+/* ============ 进度条 & 头部 ============ */
+.progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:1000;background:var(--hero-grad);transition:width .12s linear;border-radius:0 3px 3px 0}
+.site-header{
+  position:sticky;top:0;z-index:900;background:var(--header-bg);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{max-width:1560px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:12px 28px}
+.logo{display:flex;align-items:center;gap:11px;min-width:0}
+.logo svg{flex-shrink:0}
+.logo .t{font-weight:800;font-size:16.5px;letter-spacing:.01em;white-space:nowrap}
+.logo .s{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.header-actions{margin-left:auto;display:flex;align-items:center;gap:10px}
+.icon-btn{
+  width:38px;height:38px;border-radius:11px;border:1px solid var(--border);
+  background:var(--bg-card);color:var(--text-2);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:.25s;box-shadow:var(--shadow);
+}
+.icon-btn:hover{color:var(--accent);border-color:var(--accent);transform:translateY(-1px)}
+.icon-btn svg{width:18px;height:18px}
+.theme-btn .moon{display:block}.theme-btn .sun{display:none}
+html[data-theme="dark"] .theme-btn .moon{display:none}
+html[data-theme="dark"] .theme-btn .sun{display:block}
+.menu-btn{display:none}
+/* ============ 布局 ============ */
+.layout{max-width:1560px;margin:0 auto;display:flex;align-items:flex-start;padding:0 28px}
+/* ---- 左侧目录 ---- */
+.toc{
+  position:sticky;top:62px;width:272px;flex-shrink:0;height:calc(100vh - 62px);
+  overflow-y:auto;overscroll-behavior:contain;padding:26px 8px 60px 4px;
+  scrollbar-width:thin;scrollbar-color:var(--border-2) transparent;
+}
+.toc::-webkit-scrollbar{width:5px}
+.toc::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:4px}
+.toc-title{font-size:11px;letter-spacing:.18em;color:var(--muted);font-weight:700;margin:0 0 12px 14px}
+.toc a{
+  display:block;padding:4.5px 10px;border-left:2px solid transparent;border-radius:0 7px 7px 0;
+  color:var(--text-2);font-size:13.2px;line-height:1.5;text-decoration:none;transition:.18s;
+}
+.toc a:hover{color:var(--accent);background:var(--accent-soft);text-decoration:none}
+.toc a.lv2{font-weight:650;color:var(--text);margin-top:7px}
+.toc a.lv3{padding-left:25px;font-size:12.6px;color:var(--muted)}
+.toc a.active{color:var(--accent);border-left-color:var(--accent);background:var(--toc-active);font-weight:700}
+.toc .num{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:var(--accent);margin-right:7px;opacity:.85}
+.toc-mask{display:none}
+/* ---- 主内容 ---- */
+.content{flex:1;min-width:0;padding:44px 12px 110px 46px}
+.post{max-width:840px;margin:0 auto}
+/* ---- Hero ---- */
+.hero{margin:8px 0 44px}
+.hero .chip{
+  display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;letter-spacing:.06em;
+  color:var(--accent);background:var(--accent-soft);border:1px solid var(--border);
+  padding:5px 13px;border-radius:99px;margin-bottom:18px;
+}
+.hero .chip .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.hero h1{
+  margin:0 0 16px;font-size:clamp(30px,4.6vw,46px);line-height:1.25;font-weight:900;letter-spacing:-.01em;
+  background:var(--hero-grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero .sub{font-size:17.5px;color:var(--text-2);margin:0 0 20px;max-width:640px}
+.hero .meta{font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 22px}
+.hero .meta b{color:var(--text-2);font-weight:650}
+.map{margin:26px 0 0;display:flex;flex-wrap:wrap;gap:9px}
+.map a{
+  font-size:12.8px;font-weight:600;color:var(--text-2);background:var(--bg-card);
+  border:1px solid var(--border);border-radius:9px;padding:6px 13px;text-decoration:none;transition:.2s;box-shadow:var(--shadow);
+}
+.map a:hover{color:var(--accent);border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.map a b{color:var(--accent);font-family:ui-monospace,Menlo,monospace;margin-right:5px}
+/* ---- 标题 ---- */
+h2{
+  counter-reset:h3;font-size:26px;font-weight:850;line-height:1.4;margin:64px 0 6px;letter-spacing:-.01em;
+  padding-bottom:12px;border-bottom:1px solid var(--border);position:relative;
+}
+h2::before{
+  counter-increment:h2;content:counter(h2,decimal-leading-zero);
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:800;font-family:ui-monospace,Menlo,monospace;color:#fff;
+  background:var(--hero-grad);border-radius:8px;padding:2px 8px;margin-right:12px;transform:translateY(-2px);
+}
+h3{
+  counter-increment:h3;font-size:19.5px;font-weight:750;margin:38px 0 4px;line-height:1.5;
+}
+h3::before{content:counter(h2) "." counter(h3);font-family:ui-monospace,Menlo,monospace;font-size:.72em;color:var(--accent);font-weight:700;margin-right:10px;vertical-align:.12em;letter-spacing:.03em}
+h4{font-size:16.5px;font-weight:750;margin:26px 0 2px;color:var(--text)}
+h2,h3,h4{scroll-margin-top:78px}
+.post>section{margin-top:26px}
+/* ---- 行内元素 ---- */
+strong{color:var(--text);font-weight:750}
+em{font-style:normal;background:linear-gradient(transparent 62%,var(--accent-soft) 0);padding:0 2px;font-weight:600}
+p code,li code,td code{
+  background:var(--icode-bg);color:var(--icode-text);border-radius:6px;padding:2px 7px;
+  font-size:.86em;font-weight:600;
+}
+/* ---- 提示框 ---- */
+.note,.tip,.warn{
+  border-radius:12px;padding:15px 19px 15px 18px;margin:22px 0;font-size:15px;line-height:1.8;
+  border-left:4px solid var(--note-bd);background:var(--note-bg);
+}
+.tip{border-left-color:var(--tip-bd);background:var(--tip-bg)}
+.warn{border-left-color:var(--warn-bd);background:var(--warn-bg)}
+.note .lb,.tip .lb,.warn .lb{
+  display:block;font-size:11.5px;font-weight:800;letter-spacing:.14em;margin-bottom:5px;
+}
+.note .lb{color:var(--note-bd)} .tip .lb{color:var(--tip-bd)} .warn .lb{color:var(--warn-bd)}
+.note p,.tip p,.warn p{margin:.35em 0}
+/* ---- 图示 ---- */
+figure.fig{
+  margin:30px 0;background:var(--fig-bg);border:1px solid var(--fig-border);border-radius:16px;
+  padding:26px 22px 16px;box-shadow:var(--shadow);overflow-x:auto;
+}
+figure.fig svg{display:block;margin:0 auto;width:100%;height:auto}
+figure.fig figcaption{
+  text-align:center;font-size:13.2px;color:var(--muted);margin-top:16px;padding-top:12px;border-top:1px dashed var(--border);
+}
+figure.fig figcaption b{color:var(--text-2)}
+/* ---- 代码块 ---- */
+pre{
+  background:var(--code-bg);border:1px solid var(--border);border-radius:13px;padding:18px 20px;
+  overflow-x:auto;margin:20px 0;font-size:13.6px;line-height:1.75;position:relative;
+}
+pre code{background:none;padding:0;color:var(--code-text);font-size:inherit}
+pre .c{color:var(--muted);font-style:italic}
+pre .k{color:var(--accent);font-weight:700}
+pre .s{color:var(--fk)}
+/* ---- 表格 ---- */
+.tblwrap{overflow-x:auto;margin:26px 0;border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow)}
+table.tbl{border-collapse:collapse;width:100%;font-size:14px;background:var(--bg-card);min-width:620px}
+table.tbl th{
+  background:var(--accent-soft);color:var(--text);font-weight:750;text-align:left;padding:11px 15px;
+  border-bottom:2px solid var(--border-2);white-space:nowrap;
+}
+table.tbl td{padding:10.5px 15px;border-bottom:1px solid var(--border);color:var(--text-2);vertical-align:top}
+table.tbl tr:last-child td{border-bottom:none}
+table.tbl tbody tr:nth-child(even){background:var(--zebra)}
+table.tbl td b{color:var(--text)}
+/* ---- FAQ ---- */
+details.qa{
+  border:1px solid var(--border);border-radius:13px;background:var(--bg-card);margin:13px 0;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+details.qa summary{
+  cursor:pointer;padding:15px 20px;font-weight:700;font-size:15.3px;list-style:none;position:relative;
+  padding-right:44px;transition:.2s;color:var(--text);
+}
+details.qa summary::-webkit-details-marker{display:none}
+details.qa summary::after{
+  content:"+";position:absolute;right:18px;top:50%;transform:translateY(-50%);
+  font-size:21px;font-weight:400;color:var(--accent);transition:transform .25s;font-family:ui-monospace,monospace;
+}
+details.qa[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+details.qa summary:hover{color:var(--accent)}
+details.qa .body{padding:2px 20px 18px;font-size:14.8px;color:var(--text-2);border-top:1px dashed var(--border)}
+details.qa .body p{margin:.6em 0}
+/* ---- 时间线 ---- */
+.timeline{margin:28px 0;padding-left:26px;border-left:2px solid var(--border)}
+.tl-item{position:relative;margin:0 0 26px;padding-left:26px}
+.tl-item::before{
+  content:"";position:absolute;left:-33px;top:7px;width:11px;height:11px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);
+}
+.tl-item .yr{font-family:ui-monospace,Menlo,monospace;font-weight:800;font-size:13px;color:var(--accent);letter-spacing:.05em}
+.tl-item .tt{font-weight:750;margin-left:10px}
+.tl-item p{margin:.25em 0 0;font-size:14.5px;color:var(--text-2)}
+/* ---- 页脚 ---- */
+footer{
+  border-top:1px solid var(--border);margin-top:70px;padding:34px 28px 44px;text-align:center;
+  color:var(--muted);font-size:13px;
+}
+footer .flinks{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:center;margin-bottom:12px}
+/* ---- 返回顶部 ---- */
+#backTop{
+  position:fixed;right:26px;bottom:26px;width:44px;height:44px;border-radius:13px;border:1px solid var(--border);
+  background:var(--bg-card);color:var(--text-2);cursor:pointer;box-shadow:var(--shadow);
+  display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:.3s;z-index:800;
+}
+#backTop.show{opacity:1;pointer-events:auto}
+#backTop:hover{color:var(--accent);border-color:var(--accent);transform:translateY(-3px)}
+/* ---- KaTeX 微调 ---- */
+.katex{font-size:1.06em}
+.katex-display{overflow-x:auto;overflow-y:hidden;padding:6px 2px;margin:18px 0}
+.katex-display>.katex{white-space:nowrap}
+/* ---- 响应式 ---- */
+@media (max-width:1280px){ .toc{width:236px} .content{padding-left:34px} }
+@media (max-width:1020px){
+  .layout{padding:0 18px}
+  .toc{
+    position:fixed;left:0;top:0;bottom:0;width:288px;height:100vh;z-index:950;background:var(--bg-card);
+    border-right:1px solid var(--border);transform:translateX(-102%);transition:transform .3s ease;
+    box-shadow:0 0 60px rgba(0,0,0,.25);padding-top:20px;
+  }
+  .toc.open{transform:translateX(0)}
+  .toc-mask{display:block;position:fixed;inset:0;background:rgba(8,12,24,.45);z-index:940;opacity:0;pointer-events:none;transition:.3s}
+  .toc-mask.show{opacity:1;pointer-events:auto}
+  .menu-btn{display:flex}
+  .content{padding:32px 2px 90px}
+  .logo .s{display:none}
+}
+@media (max-width:640px){
+  body{font-size:15.5px}
+  .header-inner{padding:10px 16px}
+  .hero h1{font-size:30px}
+  figure.fig{padding:14px 8px 10px;border-radius:12px}
+  pre{font-size:12.6px;padding:14px}
+  h2{font-size:22px}
+  h3{font-size:17.5px}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="打开目录">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <div class="logo">
+      <svg width="30" height="30" viewBox="0 0 30 30">
+        <rect x="1" y="12" width="7" height="7" rx="2" fill="var(--fq)"/>
+        <rect x="11.5" y="4" width="7" height="7" rx="2" fill="var(--fk)"/>
+        <rect x="11.5" y="20" width="7" height="7" rx="2" fill="var(--fv)"/>
+        <path d="M8 15.5 L11.5 8 M8 15.5 L11.5 23" stroke="var(--fig-line)" stroke-width="1.6" fill="none"/>
+        <circle cx="24.5" cy="15" r="3.4" fill="none" stroke="var(--fkv)" stroke-width="2"/>
+      </svg>
+      <div>
+        <div class="t">一文吃透 Attention</div>
+        <div class="s">MHA · MQA · GQA · MLA · KV Cache · FlashAttention</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn theme-btn" id="themeToggle" aria-label="切换白天 / 黑夜模式" title="切换白天 / 黑夜模式">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2v2.5M12 19.5V22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2 12h2.5M19.5 12H22M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="toc" id="toc" aria-label="文章目录">
+    <div class="toc-title">CONTENTS · 目录</div>
+    <div id="tocList"></div>
+  </nav>
+  <div class="toc-mask" id="tocMask"></div>
+
+  <main class="content">
+    <article class="post">
+
+      <section class="hero">
+        <span class="chip"><span class="dot"></span>TRANSFORMER 深水区 · 长文慎入</span>
+        <h1>一文吃透 Attention<br>从 MHA 一路卷到 FlashAttention</h1>
+        <p class="sub">Attention 是个筐，什么都能往里装。这篇笔记试图把筐本身讲明白：Q/K/V 到底在算什么，MHA、MQA、GQA、MLA 是怎么一步步"缩水"的，KV Cache 为什么是命门，以及 FlashAttention 们凭什么把速度拉起来。</p>
+        <div class="meta">
+          <span><b>更新</b> 2026-08</span>
+          <span><b>阅读</b> 约 45 分钟</span>
+          <span><b>前置</b> 会一点线性代数就够了</span>
+          <span><b>姿势</b> 建议先收藏，再慢慢啃</span>
+        </div>
+        <div class="map">
+          <a href="#sec-1"><b>01</b>为什么要有 Attention</a>
+          <a href="#sec-2"><b>02</b>Q / K / V 与那个公式</a>
+          <a href="#sec-3"><b>03</b>MHA 多头注意力</a>
+          <a href="#sec-4"><b>04</b>MQA 与 GQA</a>
+          <a href="#sec-5"><b>05</b>MLA 低秩压缩</a>
+          <a href="#sec-6"><b>06</b>稀疏 / 滑窗变体</a>
+          <a href="#sec-7"><b>07</b>KV Cache</a>
+          <a href="#sec-8"><b>08</b>KV Cache 优化</a>
+          <a href="#sec-9"><b>09</b>FlashAttention 等</a>
+          <a href="#sec-10"><b>10</b>全景总结</a>
+          <a href="#sec-11"><b>11</b>常见疑问 FAQ</a>
+        </div>
+      </section>
+
+      <!-- ================= 1 ================= -->
+      <section id="sec-1">
+        <h2>为什么要有 Attention</h2>
+        <p>2017 年之前，处理序列的主力是 RNN / LSTM。它们像人逐字阅读：读一个词、更新一次记忆、再读下一个。这个设计有个致命的物理瓶颈——<strong>无论句子多长，中间那团"记忆"始终是固定大小的向量</strong>。句子一长，开头的信息要么被挤出去，要么被稀释成一锅粥，这就是传说中的"长程依赖问题"。</p>
+        <p>2014 年 Bahdanau 等人在机器翻译里给出了第一个答案：让解码器在每一步生成时，<em>回头看一眼整个源句子</em>，自己决定该重点看哪里。这就是注意力的雏形。2017 年《Attention Is All You Need》更激进：把 RNN 直接扔掉，注意力本身就是全部。</p>
+        <p>它的核心思想一句话就能说完：</p>
+        <div class="tip">
+          <span class="lb">核心思想</span>
+          <p><strong>按需分配注意力</strong>——对相关的信息多看几眼，对无关的信息少看几眼，然后把看到的东西<em>加权平均</em>拿回来用。</p>
+        </div>
+        <p>这个"加权平均"看似平平无奇，但因为它对<em>每一对位置</em>都直接建立连接（任意两个 token 之间的路径长度都是 1），长程依赖的传播问题被一举解决；又因为所有位置的权重可以<em>并行</em>算出，RNN 的串行瓶颈也消失了。代价嘛——每一对位置都要算一次相似度，计算量和显存都是 $O(n^2)$。这个 $n^2$ 是后面所有故事的起点，先记在这里。</p>
+      </section>
+
+      <!-- ================= 2 ================= -->
+      <section id="sec-2">
+        <h2>注意力的基本盘：Q、K、V 与那个公式</h2>
+
+        <h3>图书馆检索的比喻</h3>
+        <p>想象你去图书馆查资料：</p>
+        <ul>
+          <li><strong>Query（查询）</strong>：你心里的问题；</li>
+          <li><strong>Key（键）</strong>：每本书书脊上的索引标签；</li>
+          <li><strong>Value（值）</strong>：书的正文内容。</li>
+        </ul>
+        <p>你拿着 Query 和每本书的 Key 逐一比对，得到匹配分数；分数越高，从这本书里"抄"的内容越多。最后把所有书抄来的内容按匹配度加权混合，就是你这次检索的收获。<strong>注意：匹配用 Key，取内容用 Value——打分和取货是分开的</strong>，这让"怎么检索"和"检索到什么"可以独立学习。</p>
+
+        <h3>Scaled Dot-Product Attention：一步步算</h3>
+        <p>把上面的比喻写成公式，就是深度学习里出镜率最高的一行：</p>
+        $$
+        \text{Attention}(Q,K,V)=\text{softmax}\!\left(\frac{QK^{\top}}{\sqrt{d_k}}\right)V
+        $$
+        <p>别被它吓到，拆开看每一步都极其朴素。设 $Q\in\mathbb{R}^{n\times d_k}$（$n$ 个查询），$K,V\in\mathbb{R}^{m\times d_k}$（$m$ 个键值对），流程是：</p>
+        <figure class="fig">
+          <svg viewBox="0 0 980 250" font-family="inherit">
+            <defs>
+              <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+                <path d="M0,0 L8,4.5 L0,9 z" fill="var(--fig-line)"/>
+              </marker>
+            </defs>
+            <!-- K -->
+            <rect x="20" y="18" width="72" height="46" rx="9" fill="var(--fk-fill)" stroke="var(--fk)" stroke-width="1.6"/>
+            <text x="56" y="38" text-anchor="middle" font-size="16" font-weight="700" fill="var(--fk)">K</text>
+            <text x="56" y="55" text-anchor="middle" font-size="10.5" fill="var(--fig-text)">m × d<tspan baseline-shift="sub" font-size="8">k</tspan></text>
+            <!-- Q -->
+            <rect x="20" y="100" width="72" height="46" rx="9" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.6"/>
+            <text x="56" y="120" text-anchor="middle" font-size="16" font-weight="700" fill="var(--fq)">Q</text>
+            <text x="56" y="137" text-anchor="middle" font-size="10.5" fill="var(--fig-text)">n × d<tspan baseline-shift="sub" font-size="8">k</tspan></text>
+            <!-- V -->
+            <rect x="20" y="184" width="72" height="46" rx="9" fill="var(--fv-fill)" stroke="var(--fv)" stroke-width="1.6"/>
+            <text x="56" y="204" text-anchor="middle" font-size="16" font-weight="700" fill="var(--fv)">V</text>
+            <text x="56" y="221" text-anchor="middle" font-size="10.5" fill="var(--fig-text)">m × d<tspan baseline-shift="sub" font-size="8">v</tspan></text>
+            <!-- MatMul1 -->
+            <rect x="152" y="52" width="112" height="58" rx="9" fill="var(--fig-node-fill)" stroke="var(--fig-line)" stroke-width="1.5"/>
+            <text x="208" y="76" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fig-text)">MatMul</text>
+            <text x="208" y="95" text-anchor="middle" font-size="11" fill="var(--muted)">S = QK<tspan baseline-shift="super" font-size="8">⊤</tspan></text>
+            <!-- Scale -->
+            <rect x="306" y="52" width="104" height="58" rx="9" fill="var(--fig-node-fill)" stroke="var(--fig-line)" stroke-width="1.5"/>
+            <text x="358" y="76" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fig-text)">Scale</text>
+            <text x="358" y="95" text-anchor="middle" font-size="11" fill="var(--muted)">S ÷ √d<tspan baseline-shift="sub" font-size="8">k</tspan></text>
+            <!-- Mask -->
+            <rect x="452" y="52" width="92" height="58" rx="9" fill="none" stroke="var(--fig-line)" stroke-width="1.4" stroke-dasharray="5 4"/>
+            <text x="498" y="76" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fig-text)">Mask</text>
+            <text x="498" y="95" text-anchor="middle" font-size="10.5" fill="var(--muted)">可选·因果掩码</text>
+            <!-- Softmax -->
+            <rect x="586" y="52" width="100" height="58" rx="9" fill="var(--fig-node-fill)" stroke="var(--fig-line)" stroke-width="1.5"/>
+            <text x="636" y="76" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fig-text)">Softmax</text>
+            <text x="636" y="95" text-anchor="middle" font-size="10.5" fill="var(--muted)">按行归一化</text>
+            <!-- MatMul2 -->
+            <rect x="728" y="112" width="112" height="58" rx="9" fill="var(--fig-node-fill)" stroke="var(--fig-line)" stroke-width="1.5"/>
+            <text x="784" y="136" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fig-text)">MatMul</text>
+            <text x="784" y="155" text-anchor="middle" font-size="11" fill="var(--muted)">O = A·V</text>
+            <!-- Output -->
+            <rect x="884" y="112" width="80" height="58" rx="9" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.6"/>
+            <text x="924" y="136" text-anchor="middle" font-size="14" font-weight="700" fill="var(--accent)">输出 O</text>
+            <text x="924" y="155" text-anchor="middle" font-size="10.5" fill="var(--muted)">n × d<tspan baseline-shift="sub" font-size="8">v</tspan></text>
+            <!-- 箭头 -->
+            <line x1="92" y1="41" x2="146" y2="66" stroke="var(--fig-line)" stroke-width="1.6" marker-end="url(#ar)"/>
+            <line x1="92" y1="123" x2="146" y2="94" stroke="var(--fig-line)" stroke-width="1.6" marker-end="url(#ar)"/>
+            <line x1="264" y1="81" x2="300" y2="81" stroke="var(--fig-line)" stroke-width="1.6" marker-end="url(#ar)"/>
+            <line x1="410" y1="81" x2="446" y2="81" stroke="var(--fig-line)" stroke-width="1.6" marker-end="url(#ar)"/>
+            <line x1="544" y1="81" x2="580" y2="81" stroke="var(--fig-line)" stroke-width="1.6" marker-end="url(#ar)"/>
+            <line x1="686" y1="81" x2="722" y2="122" stroke="var(--fig-line)" stroke-width="1.6" marker-end="url(#ar)"/>
+            <line x1="92" y1="207" x2="722" y2="158" stroke="var(--fig-line)" stroke-width="1.6" marker-end="url(#ar)"/>
+            <line x1="840" y1="141" x2="878" y2="141" stroke="var(--fig-line)" stroke-width="1.6" marker-end="url(#ar)"/>
+            <!-- 形状标注 -->
+            <text x="208" y="136" text-anchor="middle" font-size="10.5" fill="var(--muted)">n × m</text>
+            <text x="636" y="136" text-anchor="middle" font-size="10.5" fill="var(--muted)">权重矩阵 A（每行和为 1）</text>
+          </svg>
+          <figcaption><b>图 2-1</b> Scaled Dot-Product Attention 计算流程。Mask 一格是可选项：自回归解码时把"未来"的位置屏蔽掉。</figcaption>
+        </figure>
+        <p>逐个步骤过一遍：</p>
+        <ol>
+          <li><strong>打分</strong>：$S = QK^{\top}$，第 $i$ 个 query 和第 $j$ 个 key 做点积，衡量"这俩有多匹配"。点积就是无界的余弦相似度加强版——既看方向，也看模长。</li>
+          <li><strong>缩放</strong>：除以 $\sqrt{d_k}$，防止分数过大（下面马上解释）。</li>
+          <li><strong>掩码（可选）</strong>：把不该看的位置（比如未来的 token）置为 $-\infty$，softmax 之后权重正好是 0。</li>
+          <li><strong>归一化</strong>：对 <em>每一行</em>（也就是每个 query 对所有 key 的分数）做 softmax，变成非负、和为 1 的注意力分布 $A$。</li>
+          <li><strong>取货</strong>：$O = AV$，输出是所有 value 的凸组合。</li>
+        </ol>
+        <p>用 NumPy 写出来不到十行，麻雀虽小五脏俱全：</p>
+<pre><code><span class="k">import</span> numpy <span class="k">as</span> np
+
+<span class="k">def</span> <span class="s">attention</span>(Q, K, V, mask=<span class="k">None</span>):
+    <span class="c"># Q: (n, d_k)   K: (m, d_k)   V: (m, d_v)</span>
+    d_k = Q.shape[-<span class="s">1</span>]
+    scores = Q @ K.T / np.sqrt(d_k)          <span class="c"># 1) 打分 + 2) 缩放  -> (n, m)</span>
+    <span class="k">if</span> mask <span class="k">is not</span> <span class="k">None</span>:
+        scores = np.where(mask, scores, -np.inf)   <span class="c"># 3) 因果掩码</span>
+    A = np.exp(scores - scores.max(-<span class="s">1</span>, keepdims=<span class="k">True</span>))
+    A = A / A.sum(-<span class="s">1</span>, keepdims=<span class="k">True</span>)         <span class="c"># 4) 行 softmax</span>
+    <span class="k">return</span> A @ V                              <span class="c"># 5) 加权取值    -> (n, d_v)</span></code></pre>
+        <div class="note">
+          <span class="lb">一个常被忽略的细节</span>
+          <p>softmax 里的 <code>减 max</code> 不是可选项：指数函数爆起来没有上限，长序列 + 大分数必然溢出。减去每行最大值后结果数学上完全等价、数值上岁月静好。后面 FlashAttention 的 online softmax 也是围绕这个 max 做文章。</p>
+        </div>
+
+        <h3>为什么要除以 √d_k</h3>
+        <p>假设 $q$ 和 $k$ 的各个分量是均值 0、方差 1 的独立随机变量，那么点积 $q\cdot k=\sum_{i=1}^{d_k}q_i k_i$ 的方差是 $d_k$。当 $d_k = 128$ 时，点积的标准差约 $\sqrt{128}\approx 11$——分数动辄几十上百。</p>
+        <p>问题出在 softmax：输入一旦拉开差距，输出就接近 one-hot（比如 $[0, 0, 1, 0]$）。one-hot 意味着"只看一个位置"，而 softmax 在饱和区的梯度几乎为零，训练就停摆了。除以 $\sqrt{d_k}$ 恰好把方差拉回 1，让 softmax 待在梯度健康的"温和区"。</p>
+        <div class="tip"><span class="lb">记忆钩子</span><p>点积方差随维度涨（$\text{Var}=d_k$），除以 $\sqrt{d_k}$ 就是<strong>方差归一化</strong>，救的是 softmax 的梯度。</p></div>
+
+        <h3>三种常见口味：Self / Cross / Causal</h3>
+        <p>同样的公式，Q/K/V 从哪来，决定了注意力的"口味"：</p>
+        <ul>
+          <li><strong>Self-Attention（自注意力）</strong>：Q、K、V 都来自同一个序列。序列里的每个 token 互相看，适合理解类任务。BERT 全程用它。</li>
+          <li><strong>Cross-Attention（交叉注意力）</strong>：Q 来自序列 A（如解码器），K/V 来自序列 B（如编码器）。翻译模型里"译文看原文"就是它；Stable Diffusion 里图像块去 attend 文本 token 也是它。</li>
+          <li><strong>Causal Self-Attention（因果自注意力）</strong>：自注意力 + 上三角掩码，每个 token 只能看自己和过去。GPT 们的自回归生成全靠它，也是 KV Cache 故事的主角。</li>
+        </ul>
+        <figure class="fig">
+          <svg viewBox="0 0 560 250" font-family="inherit">
+            <!-- 左：full -->
+            <text x="118" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fig-text)">Full（BERT 式）</text>
+            <text x="118" y="48" text-anchor="middle" font-size="10.5" fill="var(--muted)">谁都能看谁</text>
+            <g>
+              <!-- 7x7 full -->
+              <g transform="translate(36,66)">
+                <defs>
+                  <pattern id="gfull" width="24" height="24" patternUnits="userSpaceOnUse">
+                    <rect width="22" height="22" fill="var(--fq)" opacity=".28"/>
+                  </pattern>
+                </defs>
+                <rect width="164" height="164" rx="6" fill="url(#gfull)"/>
+                <!-- 网格线 -->
+                <g stroke="var(--border-2)" stroke-width="1">
+                  <line x1="0" y1="24.2" x2="164" y2="24.2"/><line x1="0" y1="48.4" x2="164" y2="48.4"/><line x1="0" y1="72.5" x2="164" y2="72.5"/><line x1="0" y1="96.7" x2="164" y2="96.7"/><line x1="0" y1="120.9" x2="164" y2="120.9"/><line x1="0" y1="145.1" x2="164" y2="145.1"/>
+                  <line x1="24.2" y1="0" x2="24.2" y2="164"/><line x1="48.4" y1="0" x2="48.4" y2="164"/><line x1="72.5" y1="0" x2="72.5" y2="164"/><line x1="96.7" y1="0" x2="96.7" y2="164"/><line x1="120.9" y1="0" x2="120.9" y2="164"/><line x1="145.1" y1="0" x2="145.1" y2="164"/>
+                </g>
+                <rect width="164" height="164" rx="6" fill="none" stroke="var(--border-2)" stroke-width="1.2"/>
+              </g>
+            </g>
+            <!-- 右：causal -->
+            <text x="420" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fig-text)">Causal（GPT 式）</text>
+            <text x="420" y="48" text-anchor="middle" font-size="10.5" fill="var(--muted)">只能看过去</text>
+            <g transform="translate(338,66)">
+              <defs>
+                <clipPath id="tri7"><path d="M0,0 L0,164 L164,164 Z"/></clipPath>
+              </defs>
+              <g clip-path="url(#tri7)">
+                <rect width="164" height="164" fill="var(--fq)" opacity=".25"/>
+              </g>
+              <g stroke="var(--border-2)" stroke-width="1">
+                <line x1="0" y1="24.2" x2="164" y2="24.2"/><line x1="0" y1="48.4" x2="164" y2="48.4"/><line x1="0" y1="72.5" x2="164" y2="72.5"/><line x1="0" y1="96.7" x2="164" y2="96.7"/><line x1="0" y1="120.9" x2="164" y2="120.9"/><line x1="0" y1="145.1" x2="164" y2="145.1"/>
+                <line x1="24.2" y1="0" x2="24.2" y2="164"/><line x1="48.4" y1="0" x2="48.4" y2="164"/><line x1="72.5" y1="0" x2="72.5" y2="164"/><line x1="96.7" y1="0" x2="96.7" y2="164"/><line x1="120.9" y1="0" x2="120.9" y2="164"/><line x1="145.1" y1="0" x2="145.1" y2="164"/>
+              </g>
+              <!-- 上三角打叉区域示意 -->
+              <g fill="var(--muted)" opacity=".55" font-size="11" text-anchor="middle">
+                <text x="36" y="20">✕</text><text x="60" y="20">✕</text><text x="84" y="20">✕</text><text x="108" y="20">✕</text><text x="132" y="20">✕</text><text x="156" y="20">✕</text>
+                <text x="60" y="44">✕</text><text x="84" y="44">✕</text><text x="108" y="44">✕</text><text x="132" y="44">✕</text><text x="156" y="44">✕</text>
+                <text x="84" y="68">✕</text><text x="108" y="68">✕</text><text x="132" y="68">✕</text><text x="156" y="68">✕</text>
+                <text x="108" y="92">✕</text><text x="132" y="92">✕</text><text x="156" y="92">✕</text>
+                <text x="132" y="116">✕</text><text x="156" y="116">✕</text>
+                <text x="156" y="140">✕</text>
+              </g>
+              <rect width="164" height="164" rx="6" fill="none" stroke="var(--border-2)" stroke-width="1.2"/>
+            </g>
+            <text x="280" y="272" text-anchor="middle" font-size="11.5" fill="var(--muted)">行 = 当前 token，列 = 它能 attend 的位置（✕ = 被 −∞ 掩掉）</text>
+          </svg>
+          <figcaption><b>图 2-2</b> 注意力矩阵视角：Full 是满格，Causal 只有下三角。</figcaption>
+        </figure>
+
+        <h3>复杂度账单</h3>
+        <p>一次 self-attention（$n$ 个 token，维度 $d$）：</p>
+        <ul>
+          <li><strong>计算量</strong>：$QK^\top$ 是 $n\times n\times d$，$AV$ 又是 $n\times n\times d$，合计 $O(n^2 d)$；</li>
+          <li><strong>显存</strong>：朴素实现要把 $n\times n$ 的分数矩阵和权重矩阵都写出来，$O(n^2)$。</li>
+        </ul>
+        <p>序列长度翻倍，计算量与显存都 ×4。<strong>$n^2$ 是注意力的"原罪"</strong>——长上下文、大 batch 的一切优化，本质上都在和这个平方项搏斗：要么少存（GQA / MLA / 滑窗），要么少读写（FlashAttention / PagedAttention），要么干脆少算（稀疏 / 线性注意力）。把这条主线记牢，后面的所有章节都是它的注脚。</p>
+      </section>
+
+      <!-- ================= 3 ================= -->
+      <section id="sec-3">
+        <h2>MHA：多头注意力</h2>
+
+        <h3>一个头不够看</h3>
+        <p>单头的注意力只有一种"打分姿势"，所有 token 用同一套 $W^Q, W^K, W^V$ 投影，等于只从<strong>一个视角</strong>理解句子里错综复杂的关系。但语言里的关系是多层面的：有的头在盯<em>句法依存</em>（主谓一致），有的头在数<em>位置</em>（相邻 token），有的头在追<em>指代</em>（it 指什么）……</p>
+        <p>于是 2017 年的 Transformer 干脆并行放 $h$ 个头，各自学各自的投影矩阵，各看各的子空间，最后把结果拼起来。这就是 <strong>Multi-Head Attention（MHA）</strong>：</p>
+        $$
+        \text{head}_i=\text{Attention}(QW_i^Q,\;KW_i^K,\;VW_i^V)
+        $$
+        $$
+        \text{MHA}(Q,K,V)=\text{Concat}(\text{head}_1,\dots,\text{head}_h)\,W^O
+        $$
+
+        <h3>计算流程</h3>
+        <figure class="fig">
+          <svg viewBox="0 0 760 660" font-family="inherit">
+            <defs>
+              <marker id="ar2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+                <path d="M0,0 L8,4.5 L0,9 z" fill="var(--fig-line)"/>
+              </marker>
+            </defs>
+            <!-- 输出 -->
+            <rect x="300" y="24" width="160" height="42" rx="9" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.6"/>
+            <text x="380" y="50" text-anchor="middle" font-size="14" font-weight="700" fill="var(--accent)">输出 (n × d<tspan baseline-shift="sub" font-size="9">model</tspan>)</text>
+            <!-- W^O -->
+            <rect x="300" y="102" width="160" height="40" rx="9" fill="var(--fig-node-fill)" stroke="var(--fig-line)" stroke-width="1.5"/>
+            <text x="380" y="127" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--fig-text)">Linear W<tspan baseline-shift="super" font-size="9">O</tspan></text>
+            <!-- Concat -->
+            <rect x="120" y="180" width="520" height="40" rx="10" fill="var(--fig-node-fill)" stroke="var(--fig-line)" stroke-width="1.5"/>
+            <text x="380" y="205" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--fig-text)">Concat：把 h 个头的输出拼成 (n × d<tspan baseline-shift="sub" font-size="9">model</tspan>)</text>
+            <!-- 三个 SDPA 块 -->
+            <rect x="40" y="268" width="200" height="72" rx="10" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/>
+            <text x="140" y="298" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fig-text)">Scaled Dot-Product</text>
+            <text x="140" y="320" text-anchor="middle" font-size="12" fill="var(--fig-text)">Attention · head<tspan baseline-shift="sub" font-size="9">1</tspan></text>
+            <rect x="280" y="268" width="200" height="72" rx="10" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/>
+            <text x="380" y="298" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fig-text)">Scaled Dot-Product</text>
+            <text x="380" y="320" text-anchor="middle" font-size="12" fill="var(--fig-text)">Attention · head<tspan baseline-shift="sub" font-size="9">2</tspan></text>
+            <rect x="520" y="268" width="200" height="72" rx="10" fill="none" stroke="var(--fig-line)" stroke-width="1.3" stroke-dasharray="5 4"/>
+            <text x="620" y="300" text-anchor="middle" font-size="15" font-weight="700" fill="var(--muted)">… × h 个头</text>
+            <text x="620" y="322" text-anchor="middle" font-size="11" fill="var(--muted)">（并行计算）</text>
+            <!-- 每头的投影：3 列 × (W^V W^K W^Q) -->
+            <g font-size="11.5" font-weight="650">
+              <rect x="52" y="384" width="56" height="32" rx="7" fill="var(--fv-fill)" stroke="var(--fv)" stroke-width="1.3"/><text x="80" y="404" text-anchor="middle" fill="var(--fig-text)">W<tspan baseline-shift="super" font-size="8">V</tspan></text>
+              <rect x="118" y="384" width="56" height="32" rx="7" fill="var(--fk-fill)" stroke="var(--fk)" stroke-width="1.3"/><text x="146" y="404" text-anchor="middle" fill="var(--fig-text)">W<tspan baseline-shift="super" font-size="8">K</tspan></text>
+              <rect x="184" y="384" width="56" height="32" rx="7" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.3"/><text x="212" y="404" text-anchor="middle" fill="var(--fig-text)">W<tspan baseline-shift="super" font-size="8">Q</tspan></text>
+              <rect x="292" y="384" width="56" height="32" rx="7" fill="var(--fv-fill)" stroke="var(--fv)" stroke-width="1.3"/><text x="320" y="404" text-anchor="middle" fill="var(--fig-text)">W<tspan baseline-shift="super" font-size="8">V</tspan></text>
+              <rect x="358" y="384" width="56" height="32" rx="7" fill="var(--fk-fill)" stroke="var(--fk)" stroke-width="1.3"/><text x="386" y="404" text-anchor="middle" fill="var(--fig-text)">W<tspan baseline-shift="super" font-size="8">K</tspan></text>
+              <rect x="424" y="384" width="56" height="32" rx="7" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.3"/><text x="452" y="404" text-anchor="middle" fill="var(--fig-text)">W<tspan baseline-shift="super" font-size="8">Q</tspan></text>
+              <rect x="532" y="384" width="56" height="32" rx="7" fill="none" stroke="var(--fig-line)" stroke-width="1.1" stroke-dasharray="4 3"/><text x="560" y="404" text-anchor="middle" fill="var(--muted)">W<tspan baseline-shift="super" font-size="8">V</tspan></text>
+              <rect x="598" y="384" width="56" height="32" rx="7" fill="none" stroke="var(--fig-line)" stroke-width="1.1" stroke-dasharray="4 3"/><text x="626" y="404" text-anchor="middle" fill="var(--muted)">W<tspan baseline-shift="super" font-size="8">K</tspan></text>
+              <rect x="664" y="384" width="56" height="32" rx="7" fill="none" stroke="var(--fig-line)" stroke-width="1.1" stroke-dasharray="4 3"/><text x="692" y="404" text-anchor="middle" fill="var(--muted)">W<tspan baseline-shift="super" font-size="8">Q</tspan></text>
+            </g>
+            <text x="380" y="444" text-anchor="middle" font-size="11" fill="var(--muted)">每个头一套投影：d<tspan baseline-shift="sub" font-size="8">model</tspan> → d<tspan baseline-shift="sub" font-size="8">k</tspan> = d<tspan baseline-shift="sub" font-size="8">model</tspan> / h</text>
+            <!-- 输入 X -->
+            <rect x="310" y="480" width="140" height="44" rx="9" fill="var(--fig-node-fill)" stroke="var(--fig-line)" stroke-width="1.5"/>
+            <text x="380" y="507" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--fig-text)">输入 X (n × d<tspan baseline-shift="sub" font-size="9">model</tspan>)</text>
+            <!-- 连线 -->
+            <line x1="380" y1="66" x2="380" y2="96" stroke="var(--fig-line)" stroke-width="1.6" marker-end="url(#ar2)"/>
+            <line x1="380" y1="142" x2="380" y2="174" stroke="var(--fig-line)" stroke-width="1.6" marker-end="url(#ar2)"/>
+            <line x1="140" y1="220" x2="140" y2="262" stroke="var(--fig-line)" stroke-width="1.6" marker-end="url(#ar2)"/>
+            <line x1="380" y1="220" x2="380" y2="262" stroke="var(--fig-line)" stroke-width="1.6" marker-end="url(#ar2)"/>
+            <line x1="620" y1="220" x2="620" y2="262" stroke="var(--fig-line)" stroke-width="1.6" marker-end="url(#ar2)" stroke-dasharray="5 4"/>
+            <line x1="140" y1="340" x2="140" y2="378" stroke="var(--fig-line)" stroke-width="1.6" marker-end="url(#ar2)"/>
+            <line x1="380" y1="340" x2="380" y2="378" stroke="var(--fig-line)" stroke-width="1.6" marker-end="url(#ar2)"/>
+            <line x1="620" y1="340" x2="620" y2="378" stroke="var(--fig-line)" stroke-width="1.6" marker-end="url(#ar2)" stroke-dasharray="5 4"/>
+            <!-- X 到投影的散开连线 -->
+            <g stroke="var(--fig-line)" stroke-width="1.3" fill="none">
+              <path d="M330 480 L96 420" marker-end="url(#ar2)"/>
+              <path d="M345 480 L162 420" marker-end="url(#ar2)"/>
+              <path d="M360 480 L228 420" marker-end="url(#ar2)"/>
+              <path d="M380 480 L336 420" marker-end="url(#ar2)"/>
+              <path d="M395 480 L402 420" marker-end="url(#ar2)"/>
+              <path d="M410 480 L468 420" marker-end="url(#ar2)"/>
+            </g>
+            <text x="380" y="560" text-anchor="middle" font-size="11.5" fill="var(--muted)">（省略号列代表第 3 … h 个头，结构完全相同）</text>
+          </svg>
+          <figcaption><b>图 3-1</b> MHA：输入 X 先经过 h 套独立的 Q/K/V 投影，h 个头并行做注意力，拼接后过输出投影 W<sup>O</sup>。</figcaption>
+        </figure>
+        <p>具体过程以 Llama-3-8B 一层为例（$d_{model}=4096$，$h=32$）：</p>
+        <ol>
+          <li><strong>整体投影</strong>：$X\,(n\times 4096)$ 分别乘 $W^Q, W^K, W^V$（各 $4096\times 4096$），得到 $Q,K,V$；</li>
+          <li><strong>切头</strong>：沿最后一维切成 32 份，每头 $d_k = d_v = 4096/32 = 128$。注意"切头"只是 reshape，不引入参数；</li>
+          <li><strong>各头独立</strong>做 scaled dot-product attention，各自输出 $n\times 128$；</li>
+          <li><strong>拼接</strong>成 $n\times 4096$，再过 $W^O$（$4096\times 4096$）做头间混合。</li>
+        </ol>
+
+        <h3>几个容易踩坑的细节</h3>
+        <ul>
+          <li><strong>MHA 并不比"单头 4096 维"贵</strong>。每个头的投影是 $d_{model}\times d_k$，$h$ 个头加起来正好还是一个 $d_{model}\times d_{model}$ 的矩阵。参数量、计算量与单头同规模版本完全相同——多买的是"视角"，不是"面积"。</li>
+          <li><strong>每个头是低维子空间里的注意力</strong>：128 维的相似度度量。所以 MHA 隐式假设注意力模式是<em>低秩</em>的——这个视角对后面理解 MLA 的低秩压缩至关重要。</li>
+          <li><strong>头的数量是超参</strong>：太小表达力不足，太大每头维度太低反而学不好。工程惯例 $h\in\{32, 64\}$、$d_h\in\{64, 128\}$，且为并行友好取 2 的幂。</li>
+          <li><strong>因果掩码对每个头同样生效</strong>；训练时所有头并行算，就是一堆 batch 化的矩阵乘。</li>
+        </ul>
+
+        <h3>优势与代价</h3>
+        <div class="note">
+          <span class="lb">MHA 的账本</span>
+          <p><strong>优势</strong>：表达力天花板高（每头自带一套"检索系统"），是所有变体比拼质量的基准线；实现简单、并行度高。</p>
+          <p><strong>代价</strong>：推理时 KV Cache 按 $\times h$ 膨胀——每层每个 token 要为<strong>每个头</strong>都存一份 K 和 V。70B 级模型（如 Llama-2-70B，80 层 × 64 头 × 128 维）每个 token 要存 $2\times 80\times 64\times 128 = 1.3\text{M}$ 个数，bf16 下约 <strong>2.6 MB/token</strong>——32K 上下文就是 85 GB，比模型本体还大。这就给下一章的"缩水运动"埋下了全部伏笔。</p>
+        </div>
+      </section>
+
+      <!-- ================= 4 ================= -->
+      <section id="sec-4">
+        <h2>KV 头的精简史：MQA 与 GQA</h2>
+
+        <h3>动机：先把 KV Cache 拉出来遛一遛</h3>
+        <p>要理解 MQA / GQA 为什么出现，得先把第 7 章的主角 KV Cache 提前请上台——它正是这一切的动机。</p>
+        <p>自回归模型生成文本时，每一步都拿<strong>当前 token 的 Query</strong> 去和<strong>所有历史 token 的 K、V</strong> 做注意力。如果每步都从头重算全部 K/V，计算量是 $O(t^2 d)$ 的重复劳动；显然该把算过的存起来复用，这就是 KV Cache。</p>
+        <p>这里有个关键的不对称性：</p>
+        <div class="tip">
+          <span class="lb">Q 是一次性消耗品，K/V 是耐用品</span>
+          <p>每个 token 的 $q$ 只在它自己那一步被用到，用完即弃；而每个 token 的 $k, v$ 会被<em>之后所有步骤</em>反复使用。所以只缓存 K/V，从不缓存 Q。</p>
+        </div>
+        <p>问题是 MHA 给每个头都配了一整套 K/V 投影，于是 cache 大小是 $2 \cdot L \cdot h \cdot d_h$（$L$ 为层数）。以 Llama-2-70B 为例（80 层 × 64 头 × 128 维，bf16）：每个 token 约 <strong>2.6 MB</strong>，32K 上下文就要 <strong>~85 GB</strong>——比模型权重还大，显存直接爆炸。</p>
+        <p>于是一个很自然的念头冒出来：<strong>查询（Q 头）可以很多，但"资料库"（K/V）能不能少建几份、大家共享？</strong></p>
+
+        <h3>MQA：一个 KV 头伺候所有 Q 头</h3>
+        <p><strong>Multi-Query Attention</strong>（Shazeer, 2019，论文标题相当嚣张：《Fast Transformer Decoding: One Write-Head is All You Need》）把这个问题一步推到底：</p>
+        <ul>
+          <li><strong>结构</strong>：$h$ 个 Query 头照旧，但只有 <strong>1 个 K 头 + 1 个 V 头</strong>，所有 Q 头共享；</li>
+          <li><strong>计算</strong>：每个 Q 头各自与同一份 K/V 做 scaled dot-product attention，其余流程（拼接、$W^O$）与 MHA 完全一致；</li>
+          <li><strong>效果</strong>：KV Cache 直接 <em>除以 $h$</em>。上面 70B 的例子里，2.6 MB/token 掉到约 41 KB/token；decode 阶段每步从显存读 cache 的带宽压力同步缩水，延迟肉眼可见地下降。</li>
+        </ul>
+        <p>代价同样直白：所有 Q 头被迫共享同一套"检索系统"，不同子空间各看各的匹配模式被强行拉齐，模型质量有所回落（规模越大越明显）。所以 MQA 常见于对吞吐极其敏感的场景，代表用户：PaLM、Falcon、StarCoder。</p>
+
+        <h3>GQA：分组的艺术</h3>
+        <p>MQA 省 interspace 省得太狠，MHA 又太奢侈，<strong>Grouped-Query Attention</strong>（Ainslie et al., 2023）给出了中间态：把 $h$ 个 Q 头分成 $g$ 组，<strong>每组共享一套 K/V</strong>。</p>
+        <ul>
+          <li>$g = h$：每组一个头独享 KV —— 退化回 <strong>MHA</strong>；</li>
+          <li>$g = 1$：所有头一组 —— 退化成 <strong>MQA</strong>；</li>
+          <li>KV Cache 缩小为 MHA 的 $g/h$（例如 64 Q 头、8 组 KV：缩小 8 倍）。</li>
+        </ul>
+        <p>GQA 论文最漂亮的贡献是 <strong>uptraining</strong>：把已经训好的 MHA 模型"升级"成 GQA——同组 Q 头原本各自的 KV 投影权重取平均，作为共享投影的初始化，然后用原训练语料的 <em>~8%</em> 继续训一小会儿。结果显示 uptrained GQA 质量几乎追平 MHA，速度接近 MQA。</p>
+        <figure class="fig">
+          <svg viewBox="0 0 860 725" font-family="inherit">
+            <defs>
+              <marker id="ar3" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+                <path d="M0,0 L8,4.5 L0,9 z" fill="var(--fig-line)"/>
+              </marker>
+            </defs>
+
+            <!-- ===== 行1：MHA ===== -->
+            <text x="110" y="38" font-size="16.5" font-weight="800" fill="var(--text)">MHA</text>
+            <text x="163" y="38" font-size="12" fill="var(--muted)">Multi-Head · 每个头独享一套 KV</text>
+            <g font-size="11" font-weight="700">
+              <rect x="110" y="54" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="128" y="76" text-anchor="middle" fill="var(--fq)">Q₁</text>
+              <rect x="148" y="54" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="166" y="76" text-anchor="middle" fill="var(--fq)">Q₂</text>
+              <rect x="186" y="54" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="204" y="76" text-anchor="middle" fill="var(--fq)">Q₃</text>
+              <rect x="224" y="54" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="242" y="76" text-anchor="middle" fill="var(--fq)">Q₄</text>
+              <rect x="262" y="54" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="280" y="76" text-anchor="middle" fill="var(--fq)">Q₅</text>
+              <rect x="300" y="54" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="318" y="76" text-anchor="middle" fill="var(--fq)">Q₆</text>
+              <rect x="338" y="54" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="356" y="76" text-anchor="middle" fill="var(--fq)">Q₇</text>
+              <rect x="376" y="54" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="394" y="76" text-anchor="middle" fill="var(--fq)">Q₈</text>
+            </g>
+            <g font-size="10.5" font-weight="700">
+              <rect x="500" y="54" width="36" height="36" rx="8" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="1.5"/><text x="518" y="76" text-anchor="middle" fill="var(--fkv)">KV₁</text>
+              <rect x="538" y="54" width="36" height="36" rx="8" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="1.5"/><text x="556" y="76" text-anchor="middle" fill="var(--fkv)">KV₂</text>
+              <rect x="576" y="54" width="36" height="36" rx="8" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="1.5"/><text x="594" y="76" text-anchor="middle" fill="var(--fkv)">KV₃</text>
+              <rect x="614" y="54" width="36" height="36" rx="8" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="1.5"/><text x="632" y="76" text-anchor="middle" fill="var(--fkv)">KV₄</text>
+              <rect x="652" y="54" width="36" height="36" rx="8" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="1.5"/><text x="670" y="76" text-anchor="middle" fill="var(--fkv)">KV₅</text>
+              <rect x="690" y="54" width="36" height="36" rx="8" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="1.5"/><text x="708" y="76" text-anchor="middle" fill="var(--fkv)">KV₆</text>
+              <rect x="728" y="54" width="36" height="36" rx="8" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="1.5"/><text x="746" y="76" text-anchor="middle" fill="var(--fkv)">KV₇</text>
+              <rect x="766" y="54" width="36" height="36" rx="8" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="1.5"/><text x="784" y="76" text-anchor="middle" fill="var(--fkv)">KV₈</text>
+            </g>
+            <g stroke="var(--fig-line)" stroke-width="1.4">
+              <line x1="146" y1="72" x2="496" y2="72"/>
+              <line x1="184" y1="72" x2="534" y2="72"/>
+              <line x1="222" y1="72" x2="572" y2="72"/>
+              <line x1="260" y1="72" x2="610" y2="72"/>
+              <line x1="298" y1="72" x2="648" y2="72"/>
+              <line x1="336" y1="72" x2="686" y2="72"/>
+              <line x1="374" y1="72" x2="724" y2="72"/>
+              <line x1="412" y1="72" x2="762" y2="72"/>
+            </g>
+            <text x="110" y="130" font-size="12.5" fill="var(--muted)">KV Cache：<tspan font-weight="700" fill="var(--text)">8 套 × (K + V)</tspan> —— 基准 100%</text>
+            <rect x="640" y="112" width="162" height="28" rx="14" fill="var(--accent-soft)"/>
+            <text x="721" y="131" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--accent)">质量基准 · Cache 最大</text>
+            <line x1="40" y1="165" x2="820" y2="165" stroke="var(--border)" stroke-width="1" stroke-dasharray="4 5"/>
+
+            <!-- ===== 行2：GQA ===== -->
+            <text x="110" y="203" font-size="16.5" font-weight="800" fill="var(--text)">GQA</text>
+            <text x="163" y="203" font-size="12" fill="var(--muted)">Grouped-Query · 组内共享，g = 2</text>
+            <!-- 分组背景 -->
+            <rect x="104" y="216" width="164" height="48" rx="10" fill="var(--fkv-fill)" opacity=".45"/>
+            <rect x="272" y="216" width="164" height="48" rx="10" fill="var(--fq-fill)" opacity=".55"/>
+            <g font-size="11" font-weight="700">
+              <rect x="110" y="222" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="128" y="244" text-anchor="middle" fill="var(--fq)">Q₁</text>
+              <rect x="148" y="222" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="166" y="244" text-anchor="middle" fill="var(--fq)">Q₂</text>
+              <rect x="186" y="222" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="204" y="244" text-anchor="middle" fill="var(--fq)">Q₃</text>
+              <rect x="224" y="222" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="242" y="244" text-anchor="middle" fill="var(--fq)">Q₄</text>
+              <rect x="278" y="222" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="296" y="244" text-anchor="middle" fill="var(--fq)">Q₅</text>
+              <rect x="316" y="222" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="334" y="244" text-anchor="middle" fill="var(--fq)">Q₆</text>
+              <rect x="354" y="222" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="372" y="244" text-anchor="middle" fill="var(--fq)">Q₇</text>
+              <rect x="392" y="222" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="410" y="244" text-anchor="middle" fill="var(--fq)">Q₈</text>
+            </g>
+            <g font-size="10.5" font-weight="700">
+              <rect x="500" y="208" width="36" height="36" rx="8" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="1.5"/><text x="518" y="230" text-anchor="middle" fill="var(--fkv)">KV₁</text>
+              <rect x="500" y="266" width="36" height="36" rx="8" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="1.5"/><text x="518" y="288" text-anchor="middle" fill="var(--fkv)">KV₂</text>
+            </g>
+            <g stroke="var(--fkv)" stroke-width="1.5" opacity=".65">
+              <line x1="146" y1="240" x2="496" y2="226"/>
+              <line x1="184" y1="240" x2="496" y2="226"/>
+              <line x1="222" y1="240" x2="496" y2="226"/>
+              <line x1="260" y1="240" x2="496" y2="226"/>
+              <line x1="314" y1="240" x2="496" y2="284"/>
+              <line x1="352" y1="240" x2="496" y2="284"/>
+              <line x1="390" y1="240" x2="496" y2="284"/>
+              <line x1="428" y1="240" x2="496" y2="284"/>
+            </g>
+            <text x="560" y="230" font-size="11" fill="var(--muted)">← 组 1（Q₁–Q₄ 共享 KV₁）</text>
+            <text x="560" y="290" font-size="11" fill="var(--muted)">← 组 2（Q₅–Q₈ 共享 KV₂）</text>
+            <text x="110" y="336" font-size="12.5" fill="var(--muted)">KV Cache：<tspan font-weight="700" fill="var(--text)">2 套 × (K + V)</tspan> —— 25%</text>
+            <rect x="640" y="318" width="162" height="28" rx="14" fill="var(--accent-soft)"/>
+            <text x="721" y="337" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--accent)">质量 ≈ MHA · 甜点位</text>
+            <line x1="40" y1="371" x2="820" y2="371" stroke="var(--border)" stroke-width="1" stroke-dasharray="4 5"/>
+
+            <!-- ===== 行3：MQA ===== -->
+            <text x="110" y="409" font-size="16.5" font-weight="800" fill="var(--text)">MQA</text>
+            <text x="163" y="409" font-size="12" fill="var(--muted)">Multi-Query · 全体共享一套 KV</text>
+            <g font-size="11" font-weight="700">
+              <rect x="110" y="424" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="128" y="446" text-anchor="middle" fill="var(--fq)">Q₁</text>
+              <rect x="148" y="424" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="166" y="446" text-anchor="middle" fill="var(--fq)">Q₂</text>
+              <rect x="186" y="424" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="204" y="446" text-anchor="middle" fill="var(--fq)">Q₃</text>
+              <rect x="224" y="424" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="242" y="446" text-anchor="middle" fill="var(--fq)">Q₄</text>
+              <rect x="262" y="424" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="280" y="446" text-anchor="middle" fill="var(--fq)">Q₅</text>
+              <rect x="300" y="424" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="318" y="446" text-anchor="middle" fill="var(--fq)">Q₆</text>
+              <rect x="338" y="424" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="356" y="446" text-anchor="middle" fill="var(--fq)">Q₇</text>
+              <rect x="376" y="424" width="36" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/><text x="394" y="446" text-anchor="middle" fill="var(--fq)">Q₈</text>
+            </g>
+            <rect x="500" y="452" width="36" height="36" rx="8" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="2"/>
+            <text x="518" y="474" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fkv)">KV</text>
+            <g stroke="var(--fkv)" stroke-width="1.5" opacity=".65">
+              <line x1="146" y1="442" x2="496" y2="466"/>
+              <line x1="184" y1="442" x2="496" y2="468"/>
+              <line x1="222" y1="442" x2="496" y2="470"/>
+              <line x1="260" y1="442" x2="496" y2="472"/>
+              <line x1="298" y1="442" x2="496" y2="474"/>
+              <line x1="336" y1="442" x2="496" y2="476"/>
+              <line x1="374" y1="442" x2="496" y2="478"/>
+              <line x1="412" y1="442" x2="496" y2="480"/>
+            </g>
+            <text x="110" y="538" font-size="12.5" fill="var(--muted)">KV Cache：<tspan font-weight="700" fill="var(--text)">1 套 × (K + V)</tspan> —— 12.5%</text>
+            <rect x="640" y="520" width="162" height="28" rx="14" fill="var(--accent-soft)"/>
+            <text x="721" y="539" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--accent)">最快最省 · 略有掉点</text>
+
+            <!-- 总结条 -->
+            <rect x="60" y="600" width="740" height="48" rx="12" fill="var(--accent-soft)" stroke="var(--border)"/>
+            <text x="430" y="629" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--text)">同一思想的三个刻度：KV 头数 8 → 2 → 1，KV Cache 与访存带宽同比例缩水</text>
+            <text x="430" y="680" text-anchor="middle" font-size="11.5" fill="var(--muted)">（连线即"谁用哪套 KV"；工业界最常见的是 GQA，如 Llama-3：32Q/8KV 与 64Q/8KV）</text>
+          </svg>
+          <figcaption><b>图 4-1</b> MHA / GQA / MQA 的 KV 共享方式对比（以 8 个 Q 头为例）。GQA 是 MQA 与 MHA 之间的"可调旋钮"。</figcaption>
+        </figure>
+
+        <h3>工业界的选择</h3>
+        <div class="tblwrap"><table class="tbl">
+          <thead><tr><th>模型</th><th>注意力</th><th>Q 头 : KV 头</th><th>KV Cache 相对 MHA</th></tr></thead>
+          <tbody>
+            <tr><td><b>GPT-3 / 原版 Transformer</b></td><td>MHA</td><td>h : h</td><td>1×（基准）</td></tr>
+            <tr><td><b>PaLM / Falcon / StarCoder</b></td><td>MQA</td><td>h : 1</td><td>1/h（如 1/32、1/128）</td></tr>
+            <tr><td><b>Llama-2-70B</b></td><td>GQA</td><td>64 : 8</td><td>1/8</td></tr>
+            <tr><td><b>Llama-3-8B / 70B</b></td><td>GQA</td><td>32 : 8 / 64 : 8</td><td>1/4 / 1/8</td></tr>
+            <tr><td><b>Mistral-7B</b></td><td>GQA + 滑窗</td><td>32 : 8</td><td>1/4（再叠窗口封顶）</td></tr>
+            <tr><td><b>Qwen2 / Qwen3</b></td><td>GQA</td><td>各异</td><td>约 1/4 ~ 1/8</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note">
+          <span class="lb">怎么选</span>
+          <p><strong>从零训练</strong>：无脑 GQA，组比 4:1 ~ 16:1 是主流甜点位（70B 级常用 8:1）。<strong>已有 MHA 模型想省显存</strong>：uptraining 转 GQA，成本约为预训练的 8%。<strong>追求极限性价比</strong>：上 MLA，下一章。</p>
+        </div>
+      </section>
+
+      <!-- ================= 5 ================= -->
+      <section id="sec-5">
+        <h2>MLA：DeepSeek 的降维打击</h2>
+
+        <h3>动机：换个维度想问题</h3>
+        <p>GQA / MQA 省的是 KV 的<strong>份数</strong>，每一份 K/V 本身还是原样保存。DeepSeek-V2 的 <strong>MLA（Multi-head Latent Attention）</strong>换了个思路：K/V 本来就是 $h_t$ 经过投影矩阵算出来的产物——MHA 每头 $d_h$ 维、总共 $h\cdot d_h$ 维的 K/V，信息源头无非是 $d_{model}$ 维的隐藏状态。那凭什么要存"解压后"的完整 K/V？<strong>存压缩包不就行了？</strong></p>
+        <p>这就是低秩压缩：把 K/V 联合压缩进一个潜在向量 $c^{KV}$，推理时只缓存它，用的时候再"解压"还原。</p>
+
+        <h3>结构与计算</h3>
+        <p>MLA 的完整公式（下投影 ↓、上投影 ↑）：</p>
+        $$
+        c_t^{KV} = W^{DKV}\, h_t \qquad (\text{下投影：} d_{model} \to d_c,\ d_c = 512)
+        $$
+        $$
+        k_{t,i}^{C} = W_i^{UK}\, c_t^{KV}, \qquad v_{t,i}^{C} = W_i^{UV}\, c_t^{KV} \qquad (\text{上投影还原出每头的 K / V})
+        $$
+        <p>Q 侧如法炮制（主要为省训练时的参数与激活，Q 反正不缓存，对 KV Cache 无影响）：</p>
+        $$
+        c_t^{Q} = W^{DQ} h_t, \qquad q_{t,i}^{C} = W_i^{UQ} c_t^{Q}
+        $$
+        <p>推理时<em>只需缓存</em> $c_t^{KV}$（512 维）和下面要讲的 RoPE 部分 $k_t^R$（64 维），合计 <strong>576 个数 / 层 / token</strong>。对比 MHA 的 $2\cdot h\cdot d_h = 2\times128\times128 = 32768$ 个数，压缩约 <strong>57 倍</strong>。</p>
+        <figure class="fig">
+          <svg viewBox="0 0 880 620" font-family="inherit">
+            <defs>
+              <marker id="ar4" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+                <path d="M0,0 L8,4.5 L0,9 z" fill="var(--fig-line)"/>
+              </marker>
+            </defs>
+            <!-- h_t -->
+            <rect x="20" y="268" width="66" height="50" rx="9" fill="var(--fig-node-fill)" stroke="var(--fig-line)" stroke-width="1.5"/>
+            <text x="53" y="298" text-anchor="middle" font-size="15" font-weight="700" fill="var(--fig-text)">h<tspan baseline-shift="sub" font-size="10">t</tspan></text>
+
+            <!-- Q 的 RoPE 路 -->
+            <rect x="168" y="16" width="92" height="34" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.4"/>
+            <text x="214" y="37" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--fig-text)">W<tspan baseline-shift="super" font-size="9">KR</tspan></text>
+            <rect x="322" y="16" width="120" height="34" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.4"/>
+            <text x="382" y="37" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fig-text)">RoPE(q<tspan baseline-shift="sub" font-size="9">i</tspan>)</text>
+            <polyline points="86,272 130,272 130,33 164,33" fill="none" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar4)"/>
+            <line x1="260" y1="33" x2="318" y2="33" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar4)"/>
+
+            <!-- Q 的内容路 -->
+            <rect x="168" y="72" width="92" height="36" rx="8" fill="var(--fig-node-fill)" stroke="var(--fig-line)" stroke-width="1.4"/>
+            <text x="214" y="94" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--fig-text)">W<tspan baseline-shift="super" font-size="9">DQ</tspan></text>
+            <rect x="322" y="72" width="88" height="36" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.6"/>
+            <text x="366" y="94" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--fig-text)">c<tspan baseline-shift="super" font-size="9">Q</tspan></text>
+            <rect x="468" y="72" width="92" height="36" rx="8" fill="var(--fig-node-fill)" stroke="var(--fig-line)" stroke-width="1.4"/>
+            <text x="514" y="94" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--fig-text)">W<tspan baseline-shift="super" font-size="9">UQ</tspan></text>
+            <rect x="614" y="56" width="150" height="66" rx="10" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/>
+            <text x="689" y="84" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fig-text)">q₁<tspan baseline-shift="super" font-size="9">C</tspan> … qₕ<tspan baseline-shift="super" font-size="9">C</tspan></text>
+            <text x="689" y="106" text-anchor="middle" font-size="10.5" fill="var(--muted)">（h 个头，无位置编码）</text>
+            <polyline points="86,286 148,286 148,90 164,90" fill="none" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar4)"/>
+            <line x1="260" y1="90" x2="318" y2="90" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar4)"/>
+            <line x1="410" y1="90" x2="464" y2="90" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar4)"/>
+            <line x1="560" y1="90" x2="610" y2="90" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar4)"/>
+
+            <!-- KV 的内容路 -->
+            <rect x="168" y="430" width="92" height="40" rx="8" fill="var(--fig-node-fill)" stroke="var(--fig-line)" stroke-width="1.4"/>
+            <text x="214" y="454" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--fig-text)">W<tspan baseline-shift="super" font-size="9">DKV</tspan></text>
+            <rect x="312" y="418" width="108" height="64" rx="10" fill="none" stroke="var(--fkv)" stroke-width="1.4" stroke-dasharray="6 4"/>
+            <rect x="322" y="430" width="88" height="40" rx="8" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="2.2"/>
+            <text x="366" y="454" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--fkv)">c<tspan baseline-shift="super" font-size="9">KV</tspan> ★</text>
+            <rect x="468" y="386" width="92" height="36" rx="8" fill="var(--fig-node-fill)" stroke="var(--fig-line)" stroke-width="1.4"/>
+            <text x="514" y="408" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--fig-text)">W<tspan baseline-shift="super" font-size="9">UK</tspan></text>
+            <rect x="468" y="474" width="92" height="36" rx="8" fill="var(--fig-node-fill)" stroke="var(--fig-line)" stroke-width="1.4"/>
+            <text x="514" y="496" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--fig-text)">W<tspan baseline-shift="super" font-size="9">UV</tspan></text>
+            <rect x="614" y="378" width="150" height="52" rx="10" fill="var(--fk-fill)" stroke="var(--fk)" stroke-width="1.5"/>
+            <text x="689" y="398" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fig-text)">k₁<tspan baseline-shift="super" font-size="9">C</tspan> … kₕ<tspan baseline-shift="super" font-size="9">C</tspan></text>
+            <text x="689" y="418" text-anchor="middle" font-size="10.5" fill="var(--muted)">（由 c<tspan baseline-shift="super" font-size="8">KV</tspan> 解压）</text>
+            <rect x="614" y="466" width="150" height="52" rx="10" fill="var(--fv-fill)" stroke="var(--fv)" stroke-width="1.5"/>
+            <text x="689" y="486" text-anchor="middle" font-size="13" font-weight="700" fill="var(--fig-text)">v₁<tspan baseline-shift="super" font-size="9">C</tspan> … vₕ<tspan baseline-shift="super" font-size="9">C</tspan></text>
+            <text x="689" y="506" text-anchor="middle" font-size="10.5" fill="var(--muted)">（由 c<tspan baseline-shift="super" font-size="8">KV</tspan> 解压）</text>
+            <polyline points="86,293 148,293 148,450 164,450" fill="none" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar4)"/>
+            <line x1="260" y1="450" x2="318" y2="450" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar4)"/>
+            <polyline points="410,446 440,446 440,404 464,404" fill="none" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar4)"/>
+            <polyline points="410,454 440,454 440,492 464,492" fill="none" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar4)"/>
+            <line x1="560" y1="404" x2="610" y2="404" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar4)"/>
+            <line x1="560" y1="492" x2="610" y2="492" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar4)"/>
+
+            <!-- KV 的 RoPE 路 -->
+            <rect x="168" y="524" width="92" height="36" rx="8" fill="var(--fig-node-fill)" stroke="var(--fig-line)" stroke-width="1.4"/>
+            <text x="214" y="547" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--fig-text)">W<tspan baseline-shift="super" font-size="9">KR</tspan></text>
+            <rect x="312" y="512" width="140" height="60" rx="10" fill="none" stroke="var(--fkv)" stroke-width="1.4" stroke-dasharray="6 4"/>
+            <rect x="322" y="524" width="120" height="36" rx="8" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="2.2"/>
+            <text x="382" y="547" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--fkv)">RoPE(k) ★</text>
+            <polyline points="86,300 148,300 148,542 164,542" fill="none" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar4)"/>
+            <line x1="260" y1="542" x2="318" y2="542" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar4)"/>
+
+            <!-- Attention 汇聚 -->
+            <rect x="796" y="250" width="76" height="100" rx="12" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.8"/>
+            <text x="834" y="292" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--accent)">Attn +</text>
+            <text x="834" y="312" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--accent)">softmax</text>
+            <polyline points="764,89 834,89 834,246" fill="none" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar4)"/>
+            <polyline points="764,404 834,404 834,354" fill="none" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar4)"/>
+            <polyline points="764,492 870,492 870,354" fill="none" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar4)"/>
+            <text x="834" y="376" text-anchor="middle" font-size="11" fill="var(--muted)">→ Wᴼ → o<tspan baseline-shift="sub" font-size="8">t</tspan></text>
+
+            <!-- 中部说明 -->
+            <text x="580" y="240" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--text)">注意力分数 = qᶜ·kᶜ ＋ qᴿ·kᴿ</text>
+            <text x="580" y="260" text-anchor="middle" font-size="11" fill="var(--muted)">（内容通道 ＋ 位置通道，两段相加）</text>
+
+            <!-- 底部总结 -->
+            <rect x="60" y="588" width="740" height="0" fill="none"/>
+            <text x="440" y="606" text-anchor="middle" font-size="12" fill="var(--muted)">★ 推理时每层每 token 只缓存粉色两项：c<tspan baseline-shift="super" font-size="9">KV</tspan>(512 维) ＋ RoPE k(64 维) = <tspan font-weight="700" fill="var(--fkv)">576 维</tspan>；MHA 同规模需 2×h×d<tspan baseline-shift="sub" font-size="9">h</tspan> = 32768 维</text>
+          </svg>
+          <figcaption><b>图 5-1</b> MLA 结构示意。K/V 不再逐头保存，而是压进潜在向量 c<sup>KV</sup>；位置信息经解耦的 RoPE 通道单独处理（★ 标记 = 推理时需要缓存的部分）。</figcaption>
+        </figure>
+
+        <h3>RoPE 为什么必须"解耦"</h3>
+        <p>细心的你会发现图里 RoPE 被单独拉了一条通道，这不是洁癖，是被逼的。</p>
+        <p>RoPE（旋转位置编码）通过给 $q$、$k$ 乘上<strong>与位置相关的旋转矩阵</strong> $R$ 来注入相对位置信息。问题来了：假如让带位置的 $k = R\, W^{UK} c^{KV}$，那么注意力分数里就出现 $q^{\top} R\, W^{UK} c^{KV}$——这个 $R$ 插在两个可学习矩阵中间，且对每个位置都不同：</p>
+        <ul>
+          <li>想预计算吸收矩阵？$R$ 依赖位置，吸收不了；</li>
+          <li>想只缓存 $c^{KV}$ 等价恢复？$R$ 在中间横着，缓存里没有它的位置。</li>
+        </ul>
+        <p>MLA 的解法是把位置信息<strong>分流</strong>：内容相似度走 $c$ 通道（不带位置），位置相似度走一条独立的共享 RoPE 通道（$k^R$ 只有 64 维，所有头共用一份）。最终的注意力分数是两段之和：</p>
+        $$
+        \text{score}(q_t, k_s) = \big(q_t^{C}\big)^{\top} k_s^{C} \;+\; \big(q_t^{R}\big)^{\top} k_s^{R}
+        $$
+        <p>这样内容部分可以放心做低秩缓存，位置部分单独缓存一份小小的 $k^R$，两全其美。</p>
+
+        <h3>矩阵吸收：跑得快的秘密</h3>
+        <p>MLA 还有个进阶技巧，理解它需要一点矩阵转置的耐心。内容通道的分数：</p>
+        $$
+        \big(q_i^{C}\big)^{\top} k_i^{C} = \big(W_i^{UQ} c_t^{Q}\big)^{\top} \big(W_i^{UK} c_s^{KV}\big) = \big(c_t^{Q}\big)^{\top} \underbrace{\big(W_i^{UQ}\big)^{\top} W_i^{UK}}_{\text{可预融合}} \, c_s^{KV}
+        $$
+        <p>中间那个括号<strong>与位置无关</strong>，完全可以预先算好存起来（"吸收"）。V 侧同理，把 $W^{UV}$ 吸收进输出投影 $W^O$。于是推理时 MLA 甚至<em>不需要显式解压出 K/V</em>，直接拿 $c^{KV}$ 做运算——cache 小、算的还快，等价于一个"超宽 MQA"。（RoPE 那一段因为位置矩阵插在中间，无法吸收——这正是它必须解耦的原因，环环相扣。）</p>
+
+        <h3>效果与代价</h3>
+        <div class="note">
+          <span class="lb">MLA 的账本</span>
+          <p><strong>收益</strong>：DeepSeek-V2 论文报告 KV Cache 减少 <b>93.3%</b>（DeepSeek-V3 约 70 KB/token），且 60 项基准平均分<em>反超</em> MHA 与 GQA——低秩约束意外起到了正则化效果。V3 的 61 层全部使用 MLA。</p>
+          <p><strong>代价</strong>：实现复杂度上一个台阶（矩阵吸收、RoPE 解耦、专用 kernel）；$W^{UK}, W^{UV}$ 每层参数不小（$d_c \times h \cdot d_h$）；训练与通信模式和主流 GQA 栈不同，生态适配要下功夫。另外和 GQA 比，MLA 的激活值更大（还原多头计算仍要做）。</p>
+        </div>
+        <p>横向比一下同量级选手的每 token KV Cache（bf16）：</p>
+        <div class="tblwrap"><table class="tbl">
+          <thead><tr><th>模型（约 60–80 层）</th><th>方案</th><th>每 token KV Cache</th><th>32K 上下文合计</th></tr></thead>
+          <tbody>
+            <tr><td>Llama-3-70B</td><td>GQA（8 KV 头）</td><td>320 KB</td><td>~10 GB</td></tr>
+            <tr><td>DeepSeek-V3</td><td>MLA</td><td>~70 KB</td><td>~2.2 GB</td></tr>
+            <tr><td>假想 MHA 版 70B</td><td>MHA（64 KV 头）</td><td>~2.6 MB</td><td>~83 GB</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <!-- ================= 6 ================= -->
+      <section id="sec-6">
+        <h2>改变注意力"形状"的变体</h2>
+        <p>MHA → MQA → GQA → MLA 这条线，优化的是 <strong>"每个位置存多少 KV"</strong>。还有另一条完全不同的战线：干脆改变注意力矩阵的<strong>形状</strong>——不让每个 token 都看所有 token。这一章过一遍这条线上的代表选手。</p>
+
+        <h3>SWA：滑窗注意力</h3>
+        <p><strong>Sliding Window Attention</strong>（Mistral 7B，2023）简单粗暴：每个 token 只 attend 最近 $w$ 个 token（如 $w=4096$），注意力矩阵从满格变成对角带状。</p>
+        <ul>
+          <li><strong>复杂度</strong>：$O(n\cdot w)$，$w$ 固定后随序列长度线性增长；</li>
+          <li><strong>感受野</strong>：单层只能看 $w$，但信息可以逐层接力——第 $L$ 层理论上能"传话"到 $L\cdot w$ 远处；</li>
+          <li><strong>KV Cache</strong>：滚动缓冲区，超过 $w$ 的旧格子直接丢弃，cache 被窗口<em>封顶</em>。</li>
+        </ul>
+        <figure class="fig">
+          <svg viewBox="0 0 560 250" font-family="inherit">
+            <text x="118" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fig-text)">Full Attention</text>
+            <text x="118" y="48" text-anchor="middle" font-size="10.5" fill="var(--muted)">O(n²) · 谁都能看谁</text>
+            <g transform="translate(36,66)">
+              <defs>
+                <pattern id="gfull2" width="24" height="24" patternUnits="userSpaceOnUse">
+                  <rect width="22" height="22" fill="var(--fq)" opacity=".28"/>
+                </pattern>
+              </defs>
+              <rect width="164" height="164" rx="6" fill="url(#gfull2)" transform="scale(0.6944)"/>
+              <g stroke="var(--border-2)" stroke-width="1">
+                <line x1="0" y1="24.2" x2="164" y2="24.2"/><line x1="0" y1="48.4" x2="164" y2="48.4"/><line x1="0" y1="72.5" x2="164" y2="72.5"/><line x1="0" y1="96.7" x2="164" y2="96.7"/><line x1="0" y1="120.9" x2="164" y2="120.9"/><line x1="0" y1="145.1" x2="164" y2="145.1"/>
+                <line x1="24.2" y1="0" x2="24.2" y2="164"/><line x1="48.4" y1="0" x2="48.4" y2="164"/><line x1="72.5" y1="0" x2="72.5" y2="164"/><line x1="96.7" y1="0" x2="96.7" y2="164"/><line x1="120.9" y1="0" x2="120.9" y2="164"/><line x1="145.1" y1="0" x2="145.1" y2="164"/>
+              </g>
+              <rect width="164" height="164" rx="6" fill="none" stroke="var(--border-2)" stroke-width="1.2"/>
+            </g>
+            <text x="420" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="var(--fig-text)">Sliding Window (w = 3)</text>
+            <text x="420" y="48" text-anchor="middle" font-size="10.5" fill="var(--muted)">O(n·w) · 只看最近 w 个</text>
+            <g transform="translate(338,66)">
+              <defs>
+                <clipPath id="band3"><path d="M0,0 L164,164 L120,164 L0,48 Z"/></clipPath>
+              </defs>
+              <g clip-path="url(#band3)">
+                <rect width="164" height="164" fill="var(--fk)" opacity=".3"/>
+              </g>
+              <g stroke="var(--border-2)" stroke-width="1">
+                <line x1="0" y1="24.2" x2="164" y2="24.2"/><line x1="0" y1="48.4" x2="164" y2="48.4"/><line x1="0" y1="72.5" x2="164" y2="72.5"/><line x1="0" y1="96.7" x2="164" y2="96.7"/><line x1="0" y1="120.9" x2="164" y2="120.9"/><line x1="0" y1="145.1" x2="164" y2="145.1"/>
+                <line x1="24.2" y1="0" x2="24.2" y2="164"/><line x1="48.4" y1="0" x2="48.4" y2="164"/><line x1="72.5" y1="0" x2="72.5" y2="164"/><line x1="96.7" y1="0" x2="96.7" y2="164"/><line x1="120.9" y1="0" x2="120.9" y2="164"/><line x1="145.1" y1="0" x2="145.1" y2="164"/>
+              </g>
+              <rect width="164" height="164" rx="6" fill="none" stroke="var(--border-2)" stroke-width="1.2"/>
+            </g>
+            <text x="280" y="272" text-anchor="middle" font-size="11.5" fill="var(--muted)">带状区域内（含对角线）可见；信息通过层间接力向外扩散</text>
+          </svg>
+          <figcaption><b>图 6-1</b> 满注意力 vs 滑窗注意力。窗口内的历史照常缓存，窗口外的直接滚出缓冲区。</figcaption>
+        </figure>
+        <p>纯滑窗会牺牲长程能力，现代用法是<strong>混合</strong>：绝大多数层用滑窗省开销，穿插少量全局层兜底传远信息。Gemma-2 / Gemma-3 采用"5 层滑窗 + 1 层全局"的节奏；Mistral 系列也用滑窗 + 滚动 cache。这是个"精度换速度"的务实选项，尤其适合局部性强的任务（代码、对话续写）。</p>
+
+        <h3>Sparse Attention：Longformer / BigBird 一族</h3>
+        <p>更早的长文本探索（2020 前后）把注意力矩阵拆成三种成分的稀疏组合：</p>
+        <ul>
+          <li><strong>全局 token</strong>：少数关键位置（如 [CLS]）可以看所有人，也被所有人看；</li>
+          <li><strong>滑窗</strong>：保证局部上下文；</li>
+          <li><strong>随机 / 膨胀连接</strong>：随机拉几条远距离边。理论上随机边能让任意两点的信息路径长度从 $O(n/w)$ 降到 $O(\log n)$ 量级。</li>
+        </ul>
+        <p>思路优雅，但工程实现繁琐（稀疏 kernel 难写高效），逐渐被"滑窗 + 少量全局层"的简洁方案和后面的原生稀疏注意力取代。知道这条脉络即可。</p>
+
+        <h3>Linear Attention：把 softmax 换掉</h3>
+        <p>另一支奇兵盯上了复杂度的根源——softmax。把 $\text{softmax}(qk)$ 近似为核函数 $\phi(q)\cdot\phi(k)$，于是：</p>
+        $$
+        \big(\phi(Q)\phi(K)^{\top}\big)V = \phi(Q)\big(\phi(K)^{\top}V\big)
+        $$
+        <p>换个括号位置，先算 $\phi(K)^{\top}V$（$d\times d$ 的小矩阵，与 $n$ 无关），复杂度从 $O(n^2)$ 降到 $O(n\cdot d^2)$。Performer、Linear Transformer 是代表。可惜近似 softmax 的质量损失在实际任务中往往得不偿失，主流 LLM 没有采用；不过它的思想活在 RWKV、Mamba 这些线性 RNN 化的架构里——那是另一个故事了。</p>
+
+        <h3>前沿：原生稀疏注意力（NSA / MoBA）</h3>
+        <p>2025 年的长上下文新解法：与其推理时用启发式规则裁剪注意力，不如<strong>训练时就让模型学会"看哪里"</strong>。</p>
+        <ul>
+          <li><strong>NSA</strong>（Native Sparse Attention，DeepSeek，2025）：三分支并行——<em>压缩分支</em>（对 KV 块做粗粒度汇总，先快速定位）、<em>选择分支</em>（门控挑选 top 相关的 KV 块精算）、<em>滑窗分支</em>（保底局部），可学习门控聚合三者。块级稀疏对 GPU 友好，训练推理行为一致。</li>
+          <li><strong>MoBA</strong>（Moonshot，2025）：把 MoE 的路由思想搬到注意力上——每个 query 像"专家选择"一样路由到相关的 KV 块。</li>
+        </ul>
+        <p>这条线的野心是让长上下文的成本从 $O(n^2)$ 里真正跳出来，同时由模型自己决定省哪些计算。DeepSeek-V3.1 已经把 NSA 用上生产，值得持续关注。</p>
+      </section>
+
+      <!-- ================= 7 ================= -->
+      <section id="sec-7">
+        <h2>KV Cache：推理的阿喀琉斯之踵</h2>
+
+        <h3>推理的两个阶段：prefill 与 decode</h3>
+        <p>LLM 推理（自回归生成）实际分两段，瓶颈完全不同：</p>
+        <ul>
+          <li><strong>Prefill（预填充）</strong>：把整个 prompt 一次性并行喂进去，算出所有位置的 KV 并入缓存。这一步是规整的大矩阵乘（GEMM），<em>算力瓶颈（compute-bound）</em>，GPU 利用率高。</li>
+          <li><strong>Decode（解码）</strong>：逐个 token 生成。每步只处理 1 个新 token：算它的 $q$，与缓存里<em>全部</em>历史 K/V 做注意力，再把它的 K/V 追加进缓存。这一步是小矩阵乘向量（GEMV），<em>带宽瓶颈（memory-bound）</em>——每生成 1 个 token，都要把整份 KV Cache 从显存搬一遍。</li>
+        </ul>
+        <figure class="fig">
+          <svg viewBox="0 0 860 320" font-family="inherit">
+            <defs>
+              <marker id="ar5" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+                <path d="M0,0 L8,4.5 L0,9 z" fill="var(--fig-line)"/>
+              </marker>
+              <marker id="ar5p" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+                <path d="M0,0 L8,4.5 L0,9 z" fill="var(--fkv)"/>
+              </marker>
+            </defs>
+            <!-- 4 个步骤面板 -->
+            <g>
+              <!-- t=1 -->
+              <text x="115" y="52" text-anchor="middle" font-size="14" font-weight="800" fill="var(--text)">t = 1</text>
+              <rect x="83" y="66" width="64" height="32" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/>
+              <text x="115" y="87" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fq)">q₁ ·「今」</text>
+              <line x1="115" y1="98" x2="115" y2="124" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar5)"/>
+              <rect x="45" y="124" width="140" height="126" rx="10" fill="var(--fig-node-fill)" stroke="var(--border-2)" stroke-width="1.4"/>
+              <rect x="53" y="214" width="124" height="26" rx="6" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="1.8"/>
+              <text x="115" y="231" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fkv)">K₁V₁ ·「今」</text>
+              <text x="115" y="278" text-anchor="middle" font-size="12" fill="var(--muted)">输出 →「天」</text>
+              <!-- t=2 -->
+              <text x="331" y="52" text-anchor="middle" font-size="14" font-weight="800" fill="var(--text)">t = 2</text>
+              <rect x="299" y="66" width="64" height="32" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/>
+              <text x="331" y="87" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fq)">q₂ ·「天」</text>
+              <line x1="331" y1="98" x2="331" y2="124" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar5)"/>
+              <rect x="261" y="124" width="140" height="126" rx="10" fill="var(--fig-node-fill)" stroke="var(--border-2)" stroke-width="1.4"/>
+              <rect x="269" y="214" width="124" height="26" rx="6" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="1.2" opacity=".55"/>
+              <text x="331" y="231" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fkv)" opacity=".75">K₁V₁ ·「今」</text>
+              <rect x="269" y="186" width="124" height="26" rx="6" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="1.8"/>
+              <text x="331" y="203" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fkv)">K₂V₂ ·「天」</text>
+              <text x="331" y="278" text-anchor="middle" font-size="12" fill="var(--muted)">输出 →「气」</text>
+              <!-- t=3 -->
+              <text x="547" y="52" text-anchor="middle" font-size="14" font-weight="800" fill="var(--text)">t = 3</text>
+              <rect x="515" y="66" width="64" height="32" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/>
+              <text x="547" y="87" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fq)">q₃ ·「气」</text>
+              <line x1="547" y1="98" x2="547" y2="124" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar5)"/>
+              <rect x="477" y="124" width="140" height="126" rx="10" fill="var(--fig-node-fill)" stroke="var(--border-2)" stroke-width="1.4"/>
+              <rect x="485" y="214" width="124" height="26" rx="6" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="1.2" opacity=".55"/>
+              <text x="547" y="231" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fkv)" opacity=".75">K₁V₁</text>
+              <rect x="485" y="186" width="124" height="26" rx="6" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="1.2" opacity=".55"/>
+              <text x="547" y="203" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fkv)" opacity=".75">K₂V₂</text>
+              <rect x="485" y="158" width="124" height="26" rx="6" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="1.8"/>
+              <text x="547" y="175" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fkv)">K₃V₃ ·「气」</text>
+              <text x="547" y="278" text-anchor="middle" font-size="12" fill="var(--muted)">输出 →「真」</text>
+              <!-- t=4 -->
+              <text x="763" y="52" text-anchor="middle" font-size="14" font-weight="800" fill="var(--text)">t = 4</text>
+              <rect x="731" y="66" width="64" height="32" rx="8" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.5"/>
+              <text x="763" y="87" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fq)">q₄ ·「真」</text>
+              <line x1="763" y1="98" x2="763" y2="124" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar5)"/>
+              <rect x="693" y="124" width="140" height="126" rx="10" fill="var(--fig-node-fill)" stroke="var(--border-2)" stroke-width="1.4"/>
+              <rect x="701" y="214" width="124" height="26" rx="6" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="1.2" opacity=".55"/>
+              <text x="763" y="231" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fkv)" opacity=".75">K₁V₁</text>
+              <rect x="701" y="186" width="124" height="26" rx="6" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="1.2" opacity=".55"/>
+              <text x="763" y="203" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fkv)" opacity=".75">K₂V₂</text>
+              <rect x="701" y="158" width="124" height="26" rx="6" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="1.2" opacity=".55"/>
+              <text x="763" y="175" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fkv)" opacity=".75">K₃V₃</text>
+              <rect x="701" y="130" width="124" height="26" rx="6" fill="var(--fkv-fill)" stroke="var(--fkv)" stroke-width="1.8"/>
+              <text x="763" y="147" text-anchor="middle" font-size="11" font-weight="700" fill="var(--fkv)">K₄V₄ ·「真」</text>
+              <text x="763" y="278" text-anchor="middle" font-size="12" fill="var(--muted)">输出 →「好」</text>
+            </g>
+            <text x="430" y="306" text-anchor="middle" font-size="12.5" fill="var(--text-2)">q 现算现用、用完即弃；K/V 逐格堆高、<tspan font-weight="700" fill="var(--fkv)">只增不减</tspan> —— 这就是 KV Cache（此处省略了"层"维度：实际每层都有一套）</text>
+          </svg>
+          <figcaption><b>图 7-1</b> 生成「今天天气真好」时的 KV Cache 逐步增长过程（高亮格 = 本步新增）。</figcaption>
+        </figure>
+
+        <h3>KV Cache 到底多大</h3>
+        <p>一行公式走天下（MHA/GQA/MQA 通用）：</p>
+        $$
+        \text{KV Cache 字节} = \underbrace{2}_{K\,\&\,V}\times \underbrace{L}_{\text{层数}}\times \underbrace{n_{kv}}_{\text{KV 头数}}\times \underbrace{d_h}_{\text{头维}}\times \underbrace{b}_{\text{每元素字节}}\times \underbrace{n_{\text{ctx}}}_{\text{token 数}}\times \text{batch}
+        $$
+        <p>代入几个真实模型（bf16，$b=2$）：</p>
+        <div class="tblwrap"><table class="tbl">
+          <thead><tr><th>模型</th><th>L</th><th>n_kv × d_h</th><th>每 token</th><th>8K 上下文</th><th>128K 上下文</th></tr></thead>
+          <tbody>
+            <tr><td><b>Llama-3-8B</b>（GQA）</td><td>32</td><td>8 × 128</td><td>128 KB</td><td>1 GB</td><td>16 GB</td></tr>
+            <tr><td><b>Llama-3-70B</b>（GQA）</td><td>80</td><td>8 × 128</td><td>320 KB</td><td>2.5 GB</td><td>40 GB</td></tr>
+            <tr><td><b>DeepSeek-V3</b>（MLA）</td><td>61</td><td>576（压缩向量）</td><td>~70 KB</td><td>0.55 GB</td><td>~8.8 GB</td></tr>
+            <tr><td><b>假想 70B MHA</b></td><td>80</td><td>64 × 128</td><td>2.6 MB</td><td>21 GB</td><td>335 GB</td></tr>
+          </tbody>
+        </table></div>
+        <p>注意最后一行：如果 70B 用纯 MHA，128K 上下文的 cache 比一台 8×A100 服务器的总显存还大。这就是为什么"现代开源旗舰几乎全员 GQA/MLA"。</p>
+
+        <h3>三大痛点</h3>
+        <ol>
+          <li><strong>显存容量</strong>：cache 和权重抢同一块显存。cache 一胖，batch 就得缩，吞吐崩。</li>
+          <li><strong>访存带宽</strong>：decode 每步全量读 cache。延迟下限 ≈ cache 字节 ÷ 显存带宽——例如 335 GB 的 cache 在 2 TB/s 的卡上光读取就要 0.17 秒/token。</li>
+          <li><strong>分配碎片</strong>：传统推理框架按"最大可能长度"为每条请求预留一整块连续显存。实际对话往往用不到最大长度，vLLM 论文测得这种做法浪费 60%–80% 的 KV 显存。</li>
+        </ol>
+        <p>下一章对症下药：少存（结构）、巧存（分页）、存小（量化）、不重算（前缀复用）。</p>
+      </section>
+
+      <!-- ================= 8 ================= -->
+      <section id="sec-8">
+        <h2>KV Cache 的省钱大法</h2>
+
+        <h3>从源头少存：GQA / MLA</h3>
+        <p>第 4、5 章讲的就是这个：<strong>GQA 把份数除以 4~8，MLA 直接把维度压缩 50 倍以上</strong>。它们作用于"每个 token 的 cache 尺寸"，是所有优化的地基——先少存，再谈怎么存。</p>
+
+        <h3>PagedAttention：像操作系统一样管显存</h3>
+        <p>痛点 3（碎片）的经典解法，来自 vLLM（2023）。思路直接抄作业操作系统：</p>
+        <ul>
+          <li>把逻辑上连续的 KV Cache 切成固定大小的<strong>块</strong>（block，如 16 个 token 一块）；</li>
+          <li>物理显存里维护一个全局块池，<strong>按需分配</strong>，逻辑相邻的块物理上不必相邻；</li>
+          <li>每条请求配一张<strong>块表</strong>（block table）：逻辑块号 → 物理块号，注意力计算时按表取块拼接。</li>
+        </ul>
+        <figure class="fig">
+          <svg viewBox="0 0 860 430" font-family="inherit">
+            <defs>
+              <marker id="ar6" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+                <path d="M0,0 L8,4.5 L0,9 z" fill="var(--fig-line)"/>
+              </marker>
+            </defs>
+            <!-- 逻辑块 -->
+            <text x="430" y="26" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--text)">逻辑 KV Cache（序列视角：看起来连续）</text>
+            <g font-size="11.5" font-weight="700">
+              <rect x="90" y="42" width="100" height="44" rx="8" fill="var(--fk-fill)" stroke="var(--fk)" stroke-width="1.5"/><text x="140" y="60" text-anchor="middle" fill="var(--fig-text)">块 0</text><text x="140" y="77" text-anchor="middle" font-size="9.5" fill="var(--muted)" font-weight="400">tok 0–15</text>
+              <rect x="198" y="42" width="100" height="44" rx="8" fill="var(--fk-fill)" stroke="var(--fk)" stroke-width="1.5" opacity=".9"/><text x="248" y="60" text-anchor="middle" fill="var(--fig-text)">块 1</text><text x="248" y="77" text-anchor="middle" font-size="9.5" fill="var(--muted)" font-weight="400">tok 16–31</text>
+              <rect x="306" y="42" width="100" height="44" rx="8" fill="var(--fk-fill)" stroke="var(--fk)" stroke-width="1.5" opacity=".8"/><text x="356" y="60" text-anchor="middle" fill="var(--fig-text)">块 2</text><text x="356" y="77" text-anchor="middle" font-size="9.5" fill="var(--muted)" font-weight="400">tok 32–47</text>
+              <rect x="414" y="42" width="100" height="44" rx="8" fill="var(--fk-fill)" stroke="var(--fk)" stroke-width="1.5" opacity=".7"/><text x="464" y="60" text-anchor="middle" fill="var(--fig-text)">块 3</text><text x="464" y="77" text-anchor="middle" font-size="9.5" fill="var(--muted)" font-weight="400">tok 48–63</text>
+              <rect x="522" y="42" width="100" height="44" rx="8" fill="var(--fk-fill)" stroke="var(--fk)" stroke-width="1.5" opacity=".6"/><text x="572" y="60" text-anchor="middle" fill="var(--fig-text)">块 4</text><text x="572" y="77" text-anchor="middle" font-size="9.5" fill="var(--muted)" font-weight="400">tok 64–79</text>
+              <rect x="630" y="42" width="100" height="44" rx="8" fill="var(--fk-fill)" stroke="var(--fk)" stroke-width="1.5" opacity=".5"/><text x="680" y="60" text-anchor="middle" fill="var(--fig-text)">块 5</text><text x="680" y="77" text-anchor="middle" font-size="9.5" fill="var(--muted)" font-weight="400">tok 80–95</text>
+            </g>
+            <!-- 块表 -->
+            <rect x="330" y="122" width="200" height="150" rx="10" fill="var(--fig-node-fill)" stroke="var(--fig-line)" stroke-width="1.4"/>
+            <text x="430" y="144" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--text)">块表（逻辑 → 物理）</text>
+            <g font-size="11.5" font-family="ui-monospace,Menlo,monospace" fill="var(--fig-text)">
+              <text x="375" y="168" text-anchor="middle">0</text><text x="485" y="168" text-anchor="middle">→ 17</text>
+              <text x="375" y="190" text-anchor="middle">1</text><text x="485" y="190" text-anchor="middle">→ 5</text>
+              <text x="375" y="212" text-anchor="middle">2</text><text x="485" y="212" text-anchor="middle">→ 23</text>
+              <text x="375" y="234" text-anchor="middle">3</text><text x="485" y="234" text-anchor="middle">→ 9</text>
+              <text x="375" y="256" text-anchor="middle">4</text><text x="485" y="256" text-anchor="middle">→ 1</text>
+              <text x="375" y="278" text-anchor="middle">5</text><text x="485" y="278" text-anchor="middle">→ 12</text>
+            </g>
+            <!-- 映射箭头 -->
+            <line x1="140" y1="86" x2="368" y2="122" stroke="var(--fig-line)" stroke-width="1.3" marker-end="url(#ar6)"/>
+            <line x1="248" y1="86" x2="395" y2="122" stroke="var(--fig-line)" stroke-width="1.3" marker-end="url(#ar6)" opacity=".6"/>
+            <!-- 物理池 -->
+            <text x="430" y="312" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--text)">物理显存块池（实际存放：离散、乱序）</text>
+            <g font-size="10" font-weight="700">
+              <!-- 8 列 × 4 行，块号 = r*8+c；着色: 17(r2c1),5(r0c5),23(r2c7),9(r1c1),1(r0c1),12(r1c4) -->
+              <rect x="130" y="326" width="44" height="34" rx="5" fill="var(--fk-fill)" stroke="var(--fk)" stroke-width="1.6"/><text x="152" y="347" text-anchor="middle" fill="var(--fig-text)">1</text>
+              <rect x="178" y="326" width="44" height="34" rx="5" fill="none" stroke="var(--border-2)" stroke-width="1"/><text x="200" y="347" text-anchor="middle" fill="var(--muted)" font-weight="400">2</text>
+              <rect x="226" y="326" width="44" height="34" rx="5" fill="none" stroke="var(--border-2)" stroke-width="1"/><text x="248" y="347" text-anchor="middle" fill="var(--muted)" font-weight="400">3</text>
+              <rect x="274" y="326" width="44" height="34" rx="5" fill="none" stroke="var(--border-2)" stroke-width="1"/><text x="296" y="347" text-anchor="middle" fill="var(--muted)" font-weight="400">4</text>
+              <rect x="322" y="326" width="44" height="34" rx="5" fill="var(--fk-fill)" stroke="var(--fk)" stroke-width="1.6"/><text x="344" y="347" text-anchor="middle" fill="var(--fig-text)">5</text>
+              <rect x="370" y="326" width="44" height="34" rx="5" fill="none" stroke="var(--border-2)" stroke-width="1"/><text x="392" y="347" text-anchor="middle" fill="var(--muted)" font-weight="400">6</text>
+              <rect x="418" y="326" width="44" height="34" rx="5" fill="none" stroke="var(--border-2)" stroke-width="1"/><text x="440" y="347" text-anchor="middle" fill="var(--muted)" font-weight="400">7</text>
+              <rect x="466" y="326" width="44" height="34" rx="5" fill="none" stroke="var(--border-2)" stroke-width="1"/><text x="488" y="347" text-anchor="middle" fill="var(--muted)" font-weight="400">8</text>
+              <rect x="130" y="364" width="44" height="34" rx="5" fill="none" stroke="var(--border-2)" stroke-width="1"/><text x="152" y="385" text-anchor="middle" fill="var(--muted)" font-weight="400">9</text>
+              <rect x="178" y="364" width="44" height="34" rx="5" fill="none" stroke="var(--border-2)" stroke-width="1"/><text x="200" y="385" text-anchor="middle" fill="var(--muted)" font-weight="400">10</text>
+              <rect x="226" y="364" width="44" height="34" rx="5" fill="none" stroke="var(--border-2)" stroke-width="1"/><text x="248" y="385" text-anchor="middle" fill="var(--muted)" font-weight="400">11</text>
+              <rect x="274" y="364" width="44" height="34" rx="5" fill="var(--fk-fill)" stroke="var(--fk)" stroke-width="1.6"/><text x="296" y="385" text-anchor="middle" fill="var(--fig-text)">12</text>
+              <rect x="322" y="364" width="44" height="34" rx="5" fill="none" stroke="var(--border-2)" stroke-width="1"/><text x="344" y="385" text-anchor="middle" fill="var(--muted)" font-weight="400">13</text>
+              <rect x="370" y="364" width="44" height="34" rx="5" fill="none" stroke="var(--border-2)" stroke-width="1"/><text x="392" y="385" text-anchor="middle" fill="var(--muted)" font-weight="400">14</text>
+              <rect x="418" y="364" width="44" height="34" rx="5" fill="none" stroke="var(--border-2)" stroke-width="1"/><text x="440" y="385" text-anchor="middle" fill="var(--muted)" font-weight="400">15</text>
+              <rect x="466" y="364" width="44" height="34" rx="5" fill="none" stroke="var(--border-2)" stroke-width="1"/><text x="488" y="385" text-anchor="middle" fill="var(--muted)" font-weight="400">16</text>
+              <rect x="130" y="402" width="44" height="34" rx="5" fill="var(--fk-fill)" stroke="var(--fk)" stroke-width="1.6"/><text x="152" y="423" text-anchor="middle" fill="var(--fig-text)">17</text>
+              <rect x="178" y="402" width="44" height="34" rx="5" fill="none" stroke="var(--border-2)" stroke-width="1"/><text x="200" y="423" text-anchor="middle" fill="var(--muted)" font-weight="400">18</text>
+              <rect x="226" y="402" width="44" height="34" rx="5" fill="none" stroke="var(--border-2)" stroke-width="1"/><text x="248" y="423" text-anchor="middle" fill="var(--muted)" font-weight="400">19</text>
+              <rect x="274" y="402" width="44" height="34" rx="5" fill="none" stroke="var(--border-2)" stroke-width="1"/><text x="296" y="423" text-anchor="middle" fill="var(--muted)" font-weight="400">20</text>
+              <rect x="322" y="402" width="44" height="34" rx="5" fill="none" stroke="var(--border-2)" stroke-width="1"/><text x="344" y="423" text-anchor="middle" fill="var(--muted)" font-weight="400">21</text>
+              <rect x="370" y="402" width="44" height="34" rx="5" fill="none" stroke="var(--border-2)" stroke-width="1"/><text x="392" y="423" text-anchor="middle" fill="var(--muted)" font-weight="400">22</text>
+              <rect x="418" y="402" width="44" height="34" rx="5" fill="var(--fk-fill)" stroke="var(--fk)" stroke-width="1.6"/><text x="440" y="423" text-anchor="middle" fill="var(--fig-text)">23</text>
+              <rect x="466" y="402" width="44" height="34" rx="5" fill="none" stroke="var(--border-2)" stroke-width="1"/><text x="488" y="423" text-anchor="middle" fill="var(--muted)" font-weight="400">24</text>
+            </g>
+            <!-- 空闲标注 -->
+            <text x="700" y="347" font-size="11" fill="var(--muted)">白格 = 空闲块</text>
+            <text x="700" y="367" font-size="11" fill="var(--muted)">绿格 = 已分配</text>
+            <text x="700" y="387" font-size="11" fill="var(--muted)">（可被其他请求使用）</text>
+            <!-- 块表到物理的示例箭头 -->
+            <line x1="530" y1="162" x2="640" y2="340" stroke="var(--fk)" stroke-width="1.3" stroke-dasharray="5 4" opacity=".8"/>
+            <text x="620" y="290" font-size="10.5" fill="var(--fk)">块0→物理17</text>
+          </svg>
+          <figcaption><b>图 8-1</b> PagedAttention：逻辑连续、物理离散，块表负责翻译。序列变长就多拿一块，用多少占多少。</figcaption>
+        </figure>
+        <p>收益立竿见影：</p>
+        <ul>
+          <li><strong>碎片 &lt; 4%</strong>（对比传统预留式分配的 60–80% 浪费）；</li>
+          <li>同显存能塞下<strong>更大的 batch 与上下文</strong>，吞吐倍增（vLLM 论文：较 HF Transformers 最高 24×，较 TGI 约 3.5×）；</li>
+          <li><strong>前缀共享</strong>：多条请求共享同一 system prompt 时，物理块可以引用同一份（copy-on-write），省显存也省 prefill 计算。</li>
+        </ul>
+
+        <h3>存小一点：KV Cache 量化</h3>
+        <p>K/V 的数值分布其实相当"好脾气"，量化空间很大：</p>
+        <ul>
+          <li><strong>FP8 / INT8</strong>：容量、带宽直接减半，精度损失几乎不可测，主流推理引擎（TensorRT-LLM、vLLM 等）均已支持；</li>
+          <li><strong>4-bit 及以下</strong>（如 KIVI）：K 按通道、V 按 token 的混合量化粒度，配合少量校准，轻微掉点换 4× 以上的容量；</li>
+          <li>带宽同步下降 → decode 延迟也跟着降，一举两得。</li>
+        </ul>
+
+        <h3>别存多余 & 别重算</h3>
+        <ul>
+          <li><strong>滑窗封顶</strong>：SWA 模型的 cache 被窗口 $w$ 封顶，长会话不再线性膨胀（回顾 6.1）；</li>
+          <li><strong>前缀缓存（prefix caching）</strong>：把已算好的 KV 块按前缀哈希存下来，命中相同前缀（system prompt、few-shot 模板）的请求直接跳过 prefill。vLLM 的 automatic prefix caching、SGLang 的 RadixAttention 都是这个思路；</li>
+          <li><strong>卸载与重算</strong>：极端长会话下，可以把冷门层的 KV 换出到 CPU/SSD（分层存储），或干脆丢掉一部分靠重算补回——用计算换显存，属于压箱底手段。</li>
+        </ul>
+      </section>
+
+      <!-- ================= 9 ================= -->
+      <section id="sec-9">
+        <h2>让 Attention 算得更快</h2>
+
+        <h3>先分清：到底卡在算力还是带宽</h3>
+        <p>GPU 性能有两个天花板：<strong>算力</strong>（FLOPS）和<strong>显存带宽</strong>（bytes/s）。一个算子到底受限于谁，看它的<strong>算术强度</strong>（每读写 1 字节做多少次浮点运算）：</p>
+        <ul>
+          <li><strong>Prefill / 训练的 attention</strong>：一次处理几百上千个 token，是大 GEMM，算术强度高 → <em>compute-bound</em>，优化方向是让 tensor core 吃满、减少冗余读写；</li>
+          <li><strong>Decode 的 attention</strong>：每步 1 个 token 对全部历史，是 GEMV，算术强度极低 → <em>memory-bound</em>，优化方向是少读数据（GQA/MLA/量化）+ 提高带宽利用率（大 batch）。</li>
+        </ul>
+        <p>FlashAttention 主要治前者（以及训练），GQA/量化治后者，两者正交、可叠加。</p>
+
+        <h3>FlashAttention：不近似，只是会搬家</h3>
+        <p>标准实现的毛病在 IO。算 $\text{softmax}(QK^\top)V$ 时，朴素流程要把中间结果 $S = QK^\top$（$n\times n$）写回显存、读回来做 softmax 得到 $P$（又是 $n\times n$）、再写回、再读回来乘 $V$。以 A100 为例：HBM 带宽约 1.5 TB/s，而 SM 的片上 SRAM 高达约 19 TB/s——<strong>慢的不是算，是搬</strong>。</p>
+        <p>FlashAttention（Tri Dao, 2022）三板斧：</p>
+        <ol>
+          <li><strong>Kernel 融合</strong>：整个 attention 融成一个 CUDA kernel，中间结果不落盘；</li>
+          <li><strong>Tiling（分块）</strong>：Q 按行分块、K/V 按列分块，小块装进 SRAM 里算，算完即弃；</li>
+          <li><strong>Online softmax</strong>：softmax 依赖整行的 max 与 sum，分块后怎么办？——维护<strong>运行中的</strong> max（$m$）与 sum（$l$），每来一块就"修正"旧结果。</li>
+        </ol>
+        <p>Online softmax 是精髓，值得亲手推一遍：处理第 $j$ 个 KV 块时，</p>
+        $$
+        m^{(j)} = \max\big(m^{(j-1)},\ \text{rowmax}(S_j)\big),\qquad
+        \ell^{(j)} = e^{m^{(j-1)}-m^{(j)}}\,\ell^{(j-1)} + \text{rowsum}\big(e^{S_j - m^{(j)}}\big)
+        $$
+        $$
+        O^{(j)} = e^{m^{(j-1)}-m^{(j)}}\,O^{(j-1)} + e^{S_j - m^{(j)}} V_j,\qquad O_{\text{final}} = O^{(\text{last})}/\ell^{(\text{last})}
+        $$
+        <p>翻译成人话：新块可能刷新最大值，于是旧累积结果统一乘上修正系数 $e^{m_{old}-m_{new}}$ 缩一下，再把新块的贡献加上——和"把所有数都拿到手里再归一化"在数学上完全等价。</p>
+<pre><code><span class="c"># FlashAttention 核心循环（每个 Q 块独立执行，可并行）</span>
+<span class="k">for</span> Q_i <span class="k">in</span> Q 的行块:
+    O_i = <span class="s">0</span>;  m = -inf;  l = <span class="s">0</span>            <span class="c"># 行级 running max / sum</span>
+    <span class="k">for</span> (K_j, V_j) <span class="k">in</span> KV 的列块:      <span class="c"># 块从 HBM 流式载入 SRAM</span>
+        S_ij = Q_i @ K_j.T / sqrt(d)      <span class="c"># 只存在于 SRAM，从不写回 HBM</span>
+        m_new = max(m, rowmax(S_ij))
+        P = exp(S_ij - m_new)             <span class="c"># 数值安全</span>
+        alpha = exp(m - m_new)            <span class="c"># 旧结果的修正系数</span>
+        l = alpha * l + rowsum(P)
+        O_i = alpha * O_i + P @ V_j       <span class="c"># 增量更新输出</span>
+        m = m_new
+    O_i = O_i / l                          <span class="c"># 最后统一归一化</span></code></pre>
+        <figure class="fig">
+          <svg viewBox="0 0 880 440" font-family="inherit">
+            <defs>
+              <marker id="ar7" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+                <path d="M0,0 L8,4.5 L0,9 z" fill="var(--fig-line)"/>
+              </marker>
+              <marker id="ar7r" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+                <path d="M0,0 L8,4.5 L0,9 z" fill="var(--fwarn)"/>
+              </marker>
+              <marker id="ar7s" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+                <path d="M0,0 L8,4.5 L0,9 z" fill="var(--fk)"/>
+              </marker>
+            </defs>
+            <!-- =左：朴素= -->
+            <text x="220" y="26" text-anchor="middle" font-size="15" font-weight="800" fill="var(--text)">朴素实现</text>
+            <rect x="40" y="40" width="360" height="34" rx="8" fill="var(--fwarn-fill)" stroke="var(--fwarn)" stroke-width="1.4"/>
+            <text x="220" y="62" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fwarn)">HBM 显存 · ~1.5 TB/s（慢）</text>
+            <rect x="60" y="106" width="56" height="32" rx="7" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.4"/><text x="88" y="126" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fq)">Q</text>
+            <rect x="60" y="148" width="56" height="32" rx="7" fill="var(--fk-fill)" stroke="var(--fk)" stroke-width="1.4"/><text x="88" y="168" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fk)">K</text>
+            <rect x="60" y="190" width="56" height="32" rx="7" fill="var(--fv-fill)" stroke="var(--fv)" stroke-width="1.4"/><text x="88" y="210" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fv)">V</text>
+            <rect x="152" y="126" width="64" height="44" rx="8" fill="var(--fig-node-fill)" stroke="var(--fig-line)" stroke-width="1.4"/><text x="184" y="152" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--fig-text)">MatMul</text>
+            <rect x="252" y="112" width="70" height="52" rx="8" fill="var(--fwarn-fill)" stroke="var(--fwarn)" stroke-width="1.6"/><text x="287" y="134" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fwarn)">S = QKᵀ</text><text x="287" y="152" text-anchor="middle" font-size="10" fill="var(--fwarn)">n × n</text>
+            <rect x="252" y="196" width="70" height="52" rx="8" fill="var(--fwarn-fill)" stroke="var(--fwarn)" stroke-width="1.6"/><text x="287" y="218" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fwarn)">P = exp</text><text x="287" y="236" text-anchor="middle" font-size="10" fill="var(--fwarn)">n × n</text>
+            <rect x="152" y="200" width="70" height="44" rx="8" fill="var(--fig-node-fill)" stroke="var(--fig-line)" stroke-width="1.4"/><text x="187" y="226" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--fig-text)">softmax</text>
+            <rect x="252" y="282" width="70" height="46" rx="8" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/><text x="287" y="310" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--accent)">O</text>
+            <line x1="116" y1="122" x2="148" y2="140" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar7)"/>
+            <line x1="116" y1="164" x2="148" y2="156" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar7)"/>
+            <line x1="216" y1="148" x2="248" y2="140" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar7)"/>
+            <line x1="287" y1="164" x2="287" y2="192" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar7)"/>
+            <line x1="252" y1="222" x2="226" y2="222" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar7)"/>
+            <line x1="287" y1="248" x2="287" y2="278" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar7)"/>
+            <line x1="116" y1="206" x2="278" y2="300" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar7)"/>
+            <!-- S/P 与 HBM 的红色往返 -->
+            <line x1="322" y1="130" x2="368" y2="130" stroke="var(--fwarn)" stroke-width="1.8" marker-end="url(#ar7r)"/>
+            <line x1="368" y1="142" x2="322" y2="142" stroke="var(--fwarn)" stroke-width="1.8" marker-end="url(#ar7r)"/>
+            <line x1="322" y1="214" x2="368" y2="214" stroke="var(--fwarn)" stroke-width="1.8" marker-end="url(#ar7r)"/>
+            <line x1="368" y1="226" x2="322" y2="226" stroke="var(--fwarn)" stroke-width="1.8" marker-end="url(#ar7r)"/>
+            <line x1="396" y1="130" x2="396" y2="76" stroke="var(--fwarn)" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#ar7r)"/>
+            <line x1="396" y1="214" x2="396" y2="160" stroke="var(--fwarn)" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#ar7r)"/>
+            <text x="220" y="368" text-anchor="middle" font-size="12" fill="var(--fwarn)" font-weight="700">S、P 共 2n² 个元素反复写回 / 读回 HBM</text>
+            <text x="220" y="388" text-anchor="middle" font-size="11" fill="var(--muted)">显存带宽被打爆，GPU 大部分时间在等数据</text>
+
+            <!-- =右：Flash= -->
+            <text x="660" y="26" text-anchor="middle" font-size="15" font-weight="800" fill="var(--text)">FlashAttention</text>
+            <rect x="480" y="40" width="360" height="250" rx="14" fill="var(--fig-node-fill)" stroke="var(--accent)" stroke-width="1.8"/>
+            <text x="660" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent)">片上 SRAM · ~19 TB/s（快）</text>
+            <!-- Q 行块 -->
+            <g font-size="10.5" font-weight="700">
+              <rect x="502" y="86" width="86" height="30" rx="6" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.2"/><text x="545" y="105" text-anchor="middle" fill="var(--fq)">Q₁</text>
+              <rect x="502" y="120" width="86" height="30" rx="6" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.2"/><text x="545" y="139" text-anchor="middle" fill="var(--fq)">Q₂</text>
+              <rect x="502" y="154" width="86" height="30" rx="6" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.2" opacity=".65"/><text x="545" y="173" text-anchor="middle" fill="var(--fq)">…</text>
+              <rect x="502" y="188" width="86" height="30" rx="6" fill="var(--fq-fill)" stroke="var(--fq)" stroke-width="1.2"/><text x="545" y="207" text-anchor="middle" fill="var(--fq)">Q<tspan baseline-shift="sub" font-size="8">m</tspan></text>
+            </g>
+            <!-- KV 列块循环 -->
+            <g font-size="10.5" font-weight="700">
+              <rect x="616" y="86" width="70" height="30" rx="6" fill="var(--fk-fill)" stroke="var(--fk)" stroke-width="1.2"/><text x="651" y="105" text-anchor="middle" fill="var(--fig-text)">K₁V₁</text>
+              <rect x="616" y="120" width="70" height="30" rx="6" fill="var(--fk-fill)" stroke="var(--fk)" stroke-width="1.2" opacity=".65"/><text x="651" y="139" text-anchor="middle" fill="var(--muted)">K₂V₂ …</text>
+              <rect x="616" y="154" width="70" height="30" rx="6" fill="var(--fk-fill)" stroke="var(--fk)" stroke-width="1.2" opacity=".65"/><text x="651" y="173" text-anchor="middle" fill="var(--muted)">KₜVₜ</text>
+            </g>
+            <!-- 计算块 -->
+            <rect x="712" y="86" width="108" height="64" rx="8" fill="var(--fig-bg)" stroke="var(--fig-line)" stroke-width="1.4"/>
+            <text x="766" y="110" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fig-text)">Q·Kᵀ 分块算</text>
+            <text x="766" y="128" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fig-text)">online softmax</text>
+            <text x="766" y="144" text-anchor="middle" font-size="9.5" fill="var(--muted)">(m, l 增量更新)</text>
+            <!-- O 累积 -->
+            <rect x="712" y="186" width="108" height="46" rx="8" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="766" y="207" text-anchor="middle" font-size="11" font-weight="700" fill="var(--accent)">Oᵢ 增量累积</text>
+            <text x="766" y="223" text-anchor="middle" font-size="9.5" fill="var(--muted)">最后 ÷ l 归一化</text>
+            <line x1="588" y1="118" x2="708" y2="112" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar7)"/>
+            <line x1="686" y1="118" x2="708" y2="122" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar7)"/>
+            <line x1="766" y1="150" x2="766" y2="182" stroke="var(--fig-line)" stroke-width="1.5" marker-end="url(#ar7)"/>
+            <!-- HBM 底条 -->
+            <rect x="480" y="330" width="360" height="34" rx="8" fill="var(--fig-node-fill)" stroke="var(--fig-line)" stroke-width="1.4"/>
+            <text x="660" y="352" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fig-text)">HBM：只读入 Q / K / V，只写回 O</text>
+            <line x1="545" y1="330" x2="545" y2="222" stroke="var(--fk)" stroke-width="1.7" marker-end="url(#ar7s)"/>
+            <line x1="651" y1="330" x2="651" y2="186" stroke="var(--fk)" stroke-width="1.7" marker-end="url(#ar7s)"/>
+            <line x1="820" y1="232" x2="820" y2="326" stroke="var(--fig-line)" stroke-width="1.7" marker-end="url(#ar7)"/>
+            <text x="660" y="404" text-anchor="middle" font-size="12" fill="var(--tip-bd)" font-weight="700">S、P 在 SRAM 里即算即弃，从不落盘 HBM</text>
+            <text x="660" y="424" text-anchor="middle" font-size="11" fill="var(--muted)">精确等价（非近似），IO 从 O(n²) 降到 O(n²d²/M)</text>
+          </svg>
+          <figcaption><b>图 9-1</b> 朴素实现 vs FlashAttention 的数据搬运路径。红色往返 = 瓶颈所在。</figcaption>
+        </figure>
+        <div class="note">
+          <span class="lb">FlashAttention 的三重身份</span>
+          <p><strong>① 精确算法</strong>：数学上与朴素实现等价（只差浮点舍入顺序），不是近似；<strong>② 显存优化</strong>：不再物化 $n\times n$ 矩阵，激活显存从 $O(n^2)$ 降到 $O(n)$，长上下文训练因此可行；<strong>③ IO 优化</strong>：HBM 访问从 $O(n^2 + nd)$ 降到 $O(n^2 d^2 / M)$（$M$ 为 SRAM 大小），训练/长序列 prefill 提速数倍。</p>
+        </div>
+
+        <h3>FlashAttention-2 / 3：接着卷</h3>
+        <ul>
+          <li><strong>FA2</strong>（2023）：重新划分并行维度（长序列下沿序列维并行）、更均衡的 warp 分工、砍掉非 matmul 的冗余运算——同一硬件上比 FA1 再快约 2×；</li>
+          <li><strong>FA3</strong>（2024）：为 Hopper（H100）定制——TMA 异步搬运、WGMMA 异步矩阵乘、两组 warp 乒乓（ping-pong）调度让数学与数据搬运永不互相等待，还支持 FP8。对 FA2 再提速 1.5–2×。</li>
+        </ul>
+        <p>顺带一提，因果掩码在分块视角下有优雅的处理：若 KV 块整体在 Q 块的"过去"，无需掩码直接算；整体在"未来"，整块跳过；只有跨对角线的块才逐元素掩码——这也是分块实现天然吃到的红利。</p>
+
+        <h3>Ring Attention：上下文长度上不封顶</h3>
+        <p>想让序列长到一台设备装不下？<strong>Ring Attention</strong>（2023）的思路：把序列沿设备环切开，每台设备只持有自己那段的 Q/K/V；K/V 块沿环形拓扑逐站轮转，<strong>通信与计算重叠</strong>——上一块数据在算的时候，下一块已经在路上。转完一圈，每台设备都见过了所有 K/V，注意力算完，上下文长度上限 ≈ 单机长度 × 设备数。百万级 token 的训练由此成为可能。</p>
+
+        <h3>系统层组合拳</h3>
+        <ul>
+          <li><strong>Continuous batching</strong>（vLLM / Orca）：调度粒度从"整个请求"细化到"每次迭代"，谁生成完了立刻让位给排队的新请求，消灭 GPU 空转；</li>
+          <li><strong>投机解码（speculative decoding）</strong>：小模型先草拟 k 个 token，大模型一次 forward 并行验证，接受的直接采纳——不改变输出分布的"合法加速"，与 attention 优化正交；</li>
+          <li><strong>Prefix caching</strong>：命中即跳过 prefill（回顾 8.4）。</li>
+        </ul>
+        <p>现代推理引擎（vLLM、SGLang、TensorRT-LLM）本质上是把这些招式全叠起来：结构上 GQA/MLA，显存上分页 + 量化，kernel 上 FlashAttention，调度上 continuous batching——这正是"Attention 生态"的全貌。</p>
+      </section>
+
+      <!-- ================= 10 ================= -->
+      <section id="sec-10">
+        <h2>全景总结</h2>
+
+        <h3>结构变体一览</h3>
+        <div class="tblwrap"><table class="tbl">
+          <thead><tr><th>方法</th><th>年份</th><th>Q 头 : KV 头</th><th>每 token KV Cache</th><th>质量</th><th>代表模型</th></tr></thead>
+          <tbody>
+            <tr><td><b>MHA</b></td><td>2017</td><td>h : h</td><td>$2Lhd_h$（基准）</td><td>基准</td><td>原版 Transformer、GPT-3</td></tr>
+            <tr><td><b>MQA</b></td><td>2019</td><td>h : 1</td><td>1/h</td><td>略降</td><td>PaLM、Falcon、StarCoder</td></tr>
+            <tr><td><b>GQA</b></td><td>2023</td><td>h : g</td><td>g/h</td><td>≈ MHA</td><td>Llama-2/3、Mistral、Qwen</td></tr>
+            <tr><td><b>MLA</b></td><td>2024</td><td>低秩压缩</td><td>$(d_c{+}d_R)\,/\,(2hd_h) \approx 1/50$</td><td>≥ MHA</td><td>DeepSeek-V2 / V3</td></tr>
+            <tr><td><b>SWA</b></td><td>2023</td><td>叠加项</td><td>窗口 $w$ 封顶</td><td>≈（混合全局层）</td><td>Mistral、Gemma-2/3</td></tr>
+            <tr><td><b>NSA / MoBA</b></td><td>2025</td><td>叠加项</td><td>选中的块</td><td>长文更强</td><td>DeepSeek-V3.1（NSA）</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>系统 / kernel 优化一览</h3>
+        <div class="tblwrap"><table class="tbl">
+          <thead><tr><th>技术</th><th>治什么病</th><th>作用层面</th><th>关键思想</th></tr></thead>
+          <tbody>
+            <tr><td><b>FlashAttention 1/2/3</b></td><td>HBM 读写瓶颈</td><td>kernel</td><td>分块 + online softmax，中间结果不落盘</td></tr>
+            <tr><td><b>PagedAttention</b></td><td>显存碎片、吞吐</td><td>显存管理</td><td>分页 + 块表，按需分配</td></tr>
+            <tr><td><b>KV 量化</b></td><td>容量 + 带宽</td><td>存储</td><td>FP8 / INT8 / 4bit</td></tr>
+            <tr><td><b>Prefix caching</b></td><td>重复 prefill</td><td>调度</td><td>前缀哈希复用 KV 块</td></tr>
+            <tr><td><b>Ring Attention</b></td><td>超长上下文</td><td>分布式</td><td>K/V 块环形轮转，通信计算重叠</td></tr>
+            <tr><td><b>Continuous batching</b></td><td>GPU 空转</td><td>调度</td><td>迭代级组批</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>一条时间线</h3>
+        <div class="timeline">
+          <div class="tl-item"><span class="yr">2014</span><span class="tt">Bahdanau Attention</span><p>RNN 时代的注意力雏形：解码器回头看编码器。</p></div>
+          <div class="tl-item"><span class="yr">2017</span><span class="tt">Transformer / MHA</span><p>"Attention Is All You Need"，多头注意力成为一切的原点。</p></div>
+          <div class="tl-item"><span class="yr">2019</span><span class="tt">MQA</span><p>Shazeer 一脚油门：一个 KV 头伺候所有 Q 头。</p></div>
+          <div class="tl-item"><span class="yr">2020</span><span class="tt">Longformer / BigBird / Performer</span><p>稀疏与线性注意力的第一波探索。</p></div>
+          <div class="tl-item"><span class="yr">2022</span><span class="tt">FlashAttention</span><p>IO 感知的精确 attention kernel，长上下文训练的入场券。</p></div>
+          <div class="tl-item"><span class="yr">2023</span><span class="tt">GQA · PagedAttention · SWA · Ring Attention · FA2</span><p>大爆发之年：结构与系统两条战线全面开花，vLLM 诞生。</p></div>
+          <div class="tl-item"><span class="yr">2024</span><span class="tt">MLA（DeepSeek-V2）· FA3 · KIVI</span><p>低秩压缩登上主舞台；KV 量化走向 2-bit。</p></div>
+          <div class="tl-item"><span class="yr">2025</span><span class="tt">NSA · MoBA</span><p>训练原生稀疏注意力：让模型自己学会"看哪里"。</p></div>
+        </div>
+
+        <h3>把一切串起来</h3>
+        <div class="tip">
+          <span class="lb">一句话心智模型</span>
+          <p>注意力的一切麻烦都源自 $n^2$ 的两难：<strong>算得动，存不起、搬不动</strong>。于是有两条主线——</p>
+          <p><strong>存得少</strong>：MHA → MQA → GQA → MLA（压 KV 的份数与维度），SWA / NSA（干脆少看）；</p>
+          <p><strong>搬得快</strong>：FlashAttention（不落盘）、PagedAttention（不浪费）、量化（变小）、continuous batching / Ring Attention（多卡多请求协同）。</p>
+          <p>两条线正交组合，就是今天你用的每一个推理引擎。</p>
+        </div>
+      </section>
+
+      <!-- ================= 11 ================= -->
+      <section id="sec-11">
+        <h2>常见疑问快问快答</h2>
+        <details class="qa"><summary>为什么只缓存 K/V，不缓存 Q？</summary><div class="body">
+          <p>因为复用价值完全不同：每个 token 的 $q$ 只在"生成它"的那一步被用到，是即算即弃的一次性消费品；而 $k, v$ 会被之后所有步骤反复读取。缓存的定义就是"留着以后再用"，Q 没有以后。</p>
+        </div></details>
+        <details class="qa"><summary>FlashAttention 是近似算法吗？会改变模型输出吗？</summary><div class="body">
+          <p>不是近似。它只改变计算的执行顺序与数据搬运路径（分块 + online softmax 的增量修正数学上严格等价于先算完再 softmax），输出与朴素实现只差浮点运算顺序带来的舍入误差。训练、推理都能放心用。</p>
+        </div></details>
+        <details class="qa"><summary>softmax 前为什么要减去最大值？</summary><div class="body">
+          <p>纯为了数值稳定：$e^x$ 溢出极快，长序列下分数动辄上百，直接 exp 会得到 inf。减去行最大值后最大的指数项恰为 $e^0=1$，数学上完全等价（分子分母同乘常数），数值上岁月静好。FlashAttention 的 online softmax 就是围绕"运行中的最大值"做增量修正。</p>
+        </div></details>
+        <details class="qa"><summary>Decode 阶段为什么说它是 memory-bound？</summary><div class="body">
+          <p>每生成一个 token，都要把整份 KV Cache 从显存读一遍，却只产出 1 个 token 的计算量——算术强度（FLOPs/字节）极低，GPU 的计算单元大量空转，时间几乎全花在搬数据上。所以 decode 的延迟下限 ≈ cache 大小 ÷ 显存带宽，优化方向是让 cache 变小（GQA/MLA/量化）或让带宽不空转（大 batch）。</p>
+        </div></details>
+        <details class="qa"><summary>MLA 和 LoRA 是一回事吗？</summary><div class="body">
+          <p>只是共享"低秩"这个数学工具。LoRA 用低秩矩阵<em>微调</em>大模型（省的是训练参数）；MLA 用低秩压缩<em>缓存</em>KV（省的是推理显存与带宽）。一个面向训练效率，一个面向推理效率，理论上还能组合使用。</p>
+        </div></details>
+        <details class="qa"><summary>GQA 的分组数有什么讲究？</summary><div class="body">
+          <p>工程上几乎总取 2 的幂（如 64Q:8KV），reshape 与 kernel 都友好；组比（每多少个 Q 头配一套 KV）常见 4:1 到 16:1。经验规律：模型越大，可承受的共享程度越高（70B 用 8:1 几乎无损，7B 用 4:1 更稳妥）。</p>
+        </div></details>
+        <details class="qa"><summary>把 MHA 模型改造成 GQA，必须从头重训吗？</summary><div class="body">
+          <p>不必。GQA 论文的 uptraining 方案：把同组 Q 头的 KV 投影权重取平均作为共享投影的初始化，再用约 8% 的原训练量继续预训练即可，质量几乎追平原生 MHA。Llama-2-70B 就是这么从 Llama-2 架构演进过来的（论文中对比了 MHA 原型）。</p>
+        </div></details>
+        <details class="qa"><summary>KV Cache 量化会掉点吗？掉多少？</summary><div class="body">
+          <p>FP8/INT8 基本无感（困惑度扰动在小数点后）；4-bit 有轻微掉点，需要合理的量化粒度（如 KIVI 的 K 按通道、V 按 token）与校准；2-bit 属于极限操作，长上下文任务上退化明显。工程上 FP8 KV 已经是"免费午餐"级别的标配。</p>
+        </div></details>
+        <details class="qa"><summary>PagedAttention 的块表查找会不会拖慢注意力？</summary><div class="body">
+          <p>几乎不会。块表是常驻显存的小数组，间接寻址开销与注意力本体的大规模读写相比可忽略；换来的是碎片从 60–80% 降到 4% 以内，同样的显存能服务多得多的请求，吞吐收益远大于寻址成本。</p>
+        </div></details>
+        <details class="qa"><summary>多头数量怎么选？头越多越好吗？</summary><div class="body">
+          <p>不是。总维度 $d_{model}$ 固定时，头数 × 每头维度是零和的：头太多，每头维度太低，单个注意力分布的表达力受限；头太少又浪费多视角。经验甜点位是每头 64–128 维（如 4096 维配 32 头或 64 头），并取 2 的幂以方便并行。</p>
+        </div></details>
+        <details class="qa"><summary>batch 越大吞吐越高吗？</summary><div class="body">
+          <p>在 decode 阶段，加大 batch 能把带宽利用率摊高（cache 读取被多条请求复用同一趟权重读取），吞吐近乎线性上升——直到 KV Cache 撑爆显存或带宽打满为止。这就是 PagedAttention + GQA 价值连城的原因：它们直接抬高了这条曲线的天花板。</p>
+        </div></details>
+      </section>
+
+      <!-- ================= 12 ================= -->
+      <section id="sec-12">
+        <h2>参考资料</h2>
+        <ul class="refs">
+          <li>Attention Is All You Need（Vaswani et al., 2017）<a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">arXiv:1706.03762</a></li>
+          <li>Fast Transformer Decoding: One Write-Head is All You Need（Shazeer, 2019）<a href="https://arxiv.org/abs/1911.02150" target="_blank" rel="noopener">arXiv:1911.02150</a></li>
+          <li>GQA: Training Generalized Multi-Query Transformer Models（Ainslie et al., 2023）<a href="https://arxiv.org/abs/2305.13245" target="_blank" rel="noopener">arXiv:2305.13245</a></li>
+          <li>DeepSeek-V2: A Strong, Economical, and Efficient MoE / MLA（2024）<a href="https://arxiv.org/abs/2405.04434" target="_blank" rel="noopener">arXiv:2405.04434</a></li>
+          <li>FlashAttention（Dao et al., 2022）<a href="https://arxiv.org/abs/2205.14135" target="_blank" rel="noopener">arXiv:2205.14135</a> · FlashAttention-2（2023）<a href="https://arxiv.org/abs/2307.08691" target="_blank" rel="noopener">arXiv:2307.08691</a> · FlashAttention-3（2024）<a href="https://arxiv.org/abs/2407.08608" target="_blank" rel="noopener">arXiv:2407.08608</a></li>
+          <li>Efficient Memory Management for LLM Serving with PagedAttention / vLLM（Kwon et al., 2023）<a href="https://arxiv.org/abs/2309.06180" target="_blank" rel="noopener">arXiv:2309.06180</a></li>
+          <li>Ring Attention with Blockwise Transformers（Liu et al., 2023）<a href="https://arxiv.org/abs/2310.01889" target="_blank" rel="noopener">arXiv:2310.01889</a></li>
+          <li>Mistral 7B / SWA（2023）<a href="https://arxiv.org/abs/2310.06825" target="_blank" rel="noopener">arXiv:2310.06825</a></li>
+          <li>Longformer（2020）<a href="https://arxiv.org/abs/2004.05150" target="_blank" rel="noopener">arXiv:2004.05150</a> · BigBird（2020）<a href="https://arxiv.org/abs/2007.14062" target="_blank" rel="noopener">arXiv:2007.14062</a> · Performer（2020）<a href="https://arxiv.org/abs/2009.14794" target="_blank" rel="noopener">arXiv:2009.14794</a></li>
+          <li>KIVI: A Tuning-Free Asymmetric 2-bit KV Cache Quantization（2024）<a href="https://arxiv.org/abs/2402.02750" target="_blank" rel="noopener">arXiv:2402.02750</a></li>
+          <li>NSA: Native Sparse Attention（DeepSeek, 2025）<a href="https://arxiv.org/abs/2502.11089" target="_blank" rel="noopener">arXiv:2502.11089</a> · MoBA（Moonshot, 2025）<a href="https://arxiv.org/abs/2502.13171" target="_blank" rel="noopener">arXiv:2502.13171</a></li>
+        </ul>
+      </section>
+
+      <footer>
+        <div class="flinks">
+          <span>一文吃透 Attention</span><span>·</span><span>MHA / MQA / GQA / MLA</span><span>·</span><span>KV Cache / PagedAttention / FlashAttention</span>
+        </div>
+        <p>发现错漏欢迎指正 · 最后更新 2026-08</p>
+      </footer>
+    </article>
+  </main>
+</div>
+
+<button id="backTop" aria-label="返回顶部" title="返回顶部">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+(function(){
+  /* ---------- 主题切换 ---------- */
+  var root = document.documentElement;
+  var saved = null;
+  try { saved = localStorage.getItem('attention-theme'); } catch(e){}
+  if (saved === 'dark' || saved === 'light') {
+    root.setAttribute('data-theme', saved);
+  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    root.setAttribute('data-theme', 'dark');
+  } else {
+    root.setAttribute('data-theme', 'light');
+  }
+  document.getElementById('themeToggle').addEventListener('click', function(){
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('attention-theme', next); } catch(e){}
+  });
+
+  /* ---------- 目录生成 ---------- */
+  var post = document.querySelector('.post');
+  var heads = post.querySelectorAll('section h2, section h3');
+  var tocList = document.getElementById('tocList');
+  var h2n = 0, h3n = 0;
+  var items = [];
+  heads.forEach(function(h){
+    if (!h.id) h.id = h.parentNode.id; /* 使用 section 的 id */
+  });
+  post.querySelectorAll('section').forEach(function(sec){
+    var sid = sec.id;
+    if (!sid) return;
+    var h2 = sec.querySelector('h2');
+    if (!h2) return;
+    h2n++; h3n = 0;
+    var a = document.createElement('a');
+    a.href = '#' + sid;
+    a.className = 'lv2';
+    a.innerHTML = '<span class="num">' + (h2n<10?'0':'') + h2n + '</span>' + h2.textContent.replace(/^\s*\d+\.?\d*\s*/, '');
+    tocList.appendChild(a);
+    items.push({el: sec, link: a});
+    sec.querySelectorAll('h3').forEach(function(h3){
+      h3n++;
+      h3.id = sid + '-' + h3n;
+      var a3 = document.createElement('a');
+      a3.href = '#' + h3.id;
+      a3.className = 'lv3';
+      a3.innerHTML = '<span class="num">' + h2n + '.' + h3n + '</span>' + h3.textContent;
+      tocList.appendChild(a3);
+      items.push({el: h3, link: a3});
+    });
+  });
+
+  /* ---------- 滚动高亮（scrollspy） ---------- */
+  function spy(){
+    var pos = window.scrollY + 120;
+    var cur = null;
+    items.forEach(function(it){
+      if (it.el.getBoundingClientRect().top + window.scrollY <= pos) cur = it;
+    });
+    items.forEach(function(it){ it.link.classList.toggle('active', it === cur); });
+    /* 进度条 */
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('progress').style.width = (h > 0 ? (window.scrollY / h * 100) : 0) + '%';
+    /* 返回顶部 */
+    document.getElementById('backTop').classList.toggle('show', window.scrollY > 600);
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if (!ticking){ requestAnimationFrame(function(){ spy(); ticking = false; }); ticking = true; }
+  }, {passive:true});
+  spy();
+
+  /* ---------- 小屏目录抽屉 ---------- */
+  var toc = document.getElementById('toc');
+  var mask = document.getElementById('tocMask');
+  function closeToc(){ toc.classList.remove('open'); mask.classList.remove('show'); }
+  document.getElementById('menuBtn').addEventListener('click', function(){ toc.classList.toggle('open'); mask.classList.toggle('show'); });
+  mask.addEventListener('click', closeToc);
+  tocList.addEventListener('click', function(e){ if (e.target.closest('a')) closeToc(); });
+
+  /* ---------- 返回顶部 ---------- */
+  document.getElementById('backTop').addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+
+  /* ---------- KaTeX 渲染 ---------- */
+  function renderMath(){
+    if (window.renderMathInElement) {
+      renderMathInElement(document.body, {
+        delimiters: [
+          {left: '$$', right: '$$', display: true},
+          {left: '$', right: '$', display: false}
+        ],
+        throwOnError: false
+      });
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderMath);
+  } else { renderMath(); }
+})();
+</script>
+</body>
+</html>
