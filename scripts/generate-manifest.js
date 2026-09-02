@@ -56,7 +56,7 @@ function pickMeta(text, names) {
   for (const name of names) {
     // 匹配 <meta name="..." content="..."> 或 <meta content="..." name="...">
     const re = new RegExp(
-      `<meta[^>]+(?:name|property)=["']\\s*${name}\\s*["'][^>]*?>`,
+      `(<meta[^>]+(?:name|property)=["']\\s*${name}\\s*["'][^>]*?>)`,
       'i'
     );
     const tag = firstMatch(re, text);
