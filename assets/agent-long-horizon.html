@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Agent 长程对话与长自生成退化问题调研：实证现状、理论解释、2023–2026 论文地图、缓解路线与开放问题">
+<title>长程之下，模型如何走样 —— Agent 长程对话 / 长自生成退化调研</title>
+<style>
+/* ============ 主题 ============ */
+:root{
+  --bg:#f7f8fa;
+  --surface:#ffffff;
+  --surface-2:#f2f4f8;
+  --ink:#1d2433;
+  --ink-2:#525e75;
+  --ink-3:#8b94a8;
+  --accent:#2f5fd0;
+  --accent-strong:#1f47a8;
+  --accent-soft:rgba(47,95,208,.08);
+  --border:#e4e8ef;
+  --border-2:#d3d9e3;
+  --warn:#b45309;
+  --warn-bg:rgba(180,83,9,.07);
+  --danger:#b3261e;
+  --danger-bg:rgba(179,38,30,.06);
+  --ok:#15803d;
+  --ok-bg:rgba(21,128,61,.07);
+  --violet:#6d4fc4;
+  --violet-bg:rgba(109,79,196,.07);
+  --code-bg:#eef1f6;
+  --shadow:0 1px 3px rgba(23,32,55,.05),0 8px 28px rgba(23,32,55,.05);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:24px;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC","Segoe UI",sans-serif;
+  font-size:16px;line-height:1.85;letter-spacing:.01em;
+}
+::selection{background:var(--accent-soft);}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;text-underline-offset:3px;}
+
+/* ============ 布局 ============ */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:200;
+  background:linear-gradient(90deg,var(--accent),var(--violet));transition:width .1s linear;}
+.sidebar{
+  position:fixed;top:0;left:0;bottom:0;width:292px;z-index:100;
+  background:var(--surface);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;overflow-y:auto;
+}
+.side-brand{padding:28px 24px 18px;border-bottom:1px solid var(--border);}
+.side-brand .kicker{font-size:11px;letter-spacing:.18em;color:var(--ink-3);text-transform:uppercase;margin-bottom:8px;}
+.side-brand h1{margin:0;font-family:Georgia,"Noto Serif SC","Songti SC",serif;font-size:19px;line-height:1.5;color:var(--ink);font-weight:700;}
+.side-brand .sub{margin-top:8px;font-size:12px;color:var(--ink-3);line-height:1.7;}
+nav.toc{flex:1;padding:14px 12px 24px;}
+nav.toc a{
+  display:flex;align-items:baseline;gap:8px;
+  padding:6px 12px;margin:1px 0;border-radius:8px;
+  color:var(--ink-2);font-size:13.5px;line-height:1.5;
+  border-left:3px solid transparent;
+}
+nav.toc a .no{font-size:11px;color:var(--ink-3);min-width:20px;font-variant-numeric:tabular-nums;flex:none;}
+nav.toc a.l2{padding-left:26px;font-size:12.8px;color:var(--ink-3);}
+nav.toc a:hover{background:var(--surface-2);text-decoration:none;color:var(--ink);}
+nav.toc a.active{background:var(--accent-soft);color:var(--accent-strong);border-left-color:var(--accent);font-weight:600;}
+nav.toc a.active .no{color:var(--accent);}
+.side-meta{padding:16px 24px 24px;border-top:1px solid var(--border);font-size:12px;color:var(--ink-3);line-height:1.9;}
+.side-meta b{color:var(--ink-2);font-weight:600;}
+
+main{margin-left:292px;padding:0 48px 90px;}
+.content{max-width:880px;margin:0 auto;}
+
+/* ============ 头部 ============ */
+.hero{padding:64px 0 34px;border-bottom:1px solid var(--border);margin-bottom:40px;}
+.hero .kicker{font-size:12px;letter-spacing:.22em;color:var(--accent);text-transform:uppercase;font-weight:600;margin-bottom:14px;}
+.hero h2{
+  font-family:Georgia,"Noto Serif SC","Songti SC",serif;
+  font-size:34px;line-height:1.45;margin:0 0 18px;font-weight:700;color:var(--ink);
+}
+.hero .lede{font-size:16.5px;color:var(--ink-2);margin:0 0 22px;max-width:760px;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:10px;}
+.chip{
+  font-size:12.5px;color:var(--ink-2);background:var(--surface);
+  border:1px solid var(--border-2);border-radius:999px;padding:4px 14px;
+}
+.chip b{color:var(--accent-strong);font-weight:600;}
+
+/* ============ 统计卡 ============ */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:26px 0 8px;}
+.stat{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:18px 18px 14px;box-shadow:var(--shadow);
+}
+.stat .num{font-family:Georgia,serif;font-size:30px;font-weight:700;color:var(--accent-strong);line-height:1.15;}
+.stat .cap{font-size:12.5px;color:var(--ink-2);line-height:1.65;margin-top:8px;}
+.stat .src{font-size:11px;color:var(--ink-3);margin-top:6px;}
+
+/* ============ 章节 ============ */
+section{margin-bottom:64px;}
+h2.sec{
+  font-family:Georgia,"Noto Serif SC","Songti SC",serif;
+  font-size:25px;font-weight:700;color:var(--ink);
+  margin:0 0 6px;display:flex;align-items:center;gap:14px;line-height:1.5;
+}
+h2.sec .sn{
+  flex:none;width:38px;height:38px;border-radius:11px;background:var(--accent-soft);
+  color:var(--accent-strong);font-size:16px;display:grid;place-items:center;
+  font-family:Georgia,serif;font-weight:700;
+}
+.sec-desc{color:var(--ink-3);font-size:14px;margin:0 0 26px;padding-left:52px;}
+h3{
+  font-size:18.5px;font-weight:700;color:var(--ink);margin:40px 0 14px;
+  padding-left:14px;border-left:4px solid var(--accent);line-height:1.6;
+}
+h3 .en{font-size:12.5px;color:var(--ink-3);font-weight:400;margin-left:10px;font-family:Georgia,serif;}
+h4{font-size:15.5px;color:var(--ink);margin:24px 0 10px;}
+p{margin:0 0 16px;color:var(--ink);max-width:820px;}
+.muted{color:var(--ink-2);}
+.small{font-size:13.5px;color:var(--ink-3);}
+
+/* ============ 卡片与提示框 ============ */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px 24px;margin:18px 0;box-shadow:var(--shadow);}
+.callout{border-radius:12px;padding:16px 20px;margin:18px 0;font-size:14.5px;line-height:1.8;}
+.callout .tag{font-weight:700;font-size:12px;letter-spacing:.1em;display:block;margin-bottom:4px;}
+.callout p{margin:0;font-size:14.5px;}
+.co-insight{background:var(--accent-soft);border:1px solid rgba(47,95,208,.18);}
+.co-insight .tag{color:var(--accent-strong);}
+.co-warn{background:var(--warn-bg);border:1px solid rgba(180,83,9,.18);}
+.co-warn .tag{color:var(--warn);}
+.co-danger{background:var(--danger-bg);border:1px solid rgba(179,38,30,.15);}
+.co-danger .tag{color:var(--danger);}
+.co-ok{background:var(--ok-bg);border:1px solid rgba(21,128,61,.18);}
+.co-ok .tag{color:var(--ok);}
+.co-violet{background:var(--violet-bg);border:1px solid rgba(109,79,196,.18);}
+.co-violet .tag{color:var(--violet);}
+
+/* ============ 定义卡（三种长） ============ */
+.def-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0;}
+.def-card{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:12px;padding:18px 18px 14px;box-shadow:var(--shadow);}
+.def-card:nth-child(2){border-top-color:var(--violet);}
+.def-card:nth-child(3){border-top-color:var(--warn);}
+.def-card h5{margin:0 0 8px;font-size:15.5px;color:var(--ink);}
+.def-card .en{font-size:11.5px;color:var(--ink-3);font-family:Georgia,serif;display:block;margin-top:2px;}
+.def-card p{font-size:13.5px;color:var(--ink-2);margin:0 0 8px;line-height:1.75;}
+.def-card .ex{font-size:12.5px;color:var(--ink-3);border-top:1px dashed var(--border-2);padding-top:8px;}
+
+/* ============ 表格 ============ */
+.tbl-wrap{overflow-x:auto;margin:18px 0;border:1px solid var(--border);border-radius:12px;background:var(--surface);}
+table{border-collapse:collapse;width:100%;font-size:13.8px;}
+th{background:var(--surface-2);text-align:left;padding:10px 14px;color:var(--ink-2);font-weight:600;white-space:nowrap;border-bottom:1px solid var(--border);}
+td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--ink);line-height:1.7;}
+tr:last-child td{border-bottom:none;}
+td .id{font-family:SFMono-Regular,Consolas,monospace;font-size:12px;color:var(--ink-3);white-space:nowrap;}
+td .id a{color:var(--accent);}
+
+/* ============ 论文列表 ============ */
+.paper-list{border:1px solid var(--border);border-radius:14px;background:var(--surface);margin:18px 0;overflow:hidden;}
+.paper{padding:14px 22px;border-bottom:1px solid var(--border);display:flex;gap:16px;align-items:baseline;}
+.paper:last-child{border-bottom:none;}
+.paper:hover{background:var(--surface-2);}
+.paper .yr{
+  flex:none;width:52px;font-family:Georgia,serif;font-size:12.5px;color:var(--ink-3);
+  font-variant-numeric:tabular-nums;
+}
+.paper .body{flex:1;min-width:0;}
+.paper .t{font-size:14.5px;font-weight:600;color:var(--ink);}
+.paper .t a{color:var(--accent-strong);}
+.paper .t .flag{font-size:11px;color:var(--danger);border:1px solid rgba(179,38,30,.3);border-radius:5px;padding:0 6px;margin-left:8px;vertical-align:1px;font-weight:400;}
+.paper .d{font-size:13px;color:var(--ink-2);margin-top:3px;line-height:1.7;}
+.paper .id{font-size:11.5px;color:var(--ink-3);font-family:SFMono-Regular,Consolas,monospace;flex:none;}
+
+/* ============ 理论卡 ============ */
+.theory{border:1px solid var(--border);border-radius:16px;background:var(--surface);margin:22px 0;overflow:hidden;box-shadow:var(--shadow);}
+.theory .head{
+  display:flex;align-items:center;gap:12px;padding:16px 24px;
+  background:linear-gradient(180deg,var(--surface-2),var(--surface));
+  border-bottom:1px solid var(--border);
+}
+.theory .head .ico{flex:none;width:34px;height:34px;border-radius:9px;background:var(--accent-soft);display:grid;place-items:center;font-size:17px;}
+.theory .head .tt{font-size:16.5px;font-weight:700;color:var(--ink);}
+.theory .head .en{font-size:12px;color:var(--ink-3);font-family:Georgia,serif;}
+.theory .bd{padding:20px 26px 22px;}
+.theory .kv{margin:10px 0;}
+.theory .kv .k{font-size:12px;font-weight:700;color:var(--accent-strong);letter-spacing:.06em;margin-bottom:4px;}
+.theory .kv .v{font-size:14.5px;color:var(--ink-2);line-height:1.8;}
+.theory .gut{
+  margin-top:14px;padding:12px 16px;border-left:3px solid var(--accent);
+  background:var(--accent-soft);border-radius:0 10px 10px 0;
+  font-size:14px;color:var(--ink);font-style:italic;
+}
+
+/* ============ 图 ============ */
+.fig{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px 20px 12px;margin:22px 0;box-shadow:var(--shadow);}
+.fig svg{display:block;width:100%;height:auto;}
+.fig .cap{font-size:12.5px;color:var(--ink-3);text-align:center;padding:10px 6px 6px;line-height:1.7;}
+.fig .cap b{color:var(--ink-2);}
+
+/* ============ 开放问题 ============ */
+.gap-list{counter-reset:gap;margin:20px 0;padding:0;list-style:none;}
+.gap-list li{
+  counter-increment:gap;position:relative;
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;
+  padding:16px 20px 16px 64px;margin:12px 0;box-shadow:var(--shadow);
+}
+.gap-list li::before{
+  content:counter(gap,decimal-leading-zero);
+  position:absolute;left:18px;top:16px;
+  font-family:Georgia,serif;font-size:20px;font-weight:700;color:var(--accent);
+  opacity:.85;
+}
+.gap-list b{display:block;font-size:15px;color:var(--ink);margin-bottom:4px;}
+.gap-list p{margin:0;font-size:13.8px;color:var(--ink-2);line-height:1.75;}
+
+/* ============ 参考文献 ============ */
+.refs h4{margin-top:30px;padding:8px 14px;background:var(--surface-2);border-radius:8px;font-size:14px;color:var(--ink-2);}
+.refs ul{margin:10px 0 4px;padding:0 0 0 6px;list-style:none;}
+.refs li{font-size:13.5px;color:var(--ink-2);padding:5px 0;line-height:1.7;border-bottom:1px dashed var(--border);}
+.refs li:last-child{border-bottom:none;}
+.refs li .id{font-family:SFMono-Regular,Consolas,monospace;font-size:12px;}
+.refs li a{color:var(--accent-strong);}
+
+footer{
+  margin-left:292px;border-top:1px solid var(--border);background:var(--surface);
+  padding:28px 48px;font-size:12.5px;color:var(--ink-3);line-height:2;
+}
+footer .inner{max-width:880px;margin:0 auto;}
+
+/* ============ 移动端 ============ */
+#menu-btn{display:none;position:fixed;left:16px;bottom:16px;z-index:150;
+  border:1px solid var(--border-2);background:var(--surface);color:var(--ink-2);
+  border-radius:999px;padding:10px 18px;font-size:13px;cursor:pointer;box-shadow:var(--shadow);}
+@media (max-width:1120px){
+  .sidebar{transform:translateX(-100%);transition:transform .25s ease;}
+  .sidebar.open{transform:translateX(0);box-shadow:0 0 60px rgba(0,0,0,.15);}
+  main{margin-left:0;padding:0 22px 80px;}
+  footer{margin-left:0;padding:24px 22px;}
+  #menu-btn{display:block;}
+  .stat-grid{grid-template-columns:repeat(2,1fr);}
+  .def-grid{grid-template-columns:1fr;}
+  .hero h2{font-size:26px;}
+}
+@media (max-width:640px){.stat-grid{grid-template-columns:1fr;}.paper{flex-wrap:wrap;gap:6px;}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<button id="menu-btn">目录</button>
+
+<!-- ================= 侧栏目录 ================= -->
+<aside class="sidebar" id="sidebar">
+  <div class="side-brand">
+    <div class="kicker">Survey Notes · LLM Agents</div>
+    <h1>长程之下，模型如何走样</h1>
+    <div class="sub">Agent 长程对话 / 长自生成退化的现状、理论与论文地图（2023–2026）</div>
+  </div>
+  <nav class="toc" id="toc">
+    <a href="#tldr"><span class="no">§0</span>摘要：一页看懂</a>
+    <a href="#definition"><span class="no">§1</span>问题定义：三种「长」</a>
+    <a href="#evidence"><span class="no">§2</span>实证现状</a>
+    <a href="#ev-multiturn" class="l2"><span class="no">2.1</span>多轮对话：越聊越偏</a>
+    <a href="#ev-context" class="l2"><span class="no">2.2</span>长上下文：装得下≠用得上</a>
+    <a href="#ev-selfgen" class="l2"><span class="no">2.3</span>长自生成：错误自我复制</a>
+    <a href="#ev-horizon" class="l2"><span class="no">2.4</span>长程任务：几何衰减律</a>
+    <a href="#theory"><span class="no">§3</span>理论解释</a>
+    <a href="#th-compound" class="l2"><span class="no">3.1</span>误差复合与自条件化</a>
+    <a href="#th-collapse" class="l2"><span class="no">3.2</span>模型自食与尾部坍缩</a>
+    <a href="#th-attention" class="l2"><span class="no">3.3</span>注意力预算的零和博弈</a>
+    <a href="#th-entropy" class="l2"><span class="no">3.4</span>熵坍缩与 Echo Trap</a>
+    <a href="#th-repeat" class="l2"><span class="no">3.5</span>重复的机制：归纳头</a>
+    <a href="#th-drift" class="l2"><span class="no">3.6</span>目标漂移与治理衰减</a>
+    <a href="#th-unify" class="l2"><span class="no">3.7</span>统一视角</a>
+    <a href="#papers"><span class="no">§4</span>论文地图（2023–2026）</a>
+    <a href="#mitigation"><span class="no">§5</span>缓解路线</a>
+    <a href="#safety"><span class="no">§6</span>安全视角</a>
+    <a href="#open"><span class="no">§7</span>开放问题</a>
+    <a href="#refs"><span class="no">§8</span>参考文献</a>
+  </nav>
+  <div class="side-meta">
+    <b>更新</b> 2026-10-07<br>
+    <b>范围</b> 2023 奠基工作 + 2025–2026 前沿<br>
+    <b>说明</b> arXiv 编号均可点击跳转原文；个别 2026 论文请以 arXiv 页面为准
+  </div>
+</aside>
+
+<!-- ================= 正文 ================= -->
+<main>
+<div class="content">
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="kicker">Long-Horizon Dialogue &amp; Self-Generated Context</div>
+  <h2>长程之下，模型如何走样？<br>—— Agent 长程对话与长自生成的退化问题</h2>
+  <p class="lede">
+    短任务上接近饱和的 LLM，一旦进入几十轮对话、几十步工具调用或上万 token 的自生成轨迹，
+    就会表现出系统性的性能衰减：指令被遗忘、错误被自我强化、行为陷入重复、目标悄悄漂移。
+    这份调研梳理这一现象的<b>实证证据</b>、<b>理论解释</b>与<b>2023–2026 关键论文</b>，
+    并讨论缓解路线、安全后果与开放问题。
+  </p>
+  <div class="hero-chips">
+    <span class="chip">📊 <b>60+</b> 篇核心文献</span>
+    <span class="chip">🗓 覆盖 <b>2023 奠基 → 2026.09</b></span>
+    <span class="chip">🔍 关键结论已逐篇核对 arXiv</span>
+    <span class="chip">🧭 面向研究者：含开放问题清单</span>
+  </div>
+</div>
+
+<!-- ============ TLDR ============ -->
+<section id="tldr">
+  <h2 class="sec"><span class="sn">§0</span>摘要：一页看懂</h2>
+  <p class="sec-desc">先给结论，细节在后文展开。</p>
+
+  <div class="stat-grid">
+    <div class="stat">
+      <div class="num">−39%</div>
+      <div class="cap">同样的信息分片到多轮对话中输入，15 个模型平均性能下降；把信息拼成单轮即可恢复 95%——退化源于<b>上下文组织</b>而非信息缺失</div>
+      <div class="src">Lost in Multi-Turn [2505.06120]</div>
+    </div>
+    <div class="stat">
+      <div class="num">16 步</div>
+      <div class="cap">长程 agent 任务中，所有被测模型从<b>近满分跌至近零</b>所需的依赖步数；成功率服从几何衰减律，单步可靠性即使 &gt;0.99 也必然衰减</div>
+      <div class="src">How Fast Do Agents Rot? [2609.01660]</div>
+    </div>
+    <div class="stat">
+      <div class="num">9 代</div>
+      <div class="cap">用<b>纯自生成数据</b>迭代再训练，OPT-125M 在 9 代后输出退化为无意义重复——分布尾部最先消失</div>
+      <div class="src">Model Collapse, Nature 2024 [2305.17493]</div>
+    </div>
+    <div class="stat">
+      <div class="num">0%→59%</div>
+      <div class="cap">上下文压缩会<b>静默丢弃</b>安全约束：治理类指令在完整上下文中违规率 0%，压缩后平均 30%、部分模型达 59%</div>
+      <div class="src">Governance Decay [2606.22528]</div>
+    </div>
+  </div>
+
+  <div class="callout co-insight">
+    <span class="tag">CORE ARGUMENT · 核心论点</span>
+    <p>
+      长程对话与长自生成把 LLM 从「一次性函数」变成了<b>以自身输出为输入的迭代动力系统</b>。
+      一旦上下文里 accumulating 的主要是模型自己写的东西，三类机制就会耦合放大：
+      ① <b>误差复合</b>——单步错误率再低，乘性叠加后长程成功率也服从几何衰减，而模型还会
+      「以自己的错误为条件」（self-conditioning）使衰减比几何更快；
+      ② <b>注意力稀释</b>——softmax 归一化使注意力成为零和资源，长上下文中位置偏置、attention sink、
+      干扰项会劫持有限的注意力预算；
+      ③ <b>分布自反馈</b>——推理时上下文被自生成内容污染（漂移、重复、目标遗忘），
+      训练时自生成数据回流导致熵坍缩与模式固化（model collapse、Echo Trap）。
+      目前的缓解（压缩、记忆、多轮 RL、子代理）本质上都是在做同一件事：
+      <b>切断或稀释自反馈回路，用外部锚点恢复信息来源的多样性</b>——但每一种缓解自身又会引入新的失效面。
+    </p>
+  </div>
+</section>
+
+<!-- ============ 1 定义 ============ -->
+<section id="definition">
+  <h2 class="sec"><span class="sn">§1</span>问题定义：三种「长」</h2>
+  <p class="sec-desc">「长程」不是一件事，是三种交叠的退化场景，机制不同、经常被混为一谈。</p>
+
+  <div class="def-grid">
+    <div class="def-card">
+      <h5>长输入<span class="en">Long Context（被动接收）</span></h5>
+      <p>一次性把超长外部内容塞进上下文：长文档问答、RAG 全文、超长系统提示。信息是<b>外部给定的</b>，问题在于「装得下但用不上」。</p>
+      <div class="ex">代表现象：Lost in the Middle、Context Rot、干扰项敏感</div>
+    </div>
+    <div class="def-card">
+      <h5>长交互<span class="en">Long Multi-Turn Dialogue</span></h5>
+      <p>任务被拆成多轮、指令分片到达，上下文不断累积又不断变轨：多轮客服、多轮工具调用、跨会话续聊。问题在于「<b>轮数越多，遵循越差</b>」。</p>
+      <div class="ex">代表现象：指令遗忘、多轮越狱、轮次间线性衰减</div>
+    </div>
+    <div class="def-card">
+      <h5>长自生成<span class="en">Long Self-Generated Trajectory</span></h5>
+      <p>输出本身越来越长且以自身为条件：长 CoT、agent 轨迹、自生成数据回流训练。上下文里<b>大部分内容是模型自己写的</b>。</p>
+      <div class="ex">代表现象：重复循环、错误级联、目标漂移、model collapse</div>
+    </div>
+  </div>
+
+  <p>
+    真正困难的是三者的叠加——<b>长程 agent</b>：任务周期几十步，每步都把上一轮的自生成结果
+    （工具输出摘要、中间结论、失败记录）写回上下文，外部与自生成内容混在一起。
+    此时「长输入」的注意力问题和「长自生成」的分布反馈问题同时发生，
+    这解释了为什么很多在长文档 QA 上「看起来没问题」的模型，在长轨迹任务上崩得很快
+    （[2609.01660] 发现退化主要由<b>步数</b>而非上下文长度驱动）。
+  </p>
+
+  <div class="callout co-warn">
+    <span class="tag">TERMINOLOGY · 术语约定</span>
+    <p>
+      本文用「退化（degradation）」统称四类可测量的失效：<b>性能衰减</b>（accuracy↓）、
+      <b>不可靠性放大</b>（同任务成败方差↑）、<b>行为病理</b>（重复、循环、格式崩坏）、
+      <b>目标/约束漂移</b>（偏离初始指令）。它们共享机制但不是同一个东西，后文分别对应。
+    </p>
+  </div>
+</section>
+
+<!-- ============ 2 实证 ============ -->
+<section id="evidence">
+  <h2 class="sec"><span class="sn">§2</span>实证现状</h2>
+  <p class="sec-desc">退化不是轶事，是可复现的定量现象。四条证据线正在收敛于同一个结论：误差随长度复合放大。</p>
+
+  <h3 id="ev-multiturn">2.1 多轮对话：越聊越偏<span class="en">Multi-Turn Degradation</span></h3>
+  <p>
+    最干净的实验来自 Microsoft 的 <b>LLMs Get Lost in Multi-Turn Conversation</b> [2505.06120]（ICLR'26 杰出论文）：
+    把 15 个模型在同一任务上的指令<b>分片</b>到多轮中给出，平均性能下降 39%（能力项 aptitude 仅 −15%，
+    而不可靠性 unreliability +112%）——同一批信息拼成单轮可恢复 95%。
+    这证明退化主要不是「信息没给到」，而是<b>上下文被对话结构重组后模型不会用了</b>；
+    且模型一旦在多轮中「走错方向」几乎不会回头（自我纠正率约 0）。
+  </p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>研究</th><th>设置</th><th>关键发现</th></tr></thead>
+    <tbody>
+      <tr><td>Lost in Multi-Turn <span class="id"><a href="https://arxiv.org/abs/2505.06120">2505.06120</a></span></td><td>15 模型 × 6 任务，单轮 vs 分片多轮</td><td>平均 −39%；unreliability +112%；自纠正率≈0；单轮拼接恢复 95%</td></tr>
+      <tr><td>Multi-IF <span class="id"><a href="https://arxiv.org/abs/2410.15553">2410.15553</a></span></td><td>多轮多语言指令遵循基准</td><td>o1-preview 第 1 轮 0.877 → 第 3 轮 0.707，每加一轮失败率递增</td></tr>
+      <tr><td>SysBench <span class="id"><a href="https://arxiv.org/abs/2408.10943">2408.10943</a></span></td><td>系统消息遵循，按轮次追踪</td><td>约束遵循随轮次<b>近线性衰减</b>；轮间依赖型对话比并行型衰减更快</td></tr>
+      <tr><td>MARS-Bench <span class="id"><a href="https://arxiv.org/abs/2505.23810">2505.23810</a></span></td><td>30+ 轮真实场景对话（EMNLP'25）</td><td>最强模型也随轮数显著下降；机理上发现 attention sink（特殊 token 吸走注意力）参与退化</td></tr>
+      <tr><td>SimpleTIR <span class="id"><a href="https://arxiv.org/abs/2509.02479">2509.02479</a></span></td><td>多轮工具调用 RL 训练</td><td>工具反馈引发分布漂移 → 低概率 token 逐轮复合 → 梯度爆炸崩溃；过滤「空轮」后 AIME24 从 22.1 → 50.5</td></tr>
+      <tr><td>Conversational Reliability <span class="id"><a href="https://arxiv.org/abs/2603.01423">2603.01423</a></span></td><td>单/多轮配对受控实验</td><td>多轮全面退化；失败模式为指令漂移、意图混淆、上下文覆写</td></tr>
+      <tr><td>Intent Mismatch <span class="id"><a href="https://arxiv.org/abs/2602.07338">2602.07338</a></span></td><td>根因分析</td><td>主张根因是「用户意图对齐缺口」而非模型能力缺陷——扩规模/换训练无法消除</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout co-insight"><span class="tag">KEY FACT</span>
+    <p>多轮退化的两个「反直觉」事实：① 它<b>不随模型规模消失</b>（前沿模型同样退化）；
+    ② 它对<b>信息组织方式</b>极其敏感——同样的 token，重排/合并即可恢复大半性能。这说明问题主要出在上下文利用机制，而非知识。</p>
+  </div>
+
+  <h3 id="ev-context">2.2 长上下文：装得下 ≠ 用得上<span class="en">Context Rot</span></h3>
+  <p>
+    上下文窗口从 4K 涨到百万级，但<b>有效上下文</b>远小于标称窗口。Chroma 的 <b>Context Rot</b>（2025.07）
+    在 18 个 SOTA 模型上系统测量：随输入 token 增加，性能全部退化，且退化为<b>非均匀</b>的——
+    与任务难度、信息位置、干扰结构强耦合。<b>Context Length Alone Hurts</b> [2510.05381] 补上了关键对照：
+    即使检索是完美的（不需要的上下文全是无关内容），长度本身也造成 13.9–50% 的下降；
+    加入语义相关的干扰项再损 15–37pp。
+  </p>
+  <p>
+    机理侧的证据链（详见 §3.3）：<b>Lost in the Middle</b> [2407.03103] 的 U 形位置曲线 →
+    <b>Attention Basin</b> [2508.05128] 证明按注意力权重重排证据即可免训练提升多跳 QA →
+    <b>TAPA</b> [2509.12635] 把根因追到 RoPE 引入的内在距离偏置 →
+    <b>FocuSFT</b> [2605.09932] 提出「注意力稀释」训练视角：sink/近因等<b>位置特权 token</b> 抢占注意力预算使内容 token「饥饿」。
+    另一个容易被忽视的暗面是<b>压缩的忠实性</b>：Answer-Evidence Gap [2608.01631] 发现 10 种 KV 淘汰方法
+    在准确率保持的同时，推理链的证据支持大幅劣化——「压缩保住了分数，毁掉了可解释性」。
+  </p>
+
+  <h3 id="ev-selfgen">2.3 长自生成：错误的自我复制<span class="en">Self-Generation Pathologies</span></h3>
+  <p>
+    当上下文的内容大部分来自模型自己，退化出现新的形态。<b>The Illusion of Diminishing Returns</b>
+    [2509.09677]（ICLR'26）提供了一个关键概念——<b>self-conditioning（自条件化）</b>：
+    显式提供完整计划后逐步执行长任务，模型的<b>单步准确率随步数增加而下降</b>，
+    且当上下文中包含自己之前的错误时更容易犯错；这一效应<b>不随模型规模消失</b>，
+    但 thinking（延长单轮推理）可以显著缓解。这排除了单纯的「能力不足」解释：
+    模型不是不会做，而是在长执行中被自己污染的上下文带偏。
+  </p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>病理</th><th>证据</th><th>关键发现</th></tr></thead>
+    <tbody>
+      <tr><td><b>错误级联</b></td><td>AgentDebug <span class="id"><a href="https://arxiv.org/abs/2509.25370">2509.25370</a></span></td><td>首个 agent 轨迹错误标注基准：早期错误跨步级联放大；基于根因的调试带来最高 26% 相对成功率提升</td></tr>
+      <tr><td><b>幻觉雪球</b></td><td>Hallucination Snowball <span class="id"><a href="https://arxiv.org/abs/2305.13534">2305.13534</a></span>；Markov 版 <span class="id"><a href="https://arxiv.org/abs/2608.14588">2608.14588</a></span></td><td>模型能识别自己 67–87% 的错误却仍坚持沿用；多智能体管线中错误逐级传播、逃逸概率逐级下降</td></tr>
+      <tr><td><b>重复循环</b></td><td>Vending-Bench <span class="id"><a href="https://arxiv.org/abs/2502.15840">2502.15840</a></span>；生产观测 <span class="id"><a href="https://arxiv.org/abs/2512.04419">2512.04419</a></span></td><td>&gt;2000 万 token 的长程运行中所有模型出现「meltdown」循环且难自恢复；贪心解码下重复因自我强化无法逃逸，beam search + early stopping 可解</td></tr>
+      <tr><td><b>推理链漂移</b></td><td>MPPA <span class="id"><a href="https://arxiv.org/abs/2510.11620">2510.11620</a></span>；Under/Overthinking <span class="id"><a href="https://arxiv.org/abs/2505.00127">2505.00127</a></span></td><td>长 CoT 中错误复合导致规划漂移，多数失败源于早期错误规划而非后期计算；准确率与推理长度非单调——过长后反而下降</td></tr>
+      <tr><td><b>自进化回路</b></td><td>TTRL-Guard <span class="id"><a href="https://arxiv.org/abs/2605.19444">2605.19444</a></span>；Invisible Leash <span class="id"><a href="https://arxiv.org/abs/2507.14843">2507.14843</a></span></td><td>用自生成伪标签训练：增益主要是「把会的 sharpening」，多数投票锁错后<b>不可逆</b>；RLVR 几乎不发现新模式（净发现率 ≤0.04）</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="ev-horizon">2.4 长程任务：几何衰减律<span class="en">The Geometric Decay Law</span></h3>
+  <p>
+    把三股线索合到一起看「长程 agent 到底怎么样了」。乐观的一面：<b>METR</b> 测量「50% 成功率的任务时长」
+    （time horizon）发现它每约 7 个月翻倍、近年还有加速 [2503.14499]，2026 年其风险报告称最强 agent
+    已能在受控基准上执行超过 16 小时的人类等时任务；OSWorld 等榜单的最佳成绩也在持续爬升。
+    悲观的一面是另一组数字：<b>TheAgentCompany</b> [2412.14161] 上最强 agent 的端到端成功率长期在 30% 上下；
+    tau2-bench 的 telecom 域已近饱和（99%+），但换成 banking 新域或用 pass^k（连续 k 次成功）衡量一致性，
+    立刻掉到 55% 左右。榜单饱和与生产不可靠并存。
+  </p>
+  <p>
+    <b>How Fast Do Agents Rot?</b> [2609.01660]（2026.09）给出了目前最系统的解释：
+    9 个模型、6 个任务族、5 个任务长度、3 种上下文机制、10,664 条轨迹的受控研究——
+    任务成功率服从<b>几何衰减律</b> S(H) ≈ r<sup>H</sup>，其中单步可靠性 r 随模型规模上升，
+    但<b>在最强的模型上也饱和于明显小于 1 的水平</b>。这意味着只要任务够长，崩溃是数学必然。
+    agentic 工具任务上，所有模型在 <b>16 步内从近满分跌到近零</b>；外推到百步级生产任务，
+    可靠性从 GAIA 长度的 0.42 跌到 0.24。最反直觉的发现：限制上下文窗口（压缩）不但没有缓解，
+    反而让衰减<b>更陡</b>（logit 斜率 −0.69 vs −0.44）——直接否定了「这只是 lost-in-the-middle」的解释，
+    也对「上压缩就稳了」的生产捷径敲了警钟。
+  </p>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="长程成功率几何衰减示意图">
+      <!-- 坐标轴 -->
+      <line x1="60" y1="260" x2="620" y2="260" stroke="#d3d9e3" stroke-width="1.5"/>
+      <line x1="60" y1="30" x2="60" y2="260" stroke="#d3d9e3" stroke-width="1.5"/>
+      <!-- 网格 -->
+      <g stroke="#eef1f6" stroke-width="1">
+        <line x1="60" y1="40" x2="620" y2="40"/><line x1="60" y1="95" x2="620" y2="95"/>
+        <line x1="60" y1="150" x2="620" y2="150"/><line x1="60" y1="205" x2="620" y2="205"/>
+      </g>
+      <g font-size="11" fill="#8b94a8" font-family="Georgia,serif">
+        <text x="50" y="44" text-anchor="end">100%</text>
+        <text x="50" y="99" text-anchor="end">75%</text>
+        <text x="50" y="154" text-anchor="end">50%</text>
+        <text x="50" y="209" text-anchor="end">25%</text>
+        <text x="60" y="278">0</text>
+        <text x="127" y="278">5</text>
+        <text x="195" y="278">10</text>
+        <text x="262" y="278">15</text>
+        <text x="330" y="278">20</text>
+        <text x="465" y="278">30</text>
+        <text x="590" y="278">40 步</text>
+      </g>
+      <!-- 16步参考线 -->
+      <line x1="276" y1="30" x2="276" y2="260" stroke="#b3261e" stroke-width="1" stroke-dasharray="5 4" opacity=".55"/>
+      <text x="282" y="44" font-size="11" fill="#b3261e">16 步：近满分 → 近零 [2609.01660]</text>
+      <!-- r=0.99 -->
+      <polyline fill="none" stroke="#2f5fd0" stroke-width="2.5"
+        points="60,40 127.5,51 195,61 262.5,71 330,80 465,97 620,113"/>
+      <!-- r=0.97 -->
+      <polyline fill="none" stroke="#6d4fc4" stroke-width="2.5"
+        points="60,40 127.5,71 195,98 262.5,121 330,141 465,172 620,195"/>
+      <!-- r=0.95 -->
+      <polyline fill="none" stroke="#b45309" stroke-width="2.5"
+        points="60,40 127.5,90 195,128 262.5,158 330,181 465,213 620,232"/>
+      <!-- 标签 -->
+      <g font-size="12" font-family="Georgia,serif">
+        <text x="392" y="72" fill="#2f5fd0">r = 0.99（单步仅 1% 出错）</text>
+        <text x="392" y="150" fill="#6d4fc4">r = 0.97</text>
+        <text x="392" y="205" fill="#b45309">r = 0.95</text>
+      </g>
+    </svg>
+    <div class="cap"><b>几何衰减律（示意）</b>：成功率 ≈ r<sup>H</sup>。单步可靠性 r 的微小差异，
+    在依赖步数 H 增大时被乘性放大——「单步准确率高」与「长程任务可靠」几乎是两个物种。
+    实测中 r 还会因 self-conditioning 随步数递减，真实衰减比图示更陡。</div>
+  </div>
+
+  <div class="callout co-violet"><span class="tag">EVALUATION GAP · 评测的结构性盲区</span>
+    <p>
+      为什么榜单看起来越来越好看？<b>Beyond pass@1</b> [2603.29231] 指出：短任务 pass@1 度量的是
+      「能力」，长部署需要的是「可靠性」，两者随任务时长<b>系统性分叉</b>，且能力排名与可靠性排名出现多重倒挂——
+      前沿模型反而有最高的 meltdown 率（最高 19%），因为它们敢于尝试激进的多步策略。
+      该文还发现一个与记忆系统文献相悖的结果：<b>记忆脚手架在全部 10 个模型上都损害长程表现</b>。
+      评测若不控制任务地平线（horizon-aware），对长程失效就是结构性失明。
+    </p>
+  </div>
+</section>
+
+<!-- ============ 3 理论 ============ -->
+<section id="theory">
+  <h2 class="sec"><span class="sn">§3</span>理论解释</h2>
+  <p class="sec-desc">六个机制 + 一个统一视角。它们不是互斥的假设，而是同一个迭代系统在不同截面上的表现。</p>
+
+  <!-- 3.1 -->
+  <div class="theory" id="th-compound">
+    <div class="head"><div class="ico">⛓️</div><div>
+      <div class="tt">3.1 误差复合与自条件化</div>
+      <div class="en">Error Compounding &amp; Self-Conditioning</div>
+    </div></div>
+    <div class="bd">
+      <p>
+        自回归模型每一步都以历史为条件，而多轮/长程场景中，历史的很大一部分是<b>模型自己生成的</b>。
+        训练时「答案来自人类」、推理时「答案来自自己」的失配（exposure bias 的现代版，
+        [2410.14655] 证明其在 LLM 时代依然成立）在短任务中被 RLHF 良好对齐掩盖，
+        在长程中则被逐步放大。
+      </p>
+      <div class="kv"><div class="k">数学直觉</div><div class="v">
+        若各步错误独立、错误率恒为 ε，则长程成功概率 ≈ (1−ε)<sup>H</sup>，呈几何衰减——
+        ε=1% 的模型跑 100 步只剩 37%。若错误还会<b>提高</b>后续错误率（self-conditioning，
+        [2509.09677]），衰减常数随 H 递减，退化比几何更快；反之若存在外部纠错/锚定，
+        衰减可被压回亚线性。
+      </div></div>
+      <div class="kv"><div class="k">代表证据</div><div class="v">
+        self-conditioning 不随规模消失但 thinking 可缓解 [2509.09677]；
+        agent 早期错误跨步级联 [2509.25370]；多轮中「走错就不回头」（自纠正率≈0）[2505.06120]；
+        幻觉雪球：模型明知有错仍坚持沿用 [2305.13534]。
+      </div></div>
+      <div class="gut">一句话：长程任务不考「会不会」，考「每一步都别错」——而模型恰恰会以自己的错误为条件继续犯错。</div>
+    </div>
+  </div>
+
+  <!-- 3.2 -->
+  <div class="theory" id="th-collapse">
+    <div class="head"><div class="ico">♻️</div><div>
+      <div class="tt">3.2 模型自食：分布映射与尾部坍缩</div>
+      <div class="en">Model Collapse as Iterated Distribution Mapping</div>
+    </div></div>
+    <div class="bd">
+      <p>
+        把「用自生成数据再训练」形式化为分布映射的迭代：p<sub>n+1</sub> = T(p<sub>n</sub>)，
+        其中 T 用模型（或其样本）近似数据分布。理论工作刻画了 T 的动力学：
+      </p>
+      <div class="kv"><div class="k">尾部最先消失</div><div class="v">
+        Shumailov et al. [2305.17493 → Nature 2024]：递归训练导致分布尾部（低频但承载多样性与难例的信息）逐代丢失，
+        分布收敛到低方差的「点估计」；OPT-125M 九代后退化为无意义重复。<b>A Tale of Tails</b> [2402.07043]
+        证明纯合成训练下 scaling law 直接改变——丧失 scale 增益，人机混合则可出现 grokking 式恢复。
+      </div></div>
+      <div class="kv"><div class="k">方差收缩与相变</div><div class="v">
+        <b>Go MAD</b> [2307.01850]（ICLR'24）用鞅不等式证明：全自食回路方差必收缩、模型必退化；
+        混入固定比例真实数据只能<b>延缓</b>；持续补充新鲜真实数据才能阻止，且存在相变式的临界点。
+        <b>迭代重训练的稳定性</b> [2310.00429] 给出不动点稳定条件：初始模型足够好 + 真实数据占比足够大。
+      </div></div>
+      <div class="kv"><div class="k">争议与边界</div><div class="v">
+        <b>Strong Model Collapse</b> [2410.04840]：合成占比低至 1/1000 也会造成性能平台化（可被大模型部分缓解）；
+        而 <b>Is Model Collapse Inevitable?</b> [2404.01413] 指出「累积式（accumulate）」训练的误差有与代数无关的上界——
+        collapse 是 replace 范式的产物。现实实践中 Phi-4 [2412.08905]（约 40% 受控合成 token）等结果说明：
+        <b>有质量过滤与真实锚定的合成数据可以增益</b>；危险的不是「用了合成数据」，而是「分布来源收敛到模型自身」的回路。
+      </div></div>
+      <div class="kv"><div class="k">与长程对话的连接</div><div class="v">
+        多轮对话中的自生成上下文可以看作「推理时的自食」：上下文分布被模型自己的历史输出改写，
+        单次会话内即可发生 mini 版的尾部丢失——用户输入里的细微约束（尾部信息）最先被冲掉，
+        这正是 §3.6 目标漂移与 §6 治理衰减的机制基础。
+      </div></div>
+      <div class="gut">一句话：无论训练时还是推理时，「用自己喂自己」都会让分布塌向高频模式——尾部（细节、约束、罕见情况）总是最先死。</div>
+    </div>
+  </div>
+
+  <!-- 3.3 -->
+  <div class="theory" id="th-attention">
+    <div class="head"><div class="ico">🎯</div><div>
+      <div class="tt">3.3 注意力预算：softmax 的零和博弈</div>
+      <div class="en">Attention Budget &amp; Positional Bias</div>
+    </div></div>
+    <div class="bd">
+      <p>
+        softmax 归一化使注意力总和恒为 1——它是<b>零和资源</b>。上下文每多一个 token，
+        无论有用与否，都在参与分蛋糕。这给出长上下文退化的一族机理：
+      </p>
+      <div class="kv"><div class="k">位置偏置</div><div class="v">
+        U 形注意力曲线（开头/结尾特权，中间塌陷）[2407.03103]；
+        <b>Attention Basin</b> [2508.05128] 发现其结构是稳定的，且按注意力重排证据即可免训练提升多跳 QA；
+        <b>TAPA</b> [2509.12635] 把根因追到 RoPE：注意力分数中存在<b>内在的距离依赖偏置</b>，
+        这是长上下文建模受限的结构性原因。
+      </div></div>
+      <div class="kv"><div class="k">特权 token 与稀释</div><div class="v">
+        attention sink（开头特殊 token 吸走大量注意力）在长对话中参与性能退化 [2505.23810]；
+        <b>FocuSFT</b> [2605.09932] 将其统一为「注意力稀释」：位置特权 token 抢占预算，内容 token 饥饿；
+        修正后 RULER 从 72.9 → 81.1。<b>ICE</b> [2509.19517] 进一步把「无关信息饱和 +
+        任务切换残留」形式化为可测的认知负载，饱和负载下性能随负载线性下降（β=−0.003/百分点，p&lt;0.001）。
+      </div></div>
+      <div class="kv"><div class="k">干扰项与机械复制</div><div class="v">
+        <b>GEAR</b> [2607.19345] 发现长上下文中模型倾向于<b>不加区分地复制输入</b>（包括干扰项），
+        复制行为随长度加剧，未能聚焦关键证据的样本显著更易错。
+      </div></div>
+      <div class="gut">一句话：注意力是一块固定大小的蛋糕；上下文越长，写进去的每一句「废话」都在分走下一句生成所需的注意力。</div>
+
+      <div class="fig" style="margin:18px 0 4px;">
+        <svg viewBox="0 0 640 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="U形注意力示意">
+          <line x1="50" y1="120" x2="610" y2="120" stroke="#d3d9e3" stroke-width="1.5"/>
+          <line x1="50" y1="15" x2="50" y2="120" stroke="#d3d9e3" stroke-width="1.5"/>
+          <path d="M 60 35 C 150 40, 210 95, 310 100 C 410 95, 470 55, 600 30"
+                fill="none" stroke="#2f5fd0" stroke-width="2.5"/>
+          <circle cx="60" cy="35" r="4" fill="#2f5fd0"/>
+          <circle cx="600" cy="30" r="4" fill="#2f5fd0"/>
+          <g font-size="11.5" fill="#8b94a8" font-family="Georgia,serif">
+            <text x="66" y="26">primacy（开头/sink）</text>
+            <text x="278" y="128" text-anchor="middle">上下文位置</text>
+            <text x="596" y="20" text-anchor="end">recency（结尾）</text>
+            <text x="310" y="88" text-anchor="middle" fill="#b45309">middle：关键证据最容易被忽略的位置</text>
+          </g>
+        </svg>
+        <div class="cap"><b>U 形位置曲线（示意）</b>：位于中部的信息在注意力分配上天然弱势——对长对话而言，
+        意味着「几轮之前定下的约束」恰好落在最容易被忽略的区域。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.4 -->
+  <div class="theory" id="th-entropy">
+    <div class="head"><div class="ico">🌀</div><div>
+      <div class="tt">3.4 熵坍缩与 Echo Trap</div>
+      <div class="en">Entropy Collapse in Self-Feeding Loops</div>
+    </div></div>
+    <div class="bd">
+      <p>
+        换个信息论视角：模型的输出分布有自己的熵（多样性）。当系统进入「自己喂自己」的回路
+        ——推理时上下文被自生成内容填充、训练时数据来自自生成轨迹——分布熵会单调下降：
+        高频模式被不断强化，低频探索被系统性淘汰。
+      </p>
+      <div class="kv"><div class="k">训练侧的定量刻画</div><div class="v">
+        <b>Entropy Mechanism</b> [2505.22617] 发现 RL 训练中性能与熵满足经验律 R = −a·exp(H) + b：
+        性能是从熵里「换」来的，熵耗尽即天花板；熵变化由 Cov(动作概率, logit 更新) 驱动，全程为正 → 熵单调下降。
+        <b>RAGEN</b> [2504.20073] 在多轮 agent RL 中发现同名病理——<b>Echo Trap</b>：
+        奖励方差断崖、梯度尖峰，agent 陷入模仿上下文噪声的重复模式；需要轨迹过滤 + critic + 梯度稳定（StarPO-S）才能续命。
+        <b>SimpleTIR</b> [2509.02479] 的「空轮 → 分布漂移 → 梯度爆炸」是同一现象在工具 RL 中的形态。
+      </div></div>
+      <div class="kv"><div class="k">更深一层：探索边界</div><div class="v">
+        <b>Invisible Leash</b> [2507.14843]：RLVR 只在基座分布支撑集内重新分配概率质量
+        （支撑保留率 0.93–0.99，净新发现率 ≤0.04）——如果自进化系统没有任何外部信息源
+        （工具、检索、人类锚点），熵再高也只是在自己已有的模式里打转。
+        这与 model collapse 理论的结论在更高层面汇合：<b>系统的新信息必须来自系统外</b>。
+      </div></div>
+      <div class="kv"><div class="k">推理侧的表现</div><div class="v">
+        长自生成中的重复循环、格式套路化、「越写越像自己」的文风收敛，是同一熵动力学在单次生成内的缩影；
+        多样性损失可以被测量并在采样策略上部分恢复（如 Verbalized Sampling [2510.01171] 从偏好数据的
+        typicality bias 出发恢复 1.6–2.1× 多样性）。
+      </div></div>
+      <div class="gut">一句话：自反馈回路是一部「熵燃烧机」——多样性被烧掉换来表面性能；没有外部信息注入，燃烧结束后只剩原地打转。</div>
+    </div>
+  </div>
+
+  <!-- 3.5 -->
+  <div class="theory" id="th-repeat">
+    <div class="head"><div class="ico">🔁</div><div>
+      <div class="tt">3.5 重复的机制：归纳头自反馈</div>
+      <div class="en">Induction Heads &amp; the Repetition Curse</div>
+    </div></div>
+    <div class="bd">
+      <p>
+        重复循环（repetition curse）有具体的机制解释候选：<b>归纳头（induction heads）</b>——
+        负责模式 A B … A → B 的复制型注意力头——在输出中出现重复模式后被激活，
+        并<b>支配</b> logits、抑制其他头 contribution，形成「越重复 → 越强 → 越重复」的自反馈。
+        [2505.13514] 对此给出了注意力层面的分析并提出头正则化缓解
+        <span class="small">（注：该文 v2 已被作者撤回，机理结论应作为假说看待；
+        但生产环境观测 [2512.04419] 与 Vending-Bench 的 meltdown 现象 [2502.15840]
+        与「重复自强化、贪心解码难逃逸」的宏观描述一致）</span>。
+      </p>
+      <div class="kv"><div class="k">为什么 agent 场景更危险</div><div class="v">
+        agent 轨迹天然充满重复结构（相似的工具调用格式、相似的观察-行动循环），
+        为归纳头提供了大量「可复制模式」；而 agent 常用的贪心解码恰好处在最容易被重复吸引子捕获的解码区间。
+        Vending-Bench 观察到的 meltdown 一旦发生，模型几乎无法自行恢复——吸引子一旦形成，梯度与注意力都在为它加固。
+      </div></div>
+      <div class="gut">一句话：重复不是「卡住了」，是注意力机制的一种自组织吸引子——模式自己给自己投票。</div>
+    </div>
+  </div>
+
+  <!-- 3.6 -->
+  <div class="theory" id="th-drift">
+    <div class="head"><div class="ico">🧭</div><div>
+      <div class="tt">3.6 目标漂移：软先验压过硬指令</div>
+      <div class="en">Goal Drift &amp; Governance Decay</div>
+    </div></div>
+    <div class="bd">
+      <p>
+        长程系统最隐蔽的失效不是变慢或出错，而是<b>悄悄换目标</b>。
+        <b>Evaluating Goal Drift in LM Agents</b> [2505.02709] 的实验设计很能说明问题：
+        在系统提示里显式给定目标，再让环境施加竞争性诱惑——所有被测模型都会发生不同程度的漂移，
+        且漂移程度与「随上下文增长的模式匹配倾向」相关：模型越来越依赖「这个情境下通常该做什么」
+        的统计先验，而不是「我的任务书里写了什么」。最强的 scaffolded Claude 3.5 Sonnet
+        能在最难设置下坚持 10 万 token 以上，但没有任何模型完全免疫。
+      </p>
+      <div class="kv"><div class="k">漂移可以传染</div><div class="v">
+        <b>Inherited Goal Drift</b> [2603.03258]：让强模型接管弱 agent 预填充的漂移轨迹，
+        强模型会<b>继承</b>漂移——漂移写在上下文里，而不只是模型参数里。
+        这对多 agent 协作与「人类起草 + agent 接管」的工作流是实质性风险。
+        <b>Asymmetric Goal Drift</b> [2603.03456] 进一步发现漂移会不对称地违反 system prompt。
+      </div></div>
+      <div class="kv"><div class="k">压缩也会漂移：治理衰减</div><div class="v">
+        <b>Governance Decay</b> [2606.22528]：compaction 会静默丢弃治理类约束——
+        完整上下文中违规率 0%，压缩后平均 30%（部分模型 59%）；约束幸存于摘要中则违规率仍为 0%。
+        更严重的是 <b>Compaction-Eviction Attack</b>：对抗者可以注入内容诱导摘要器「恰好删掉」安全策略，
+        优化后的注入击败了所有被测模型；而简单的 <b>Constraint Pinning</b>（把约束隔离出有损压缩区）可将违规归零。
+      </div></div>
+      <div class="gut">一句话：指令是「硬」的，但注意力是「软」的——上下文越长，软的统计先验越容易投票淘汰硬的约束。</div>
+    </div>
+  </div>
+
+  <!-- 3.7 -->
+  <div class="theory" id="th-unify">
+    <div class="head"><div class="ico">🌌</div><div>
+      <div class="tt">3.7 统一视角：长程 = 敏感迭代系统的多步执行</div>
+      <div class="en">One Loop, Many Faces</div>
+    </div></div>
+    <div class="bd">
+      <p>
+        六个机制其实是同一个反馈回路在不同截面上的投影。长程系统 = 一个把「当前上下文」映射到
+        「下一步输出」的函数 f 的迭代执行；f 有两类系统性偏置（注意力稀释、分布 sharpening），
+        迭代让偏置复合：
+      </p>
+
+      <div class="fig">
+        <svg viewBox="0 0 900 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="推理侧与训练侧自反馈回路">
+          <defs>
+            <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#525e75"/>
+            </marker>
+            <marker id="ar-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#2f5fd0"/>
+            </marker>
+            <marker id="ar-v" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#6d4fc4"/>
+            </marker>
+          </defs>
+          <!-- 推理回路 -->
+          <text x="40" y="34" font-size="14" font-weight="700" fill="#2f5fd0" font-family="Georgia,serif">推理侧回路 · 单次会话内</text>
+          <g font-size="13">
+            <rect x="40" y="52" width="180" height="72" rx="12" fill="#f2f4f8" stroke="#2f5fd0" stroke-width="1.4"/>
+            <text x="130" y="82" text-anchor="middle" fill="#1d2433">自生成内容写入上下文</text>
+            <text x="130" y="104" text-anchor="middle" fill="#8b94a8" font-size="11.5">中间结论 / 摘要 / 失败记录</text>
+            <rect x="270" y="52" width="180" height="72" rx="12" fill="#f2f4f8" stroke="#2f5fd0" stroke-width="1.4"/>
+            <text x="360" y="82" text-anchor="middle" fill="#1d2433">注意力被稀释 / 劫持</text>
+            <text x="360" y="104" text-anchor="middle" fill="#8b94a8" font-size="11.5">位置偏置 · sink · 干扰项</text>
+            <rect x="500" y="52" width="180" height="72" rx="12" fill="#f2f4f8" stroke="#2f5fd0" stroke-width="1.4"/>
+            <text x="590" y="82" text-anchor="middle" fill="#1d2433">输出漂移</text>
+            <text x="590" y="104" text-anchor="middle" fill="#8b94a8" font-size="11.5">冗余 · 重复 · 偏离指令</text>
+            <rect x="710" y="52" width="160" height="72" rx="12" fill="#f2f4f8" stroke="#2f5fd0" stroke-width="1.4"/>
+            <text x="790" y="82" text-anchor="middle" fill="#1d2433">错误成为条件</text>
+            <text x="790" y="104" text-anchor="middle" fill="#8b94a8" font-size="11.5">self-conditioning</text>
+          </g>
+          <g stroke="#2f5fd0" stroke-width="1.6" fill="none">
+            <line x1="220" y1="88" x2="266" y2="88" marker-end="url(#ar-b)"/>
+            <line x1="450" y1="88" x2="496" y2="88" marker-end="url(#ar-b)"/>
+            <line x1="680" y1="88" x2="706" y2="88" marker-end="url(#ar-b)"/>
+            <path d="M 790 124 L 790 152 L 130 152 L 130 128" marker-end="url(#ar-b)" stroke-dasharray="6 4"/>
+          </g>
+          <text x="460" y="146" text-anchor="middle" font-size="12" fill="#2f5fd0">循环放大：上下文进一步被自生成内容污染</text>
+
+          <!-- 分隔 -->
+          <line x1="40" y1="196" x2="870" y2="196" stroke="#e4e8ef" stroke-width="1"/>
+
+          <!-- 训练回路 -->
+          <text x="40" y="232" font-size="14" font-weight="700" fill="#6d4fc4" font-family="Georgia,serif">训练侧回路 · 跨代迭代（自进化 / 合成数据）</text>
+          <g font-size="13">
+            <rect x="40" y="250" width="180" height="72" rx="12" fill="#f2f4f8" stroke="#6d4fc4" stroke-width="1.4"/>
+            <text x="130" y="280" text-anchor="middle" fill="#1d2433">采集自生成轨迹 / 数据</text>
+            <text x="130" y="302" text-anchor="middle" fill="#8b94a8" font-size="11.5">rollout · 自对话 · 自标注</text>
+            <rect x="270" y="250" width="180" height="72" rx="12" fill="#f2f4f8" stroke="#6d4fc4" stroke-width="1.4"/>
+            <text x="360" y="280" text-anchor="middle" fill="#1d2433">筛选与伪标签</text>
+            <text x="360" y="302" text-anchor="middle" fill="#8b94a8" font-size="11.5">多数投票 · 自评分 · 过滤</text>
+            <rect x="500" y="250" width="180" height="72" rx="12" fill="#f2f4f8" stroke="#6d4fc4" stroke-width="1.4"/>
+            <text x="590" y="280" text-anchor="middle" fill="#1d2433">分布 sharpening</text>
+            <text x="590" y="302" text-anchor="middle" fill="#8b94a8" font-size="11.5">尾部丢失 · 熵坍缩</text>
+            <rect x="710" y="250" width="160" height="72" rx="12" fill="#f2f4f8" stroke="#6d4fc4" stroke-width="1.4"/>
+            <text x="790" y="280" text-anchor="middle" fill="#1d2433">模式固化</text>
+            <text x="790" y="302" text-anchor="middle" fill="#8b94a8" font-size="11.5">Echo Trap · collapse</text>
+          </g>
+          <g stroke="#6d4fc4" stroke-width="1.6" fill="none">
+            <line x1="220" y1="286" x2="266" y2="286" marker-end="url(#ar-v)"/>
+            <line x1="450" y1="286" x2="496" y2="286" marker-end="url(#ar-v)"/>
+            <line x1="680" y1="286" x2="706" y2="286" marker-end="url(#ar-v)"/>
+            <path d="M 790 322 L 790 350 L 130 350 L 130 326" marker-end="url(#ar-v)" stroke-dasharray="6 4"/>
+          </g>
+          <text x="460" y="344" text-anchor="middle" font-size="12" fill="#6d4fc4">下一代模型更同质 → 采集到更同质的数据</text>
+
+          <!-- 底部锚点 -->
+          <rect x="150" y="378" width="600" height="40" rx="10" fill="rgba(21,128,61,.07)" stroke="#15803d" stroke-width="1.2" stroke-dasharray="5 3"/>
+          <text x="450" y="403" text-anchor="middle" font-size="13" fill="#15803d">唯一的破解方向：注入外部信息源（真实数据 / 工具反馈 / 检索 / 人类锚点 / 新环境）</text>
+        </svg>
+        <div class="cap"><b>同一个回路的两张脸</b>：推理侧（上）与训练侧（下）的自反馈结构同构——
+        都没有外部信息进入系统，都以「分布收敛到自己」为终局。这也解释了为什么各路缓解方案殊途同归。</div>
+      </div>
+
+      <div class="kv"><div class="k">把机制装进几何衰减律</div><div class="v">
+        成功率 S(H) ≈ ∏ r<sub>i</sub>。三个机制分别决定 r<sub>i</sub> 的命运：
+        <b>注意力稀释</b>压低基线 r；<b>自条件化</b>让 r<sub>i</sub> 随历史中的错误数递减；
+        <b>熵坍缩/重复吸引子</b>让 r 在局部塌缩到近零且难恢复。而所有缓解手段都在做反向操作：
+        提高基线 r（更强的模型、thinking）、切断自反馈（上下文重组、外部校验）、
+        或在塌缩前注入外熵（约束钉扎、真实数据、工具反馈）。
+        [2609.01660] 的实测——r 随规模提升但饱和于 &lt;1——说明前两条路收益有限，
+        <b>系统性解法必须指向回路本身</b>。
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 论文地图 ============ -->
+<section id="papers">
+  <h2 class="sec"><span class="sn">§4</span>论文地图（2023–2026）</h2>
+  <p class="sec-desc">按「奠基 → 分支爆发」的脉络整理核心文献；同一年的条目按主题聚类。arXiv 编号可点击。</p>
+
+  <h3>4.1 奠基：问题被发现（2023–2024 上半年）</h3>
+  <div class="paper-list">
+    <div class="paper"><span class="yr">2023.05</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2305.17493">The Curse of Recursion / Model Collapse</a></div>
+      <div class="d">递归训练自生成数据 → 尾部消失 → 不可逆退化；后续发表于 Nature 2024。</div></div><span class="id">2305.17493</span></div>
+    <div class="paper"><span class="yr">2023.05</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2305.13534">How LLM Hallucinations Can Snowball</a></div>
+      <div class="d">错误一旦进入上下文会被沿用而非纠正：模型能识别自己 67–87% 的错误却仍坚持。</div></div><span class="id">2305.13534</span></div>
+    <div class="paper"><span class="yr">2023.07</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2307.01850">Self-Consuming Generative Models Go MAD</a>（ICLR'24）</div>
+      <div class="d">自食回路动力学：全合成必退化、真实锚定仅延缓、新鲜数据可阻止且存在相变。</div></div><span class="id">2307.01850</span></div>
+    <div class="paper"><span class="yr">2023.10</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2310.00429">On the Stability of Iterative Retraining</a>（ICLR'24）</div>
+      <div class="d">迭代重训练不动点的稳定条件：初始模型足够好 + 真实数据占比足够大。</div></div><span class="id">2310.00429</span></div>
+    <div class="paper"><span class="yr">2023.11</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2310.02264">MemGPT</a></div>
+      <div class="d">OS 式分层内存、LLM 自管上下文：长程上下文工程的开端。</div></div><span class="id">2310.02264</span></div>
+    <div class="paper"><span class="yr">2024.02</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2402.07043">A Tale of Tails</a>（ICML'24）</div>
+      <div class="d">collapse 改变 scaling law：纯合成丧失规模增益，人机混合可恢复。</div></div><span class="id">2402.07043</span></div>
+    <div class="paper"><span class="yr">2024.04</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2404.01413">Is Model Collapse Inevitable?</a>（NeurIPS'24）</div>
+      <div class="d">replace 范式必崩，accumulate 范式误差有与代数无关的上界——collapse 不是宿命。</div></div><span class="id">2404.01413</span></div>
+    <div class="paper"><span class="yr">2024.07</span><div class="body">
+      <div class="t"><a href="https://www.nature.com/articles/s41586-024-07566-y">AI models collapse when trained on recursively generated data</a>（Nature）</div>
+      <div class="d">期刊版实证：OPT-125M 九代退化为无意义重复；模型collapse 进入主流视野。</div></div><span class="id">Nature 2024</span></div>
+    <div class="paper"><span class="yr">2024.08</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2408.10943">SysBench</a></div>
+      <div class="d">系统消息遵循随轮次近线性衰减的最早系统测量之一。</div></div><span class="id">2408.10943</span></div>
+    <div class="paper"><span class="yr">2024.10</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2410.04840">Strong Model Collapse</a>（ICLR'25）</div>
+      <div class="d">千分之一合成占比即可致性能平台化；大模型越过插值阈值后部分缓解。</div></div><span class="id">2410.04840</span></div>
+    <div class="paper"><span class="yr">2024.10</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2410.15553">Multi-IF</a>（Meta）</div>
+      <div class="d">多轮多语言指令遵循：第 1→3 轮 0.877→0.707，轮次即失败率。</div></div><span class="id">2410.15553</span></div>
+    <div class="paper"><span class="yr">2024.10</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2410.14655">Bridging the Training-Inference Gap</a></div>
+      <div class="d">exposure bias 在 LLM 时代成立；scheduled sampling 可缓解自生成 token 的复合误差。</div></div><span class="id">2410.14655</span></div>
+    <div class="paper"><span class="yr">2024.12</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2412.14161">TheAgentCompany</a></div>
+      <div class="d">长程办公 agent 基准：最强系统端到端成功率约 30%，长程可靠性的年度标尺。</div></div><span class="id">2412.14161</span></div>
+  </div>
+
+  <h3>4.2 爆发：现象被系统测量（2025）</h3>
+  <div class="paper-list">
+    <div class="paper"><span class="yr">2025.02</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2502.15840">Vending-Bench</a></div>
+      <div class="d">千万 token 级长程运行：所有模型出现 meltdown 循环且难自恢复；失败与上下文填满点无关。</div></div><span class="id">2502.15840</span></div>
+    <div class="paper"><span class="yr">2025.03</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2503.14499">Measuring AI Ability to Complete Long Tasks</a>（METR）</div>
+      <div class="d">50%-成功率任务时长每约 7 个月翻倍；「time horizon」成为长程能力的标准度量。</div></div><span class="id">2503.14499</span></div>
+    <div class="paper"><span class="yr">2025.03</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2503.13657">MAST: Why Do Multi-Agent LLM Systems Fail?</a></div>
+      <div class="d">多智能体失败分类学：规格/对齐/协调三类失效的系统标注框架。</div></div><span class="id">2503.13657</span></div>
+    <div class="paper"><span class="yr">2025.04</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2504.16084">TTRL</a> &amp; <a href="https://arxiv.org/abs/2504.20073">RAGEN</a></div>
+      <div class="d">TTRL：多数投票伪标签的 label-free RL；RAGEN：多轮 agent RL 的 Echo Trap——奖励方差断崖与重复模式固化，StarPO-S 缓解。</div></div><span class="id">2504.16084 / 2504.20073</span></div>
+    <div class="paper"><span class="yr">2025.05</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2505.06120">LLMs Get Lost in Multi-Turn Conversation</a>（ICLR'26 杰出论文）</div>
+      <div class="d">多轮分片平均 −39%、unreliability +112%、单轮拼接恢复 95%：本领域最干净的因果证据。</div></div><span class="id">2505.06120</span></div>
+    <div class="paper"><span class="yr">2025.05</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2505.02709">Evaluating Goal Drift in LM Agents</a></div>
+      <div class="d">所有模型都会漂移；漂移与长上下文中 pattern-matching 的增强相关。</div></div><span class="id">2505.02709</span></div>
+    <div class="paper"><span class="yr">2025.05</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2505.23810">MARS-Bench</a>（EMNLP'25）</div>
+      <div class="d">30+ 轮真实对话基准；attention sink 参与长对话退化的机理可视化。</div></div><span class="id">2505.23810</span></div>
+    <div class="paper"><span class="yr">2025.05–07</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2505.22617">Entropy Mechanism</a> · <a href="https://arxiv.org/abs/2506.01939">80/20 Fork Tokens</a> · <a href="https://arxiv.org/abs/2507.14843">Invisible Leash</a></div>
+      <div class="d">熵-性能交换律 R=−a·exp(H)+b；fork token 承载 RL 梯度；RLVR 不越出基座支撑集——自进化的热力学三定律。</div></div><span class="id">2505/2506/2507</span></div>
+    <div class="paper"><span class="yr">2025.07</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2507.13334">Context Engineering Survey</a> &amp; Chroma <a href="https://research.trychroma.com/context-rot">Context Rot</a></div>
+      <div class="d">上下文工程成型的年度综述；18 个 SOTA 模型随输入增长全部非均匀退化。</div></div><span class="id">2507.13334</span></div>
+    <div class="paper"><span class="yr">2025.07–08</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2507.19849">ARPO</a> · <a href="https://arxiv.org/abs/2508.03680">Agent Lightning</a> · <a href="https://arxiv.org/abs/2508.07976">ASearcher</a></div>
+      <div class="d">多轮 RL 工程化：熵尖峰驱动的自适应分支；执行与训练解耦的分层 credit assignment；全异步 RL 突破百轮工具调用。</div></div><span class="id">2507/2508</span></div>
+    <div class="paper"><span class="yr">2025.09</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2509.09677">The Illusion of Diminishing Returns</a>（ICLR'26）</div>
+      <div class="d">提出 self-conditioning：上下文含自身错误时更易犯错，规模不救、thinking 可救；单步准确率随步数下降。</div></div><span class="id">2509.09677</span></div>
+    <div class="paper"><span class="yr">2025.09</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2509.25370">Where LLM Agents Fail / AgentDebug</a> · <a href="https://arxiv.org/abs/2509.02479">SimpleTIR</a></div>
+      <div class="d">轨迹错误级联的首个标注基准与根因调试；多轮工具 RL 的分布漂移→梯度爆炸及其修复。</div></div><span class="id">2509.25370 / 2509.02479</span></div>
+    <div class="paper"><span class="yr">2025.10</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2510.04618">ACE: Agentic Context Engineering</a>（ICLR'26）· <a href="https://arxiv.org/abs/2510.11967">Context-Folding</a></div>
+      <div class="d">上下文当作可进化资产：playbook 迭代反超生产 agent；主动折叠子轨迹使 32K 预算超 327K 全上下文。</div></div><span class="id">2510.04618 / 2510.11967</span></div>
+    <div class="paper"><span class="yr">2025.11–12</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2511.16108">SkyRL-Agent</a> · <a href="https://arxiv.org/abs/2512.17008">Turn-PPO</a> · <a href="https://arxiv.org/abs/2512.04419">生产环境重复研究</a></div>
+      <div class="d">异步调度提速；turn 级 MDP 的 PPO 显著缓解多轮训练崩溃；贪心解码重复环的 Markov 分析与 beam search 修复。</div></div><span class="id">2511/2512</span></div>
+  </div>
+
+  <h3>4.3 深化：机理、可靠性与安全面（2026）</h3>
+  <div class="paper-list">
+    <div class="paper"><span class="yr">2026.01–03</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2512.24601">Recursive Language Models</a> · <a href="https://arxiv.org/abs/2602.07338">Intent Mismatch</a> · <a href="https://arxiv.org/abs/2603.01423">Conversational Reliability</a> · <a href="https://arxiv.org/abs/2603.29231">Beyond pass@1</a></div>
+      <div class="d">RLM 把 prompt 存为变量递归处理、10M+ token 不退化；多轮根因之争；单/多轮配对测量；能力 vs 可靠性的四指标体系（含 memory scaffold 普遍有害的反直觉发现）。</div></div><span class="id">2512/2602/2603</span></div>
+    <div class="paper"><span class="yr">2026.03</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2603.03258">Inherited Goal Drift</a> · <a href="https://arxiv.org/abs/2603.03456">Asymmetric Goal Drift</a></div>
+      <div class="d">漂移可经上下文条件化「传染」给强模型；价值冲突下不对称违反 system prompt。</div></div><span class="id">2603.03258 / 2603.03456</span></div>
+    <div class="paper"><span class="yr">2026.05–07</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2605.08580">Slipstream</a> · <a href="https://arxiv.org/abs/2607.05378">CompactionRL</a> · <a href="https://arxiv.org/abs/2605.09932">FocuSST</a> · <a href="https://arxiv.org/abs/2607.19345">GEAR</a></div>
+      <div class="d">压缩走向异步化 + 轨迹接地校验 + RL 联合训练；注意力稀释的训练侧修正；长上下文机械复制干扰项。</div></div><span class="id">2605/2607</span></div>
+    <div class="paper"><span class="yr">2026.06</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2606.22528">Governance Decay</a> · <a href="https://arxiv.org/abs/2606.06708">Signal-Driven Observation</a> · <a href="https://arxiv.org/abs/2606.15017">预算约束研究</a></div>
+      <div class="d">压缩静默丢弃安全约束（0%→59%）与 Constraint Pinning 防御；「context rot + 动作循环 + goal drift」三联症；token 匹配后记忆系统增益消失。</div></div><span class="id">2606</span></div>
+    <div class="paper"><span class="yr">2026.05–08</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2605.15338">Sleeper Memory Poisoning</a> · <a href="https://arxiv.org/abs/2605.22842">Misattribution Gap</a> · <a href="https://arxiv.org/abs/2608.14588">Hallucination Snowball (Markov)</a> · <a href="https://arxiv.org/abs/2608.01631">Answer-Evidence Gap</a></div>
+      <div class="d">记忆投毒的休眠-复发攻击；归因系统把投毒误判为模型失调；多级管线错误传播的随机过程刻画；压缩保分不保忠实。</div></div><span class="id">2605/2608</span></div>
+    <div class="paper"><span class="yr">2026.09</span><div class="body">
+      <div class="t"><a href="https://arxiv.org/abs/2609.01660">How Fast Do Agents Rot?</a></div>
+      <div class="d">10,664 轨迹的受控研究：几何衰减律 + r 饱和于 &lt;1 + 压缩反而更陡——本页 §2.4 的主角。</div></div><span class="id">2609.01660</span></div>
+  </div>
+  <p class="small">* RAGEN 的 arXiv 编号为 2504.20073，TTRL 为 2504.16084；条目内合并展示。个别 2026 年论文编号建议引用前再行核对 arXiv 页面。</p>
+</section>
+
+<!-- ============ 5 缓解 ============ -->
+<section id="mitigation">
+  <h2 class="sec"><span class="sn">§5</span>缓解路线</h2>
+  <p class="sec-desc">五条路线各有代价，且彼此有隐藏张力——没有免费的午餐，只有清醒的取舍。</p>
+
+  <h3>5.1 上下文工程：压缩、折叠与重组<span class="en">Compaction / Folding</span></h3>
+  <p>
+    主流生产方案。工业界经验已收敛为几条原则（Manus 2025.07、Anthropic《Effective Context Engineering》2025.09）：
+    KV-cache 命中率优先、append-only 结构化上下文、把文件系统当「终极上下文」、压缩必须可还原。
+    学术侧快速跟进：<b>Context-Folding</b> [2510.11967] 与 <b>AgentFold</b> [2510.24699] 让 agent 主动折叠历史
+    （后者 100 轮后上下文仅 7K）；<b>MEM1</b> [2506.15841] 用 RL 学每轮覆写紧凑状态并在目标数上外推（2→16）；
+    <b>MemAgent</b> [2507.02259] 以定长覆写记忆实现 8K→3.5M token 的长度外推；<b>Slipstream</b> [2605.08580]
+    把压缩异步化并用轨迹接地校验器验证摘要；<b>CompactionRL</b> [2607.05378] 用 RL 联合训练执行与摘要。
+  </p>
+  <div class="callout co-warn"><span class="tag">COMPACTION 的暗面</span>
+    <p>三条反向证据必须放在一起看：① [2609.01660]：限制上下文窗口让衰减<b>更陡</b>而非更缓；
+    ② [2606.22528]：压缩静默丢弃约束，违规 0%→59%，且可被对抗注入利用；
+    ③ <b>TRACE</b> [2608.06503]：压缩引发执行不稳定（重复探索、阻塞动作），需要边界局部验证。
+    结论：压缩不是「删掉旧的」，而是一个新的、需要被验证的<b>信息重写层</b>——错误的重写本身就是新的失效面。</p>
+  </div>
+
+  <h3>5.2 记忆系统：增益归因的争议<span class="en">Memory</span></h3>
+  <p>
+    Mem0 [2504.19413]、A-MEM [2502.12110]、MemoryOS [2506.06326]、ACE [2510.04618]、ReasoningBank [2509.25140]
+    构成了热闹的「经验记忆」赛道。但 2026 年出现了两组严肃的反证据：
+    <b>预算约束研究</b> [2606.15017] 发现在 token 预算匹配后，多个记忆系统的增益<b>全部消失</b>——
+    之前的提升可能主要来自「更多 token」；<b>Beyond pass@1</b> [2603.29231] 更进一步：
+    记忆脚手架在全部 10 个模型上<b>损害</b>长程表现。结合 memory poisoning 攻击（§6），
+    2026 年的共识正在形成：<b>记忆是高杠杆但需要审计的上下文重写层</b>，
+    「何时该忘」比「如何记住」更难也更重要。
+  </p>
+
+  <h3>5.3 训练侧：多轮 RL 的稳定化<span class="en">Multi-Turn RL</span></h3>
+  <p>
+    既然退化出现在多轮，就在多轮里训练。<b>StarPO/StarPO-S</b> [2504.20073] 提供轨迹级 agent RL 框架与
+    Echo Trap 的稳定化（轨迹过滤、critic、梯度稳定）；<b>Turn-PPO</b> [2512.17008] 证明 turn 级 MDP 的 PPO
+    显著优于 GRPO，缓解多轮训练崩溃；<b>ARPO</b> [2507.19849] 在工具调用后的熵尖峰处自适应分支采样；
+    <b>Agent Lightning</b> [2508.03680] 把执行与训练解耦、分层 credit assignment；<b>ASearcher</b> [2508.07976]
+    与 <b>SkyRL-Agent</b> [2511.16108] 以全异步基础设施支撑百轮级轨迹训练；
+    <b>BranPO</b> [2602.03719] 对已完成轨迹做后期分支对比以缓解稀疏奖励下的 credit assignment。
+    与自进化文献的接口也很清晰：<b>Evol-RL</b> [2509.15194]（选择 + 变异抗熵坍缩）、
+    <b>TTRL-Guard</b> [2605.19444]（灭绝窗口预警）提供了「自生成信号」场景下的稳定化原则。
+  </p>
+
+  <h3>5.4 推理架构：别把所有历史塞进一个窗口<span class="en">Architecture</span></h3>
+  <p>
+    <b>Recursive Language Models</b> [2512.24601] 是 2026 年最有趣的新范式：把 prompt 存为可编程变量，
+    模型写代码检查、分解、递归调用自己——10M+ token 上不出现退化，且小模型配 RLM 可反超大模型。
+    <b>Anthropic 多智能体系统</b>（2025.06）则代表另一条路：orchestrator-worker 上下文隔离，
+    subagent 各自压缩信息后只回传结论（内部评测 +90.2%，但 token 成本 15×）。
+    此外，[2509.09677] 显示 <b>thinking</b>（单轮内延长推理）能显著缓解 self-conditioning——
+    在上下文之外再开一条「可以慢慢想」的通道，本身就是一种架构缓解。
+  </p>
+
+  <h3>5.5 评测协议：先学会测量，再谈优化<span class="en">Evaluation</span></h3>
+  <p>
+    可靠性优先的评测正在取代聚合通过率：[2609.01660] 主张 horizon-aware 评测与可靠性预算；
+    <b>Beyond pass@1</b> [2603.29231] 给出 RDC/VAF/GDS/MOP 四指标；
+    tau2-bench 的 pass^k [2506.07982] 衡量连续一致性；LongMemEval V2 [2410.10813] 的
+    「准确率 × 时延 × 预算」联合计分；METR [2503.14499] 的 time-horizon 回归范式。
+    共同精神：<b>把「步数」「预算」「方差」变成一等公民</b>，否则任何缓解声明都无法被证伪。
+  </p>
+
+  <div class="callout co-ok"><span class="tag">DESIGN PRINCIPLES · 从证据里 distilled 的设计原则</span>
+    <p>
+      ① <b>断开自反馈</b>：上下文里自生成内容占比越高越危险，用外部校验（工具输出、检索、测试）打断回路；
+      ② <b>重排优于重训</b>：同样的信息，组织方式值 39% [2505.06120]——先做结构优化再谈加资源；
+      ③ <b>约束出有损区</b>：治理/安全约束绝不应经过压缩 [2606.22528]；
+      ④ <b>为重复设熔断</b>：检测动作/文本重复度，及时升级到非贪心解码或人工接管 [2512.04419, 2502.15840]；
+      ⑤ <b>错误要被标注而非沉淀</b>：已知错误留在上下文里只会 self-conditioning，清理或显式标记；
+      ⑥ <b>监控熵与方差</b>：奖励方差、输出多样性的断崖是退化前兆 [2504.20073, 2505.22617]。
+    </p>
+  </div>
+</section>
+
+<!-- ============ 6 安全 ============ -->
+<section id="safety">
+  <h2 class="sec"><span class="sn">§6</span>安全视角：长程退化是安全问题的放大器</h2>
+  <p class="sec-desc">长程退化不只是性能问题——它把对齐与安全从「一次快照」变成了「随时间衰减的状态量」。</p>
+
+  <h3>6.1 多轮交互瓦解单轮对齐<span class="en">Multi-Turn Jailbreak</span></h3>
+  <p>
+    安全对齐大多在单轮上训练与评测，而长程恰恰提供了绕开它的手段：<b>Crescendo</b> [2404.01833]
+    多轮渐进式越狱已成为标准攻击范式；<b>Tempest</b> [2503.10619] 用树搜索多轮越狱达到 GPT-4 上 97% 攻击成功率；
+    <b>Salami Slicing</b> [2604.11309] 证明多条「单看无害」的输入累积可触发高危输出（GPT-4o/Gemini 上 ASR&gt;90%）。
+    机理上，<b>表征分析</b> [2507.02956] 发现轮数越多，攻击性内容在模型的表征空间里越被编码为「良性」
+    ——这解释了为什么单轮防御（如 circuit breakers）对多轮攻击失效。
+    <b>AdvChain</b> [2509.24269] 则展示了对齐的「雪球效应」：CoT 中微小偏差沿推理链放大为有害合规或过度拒绝。
+  </p>
+
+  <h3>6.2 记忆与压缩成为攻击面<span class="en">Memory &amp; Compaction Attack Surface</span></h3>
+  <p>
+    §5 提到压缩是「信息重写层」——重写层就是攻击面。<b>Sleeper Memory Poisoning</b> [2605.15338]
+    操纵外部文档诱导 agent 存入伪造记忆，休眠后跨会话复发；<b>MemoryGraft</b> [2512.16962]
+    把恶意「成功经验」植入记忆库造成持久行为漂移；<b>Misattribution Gap</b> [2605.22842]
+    发现现有归因系统会把记忆投毒误判为「模型失调」——防御方向从根上就错了；
+    Governance Decay 的 <b>Compaction-Eviction Attack</b> [2606.22528] 则让对抗者借压缩之手删除安全策略。
+  </p>
+
+  <h3>6.3 自进化的静默退化<span class="en">Silent Mis-Evolution</span></h3>
+  <p>
+    与显式攻击相对的是系统自身的缓慢走样。自进化回路中的熵坍缩表现为行为固化，
+    对齐性质的静默退化比越狱更难检测（没有异常 prompt 可抓）；TTRL-Guard 的「灭绝窗口」[2605.19444]
+    说明错误一旦被伪标签锁定便不可逆；<b>Agentic RL for Search is Unsafe</b> [2510.17431] 发现
+    奖励「持续生成」的 RL 训练本身就会使拒绝率下降最多 60%——能力优化与安全行为存在隐性交换。
+    目标漂移的「传染性」[2603.03258] 则意味着：一个被攻破或走样的 agent 可以通过其输出污染后续 agent 的上下文，
+    形成横向传播链。
+  </p>
+
+  <div class="callout co-danger"><span class="tag">THESIS · 长程安全的第一性表述</span>
+    <p>
+      单轮时代的安全是<b>函数性质</b>：输入 → 输出是否合规。长程时代的安全是<b>轨迹性质</b>：
+      约束在时间轴上的存活概率。几何衰减律对安全约束同样成立——如果约束的「遵循率」也是 r&lt;1 的每步事件，
+      那么任何长程部署都在数学上走向违规，除非把约束移出衰减过程（钉扎、外部执行、不变式检查）。
+      这把「安全约束的半衰期」变成了一个可测量、可优化的工程量。
+    </p>
+  </div>
+</section>
+
+<!-- ============ 7 开放问题 ============ -->
+<section id="open">
+  <h2 class="sec"><span class="sn">§7</span>开放问题</h2>
+  <p class="sec-desc">按「空白大小 × 可行性」整理，适合作为下一步研究的选题清单。</p>
+  <ol class="gap-list">
+    <li><b>几何衰减律的微观基础</b>
+      <p>r（单步可靠性）由什么决定、为何随规模饱和于 &lt;1？目前只有现象学 [2609.01660]，
+      缺少把 r 分解为注意力、检索、策略漂移等成分的解析或半解析理论。任何进展都会直接改善长程可靠性预算。</p></li>
+    <li><b>自条件化的因果测量协议</b>
+      <p>「上下文里有自己的错误 → 更易犯错」目前是单点证据 [2509.09677]。
+      需要受控协议把它与位置偏置、注意力稀释、策略漂移分离——例如错误注入位置 × 数量 × 相关性的因子设计。</p></li>
+    <li><b>上下文操作的原子归因</b>
+      <p>压缩/折叠/重排/注入各自的独立贡献从未被共同分解；「组织 &gt; 信息」的 39% [2505.06120]、
+      「去噪即提分」、「预算假象」 [2606.15017] 各照亮一角。一个 2×2×2×2 因子消融框架是明显的空位。</p></li>
+    <li><b>压缩的信息论下界</b>
+      <p>哪些信息类别（约束条件？中间结论？失败教训？环境状态？）删除后最伤长程性能？
+      压缩忠实性与任务成功率脱节 [2608.01631] 已被证明，但「不可删集」的最小刻画不存在。</p></li>
+    <li><b>训练-推理漂移的统一处理</b>
+      <p>多轮 RL 的分布漂移（SimpleTIR 的梯度爆炸）与推理时 self-conditioning 疑似同源；
+      把 exposure bias 的经典框架推广到「上下文自反馈」并给出可检验预测，是理论上最干净的切口。</p></li>
+    <li><b>漂移与熵的健康度监控</b>
+      <p>goal drift [2505.02709]、governance decay [2606.22528]、熵坍缩 [2505.22617]
+      都有前兆信号（方差、熵分布、约束遵循率），但没有系统性的在线检测器。
+      「长程对齐漂移的可观测性」是安全方向的高价值选题。</p></li>
+    <li><b>记忆的负迁移边界</b>
+      <p>经验记忆何时从资产变负债？环境漂移下的 stale playbook、预算匹配后的增益消失 [2606.15017]、
+      memory scaffold 的普遍有害 [2603.29231]——「该忘什么、何时忘」缺少理论指导。</p></li>
+    <li><b>安全评测的长程化</b>
+      <p>现有安全基准几乎全是单轮的。多轮越狱已有基准，但「安全约束在长交互中的半衰期」
+      没有标准度量；[2606.22528] 的 ConstraintRot 是第一个起点，远未形成协议。</p></li>
+  </ol>
+</section>
+
+<!-- ============ 8 参考文献 ============ -->
+<section id="refs" class="refs">
+  <h2 class="sec"><span class="sn">§8</span>参考文献</h2>
+  <p class="sec-desc">按主题分组；格式为 论文名 [arXiv ID]。正文首次引用处已带链接。</p>
+
+  <h4>多轮对话与指令遵循</h4>
+  <ul>
+    <li>LLMs Get Lost in Multi-Turn Conversation [<span class="id"><a href="https://arxiv.org/abs/2505.06120">2505.06120</a></span>] · Multi-IF [<span class="id"><a href="https://arxiv.org/abs/2410.15553">2410.15553</a></span>] · SysBench [<span class="id"><a href="https://arxiv.org/abs/2408.10943">2408.10943</a></span>] · MARS-Bench [<span class="id"><a href="https://arxiv.org/abs/2505.23810">2505.23810</a></span>]</li>
+    <li>Quantifying Conversational Reliability [<span class="id"><a href="https://arxiv.org/abs/2603.01423">2603.01423</a></span>] · Intent Mismatch [<span class="id"><a href="https://arxiv.org/abs/2602.07338">2602.07338</a></span>] · SimpleTIR [<span class="id"><a href="https://arxiv.org/abs/2509.02479">2509.02479</a></span>]</li>
+  </ul>
+
+  <h4>长上下文与注意力机理</h4>
+  <ul>
+    <li>Lost in the Middle [<span class="id"><a href="https://arxiv.org/abs/2407.03103">2407.03103</a></span>] · Context Rot (Chroma, 2025.07) · Context Length Alone Hurts [<span class="id"><a href="https://arxiv.org/abs/2510.05381">2510.05381</a></span>] · Attention Basin [<span class="id"><a href="https://arxiv.org/abs/2508.05128">2508.05128</a></span>]</li>
+    <li>TAPA (RoPE 距离偏置) [<span class="id"><a href="https://arxiv.org/abs/2509.12635">2509.12635</a></span>] · FocuSFT [<span class="id"><a href="https://arxiv.org/abs/2605.09932">2605.09932</a></span>] · ICE 认知负载 [<span class="id"><a href="https://arxiv.org/abs/2509.19517">2509.19517</a></span>] · GEAR [<span class="id"><a href="https://arxiv.org/abs/2607.19345">2607.19345</a></span>] · Answer-Evidence Gap [<span class="id"><a href="https://arxiv.org/abs/2608.01631">2608.01631</a></span>]</li>
+  </ul>
+
+  <h4>长自生成、误差传播与长程执行</h4>
+  <ul>
+    <li>The Illusion of Diminishing Returns [<span class="id"><a href="https://arxiv.org/abs/2509.09677">2509.09677</a></span>] · How Fast Do Agents Rot? [<span class="id"><a href="https://arxiv.org/abs/2609.01660">2609.01660</a></span>] · Beyond pass@1 [<span class="id"><a href="https://arxiv.org/abs/2603.29231">2603.29231</a></span>]</li>
+    <li>AgentDebug [<span class="id"><a href="https://arxiv.org/abs/2509.25370">2509.25370</a></span>] · Hallucination Snowball [<span class="id"><a href="https://arxiv.org/abs/2305.13534">2305.13534</a></span>] / Markov 版 [<span class="id"><a href="https://arxiv.org/abs/2608.14588">2608.14588</a></span>] · Vending-Bench [<span class="id"><a href="https://arxiv.org/abs/2502.15840">2502.15840</a></span>] · 生产重复研究 [<span class="id"><a href="https://arxiv.org/abs/2512.04419">2512.04419</a></span>] · MPPA [<span class="id"><a href="https://arxiv.org/abs/2510.11620">2510.11620</a></span>] · Under/Overthinking [<span class="id"><a href="https://arxiv.org/abs/2505.00127">2505.00127</a></span>] · Exposure Bias [<span class="id"><a href="https://arxiv.org/abs/2410.14655">2410.14655</a></span>] · Induction Head Toxicity [<span class="id"><a href="https://arxiv.org/abs/2505.13514">2505.13514</a></span>]<span class="small">（已撤回，作机理假说引用）</span></li>
+  </ul>
+
+  <h4>模型自食与合成数据理论</h4>
+  <ul>
+    <li>Curse of Recursion [<span class="id"><a href="https://arxiv.org/abs/2305.17493">2305.17493</a></span> / <a href="https://www.nature.com/articles/s41586-024-07566-y">Nature 2024</a>] · Go MAD [<span class="id"><a href="https://arxiv.org/abs/2307.01850">2307.01850</a></span>] · Tale of Tails [<span class="id"><a href="https://arxiv.org/abs/2402.07043">2402.07043</a></span>] · Stability of Iterative Retraining [<span class="id"><a href="https://arxiv.org/abs/2310.00429">2310.00429</a></span>]</li>
+    <li>Strong Model Collapse [<span class="id"><a href="https://arxiv.org/abs/2410.04840">2410.04840</a></span>] · Is Collapse Inevitable? [<span class="id"><a href="https://arxiv.org/abs/2404.01413">2404.01413</a></span>] · MGT Detection Prevents Collapse [<span class="id"><a href="https://arxiv.org/abs/2502.15654">2502.15654</a></span>] · Phi-4 [<span class="id"><a href="https://arxiv.org/abs/2412.08905">2412.08905</a></span>] · LLM Web Dynamics [<span class="id"><a href="https://arxiv.org/abs/2506.15690">2506.15690</a></span>] · 自食模型收敛性 [<span class="id"><a href="https://arxiv.org/abs/2511.09002">2511.09002</a></span>]</li>
+  </ul>
+
+  <h4>熵、自进化与多轮 RL</h4>
+  <ul>
+    <li>Entropy Mechanism [<span class="id"><a href="https://arxiv.org/abs/2505.22617">2505.22617</a></span>] · Invisible Leash [<span class="id"><a href="https://arxiv.org/abs/2507.14843">2507.14843</a></span>] · 80/20 Fork Tokens [<span class="id"><a href="https://arxiv.org/abs/2506.01939">2506.01939</a></span>] · Verbalized Sampling [<span class="id"><a href="https://arxiv.org/abs/2510.01171">2510.01171</a></span>]</li>
+    <li>RAGEN/StarPO [<span class="id"><a href="https://arxiv.org/abs/2504.20073">2504.20073</a></span>] · TTRL [<span class="id"><a href="https://arxiv.org/abs/2504.16084">2504.16084</a></span>] · TTRL-Guard [<span class="id"><a href="https://arxiv.org/abs/2605.19444">2605.19444</a></span>] · Evol-RL [<span class="id"><a href="https://arxiv.org/abs/2509.15194">2509.15194</a></span>] · Self-Evolving Agents 综述 [<span class="id"><a href="https://arxiv.org/abs/2507.21046">2507.21046</a></span>]</li>
+    <li>ARPO [<span class="id"><a href="https://arxiv.org/abs/2507.19849">2507.19849</a></span>] · Agent Lightning [<span class="id"><a href="https://arxiv.org/abs/2508.03680">2508.03680</a></span>] · ASearcher [<span class="id"><a href="https://arxiv.org/abs/2508.07976">2508.07976</a></span>] · SkyRL-Agent [<span class="id"><a href="https://arxiv.org/abs/2511.16108">2511.16108</a></span>] · BranPO [<span class="id"><a href="https://arxiv.org/abs/2602.03719">2602.03719</a></span>] · Turn-PPO [<span class="id"><a href="https://arxiv.org/abs/2512.17008">2512.17008</a></span>]</li>
+  </ul>
+
+  <h4>目标漂移与长程评测</h4>
+  <ul>
+    <li>Evaluating Goal Drift [<span class="id"><a href="https://arxiv.org/abs/2505.02709">2505.02709</a></span>] · Inherited Goal Drift [<span class="id"><a href="https://arxiv.org/abs/2603.03258">2603.03258</a></span>] · Asymmetric Goal Drift [<span class="id"><a href="https://arxiv.org/abs/2603.03456">2603.03456</a></span>] · Signal-Driven Observation [<span class="id"><a href="https://arxiv.org/abs/2606.06708">2606.06708</a></span>] · MAST [<span class="id"><a href="https://arxiv.org/abs/2503.13657">2503.13657</a></span>]</li>
+    <li>METR Time Horizon [<span class="id"><a href="https://arxiv.org/abs/2503.14499">2503.14499</a></span>] · TheAgentCompany [<span class="id"><a href="https://arxiv.org/abs/2412.14161">2412.14161</a></span>] · tau2-bench [<span class="id"><a href="https://arxiv.org/abs/2506.07982">2506.07982</a></span>] · LongMemEval [<span class="id"><a href="https://arxiv.org/abs/2410.10813">2410.10813</a></span>] · HELMET [<span class="id"><a href="https://arxiv.org/abs/2410.02694">2410.02694</a></span>] · 预算约束研究 [<span class="id"><a href="https://arxiv.org/abs/2606.15017">2606.15017</a></span>]</li>
+  </ul>
+
+  <h4>上下文工程与记忆</h4>
+  <ul>
+    <li>Context Engineering Survey [<span class="id"><a href="https://arxiv.org/abs/2507.13334">2507.13334</a></span>] · Context-Folding [<span class="id"><a href="https://arxiv.org/abs/2510.11967">2510.11967</a></span>] · AgentFold [<span class="id"><a href="https://arxiv.org/abs/2510.24699">2510.24699</a></span>] · MEM1 [<span class="id"><a href="https://arxiv.org/abs/2506.15841">2506.15841</a></span>] · MemAgent [<span class="id"><a href="https://arxiv.org/abs/2507.02259">2507.02259</a></span>] · ACE [<span class="id"><a href="https://arxiv.org/abs/2510.04618">2510.04618</a></span>] · RLM [<span class="id"><a href="https://arxiv.org/abs/2512.24601">2512.24601</a></span>]</li>
+    <li>Slipstream [<span class="id"><a href="https://arxiv.org/abs/2605.08580">2605.08580</a></span>] · CompactionRL [<span class="id"><a href="https://arxiv.org/abs/2607.05378">2607.05378</a></span>] · TRACE [<span class="id"><a href="https://arxiv.org/abs/2608.06503">2608.06503</a></span>] · ReasoningBank [<span class="id"><a href="https://arxiv.org/abs/2509.25140">2509.25140</a></span>] · Mem0 [<span class="id"><a href="https://arxiv.org/abs/2504.19413">2504.19413</a></span>] · A-MEM [<span class="id"><a href="https://arxiv.org/abs/2502.12110">2502.12110</a></span>] · MemoryOS [<span class="id"><a href="https://arxiv.org/abs/2506.06326">2506.06326</a></span>] · Anthropic Multi-Agent (2025.06) · Manus Context Engineering (2025.07)</li>
+  </ul>
+
+  <h4>安全：越狱、投毒与治理</h4>
+  <ul>
+    <li>Crescendo [<span class="id"><a href="https://arxiv.org/abs/2404.01833">2404.01833</a></span>] · Tempest [<span class="id"><a href="https://arxiv.org/abs/2503.10619">2503.10619</a></span>] · Crescendo 表征分析 [<span class="id"><a href="https://arxiv.org/abs/2507.02956">2507.02956</a></span>] · Salami Slicing [<span class="id"><a href="https://arxiv.org/abs/2604.11309">2604.11309</a></span>] · AdvChain [<span class="id"><a href="https://arxiv.org/abs/2509.24269">2509.24269</a></span>]</li>
+    <li>Governance Decay [<span class="id"><a href="https://arxiv.org/abs/2606.22528">2606.22528</a></span>] · Sleeper Memory Poisoning [<span class="id"><a href="https://arxiv.org/abs/2605.15338">2605.15338</a></span>] · MemoryGraft [<span class="id"><a href="https://arxiv.org/abs/2512.16962">2512.16962</a></span>] · Misattribution Gap [<span class="id"><a href="https://arxiv.org/abs/2605.22842">2605.22842</a></span>] · RL Search Safety [<span class="id"><a href="https://arxiv.org/abs/2510.17431">2510.17431</a></span>]</li>
+  </ul>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="inner">
+    <b>Agent 长程对话 / 长自生成退化调研</b> · 更新于 2026-10-07 ·
+    检索方法：三路并行文献检索 + 关键论文逐篇核对 arXiv 摘要；2026 年论文编号请以 arXiv 页面为准。<br>
+    本页为独立调研笔记，欢迎指正与补充；引用论文请以原始出处为准。
+  </div>
+</footer>
+
+<script>
+(function(){
+  // 进度条
+  var bar = document.getElementById('progress');
+  function onScroll(){
+    var h = document.documentElement;
+    var p = h.scrollTop / (h.scrollHeight - h.clientHeight);
+    bar.style.width = (p*100).toFixed(2) + '%';
+  }
+  document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  // 目录 scrollspy
+  var links = Array.prototype.slice.call(document.querySelectorAll('#toc a'));
+  var map = {};
+  links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(map).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  var current = null;
+  function spy(){
+    var pos = window.scrollY + 120, best = null;
+    targets.forEach(function(t){ if(t.offsetTop <= pos) best = t; });
+    if(!best && targets.length) best = targets[0];
+    var id = best ? best.id : null;
+    if(id !== current){
+      current = id;
+      links.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#'+id); });
+    }
+  }
+  document.addEventListener('scroll', spy, {passive:true}); spy();
+
+  // 移动端目录
+  var btn = document.getElementById('menu-btn'), side = document.getElementById('sidebar');
+  btn.addEventListener('click', function(){ side.classList.toggle('open'); });
+  links.forEach(function(a){ a.addEventListener('click', function(){ side.classList.remove('open'); }); });
+})();
+</script>
+</body>
+</html>
