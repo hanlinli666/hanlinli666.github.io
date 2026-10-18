@@ -1,0 +1,29 @@
+# ============================================================================
+# 论文关键词（每行一个 OR 分支）
+# ----------------------------------------------------------------------------
+# 语法：
+#   1) 每行 = 一个 OR 条件；
+#   2) 行内空格 = 整句短语检索（在标题或摘要中作为词组出现）；
+#   3) 用 + 连接多个词 = AND 条件，例如：  agent + reinforcement
+#   4) 行首 # 为注释，空行忽略。
+# 检索范围：arXiv API 的 ti（标题）与 abs（摘要）字段。
+# 修改后下一次 GitHub Actions 运行即生效，无需改代码。
+# ============================================================================
+
+# —— 文档指定的初始方向 ——
+agent harness
+LLM agent
+AI agent
+autonomous agent
+tool use
+reasoning
+
+# —— 补充的高信号方向（可自行删减）——
+agentic workflow
+agentic memory
+multi-agent
+context engineering
+retrieval-augmented generation
+computer use agent
+coding agent
+test-time compute

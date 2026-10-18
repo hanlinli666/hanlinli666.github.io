@@ -4,10 +4,22 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      fetch:
+        description: "先抓取今日论文与新闻（并推送飞书），再部署"
+        type: boolean
+        default: false
+      skip_feishu:
+        description: "抓取数据但不推送飞书"
+        type: boolean
+        default: false
+  schedule:
+    # GitHub Actions 的 cron 使用 UTC：00:30 UTC = 北京时间 08:30
+    - cron: "30 0 * * *"
 
-# 允许 Pages 部署所需权限
+# 允许 Pages 部署所需权限，并允许工作流提交每日数据
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -30,15 +42,78 @@ jobs:
         with:
           node-version: 20
 
+      # ───────────────────────── 每日精进：数据抓取 ─────────────────────────
+      # 只在「定时」或「手动勾选 fetch」时执行，日常推文不会重复抓取。
+      - name: 安装 Python
+        if: ${{ github.event_name == 'schedule' || inputs.fetch == true }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 检查 Secrets
+        if: ${{ github.event_name == 'schedule' || inputs.fetch == true }}
+        env:
+          FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
+          BIGMODEL_API_KEY: ${{ secrets.BIGMODEL_API_KEY }}
+          DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
+        run: |
+          if [ -z "$FEISHU_WEBHOOK_URL" ]; then
+            echo "::warning title=缺少 FEISHU_WEBHOOK_URL::Settings → Secrets and variables → Actions 里添加后才能推送飞书卡片"
+          fi
+          if [ -z "$BIGMODEL_API_KEY" ] && [ -z "$DASHSCOPE_API_KEY" ]; then
+            echo "::notice title=未配置 AI Key::论文照常抓取，但不生成中文标题与 AI 摘要（加 BIGMODEL_API_KEY 即可）"
+          fi
+
+      - name: 抓取论文（arXiv）
+        if: ${{ github.event_name == 'schedule' || inputs.fetch == true }}
+        env:
+          BIGMODEL_API_KEY: ${{ secrets.BIGMODEL_API_KEY }}
+          BIGMODEL_MODEL: ${{ vars.BIGMODEL_MODEL }}
+          DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
+          DASHSCOPE_MODEL: ${{ vars.DASHSCOPE_MODEL }}
+          SUMMARIZE_LIMIT: "40"
+          # off（默认，约 700 tokens/8s）| on（约 2300 tokens/45s）| auto（只给最相关的 8 篇开）
+          LLM_THINKING: ${{ vars.LLM_THINKING }}
+        run: python scripts/daily/fetch_papers.py
+
+      - name: 抓取新闻（RSS）
+        if: ${{ github.event_name == 'schedule' || inputs.fetch == true }}
+        run: python scripts/daily/fetch_news.py
+
+      - name: 提交每日数据
+        if: ${{ github.event_name == 'schedule' || inputs.fetch == true }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add daily/data
+          if git diff --cached --quiet; then
+            echo "数据没有变化，跳过提交"
+          else
+            git commit -m "chore(daily): $(date -u +'%Y-%m-%d') 更新论文与新闻"
+            git pull --rebase --autostash || true
+            git push || echo "::warning::数据推送失败，本次部署仍使用本地生成的数据"
+          fi
+
+      - name: 推送飞书卡片
+        if: ${{ (github.event_name == 'schedule' || (inputs.fetch == true && inputs.skip_feishu != true)) }}
+        env:
+          FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
+          FEISHU_SIGNKEY: ${{ secrets.FEISHU_SIGNKEY }}
+          PWA_URL: ${{ vars.PWA_URL }}
+        run: python scripts/daily/send_feishu.py
+
+      # ───────────────────────── 博客：构建与发布 ─────────────────────────
       - name: 扫描 assets/ 生成 manifest.json
         run: node scripts/generate-manifest.js
 
       - name: 准备发布目录
         run: |
-          mkdir -p dist/assets
+          mkdir -p dist/assets dist/daily
           cp index.html dist/
           cp manifest.json dist/
           cp -r assets/. dist/assets/
+          # 每日精进 PWA（/daily/）
+          cp -r daily/. dist/daily/
           # 如使用了自定义域名则一并拷贝
           [ -f CNAME ] && cp CNAME dist/ || true
 
@@ -49,6 +124,23 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+
+      - name: 汇总
+        if: ${{ always() && (github.event_name == 'schedule' || inputs.fetch == true) }}
+        run: |
+          echo "### 今日摘要" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json, pathlib
+          p = pathlib.Path("daily/data/meta.json")
+          meta = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+          papers = meta.get("papers", {})
+          news = meta.get("news", {})
+          print(f"- 论文：{papers.get('count', 0)} 篇（今日新增 {papers.get('new_today', 0)}），AI 摘要：{'已开启' if papers.get('ai_summary') else '未开启'}")
+          print(f"- 新闻：{news.get('count', 0)} 条（今日 {news.get('new_today', 0)}），来源 {len(news.get('sources', []))} 个")
+          print(f"- 生成时间：{papers.get('generated_at', '-')} / {news.get('generated_at', '-')}")
+          print(f"- PWA：https://hanlinli666.github.io/daily/")
+          PY
 
   deploy:
     needs: build
