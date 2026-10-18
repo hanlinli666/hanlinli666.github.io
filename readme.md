@@ -11,9 +11,15 @@
 ├── assets/                   # 博客文章（独立的 HTML 文件）
 │   └── wealth-plan.html
 ├── scripts/
-│   └── generate-manifest.js  # 清单生成器（纯 Node，无依赖）
+│   ├── generate-manifest.js  # 清单生成器（纯 Node，无依赖）
+│   └── daily/                # 每日精进数据管道（Python，纯标准库）
+├── daily/                    # 每日精进 PWA，发布在 /daily/
+│   ├── index.html            # 论文 / 新闻 / 收藏
+│   ├── sw.js                 # Service Worker（离线可读）
+│   ├── data/                 # papers.json / news.json / meta.json（自动生成）
+│   └── keywords.txt          # 论文关键词
 ├── .github/workflows/
-│   └── deploy.yml            # 自动构建并部署到 GitHub Pages
+│   └── deploy.yml            # 自动构建并部署到 GitHub Pages（含每日抓取）
 └── manifest.json             # 自动生成，无需手动维护（已加入 .gitignore）
 ```
 
@@ -83,3 +89,17 @@ python3 -m http.server 8000
 ## 主题
 
 主页支持浅色 / 深色主题，点击右上角图标切换，偏好会保存在本地。
+
+## 每日精进（/daily/）
+
+站点根目录下挂了一个可安装的每日阅读 PWA：每天早上抓 arXiv 论文 + 11 个 RSS 新闻源，
+用智谱 GLM-4.7 生成中文标题与三条摘要，再把摘要卡片推送到飞书群。
+
+- 入口：<https://hanlinli666.github.io/daily/>（主页顶栏与首屏也有入口）
+- 详细说明：见 [`daily/README.md`](daily/README.md)
+- 每天 08:30（北京时间）由同一个 `deploy.yml` 抓取、提交数据并重新部署
+- 新增论文关键词 → 改 `daily/keywords.txt`；换新闻源 → 改 `daily/config/news_sources.txt`
+
+日常写文章完全不受影响：推送到 `main` 只会走「生成 manifest → 构建 → 部署」，
+抓取与推送步骤只在定时或手动勾选 `fetch` 时才执行。
+

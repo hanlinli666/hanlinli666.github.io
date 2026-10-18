@@ -5,6 +5,17 @@ manifest.json
 # 发布目录
 dist/
 
+# 每日精进：本地凭据（飞书 Webhook、智谱 Key）
+.env.local
+config/local.env
+
+# 每日精进：Python 缓存
+__pycache__/
+*.py[cod]
+
+# 内部设计文档，不对外发布
+开发文档.md
+
 # 系统与编辑器杂物
 .DS_Store
 Thumbs.db
