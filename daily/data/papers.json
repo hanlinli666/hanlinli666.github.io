@@ -3387,9 +3387,13 @@
   {
     "id": "2610.21601",
     "title": "Waypoint-OPD: Transferring RL-Induced Policy Shifts via Gated On-Policy Distillation",
-    "title_zh": null,
+    "title_zh": "Waypoint-OPD：通过门控在线蒸馏迁移强化学习策略偏移",
     "abstract": "Policy-shift distillation reuses the difference between a teacher's log probabilities before and after reinforcement learning (RL) as supervision on student-generated trajectories. However, this endpoint policy shift cannot reveal whether local action preferences evolved consistently during teacher training. The same endpoint shift can result from early and late shifts that reinforce or partially cancel each other. We investigate whether agreement between early and late teacher policy shifts can guide selective transfer. We introduce Waypoint-guided On-Policy Distillation (Waypoint-OPD), which uses an intermediate teacher checkpoint from the same RL run to compare early and late shifts in relative action preferences at student-visited prefixes. We gate the endpoint shift according to the directional agreement between the early and late shifts, suppressing it when they point in opposing directions. Compared with endpoint-only transfer, our method requires only one additional frozen-teacher scoring pass. Using RL-trained Qwen3-4B teachers, we evaluate our method with Qwen3-8B, Qwen3-14B, and Qwen3-30B-A3B as student models in mathematical and code reasoning. In all six domain--student settings, Waypoint-OPD achieves the highest domain-average score among the compared distillation methods. Ablations with the Qwen3-8B student show that removing or shuffling gates reduces mathematical reasoning performance. These results support the use of directional agreement between early and late teacher policy shifts to weight the endpoint shift during student training.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有策略偏移蒸馏仅利用RL前后端点差异，忽略了局部动作偏好演变的一致性，端点偏移可能因早晚变化相抵消而具误导性。",
+      "提出Waypoint-OPD方法，利用中间检查点对比早晚策略偏移方向，依其一致性对端点偏移施加门控，抑制方向相反的偏移迁移。",
+      "在数学与代码推理任务中，Waypoint-OPD在六种配置下均取得最高域平均分，消融实验验证了门控机制的有效性。"
+    ],
     "authors": [
       "Bingxi Hou",
       "Guochao Jiang",
@@ -3415,14 +3419,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 8
+    "score": 8,
+    "tags": [
+      "策略蒸馏",
+      "强化学习",
+      "知识迁移",
+      "大语言模型"
+    ]
   },
   {
     "id": "2610.21588",
     "title": "Hear, Localize, and Reason: Spatially Aware Scene Understanding for Audio-Visual LLMs",
-    "title_zh": null,
+    "title_zh": "面向视听LLM的听觉-定位-推理空间感知场景理解",
     "abstract": "Audio-visual large language models (AV-LLMs) have made strong progress in multimodal understanding, yet most treat audio as monaural semantic content, limiting their ability to reason about where sounds originate and how they relate to the visual scene. Recent spatial audio-visual studies address parts of this problem, but often focus on specific abilities, such as spatial correspondence or direction and distance reasoning. In this work, we introduce HLR-AVSceneQA, a comprehensive benchmark with a hear-localize-reason hierarchy that evaluates whether models can recognize what is heard, localize sound sources in egocentric and allocentric views, and use these localized sources to reason about how they relate to the visual scene. We further introduce HLR-LLM, which augments a strong audio-visual foundation model with a binaural spatial audio branch alongside its monaural semantic audio pathway. We train HLR-LLM with a curriculum that incorporates final-stage chain-of-thought supervision for multi-step spatial reasoning. Experiments show that existing AV-LLMs remain limited in spatial grounding and relational reasoning, while HLR-LLM substantially improves spatial audio-visual scene understanding without compromising semantic audio-visual perception.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有视听LLM多将音频作单耳语义内容，缺乏空间定位与视听关联推理能力。",
+      "提出HLR-AVSceneQA基准，按听-定位-推理层级评估模型识别、定位及关联推理能力。",
+      "引入双耳空间音频分支构建HLR-LLM，结合思维链监督训练，显著提升空间理解且不损语义感知。"
+    ],
     "authors": [
       "Kim Sung-Bin",
       "Lee Jung-Mok",
@@ -3448,14 +3462,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 7
+    "score": 7,
+    "tags": [
+      "视听大语言模型",
+      "空间音频",
+      "场景理解",
+      "基准测试"
+    ]
   },
   {
     "id": "2610.21581",
     "title": "ClaimScope: Label-Blind Witness Verification for Mathematical Claim Auditing",
-    "title_zh": null,
+    "title_zh": "ClaimScope：数学命题审计的标签无关见证验证",
     "abstract": "Mathematical agents are commonly evaluated by answer accuracy or proof acceptance. We introduce ClaimScope, a 72-task benchmark for auditing proposed claims through a verdict, scope, counterexample, and repair. Tasks cover optimizer-state transport, finite-horizon affine recurrences, and exact $2\\times2$ linear algebra. We evaluate Qwen3-8B with direct generation and four matched two-pass conditions, each starting from the same draft. A witness checker evaluates only the model's submitted state, without consulting reference verdicts or supplying a replacement witness. Its feedback still conveys information about validity: a verified refutation establishes that the claim is false, and rejection reasons can suggest structural fixes. In this evaluation, verifier feedback yields $23/39$ accepted counterexamples on invalid claims and $25/72$ safe completions, compared with $15/39$ and $20/72$ for checker-free generic feedback. Strict completion remains $17/72$; verdict accuracy changes from $47/72$ to $46/72$. The claim-grouped safe-completion difference is $.094$, with a bootstrap 95\\% interval of $[.000,.198]$. All seven task-level gains follow horizon/input-length diagnostics. A post-hoc schema-only correction of the direct outputs reaches the same 25 safe tasks without another model call. These results separate claim classification from executable evidence, while locating the observed gains in witness-structure correction rather than demonstrating broader reasoning improvement.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有数学智能体评估仅看答案或证明，缺乏对命题有效性与结构的审计，故提出ClaimScope基准。",
+      "该基准含72个任务，通过见证检查器仅评估模型提交的状态，不依赖参考标签即可验证反驳与修复。",
+      "实验表明见证反馈提升了无效命题反例和安全完成率，但收益源于结构修正而非推理能力的提升。"
+    ],
     "authors": [
       "Mushir Akhtar"
     ],
@@ -3475,14 +3499,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "数学智能体",
+      "命题审计",
+      "见证验证"
+    ]
   },
   {
     "id": "2610.21573",
     "title": "MYOPIA: Understanding the Limits of Tree-Based Reasoning in Vision-Language Models",
-    "title_zh": null,
+    "title_zh": "视觉语言模型中树状推理的局限性探究",
     "abstract": "Decision trees can make vision-language model (VLM) classification interpretable by replacing a single prediction with a sequence of root-to-leaf questions. However, the accuracy cost of this greedy, non-backtracking procedure remains unclear. We introduce \\textbf{MYOPIA}, a benchmark comprising four LLM-generated, human-refined decision trees for GTSRB, MNIST, CIFAR-10, and MSCOCO, together with matched prompts, diagnostic protocols, and an evaluation harness. Across GPT-4o, Qwen-VL Max, and LLaMA-3.2 11B Vision, tree traversal underperforms zero-shot prompting in all 12 dataset--model pairs; paired bootstrap analyses consistently favor zero-shot. Our diagnostics characterize interacting failure modes associated with this gap. Models often recall tree-encoded class attributes more accurately than they ground the same attributes in images: the mean label--image accuracy gaps are 9.5, 13.8, and 12.6 points for GPT-4o, Qwen-VL Max, and LLaMA, respectively. Incorrect local decisions then irreversibly exclude the correct class, while answer extraction introduces additional model-dependent loss. A node-level audit of the four trees finds that split entropy is weakly but consistently associated with lower node accuracy, whereas depth, branching factor, and within-node grounding differences are less stable. \\textbf{MYOPIA} therefore provides a framework for diagnosing hierarchical visual classification and motivates testing tree designs that prioritize perceptual answerability and recovery from early errors. Code is available at https://github.com/islammesabah/VLM_Classification.",
-    "summary_zh": null,
+    "summary_zh": [
+      "VLM的树状分类推理缺乏回溯，其准确率代价不明，需量化评估该贪心策略的性能损失。",
+      "构建MYOPIA基准，在12个数据集-模型对上测试，发现树遍历分类均逊于零样本提示。",
+      "诊断发现模型属性召回优于图像定位，局部误判不可逆排除正确类，为优化树设计提供依据。"
+    ],
     "authors": [
       "Islam Mesabah",
       "Sary Elmansoury",
@@ -3505,14 +3538,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 12
+    "score": 12,
+    "tags": [
+      "视觉语言模型",
+      "树状推理",
+      "可解释性"
+    ]
   },
   {
     "id": "2610.21571",
     "title": "Rethinking the Role of Tool Graph Memory in Multi-Turn Tool Use",
-    "title_zh": null,
+    "title_zh": "重新思考多轮工具使用中工具图记忆的作用",
     "abstract": "Large language model (LLM) agents solve complex tasks by calling external tools over multiple turns. Recent work has proposed tool graph memory, which stores past experience as tool transitions to guide subsequent selection. However, it remains unclear whether this component consistently improves agents' tool use or undermines it. We evaluate tool graph memory on nine models and two benchmarks, finding that it seldom improves significantly over baselines, and that its gains, where present, cost over twice the LLM calls. The memory's guidance is often incorrect, and random or no guidance retains most of the gain, implying that the benefit stems from extra computation rather than the memory itself. Moreover, even with the correct next tool suggested, many failures remain, such as giving up without a tool call. Storing the same experience instead as textual insights outperforms tool graph memory with almost no extra LLM calls. This suggests that memory serves better as a soft prior than as a prescription of the next tool, leading to a more effective and generalizable solution.",
-    "summary_zh": null,
+    "summary_zh": [
+      "多轮工具使用中，工具图记忆能否有效指导工具选择尚不明确，需评估其实际效用。",
+      "跨模型与基准测试发现，工具图记忆极少显著提升基线，且收益伴随超两倍LLM调用开销；其指导常出错，收益实为额外计算而非记忆本身。",
+      "将经验存为文本见解优于工具图记忆且无额外开销，表明记忆更适合作为软先验而非硬性指定，更具泛化性。"
+    ],
     "authors": [
       "Uiji Hwang",
       "Richeng Xuan",
@@ -3534,14 +3576,23 @@
     "matched": [
       "tool use"
     ],
-    "score": 16
+    "score": 16,
+    "tags": [
+      "多轮工具使用",
+      "工具图记忆",
+      "LLM智能体"
+    ]
   },
   {
     "id": "2610.21570",
     "title": "Independent Data-Integrity Verification for LLM-Driven Functional Coverage Closure in Hardware Design",
-    "title_zh": null,
+    "title_zh": "硬件设计中LLM功能覆盖闭合的独立数据完整性验证",
     "abstract": "LLM agents can write directed tests that close functional coverage, but coverage only shows that a state was reached, not that the data on the way there was correct. This is a long-known point in verification and we do not claim it as new. We describe a small coverage-closure agent that applies it to an LLM loop: coverage is read from the report that the simulation itself exports (cocotb-coverage YAML) and never taken from the model's account, and data integrity is checked by scoreboards that are separate from the model. On three architecturally distinct RTL designs (an asynchronous FIFO, a UART transmitter and an AHB2APB bridge) the agent raised coverage from 91.7%, 88.9% and 67.4% to 100% within its 8-iteration budget in every logged run, using one design-agnostic agent. A reactive scoreboard monitor attached to the FIFO's base testbench also found a clock-domain-crossing bug in the author's own stimulus code. The monitor is not yet attached to the LLM-generated tests, so their data integrity is not independently checked; one manual check on a single FIFO test is reported as preliminary. We list the weaknesses of this evidence: three designs, no baseline, no ablation, and logged runs that come from several agent checkpoints.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM agent闭合功能覆盖仅表明状态到达，无法保证数据正确性，需独立验证。",
+      "提出一种覆盖闭合agent，从仿真报告读取覆盖，并用独立记分板检查数据完整性。",
+      "在三种RTL设计上将覆盖提至100%，并发现一跨时钟域bug，但LLM测试的完整性尚未独立验证。"
+    ],
     "authors": [
       "Venkata Krishna Kumar Vedantam"
     ],
@@ -3562,14 +3613,24 @@
     "matched": [
       "LLM agent"
     ],
-    "score": 3
+    "score": 3,
+    "tags": [
+      "硬件验证",
+      "LLM agent",
+      "功能覆盖",
+      "数据完整性"
+    ]
   },
   {
     "id": "2610.21560",
     "title": "Numerical simulations of low-mass black hole-neutron star mergers with moderate eccentricities",
-    "title_zh": null,
+    "title_zh": "中等偏心率低质量黑洞-中子星并合的数值模拟",
     "abstract": "A confident detection of orbital eccentricity in gravitational-wave signals from black hole-neutron star systems would be a strong indicator of their dynamical formation origin. While eccentric waveform models have recently been developed, their validity for analyzing black hole--neutron star signals has yet to be tested against numerical-relativity simulations. Building upon our previous study of quasicircular black hole--neutron star mergers, we perform simulations of a subset of these systems with orbital eccentricities around five times larger than those inferred for GW200105_162426. Additionally, we perform simulations with magnetized matter to assess whether trapped $g$-mode oscillations persist in strongly magnetized disks. Regarding the emitted gravitational-wave signal, we find that the effective one-body waveform model SEOBNRv5EHM shows reasonable agreement unless tidal contributions become important, and the inspiral-only post-Newtonian models pyEFPE/pyEFPEHM show larger disagreement in the late inspiral. For the equal-mass system, which has the largest effective tidal deformability, eccentric tidal corrections have a small but noticeable impact on the phase, $\\sim0.1$ rad. We find an almost negligible impact of eccentricity on the properties of the remnant black hole, and differences of up to a factor of two in the remnant disk mass. Trapped $g$ modes in the accretion disks have the same frequency regardless of the eccentricity, confirming that they depend mainly on the properties of the remnant black hole. We find that when accretion disks are strongly magnetized, they become less dense and have less pronounced structure, and that the trapped $g$ modes previously identified in the unmagnetized cases are efficiently damped.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有偏心率波形模型未针对黑洞-中子星信号验证，本文模拟了具有中等偏心率的此类系统并合。",
+      "引力波分析表明，SEOBNRv5EHM模型在潮汐贡献不显著时表现合理，偏心潮汐修正对相位有约0.1弧度影响。",
+      "偏心率对残余黑洞性质影响极小，但残余盘质量差异可达两倍；强磁场会抑制盘密度并有效阻尼捕获g模。"
+    ],
     "authors": [
       "Ivan Markin",
       "Gonzalo Morrás",
@@ -3589,14 +3650,24 @@
     "comment": "24 pages, 8 figures, to be submitted to PRD",
     "journal_ref": "",
     "matched": [],
-    "score": 1
+    "score": 1,
+    "tags": [
+      "黑洞-中子星并合",
+      "数值模拟",
+      "引力波",
+      "偏心率"
+    ]
   },
   {
     "id": "2610.21539",
     "title": "Reinforcement Learning-driven Diffusion Models: Language, Vision, and Beyond",
-    "title_zh": null,
+    "title_zh": "强化学习驱动的扩散模型：语言、视觉及更多领域",
     "abstract": "Diffusion models (DMs) have steadily demonstrated outstanding performance in high-fidelity, controllable generation across diverse scenarios, following the \"pretraining-finetuning\" paradigm established in LLMs. Despite these advances, conventional DMs still face critical limitations in sophisticated reasoning, autonomous exploration of generation pathways, and adaptability to complex, human-aligned objectives. Inspired by RLHF's success in LLMs, RL has recently emerged as a pivotal post-training mechanism to iteratively refine DMs through reward-driven trajectory optimization. This paper presents the first comprehensive review of RL-driven DMs and an empirical analysis of how RL reshapes the diffusion process towards experience-centric, goal-directed generation. We propose a novel technical panorama elucidating RL's multifaceted roles in diffusion-based language, multimodal, robotic, and scientific models, with a granular focus on diffusion trajectory optimization and reward engineering. Through extensive experiments on multiple task-specific benchmarks, we systematically evaluate representative methods to intuitively highlight the advantages of different RL post-training strategies. Furthermore, we reveal and dissect three crucial bottlenecks that currently hinder the real-world deployment of RL-driven DMs: reward design fragility, exploration-exploitation trade-off in high-dimensional generation spaces, and training instability under sparse rewards. Based on these perspectives, we provide a principled roadmap for the integration of RL into DMs and outline promising future research directions for robust, interpretable RL-diffusion systems. We also construct a public repository to continuously track the latest developments in this rapidly evolving field: https://github.com/MAIR-Lab-HUST/Awesome-RL-for-Diffusion-Models.",
-    "summary_zh": null,
+    "summary_zh": [
+      "传统扩散模型在复杂推理与人类目标对齐上存在局限，引入RL作为后训练机制，通过奖励驱动优化迭代优化扩散轨迹。",
+      "本文首次全面综述RL驱动的扩散模型，提出技术全景图，并在多任务基准上系统评估不同RL后训练策略的优势。",
+      "揭示奖励设计脆弱性、高维空间探索与利用权衡、稀疏奖励下训练不稳定三大瓶颈，为构建鲁棒系统提供未来路线图。"
+    ],
     "authors": [
       "Zhiyuan Ma",
       "Jiabao Wei",
@@ -3626,14 +3697,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "强化学习",
+      "扩散模型",
+      "后训练",
+      "综述"
+    ]
   },
   {
     "id": "2610.21538",
     "title": "Agent Status Protocol (ASP): A Lightweight Specification for State Reporting in Multi-Agent Systems",
-    "title_zh": null,
+    "title_zh": "Agent状态协议：多智能体系统的轻量级状态报告规范",
     "abstract": "The Agent Status Protocol (ASP) defines a lightweight way for heterogeneous AI agents to report their operational state to a status server, and for observers such as dashboards to receive that state as soon as it changes. Agents push small JSON events over HTTP POST; the server exposes the aggregated state to observers over Server-Sent Events (SSE). Because an agent that has crashed, hung or been compromised cannot be trusted to report its own failure, ASP does not rely on self-reports alone: the server infers liveness from missed heartbeats, can detect agents that are alive but no longer making progress, and accepts observations from supervisors, guardrails, operators and peers, some of which take precedence over what the agent says about itself while others are shown alongside it. ASP models state along independent dimensions (lifecycle, health, task, floor, governance), so that an agent can be, for example, online, degraded, working on a task and waiting for the floor at the same time. It reuses existing vocabularies: task states from the Agent2Agent (A2A) protocol, floor states from the Open Floor Protocol (OFP), and attribute conventions from the OpenTelemetry GenAI semantic conventions. This paper presents version 0.1 of ASP as a proposal, not as an approved standard. It is a working draft intended to open a discussion, and the authors invite comments, alternative proposals and independent implementations from the community.",
-    "summary_zh": null,
+    "summary_zh": [
+      "多智能体系统中异构agent状态报告缺乏轻量统一规范，提出ASP协议，通过HTTP POST与SSE实现状态实时推送与聚合。",
+      "agent崩溃或被入侵时自报不可靠，ASP引入心跳推断、外部监督观察机制，并沿生命周期等独立维度建模状态。",
+      "ASP复用A2A、OFP及OpenTelemetry等现有词汇表，发布v0.1工作草案以邀请社区讨论与替代方案。"
+    ],
     "authors": [
       "Diego Gosmar",
       "Deborah A. Dahl",
@@ -3658,14 +3739,23 @@
       "AI agent",
       "multi-agent"
     ],
-    "score": 20
+    "score": 20,
+    "tags": [
+      "多智能体系统",
+      "状态监控",
+      "协议规范"
+    ]
   },
   {
     "id": "2610.21537",
     "title": "Functional Subnetwork Localization for Efficient Continual Learning in Large Language Models",
-    "title_zh": null,
+    "title_zh": "大语言模型中基于功能子网络定位的高效持续学习",
     "abstract": "Biological intelligence continually adapts to new information while retaining prior skills through localized plasticity. In contrast, continual learning in large language models (LLMs) remains vulnerable to catastrophic forgetting. A promising direction is to identify functionally specialized subnetworks within LLMs that enable targeted and resource-efficient adaptation. Using gradient-attribution profiling, we localize cognition-associated functional subnetworks exhibiting extremely low mutual overlap. Building on this finding, we propose Function-isolated Memory-Efficient Optimization (CiMEO), a continual learning framework that routes each training example to its corresponding functional subnetwork, restricting parameter updates and optimizer states to selected regions. Across 1.4 million sequential instructions, CiMEO achieves the highest average performance among the compared methods on five generative benchmarks spanning programming, examination-style tasks, and mathematical reasoning, while mitigating catastrophic forgetting. Subspace-overlap and principal-angle analyses further indicate that localized updates help preserve pre-trained representations, highlighting functional subnetwork localization as a practical approach to efficient and stable continual learning in LLMs.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM持续学习易灾难性遗忘，借鉴生物局部可塑性，提出定位功能特化子网络以实现高效适配。",
+      "通过梯度归因定位认知子网络，发现其重叠极低；提出CiMEO框架，将训练样本路由至对应子网络并限制参数更新。",
+      "在140万指令实验中，CiMEO在多领域生成基准上性能最优，有效缓解遗忘，证明子网络定位的实用性。"
+    ],
     "authors": [
       "Shuoran Jiang",
       "Wentao Zhu",
@@ -3694,14 +3784,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "持续学习",
+      "大语言模型",
+      "灾难性遗忘",
+      "功能子网络"
+    ]
   },
   {
     "id": "2610.21512",
     "title": "QREF: Improving DeepSearch Agents by Aligning Search with Reasoning via Query Refinement and Evidence Filtering",
-    "title_zh": null,
+    "title_zh": "QREF：通过查询精炼与证据过滤对齐搜索与推理",
     "abstract": "DeepSearch agents achieve strong performance on complex information-seeking tasks through iterative search and reasoning. However, they often issue intent-misaligned, under-constrained, or redundant search queries, resulting in poor evidence coverage and accumulating retrieval noise. To mitigate these limitations, we propose QREF, a plug-and-play Query Refiner and Evidence Filter. Specifically, the Query Refiner rewrites search queries according to the current reasoning intent while ensuring complementary coverage across each search batch. The Evidence Filter retains evidence relevant to both the current search batch and the reasoning objective, reducing distracting retrieval results. We initialize the Query Refiner with supervised fine-tuning and optimize it through reinforcement learning based on interactions with a real-world web search environment, reducing ineffective queries. Comprehensive experiments demonstrate that our approach improves the performance of DeepSearch agents across four challenging benchmarks, achieving average relative Pass@1 improvements of 33.55% on WebSailor and 11.04% on TongyiDeepResearch without modifying architectures or retraining their reasoning policies. Compared with the original DeepSearch backbone without QREF, the RL-trained refiner reduces the fraction of query batches that lack discriminative retrieval anchors by 95%. Compared with the SFT-trained refiner, it also lowers the filter-based ineffective query ratio.",
-    "summary_zh": null,
+    "summary_zh": [
+      "DeepSearch agent易生成意图不符或冗余的查询，导致证据覆盖差且检索噪声累积。",
+      "提出即插即用模块QREF，含查询精炼器与证据过滤器，分别重写查询对齐推理意图并过滤无关证据。",
+      "实验表明QREF显著提升agent性能，在两基准上Pass@1平均相对提升超11%，且大幅减少无效查询。"
+    ],
     "authors": [
       "Yujia Chen",
       "Yuhui Wang",
@@ -3731,14 +3831,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "智能体",
+      "查询精炼",
+      "检索增强"
+    ]
   },
   {
     "id": "2610.21504",
     "title": "Receiver-Specific Interventional Valuation of Semantic Atoms for Budget-Constrained Multi-Agent Communication",
-    "title_zh": null,
+    "title_zh": "预算受限多智能体通信的接收者特定语义原子干预评估",
     "abstract": "Cooperative multi-agent semantic communication requires deciding not only how a transmitter encodes its observation, but also which resulting semantic content should be delivered to each receiver under a limited link budget. We introduce an encoder-agnostic transmitter-side framework for receiver-specific valuation of independently selectable semantic units, termed semantic atoms. Each atom is assigned a signed value that quantifies whether delivering it is expected to improve or degrade the intended receiver's downstream decision. We formulate this effect through a controlled-delivery utility and identify it via prospective randomized payload delivery before the receiver acts. A shadow receiver estimates this utility using only transmitter-available information, from which receiver-specific leave-one-out (LOO) and Shapley atom values are computed. Experiments on a four-receiver intersection benchmark show 68.4% accuracy in recovering the sign of non-negligible LOO atom effects and a Spearman correlation of 0.302 between estimated and reference LOO values. Under limited budgets, we show that receiver-specific selection consistently outperforms shared and random alternatives, demonstrating the benefit of adapting semantic ranking to the intended receiver. At full affordability, exhaustive subset selection also outperforms full-payload transmission, showing that transmitting all available content need not maximize receiver utility. Overall, our results show that receiver-specific semantic valuation can support effective budget-constrained communication despite imperfect atom-value estimation.",
-    "summary_zh": null,
+    "summary_zh": [
+      "多智能体语义通信需在有限预算下决定向各接收者传递何种语义内容，现有方法缺乏针对接收者的内容价值评估。",
+      "提出编码器无关的发射端框架，通过受控交付效用与影子接收者，计算接收者特定的LOO与Shapley语义原子值。",
+      "实验表明，接收者特定的语义选择在有限预算下持续优于共享或随机方案，且全量传输未必最大化接收效用。"
+    ],
     "authors": [
       "Danial Dehghani",
       "Maximilian Lübke",
@@ -3761,14 +3870,24 @@
     "matched": [
       "multi-agent"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "多智能体通信",
+      "语义通信",
+      "价值评估"
+    ]
   },
   {
     "id": "2610.21496",
     "title": "OPRD: On-Policy Reminder Distillation for Long-Horizon Coding Agents",
-    "title_zh": null,
+    "title_zh": "长周期编程智能体的同策略提醒蒸馏",
     "abstract": "Reliable repository-level coding requires agents not only to generate correct code but also to preserve constraints and respond to tool feedback across long interactions. However, our diagnostic analysis shows that agents often fail to act on relevant information already available in context, while final Pass/Fail outcomes provide only sparse process supervision. We introduce On-Policy Reminder Distillation (OPRD), which combines Multi-Scope Reminder supervision with outcome-based routing on reminder-free student rollouts. Successful rollouts provide autoregressive self-imitation targets, whereas failed rollouts receive Reminder-conditioned reverse-KL supervision from a teacher that re-evaluates the same student-generated prefixes. A Global Reminder converts final-test diagnostics into trajectory-level guidance, while Turn-local Reminders apply only to the next decision following the relevant environment observation. The teacher and student share a two-stage initialization from Coding SFT and Instruction-Following (IF) SFT. At inference, the student operates without Reminders. On SWE-bench Verified, SWE-bench Pro, and SWE-bench Multilingual, OPRD improves the benchmark-averaged task resolution rate by 11.3 points over the open-source Qwen3.5-4B base model. Under the same diagnostic protocol, it reduces the aggregate error-event count from 446 to 222, a 50.2% reduction.",
-    "summary_zh": null,
+    "summary_zh": [
+      "长周期编程中，智能体常忽略上下文已有信息，且最终结果仅提供稀疏的过程监督。",
+      "提出OPRD方法，结合多范围提醒监督与基于结果的路由，对失败轨迹用教师模型提供反向KL监督。",
+      "OPRD在多基准上平均任务解决率提升11.3%，错误事件减少50.2%，推理时无需提醒。",
+      "全局提醒提供轨迹级指导，局部提醒作用于环境观测后的下一步决策，师生模型共享两阶段SFT初始化。"
+    ],
     "authors": [
       "Yuechen Luo",
       "Zhiyi Lai",
@@ -3798,14 +3917,23 @@
     "matched": [
       "coding agent"
     ],
-    "score": 18
+    "score": 18,
+    "tags": [
+      "编程智能体",
+      "知识蒸馏",
+      "过程监督"
+    ]
   },
   {
     "id": "2610.21484",
     "title": "Context Matters! Social, Spatial, and Semantic Coordination with an Embodied Agent in Immersive Analytics",
-    "title_zh": null,
+    "title_zh": "沉浸式分析中具身智能体的社会、空间与语义协调",
     "abstract": "Embodied AI agents in Augmented Reality (AR) could enable more natural collaboration in immersive analytics by engaging users through spatial, conversational, and visual interaction. However, designing such agents requires careful attention to context. We propose a preliminary conceptual framework for context-aware design of embodied agents structured around three dimensions of spatial, social, and semantic. This framework is further categorised into embeddedness (how agents are situated in the contexts) and awareness (how agents perceive and respond to the contexts). To explore this, we present Cobot, an embodied AI agent designed as a design probe. Cobot supports context-sensitive interaction through features such as gaze cues, spatial sound, and task-aware behaviour. We reflect on its design and identify implications for future contextaware embodied agents.",
-    "summary_zh": null,
+    "summary_zh": [
+      "AR中具身AI智能体能实现自然协作，但设计时需充分考量上下文环境。",
+      "提出上下文感知设计概念框架，围绕空间、社会和语义三个维度，并划分为嵌入性与感知性。",
+      "开发具身智能体Cobot作为设计探针，支持注视、空间音频等上下文交互，并反思其设计启示。"
+    ],
     "authors": [
       "Andrew Cunningham",
       "Nicolas Barbotin",
@@ -3827,14 +3955,24 @@
     "matched": [
       "AI agent"
     ],
-    "score": 6
+    "score": 6,
+    "tags": [
+      "具身智能体",
+      "沉浸式分析",
+      "上下文感知",
+      "增强现实"
+    ]
   },
   {
     "id": "2610.21477",
     "title": "Tool-Augmented Large Language Models for Reliable Medical Calculation from Patient Notes",
-    "title_zh": null,
+    "title_zh": "基于工具增强LLM的可靠患者笔记医疗计算框架",
     "abstract": "Medical calculators translate raw patient observations into clinically actionable values and scores. However, applying these calculators directly to free-form patient notes requires precise variable extraction combined with the exact execution of complex formulas, scoring rules, and output conventions. Relying solely on direct large language model (LLM) prompting is unreliable in this context, as rule recall, parameter extraction, arithmetic reasoning, and formatting become entangled within a single generative step. To address these limitations, we propose a tool-augmented LLM framework for reliable medical calculation from patient notes. The framework retrieves and structures calculator specifications, generates reusable executable tools, and uses a constrained extractor to map each patient note to calculator-ready inputs. The tools then perform deterministic calculation, separating clinical language understanding from rule execution and arithmetic. Evaluated on the MedCalc-Bench dataset, our method achieves 86.73% final-answer accuracy, outperforming the one-shot prompting and supervised fine tuning-only baselines by 24.0 and 17.27 percentage points. Ablation and error analyses show that these performance gains are primarily driven by rule-grounded tool synthesis and schema-constrained extraction, whereas remaining failures are concentrated in clinical-semantic extraction and benchmark-specific output contracts. By grounding calculator logic in executable tools, the proposed approach alleviates arithmetic hallucinations and improves the computational reliability of the final clinical outputs.",
-    "summary_zh": null,
+    "summary_zh": [
+      "直接用LLM从自由文本提取变量并执行医疗计算易因推理与计算纠缠而出错。",
+      "提出工具增强LLM框架，生成可执行工具并利用受限提取器映射输入，实现确定性计算。",
+      "在MedCalc-Bench上准确率达86.73%，显著超越基线，有效缓解算术幻觉。"
+    ],
     "authors": [
       "Yang Zhong",
       "Ling Luo",
@@ -3859,14 +3997,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "医疗计算",
+      "工具增强LLM",
+      "信息提取"
+    ]
   },
   {
     "id": "2610.21464",
     "title": "Poisoning the Neighborhood: A Topology-Aware Topic-Level Attack on Large-Scale HNSW-based RAG Systems",
-    "title_zh": null,
+    "title_zh": "针对大规模HNSW-RAG系统的拓扑感知主题级投毒攻击",
     "abstract": "Retrieval-augmented generation (RAG) mitigates hallucinations and knowledge staleness in large language models using external knowledge. However, ingestion from public and third-party sources exposes RAG systems to poisoning attacks. Existing attacks are designed and evaluated under exact retrieval, where poisoned documents participate in global ranking. Deployment-scale systems instead rely on approximate nearest-neighbor (ANN) indexes such as hierarchical navigable small world (HNSW), where limited search budgets, graph-search reachability, and local benign-document competition invalidate this assumption and degrade existing attacks. We present a topology-aware topic-level poisoning attack against large-scale HNSW-RAG that generalizes to unseen topic queries. We organize poisoned documents into a Hub-Satellite structure: Satellites provide competitive entry points across semantic regions, while Hubs strengthen local cohesion and facilitate cascading retrieval. For generation, we propose an entity-claim promotion attack combining evidence anchoring and entity-claim coupling to promote the target entity via a target claim across different query regions. On 2M-document Wikipedia, our attack maintains over 72% retrieval success and reaches 31.29% attack success, substantially outperforming baselines; domain-specific experiments further support its effectiveness. Structural analyses show that the Hub-Satellite topology forms in HNSW, indicating that graph structure contributes to improved poisoned-document retrieval. Existing poisoning defenses cannot mitigate the attack, exposing graph-structural risks in HNSW-RAG systems.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有RAG投毒攻击基于精确检索假设，在采用HNSW索引的大规模系统中因搜索预算和图可达性限制而失效。",
+      "提出拓扑感知主题级投毒攻击，构建Hub-Satellite结构增强局部内聚与级联检索，并结合实体-声明提升攻击影响生成。",
+      "在200万维基文档上攻击成功率达31.29%，现有防御无法缓解，暴露了HNSW-RAG的图结构风险。"
+    ],
     "authors": [
       "Yufei Chen",
       "Yao Wang",
@@ -3887,14 +4034,23 @@
     "matched": [
       "retrieval-augmented generation"
     ],
-    "score": 3
+    "score": 3,
+    "tags": [
+      "RAG投毒攻击",
+      "HNSW图索引",
+      "拓扑感知"
+    ]
   },
   {
     "id": "2610.21463",
     "title": "Trajectory-Level Speculation with Semantic Verification for Tool-Using Agents",
-    "title_zh": null,
+    "title_zh": "基于轨迹推测与语义验证的工具调用Agent协议",
     "abstract": "Large language model agents solve tasks through long sequences of tool calls, and the prevailing design has a single strong model generate every step, although many steps are routine enough for a much smaller model. Existing ways of sharing this work keep the strong model as the generator: routers and collaborative agents decide which model handles each query or step, and speculative methods check a small model's drafts one step at a time, usually against the strong model's own action. We introduce SpecAgent, a collaboration protocol that turns the strong model from the author of each step into a reviewer of steps drafted by a weak model. The weak model executes read-only tool calls as it drafts, so that every step is grounded in real observations, and holds the first action that would modify the environment. The strong model then verifies the drafted segment in a single prefill pass, commits the longest prefix it judges semantically valid, and repairs the first rejected step. Because verification replaces autoregressive decoding with parallel prefill, the strong model decodes only short verdicts and occasional repairs rather than every step. On $τ^2$-Bench, SpecAgent comes within one point of the strong model's success rate while roughly halving memory traffic and wall time, and on AutomationBench and VitaBench it recovers 44-75% of the quality gap while lowering both. In an edge-cloud deployment on MCP-Atlas with three cloud models, it closes 53-75% of the weak-strong quality gap while the strong model generates at most half as many tokens. These results suggest that a strong model need not author every step of an agent: reviewing grounded drafts retains most of its quality while cutting both latency and memory traffic.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM Agent逐步调用工具时全由强模型生成效率低，多数常规步骤弱模型即可胜任。",
+      "提出SpecAgent协议，由弱模型执行只读工具生成轨迹草案，强模型单次并行预填验证并修复。",
+      "验证替代自回归解码，强模型仅输出短判定与修复。实验表明该协议在大幅降低延迟和内存的同时，恢复了44-75%的质量差距。"
+    ],
     "authors": [
       "Zilin Wang",
       "Yinhong Liu",
@@ -3917,14 +4073,24 @@
     "comment": "",
     "journal_ref": "",
     "matched": [],
-    "score": 6
+    "score": 6,
+    "tags": [
+      "大语言模型Agent",
+      "推测解码",
+      "模型协作",
+      "工具调用"
+    ]
   },
   {
     "id": "2610.21458",
     "title": "What Survives Self-Evolution: Provenance Marks in Copied Agent Harnesses",
-    "title_zh": null,
+    "title_zh": "智能体框架泄露后的溯源标记存活研究",
     "abstract": "Agent harnesses, the prompt and tool code around a base model, leak. Claude Code's 512,000 lines were mirrored within hours of a packaging error. A plagiarist can pass a leaked harness through a published self-evolver and ship the result as its own. We define this as a covert rewriting attack. No one targets a provenance mark, yet a large language model (LLM) proposer rewrites the file that carries it and a score keeps the better rewrites. We give the first measurement of marks under this attack, with three evolvers, five proposers and two environments. Published marks fail. KGW in the prompt survives GEPA's rewrites in 0 of 12 copies, AgentMark as released in 5 of 12. The proposer's habits decide survival, by two orders of magnitude across models, and selection protects a mark only when each decision sees enough games. We then build a mark for this attack. Its key is the order of near-tied entries of a table of where objects are found, built from public games, so deleting the table costs success, rewrites that keep its rows keep the order, and a customer reads the key from the agent's actions alone. On held-out games it is detected in 62 of 76 copies whose lineage rewrote its file. A scheme-aware plagiarist reshuffles the ties at no measurable cost, and a plagiarist who asks the proposer for more general code removes the key in 75-100% of rewrites.",
-    "summary_zh": null,
+    "summary_zh": [
+      "智能体框架易泄露并被隐蔽重写攻击，现有溯源标记在自演化重写下几乎全部失效。",
+      "标记存活取决于LLM改写习惯，且选择机制仅在决策充分时才能保护标记。",
+      "提出基于对象位置表排序的新标记，在未知游戏检测率达82%，但更高级抄袭仍可破坏。"
+    ],
     "authors": [
       "Jieyu Li",
       "Jingya Li",
@@ -3947,14 +4113,23 @@
     "matched": [
       "agent harness"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "隐蔽重写攻击",
+      "溯源标记",
+      "智能体框架"
+    ]
   },
   {
     "id": "2610.21449",
     "title": "Incentivizing Tool-Use Reinforcement Learning for Post-Arrival Emergency Care Prediction",
-    "title_zh": null,
+    "title_zh": "激励工具使用的强化学习用于急诊抵达后护理预测",
     "abstract": "Large language models (LLMs) can reason over both structured measurements and free-text records, which makes them attractive for emergency department (ED) prediction. However, most existing LLMs still fall short of conventional ML methods like trees on EHR-based prediction tasks. Our controlled analysis traces this gap to two weaknesses: LLMs do not select informative features, and they misjudge what numerical values imply for risk even when given the right features. We propose TIR-EC, a tool-integrated reinforcement learning framework that addresses both. TIR-EC exposes EHR feature groups as tools the LLM can call. It trains the LLM with rewards from a gradient-boosted tree teacher, which provides a reference set of informative tools and a graded risk target. TIR-EC also distills task-specific clinical skills into the model weights through a reverse curriculum that gradually removes the skills from the prompt during RL process. Evaluation on three clinical prediction tasks shows that our 4B agent achieves the highest macro F1 of all compared models, outperforms conventional ML baselines, and is competitive with much larger frontier LLMs. Further analysis shows that TIR-EC selects more useful evidence with fewer tool calls and combines measurements more effectively.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有LLM在EHR预测任务上不及传统ML，原因在于无法选择有效特征且误判数值风险。",
+      "提出TIR-EC框架，将EHR特征组暴露为工具，利用梯度提升树教师的奖励指导LLM调用。",
+      "通过逆向课程将临床技能蒸馏至模型权重，4B agent在三项任务上超越传统ML基线。"
+    ],
     "authors": [
       "Pengfei Hu",
       "Chenwei Wu",
@@ -3977,14 +4152,24 @@
     "comment": "",
     "journal_ref": "",
     "matched": [],
-    "score": 7
+    "score": 7,
+    "tags": [
+      "强化学习",
+      "急诊预测",
+      "工具使用",
+      "大语言模型"
+    ]
   },
   {
     "id": "2610.21427",
     "title": "Learning from Interaction Experience via Localized Context Distillation",
-    "title_zh": null,
+    "title_zh": "基于局部上下文蒸馏的交互经验学习方法",
     "abstract": "Learning from interaction experience is essential for enabling large language models to continually improve during deployment. Context distillation offers a promising path: privileged information extracted from experience is provided to a teacher, whose behavior is then distilled into a student model that has no access to it. However, both existing forms of context distillation have limitations. Off-policy context distillation trains the student on teacher-generated trajectories and thus suffers from exposure bias; whereas on-policy context distillation trains on the student's own rollouts, whose states are often uninformative and fail to convey behaviors the student cannot yet produce. To resolve this dilemma, we introduce Localized Context Distillation (LoCD). LoCD first localizes the critical spans of a student trajectory that require revision. The teacher then regenerates only these spans from the student's own prefix, and the student is trained on the regenerated segments. LoCD thereby concentrates learning on the most informative states while keeping exposure bias low. Extensive experiments across math reasoning, code generation, and agent tasks demonstrate that LoCD consistently outperforms strong baselines and achieves more stable training with smaller and sparser parameter updates.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM从交互中持续学习需上下文蒸馏，但离策略存在暴露偏差，在线策略因状态信息不足难以传递新行为。",
+      "提出局部上下文蒸馏LoCD，先定位学生轨迹需修正的关键片段，再由教师基于学生前缀重新生成该片段进行训练。",
+      "LoCD聚焦最具信息量的状态并降低暴露偏差，在数学推理、代码生成和agent任务上稳定训练且优于强基线。"
+    ],
     "authors": [
       "Zhezheng Hao",
       "Yongkang Yang",
@@ -4014,14 +4199,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "上下文蒸馏",
+      "交互学习",
+      "大语言模型"
+    ]
   },
   {
     "id": "2610.21424",
     "title": "Do Agents Need a New Kind of Paper? SPRA: Structured Paper Representation for Agents",
-    "title_zh": null,
+    "title_zh": "智能体需要新型论文吗？面向智能体的结构化论文表示SPRA",
     "abstract": "Scientific agents must connect research problems, methods, and findings dispersed through narrative articles. We introduce SPRA (Structured Paper Representation for Agents), a paper-level representation of persistent research objects and typed relations. Its empirical-AI profile organizes Problems, Contributions, Components, ExperimentSetups, Measures, and Findings for querying, traversal, and reuse. Selected paper-level citation relations record dependencies, component use, and comparisons with prior work; source locations support verification. We instantiate SPRA across more than one million AI papers, with 19.95 million research units and 24.07 million internal relations. Evaluations access SPRA through Schema-RAG with task evidence fixed before inference. Across seven subfields, SPRA improves source-conditioned scientific QA by 0.381/5 over passage retrieval while remaining close to Full Compact (0.078/5 lower on average). In directed cross-paper reasoning, qualification improves by 0.184/5 over passage retrieval; Top-5 synthesis shows mixed quality effects. Across all paired RQ2 tasks, including Top-5, input+output tokens decrease by 28.5% relative to passage retrieval and 95.3% relative to Full Compact. In idea generation, a 0.067-point lower Overall score than Full Compact accompanies 93.7% fewer input+output tokens. Together, these results support SPRA as a usable representation of scientific content and a foundation for research workflows that connect, inspect, and reuse paper-level research objects. The SPRA resource is accessible through the SciVerse scholarly-data platform.",
-    "summary_zh": null,
+    "summary_zh": [
+      "传统叙事型论文使智能体难以关联分散的研究问题、方法与发现，故提出结构化论文表示SPRA以组织科研对象与关系。",
+      "SPRA构建经验AI档案组织问题、贡献等核心要素及引用关系，并在超百万篇AI论文中实例化近两千万研究单元。",
+      "实验表明SPRA在科学QA与跨论文推理上优于段落检索，且较全文压缩大幅减少Token消耗，可作为科研工作流基础。"
+    ],
     "authors": [
       "Yutong Leng",
       "Haojiong Chen",
@@ -4047,14 +4241,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "科学智能体",
+      "结构化论文表示",
+      "Schema-RAG"
+    ]
   },
   {
     "id": "2610.21422",
     "title": "Where, How, and When: Query-Guided Grounding for Video Understanding",
-    "title_zh": null,
+    "title_zh": "查询引导的视频定位：位置、关系与时刻",
     "abstract": "Understanding video content requires reasoning at multiple levels of granularity, from identifying objects to interpreting their interactions and localizing when specific actions occur. This thesis studies three query-guided grounding tasks that answer where key objects are (object-level grounding), how they interact (relationship-level grounding), and when specific moments occur (moment-level grounding). For object-level grounding, we present QDETRv, a query-guided extension of the Detection Transformer for one-shot localization of unseen objects in videos, which combines query-context fusion, a memory module for temporal consistency, and unsupervised pretraining on synthetic object trajectories. We further propose the Temporal Object-Aware Vision Transformer (TOViT) for few-shot video object detection, which builds on a language-aligned open-set vision encoder and propagates high-confidence object features across frames. For relationship-level grounding, we introduce few-shot referring relationships in videos: given a (subject, predicate, object) query and a few support videos sharing the predicate, the entities are localized by optimizing a T-partite random field using a meta-learned relation network with query-conditioned translational embeddings, Global Semantic Aggregation, Local Localization Aggregation, and belief-propagation-based message passing. For moment-level grounding, we propose the Moment Alignment Transformer (MATR) for video-to-video moment retrieval, which uses dual-stage Dynamic Time Warping for pre- and post-fusion alignment, learnable queries for boundary prediction, and self-supervised pretraining with temporal augmentations; MATR also extends to text-to-video moment retrieval with performance comparable to, or better than, the state of the art. These contributions advance query-guided video understanding across spatial, relational, and temporal grounding.",
-    "summary_zh": null,
+    "summary_zh": [
+      "视频理解需多粒度推理，本文研究查询引导的三个定位任务：对象位置、交互关系与动作时刻。",
+      "针对对象定位，提出QDETRv与TOViT，分别通过查询融合及跨帧特征传播实现单样本与少样本视频对象检测。",
+      "针对关系定位，提出少样本指代关系定位，利用元学习关系网络与T部随机场优化实体位置；针对时刻定位，提出MATR，通过双阶段DTW对齐与自监督预训练实现视频时刻检索。"
+    ],
     "authors": [
       "Yogesh Kumar"
     ],
@@ -4074,14 +4277,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 5
+    "score": 5,
+    "tags": [
+      "视频定位",
+      "查询引导",
+      "少样本检测",
+      "Transformer"
+    ]
   },
   {
     "id": "2610.21412",
     "title": "JevAgentHarness: Benchmarking, Deploying and Training Decision Models That Share Control with LLMs",
-    "title_zh": null,
+    "title_zh": "JevAgentHarness：与LLM共享控制的决策模型评测与训练",
     "abstract": "Large language model (LLM) agents now fix software, operate computers and serve customers, but their harnesses, the programs that run them, call a large LLM at every step, which makes long tasks slow and costly. Most of these calls end in a multiple-choice decision, such as which tool to call next. Decision models such as Jev answer these questions directly, at a fraction of an LLM call's time and price. We ask how a harness can delegate these decisions to a decision model with little loss of success. To evaluate decision models in agentic tasks, we build AgentDecisionBench, which tests them from isolated questions up to control of a running agent, on public benchmarks and our DecisionGym environment. The decision model most accurate on isolated questions solved only 69.5% of agent tasks, and without a fitted confidence threshold, delegating tool choices lowered success by 19.0 points. Building on these findings, we then design JevAgentHarness, which fits this threshold for each choice on the agent's own trajectories and lets the LLM decide below it. Because existing decision models never see the states an agent reaches after its own mistakes, we train AgentDecision-4B, an open 4B model, on such states with Jev's answers as labels. On tasks unlike its training data, the agent solved 91.5% of them with AgentDecision-4B and 82.0% with Jev. On tasks like their training data, 4B models trained this way made agents 81.1-89.0% cheaper and up to 2.5 times faster, without losing 3 or more points of task success. The models, data, and harness will be released at https://github.com/JevAgentHarness/JevAgentHarness.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM agent每步调用大模型导致长任务慢且贵，多数调用实为多选决策，故引入决策模型直接作答以降本增效。",
+      "构建AgentDecisionBench评测决策模型，发现孤立问题最准的模型在agent任务上成功率仅69.5%，无置信度阈值的委托会降19点。",
+      "设计JevAgentHarness拟合置信度阈值，并训练AgentDecision-4B处理agent自身错误状态，使agent成本降81-89%、速度提2.5倍且几乎不损成功率。"
+    ],
     "authors": [
       "Kunlun Zhu",
       "Tao Feng",
@@ -4105,14 +4318,23 @@
     "comment": "Code: https://github.com/JevAgentHarness/JevAgentHarness",
     "journal_ref": "",
     "matched": [],
-    "score": 8
+    "score": 8,
+    "tags": [
+      "LLM agent",
+      "决策模型",
+      "评测基准"
+    ]
   },
   {
     "id": "2610.21411",
     "title": "Jev-LiteMAS: Separating Decisions from Generation in Multi-Agent Workflows",
-    "title_zh": null,
+    "title_zh": "Jev-LiteMAS：多智能体工作流中决策与生成的分离",
     "abstract": "Multi-agent LLM systems rely on generative models for expert execution, workflow planning, and artifact review. Yet many coordination operations require only bounded decisions, such as selecting the next expert or judging artifact quality. Profiling three representative MAS frameworks, we find that routing and review account for 31.7-43.5% of generative-LLM tokens. However, replacing these operations with low-cost decision models introduces two interface gaps: generative planners produce execution plans and handoff instructions (planning gap), while reviewers provide actionable feedback for repairing flawed artifacts (review gap), which bounded decisions alone cannot provide. We introduce Jev-LiteMAS, a multi-agent framework that bridges both gaps by combining a lightweight decision model (Jev) with generative execution and feedback. To address the planning gap, Jev selects experts dynamically from the task and prior expert outputs, using accumulated context to ground subsequent execution without a pre-generated trajectory. To address the review gap, Jev screens intermediate artifacts against task criteria: passing artifacts proceed directly, whereas flagged ones undergo LLM re-review for acceptance or corrective feedback. Across four benchmarks and two backbones, Jev-LiteMAS reduces generative-LLM tokens by 12.7-54.6% over LAS, maintaining accuracy within 1.34 percentage points and lowering latency in seven of eight settings. Grounding routing in substantive expert outputs prevents up to 18.0 points in accuracy loss.",
-    "summary_zh": null,
+    "summary_zh": [
+      "多智能体系统路由与审查消耗大量LLM token，用低成本决策模型替换会面临规划与审查的接口鸿沟。",
+      "提出Jev-LiteMAS框架，结合轻量决策模型Jev与生成式执行反馈，动态选专家并筛选中间产物以桥接鸿沟。",
+      "实验表明，该方法降低12.7-54.6%的生成token，精度损失在1.34%内，且多数场景延迟更低。"
+    ],
     "authors": [
       "Kaixiang Wang",
       "Zhaijiacheng Zhou",
@@ -4134,14 +4356,24 @@
     "matched": [
       "multi-agent"
     ],
-    "score": 16
+    "score": 16,
+    "tags": [
+      "多智能体系统",
+      "决策模型",
+      "大语言模型",
+      "工作流优化"
+    ]
   },
   {
     "id": "2610.21405",
     "title": "MemCut: Every Secret Leaves a Trail in the Long-Term Memory of LLM Agents",
-    "title_zh": null,
+    "title_zh": "MemCut：LLM Agent长期记忆中的遗忘轨迹",
     "abstract": "Long-term memory has become a crucial component of large language model (LLM) agents, with most research focusing on retrieving relevant information accurately and efficiently. However, a dependable memory system must also forget sensitive user data upon request. To evaluate this capability, we introduce MemCut, a systematic benchmark for user-requested forgetting. Its 456 hand-designed secrets in long-horizon conversations have fully annotated evidence trails to test recovery after deletion, including from messages that never state the secrets directly. We propose two recovery metrics. Native recovery measures reader success through the system's retrieval, whereas residual recovery measures the same reader's success when directly given surviving objects traced to annotated disclosures or evidence. We establish three reference deletion baselines to test how far existing retrievers and write models support forgetting across five memory designs and four LLMs. Disclosure removal reduces native recovery far more than residual recovery. LLM-guided deletion of ten additional turns from twenty retrieval candidates leaves 39-76% residual recovery. Subset sweeps (144 facts, three systems, two models) show that widening the pool at a fixed budget reduces residual recovery more than deleting all original candidates. These sweeps identify candidate coverage as a bottleneck in the reference baselines.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM Agent的长期记忆缺乏对用户请求遗忘敏感数据的评估，为此提出系统基准MemCut。",
+      "MemCut包含456个秘密及证据轨迹，提出原生与残差恢复指标，测试删除后信息恢复情况。",
+      "实验表明现有遗忘基线残差恢复高，扩大候选池比全删原候选更降残差，揭示候选覆盖是瓶颈。"
+    ],
     "authors": [
       "Cheng Zhang",
       "Xuanning Cao",
@@ -4163,14 +4395,24 @@
     "matched": [
       "LLM agent"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "LLM Agent",
+      "机器遗忘",
+      "长期记忆",
+      "基准测试"
+    ]
   },
   {
     "id": "2610.21397",
     "title": "Watts If? A Benchmark for Counterfactual Reasoning About the AI Data Center Buildout",
-    "title_zh": null,
+    "title_zh": "AI数据中心建设的反事实推理基准测试",
     "abstract": "An AI data center is committed years before it draws a watt: a few discrete choices (grid or on-site gas, evaporative or dry cooling, which county to file in) fix its capital, water draw, and carbon path, and LLMs are now asked to help screen them with no test of whether they track what each commitment rules out. We introduce DCBench-440, with two arms reported separately: 200 generative questions over STRIPS worlds for five US deal archetypes, with search-verified gold answers and no tested shortcut above 12% on any question type, and 240 multiple-choice questions grounded in quoted site records, emission equations, and stated scenarios. Across open-weight deployments, accuracy spans 12.5-71.5% (generative) and 58.3-92.5% (multiple choice). One skill fails everywhere: asked to list every action available at a decision gate, no model exceeds 4.0% exact match. The strongest list 72-85% of the actions that would change the project's state but omit most permitted actions that change nothing; with those excused, the best exact match is still 24%. Code, data, and other materials are available upon request.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM被用于筛选AI数据中心早期决策，但缺乏测试其能否理解决策所排除的选项。",
+      "提出DCBench-440基准，含200道生成题与240道多选题，分别基于STRIPS世界和真实场景记录。",
+      "测试表明模型生成题准确率仅12.5-71.5%，在列举决策门可用动作时表现极差，最佳精确匹配仅24%。"
+    ],
     "authors": [
       "Pankaj Chouhan",
       "Rajarshi Das",
@@ -4196,14 +4438,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "反事实推理",
+      "AI数据中心",
+      "基准测试"
+    ]
   },
   {
     "id": "2610.21394",
     "title": "Matoi: Selective Revalidation of Consequence Evidence for Agent Authorization",
-    "title_zh": null,
+    "title_zh": "Matoi：面向Agent授权的后果证据选择性重验证",
     "abstract": "Matoi separates reusable consequence evidence from current execution authority and durable occurrence history. Its finite query-aware contract covers branches, ordered collections and negative lookups. A consumer reuses only its own checked evidence whose observations remain valid; signed requests, live grants, quota and uncertain outcomes remain separate obligations. Conditional correctness arguments distinguish locally serialized claims from nontransactional remote effects. Two studies strengthen cost attribution and domain evaluation. A 1,440-cell matched-wire study repeats 144 authored inputs. With compact input bytes identical, reuse reduces complete lifecycle cost by 3.49 percent in JS and 1.79 percent in Python. Combined representation/reuse reductions against full proof are 10.87 and 16.53 percent; five of twelve family intervals for the matched comparison cross one in each language. A prospectively frozen AgentDojo Banking mapping covers 5/16 user plans and 7/9 attack plans. Both governed strategies preserve five exact benign transfers and refuse 35 reused attack-plan/policy crosses. Pre-satisfied utility predicates are reported separately from completed work. These are original scripted synthetic tools, not autonomous agents or a real bank. Earlier studies retain cheaper protected-cache alternatives, policy-compatible phishing, provider duplication and post-claim revocation. Separate JS/Python consumers establish finite-profile interoperability within the same project; durable recovery rechecks evidence and retains uncertain reservations. The results support a bounded, auditable reuse and execution contract, not a new general incremental algorithm, arbitrary-tool closure, atomic third-party commitment or production superiority.",
-    "summary_zh": null,
+    "summary_zh": [
+      "Agent授权需隔离可复用的后果证据与不可复用的义务，以实现有限查询感知契约。",
+      "提出Matoi方法，分离并重用自身已验证证据，区分本地串行化声明与非事务性远程效应，确保条件正确性。",
+      "实验表明证据重用使JS和Python全生命周期成本分别降3.49%和1.79%，并在AgentDojo中成功拒绝对抗攻击。"
+    ],
     "authors": [
       "Zexun Wang"
     ],
@@ -4223,14 +4474,23 @@
     "matched": [
       "autonomous agent"
     ],
-    "score": 4
+    "score": 4,
+    "tags": [
+      "Agent授权",
+      "证据重验证",
+      "安全契约"
+    ]
   },
   {
     "id": "2610.21393",
     "title": "Self-Guided LLM Reasoning for Error Diagnosis in Vehicle Routing Problems",
-    "title_zh": null,
+    "title_zh": "车辆路径问题错误诊断的自引导LLM推理",
     "abstract": "Vehicle Routing Problems (VRPs) are fundamental to many real-world applications. Recent advances in large language models (LLMs) have spurred progress in solving these NP-hard problems. However, most existing approaches assume that input instances are error-free, neglecting the presence of faults commonly encountered in real-world data. In this work, we systematically investigate the capability of LLMs to detect (and correct) errors in VRP instances, and identify key limitations, particularly in handling complex instances or errors that substantially increase the LLM's reasoning burden. To overcome these challenges, we propose a self-guided reasoning framework in which LLMs autonomously generate code that provides structured insights to aid in error diagnosis. Experiments across diverse problem settings and LLMs demonstrate that our framework significantly improves error detection performance, achieving near-perfect accuracy.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有LLM求解VRP多假设输入无误，忽略了真实数据常含错误的问题。",
+      "提出自引导推理框架，让LLM自主生成代码提供结构化洞察以辅助错误诊断。",
+      "实验表明该框架显著提升错误检测性能，在多种设置下实现近乎完美的准确率。"
+    ],
     "authors": [
       "Ni Zhang",
       "Jianan Zhou",
@@ -4253,14 +4513,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 16
+    "score": 16,
+    "tags": [
+      "车辆路径问题",
+      "错误诊断",
+      "大语言模型"
+    ]
   },
   {
     "id": "2610.21392",
     "title": "Learning to Reason with Selective Internal Feedback",
-    "title_zh": null,
+    "title_zh": "基于选择性内部反馈的推理学习方法",
     "abstract": "Reinforcement learning from internal feedback can improve language models without ground-truth answers or external verifiers. However, confidence and correctness can diverge during training, and continued optimization of average self-certainty can increase confidence while degrading reasoning accuracy. We introduce SIF, a reinforcement learning method that combines comparative reward construction with selective policy updates. SIF compares ranked token-level self-certainty profiles across multiple windows and peers, assigning positive rewards only when both levels of voting provide sufficient support. Sample and group level filtering determines which responses contribute to policy optimization. Experiments on three backbones across 12 mathematical and scientific reasoning benchmarks show that SIF's final checkpoints achieve higher average accuracy than the best-validation checkpoints of Intuitor and Vigor, with a gain of 4.71 percentage points over Intuitor on Qwen2.5-Math-1.5B. Further analyses show better retention of accuracy during continued optimization, while test-time training experiments demonstrate sustained improvements with as few as four rollouts per prompt.",
-    "summary_zh": null,
+    "summary_zh": [
+      "优化平均自确定性会导致模型置信度与正确性偏离，降低推理准确率。",
+      "提出SIF方法，结合对比奖励构建与选择性策略更新，仅在多层级投票支持时给予正奖励。",
+      "实验表明SIF在12个推理基准上优于Intuitor等方法，且在持续优化中能更好保持准确率。"
+    ],
     "authors": [
       "Xun Lu",
       "Shumeng Yang",
@@ -4284,14 +4553,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "强化学习",
+      "语言模型",
+      "推理能力"
+    ]
   },
   {
     "id": "2610.21390",
     "title": "PriorityFEC: Deadline-Aware Streaming FEC for KV-Cache Handoff in Edge Multi-Agent Systems",
-    "title_zh": null,
+    "title_zh": "面向边缘多智能体KV缓存交接的截止期感知流FEC",
     "abstract": "Multi-agent large language model (LLM) systems are increasingly deployed at the edge to support complex tasks that require collaboration and information exchange among multiple agents. However, when task contexts are passed across agents, shared context that has already been processed by upstream agents often needs to be prefilled again, resulting in substantial redundant computation. Reusing an already prefilled key--value (KV) cache can avoid this recomputation, but requires the reusable KV state to be transferred across the network before the receiving agent can begin generation. Under strict time-to-first-token (TTFT) deadlines and unreliable edge links, delivering the complete KV cache may be infeasible, making it necessary to prioritize and protect the most valuable KV information within a limited transmission budget. This paper proposes PriorityFEC, a utility-aware KV-cache handoff scheme that jointly exploits model-side KV importance and transport-side reliability. PriorityFEC first constructs a utility-aware source stream by placing high-utility KV blocks at earlier transmission positions. It then protects the ordered stream using a feedback-adaptive Streaming Forward Erasure Correction (FEC) mechanism, which schedules repair packets according to receiver feedback before the TTFT deadline. We implement PriorityFEC on a distributed edge LLM serving prototype and evaluate it with Qwen2.5-7B-Instruct and Llama-3.1-8B-Instruct across multiple datasets. Results show that PriorityFEC achieves superior task quality over the compared transport schemes, with its advantages becoming particularly pronounced under stringent deadline constraints. These results demonstrate the importance of jointly optimizing KV-cache utility and deadline-aware transport reliability when reusable LLM state must be handed off across unreliable edge networks.",
-    "summary_zh": null,
+    "summary_zh": [
+      "边缘多智能体LLM系统跨节点传递KV缓存时，面临严格TTFT截止期与不可靠链路导致传输不全的问题。",
+      "提出PriorityFEC方案，按KV重要性构建源流优先传输高价值块，并采用反馈自适应流FEC机制保护数据。",
+      "实验表明，该方案在严格截止期下显著提升任务质量，证明了联合优化KV效用与传输可靠性的必要性。"
+    ],
     "authors": [
       "Han Shen",
       "Qifu Tyler Sun",
@@ -4315,14 +4593,24 @@
     "matched": [
       "multi-agent"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "边缘多智能体",
+      "KV缓存",
+      "前向纠错",
+      "LLM推理"
+    ]
   },
   {
     "id": "2610.21382",
     "title": "RDL-Bench: A Benchmark for Task-Aware Question Answering over Relational Databases",
-    "title_zh": null,
+    "title_zh": "RDL-Bench：关系数据库任务感知问答基准",
     "abstract": "Relational databases (RDBs) remain the primary infrastructure for storing and managing structured data across enterprise and scientific domains. Natural-language (NL) interfaces to RDBs aim to let users ask questions without writing SQL, but real user needs go beyond SQL-style lookup: some questions require reasoning over the observable database state, while others require predictive inference from historical relational records under temporal constraints. Existing benchmarks address these goals in isolation. To address this gap, we introduce RDL-Bench, a benchmark for task-aware question answering (QA) over real RDBs. RDL-Bench organizes diverse user questions into reasoning-oriented questions, whose answers are determined by the current database state, and prediction-oriented questions, whose answers depend on future outcomes under temporal constraints. Each instance contains an NL question, task metadata, schema information, temporal context, either executable evidence or target-construction logic, and denotation-level ground truth. RDL-Bench supports two evaluation settings: native solvers under their intended capabilities, and task-aware modular systems where a router dispatches each question to an appropriate execution module.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有RDB问答基准将推理与预测任务割裂，无法满足用户超越SQL查询的真实需求。",
+      "提出RDL-Bench基准，将问题分为依赖当前状态的推理类和依赖时序约束的预测类。",
+      "支持原生求解器与任务感知模块系统两种评估，通过路由分发问题至合适执行模块。"
+    ],
     "authors": [
       "Yao Cheng",
       "Siqiang Luo"
@@ -4342,14 +4630,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 8
+    "score": 8,
+    "tags": [
+      "关系数据库",
+      "问答基准",
+      "任务感知"
+    ]
   },
   {
     "id": "2610.21380",
     "title": "Perception or Reasoning? Diagnosing and Tackling Reinforcement Learning Bottlenecks in VLMs",
-    "title_zh": null,
+    "title_zh": "诊断视觉语言模型强化学习瓶颈：感知还是推理？",
     "abstract": "Reinforcement learning has brought strong gains to language model reasoning, but its improvements on visual tasks remain less consistent. One difficulty is that visual task failures can arise from different sources: the same benchmark may be limited by perception for one model and by reasoning for another. We introduce Perception and Reasoning Attribution (PARA), which measures the remaining perceptual and reasoning headroom of each model--benchmark pair by comparing how many current errors are recovered with more accurate visual information versus a stronger reasoner. Across 4 vision-language models and 17 multimodal benchmarks, PARA broadly agrees with the expected characteristics of existing benchmarks while revealing substantial model-specific variation. More importantly, it shows that RL gains become smaller as perceptual headroom increases, but larger when reasoning explains more of the recoverable errors, suggesting that current RL exploits reasoning headroom more effectively than perceptual headroom. Motivated by this gap, we analyze how existing RL objectives affect visual perception and find that reward- and token-level signals influence visual attention only indirectly. We therefore propose GRAD, a group-relative attention distillation objective that uses the best rollout in each group to directly guide the visual attention of weaker rollouts. GRAD consistently improves performance across two model scales and seven benchmarks, and further complements existing RL methods.",
-    "summary_zh": null,
+    "summary_zh": [
+      "视觉任务中RL增益不稳定，因模型失败源于感知或推理瓶颈，需区分归因。",
+      "提出PARA方法量化感知与推理提升空间，发现当前RL更易利用推理空间而非感知空间。",
+      "发现现有RL奖励信号仅间接影响视觉注意力，提出GRAD目标直接引导注意力，有效提升性能。"
+    ],
     "authors": [
       "Zeyuan Yang",
       "Zhuohao Chen",
@@ -4373,14 +4670,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 12
+    "score": 12,
+    "tags": [
+      "视觉语言模型",
+      "强化学习",
+      "注意力蒸馏"
+    ]
   },
   {
     "id": "2610.21373",
     "title": "Evaluating and Improving Static Application Security Testing Tools for Rust",
-    "title_zh": null,
+    "title_zh": "Rust静态应用安全测试工具的评估与改进",
     "abstract": "Rust has become a popular systems programming language in recent years because of its strong guarantees on memory and concurrency safety. Many types of system software have been re-implemented in Rust. However, Rust programs can still suffer from common memory and concurrency vulnerabilities due to unsafe code and misunderstandings of its complex mechanisms. To mitigate such vulnerabilities, developers often rely on static application security testing (SAST) tools. However, the effectiveness of existing Rust SAST tools on real-world vulnerabilities remains underexplored. In this paper, we first conduct an empirical evaluation of mainstream Rust SAST tools using security vulnerabilities identified in real-world Rust applications. We systematically assess their effectiveness, uncover common weaknesses, and analyze the root causes behind them. Motivated by the study, we propose TRUST, a large language model (LLM)-assisted automated testing framework. TRUST automatically analyzes the official Rust reference to derive and implement semantics-preserving transformations. It leverages these transformations to generate mutant programs for evaluating Rust SAST tools and uncovering potential faults within them. Overall, TRUST has revealed 46 faults across six popular SAST tools, 17 of which have been confirmed. In addition, our study yields ten empirical findings and four practical lessons that provide actionable guidance for developing more effective, robust, and maintainable Rust SAST tools.",
-    "summary_zh": null,
+    "summary_zh": [
+      "Rust的unsafe代码等机制仍会引发内存与并发漏洞，但现有SAST工具在真实漏洞上的有效性缺乏探索。",
+      "对主流Rust SAST工具进行实证评估，揭示其常见弱点并分析根因，进而提出LLM辅助的自动化测试框架TRUST。",
+      "TRUST利用语义保留变换生成变异程序测试SAST工具，发现46个故障（17个已确认），并总结出10项发现与4条实践指导。"
+    ],
     "authors": [
       "Huaien Zhang",
       "Zhengjie Zhao",
@@ -4404,14 +4710,23 @@
     "comment": "",
     "journal_ref": "",
     "matched": [],
-    "score": 1
+    "score": 1,
+    "tags": [
+      "Rust",
+      "SAST工具",
+      "LLM辅助测试"
+    ]
   },
   {
     "id": "2610.21372",
     "title": "Agentic Dependency Transformations: Lessons from an Exploratory Case Study of Flask",
-    "title_zh": null,
+    "title_zh": "智能体依赖转换：Flask探索性案例研究的启示",
     "abstract": "Modern software relies heavily on third-party libraries, requiring maintainers to balance the benefits of reuse against dependency-related maintenance and risk. We define dependency transformation as an emerging approach in which an AI coding agent alters how a repository handles external dependencies. Local reimplementation is one transformation strategy that recreates required functionality as local code; dependency transformation is broader and may include other strategies. In this emerging-results paper, we report an exploratory case study of Flask to explore dependency transformation strategies. We design experiments that show how available context shapes an agent's dependency discovery and iterative transformation of dependencies. The case yields five preliminary lessons. These lessons and the five-part research agenda position dependency transformation as an emerging research direction and motivate explicit transformation contracts, provenance constraints, preservation requirements, and independent validation criteria.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现代软件依赖第三方库带来维护风险，需研究AI coding agent改变仓库依赖处理方式的依赖转换方法。",
+      "以Flask为对象进行探索性案例研究，设计实验分析可用上下文如何影响agent的依赖发现与迭代转换。",
+      "案例得出五项初步经验并提出五部分研究议程，明确了转换契约、溯源约束等未来研究方向。"
+    ],
     "authors": [
       "Kaya Kitada",
       "Yoshiki Higo",
@@ -4432,14 +4747,23 @@
     "matched": [
       "coding agent"
     ],
-    "score": 7
+    "score": 7,
+    "tags": [
+      "依赖转换",
+      "AI智能体",
+      "软件工程"
+    ]
   },
   {
     "id": "2610.21366",
     "title": "RenoLayout: Unified Floorplan Renovation and Furniture Layout for Constraint-Aware Residential Design",
-    "title_zh": null,
+    "title_zh": "RenoLayout：面向约束感知的户型改造与家具布局统一框架",
     "abstract": "Residential design aims to transform existing homes into functional living spaces while satisfying diverse design preferences and physical constraints. However, existing floorplan generation methods typically assume empty building boundaries as input, whereas renovation requires reasoning over existing floorplans. Furthermore, floorplan renovation and furniture layout are commonly addressed as separate tasks, overlooking their inherent spatial dependency. Consequently, practical residential design must preserve immutable structural components while transforming editable spatial elements. It must also optimize furniture placement under design objectives and physical constraints. To address these challenges, we formulate residential design as a design-point-guided conditional generation task and propose RenoLayout, a framework that translates a pre-design residential state together with a design-point set into an executable Geometry-as-Code program. To enable controllable supervision, we construct a Design Map comprising 123 fine-grained design points covering structural renovation and furniture layout. We further introduce Difference-Grounded Design-Point Annotation to derive design-point sets automatically from before--after design pairs with VLM-based consistency verification. RenoLayout is trained using a three-stage CPT--SFT--RL pipeline, progressively improving spatial reasoning, instruction following, and constraint compliance. We also introduce the RenoLayout Benchmark, a set of 200 real-world before--after renovation cases with complete furniture layouts. To the best of our knowledge, it is the first benchmark for unified residential design. These cases include design-critical structural and building-service constraints.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有方法多假设空边界输入且分离处理改造与布局，忽略了空间依赖与原有结构约束。",
+      "提出RenoLayout框架，将住宅设计建模为设计点引导的条件生成任务，输出可执行的Geometry-as-Code程序。",
+      "构建含123个设计点的Design Map与200个真实案例的RenoLayout Benchmark，通过三阶段训练逐步提升空间推理与约束合规性。"
+    ],
     "authors": [
       "Jingguo Liu",
       "Yuanqing Liu",
@@ -4461,14 +4785,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 9
+    "score": 9,
+    "tags": [
+      "户型改造",
+      "家具布局",
+      "条件生成",
+      "基准测试"
+    ]
   },
   {
     "id": "2610.21362",
     "title": "LTM: Latent Transition Based In-Context Memory for Vision-Language-Action Models",
-    "title_zh": null,
+    "title_zh": "基于潜在转移的视觉-语言-动作模型上下文记忆",
     "abstract": "Robotic manipulation often requires remembering interactions that are no longer visible. We introduce Latent Transition Memory (LTM), which stores history as compact latent transitions between consecutive observations. Instantiated on $π_{0.5}$ as LTM-$π$, our method uses a frozen latent action encoder, a lightweight adapter, and causal KV caching for incremental inference without memory-specific semantic annotations or external reasoning-model calls. With DreamDojo transitions, LTM-$π$ achieves 58.54% success on RoboMME and 80.5% on LIBERO-Mem, performing best among baselines without external reasoning models or memory-specific annotations. Ablations support the contribution of transition content beyond temporal cues and the efficiency of delayed memory admission. Scaling RoboMME demonstrations tenfold improves success from 57.67% to 87.50%, while a Cup Swap diagnostic highlights the role of process supervision in temporal composition. Under a 200-token memory budget, success remains 84.00%, versus 87.50% without compression. Finally, real-robot counting success improves from 11.25% to 82.50%. Together, these results demonstrate the effectiveness, scalability, and efficiency of latent transition memory, highlighting its capacity for complex temporal information, bounded-context operation, and real-world robotic control.",
-    "summary_zh": null,
+    "summary_zh": [
+      "机器人操作需记忆不可见交互，为此提出潜在转移记忆LTM，将历史存储为紧凑的连续观测间潜在转移。",
+      "在π₀.₅上实现LTM-π，采用冻结编码器、轻量适配器与因果KV缓存，实现无外部推理的增量推理。",
+      "实验表明LTM-π在RoboMME等基准上优于基线，数据增十倍成功率升至87.5%，且200 token预算下仍达84%。"
+    ],
     "authors": [
       "Qixin Sun",
       "WenLong Gao",
@@ -4493,14 +4827,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 4
+    "score": 4,
+    "tags": [
+      "机器人操作",
+      "视觉-语言-动作模型",
+      "潜在转移记忆"
+    ]
   },
   {
     "id": "2610.21359",
     "title": "SWE-at-Scale: Scalable Issue Synthesis from Historical Bug Fixes",
-    "title_zh": null,
+    "title_zh": "基于历史修复的大规模软件问题合成框架",
     "abstract": "As coding agents become increasingly capable, robust evaluation requires a broader and more diverse supply of verifiable software engineering (SWE) tasks. However, real-world tasks are constrained by the natural frequency of issue reporting and the substantial cost of manual curation. Furthermore, existing synthetic approaches rely primarily on the pretrained knowledge of large models coupled with heuristic prompting, often failing to capture the authentic, complex mechanics of software failures. To exponentially scale SWE task production, we introduce SWE-at-Scale, a framework that automatically synthesizes realistic issues by reverse-engineering real-world software fixes. Our key insight is that historical fixes encapsulate deep mechanistic knowledge of bug formation: inverting a fix transforms repair supervision into bug-induction supervision grounded in actual development scenarios. SWE-at-Scale transfers these learned bug patterns to novel code contexts, repeatedly sampling diverse bug typologies to construct executable SWE tasks. Extensive experiments show that SWE-at-Scale generates more diverse and realistic SWE tasks than current synthesis baselines while posing greater challenges to state-of-the-art coding agents. Notably, SWE-at-Scale can generate distinct bug types from a single code context, with bug diversity scaling robustly even up to 200 generations per file. Overall, SWE-at-Scale turns finite real-world fixes into reusable supervision for scalable synthesis of realistic, diverse, and challenging SWE tasks.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有SWE任务受限于真实问题频率与人工标注成本，且现有合成方法难以捕捉真实软件故障机制。",
+      "提出SWE-at-Scale框架，通过逆向工程真实修复将修复监督转化为错误诱导监督，并迁移至新代码上下文。",
+      "该框架能指数级扩展SWE任务生成，产出的任务更多样真实，对coding agent挑战更大，且多样性随生成量稳健扩展。"
+    ],
     "authors": [
       "Silin Chen",
       "Zihan Zhang",
@@ -4528,14 +4871,23 @@
     "matched": [
       "coding agent"
     ],
-    "score": 8
+    "score": 8,
+    "tags": [
+      "软件工程",
+      "任务合成",
+      "代码智能体"
+    ]
   },
   {
     "id": "2610.21348",
     "title": "FedSkillGit: Federated Skill Evolution via Version Control",
-    "title_zh": null,
+    "title_zh": "基于版本控制的联邦技能演化框架FedSkillGit",
     "abstract": "Large language model agents can improve their capabilities by evolving reusable natural-language skills from execution experience. In real-world deployments, this experience is distributed across data owners who cannot pool their raw data, which motivates federated skill evolution. The natural first design lets each client evolve the whole skill document and upload the result for server-side aggregation. That design is poorly matched to skill evolution for three reasons. An evolved document can still carry client-specific content distilled from private traces, repeated transmission of a nearly unchanged document spends communication on knowledge that the population already holds and the contribution of a single client is buried in a document that the server cannot meaningfully attribute. We propose FedSkillGit, a federated skill evolution framework that replaces full-document updates with commits. Each participating client submits a bounded set of patches over named rules together with its local experience, which summarizes what the round taught it, and the pair passes a two-stage privacy filter before it leaves the client. The server deduplicates the submitted patches and the local experience of all participants, updates a global experience document that only the optimizers read, and merges the surviving patches into a candidate skill. The candidate is distributed to the clients, which score it on their own validation sets and report the results, and it is published only when the reported scores improve on the current version. Experiments on three datasets and three language model families show that FedSkillGit outperforms state-of-the-art baselines by up to 22% and approaches centralized evolution without sharing raw client data.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM agent需从执行经验演化技能，但数据分布且无法共享，传统全文档聚合易泄露隐私且通信低效。",
+      "提出FedSkillGit框架，用补丁提交替代全文档更新，经两阶段隐私过滤后上传，服务端去重并合并补丁。",
+      "候选技能需经客户端验证评分，仅当性能提升时才发布。实验表明其性能提升达22%，接近集中式演化。"
+    ],
     "authors": [
       "Boxun Lan",
       "Jiamei Li",
@@ -4559,14 +4911,24 @@
     "comment": "",
     "journal_ref": "",
     "matched": [],
-    "score": 7
+    "score": 7,
+    "tags": [
+      "联邦学习",
+      "技能演化",
+      "版本控制",
+      "LLM agent"
+    ]
   },
   {
     "id": "2610.21347",
     "title": "Emotion Is Not External Knowledge: Internal Attention Signals for Affective State Reasoning",
-    "title_zh": null,
+    "title_zh": "情感非外部知识：用于情感状态推理的内部注意力信号",
     "abstract": "Large Language Models (LLMs) increasingly operate in multi-turn interactions that require maintaining latent conversational states, not only explicit facts. We study affective state as an implicit state inferred from sparse contextual cues that remain relevant after topic shifts, and ask whether LLMs expose internal attention signals for routing such evidence at inference time. Prior attention interventions rely on labeled in-domain head profiles and externally specified target spans, limiting transfer across affective-evidence distributions. We propose Self-targeted Internal Attention Boosting (SIAB), which localizes sparse affective heads via causal localization (in detail activation patching) on synthetic minimal pairs and boosts, at the answer position, the content tokens these heads already attend to; both edited heads and target tokens are derived from the model's own behavior, enabling the same head set to be reused across tasks.We evaluate on ECC and GoEmotions across three LLMs and multiple prompting settings. Across settings, SIAB improves prompt-matched baselines by up to +10.3 macro-F1 on ECC and +5.5 on GoEmotions. Combined with PASTA-style external supervision, it achieves up to +13.84 accuracy points and +12.51 macro-F1 points, while mechanistic analyses trace the gains to sparse, emotion-enriched heads and show that layer proximity affects additivity.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM多轮对话需维护隐式情感状态，但现有注意力干预依赖标注数据与外部指定目标，跨任务泛化差。",
+      "提出SIAB方法，通过因果定位找出稀疏情感注意力头，并在答案位置增强这些头已关注的token。",
+      "SIAB无需外部监督即可复用，在ECC和GoEmotions上最高提升10.3和5.5的macro-F1，结合外部监督增益更显著。"
+    ],
     "authors": [
       "Wenqiu Tang",
       "Zhen Wan",
@@ -4589,14 +4951,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "情感状态推理",
+      "注意力干预",
+      "大语言模型"
+    ]
   },
   {
     "id": "2610.21327",
     "title": "DocPilot: Interactive Agent Orchestration and Training for Long Visual Document Understanding",
-    "title_zh": null,
+    "title_zh": "DocPilot：面向长视觉文档理解的交互式智能体编排与训练",
     "abstract": "Multimodal long-document question answering requires models to seek sparse evidence across pages and modalities, understand heterogeneous document content, and reason over the collected evidence. Even advanced vision-language models (VLMs) can overlook sparse evidence and struggle with cross-modal reasoning in a single pass. Existing document agents further introduce multi-step interaction, but some still rely on predefined workflows or coarse-grained actions, limiting the flexibility and granularity of document reasoning. We introduce DocPilot, an agentic document framework that supports expressive orchestration and makes complex document solving learnable by small language models (SLMs). DocPilot orchestrates evidence seeking through page-level navigation and fine-grained evidence localization, and integrates local visual inspection, code-based numerical reasoning, and cross-modal reasoning for multimodal understanding. To transfer these capabilities to small models, we propose curriculum-based agentic training that progresses from single-ability learning to adaptive orchestration through supervision from data-grounded reasoning traces and executable interaction trajectories. Across MMLongBench-Doc, DocBench, FinRAGBench-V, and MADQA, DocPilot achieves strong gains with frontier VLM backbones, while DocPilot-4B delivers competitive performance against substantially larger models, demonstrating strong effectiveness and generalization across diverse long-document reasoning settings. The code is available at https://github.com/HKUSTDial/DocPilot.",
-    "summary_zh": null,
+    "summary_zh": [
+      "多模态长文档问答中，VLM易遗漏稀疏证据且跨模态推理弱，现有文档智能体受限于预定义流程与粗粒度动作。",
+      "提出DocPilot框架，通过页面导航与细粒度定位编排证据检索，并整合局部视觉检查、代码推理与跨模态推理。",
+      "提出课程式智能体训练将能力迁移至小模型，DocPilot及4B小模型在多个基准上表现优异，泛化性强。"
+    ],
     "authors": [
       "Zhuowen Liang",
       "Xiaotian Lin",
@@ -4621,7 +4992,12 @@
     "matched": [
       "reasoning"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "文档理解",
+      "智能体编排",
+      "多模态推理"
+    ]
   },
   {
     "id": "2610.21325",
