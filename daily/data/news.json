@@ -1,5 +1,155 @@
 [
   {
+    "title": "llm-tools-datasette 0.1.1",
+    "link": "https://simonwillison.net/2026/Oct/18/llm-tools-datasette/",
+    "published": "2026-10-18T23:43:09Z",
+    "source": "Simon Willison",
+    "summary": "Release: llm-tools-datasette 0.1.1 When I switched LLM over to httpx2 in LLM 0.33 I forget that this would break any plugins which used httpx without directly depending on it. llm-tools-datasette was one of those…",
+    "categories": [
+      "datasette",
+      "llm"
+    ],
+    "author": null,
+    "id": "https://simonwillison.net/2026/Oct/18/llm-tools-datasette",
+    "day": "2026-10-19"
+  },
+  {
+    "title": "William Gibson and the trademarking of cyberspace",
+    "link": "https://colo.to/cyberspace.html",
+    "published": "2026-10-18T23:37:57Z",
+    "source": "Hacker News",
+    "summary": "",
+    "categories": [],
+    "author": "Eric_Gullichsen",
+    "id": "https://colo.to/cyberspace.html",
+    "day": "2026-10-19"
+  },
+  {
+    "title": "llm-echo 0.5",
+    "link": "https://simonwillison.net/2026/Oct/18/llm-echo/",
+    "published": "2026-10-18T23:16:16Z",
+    "source": "Simon Willison",
+    "summary": "Release: llm-echo 0.5 I'm working towards a new LLM release, and testing PRs caused me to revisit the llm-echo debug plugin. This plugin provides a \"model\" which doesn't involve an LLM at all - it just repeats back the…",
+    "categories": [
+      "llm"
+    ],
+    "author": null,
+    "id": "https://simonwillison.net/2026/Oct/18/llm-echo",
+    "day": "2026-10-19"
+  },
+  {
+    "title": "Hybrid Reasoning Agents: LLM agents that think in latent space, act through text",
+    "link": "https://arxiv.org/abs/2610.18861",
+    "published": "2026-10-18T20:48:14Z",
+    "source": "Hacker News",
+    "summary": "https://x.com/Jiaru_Zou/status/2110400256647340476 https://github.com/togethercomputer/HybridAgent https://huggingface.co/collections/togethercomputer/hybridag... Evaluations: https://arxiv.org/html/2610.18861v1#S5",
+    "categories": [],
+    "author": "allinonai",
+    "id": "https://arxiv.org/abs/2610.18861",
+    "day": "2026-10-19"
+  },
+  {
+    "title": "Anthropic says it’s committing 5% of its shares to a ‘public benefit fund’",
+    "link": "https://techcrunch.com/2026/10/18/anthropic-says-its-committing-5-of-its-shares-to-a-public-benefit-fund/",
+    "published": "2026-10-18T20:37:40Z",
+    "source": "TechCrunch AI",
+    "summary": "Anthropic said that it will commit 5% of its shares to the fund.",
+    "categories": [
+      "AI",
+      "Anthropic"
+    ],
+    "author": "Anthony Ha",
+    "id": "https://techcrunch.com/2026/10/18/anthropic-says-its-committing-5-of-its-shares-to-a-public-benefit-fund",
+    "day": "2026-10-19"
+  },
+  {
+    "title": "Free Pascal compiler now supports dynamic packages",
+    "link": "https://www.getlazarus.org/dynamic/",
+    "published": "2026-10-18T18:48:04Z",
+    "source": "Hacker News",
+    "summary": "",
+    "categories": [],
+    "author": "sysrpl",
+    "id": "https://getlazarus.org/dynamic",
+    "day": "2026-10-19"
+  },
+  {
+    "title": "PalmOS Lemmings",
+    "link": "https://github.com/ardiri/palmos-lemmings",
+    "published": "2026-10-18T17:56:59Z",
+    "source": "Hacker News",
+    "summary": "",
+    "categories": [],
+    "author": "memalign",
+    "id": "https://github.com/ardiri/palmos-lemmings",
+    "day": "2026-10-19"
+  },
+  {
+    "title": "Namecheap just seized and disabled all my domains",
+    "link": "https://www.reddit.com/r/sysadmin/comments/1x8cycd/namecheap_just_seized_and_disabled_all_my_domains/",
+    "published": "2026-10-18T16:56:56Z",
+    "source": "Hacker News",
+    "summary": "",
+    "categories": [],
+    "author": "sashk",
+    "id": "https://reddit.com/r/sysadmin/comments/1x8cycd/namecheap_just_seized_and_disabled_all_my_domains",
+    "day": "2026-10-19"
+  },
+  {
+    "title": "Someone behind the software",
+    "link": "https://karrisaarinen.com/posts/someone-behind-the-software/",
+    "published": "2026-10-18T16:32:00Z",
+    "source": "Hacker News",
+    "summary": "",
+    "categories": [],
+    "author": "tosh",
+    "id": "https://karrisaarinen.com/posts/someone-behind-the-software",
+    "day": "2026-10-19"
+  },
+  {
+    "title": "Disney agrees to hire the majority of Character.AI’s workforce",
+    "link": "https://techcrunch.com/2026/10/18/disney-agrees-to-hire-the-majority-of-character-ais-workforce/",
+    "published": "2026-10-18T16:30:00Z",
+    "source": "TechCrunch AI",
+    "summary": "The filing also says that the “vast majority” of Character.AI employees who were offered jobs at Disney accepted them. However, this is a stalking horse bid, so another company could come forward with a higher offer.",
+    "categories": [
+      "AI",
+      "Media & Entertainment",
+      "Startups",
+      "character.ai"
+    ],
+    "author": "Anthony Ha",
+    "id": "https://techcrunch.com/2026/10/18/disney-agrees-to-hire-the-majority-of-character-ais-workforce",
+    "day": "2026-10-19"
+  },
+  {
+    "title": "Anthropic gives outside AI watchdog “employee-like” access",
+    "link": "https://arstechnica.com/ai/2026/10/anthropic-gives-outside-ai-watchdog-employee-like-access/",
+    "published": "2026-10-18T16:25:19Z",
+    "source": "Ars Technica",
+    "summary": "The outside watchdog can publish its findings without Anthropic's approval.",
+    "categories": [
+      "AI",
+      "AI agents",
+      "AI oversight",
+      "Anthropic"
+    ],
+    "author": "Cristina Criddle, Financial Times",
+    "id": "https://arstechnica.com/ai/2026/10/anthropic-gives-outside-ai-watchdog-employee-like-access",
+    "day": "2026-10-19"
+  },
+  {
+    "title": "Java sealed classes and exhaustive pattern matching",
+    "link": "https://neilmadden.blog/2026/04/24/java-sealed-classes-and-exhaustive-pattern-matching/",
+    "published": "2026-10-18T14:47:37Z",
+    "source": "Hacker News",
+    "summary": "",
+    "categories": [],
+    "author": "hnisjafx40",
+    "id": "https://neilmadden.blog/2026/04/24/java-sealed-classes-and-exhaustive-pattern-matching",
+    "day": "2026-10-18"
+  },
+  {
     "title": "RepRapMicron",
     "link": "https://github.com/VikOlliver/RepRapMicron/wiki",
     "published": "2026-10-18T13:48:48Z",
@@ -8,6 +158,30 @@
     "categories": [],
     "author": "RobotToaster",
     "id": "https://github.com/VikOlliver/RepRapMicron/wiki",
+    "day": "2026-10-18"
+  },
+  {
+    "title": "VAST开源实时世界模型EdenLive！单消费级显卡、720P超24FPS",
+    "link": "https://www.qbitai.com/2026/10/504136.html",
+    "published": "2026-10-18T11:49:49Z",
+    "source": "量子位",
+    "summary": "让人人都能自由创造并体验可交互世界",
+    "categories": [
+      "资讯"
+    ],
+    "author": "听雨",
+    "id": "https://qbitai.com/2026/10/504136.html",
+    "day": "2026-10-18"
+  },
+  {
+    "title": "Open MicroManipulator – A sub-micrometer 3D motion control plattform",
+    "link": "https://github.com/0x23/MicroManipulatorStepper",
+    "published": "2026-10-18T11:16:22Z",
+    "source": "Hacker News",
+    "summary": "",
+    "categories": [],
+    "author": "_Microft",
+    "id": "https://github.com/0x23/MicroManipulatorStepper",
     "day": "2026-10-18"
   },
   {
@@ -82,6 +256,17 @@
     "day": "2026-10-18"
   },
   {
+    "title": "Dogs seem to agree with humans that 'bouba' is round and 'kiki' is spiky",
+    "link": "https://www.sciencealert.com/dogs-seem-to-agree-with-humans-that-bouba-is-round-and-kiki-is-spiky",
+    "published": "2026-10-18T01:38:08Z",
+    "source": "Hacker News",
+    "summary": "",
+    "categories": [],
+    "author": "gmays",
+    "id": "https://sciencealert.com/dogs-seem-to-agree-with-humans-that-bouba-is-round-and-kiki-is-spiky",
+    "day": "2026-10-18"
+  },
+  {
     "title": "NY announces game ownership bill requiring ownership rather than licensing",
     "link": "https://www.tomshardware.com/video-games/new-york-rep-announces-game-ownership-bill-that-would-require-consumer-ownership-rather-than-sale-of-licenses-would-also-require-publishers-to-keep-the-game-functional-after-support-ends",
     "published": "2026-10-18T00:14:22Z",
@@ -90,6 +275,28 @@
     "categories": [],
     "author": "guiambros",
     "id": "https://tomshardware.com/video-games/new-york-rep-announces-game-ownership-bill-that-would-require-consumer-ownership-rather-than-sale-of-licenses-would-also-require-publishers-to-keep-the-game-functional-after-support-ends",
+    "day": "2026-10-18"
+  },
+  {
+    "title": "There's never been a better time to go into math (by: 3blue1brown) [video]",
+    "link": "https://www.youtube.com/watch?v=LKrwhjOI8Nc",
+    "published": "2026-10-17T23:26:35Z",
+    "source": "Hacker News",
+    "summary": "",
+    "categories": [],
+    "author": "mdp2021",
+    "id": "https://youtube.com/watch?v=LKrwhjOI8Nc",
+    "day": "2026-10-18"
+  },
+  {
+    "title": "I built a programming language that LLMs can't use",
+    "link": "https://blog.picheta.me/post/killswitch-lang/",
+    "published": "2026-10-17T22:26:47Z",
+    "source": "Hacker News",
+    "summary": "",
+    "categories": [],
+    "author": "dom96",
+    "id": "https://blog.picheta.me/post/killswitch-lang",
     "day": "2026-10-18"
   },
   {
@@ -686,6 +893,31 @@
     "day": "2026-10-16"
   },
   {
+    "title": "端侧跑通超千亿大模型！联想YOGA Pro 15 RTX Spark超级AIPC今日正式发售",
+    "link": "https://www.qbitai.com/2026/10/504116.html",
+    "published": "2026-10-16T13:48:10Z",
+    "source": "量子位",
+    "summary": "买AIPC就选联想YOGA。",
+    "categories": [
+      "资讯",
+      "联想"
+    ],
+    "author": "量子位的朋友们",
+    "id": "https://qbitai.com/2026/10/504116.html",
+    "day": "2026-10-16"
+  },
+  {
+    "title": "\"I'm on a war footing\": Terry Tao and the crisis in math",
+    "link": "https://www.nytimes.com/2026/10/16/us/math-ai-terence-tao.html",
+    "published": "2026-10-16T13:30:20Z",
+    "source": "Hacker News",
+    "summary": "https://archive.ph/bid95",
+    "categories": [],
+    "author": "vinipolicena",
+    "id": "https://nytimes.com/2026/10/16/us/math-ai-terence-tao.html",
+    "day": "2026-10-16"
+  },
+  {
     "title": "Replit’s CEO says the future of work is the ‘self-driving company’",
     "link": "https://techcrunch.com/2026/10/16/replits-ceo-says-the-future-of-work-is-the-self-driving-company/",
     "published": "2026-10-16T12:55:09Z",
@@ -992,38 +1224,6 @@
     "day": "2026-10-16"
   },
   {
-    "title": "Hegseth’s dubious low-T screening may flag up to 25 percent of the Army",
-    "link": "https://arstechnica.com/health/2026/10/hegseths-dubious-low-t-screening-may-flag-up-to-25-percent-of-the-army/",
-    "published": "2026-10-15T21:09:57Z",
-    "source": "Ars Technica",
-    "summary": "Medical experts explicitly recommend against blanket screenings.",
-    "categories": [
-      "Health",
-      "ARM",
-      "hegseth",
-      "Military"
-    ],
-    "author": "Beth Mole",
-    "id": "https://arstechnica.com/health/2026/10/hegseths-dubious-low-t-screening-may-flag-up-to-25-percent-of-the-army",
-    "day": "2026-10-16"
-  },
-  {
-    "title": "State of Supply Chain Sustainability Report finds corporate commitment at record high, but governance lags behind",
-    "link": "https://news.mit.edu/2026/state-of-supply-chain-sustainability-report-1015",
-    "published": "2026-10-15T21:00:00Z",
-    "source": "MIT News AI",
-    "summary": "MIT's Center for Transportation and Logistics finds sustainability commitments are strong, but governance gaps and external disruptions prevent execution.",
-    "categories": [
-      "Research",
-      "Supply chains",
-      "Sustainability",
-      "Cleaner industry"
-    ],
-    "author": "Mackenzie Berry | MIT Center for Transportation and Logistics",
-    "id": "https://news.mit.edu/2026/state-of-supply-chain-sustainability-report-1015",
-    "day": "2026-10-16"
-  },
-  {
     "title": "AI agents are coming to Rivian’s cars",
     "link": "https://techcrunch.com/2026/10/15/ai-agents-are-coming-to-rivians-cars/",
     "published": "2026-10-15T15:02:36Z",
@@ -1225,6 +1425,17 @@
     "day": "2026-10-15"
   },
   {
+    "title": "SIGSALY: Churchill's top secret hotline to the president",
+    "link": "https://www.iwm.org.uk/history/iwm/cwr/telephone",
+    "published": "2026-10-14T22:07:47Z",
+    "source": "Hacker News",
+    "summary": "",
+    "categories": [],
+    "author": "stmw",
+    "id": "https://iwm.org.uk/history/iwm/cwr/telephone",
+    "day": "2026-10-15"
+  },
+  {
     "title": "Tree Appreciator",
     "link": "https://simonwillison.net/2026/Oct/14/tree-appreciator/",
     "published": "2026-10-14T21:23:01Z",
@@ -1238,6 +1449,17 @@
     ],
     "author": null,
     "id": "https://simonwillison.net/2026/Oct/14/tree-appreciator",
+    "day": "2026-10-15"
+  },
+  {
+    "title": "I electrified my push scooter with a power drill",
+    "link": "https://eddieabbondanz.io/post/shop/drill-powered-scooter/",
+    "published": "2026-10-14T18:53:52Z",
+    "source": "Hacker News",
+    "summary": "",
+    "categories": [],
+    "author": "speckx",
+    "id": "https://eddieabbondanz.io/post/shop/drill-powered-scooter",
     "day": "2026-10-15"
   },
   {
@@ -1575,19 +1797,6 @@
     ],
     "author": null,
     "id": "https://simonwillison.net/2026/Oct/12/web-edit",
-    "day": "2026-10-12"
-  },
-  {
-    "title": "datasette-ports 0.4",
-    "link": "https://simonwillison.net/2026/Oct/12/datasette-ports/",
-    "published": "2026-10-12T04:57:07Z",
-    "source": "Simon Willison",
-    "summary": "Release: datasette-ports 0.4 My plugin for detecting and listing all Datasette instances on the current machine now works with the latest version, and displays the detected PID as well. Knowing the PID makes it easier…",
-    "categories": [
-      "datasette"
-    ],
-    "author": null,
-    "id": "https://simonwillison.net/2026/Oct/12/datasette-ports",
     "day": "2026-10-12"
   }
 ]
