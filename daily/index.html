@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="auto">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>今日精进 · 论文与新闻</title>
 <meta name="description" content="每天一份 AI 论文与科技新闻摘要，自动更新、离线可读、可安装到主屏幕。" />
 <link rel="manifest" href="./manifest.webmanifest" />
@@ -14,7 +14,7 @@
 <meta name="color-scheme" content="light dark" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-title" content="今日精进" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="format-detection" content="telephone=no" />
 <script>
   // Apply the saved theme before first paint to avoid a flash of the wrong colour.
@@ -29,6 +29,7 @@
 
 <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
 
+<!-- 第一屏的品牌区：随页面正常滚走 -->
 <header class="app-head">
   <div class="head-row">
     <div class="brand">
@@ -61,7 +62,10 @@
     <span class="stat"><b id="st-read">0</b><span>已读</span></span>
     <span class="stat"><b id="st-streak">1</b><span>连续打卡</span></span>
   </div>
+</header>
 
+<!-- 常驻栏：标签 + 搜索。sticky 定位、高度恒定，滚动时不改变任何布局 -->
+<div class="app-bar">
   <nav class="tabs" role="tablist" aria-label="内容分类">
     <button class="tab" role="tab" data-tab="papers" aria-selected="true">
       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5Z"/><path d="M4 20.5V5.5"/></svg>
@@ -94,27 +98,9 @@
       </div>
     </div>
   </div>
-
-  <div class="chips" id="keyword-chips" hidden></div>
-</header>
-
-<!-- 头部滚出视野后接替它的紧凑栏：固定定位，不参与文档流 -->
-<div class="compact-bar" id="compact-bar">
-  <nav class="tabs" role="tablist" aria-label="内容分类">
-    <button class="tab" role="tab" data-tab="papers" aria-selected="true">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5Z"/><path d="M4 20.5V5.5"/></svg>
-      论文
-    </button>
-    <button class="tab" role="tab" data-tab="news" aria-selected="false">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13v14H5.5A1.5 1.5 0 0 1 4 17.5Z"/><path d="M17 8h2.5A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5H17"/><path d="M7 8h7M7 11.5h7M7 15h4"/></svg>
-      新闻
-    </button>
-    <button class="tab" role="tab" data-tab="saved" aria-selected="false">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m12 4 2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 9.7l5.4-.8Z"/></svg>
-      收藏
-    </button>
-  </nav>
 </div>
+
+<div class="chips" id="keyword-chips" hidden></div>
 
 <main id="main" tabindex="-1">
   <div id="result-info" class="result-info" aria-live="polite"></div>

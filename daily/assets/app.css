@@ -180,43 +180,28 @@ svg { display: block; }
 }
 
 /* ---------------------------------------------------------------- 4. header */
-/* 头部整体随页面正常滚走，不再 sticky —— 这样它的高度变化不会影响文档流，
-   也就不会出现「折叠→内容位移→滚动位置变化→再触发折叠」的抖动循环。 */
+/* 第一屏的品牌区：普通文档流，随页面滚走。没有背景、没有定位花活。 */
 .app-head {
   position: relative;
-  z-index: 30;
-  padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px 10px;
-  background: var(--head-bg);
-  backdrop-filter: saturate(180%) blur(18px);
-  -webkit-backdrop-filter: saturate(180%) blur(18px);
-  border-bottom: 1px solid var(--border);
+  z-index: 10;
+  padding: 14px 16px 4px;
 }
 
-/* 头部滚出视野后接替它的紧凑标签栏：固定定位、不占文档流，进出只做位移与淡入 */
-.compact-bar {
-  position: fixed;
+/* 常驻栏：标签 + 搜索。
+   sticky + 高度恒定 —— 滚动时它只是「贴在顶部」，不改变任何元素的位置和尺寸，
+   所以不可能出现折叠/展开引起的位移或抖动，也不需要一行 JS。 */
+.app-bar {
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
   z-index: 40;
-  padding: calc(env(safe-area-inset-top, 0px) + 8px) 16px 8px;
+  padding: 8px 16px;
   background: var(--head-bg);
   backdrop-filter: saturate(180%) blur(18px);
   -webkit-backdrop-filter: saturate(180%) blur(18px);
   border-bottom: 1px solid var(--border);
-  box-shadow: 0 12px 28px -24px rgba(8, 10, 20, 0.7);
-  transform: translateY(-104%);
-  opacity: 0;
-  pointer-events: none;
-  will-change: transform;
-  transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease;
 }
-.compact-bar.is-visible {
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: auto;
-}
-.compact-bar .tabs { margin: 0; }
+.app-bar .tabs { margin: 0 auto; }
+.app-bar .toolbar { margin: 8px auto 0; }
 
 .head-row {
   display: flex;
@@ -440,7 +425,7 @@ svg { display: block; }
   gap: 7px;
   max-width: 760px;
   margin: 10px auto 0;
-  padding-bottom: 2px;
+  padding: 0 16px 2px;
   overflow-x: auto;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
@@ -871,5 +856,6 @@ html[data-theme="dark"] .toast { background: var(--surface-3); color: var(--text
 
 /* Installed / standalone tweaks */
 @media (display-mode: standalone) {
-  .app-head { padding-top: calc(env(safe-area-inset-top, 0px) + 8px); }
+  /* 常驻栏固定在顶部，安装后给状态栏留一点呼吸空间 */
+  .app-bar { padding-top: 10px; }
 }

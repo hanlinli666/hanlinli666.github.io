@@ -626,41 +626,9 @@
     });
   }
 
-  /* --------------------------------------------------- 滚动切换顶部栏 */
-
-  // 头部整体随页面滚走；当它完全离开视野，固定定位的紧凑标签栏滑下来接替。
-  // 关键点：两个栏位都不改变文档流高度，所以不存在「折叠→内容位移→滚回→再折叠」的抖动。
-  function wireHeaderCollapse() {
-    const head = $('.app-head');
-    const bar = $('#compact-bar');
-    if (!head || !bar) return;
-
-    let headHeight = head.offsetHeight;
-    let visible = false;
-
-    const apply = () => {
-      const y = window.scrollY || window.pageYOffset || 0;
-      // 留 40px 迟滞：在临界点附近来回滚动不会反复抽动
-      const next = visible ? y > headHeight - 40 : y > headHeight;
-      if (next === visible) return;
-      visible = next;
-      bar.classList.toggle('is-visible', visible);
-    };
-
-    const remeasure = () => {
-      headHeight = head.offsetHeight;
-      apply();
-    };
-
-    window.addEventListener('scroll', apply, { passive: true });
-    window.addEventListener('resize', remeasure, { passive: true });
-    window.addEventListener('orientationchange', remeasure);
-    // 关键词 chips 会在数据到达后才出现，头部高度会变，需要重新量一次
-    if ('ResizeObserver' in window) {
-      new ResizeObserver(remeasure).observe(head);
-    }
-    apply();
-  }
+  /* 顶部栏说明：
+     常驻栏（.app-bar）用 CSS sticky 贴在顶部，高度恒定、由浏览器负责，
+     不参与这里任何滚动计算，因此不需要 JS，也不会抖动。 */
 
   /* ----------------------------------------------------------------- events */
 
@@ -790,7 +758,6 @@
     applyThemeSilently();
     wireEvents();
     wireInstall();
-    wireHeaderCollapse();
     registerSW();
 
     const hash = location.hash.replace('#', '');

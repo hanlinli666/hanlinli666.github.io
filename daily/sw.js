@@ -3,7 +3,7 @@
    Bump VERSION when the shell changes so old caches are dropped.
    ========================================================================== */
 
-const VERSION = 'v3';
+const VERSION = 'v4';
 const SHELL_CACHE = `dl-shell-${VERSION}`;
 const DATA_CACHE = `dl-data-${VERSION}`;
 
@@ -119,4 +119,5 @@ self.addEventListener('fetch', (event) => {
 self.addEventListener('message', (event) => {
   if (event.data === 'skip-waiting') self.skipWaiting();
 });
+
 
