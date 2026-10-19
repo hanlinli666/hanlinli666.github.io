@@ -34,12 +34,14 @@ from common import (  # noqa: E402
     DATA_DIR,
     cn_day,
     http_post_json,
+    iso,
     load_local_env,
     log,
     now_utc,
     parse_dt,
     read_json,
     truncate,
+    write_json,
 )
 
 WEEK = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
@@ -49,8 +51,25 @@ MAX_NEWS = 5
 # The PWA lives in a sub-folder of the Pages site (e.g. hanlinli666.github.io/daily/).
 APP_SUBPATH = (os.environ.get("PWA_SUBPATH") or "daily").strip("/")
 
+# 推送成功后写下的标记，供 workflow 判断「今天是否已经发过」，避免补跑时重复推送。
+PUSH_MARKER = DATA_DIR / "last_push.json"
+
 
 # --------------------------------------------------------------------- helpers
+
+
+def record_push() -> None:
+    try:
+        write_json(
+            PUSH_MARKER,
+            {
+                "date": datetime.now(CN_TZ).strftime("%Y-%m-%d"),
+                "at": iso(now_utc()),
+                "url": resolve_pwa_url(),
+            },
+        )
+    except Exception as exc:  # noqa: BLE001 - 标记写不进去不该影响推送结果
+        log("feishu", f"could not write push marker: {exc}")
 
 
 def resolve_pwa_url() -> str:
@@ -288,6 +307,7 @@ def main() -> None:
     ok = code in (0, "0") and not (isinstance(ret, dict) and ret.get("code") not in (None, 0, "0"))
     if ok:
         log("feishu", "card delivered ✔")
+        record_push()
         return
 
     # Usually: wrong webhook, bot removed from the group, or 签名校验 mismatch.

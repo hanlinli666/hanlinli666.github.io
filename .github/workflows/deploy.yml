@@ -14,8 +14,14 @@ on:
         type: boolean
         default: false
   schedule:
-    # GitHub Actions 的 cron 使用 UTC：00:30 UTC = 北京时间 08:30
-    - cron: "30 0 * * *"
+    # GitHub Actions 的 cron 使用 UTC，北京时间 = UTC+8（无夏令时）
+    #   30 0  * * *  → 08:30  主时间
+    #   30 1  * * *  → 09:30  补跑（若 08:30 未成功）
+    #   30 2  * * *  → 10:30  再补一次
+    # 后面的补跑会先检查 daily/data/last_push.json：今天已推送过就直接跳过，
+    # 所以正常日子里只有 08:30 那次会真正干活。
+    # 之所以要做补跑：GitHub 的 schedule 是「尽力而为」，实测出现过整点被拖后数小时。
+    - cron: "30 0,1,2 * * *"
 
 # 允许 Pages 部署所需权限，并允许工作流提交每日数据
 permissions:
@@ -23,10 +29,11 @@ permissions:
   pages: write
   id-token: write
 
-# 同一时间只允许一次部署，取消正在进行的旧部署
+# 同一时间只允许一次部署。补跑机制依赖「上一次跑完再判断」，
+# 所以这里不取消正在进行的运行，避免 09:30 那次把 08:30 那次掐断。
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -50,8 +57,30 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: 检查 Secrets
+      - name: 判断今天是否已经推送过
+        id: gate
         if: ${{ github.event_name == 'schedule' || inputs.fetch == true }}
+        run: |
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            echo "手动触发：强制执行"
+            exit 0
+          fi
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import datetime, json, pathlib
+          tz = datetime.timezone(datetime.timedelta(hours=8))
+          today = datetime.datetime.now(tz).strftime("%Y-%m-%d")
+          try:
+              marker = json.loads(pathlib.Path("daily/data/last_push.json").read_text(encoding="utf-8"))
+          except Exception:
+              marker = {}
+          done = marker.get("date") == today
+          print(f"skip={'true' if done else 'false'}")
+          print(f"note={'今天 ' + today + ' 已推送过，跳过抓取' if done else '今天 ' + today + ' 尚未推送，开始抓取'}")
+          PY
+
+      - name: 检查 Secrets
+        if: ${{ (github.event_name == 'schedule' || inputs.fetch == true) && steps.gate.outputs.skip != 'true' }}
         env:
           FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
           BIGMODEL_API_KEY: ${{ secrets.BIGMODEL_API_KEY }}
@@ -65,7 +94,7 @@ jobs:
           fi
 
       - name: 抓取论文（arXiv）
-        if: ${{ github.event_name == 'schedule' || inputs.fetch == true }}
+        if: ${{ (github.event_name == 'schedule' || inputs.fetch == true) && steps.gate.outputs.skip != 'true' }}
         env:
           BIGMODEL_API_KEY: ${{ secrets.BIGMODEL_API_KEY }}
           BIGMODEL_MODEL: ${{ vars.BIGMODEL_MODEL }}
@@ -77,11 +106,24 @@ jobs:
         run: python scripts/daily/fetch_papers.py
 
       - name: 抓取新闻（RSS）
-        if: ${{ github.event_name == 'schedule' || inputs.fetch == true }}
+        if: ${{ (github.event_name == 'schedule' || inputs.fetch == true) && steps.gate.outputs.skip != 'true' }}
         run: python scripts/daily/fetch_news.py
 
+      - name: 推送飞书卡片
+        if: ${{ (github.event_name == 'schedule' || (inputs.fetch == true && inputs.skip_feishu != true)) && steps.gate.outputs.skip != 'true' }}
+        # 飞书挂了不应该影响站点发布；失败时不会写 last_push.json，
+        # 09:30 / 10:30 的补跑会自动重试。
+        continue-on-error: true
+        env:
+          FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
+          FEISHU_SIGNKEY: ${{ secrets.FEISHU_SIGNKEY }}
+          PWA_URL: ${{ vars.PWA_URL }}
+        run: python scripts/daily/send_feishu.py
+
+      # 放在推送之后：推送成功会写下 last_push.json，两者一起提交，
+      # 这样「数据已更新」和「卡片已发送」在仓库里始终是一致的。
       - name: 提交每日数据
-        if: ${{ github.event_name == 'schedule' || inputs.fetch == true }}
+        if: ${{ (github.event_name == 'schedule' || inputs.fetch == true) && steps.gate.outputs.skip != 'true' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -93,14 +135,6 @@ jobs:
             git pull --rebase --autostash || true
             git push || echo "::warning::数据推送失败，本次部署仍使用本地生成的数据"
           fi
-
-      - name: 推送飞书卡片
-        if: ${{ (github.event_name == 'schedule' || (inputs.fetch == true && inputs.skip_feishu != true)) }}
-        env:
-          FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
-          FEISHU_SIGNKEY: ${{ secrets.FEISHU_SIGNKEY }}
-          PWA_URL: ${{ vars.PWA_URL }}
-        run: python scripts/daily/send_feishu.py
 
       # ───────────────────────── 博客：构建与发布 ─────────────────────────
       - name: 扫描 assets/ 生成 manifest.json
@@ -129,6 +163,8 @@ jobs:
         if: ${{ always() && (github.event_name == 'schedule' || inputs.fetch == true) }}
         run: |
           echo "### 今日摘要" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 本次触发：\`${{ github.event_name }}\`（skip=${{ steps.gate.outputs.skip }}，${{ steps.gate.outputs.note }}）" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
           python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
           import json, pathlib
