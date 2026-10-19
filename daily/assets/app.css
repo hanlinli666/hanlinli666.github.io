@@ -180,63 +180,43 @@ svg { display: block; }
 }
 
 /* ---------------------------------------------------------------- 4. header */
+/* 头部整体随页面正常滚走，不再 sticky —— 这样它的高度变化不会影响文档流，
+   也就不会出现「折叠→内容位移→滚动位置变化→再触发折叠」的抖动循环。 */
 .app-head {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 30;
   padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px 10px;
   background: var(--head-bg);
   backdrop-filter: saturate(180%) blur(18px);
   -webkit-backdrop-filter: saturate(180%) blur(18px);
   border-bottom: 1px solid var(--border);
-  transition: padding 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease;
 }
 
-/* 向下滚动后只保留「论文 / 新闻 / 收藏」这一栏，其余部分收起。
-   每个可收起块单独做 max-height 过渡，max-height 取略大于实际高度，
-   避免过渡前半段「看不见变化」。
-   overflow:hidden 只在过渡的 300ms 内生效，否则会把排序下拉菜单裁掉。 */
-.head-row,
-.stats,
-.toolbar,
-.chips {
-  opacity: 1;
-  transition: max-height 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.18s ease, margin-top 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-    padding 0.28s ease;
-}
-.head-row { max-height: 56px; }
-.stats { max-height: 72px; }
-.toolbar { max-height: 48px; }
-.chips { max-height: 42px; }
-
-.app-head.is-animating .head-row,
-.app-head.is-animating .stats,
-.app-head.is-animating .toolbar,
-.app-head.is-animating .chips { overflow: hidden; }
-
-.tabs {
-  transition: margin-top 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.28s ease;
-}
-
-.app-head.is-compact {
-  padding-top: calc(env(safe-area-inset-top, 0px) + 7px);
-  padding-bottom: 7px;
-  box-shadow: 0 10px 26px -20px rgba(8, 10, 20, 0.55);
-}
-.app-head.is-compact .head-row,
-.app-head.is-compact .stats,
-.app-head.is-compact .toolbar,
-.app-head.is-compact .chips {
-  max-height: 0;
+/* 头部滚出视野后接替它的紧凑标签栏：固定定位、不占文档流，进出只做位移与淡入 */
+.compact-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  padding: calc(env(safe-area-inset-top, 0px) + 8px) 16px 8px;
+  background: var(--head-bg);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 12px 28px -24px rgba(8, 10, 20, 0.7);
+  transform: translateY(-104%);
   opacity: 0;
-  margin-top: 0;
-  padding-top: 0;
-  padding-bottom: 0;
   pointer-events: none;
+  will-change: transform;
+  transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease;
 }
-.app-head.is-compact .tabs { margin-top: 0; }
+.compact-bar.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.compact-bar .tabs { margin: 0; }
 
 .head-row {
   display: flex;

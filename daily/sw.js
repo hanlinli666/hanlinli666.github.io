@@ -1,9 +1,9 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    今日精进 — service worker
    Bump VERSION when the shell changes so old caches are dropped.
    ========================================================================== */
 
-const VERSION = 'v2';
+const VERSION = 'v3';
 const SHELL_CACHE = `dl-shell-${VERSION}`;
 const DATA_CACHE = `dl-data-${VERSION}`;
 
@@ -119,3 +119,4 @@ self.addEventListener('fetch', (event) => {
 self.addEventListener('message', (event) => {
   if (event.data === 'skip-waiting') self.skipWaiting();
 });
+

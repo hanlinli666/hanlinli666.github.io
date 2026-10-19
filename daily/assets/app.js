@@ -626,41 +626,39 @@
     });
   }
 
-  /* --------------------------------------------------- 滚动折叠顶部栏 */
+  /* --------------------------------------------------- 滚动切换顶部栏 */
 
-  // 向下滚过一屏就只留「论文 / 新闻 / 收藏」，向上滚回来再展开。
-  // 用两个阈值（收起 160 / 展开 110）避免在临界点来回抖动。
+  // 头部整体随页面滚走；当它完全离开视野，固定定位的紧凑标签栏滑下来接替。
+  // 关键点：两个栏位都不改变文档流高度，所以不存在「折叠→内容位移→滚回→再折叠」的抖动。
   function wireHeaderCollapse() {
     const head = $('.app-head');
-    if (!head) return;
-    const COLLAPSE_AT = 160;
-    const EXPAND_AT = 110;
-    let ticking = false;
-    let animTimer = 0;
+    const bar = $('#compact-bar');
+    if (!head || !bar) return;
 
-    const setCompact = (compact) => {
-      if (head.classList.contains('is-compact') === compact) return;
-      head.classList.add('is-animating');
-      head.classList.toggle('is-compact', compact);
-      window.clearTimeout(animTimer);
-      animTimer = window.setTimeout(() => head.classList.remove('is-animating'), 320);
-    };
+    let headHeight = head.offsetHeight;
+    let visible = false;
 
     const apply = () => {
-      ticking = false;
       const y = window.scrollY || window.pageYOffset || 0;
-      if (y > COLLAPSE_AT) setCompact(true);
-      else if (y < EXPAND_AT) setCompact(false);
+      // 留 40px 迟滞：在临界点附近来回滚动不会反复抽动
+      const next = visible ? y > headHeight - 40 : y > headHeight;
+      if (next === visible) return;
+      visible = next;
+      bar.classList.toggle('is-visible', visible);
     };
 
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      window.requestAnimationFrame(apply);
+    const remeasure = () => {
+      headHeight = head.offsetHeight;
+      apply();
     };
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
+    window.addEventListener('scroll', apply, { passive: true });
+    window.addEventListener('resize', remeasure, { passive: true });
+    window.addEventListener('orientationchange', remeasure);
+    // 关键词 chips 会在数据到达后才出现，头部高度会变，需要重新量一次
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(remeasure).observe(head);
+    }
     apply();
   }
 

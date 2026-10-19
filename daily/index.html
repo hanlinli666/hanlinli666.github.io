@@ -98,6 +98,24 @@
   <div class="chips" id="keyword-chips" hidden></div>
 </header>
 
+<!-- 头部滚出视野后接替它的紧凑栏：固定定位，不参与文档流 -->
+<div class="compact-bar" id="compact-bar">
+  <nav class="tabs" role="tablist" aria-label="内容分类">
+    <button class="tab" role="tab" data-tab="papers" aria-selected="true">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5Z"/><path d="M4 20.5V5.5"/></svg>
+      论文
+    </button>
+    <button class="tab" role="tab" data-tab="news" aria-selected="false">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13v14H5.5A1.5 1.5 0 0 1 4 17.5Z"/><path d="M17 8h2.5A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5H17"/><path d="M7 8h7M7 11.5h7M7 15h4"/></svg>
+      新闻
+    </button>
+    <button class="tab" role="tab" data-tab="saved" aria-selected="false">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m12 4 2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 9.7l5.4-.8Z"/></svg>
+      收藏
+    </button>
+  </nav>
+</div>
+
 <main id="main" tabindex="-1">
   <div id="result-info" class="result-info" aria-live="polite"></div>
   <div id="list" class="list"></div>
