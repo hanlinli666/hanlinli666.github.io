@@ -626,6 +626,44 @@
     });
   }
 
+  /* --------------------------------------------------- 滚动折叠顶部栏 */
+
+  // 向下滚过一屏就只留「论文 / 新闻 / 收藏」，向上滚回来再展开。
+  // 用两个阈值（收起 160 / 展开 110）避免在临界点来回抖动。
+  function wireHeaderCollapse() {
+    const head = $('.app-head');
+    if (!head) return;
+    const COLLAPSE_AT = 160;
+    const EXPAND_AT = 110;
+    let ticking = false;
+    let animTimer = 0;
+
+    const setCompact = (compact) => {
+      if (head.classList.contains('is-compact') === compact) return;
+      head.classList.add('is-animating');
+      head.classList.toggle('is-compact', compact);
+      window.clearTimeout(animTimer);
+      animTimer = window.setTimeout(() => head.classList.remove('is-animating'), 320);
+    };
+
+    const apply = () => {
+      ticking = false;
+      const y = window.scrollY || window.pageYOffset || 0;
+      if (y > COLLAPSE_AT) setCompact(true);
+      else if (y < EXPAND_AT) setCompact(false);
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(apply);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    apply();
+  }
+
   /* ----------------------------------------------------------------- events */
 
   function wireEvents() {
@@ -754,6 +792,7 @@
     applyThemeSilently();
     wireEvents();
     wireInstall();
+    wireHeaderCollapse();
     registerSW();
 
     const hash = location.hash.replace('#', '');

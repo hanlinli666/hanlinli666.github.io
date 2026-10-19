@@ -3,7 +3,7 @@
    Bump VERSION when the shell changes so old caches are dropped.
    ========================================================================== */
 
-const VERSION = 'v1';
+const VERSION = 'v2';
 const SHELL_CACHE = `dl-shell-${VERSION}`;
 const DATA_CACHE = `dl-data-${VERSION}`;
 
