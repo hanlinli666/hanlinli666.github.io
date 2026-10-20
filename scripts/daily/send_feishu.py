@@ -54,22 +54,55 @@ APP_SUBPATH = (os.environ.get("PWA_SUBPATH") or "daily").strip("/")
 # 推送成功后写下的标记，供 workflow 判断「今天是否已经发过」，避免补跑时重复推送。
 PUSH_MARKER = DATA_DIR / "last_push.json"
 
+# 计划送达时间（北京时间）。GitHub 自己的 schedule 经常被拖后几个小时，
+# 超过计划时间就在卡片底部如实写上「实际送达 HH:MM」，一眼能看出是调度慢还是脚本慢。
+PLANNED_HHMM = (os.environ.get("PUSH_DEADLINE") or "08:40").strip()
+# 迟到多少分钟以内算正常（抓取本身要几分钟，不该每次都标注）。
+GRACE_MINUTES = int(os.environ.get("PUSH_GRACE_MINUTES") or "20")
+
 
 # --------------------------------------------------------------------- helpers
 
 
-def record_push() -> None:
+def record_push(late_minutes: int = 0) -> None:
     try:
         write_json(
             PUSH_MARKER,
             {
                 "date": datetime.now(CN_TZ).strftime("%Y-%m-%d"),
                 "at": iso(now_utc()),
+                "late_min": late_minutes,
+                "trigger": os.environ.get("GITHUB_EVENT_NAME") or "local",
                 "url": resolve_pwa_url(),
             },
         )
     except Exception as exc:  # noqa: BLE001 - 标记写不进去不该影响推送结果
         log("feishu", f"could not write push marker: {exc}")
+
+
+def planned_deadline(day: datetime) -> datetime | None:
+    try:
+        hour, minute = (int(part) for part in PLANNED_HHMM.split(":")[:2])
+    except (TypeError, ValueError):
+        return None
+    return day.replace(hour=hour, minute=minute, second=0, microsecond=0)
+
+
+def minutes_late(day: datetime) -> int:
+    """How many minutes past the planned delivery time (0 when on time)."""
+    deadline = planned_deadline(day)
+    if deadline is None:
+        return 0
+    return max(0, int((day - deadline).total_seconds() // 60))
+
+
+def human_late(minutes: int) -> str:
+    hours, rest = divmod(minutes, 60)
+    if hours and rest:
+        return f"{hours} 小时 {rest} 分"
+    if hours:
+        return f"{hours} 小时"
+    return f"{rest} 分钟"
 
 
 def resolve_pwa_url() -> str:
@@ -241,12 +274,14 @@ def build_card() -> dict:
         }
     )
 
-    footer = "由 GitHub Actions 每日 08:30（北京时间）自动推送"
+    footer = "每天早上（北京时间）由 GitHub Actions 自动推送"
     ai_model = (meta.get("papers") or {}).get("ai_model")
     if ai_ready and ai_model:
         footer += f" · 中文摘要由 {ai_model} 生成"
     elif not ai_ready:
         footer += " · 未配置 AI 摘要，中文摘要将以英文原文呈现"
+    if minutes_late(today_dt) > GRACE_MINUTES:
+        footer += f" · 实际送达 {today_dt:%H:%M}，比计划晚 {human_late(minutes_late(today_dt))}"
     elements.append(
         {"tag": "note", "elements": [{"tag": "plain_text", "content": footer}]}
     )
@@ -307,7 +342,11 @@ def main() -> None:
     ok = code in (0, "0") and not (isinstance(ret, dict) and ret.get("code") not in (None, 0, "0"))
     if ok:
         log("feishu", "card delivered ✔")
-        record_push()
+        late = minutes_late(datetime.now(CN_TZ))
+        if late > GRACE_MINUTES:
+            log("feishu", f"delivered {human_late(late)} after the {PLANNED_HHMM} plan "
+                          f"(GitHub schedule delay - not the script)")
+        record_push(late)
         return
 
     # Usually: wrong webhook, bot removed from the group, or 签名校验 mismatch.

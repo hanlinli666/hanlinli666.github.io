@@ -3,25 +3,44 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+
+  # 手动触发；也可以用 REST API 从外面触发（Actions 页面 → Run workflow 等价）：
+  #
+  #   POST https://api.github.com/repos/hanlinli666/hanlinli666.github.io/actions/workflows/deploy.yml/dispatches
+  #   { "ref": "main" }
+  #
+  # 准点主通道是下面的 schedule「提前起跑 + 等到 07:50」，这个 dispatch 只用于手动补跑。
   workflow_dispatch:
     inputs:
       fetch:
         description: "先抓取今日论文与新闻（并推送飞书），再部署"
+        type: boolean
+        default: true
+      force:
+        description: "忽略「今天已推送过」的标记，强制再推一次"
         type: boolean
         default: false
       skip_feishu:
         description: "抓取数据但不推送飞书"
         type: boolean
         default: false
+
   schedule:
-    # GitHub Actions 的 cron 使用 UTC，北京时间 = UTC+8（无夏令时）
-    #   30 0  * * *  → 08:30  主时间
-    #   30 1  * * *  → 09:30  补跑（若 08:30 未成功）
-    #   30 2  * * *  → 10:30  再补一次
-    # 后面的补跑会先检查 daily/data/last_push.json：今天已推送过就直接跳过，
-    # 所以正常日子里只有 08:30 那次会真正干活。
-    # 之所以要做补跑：GitHub 的 schedule 是「尽力而为」，实测出现过整点被拖后数小时。
-    - cron: "30 0,1,2 * * *"
+    # ── 为什么定时是 19:30 UTC（北京 03:30），而不是 00:30 UTC（北京 08:30）──
+    # GitHub 的 schedule 不是闹钟：实测 00:30 UTC 的触发要拖到 04:56 UTC 才真正开始
+    # （晚 4h26m），于是卡片 13:00 才到。延迟是「固定的几个小时」，那就提前几个小时
+    # 起来，进作业后先等到 07:50（北京）再干活：
+    #
+    #   GitHub 延迟 4.5h  → 08:00 起跑 → 08:05 送达   ✔ 正常情况
+    #   GitHub 哪天变准点 → 03:30 起跑 → 等到 07:50 → 07:55 送达   ✔
+    #   GitHub 延迟变长   → 相应变晚（把 19:30 再往前挪，例如 18:30 或 17:30）
+    #
+    # 04:30 UTC（北京 12:30）是最后一次兜底：只在 19:30 那次被 GitHub 整个丢掉时才起作用。
+    #
+    # 之前「一天打三枪（30 0,1,2 * * *）」没用：延迟对三枪一视同仁，最早那枪还是 13:00；
+    # 而且 concurrency 组里只允许一个 pending，后面的枪会把前面排队的那次取消掉。
+    - cron: "30 19 * * *"
+    - cron: "30 4 * * *"
 
 # 允许 Pages 部署所需权限，并允许工作流提交每日数据
 permissions:
@@ -30,7 +49,7 @@ permissions:
   id-token: write
 
 # 同一时间只允许一次部署。补跑机制依赖「上一次跑完再判断」，
-# 所以这里不取消正在进行的运行，避免 09:30 那次把 08:30 那次掐断。
+# 所以这里不取消正在进行的运行，避免后一次把前一次掐断。
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -44,43 +63,98 @@ jobs:
         with:
           fetch-depth: 0
 
+      # 03:30 起跑时不要抢跑：等到 07:50（北京）再抓取，否则卡片会在凌晨发出去。
+      # 已经是 07:50 之后才起跑（正常情况下 GitHub 会拖 4 个多小时）就一秒都不等。
+      - name: 等到不早于 07:50（北京）
+        if: github.event_name == 'schedule'
+        run: |
+          python3 - <<'PY'
+          import datetime, time
+
+          tz = datetime.timezone(datetime.timedelta(hours=8))
+          now = datetime.datetime.now(tz)
+          target = now.replace(hour=7, minute=50, second=0, microsecond=0)
+          wait = min(max((target - now).total_seconds(), 0), 5 * 3600)
+          if wait < 60:
+              print(f"现在 {now:%H:%M}（北京），已过 07:50，直接开始", flush=True)
+          else:
+              print(f"现在 {now:%H:%M}（北京），等到 07:50 再开始（{wait / 60:.0f} 分钟）", flush=True)
+              time.sleep(wait)
+          PY
+
+      # 睡了几个小时的话，手里是最初那次 checkout 的代码；同步一次，免得用旧提交部署站点。
+      - name: 同步主分支
+        if: github.event_name == 'schedule'
+        run: git pull --ff-only --autostash || echo "::warning::主分支同步失败，继续使用当前提交"
+
+      # ── 先判断这次要做什么：抓取？推送？还是只部署 ──
+      # 所有后续步骤都看这里的 output，避免同一套条件在 8 个 if 里重复写错。
+      - name: 判断本次要做什么
+        id: gate
+        env:
+          EVENT: ${{ github.event_name }}
+          WANT_FETCH: ${{ inputs.fetch }}
+          FORCE: ${{ inputs.force }}
+          SKIP_FEISHU: ${{ inputs.skip_feishu }}
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import datetime, json, os, pathlib
+
+          tz = datetime.timezone(datetime.timedelta(hours=8))
+          now = datetime.datetime.now(tz)
+          today = now.strftime("%Y-%m-%d")
+
+          def flag(name: str, default: bool) -> bool:
+              raw = (os.environ.get(name) or "").strip().lower()
+              return default if not raw else raw == "true"
+
+          event = (os.environ.get("EVENT") or "").strip()
+          force = flag("FORCE", False)
+          skip_feishu = flag("SKIP_FEISHU", False)
+
+          try:
+              marker = json.loads(pathlib.Path("daily/data/last_push.json").read_text(encoding="utf-8"))
+          except Exception:
+              marker = {}
+          pushed_today = marker.get("date") == today
+
+          if event == "push":
+              fetch, push = False, False
+              note = "push 触发：只构建部署，不抓取"
+          elif not flag("WANT_FETCH", True):
+              fetch, push = False, False
+              note = "手动触发但没勾「抓取」：只构建部署"
+          else:
+              fetch = True
+              if pushed_today and force:
+                  push, note = True, f"今天（{today}）已推过，但勾了 force，强制再推一次"
+              elif pushed_today:
+                  push, note = False, f"今天（{today}）已经推送过，跳过抓取与推送"
+              elif skip_feishu:
+                  push, note = False, "按要求只抓取、不推送飞书"
+              else:
+                  push, note = True, f"今天（{today}）还没有推送过，开始抓取"
+
+          print(f"fetch={'true' if fetch else 'false'}")
+          print(f"push={'true' if push else 'false'}")
+          print(f"note={note}")
+          print(f"clock={now.strftime('%Y-%m-%d %H:%M:%S')} (北京时间)")
+          PY
+
       - name: 安装 Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
       # ───────────────────────── 每日精进：数据抓取 ─────────────────────────
-      # 只在「定时」或「手动勾选 fetch」时执行，日常推文不会重复抓取。
       - name: 安装 Python
-        if: ${{ github.event_name == 'schedule' || inputs.fetch == true }}
+        if: steps.gate.outputs.fetch == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: 判断今天是否已经推送过
-        id: gate
-        if: ${{ github.event_name == 'schedule' || inputs.fetch == true }}
-        run: |
-          if [ "${{ github.event_name }}" != "schedule" ]; then
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-            echo "手动触发：强制执行"
-            exit 0
-          fi
-          python - <<'PY' >> "$GITHUB_OUTPUT"
-          import datetime, json, pathlib
-          tz = datetime.timezone(datetime.timedelta(hours=8))
-          today = datetime.datetime.now(tz).strftime("%Y-%m-%d")
-          try:
-              marker = json.loads(pathlib.Path("daily/data/last_push.json").read_text(encoding="utf-8"))
-          except Exception:
-              marker = {}
-          done = marker.get("date") == today
-          print(f"skip={'true' if done else 'false'}")
-          print(f"note={'今天 ' + today + ' 已推送过，跳过抓取' if done else '今天 ' + today + ' 尚未推送，开始抓取'}")
-          PY
-
       - name: 检查 Secrets
-        if: ${{ (github.event_name == 'schedule' || inputs.fetch == true) && steps.gate.outputs.skip != 'true' }}
+        if: steps.gate.outputs.fetch == 'true'
         env:
           FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
           BIGMODEL_API_KEY: ${{ secrets.BIGMODEL_API_KEY }}
@@ -94,7 +168,7 @@ jobs:
           fi
 
       - name: 抓取论文（arXiv）
-        if: ${{ (github.event_name == 'schedule' || inputs.fetch == true) && steps.gate.outputs.skip != 'true' }}
+        if: steps.gate.outputs.fetch == 'true'
         env:
           BIGMODEL_API_KEY: ${{ secrets.BIGMODEL_API_KEY }}
           BIGMODEL_MODEL: ${{ vars.BIGMODEL_MODEL }}
@@ -106,24 +180,27 @@ jobs:
         run: python scripts/daily/fetch_papers.py
 
       - name: 抓取新闻（RSS）
-        if: ${{ (github.event_name == 'schedule' || inputs.fetch == true) && steps.gate.outputs.skip != 'true' }}
+        if: steps.gate.outputs.fetch == 'true'
         run: python scripts/daily/fetch_news.py
 
       - name: 推送飞书卡片
-        if: ${{ (github.event_name == 'schedule' || (inputs.fetch == true && inputs.skip_feishu != true)) && steps.gate.outputs.skip != 'true' }}
+        if: steps.gate.outputs.push == 'true'
         # 飞书挂了不应该影响站点发布；失败时不会写 last_push.json，
-        # 09:30 / 10:30 的补跑会自动重试。
+        # 下一次兜底运行会自动重试。
         continue-on-error: true
         env:
           FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
           FEISHU_SIGNKEY: ${{ secrets.FEISHU_SIGNKEY }}
           PWA_URL: ${{ vars.PWA_URL }}
+          # 计划送达时间（北京时间）。超过后卡片底部会如实写明「实际送达 HH:MM」，
+          # 这样一眼就能看出是调度慢还是脚本慢。
+          PUSH_DEADLINE: "08:40"
         run: python scripts/daily/send_feishu.py
 
       # 放在推送之后：推送成功会写下 last_push.json，两者一起提交，
       # 这样「数据已更新」和「卡片已发送」在仓库里始终是一致的。
       - name: 提交每日数据
-        if: ${{ (github.event_name == 'schedule' || inputs.fetch == true) && steps.gate.outputs.skip != 'true' }}
+        if: steps.gate.outputs.fetch == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -160,13 +237,16 @@ jobs:
           path: dist
 
       - name: 汇总
-        if: ${{ always() && (github.event_name == 'schedule' || inputs.fetch == true) }}
+        if: always()
         run: |
-          echo "### 今日摘要" >> "$GITHUB_STEP_SUMMARY"
+          echo "### 本次运行" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "- 本次触发：\`${{ github.event_name }}\`（skip=${{ steps.gate.outputs.skip }}，${{ steps.gate.outputs.note }}）" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 触发方式：\`${{ github.event_name }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 判断：${{ steps.gate.outputs.note }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 开始时间：${{ steps.gate.outputs.clock }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 抓取：${{ steps.gate.outputs.fetch }} ｜ 推送：${{ steps.gate.outputs.push }}" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
-          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
           import json, pathlib
           p = pathlib.Path("daily/data/meta.json")
           meta = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
@@ -174,8 +254,13 @@ jobs:
           news = meta.get("news", {})
           print(f"- 论文：{papers.get('count', 0)} 篇（今日新增 {papers.get('new_today', 0)}），AI 摘要：{'已开启' if papers.get('ai_summary') else '未开启'}")
           print(f"- 新闻：{news.get('count', 0)} 条（今日 {news.get('new_today', 0)}），来源 {len(news.get('sources', []))} 个")
-          print(f"- 生成时间：{papers.get('generated_at', '-')} / {news.get('generated_at', '-')}")
-          print(f"- PWA：https://hanlinli666.github.io/daily/")
+          print(f"- 数据生成于：{papers.get('generated_at', '-')} / {news.get('generated_at', '-')}")
+
+          marker = pathlib.Path("daily/data/last_push.json")
+          if marker.exists():
+              m = json.loads(marker.read_text(encoding="utf-8"))
+              print(f"- 上次飞书推送：{m.get('date', '-')} {m.get('at', '-')}（延迟 {m.get('late_min', 0)} 分钟）")
+          print("- PWA：https://hanlinli666.github.io/daily/")
           PY
 
   deploy:
