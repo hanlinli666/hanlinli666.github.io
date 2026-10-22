@@ -61,7 +61,7 @@ jobs:
         env:
           BIGMODEL_API_KEY: ${{ secrets.BIGMODEL_API_KEY }}
           NEWS_LLM_MODEL: "glm-4.7-flash"
-          NEWS_TRANSLATE_LIMIT: "80"
+          NEWS_TRANSLATE_LIMIT: "25"
           NEWS_TRANSLATE_BATCH: "25"
           NEWS_LLM_BUDGET_MIN: "6"
           NEWS_SUMMARY_CHARS: "260"

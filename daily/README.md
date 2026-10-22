@@ -178,7 +178,7 @@ curl -X POST -H "Authorization: Bearer <TOKEN>" -H "Accept: application/vnd.gith
 | 推送时间 | `.github/workflows/deploy.yml` 的 `cron`（**UTC**） |
 | 每天抓多少论文 | `PAPERS_MAX_RESULTS`（默认 220）/ `PAPERS_LOOKBACK_DAYS`（默认 4 天） |
 | 新闻回看 / 保留 / 每天条数 | `NEWS_LOOKBACK_DAYS`(3) / `NEWS_HISTORY_DAYS`(7) / `NEWS_PER_DAY_LIMIT`(150) |
-| 每轮翻译多少条标题 | `NEWS_TRANSLATE_LIMIT`（默认 80，命中缓存不重复）、`NEWS_TRANSLATE_BATCH`(25) |
+| 每轮翻译多少条标题 | `NEWS_TRANSLATE_LIMIT`（默认 25，命中缓存不重复）、`NEWS_TRANSLATE_BATCH`(25) |
 | 事件摘要字数 | `NEWS_SUMMARY_CHARS`（默认 260，直接截取原文摘要） |
 | 无摘要时补正文 | `NEWS_BODY_CHARS`（默认 200，抓原文正文前 200 字）、`NEWS_BODY_LIMIT`（默认 12 篇/轮） |
 | 事件合并松紧 | `NEWS_EVENT_SIMILARITY`（默认 0.5，调高更保守） |

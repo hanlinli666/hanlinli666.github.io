@@ -55,7 +55,7 @@ EVENTS_FILE = DATA_DIR / "events.json"
 STATS_FILE = DATA_DIR / "stats.json"
 CACHE_FILE = CACHE_DIR / "news_llm.json"
 
-TRANSLATE_LIMIT = int(os.environ.get("NEWS_TRANSLATE_LIMIT", "80"))
+TRANSLATE_LIMIT = int(os.environ.get("NEWS_TRANSLATE_LIMIT", "25"))
 TRANSLATE_BATCH = int(os.environ.get("NEWS_TRANSLATE_BATCH", "25"))
 EVENT_DAYS = int(os.environ.get("NEWS_EVENT_DAYS", "4"))
 SIMILARITY = float(os.environ.get("NEWS_EVENT_SIMILARITY", "0.5"))
@@ -131,7 +131,8 @@ def build_payload(batch: list[dict]) -> str:
     return json.dumps(rows, ensure_ascii=False)
 
 
-def call_llm(llm: dict, batch: list[dict], drop_response_format: bool = False) -> dict[str, str]:
+def call_llm(llm: dict, batch: list[dict], drop_response_format: bool = False) -> dict[str, str] | None:
+    """返回 id→中文标题；被限流且重试无果时返回 None（本轮别再继续撞墙）。"""
     payload = {
         "model": llm["model"],
         "messages": [
@@ -148,7 +149,7 @@ def call_llm(llm: dict, batch: list[dict], drop_response_format: bool = False) -
         payload["thinking"] = {"type": "disabled"}
 
     response = None
-    for attempt in range(1, 5):
+    for attempt in range(1, 6):
         try:
             response = http_post_json(llm["url"], payload, timeout=120, retries=1,
                                       headers={"Authorization": f"Bearer {llm['key']}"})
@@ -156,8 +157,9 @@ def call_llm(llm: dict, batch: list[dict], drop_response_format: bool = False) -
         except Exception as exc:  # noqa: BLE001
             message = str(exc)
             if "429" in message or "1305" in message:
-                delay = 8 * attempt
-                log("llm", f"rate limited, retry in {delay}s ({attempt}/4)")
+                # 1305 是模型侧「访问量过大」，实测 8~24s 退避后第 3~4 次能成功
+                delay = 10 * attempt
+                log("llm", f"rate limited ({message[:70]}), retry in {delay}s ({attempt}/5)")
                 time.sleep(delay)
                 continue
             if ("response_format" in message or "400" in message) and not drop_response_format:
@@ -165,8 +167,8 @@ def call_llm(llm: dict, batch: list[dict], drop_response_format: bool = False) -
             log("llm", f"call failed: {message[:160]}")
             return {}
     if response is None:
-        log("llm", "giving up after retries")
-        return {}
+        log("llm", "still rate limited - stop this round, rest goes next run")
+        return None
 
     try:
         content = response["choices"][0]["message"].get("content") or ""
@@ -202,7 +204,10 @@ def translate_titles(items: list[dict], llm: dict | None) -> tuple[dict[str, dic
         and not has_cjk(item.get("title"))
         and not (cache.get(item["id"]) or {}).get("title_zh")
         and (parse_dt(item.get("published")) or now_utc()) >= cutoff
-    ][:TRANSLATE_LIMIT]
+    ]
+    # 先把最新的标题翻出来：限流时首页卡片优先变成中文
+    todo.sort(key=lambda item: item.get("published") or "", reverse=True)
+    todo = todo[:TRANSLATE_LIMIT]
     if not llm or not todo:
         return cache, 0
 
@@ -216,12 +221,16 @@ def translate_titles(items: list[dict], llm: dict | None) -> tuple[dict[str, dic
             log("llm", f"time budget {LLM_BUDGET_MIN:.0f}min reached - the rest runs next time")
             break
         result = call_llm(llm, batch)
+        if result is None:
+            # 免费模型限流：本轮不再发请求，已翻好的先落盘，剩下的下一轮再来
+            break
         for item in batch:
             title = result.get(item["id"])
             if not title:
                 continue
             cache[item["id"]] = {"title_zh": title, "model": llm["model"], "at": iso(now_utc())}
             done += 1
+        write_json(CACHE_FILE, cache)
         time.sleep(0.5)
     write_json(CACHE_FILE, cache)
     log("llm", f"translated {done}/{len(todo)} titles")
@@ -383,13 +392,18 @@ def build_events(items: list[dict], cache: dict) -> list[dict]:
         hot_seen = min((item.get("published") for _, item, _ in members
                         if item.get("level") == "L3" and item.get("published")), default=None)
         published = min(row[0] for row in members)
+        summary_text = truncate(rep_item.get("summary") or "", SUMMARY_CHARS)
+        # 热榜/榜单条目经常没有摘要，单独成卡就只剩一个标题；不发布这种空卡
+        # （L1 官方公告例外：标题本身就是要看的信息）
+        if not summary_text.strip() and rep_item.get("level") != "L1":
+            continue
 
         events.append({
             "id": "e_" + hashlib.sha1(
                 (rep_item.get("link") or rep_item.get("id") or "").encode("utf-8")
             ).hexdigest()[:10],
             "title_zh": rep_data.get("title_zh") or rep_item.get("title"),
-            "event_summary": truncate(rep_item.get("summary") or "", SUMMARY_CHARS),
+            "event_summary": summary_text,
             "source_level": rep_item.get("level", "L2"),
             "policy_stage": guess_stage(rep_item),
             "key_entities": [],

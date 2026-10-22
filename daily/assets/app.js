@@ -450,7 +450,9 @@
   }
 
   function renderCard(item) {
-    const kind = item.kind || (state.tab === 'saved' ? (item.url ? 'paper' : 'news') : state.tab);
+    const raw = item.kind || (state.tab === 'saved' ? (item.url ? 'paper' : 'news') : state.tab);
+    // tab 叫 events（复数），卡片类型叫 event（单数）；不归一化会把事件当论文渲染
+    const kind = raw === 'events' ? 'event' : raw;
     if (kind === 'event') return renderEventCard(item);
     return kind === 'news' ? renderNewsCard(item) : renderPaperCard(item);
   }
@@ -805,7 +807,7 @@
         event.preventDefault();
         const kind = saveBtn.dataset.kind;
         const id = saveBtn.dataset.id;
-        const pool = kind === 'news' ? state.news : state.papers;
+        const pool = kind === 'event' ? state.events : kind === 'news' ? state.news : state.papers;
         const item = pool.find((x) => String(x.id) === id) || state.saved[itemKey(kind, id)]?.item;
         if (item) toggleSave(kind, item);
         return;
