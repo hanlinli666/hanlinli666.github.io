@@ -3,6 +3,15 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+    # collect.yml 提交的数据由下面的 workflow_run 触发发布，避免同一次数据提交
+    # 既触发 push 又触发 workflow_run（部署两次）。
+    paths-ignore:
+      - daily/data/**
+
+  # 采集工作流每 2 小时提交一次数据；完成后重新构建，站点随即更新。
+  workflow_run:
+    workflows: ["Collect news"]
+    types: [completed]
 
   # 手动触发；也可以用 REST API 从外面触发（Actions 页面 → Run workflow 等价）：
   #
@@ -48,14 +57,10 @@ permissions:
   pages: write
   id-token: write
 
-# 同一时间只允许一次部署。补跑机制依赖「上一次跑完再判断」，
-# 所以这里不取消正在进行的运行，避免后一次把前一次掐断。
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
 jobs:
   build:
+    # 采集工作流失败时不用重新部署；其它触发方式不受影响。
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码（完整历史，用于读取文章提交时间）
@@ -82,9 +87,10 @@ jobs:
               time.sleep(wait)
           PY
 
-      # 睡了几个小时的话，手里是最初那次 checkout 的代码；同步一次，免得用旧提交部署站点。
+      # schedule 睡了几个小时、workflow_run 拿到的是采集开始前的提交：都同步一次，
+      # 免得用旧提交部署站点。
       - name: 同步主分支
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_run'
         run: git pull --ff-only --autostash || echo "::warning::主分支同步失败，继续使用当前提交"
 
       # ── 先判断这次要做什么：抓取？推送？还是只部署 ──
@@ -118,9 +124,9 @@ jobs:
               marker = {}
           pushed_today = marker.get("date") == today
 
-          if event == "push":
+          if event in ("push", "workflow_run"):
               fetch, push = False, False
-              note = "push 触发：只构建部署，不抓取"
+              note = "push / 采集完成触发：只构建部署，不抓取"
           elif not flag("WANT_FETCH", True):
               fetch, push = False, False
               note = "手动触发但没勾「抓取」：只构建部署"
@@ -179,9 +185,28 @@ jobs:
           LLM_THINKING: ${{ vars.LLM_THINKING }}
         run: python scripts/daily/fetch_papers.py
 
-      - name: 抓取新闻（RSS）
+      - name: 抓取新闻（多源聚合 + 关键词过滤）
         if: steps.gate.outputs.fetch == 'true'
-        run: python scripts/daily/fetch_news.py
+        env:
+          NEWS_LOOKBACK_DAYS: "3"
+          NEWS_HISTORY_DAYS: "7"
+          NEWS_PER_DAY_LIMIT: "150"
+          NEWS_TOTAL_LIMIT: "600"
+          NEWS_SUMMARY_CHARS: "260"
+          NEWS_BODY_CHARS: "200"
+          NEWS_BODY_LIMIT: "12"
+        run: python scripts/daily/fetch_sources.py
+
+      - name: 生成事件（只翻标题 + 聚类）
+        if: steps.gate.outputs.fetch == 'true'
+        env:
+          BIGMODEL_API_KEY: ${{ secrets.BIGMODEL_API_KEY }}
+          NEWS_LLM_MODEL: "glm-4.7-flash"
+          NEWS_TRANSLATE_LIMIT: "80"
+          NEWS_TRANSLATE_BATCH: "25"
+          NEWS_LLM_BUDGET_MIN: "6"
+          NEWS_SUMMARY_CHARS: "260"
+        run: python scripts/daily/enrich_events.py
 
       - name: 推送飞书卡片
         if: steps.gate.outputs.push == 'true'
@@ -254,6 +279,15 @@ jobs:
           news = meta.get("news", {})
           print(f"- 论文：{papers.get('count', 0)} 篇（今日新增 {papers.get('new_today', 0)}），AI 摘要：{'已开启' if papers.get('ai_summary') else '未开启'}")
           print(f"- 新闻：{news.get('count', 0)} 条（今日 {news.get('new_today', 0)}），来源 {len(news.get('sources', []))} 个")
+
+          stats = pathlib.Path("daily/data/stats.json")
+          if stats.exists():
+              data = json.loads(stats.read_text(encoding="utf-8"))
+              funnel = data.get("stages", {})
+              print(f"- 漏斗：采集 {funnel.get('raw', 0)} → 关键词 {funnel.get('after_keywords', 0)} → 入库 {funnel.get('written', 0)}（源 {funnel.get('sources_ok', 0)}/{funnel.get('sources', 0)} 可用）")
+              events = data.get("events", {})
+              if events:
+                  print(f"- 事件：{events.get('events', 0)} 个（今日 {events.get('new_today', 0)}），本轮翻译标题 {events.get('translated', 0)} 条")
           print(f"- 数据生成于：{papers.get('generated_at', '-')} / {news.get('generated_at', '-')}")
 
           marker = pathlib.Path("daily/data/last_push.json")
@@ -266,6 +300,11 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    # 只有发布环节串行。放在 job 上而不是 workflow 上，是为了让「提前起跑 + 等到
+    # 07:50」的那次 build 不再占用 pages 组，否则凌晨 4 小时内的数据更新都发不出去。
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

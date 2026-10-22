@@ -1,0 +1,119 @@
+name: Collect news
+
+# 每 2 小时增量采集一次：抓取 → 关键词过滤 → 标题翻译 → 事件聚类 → L1 告警。
+# 只提交 daily/data，站点由 deploy.yml 通过 workflow_run 自动重新发布。
+#
+# GitHub 的 schedule 在本仓库会被拖后约 4.5 小时（见 daily/README.md）。
+# 这里不提前起跑、也不 sleep：每 2 小时一轮，某一轮被拖后，下一轮仍在队列里，
+# 事件不会整体丢失，只是那一轮的延迟变长。
+
+on:
+  schedule:
+    - cron: "5 */2 * * *"   # UTC，北京 08:05 / 10:05 / … / 06:05，每天 12 轮
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: collect-news
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码（完整历史，便于 rebase 后重推）
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 安装 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 检查 Secrets
+        env:
+          FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
+          BIGMODEL_API_KEY: ${{ secrets.BIGMODEL_API_KEY }}
+          DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
+        run: |
+          if [ -z "$FEISHU_WEBHOOK_URL" ]; then
+            echo "::warning title=缺少 FEISHU_WEBHOOK_URL::L1 告警不会推送，数据仍会正常采集"
+          fi
+          if [ -z "$BIGMODEL_API_KEY" ] && [ -z "$DASHSCOPE_API_KEY" ]; then
+            echo "::notice title=未配置 AI Key::事件照常生成，但英文标题不会翻译成中文"
+          fi
+
+      - name: 抓取新闻（多源聚合 + 关键词过滤）
+        env:
+          NEWS_LOOKBACK_DAYS: "3"
+          NEWS_HISTORY_DAYS: "7"
+          NEWS_PER_DAY_LIMIT: "150"
+          NEWS_TOTAL_LIMIT: "600"
+          NEWS_SUMMARY_CHARS: "260"
+          NEWS_BODY_CHARS: "200"
+          NEWS_BODY_LIMIT: "12"
+        run: python scripts/daily/fetch_sources.py
+
+      - name: 生成事件（只翻标题，摘要用原文）
+        env:
+          BIGMODEL_API_KEY: ${{ secrets.BIGMODEL_API_KEY }}
+          NEWS_LLM_MODEL: "glm-4.7-flash"
+          NEWS_TRANSLATE_LIMIT: "80"
+          NEWS_TRANSLATE_BATCH: "25"
+          NEWS_LLM_BUDGET_MIN: "6"
+          NEWS_SUMMARY_CHARS: "260"
+        run: python scripts/daily/enrich_events.py
+
+      # 告警失败不能影响数据入库；下一轮会重新发现同一事件并补推。
+      - name: L1 政策即时告警
+        continue-on-error: true
+        env:
+          FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
+          FEISHU_SIGNKEY: ${{ secrets.FEISHU_SIGNKEY }}
+          ALERT_LOOKBACK_MIN: "150"
+        run: python scripts/daily/send_feishu.py --alert
+
+      - name: 提交增量数据
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add daily/data
+          if git diff --cached --quiet; then
+            echo "数据没有变化，跳过提交"
+            exit 0
+          fi
+          git commit -m "chore(daily): $(date -u +'%Y-%m-%d %H:%M') 增量采集"
+          for attempt in 1 2 3; do
+            if git pull --rebase --autostash && git push; then
+              exit 0
+            fi
+            echo "push 失败，${attempt}/3，5 秒后重试"
+            sleep 5
+          done
+          echo "::warning::数据推送失败，本轮采集结果只在本次运行中可见"
+
+      - name: 汇总
+        if: always()
+        run: |
+          echo "### 本次采集" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json, pathlib
+
+          stats = pathlib.Path("daily/data/stats.json")
+          if not stats.exists():
+              print("- 没有生成 stats.json")
+              raise SystemExit(0)
+          data = json.loads(stats.read_text(encoding="utf-8"))
+          funnel = data.get("stages", {})
+          events = data.get("events", {})
+          print(f"- 漏斗：采集 {funnel.get('raw', 0)} → 关键词 {funnel.get('after_keywords', 0)} → 入库 {funnel.get('written', 0)}（源 {funnel.get('sources_ok', 0)}/{funnel.get('sources', 0)} 可用，补正文 {funnel.get('body_filled', 0)} 条）")
+          if events:
+              print(f"- 事件：{events.get('events', 0)} 个（今日 {events.get('new_today', 0)}），本轮翻译标题 {events.get('translated', 0)} 条")
+          dead = [s.get("name") for s in data.get("sources", []) if not s.get("raw")]
+          if dead:
+              print(f"- ⚠️ 本轮 0 条：{'、'.join(dead)}")
+          PY

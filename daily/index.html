@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>今日精进 · 论文与新闻</title>
-<meta name="description" content="每天一份 AI 论文与科技新闻摘要，自动更新、离线可读、可安装到主屏幕。" />
+<meta name="description" content="每天一份 AI 事件简报与论文摘要：部委政策、中文媒体、热榜信号，自动更新、离线可读、可安装到主屏幕。" />
 <link rel="manifest" href="./manifest.webmanifest" />
 <link rel="icon" href="./icons/favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
@@ -57,8 +57,8 @@
   </div>
 
   <div class="stats" id="stats" aria-live="polite">
+    <span class="stat"><b id="st-events">–</b><span>今日事件</span></span>
     <span class="stat"><b id="st-papers">–</b><span>今日论文</span></span>
-    <span class="stat"><b id="st-news">–</b><span>今日新闻</span></span>
     <span class="stat"><b id="st-read">0</b><span>已读</span></span>
     <span class="stat"><b id="st-streak">1</b><span>连续打卡</span></span>
   </div>
@@ -67,13 +67,13 @@
 <!-- 常驻栏：标签 + 搜索。sticky 定位、高度恒定，滚动时不改变任何布局 -->
 <div class="app-bar">
   <nav class="tabs" role="tablist" aria-label="内容分类">
-    <button class="tab" role="tab" data-tab="papers" aria-selected="true">
+    <button class="tab" role="tab" data-tab="events" aria-selected="true">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13v14H5.5A1.5 1.5 0 0 1 4 17.5Z"/><path d="M17 8h2.5A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5H17"/><path d="M7 8h7M7 11.5h7M7 15h4"/></svg>
+      事件
+    </button>
+    <button class="tab" role="tab" data-tab="papers" aria-selected="false">
       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5Z"/><path d="M4 20.5V5.5"/></svg>
       论文
-    </button>
-    <button class="tab" role="tab" data-tab="news" aria-selected="false">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13v14H5.5A1.5 1.5 0 0 1 4 17.5Z"/><path d="M17 8h2.5A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5H17"/><path d="M7 8h7M7 11.5h7M7 15h4"/></svg>
-      新闻
     </button>
     <button class="tab" role="tab" data-tab="saved" aria-selected="false">
       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m12 4 2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 9.7l5.4-.8Z"/></svg>
@@ -84,7 +84,7 @@
   <div class="toolbar">
     <label class="search">
       <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="search" type="search" inputmode="search" autocomplete="off" placeholder="搜索标题、摘要、来源…" aria-label="搜索" />
+      <input id="search" type="search" inputmode="search" autocomplete="off" placeholder="搜索事件、实体、来源…" aria-label="搜索" />
       <button id="search-clear" class="clear" type="button" aria-label="清空搜索" hidden>&times;</button>
     </label>
     <div class="sort" id="sort-wrap">
@@ -123,6 +123,8 @@
     <a href="https://arxiv.org/" target="_blank" rel="noopener">arXiv</a>
     <span>·</span>
     <a href="./data/papers.json" target="_blank" rel="noopener">papers.json</a>
+    <span>·</span>
+    <a href="./data/events.json" target="_blank" rel="noopener">events.json</a>
     <span>·</span>
     <a href="./data/news.json" target="_blank" rel="noopener">news.json</a>
   </p>

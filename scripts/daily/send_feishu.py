@@ -23,7 +23,7 @@ import os
 import sys
 import time
 import urllib.parse
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -47,12 +47,21 @@ from common import (  # noqa: E402
 WEEK = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
 MAX_PAPERS = 5
 MAX_NEWS = 5
+MAX_EVENTS = 5
+LEVEL_LABEL = {"L1": "L1 官方", "L2": "L2 媒体", "L3": "L3 社区"}
+LEVEL_ORDER = {"L1": 0, "L2": 1, "L3": 2}
 
 # The PWA lives in a sub-folder of the Pages site (e.g. hanlinli666.github.io/daily/).
 APP_SUBPATH = (os.environ.get("PWA_SUBPATH") or "daily").strip("/")
 
 # 推送成功后写下的标记，供 workflow 判断「今天是否已经发过」，避免补跑时重复推送。
 PUSH_MARKER = DATA_DIR / "last_push.json"
+
+# L1 即时告警：已告警的 event_id 落盘，同一个事件只推一次。
+ALERT_MARKER = DATA_DIR / "last_alert.json"
+ALERT_STAGES = ("征求意见", "已发布")
+ALERT_LOOKBACK_MIN = int(os.environ.get("ALERT_LOOKBACK_MIN") or "150")
+MAX_ALERTS = 5
 
 # 计划送达时间（北京时间）。GitHub 自己的 schedule 经常被拖后几个小时，
 # 超过计划时间就在卡片底部如实写上「实际送达 HH:MM」，一眼能看出是调度慢还是脚本慢。
@@ -176,6 +185,85 @@ def news_line(index: int, item: dict) -> str:
     return f"**{index}.** [{title}]({item.get('link', '#')}) · {source}"
 
 
+def event_line(index: int, event: dict) -> str:
+    title = truncate(event.get("title_zh") or "无标题", 56)
+    tag = LEVEL_LABEL.get(event.get("source_level"), "")
+    stage = event.get("policy_stage")
+    extra = " · ".join(bit for bit in (tag, "" if stage in (None, "不适用") else stage) if bit)
+    url = event.get("primary_url") or "#"
+    return f"**{index}.** [{title}]({url})" + (f" · {extra}" if extra else "")
+
+
+# ---------------------------------------------------------------- L1 alerts
+
+
+def pick_alerts(events: list[dict]) -> list[dict]:
+    """L1 且已进入「征求意见 / 已发布」的新事件；同一个 event_id 只告警一次。"""
+    marker = read_json(ALERT_MARKER, {})
+    seen = {str(x) for x in marker.get("ids", [])} if isinstance(marker, dict) else set()
+    cutoff = now_utc() - timedelta(minutes=ALERT_LOOKBACK_MIN)
+    fresh = []
+    for event in events:
+        if not isinstance(event, dict):
+            continue
+        if event.get("source_level") != "L1" or event.get("policy_stage") not in ALERT_STAGES:
+            continue
+        if str(event.get("id")) in seen:
+            continue
+        first = parse_dt(event.get("first_seen_at"))
+        if first and first < cutoff:
+            continue
+        fresh.append(event)
+    fresh.sort(key=lambda e: e.get("first_seen_at") or "", reverse=True)
+    return fresh[:MAX_ALERTS]
+
+
+def record_alerts(alerts: list[dict]) -> None:
+    marker = read_json(ALERT_MARKER, {})
+    ids = [str(x) for x in marker.get("ids", [])] if isinstance(marker, dict) else []
+    for event in alerts:
+        key = str(event.get("id"))
+        if key not in ids:
+            ids.append(key)
+    write_json(ALERT_MARKER, {"ids": ids[-200:], "at": iso(now_utc())})
+
+
+def build_alert_card(alerts: list[dict]) -> dict:
+    lines: list[str] = []
+    for event in alerts:
+        title = truncate(event.get("title_zh") or event.get("title") or "未命名", 90)
+        url = event.get("primary_url") or "#"
+        summary = truncate(event.get("event_summary") or "", 180)
+        links = event.get("links") or [{}]
+        source = links[0].get("source") or "官方"
+        stage = event.get("policy_stage") or ""
+        lines.append(f"**[{title}]({url})**")
+        if summary:
+            lines.append(summary)
+        meta = " · ".join(bit for bit in ("L1 官方", source, stage) if bit)
+        lines.append(f"<font color='grey'>{meta}</font>")
+        lines.append("")
+
+    return {
+        "msg_type": "interactive",
+        "card": {
+            "config": {"wide_screen_mode": True, "enable_forward": True},
+            "header": {
+                "template": "orange",
+                "title": {"tag": "plain_text", "content": f"L1 政策速递 · {len(alerts)} 条"},
+                "subtitle": {"tag": "plain_text", "content": "发现即推 · 点标题看原文"},
+            },
+            "elements": [
+                {"tag": "div", "text": {"tag": "lark_md", "content": "\n".join(lines).strip()}},
+                {
+                    "tag": "note",
+                    "elements": [{"tag": "plain_text", "content": "仅推送 L1 官方「征求意见 / 已发布」事件，同一事件不重复"}],
+                },
+            ],
+        },
+    }
+
+
 # ----------------------------------------------------------------------- build
 
 
@@ -195,6 +283,21 @@ def pick_papers(papers: list[dict], today: str) -> tuple[list[dict], int, str]:
     return ranked[:MAX_PAPERS], len(batch), f"最近（{best_day[5:].replace('-', '/')}）"
 
 
+def pick_events(events: list[dict], today: str) -> tuple[list[dict], int]:
+    """L1 优先，其次按首次发现时间倒序；只看今天的，没有就退回最近的。"""
+    if not events:
+        return [], 0
+
+    def sort_key(event: dict):
+        first_seen = parse_dt(event.get("first_seen_at")) or now_utc()
+        return (LEVEL_ORDER.get(event.get("source_level"), 9), -first_seen.timestamp())
+
+    todays = [e for e in events if cn_day(parse_dt(e.get("first_seen_at")) or now_utc()) == today]
+    pool = todays if todays else events
+    ranked = sorted(pool, key=sort_key)
+    return ranked[:MAX_EVENTS], len(pool)
+
+
 def pick_news(news: list[dict], today: str) -> tuple[list[dict], int, str]:
     todays = [n for n in news if (n.get("day") or "") == today]
     if len(todays) >= 3:
@@ -212,11 +315,14 @@ def pick_news(news: list[dict], today: str) -> tuple[list[dict], int, str]:
 def build_card() -> dict:
     papers = read_json(DATA_DIR / "papers.json", [])
     news = read_json(DATA_DIR / "news.json", [])
+    events = read_json(DATA_DIR / "events.json", [])
     meta = read_json(DATA_DIR / "meta.json", {})
     if isinstance(papers, dict):
         papers = papers.get("items", [])
     if isinstance(news, dict):
         news = news.get("items", [])
+    if isinstance(events, dict):
+        events = events.get("items", [])
 
     today_dt = datetime.now(CN_TZ)
     today = today_dt.strftime("%Y-%m-%d")
@@ -224,6 +330,7 @@ def build_card() -> dict:
 
     top_papers, paper_count, paper_label = pick_papers(papers, today)
     top_news, news_count, news_label = pick_news(news, today)
+    top_events, event_count = pick_events(events, today)
     ai_ready = bool(meta.get("papers", {}).get("ai_summary"))
 
     elements: list[dict] = []
@@ -244,13 +351,19 @@ def build_card() -> dict:
 
     elements.append({"tag": "hr"})
 
-    if top_news:
+    if top_events:
+        lines = [f"**📌 今日事件 · {event_count} 件**", ""]
+        lines += [event_line(i, e) for i, e in enumerate(top_events, 1)]
+        if event_count > len(top_events):
+            lines += ["", f"[查看全部 {event_count} 件 →]({pwa_link(base, 'events')})"]
+        elements.append({"tag": "div", "text": {"tag": "lark_md", "content": "\n".join(lines)}})
+    elif top_news:
         lines = [f"**📰 {news_label}新闻 · {news_count} 条**", ""]
         lines += [news_line(i, n) for i, n in enumerate(top_news, 1)]
         elements.append({"tag": "div", "text": {"tag": "lark_md", "content": "\n".join(lines)}})
     else:
         elements.append(
-            {"tag": "div", "text": {"tag": "lark_md", "content": "**📰 新闻**\n\n今天还没有新的新闻。"}}
+            {"tag": "div", "text": {"tag": "lark_md", "content": "**📌 今日事件**\n\n今天还没有新的事件。"}}
         )
 
     elements.append({"tag": "hr"})
@@ -260,14 +373,14 @@ def build_card() -> dict:
             "actions": [
                 {
                     "tag": "button",
-                    "text": {"tag": "plain_text", "content": "📄 打开论文页"},
-                    "url": pwa_link(base, "papers"),
+                    "text": {"tag": "plain_text", "content": "📌 打开事件页"},
+                    "url": pwa_link(base, "events"),
                     "type": "primary",
                 },
                 {
                     "tag": "button",
-                    "text": {"tag": "plain_text", "content": "📰 打开新闻页"},
-                    "url": pwa_link(base, "news"),
+                    "text": {"tag": "plain_text", "content": "📄 打开论文页"},
+                    "url": pwa_link(base, "papers"),
                     "type": "default",
                 },
             ],
@@ -293,7 +406,7 @@ def build_card() -> dict:
             "header": {
                 "template": "indigo",
                 "title": {"tag": "plain_text", "content": f"今日精进 · {human_day(today_dt)}"},
-                "subtitle": {"tag": "plain_text", "content": f"{paper_count} 篇论文 · {news_count} 条新闻"},
+                "subtitle": {"tag": "plain_text", "content": f"{event_count} 件事件 · {paper_count} 篇论文"},
             },
             "elements": elements,
         },
@@ -303,21 +416,73 @@ def build_card() -> dict:
 # ------------------------------------------------------------------------ send
 
 
+def deliver(webhook: str, payload: dict) -> bool:
+    try:
+        response = http_post_json(webhook, payload, timeout=25, retries=3)
+    except Exception as exc:  # noqa: BLE001
+        log("feishu", f"send failed: {exc}")
+        return False
+
+    if not isinstance(response, dict):
+        response = {"_raw": response}
+
+    code = response.get("code", response.get("StatusCode", -1))
+    ret = response.get("data") or {}
+    ok = code in (0, "0") and not (isinstance(ret, dict) and ret.get("code") not in (None, 0, "0"))
+    if ok:
+        log("feishu", "card delivered ✔")
+        return True
+
+    # Usually: wrong webhook, bot removed from the group, or 签名校验 mismatch.
+    log("feishu", f"Feishu rejected the card: {json.dumps(response, ensure_ascii=False)[:400]}")
+    return False
+
+
+def run_alerts(webhook: str, secret: str, dry_run: bool) -> None:
+    events = read_json(DATA_DIR / "events.json", [])
+    if isinstance(events, dict):
+        events = events.get("items", [])
+    alerts = pick_alerts(events if isinstance(events, list) else [])
+    if not alerts:
+        log("feishu", "no new L1 policy events - nothing to alert")
+        return
+
+    payload = build_alert_card(alerts)
+    if secret:
+        payload = {**payload, **sign_payload(secret)}
+
+    if dry_run:
+        print(json.dumps(payload, ensure_ascii=False, indent=2))
+        return
+    if not webhook:
+        log("feishu", "FEISHU_WEBHOOK_URL is empty - printing the alert instead of sending")
+        print(json.dumps(payload, ensure_ascii=False, indent=2))
+        return
+    if deliver(webhook, payload):
+        record_alerts(alerts)
+        log("feishu", f"alerted {len(alerts)} L1 events")
+    else:
+        sys.exit(1)
+
+
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Send the daily digest to Feishu")
+    parser = argparse.ArgumentParser(description="Send the daily digest / L1 alerts to Feishu")
     parser.add_argument("--dry-run", action="store_true", help="print the payload, do not send")
     parser.add_argument("--webhook", default="", help="override FEISHU_WEBHOOK_URL")
+    parser.add_argument("--alert", action="store_true", help="push new L1 policy events only")
     args = parser.parse_args()
 
     load_local_env()
-    card = build_card()
-    payload = card
-
     webhook = (args.webhook or os.environ.get("FEISHU_WEBHOOK_URL") or "").strip()
     secret = (os.environ.get("FEISHU_SIGNKEY") or "").strip()
 
+    if args.alert:
+        run_alerts(webhook, secret, args.dry_run)
+        return
+
+    payload = build_card()
     if secret:
-        payload = {**card, **sign_payload(secret)}
+        payload = {**payload, **sign_payload(secret)}
 
     if args.dry_run:
         print(json.dumps(payload, ensure_ascii=False, indent=2))
@@ -328,30 +493,14 @@ def main() -> None:
         print(json.dumps(payload, ensure_ascii=False, indent=2))
         return
 
-    try:
-        response = http_post_json(webhook, payload, timeout=25, retries=3)
-    except Exception as exc:  # noqa: BLE001
-        log("feishu", f"send failed: {exc}")
+    if not deliver(webhook, payload):
         sys.exit(1)
 
-    if not isinstance(response, dict):
-        response = {"_raw": response}
-
-    code = response.get("code", response.get("StatusCode", -1))
-    ret = response.get("data") or {}
-    ok = code in (0, "0") and not (isinstance(ret, dict) and ret.get("code") not in (None, 0, "0"))
-    if ok:
-        log("feishu", "card delivered ✔")
-        late = minutes_late(datetime.now(CN_TZ))
-        if late > GRACE_MINUTES:
-            log("feishu", f"delivered {human_late(late)} after the {PLANNED_HHMM} plan "
-                          f"(GitHub schedule delay - not the script)")
-        record_push(late)
-        return
-
-    # Usually: wrong webhook, bot removed from the group, or 签名校验 mismatch.
-    log("feishu", f"Feishu rejected the card: {json.dumps(response, ensure_ascii=False)[:400]}")
-    sys.exit(1)
+    late = minutes_late(datetime.now(CN_TZ))
+    if late > GRACE_MINUTES:
+        log("feishu", f"delivered {human_late(late)} after the {PLANNED_HHMM} plan "
+                      f"(GitHub schedule delay - not the script)")
+    record_push(late)
 
 
 if __name__ == "__main__":

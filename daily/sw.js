@@ -1,9 +1,9 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    今日精进 — service worker
    Bump VERSION when the shell changes so old caches are dropped.
    ========================================================================== */
 
-const VERSION = 'v4';
+const VERSION = 'v5';
 const SHELL_CACHE = `dl-shell-${VERSION}`;
 const DATA_CACHE = `dl-data-${VERSION}`;
 

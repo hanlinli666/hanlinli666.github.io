@@ -13,6 +13,7 @@
   const DATA_URLS = {
     papers: './data/papers.json',
     news: './data/news.json',
+    events: './data/events.json',
     meta: './data/meta.json',
   };
   const STORE = {
@@ -133,12 +134,13 @@
   /* ----------------------------------------------------------------- state */
 
   const state = {
-    tab: 'papers',
+    tab: 'events',
     query: '',
     sort: 'date',
     keyword: '',
     papers: [],
     news: [],
+    events: [],
     meta: {},
     saved: safeRead(STORE.saved, {}),
     reading: safeRead(STORE.reading, {}),
@@ -183,6 +185,17 @@
           authors: item.authors || [],
           author_count: item.author_count || (item.authors || []).length,
           matched: item.matched || [],
+          // 事件卡片的字段
+          primary_url: item.primary_url,
+          event_summary: item.event_summary,
+          potential_impact: item.potential_impact,
+          key_entities: item.key_entities || [],
+          topics: item.topics || [],
+          source_level: item.source_level,
+          policy_stage: item.policy_stage,
+          first_seen_at: item.first_seen_at,
+          source_count: item.source_count,
+          links: item.links || [],
         },
       };
       toast('已收藏，可在「收藏」里复习');
@@ -246,17 +259,22 @@
     const cacheBust = force ? `?v=${Date.now()}` : '';
     setLoading(true);
     try {
-      const [papersRes, newsRes, metaRes] = await Promise.all([
+      const [papersRes, newsRes, eventsRes, metaRes] = await Promise.all([
         fetch(DATA_URLS.papers + cacheBust, { cache: force ? 'reload' : 'default' }),
-        fetch(DATA_URLS.news + cacheBust, { cache: force ? 'reload' : 'default' }),
+        fetch(DATA_URLS.news + cacheBust, { cache: force ? 'reload' : 'default' }).catch(() => null),
+        fetch(DATA_URLS.events + cacheBust, { cache: force ? 'reload' : 'default' }).catch(() => null),
         fetch(DATA_URLS.meta + cacheBust, { cache: force ? 'reload' : 'default' }).catch(() => null),
       ]);
       const papers = papersRes.ok ? await papersRes.json() : [];
-      const news = newsRes.ok ? await newsRes.json() : [];
+      const news = newsRes && newsRes.ok ? await newsRes.json() : [];
+      const events = eventsRes && eventsRes.ok ? await eventsRes.json() : [];
       const meta = metaRes && metaRes.ok ? await metaRes.json() : {};
 
       state.papers = normalizeList(papers);
       state.news = normalizeList(news);
+      const eventList = normalizeList(events);
+      // 事件层是后加的：老部署或精炼失败时用新闻池兜底，页面不会空着
+      state.events = eventList.length ? eventList : eventsFromNews(state.news);
       state.meta = meta || {};
       state.error = '';
       state.lastSync = Date.now();
@@ -268,6 +286,24 @@
       setLoading(false);
       render();
     }
+  }
+
+  function eventsFromNews(news) {
+    return news.map((item) => ({
+      id: item.id,
+      title_zh: item.title,
+      event_summary: item.summary || '',
+      source_level: item.level || 'L2',
+      policy_stage: '不适用',
+      key_entities: [],
+      potential_impact: null,
+      topics: item.matched || [],
+      first_seen_at: item.first_seen || item.published,
+      published: item.published,
+      primary_url: item.link,
+      source_count: 1,
+      links: [],
+    }));
   }
 
   const normalizeList = (payload) => {
@@ -292,6 +328,8 @@
       item.title_zh,
       item.abstract,
       item.summary,
+      item.event_summary,
+      item.potential_impact,
       Array.isArray(item.summary_zh) ? item.summary_zh.join(' ') : item.summary_zh,
       item.source,
       item.primary_category,
@@ -299,6 +337,9 @@
       (item.matched || []).join(' '),
       (item.tags || []).join(' '),
       (item.categories || []).join(' '),
+      (item.key_entities || []).join(' '),
+      (item.topics || []).join(' '),
+      (item.links || []).map((l) => `${l.source} ${l.title}`).join(' '),
     ]
       .filter(Boolean)
       .join(' ')
@@ -311,7 +352,7 @@
     if (state.sort === 'score') {
       list.sort((a, b) => (b.score || 0) - (a.score || 0) || String(b.published).localeCompare(String(a.published)));
     } else {
-      list.sort((a, b) => String(b.published || '').localeCompare(String(a.published || '')));
+      list.sort((a, b) => String(b.published || b.first_seen_at || '').localeCompare(String(a.published || a.first_seen_at || '')));
     }
     return list;
   }
@@ -324,7 +365,7 @@
         .map((entry) => ({ ...entry.item, kind: entry.kind }));
       return items.filter((item) => matchesQuery(item, q));
     }
-    const pool = state.tab === 'news' ? state.news : state.papers;
+    const pool = state.tab === 'events' ? state.events : state.papers;
     let items = pool.filter((item) => matchesQuery(item, q));
     if (state.tab === 'papers' && state.keyword) {
       items = items.filter((item) => (item.matched || []).includes(state.keyword));
@@ -360,14 +401,18 @@
           ? '没有匹配的内容'
           : state.tab === 'saved'
             ? '还没有收藏'
-            : '今天这里还是空的';
+            : state.tab === 'events'
+              ? '今天还没有事件'
+              : '今天这里还是空的';
       $('#empty-text').textContent = state.error
         ? state.error
         : state.query
           ? `没有找到包含「${state.query}」的条目，换个词试试。`
           : state.tab === 'saved'
-            ? '在论文或新闻卡片右上角点一下 ☆，就会收藏到这里，方便之后复习。'
-            : 'arXiv 在周末不发布新论文，可以先看看之前的内容。';
+            ? '在论文或事件卡片右上角点一下 ☆，就会收藏到这里，方便之后复习。'
+            : state.tab === 'events'
+              ? '采集还在跑，下拉刷新一次试试。'
+              : 'arXiv 在周末不发布新论文，可以先看看之前的内容。';
       info.textContent = '';
       return;
     }
@@ -379,7 +424,7 @@
 
   function summarize(items) {
     const total = `${items.length} 条`;
-    const label = state.tab === 'papers' ? '论文' : state.tab === 'news' ? '新闻' : '收藏';
+    const label = state.tab === 'papers' ? '论文' : state.tab === 'events' ? '事件' : '收藏';
     const bits = [`共 ${total}${label}`];
     if (state.query) bits.push(`匹配「${state.query}」`);
     if (state.tab === 'papers' && state.keyword) bits.push(`关键词 ${state.keyword}`);
@@ -390,7 +435,7 @@
   function renderGrouped(items) {
     const groups = new Map();
     items.forEach((item) => {
-      const day = item.day || cnDay(item.published);
+      const day = item.day || cnDay(item.first_seen_at || item.published);
       if (!groups.has(day)) groups.set(day, []);
       groups.get(day).push(item);
     });
@@ -398,14 +443,15 @@
     return days
       .map((day) => {
         const rows = groups.get(day).map((item) => renderCard(item)).join('');
-        const unit = state.tab === 'news' ? '条' : '篇';
+        const unit = state.tab === 'events' ? '件' : state.tab === 'papers' ? '篇' : '条';
         return `<div class="day-head"><span>${esc(dayLabel(day))}</span><span class="count">${groups.get(day).length} ${unit}</span></div>${rows}`;
       })
       .join('');
   }
 
   function renderCard(item) {
-    const kind = item.kind || (state.tab === 'saved' ? (item.url ? 'paper' : 'news') : state.tab === 'news' ? 'news' : 'paper');
+    const kind = item.kind || (state.tab === 'saved' ? (item.url ? 'paper' : 'news') : state.tab);
+    if (kind === 'event') return renderEventCard(item);
     return kind === 'news' ? renderNewsCard(item) : renderPaperCard(item);
   }
 
@@ -456,6 +502,60 @@
       </article>`;
   }
 
+  function renderEventCard(item) {
+    const q = state.query.trim();
+    const id = esc(item.id || '');
+    const saved = isSaved('event', item.id);
+    const read = isRead('event', item.id);
+    const level = item.source_level || 'L2';
+    const levelLabel = { L1: 'L1 官方', L2: 'L2 媒体', L3: 'L3 社区' }[level] || 'L2 媒体';
+    const stage = item.policy_stage && item.policy_stage !== '不适用'
+      ? `<span class="stage">${esc(item.policy_stage)}</span>`
+      : '';
+    const summary = item.event_summary
+      ? `<p class="summary">${highlight(item.event_summary, q)}</p>`
+      : '';
+    const impact = item.potential_impact
+      ? `<p class="impact">影响：${highlight(item.potential_impact, q)}</p>`
+      : '';
+    const chips = [...(item.key_entities || []), ...(item.topics || [])]
+      .slice(0, 5)
+      .map((tag) => `<span class="kw">${esc(tag)}</span>`)
+      .join('');
+    const others = (item.links || []).filter((link) => link.url && link.url !== item.primary_url).slice(0, 4);
+    const alt = others.length
+      ? `<details class="alt"><summary>另见 ${others.length} 家来源</summary><ul>${others
+          .map((link) => `<li><a href="${esc(link.url)}" target="_blank" rel="noopener">${esc(link.source)} · ${esc(link.title)}</a></li>`)
+          .join('')}</ul></details>`
+      : '';
+    const count = (item.source_count || 1) > 1 ? ` · ${item.source_count} 家来源` : '';
+    const url = item.primary_url || item.link || '#';
+
+    return `
+      <article class="card event${read ? ' is-read' : ''}" data-key="event:${id}">
+        <div class="src-row">
+          <span class="lv lv-${esc(level.toLowerCase())}">${levelLabel}</span>
+          ${stage}
+          <span class="dot"></span>
+          <span>${esc(relTime(item.first_seen_at))}</span>
+          <span class="spacer"></span>
+          <button class="save-btn" type="button" data-action="save" data-kind="event" data-id="${id}"
+            aria-pressed="${saved}" aria-label="${saved ? '取消收藏' : '收藏'}">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="m12 4 2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 9.7l5.4-.8Z"/></svg>
+          </button>
+        </div>
+        <h3 class="zh"><a href="${esc(url)}" target="_blank" rel="noopener" data-read="event" data-id="${id}">${highlight(item.title_zh, q)}</a></h3>
+        ${summary}
+        ${impact}
+        ${chips ? `<div class="kw-row">${chips}</div>` : ''}
+        ${alt}
+        <div class="card-foot">
+          <span class="authors">首次发现 ${esc(clock(item.first_seen_at))}${count}</span>
+          <a class="btn" href="${esc(url)}" target="_blank" rel="noopener" data-read="event" data-id="${id}">原文 ↗</a>
+        </div>
+      </article>`;
+  }
+
   function renderNewsCard(item) {
     const q = state.query.trim();
     const saved = isSaved('news', item.id);
@@ -496,14 +596,14 @@
   function updateStats() {
     const today = todayStr();
     const papersToday = state.papers.filter((p) => (p.day || cnDay(p.published)) === today).length;
-    const newsToday = state.news.filter((n) => (n.day || cnDay(n.published)) === today).length;
+    const eventsToday = state.events.filter((e) => cnDay(e.first_seen_at || e.published) === today).length;
     $('#st-papers').textContent = state.loading ? '–' : papersToday;
-    $('#st-news').textContent = state.loading ? '–' : newsToday;
+    $('#st-events').textContent = state.loading ? '–' : eventsToday;
     $('#st-read').textContent = readToday();
     $('#st-streak').textContent = state.streak || 1;
 
     const meta = state.meta || {};
-    const stamp = meta.papers && meta.papers.generated_at;
+    const stamp = (meta.events && meta.events.generated_at) || (meta.papers && meta.papers.generated_at);
     $('#foot-meta').textContent = stamp
       ? `数据更新于 ${relTime(stamp)} · 由 GitHub Actions 每日自动生成`
       : '数据由 GitHub Actions 每天自动生成';
@@ -535,7 +635,8 @@
   /* ---------------------------------------------------------------- actions */
 
   function setTab(tab, { push = true } = {}) {
-    state.tab = ['papers', 'news', 'saved'].includes(tab) ? tab : 'papers';
+    if (tab === 'news') tab = 'events'; // 旧链接兼容
+    state.tab = ['events', 'papers', 'saved'].includes(tab) ? tab : 'events';
     state.keyword = '';
     if (push) {
       const target = `#${state.tab}`;
@@ -746,7 +847,7 @@
         $('#search').focus();
       }
       if (!typing && ['1', '2', '3'].includes(event.key)) {
-        setTab({ 1: 'papers', 2: 'news', 3: 'saved' }[event.key]);
+        setTab({ 1: 'events', 2: 'papers', 3: 'saved' }[event.key]);
       }
     });
   }
@@ -761,7 +862,9 @@
     registerSW();
 
     const hash = location.hash.replace('#', '');
-    if (['papers', 'news', 'saved'].includes(hash)) state.tab = hash;
+    if (['events', 'papers', 'saved', 'news'].includes(hash)) {
+      state.tab = hash === 'news' ? 'events' : hash;
+    }
 
     // Deep link from the Feishu card: ?q=<paper title>#papers
     const params = new URLSearchParams(location.search);

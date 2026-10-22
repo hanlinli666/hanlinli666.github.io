@@ -576,6 +576,57 @@ main {
   border: 1px solid transparent;
 }
 
+/* 事件卡片：层级 / 政策阶段 / 影响 / 另见来源 */
+.lv,
+.stage {
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.lv-l1 {
+  color: #9a3412;
+  background: rgba(234, 88, 12, 0.12);
+  border: 1px solid rgba(234, 88, 12, 0.25);
+}
+.lv-l2 {
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+}
+.lv-l3 {
+  color: var(--muted);
+  background: rgba(120, 120, 140, 0.1);
+  border: 1px solid var(--border);
+}
+.stage {
+  color: #92400e;
+  background: var(--amber-soft);
+  border: 1px solid rgba(214, 158, 46, 0.3);
+}
+html[data-theme="dark"] .lv-l1 { color: #fdba74; background: rgba(251, 146, 60, 0.16); border-color: rgba(251, 146, 60, 0.3); }
+html[data-theme="dark"] .stage { color: #fcd34d; }
+
+.card .impact {
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-soft);
+}
+.card .alt {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.card .alt summary { cursor: pointer; }
+.card .alt ul { margin: 6px 0 0; padding-left: 18px; }
+.card .alt li { margin: 2px 0; }
+.card .alt a { color: var(--muted); text-decoration: none; }
+.card .alt a:hover { color: var(--accent); }
+.card.event h3.zh a { color: inherit; text-decoration: none; }
+.card.event h3.zh a:hover { color: var(--accent); }
+
 .bullets {
   margin: 9px 0 0;
   display: flex;
@@ -705,6 +756,8 @@ main {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+/* 事件摘要直接来自原文（最多 260 字），比新闻摘要多留几行 */
+.card.event .summary { -webkit-line-clamp: 6; }
 .card.news .open-hint {
   display: inline-flex;
   align-items: center;

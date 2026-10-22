@@ -92,14 +92,14 @@ python3 -m http.server 8000
 
 ## 每日精进（/daily/）
 
-站点根目录下挂了一个可安装的每日阅读 PWA：每天早上抓 arXiv 论文 + 11 个 RSS 新闻源，
-用智谱 GLM-4.7 生成中文标题与三条摘要，再把摘要卡片推送到飞书群。
+站点根目录下挂了一个可安装的每日阅读 PWA：每天早上抓 arXiv 论文 + 34 个新闻源（部委政策、中文媒体、热榜、国外 RSS），
+新闻先过一层确定性关键词过滤，英文标题用智谱 GLM-4.7 翻成中文（摘要直接用原文，不调用模型），最后把摘要卡片推送到飞书群；论文链路仍会生成中文标题与三条 AI 摘要。
 
 - 入口：<https://hanlinli666.github.io/daily/>（主页顶栏与首屏也有入口）
 - 详细说明：见 [`daily/README.md`](daily/README.md)
-- 每天 08:30（北京时间）由同一个 `deploy.yml` 抓取、提交数据并重新部署
-- 新增论文关键词 → 改 `daily/keywords.txt`；换新闻源 → 改 `daily/config/news_sources.txt`
+- 新闻每 2 小时由 `collect.yml` 增量采集并提交数据，`deploy.yml` 再通过 `workflow_run` 重新发布；论文与飞书简报仍在每天 07:50 的那次部署里抓取
+- 新增论文关键词 → 改 `daily/keywords.txt`；增删新闻源 → 改 `daily/config/sources.json`；改进出词 → 改 `daily/config/news_keywords.txt`
 
 日常写文章完全不受影响：推送到 `main` 只会走「生成 manifest → 构建 → 部署」，
-抓取与推送步骤只在定时或手动勾选 `fetch` 时才执行。
+`deploy.yml` 里的论文抓取与飞书推送只在定时或手动勾选 `fetch` 时才执行（新闻由 `collect.yml` 独立采集）。
 

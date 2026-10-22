@@ -3,8 +3,9 @@
 博客站的每日阅读面板：**零服务器、零数据库**，全部由 GitHub Actions 在每天早上生成静态数据。
 
 - 📄 arXiv 上 AI / Agent / LLM 方向的新论文，按 `keywords.txt` 过滤 + 相关性打分
-- 📰 11 个 RSS 源的技术新闻（Hacker News / OpenAI / DeepMind / TechCrunch AI / 量子位 …）
-- 🈶 智谱 GLM-4.7 生成中文标题 + 三条中文摘要 + 主题词
+- 📰 34 个新闻源：部委政策（国务院 / 工信部 / 科技部 / 商务部）、中文媒体（量子位 / IT之家 / 财联社 / 36氪 / 澎湃 / 华尔街见闻 …）、热榜（知乎 / 百度 / 头条 / 掘金 / GitHub / HN）、国外 RSS
+- 🧹 进 LLM 之前先做**确定性关键词过滤**（`news_keywords.txt`，零成本），源头政策用更宽的口径 `news_keywords_policy.txt`
+- 🈶 智谱 GLM-4.7 生成论文的中文标题 + 三条中文摘要 + 主题词
 - 🃏 每天早上（北京时间 8 点左右）把卡片推送到飞书群
 - 📱 可安装到主屏幕，独立窗口、离线可读
 - 💾 收藏 / 已读 / 连续打卡都存在浏览器本地
@@ -13,19 +14,26 @@
 
 ```
 daily/
-├── index.html              # 三栏：论文 / 新闻 / 收藏（无框架、无构建）
+├── index.html              # 三栏：事件 / 论文 / 收藏（无框架、无构建）
 ├── assets/app.css, app.js
 ├── sw.js                   # 壳缓存 + 数据「网络优先」
 ├── manifest.webmanifest    # start_url=./  scope=./  standalone
 ├── icons/                  # 192 / 512 / maskable / apple-touch
 ├── data/
 │   ├── papers.json         # 论文（约 21 天滚动窗口）
-│   ├── news.json           # 新闻（7 天窗口，每天上限 30 条）
+│   ├── events.json         # 事件：中文标题 + 摘要 + 阶段 + 实体 + first_seen_at
+│   ├── news.json           # 过滤后的新闻池（事件层的原料，7 天）
+│   ├── stats.json          # 最近一轮漏斗 + 每源状态 + 事件数
 │   ├── meta.json           # 生成时间 / 关键词 / 计数
-│   └── cache/summaries.json# AI 摘要缓存（随仓库提交，换机器不丢）
-├── keywords.txt
+│   └── cache/
+│       ├── summaries.json  # 论文 AI 摘要缓存
+│       ├── news_llm.json   # 新闻标题翻译缓存（按 URL，换机器不丢）
+│       └── quota.json      # @N 每日限额计数（美股/关税等宏观条目）
+├── keywords.txt            # 论文关键词
 └── config/
-    ├── news_sources.txt
+    ├── sources.json        # 新闻源清单（层级 / 类型 / URL / 过滤档位）
+    ├── news_keywords.txt   # 媒体源关键词（TrendRadar 语法，含 ! 排除、~ 只匹配标题、@N 每日上限）
+    ├── news_keywords_policy.txt  # 政策源头专用（更宽的产业口径）
     └── site.json
 ```
 
@@ -34,16 +42,20 @@ daily/
 ## 数据流
 
 ```
-GitHub Actions 定时（UTC 19:30 = 北京 03:30 提前起跑）
-   ├─ 等到 07:50（北京）——GitHub 通常把运行拖后 4 个多小时，正好拖到 08:00
-   ├─ scripts/daily/fetch_papers.py → daily/data/papers.json
-   ├─ scripts/daily/fetch_news.py   → daily/data/news.json
-   ├─ scripts/daily/send_feishu.py  → 飞书卡片 + last_push.json
-   ├─ 提交 daily/data 并 push
-   └─ 构建 dist/ → 部署 GitHub Pages（博客 + /daily/ 一起发布）
+GitHub Actions
+├─ collect.yml（每 2 小时，UTC 5 */2 * * *）
+│   ├─ scripts/daily/fetch_sources.py → daily/data/news.json（34 源 → 关键词过滤）
+│   ├─ scripts/daily/enrich_events.py → daily/data/events.json（GLM-Flash 翻标题 + 规则字段 + 聚类）
+│   ├─ scripts/daily/send_feishu.py --alert → L1 政策即时告警
+│   └─ 提交 daily/data → workflow_run 触发 deploy.yml
+└─ deploy.yml（push / 每天 03:30 提前起跑等到 07:50 / 采集完成后）
+    ├─ scripts/daily/fetch_papers.py → daily/data/papers.json
+    ├─ scripts/daily/send_feishu.py → 每日简报 + last_push.json
+    ├─ 提交 daily/data
+    └─ 构建 dist/ → 部署 GitHub Pages（博客 + /daily/ 一起发布）
 ```
 
-> 抓取步骤只在非 `push` 事件、且「今天还没推过」时执行；平时推文只走构建部署。
+> 抓取步骤只在 `schedule` / 手动触发、且「今天还没推过」时执行；`push` 和采集完成后的 `workflow_run` 只做构建部署。
 
 ## 为什么以前总是 13:00 才收到卡片
 
@@ -160,12 +172,21 @@ curl -X POST -H "Authorization: Bearer <TOKEN>" -H "Accept: application/vnd.gith
 | 想改什么 | 改哪里 |
 | --- | --- |
 | 论文关键词 | `daily/keywords.txt` |
-| 新闻源 | `daily/config/news_sources.txt` |
+| 新闻源（增删源、改层级/过滤档） | `daily/config/sources.json` |
+| 新闻关键词 / 排除词 | `daily/config/news_keywords.txt` |
+| 政策源头关键词 | `daily/config/news_keywords_policy.txt` |
 | 推送时间 | `.github/workflows/deploy.yml` 的 `cron`（**UTC**） |
 | 每天抓多少论文 | `PAPERS_MAX_RESULTS`（默认 220）/ `PAPERS_LOOKBACK_DAYS`（默认 4 天） |
-| 新闻回看 / 每天条数 | `NEWS_LOOKBACK_DAYS` / `NEWS_PER_DAY_LIMIT` |
+| 新闻回看 / 保留 / 每天条数 | `NEWS_LOOKBACK_DAYS`(3) / `NEWS_HISTORY_DAYS`(7) / `NEWS_PER_DAY_LIMIT`(150) |
+| 每轮翻译多少条标题 | `NEWS_TRANSLATE_LIMIT`（默认 80，命中缓存不重复）、`NEWS_TRANSLATE_BATCH`(25) |
+| 事件摘要字数 | `NEWS_SUMMARY_CHARS`（默认 260，直接截取原文摘要） |
+| 无摘要时补正文 | `NEWS_BODY_CHARS`（默认 200，抓原文正文前 200 字）、`NEWS_BODY_LIMIT`（默认 12 篇/轮） |
+| 事件合并松紧 | `NEWS_EVENT_SIMILARITY`（默认 0.5，调高更保守） |
+| 翻译模型 / 时间预算 | `NEWS_LLM_MODEL`（默认 `glm-4.7-flash`）/ `NEWS_LLM_BUDGET_MIN`(6) |
 | AI 摘要条数 | `SUMMARIZE_LIMIT`（默认 40/次，结果永久缓存） |
 | 请求节流（防 429） | `LLM_MIN_INTERVAL`（默认 4 秒）/ `LLM_WORKERS`（默认 3） |
+
+看一轮到底发生了什么：`daily/data/stats.json` 里是 `raw → after_keywords → written` 的漏斗和每个源的条数/耗时/镜像，Actions 的 Step Summary 也会打印这一行。
 
 `keywords.txt`：每行一个「或」条件，行内空格视为整句短语，`+` 表示「且」：
 
@@ -202,7 +223,9 @@ agent + reinforcement learning
 ```bash
 node scripts/generate-manifest.js      # 生成博客清单
 python scripts/daily/fetch_papers.py   # 抓论文（需 .env.local 里的 Key 才有中文摘要）
-python scripts/daily/fetch_news.py     # 抓新闻
+python scripts/daily/fetch_news.py     # 旧版：单一 RSS 列表（已不参与流水线）
+python scripts/daily/fetch_sources.py  # 新版：34 源 + 关键词过滤
+python scripts/daily/probe_sources.py  # 探源：一次性验证哪些源还活着
 python -m http.server 8099             # 开在仓库根目录
 # → http://127.0.0.1:8099/daily/
 ```
