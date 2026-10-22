@@ -22,10 +22,10 @@ OUT = ROOT / "daily" / "icons"
 
 # name, pixel size, mark scale (maskable/apple need padding), full-bleed square
 JOBS = [
-    ("icon-192.png", 192, 1.0, False),
-    ("icon-512.png", 512, 1.0, False),
-    ("icon-512-maskable.png", 512, 0.70, True),
-    ("apple-touch-icon.png", 180, 0.80, True),
+    ("icon-192-v2.png", 192, 1.0, False),
+    ("icon-512-v2.png", 512, 1.0, False),
+    ("icon-512-maskable-v2.png", 512, 0.70, True),
+    ("apple-touch-icon-v2.png", 180, 0.80, True),
 ]
 
 CANDIDATES = [

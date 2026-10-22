@@ -14,9 +14,9 @@ const SHELL_ASSETS = [
   './assets/app.js',
   './manifest.webmanifest',
   './icons/favicon.svg',
-  './icons/icon-192.png',
-  './icons/icon-512.png',
-  './icons/apple-touch-icon.png',
+  './icons/icon-192-v2.png',
+  './icons/icon-512-v2.png',
+  './icons/apple-touch-icon-v2.png',
 ];
 
 self.addEventListener('install', (event) => {
