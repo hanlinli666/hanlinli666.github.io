@@ -1349,8 +1349,24 @@ body.is-locked { overflow: hidden; }
 }
 
 @media (max-width: 640px) {
-  /* 手机端标签栏移到底部拇指区，顶部只留搜索 */
-  .app-bar { padding: 8px 16px; }
+  /* 手机端标签栏移到底部拇指区，顶部只留搜索。
+     注意：.app-bar 自身不能有 backdrop-filter —— 它会给 fixed 子元素建立包含块，
+     导致 .tabs 相对 56px 高的顶栏定位并盖住搜索行。毛玻璃改由伪元素承担。 */
+  .app-bar {
+    padding: 8px 16px;
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .app-bar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--head-bg);
+    -webkit-backdrop-filter: saturate(180%) blur(18px);
+    backdrop-filter: saturate(180%) blur(18px);
+  }
   .app-bar .toolbar { margin: 0 auto; }
   .app-bar .tabs {
     position: fixed;
