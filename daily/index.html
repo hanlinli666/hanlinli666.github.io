@@ -2,15 +2,15 @@
 <html lang="zh-CN" data-theme="auto">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>今日精进 · 论文与新闻</title>
 <meta name="description" content="每天一份 AI 事件简报与论文摘要：部委政策、中文媒体、热榜信号，自动更新、离线可读、可安装到主屏幕。" />
 <link rel="manifest" href="./manifest.webmanifest" />
 <link rel="icon" href="./icons/favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="./icons/apple-touch-icon-v2.png" />
 <link rel="stylesheet" href="./assets/app.css" />
-<meta name="theme-color" content="#f7f7fb" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#0e1016" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#f5f6fa" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0a0c12" media="(prefers-color-scheme: dark)" />
 <meta name="color-scheme" content="light dark" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-title" content="今日精进" />
@@ -55,8 +55,8 @@
   </div>
 
   <div class="stats" id="stats" aria-live="polite">
-    <span class="stat"><b id="st-events">–</b><span>今日事件</span></span>
-    <span class="stat"><b id="st-papers">–</b><span>今日论文</span></span>
+    <span class="stat"><b id="st-events">–</b><span>事件</span></span>
+    <span class="stat"><b id="st-papers">–</b><span>论文</span></span>
     <span class="stat"><b id="st-read">0</b><span>已读</span></span>
     <span class="stat"><b id="st-streak">1</b><span>连续打卡</span></span>
   </div>
@@ -139,6 +139,24 @@
     <button id="ios-close" class="btn primary" type="button">知道了</button>
   </div>
 </div>
+
+<div id="reader" class="reader" hidden>
+  <div class="reader-backdrop" data-reader-close></div>
+  <article class="reader-card" role="dialog" aria-modal="true" aria-labelledby="reader-title" tabindex="-1">
+    <div class="reader-grip" aria-hidden="true"></div>
+    <button class="reader-close" type="button" data-reader-close aria-label="关闭详情">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <div class="reader-scroll" id="reader-scroll">
+      <div id="reader-body"></div>
+    </div>
+    <div class="reader-foot" id="reader-actions"></div>
+  </article>
+</div>
+
+<button id="to-top" class="to-top" type="button" aria-label="回到顶部" hidden>
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5m0 0-6 6m6-6 6 6"/></svg>
+</button>
 
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 

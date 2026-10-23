@@ -131,6 +131,38 @@
     return total > limit ? `${shown} 等 ${total} 人` : shown;
   };
 
+  /* 中文约 350 字/分钟，英文约 180 词/分钟；用来给阅读层一个时间预期 */
+  const readingMinutes = (text) => {
+    const raw = String(text || '');
+    const cn = (raw.match(/[\u4e00-\u9fff]/g) || []).length;
+    const words = (raw.replace(/[\u4e00-\u9fff]/g, ' ').match(/[A-Za-z0-9]+/g) || []).length;
+    return Math.max(1, Math.ceil(cn / 350 + words / 180));
+  };
+
+  const isEnglishText = (text) => {
+    const raw = String(text || '');
+    if (raw.length < 40) return false;
+    const cn = (raw.match(/[\u4e00-\u9fff]/g) || []).length;
+    const latin = (raw.match(/[A-Za-z]/g) || []).length;
+    return latin > 40 && latin > cn * 2;
+  };
+
+  const eventSourceList = (item) => {
+    const seen = new Set();
+    const list = [];
+    const push = (url, source, title, published) => {
+      if (!url || seen.has(url)) return;
+      seen.add(url);
+      list.push({ url, source, title, published });
+    };
+    const primary = (item.links || []).find((link) => link.url === item.primary_url);
+    push(item.primary_url || item.link, primary ? primary.source : '原始报道', primary ? primary.title : item.title_zh || item.title);
+    (item.links || []).forEach((link) => push(link.url, link.source, link.title, link.published));
+    return list;
+  };
+
+  const looksLikeUrl = (value) => /^https?:\/\//i.test(String(value || ''));
+
   /* ----------------------------------------------------------------- state */
 
   const state = {
@@ -138,6 +170,7 @@
     query: '',
     sort: 'date',
     keyword: '',
+    filter: 'all',
     papers: [],
     news: [],
     events: [],
@@ -148,11 +181,17 @@
     loading: true,
     error: '',
     lastSync: 0,
+    reader: null,
   };
 
   /* --------------------------------------------------------------- storage */
 
   const itemKey = (kind, id) => `${kind}:${id}`;
+
+  function findItem(kind, id) {
+    const pool = kind === 'event' ? state.events : kind === 'news' ? state.news : state.papers;
+    return pool.find((item) => String(item.id) === String(id)) || state.saved[itemKey(kind, id)]?.item || null;
+  }
 
   function isSaved(kind, id) {
     return Boolean(state.saved[itemKey(kind, id)]);
@@ -202,6 +241,7 @@
     }
     safeWrite(STORE.saved, state.saved);
     render();
+    refreshReaderActions();
   }
 
   function markRead(kind, id) {
@@ -367,6 +407,10 @@
     }
     const pool = state.tab === 'events' ? state.events : state.papers;
     let items = pool.filter((item) => matchesQuery(item, q));
+    if (state.tab === 'events') {
+      if (state.filter === 'l1') items = items.filter((item) => item.source_level === 'L1');
+      if (state.filter === 'unread') items = items.filter((item) => !isRead('event', item.id));
+    }
     if (state.tab === 'papers' && state.keyword) {
       items = items.filter((item) => (item.matched || []).includes(state.keyword));
     }
@@ -427,6 +471,8 @@
     const label = state.tab === 'papers' ? '论文' : state.tab === 'events' ? '事件' : '收藏';
     const bits = [`共 ${total}${label}`];
     if (state.query) bits.push(`匹配「${state.query}」`);
+    if (state.tab === 'events' && state.filter === 'l1') bits.push('仅官方 L1');
+    if (state.tab === 'events' && state.filter === 'unread') bits.push('仅未读');
     if (state.tab === 'papers' && state.keyword) bits.push(`关键词 ${state.keyword}`);
     if (state.tab === 'papers' && state.sort === 'score') bits.push('按相关度');
     return bits.join(' · ');
@@ -461,8 +507,10 @@
     const q = state.query.trim();
     const id = esc(item.id || '');
     const saved = isSaved('paper', item.id);
-    const titleZh = item.title_zh ? `<h3 class="zh">${highlight(item.title_zh, q)}</h3>` : '';
-    const titleEn = `<h3 class="${item.title_zh ? 'title-en' : ''}">${highlight(item.title, q)}</h3>`;
+    const titleZh = item.title_zh
+      ? `<h3 class="zh"><button class="card-open" type="button" data-open-kind="paper" data-open-id="${id}">${highlight(item.title_zh, q)}</button></h3>`
+      : '';
+    const titleEn = `<h3 class="title-en"><button class="card-open" type="button" data-open-kind="paper" data-open-id="${id}">${highlight(item.title, q)}</button></h3>`;
     // AI 主题词优先；没有摘要时退回「命中关键词」，读者总能知道这篇在讲什么
     const topics = (item.tags && item.tags.length ? item.tags : item.matched) || [];
     const matched = topics
@@ -480,7 +528,7 @@
     const read = isRead('paper', item.id);
 
     return `
-      <article class="card paper${read ? ' is-read' : ''}" data-key="paper:${id}">
+      <article class="card paper${read ? ' is-read' : ''}" data-key="paper:${id}" data-card-kind="paper" data-card-id="${id}">
         <div class="card-top">
           ${cat}
           <span class="dot"></span>
@@ -517,24 +565,17 @@
     const summary = item.event_summary
       ? `<p class="summary">${highlight(item.event_summary, q)}</p>`
       : '';
-    const impact = item.potential_impact
-      ? `<p class="impact">影响：${highlight(item.potential_impact, q)}</p>`
-      : '';
     const chips = [...(item.key_entities || []), ...(item.topics || [])]
-      .slice(0, 5)
+      .slice(0, 3)
       .map((tag) => `<span class="kw">${esc(tag)}</span>`)
       .join('');
-    const others = (item.links || []).filter((link) => link.url && link.url !== item.primary_url).slice(0, 4);
-    const alt = others.length
-      ? `<details class="alt"><summary>另见 ${others.length} 家来源</summary><ul>${others
-          .map((link) => `<li><a href="${esc(link.url)}" target="_blank" rel="noopener">${esc(link.source)} · ${esc(link.title)}</a></li>`)
-          .join('')}</ul></details>`
-      : '';
+    const primary = (item.links || []).find((link) => link.url === item.primary_url) || (item.links || [])[0];
+    const sourceName = primary ? primary.source : '原始报道';
     const count = (item.source_count || 1) > 1 ? ` · ${item.source_count} 家来源` : '';
     const url = item.primary_url || item.link || '#';
 
     return `
-      <article class="card event${read ? ' is-read' : ''}" data-key="event:${id}">
+      <article class="card event${read ? ' is-read' : ''}" data-key="event:${id}" data-card-kind="event" data-card-id="${id}">
         <div class="src-row">
           <span class="lv lv-${esc(level.toLowerCase())}">${levelLabel}</span>
           ${stage}
@@ -546,14 +587,17 @@
             <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="m12 4 2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 9.7l5.4-.8Z"/></svg>
           </button>
         </div>
-        <h3 class="zh"><a href="${esc(url)}" target="_blank" rel="noopener" data-read="event" data-id="${id}">${highlight(item.title_zh, q)}</a></h3>
+        <h3 class="zh">
+          <button class="card-open" type="button" data-open-kind="event" data-open-id="${id}">${highlight(item.title_zh, q)}</button>
+        </h3>
         ${summary}
-        ${impact}
         ${chips ? `<div class="kw-row">${chips}</div>` : ''}
-        ${alt}
         <div class="card-foot">
-          <span class="authors">首次发现 ${esc(clock(item.first_seen_at))}${count}</span>
-          <a class="btn" href="${esc(url)}" target="_blank" rel="noopener" data-read="event" data-id="${id}">原文 ↗</a>
+          <span class="authors">${esc(sourceName)}${count}</span>
+          <a class="src-link" href="${esc(url)}" target="_blank" rel="noopener" data-read="event" data-id="${id}">
+            原文
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
         </div>
       </article>`;
   }
@@ -565,7 +609,7 @@
     const summary = item.summary ? `<p class="summary">${highlight(item.summary, q)}</p>` : '';
     const read = isRead('news', item.id);
     return `
-      <article class="card news${read ? ' is-read' : ''}" data-key="news:${id}">
+      <article class="card news${read ? ' is-read' : ''}" data-key="news:${id}" data-card-kind="news" data-card-id="${id}">
         <div class="src-row">
           <span class="src-badge">${esc(sourceBadge(item.source))}</span>
           <span>${esc(item.source || '新闻')}</span>
@@ -578,14 +622,196 @@
           </button>
         </div>
         <h3>
-          <a href="${esc(item.link)}" target="_blank" rel="noopener" data-read="news" data-id="${id}">${highlight(item.title, q)}</a>
+          <button class="card-open" type="button" data-open-kind="news" data-open-id="${id}">${highlight(item.title, q)}</button>
         </h3>
         ${summary}
-        <a class="open-hint" href="${esc(item.link)}" target="_blank" rel="noopener" data-read="news" data-id="${id}">
-          阅读原文
-          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
-        </a>
+        <div class="card-foot">
+          <span class="authors">${esc(item.source || '新闻')}</span>
+          <a class="src-link" href="${esc(item.link)}" target="_blank" rel="noopener" data-read="news" data-id="${id}">
+            原文
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
       </article>`;
+  }
+
+  /* ------------------------------------------------------------------ reader */
+
+  function readerEvent(item) {
+    const q = state.query.trim();
+    const level = item.source_level || 'L2';
+    const levelLabel = { L1: 'L1 官方', L2: 'L2 媒体', L3: 'L3 社区' }[level] || 'L2 媒体';
+    const stage = item.policy_stage && item.policy_stage !== '不适用'
+      ? `<span class="stage">${esc(item.policy_stage)}</span>`
+      : '';
+    const first = item.first_seen_at || item.published;
+    const summary = item.event_summary || item.summary || '';
+    const impact = item.potential_impact || '';
+    const tags = [...(item.key_entities || []), ...(item.topics || [])];
+    const links = eventSourceList(item);
+    const english = isEnglishText(summary);
+    return `
+      <div class="r-meta">
+        <span class="lv lv-${esc(level.toLowerCase())}">${levelLabel}</span>
+        ${stage}
+        <span class="dot"></span>
+        <span>${esc(dayLabel(cnDay(first)))} ${esc(clock(first))}</span>
+        <span class="dot"></span>
+        <span>约 ${readingMinutes(summary + impact)} 分钟</span>
+      </div>
+      <h2 id="reader-title" class="r-title">${highlight(item.title_zh || item.title, q)}</h2>
+      ${english && summary ? `<p class="r-eyebrow">英文原文摘要 · 可点底部「阅读原文」查看全文</p>` : ''}
+      ${summary ? `<p class="r-summary">${highlight(summary, q)}</p>` : ''}
+      ${impact ? `<div class="r-impact"><span>潜在影响</span><p>${highlight(impact, q)}</p></div>` : ''}
+      ${tags.length ? `<div class="r-tags">${tags.map((tag) => `<span class="kw">${esc(tag)}</span>`).join('')}</div>` : ''}
+      ${links.length ? `
+        <div class="r-sources">
+          <h3>信息来源</h3>
+          <ul>${links.map((link) => `
+            <li>
+              <a href="${esc(link.url)}" target="_blank" rel="noopener">
+                <span class="r-src-name">${esc(link.source || '来源')}</span>
+                <span class="r-src-title">${esc(link.title || '')}</span>
+                ${link.published ? `<span class="r-src-time">${esc(clock(link.published))}</span>` : ''}
+              </a>
+            </li>`).join('')}
+          </ul>
+        </div>` : ''}
+    `;
+  }
+
+  function readerPaper(item) {
+    const q = state.query.trim();
+    const cat = item.primary_category ? `<span class="cat">${esc(item.primary_category)}</span>` : '';
+    const day = item.day || cnDay(item.published);
+    const bullets = Array.isArray(item.summary_zh) ? item.summary_zh : [];
+    const list = item.authors || [];
+    const total = item.author_count || list.length;
+    const authors = list.length
+      ? `${list.slice(0, 8).join('、')}${total > Math.min(list.length, 8) ? ` 等 ${total} 人` : ''}`
+      : '';
+    return `
+      <div class="r-meta">
+        ${cat}
+        <span class="dot"></span>
+        <span>${esc(dayLabel(day))} ${esc(clock(item.published))}</span>
+        <span class="dot"></span>
+        <span>约 ${readingMinutes(bullets.join('') + (item.abstract || ''))} 分钟</span>
+      </div>
+      <h2 id="reader-title" class="r-title">${highlight(item.title_zh || item.title, q)}</h2>
+      ${item.title_zh ? `<p class="r-subtitle">${highlight(item.title, q)}</p>` : ''}
+      ${bullets.length ? `
+        <div class="r-block">
+          <h3>AI 要点</h3>
+          <ul class="r-bullets">${bullets.map((b) => `<li>${highlight(b, q)}</li>`).join('')}</ul>
+        </div>` : ''}
+      ${item.abstract ? `<details class="r-abstract"><summary>原文摘要</summary><p>${highlight(item.abstract, q)}</p></details>` : ''}
+      ${authors ? `<p class="r-author">${esc(authors)}</p>` : ''}
+    `;
+  }
+
+  function readerNews(item) {
+    const q = state.query.trim();
+    const summary = item.summary || '';
+    return `
+      <div class="r-meta">
+        <span class="src-badge">${esc(sourceBadge(item.source))}</span>
+        <span>${esc(item.source || '新闻')}</span>
+        <span class="dot"></span>
+        <span>${esc(dayLabel(cnDay(item.published)))} ${esc(clock(item.published))}</span>
+        <span class="dot"></span>
+        <span>约 ${readingMinutes(summary)} 分钟</span>
+      </div>
+      <h2 id="reader-title" class="r-title">${highlight(item.title, q)}</h2>
+      ${isEnglishText(summary) ? '<p class="r-eyebrow">英文原文摘要</p>' : ''}
+      ${summary ? `<p class="r-summary">${highlight(summary, q)}</p>` : ''}
+      ${(item.matched || []).length ? `<div class="r-tags">${item.matched.slice(0, 8).map((tag) => `<span class="kw">${esc(tag)}</span>`).join('')}</div>` : ''}
+    `;
+  }
+
+  function readerActions(kind, item) {
+    const saved = isSaved(kind, item.id);
+    const url = item.link || item.primary_url || item.url;
+    const primary = looksLikeUrl(url) ? url : '';
+    const pdf = kind === 'paper' && looksLikeUrl(item.pdf) ? item.pdf : '';
+    return `
+      <button class="r-btn ghost" type="button" data-action="save" data-kind="${kind}" data-id="${esc(item.id)}" aria-pressed="${saved}">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" ${saved ? 'fill="currentColor"' : ''}><path d="m12 4 2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 9.7l5.4-.8Z"/></svg>
+        ${saved ? '已收藏' : '收藏'}
+      </button>
+      ${pdf ? `<a class="r-btn ghost" href="${esc(pdf)}" target="_blank" rel="noopener">PDF</a>` : ''}
+      ${primary ? `
+        <a class="r-btn primary" href="${esc(primary)}" target="_blank" rel="noopener">
+          阅读原文
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>` : ''}
+    `;
+  }
+
+  let readerReturnFocus = null;
+
+  function openReader(kind, id) {
+    const item = findItem(kind, id);
+    if (!item) return;
+    if (!state.reader) {
+      readerReturnFocus = document.activeElement;
+      try { history.pushState({ reader: true }, '', location.href); } catch (err) { /* file:// 等环境 */ }
+    }
+    state.reader = { kind, id: String(item.id) };
+    const body = kind === 'event' ? readerEvent(item) : kind === 'news' ? readerNews(item) : readerPaper(item);
+    $('#reader-body').innerHTML = body;
+    $('#reader-actions').innerHTML = readerActions(kind, item);
+    $('#reader-scroll').scrollTop = 0;
+
+    const el = $('#reader');
+    el.hidden = false;
+    document.body.classList.add('is-locked');
+    requestAnimationFrame(() => el.classList.add('is-open'));
+    markRead(kind, item.id);
+    window.setTimeout(() => {
+      const close = $('.reader-close');
+      if (close) close.focus({ preventScroll: true });
+    }, 40);
+  }
+
+  function closeReader({ fromHistory = false } = {}) {
+    if (!state.reader) return;
+    state.reader = null;
+    const el = $('#reader');
+    el.classList.remove('is-open');
+    document.body.classList.remove('is-locked');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.setTimeout(() => {
+      if (!state.reader) el.hidden = true;
+    }, reduce ? 0 : 200);
+    if (!fromHistory && history.state && history.state.reader) {
+      history.back();
+    }
+    if (readerReturnFocus && readerReturnFocus.isConnected) {
+      readerReturnFocus.focus({ preventScroll: true });
+      readerReturnFocus = null;
+    }
+  }
+
+  function trapReaderFocus(event) {
+    const nodes = $$('#reader a[href], #reader button:not([disabled])').filter((node) => node.offsetParent !== null);
+    if (!nodes.length) return;
+    const first = nodes[0];
+    const last = nodes[nodes.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
+  function refreshReaderActions() {
+    if (!state.reader) return;
+    const item = findItem(state.reader.kind, state.reader.id);
+    if (!item) return;
+    $('#reader-actions').innerHTML = readerActions(state.reader.kind, item);
   }
 
   /* ------------------------------------------------------------- chrome bits */
@@ -616,10 +842,34 @@
       tab.setAttribute('aria-selected', String(tab.dataset.tab === state.tab));
     });
     $('#sort-wrap').hidden = state.tab !== 'papers';
+    const placeholders = {
+      events: '搜索事件、来源、话题…',
+      papers: '搜索论文、作者、方向…',
+      saved: '搜索收藏…',
+    };
+    $('#search').placeholder = placeholders[state.tab] || placeholders.events;
   }
 
   function renderChips() {
     const wrap = $('#keyword-chips');
+    if (state.loading) {
+      wrap.hidden = true;
+      return;
+    }
+    if (state.tab === 'events') {
+      const l1 = state.events.filter((item) => item.source_level === 'L1').length;
+      const unread = state.events.filter((item) => !isRead('event', item.id)).length;
+      const chip = (key, label, count) =>
+        `<button class="chip" type="button" data-filter="${key}" aria-pressed="${state.filter === key}">${esc(label)}<span class="chip-n">${count}</span></button>`;
+      wrap.hidden = false;
+      wrap.innerHTML = [
+        chip('all', '全部', state.events.length),
+        chip('l1', '官方 L1', l1),
+        chip('unread', '未读', unread),
+      ].join('');
+      return;
+    }
+
     const keywords = (state.meta.papers && state.meta.papers.keywords) || [];
     if (state.tab !== 'papers' || !keywords.length) {
       wrap.hidden = true;
@@ -640,6 +890,7 @@
     if (tab === 'news') tab = 'events'; // 旧链接兼容
     state.tab = ['events', 'papers', 'saved'].includes(tab) ? tab : 'events';
     state.keyword = '';
+    state.filter = 'all';
     if (push) {
       const target = `#${state.tab}`;
       if (location.hash !== target) history.replaceState(null, '', target);
@@ -730,8 +981,8 @@
   }
 
   /* 顶部栏说明：
-     常驻栏（.app-bar）用 CSS sticky 贴在顶部，高度恒定、由浏览器负责，
-     不参与这里任何滚动计算，因此不需要 JS，也不会抖动。 */
+     常驻栏（.app-bar）用 CSS sticky 贴在顶部，高度恒定、由浏览器负责；
+     JS 只读取它的高度写进 --bar-h，供吸顶日期栏对齐，不参与滚动计算。 */
 
   /* ----------------------------------------------------------------- events */
 
@@ -792,11 +1043,15 @@
       if (!$('#sort-wrap').contains(event.target)) closeSort();
     });
 
-    // keyword chips
+    // chips: 事件用来源/未读筛选，论文用关键词
     $('#keyword-chips').addEventListener('click', (event) => {
       const chip = event.target.closest('.chip');
       if (!chip) return;
-      state.keyword = chip.dataset.kw || '';
+      if (chip.dataset.filter) {
+        state.filter = chip.dataset.filter;
+      } else {
+        state.keyword = chip.dataset.kw || '';
+      }
       render();
     });
 
@@ -807,13 +1062,38 @@
         event.preventDefault();
         const kind = saveBtn.dataset.kind;
         const id = saveBtn.dataset.id;
-        const pool = kind === 'event' ? state.events : kind === 'news' ? state.news : state.papers;
-        const item = pool.find((x) => String(x.id) === id) || state.saved[itemKey(kind, id)]?.item;
+        const item = findItem(kind, id);
         if (item) toggleSave(kind, item);
+        return;
+      }
+      const openBtn = event.target.closest('button[data-open-kind]');
+      if (openBtn) {
+        openReader(openBtn.dataset.openKind, openBtn.dataset.openId);
         return;
       }
       const readLink = event.target.closest('[data-read]');
       if (readLink) markRead(readLink.dataset.read, readLink.dataset.id);
+      if (event.target.closest('a, button, summary, details')) return;
+      const card = event.target.closest('.card[data-card-kind]');
+      if (card) openReader(card.dataset.cardKind, card.dataset.cardId);
+    });
+
+    // reader: 关闭按钮 / 遮罩 / 收藏
+    $$('[data-reader-close]').forEach((node) => {
+      node.addEventListener('click', () => closeReader());
+    });
+    $('#reader-actions').addEventListener('click', (event) => {
+      const btn = event.target.closest('[data-action="save"]');
+      if (!btn || !state.reader) return;
+      event.preventDefault();
+      const item = findItem(btn.dataset.kind, btn.dataset.id);
+      if (!item) return;
+      toggleSave(btn.dataset.kind, item);
+      const next = $('#reader-actions [data-action="save"]');
+      if (next) next.focus({ preventScroll: true });
+    });
+    window.addEventListener('popstate', () => {
+      if (state.reader) closeReader({ fromHistory: true });
     });
 
     $('#btn-theme').addEventListener('click', cycleTheme);
@@ -840,15 +1120,39 @@
       updateStats();
     });
 
-    // keyboard: "/" focuses search, 1/2/3 switch tabs
+    // 长列表滚动后出现「回到顶部」
+    const toTop = $('#to-top');
+    let topTick = false;
+    window.addEventListener('scroll', () => {
+      if (topTick) return;
+      topTick = true;
+      requestAnimationFrame(() => {
+        toTop.hidden = window.scrollY < 640;
+        topTick = false;
+      });
+    }, { passive: true });
+    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // keyboard: "/" focuses search, 1/2/3 switch tabs, Esc 关闭阅读层
     document.addEventListener('keydown', (event) => {
       if (event.metaKey || event.ctrlKey || event.altKey) return;
+      if (state.reader) {
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          closeReader();
+          return;
+        }
+        if (event.key === 'Tab') {
+          trapReaderFocus(event);
+          return;
+        }
+      }
       const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName);
       if (event.key === '/' && !typing) {
         event.preventDefault();
         $('#search').focus();
       }
-      if (!typing && ['1', '2', '3'].includes(event.key)) {
+      if (!typing && !state.reader && ['1', '2', '3'].includes(event.key)) {
         setTab({ 1: 'events', 2: 'papers', 3: 'saved' }[event.key]);
       }
     });
@@ -856,12 +1160,22 @@
 
   /* ------------------------------------------------------------------- boot */
 
+  /* 给吸顶日期栏提供实际高度：手机端常驻栏只有搜索行，桌面端还含标签行 */
+  function syncBarHeight() {
+    const bar = $('.app-bar');
+    if (bar) document.documentElement.style.setProperty('--bar-h', `${bar.offsetHeight}px`);
+  }
+
   function boot() {
     bumpStreak();
     applyThemeSilently();
     wireEvents();
     wireInstall();
     registerSW();
+    syncBarHeight();
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(syncBarHeight).observe($('.app-bar'));
+    }
 
     const hash = location.hash.replace('#', '');
     if (['events', 'papers', 'saved', 'news'].includes(hash)) {
