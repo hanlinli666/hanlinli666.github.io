@@ -3,7 +3,7 @@
    Bump VERSION when the shell changes so old caches are dropped.
    ========================================================================== */
 
-const VERSION = 'v10';
+const VERSION = 'v11';
 const SHELL_CACHE = `dl-shell-${VERSION}`;
 const DATA_CACHE = `dl-data-${VERSION}`;
 
@@ -19,16 +19,28 @@ const SHELL_ASSETS = [
   './icons/apple-touch-icon-v2.png',
 ];
 
+/* 首次访问时页面的 JSON 请求发生在 SW 接管之前，不会经过 fetch 事件，
+   导致「第一次在线打开、随后立刻断网」没有数据。安装期预缓存一份兜底。 */
+const DATA_ASSETS = [
+  './data/events.json',
+  './data/papers.json',
+  './data/news.json',
+  './data/meta.json',
+];
+
 self.addEventListener('install', (event) => {
   event.waitUntil(
     (async () => {
-      const cache = await caches.open(SHELL_CACHE);
+      const [shell, data] = await Promise.all([caches.open(SHELL_CACHE), caches.open(DATA_CACHE)]);
       // addAll() rejects when any single URL fails: add one by one instead.
-      await Promise.all(
-        SHELL_ASSETS.map((url) =>
-          cache.add(new Request(url, { cache: 'reload' })).catch(() => {})
-        )
-      );
+      await Promise.all([
+        ...SHELL_ASSETS.map((url) =>
+          shell.add(new Request(url, { cache: 'reload' })).catch(() => {})
+        ),
+        ...DATA_ASSETS.map((url) =>
+          data.add(new Request(url, { cache: 'reload' })).catch(() => {})
+        ),
+      ]);
       await self.skipWaiting();
     })()
   );
