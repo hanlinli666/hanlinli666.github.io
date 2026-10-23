@@ -1,5 +1,467 @@
 [
   {
+    "id": "e_0cc9f883d6",
+    "title_zh": "前端对接聊天 API：我用 React 做了一个比 ChatGPT 还好看的界面",
+    "event_summary": "前后端联调了4遍才跑通，3个跨域坑我替你踩完了。 我是怕浪猫，上一章后端搞定了，这章搭前端。目标明确——用Vue3把聊天机器人的UI做出来，和后端API对接，实现一个完整的带UI的聊天机器人。 浏览器有同源策略：协议+域名+端口必须一致。前端跑在 localhost:5173 ，后端跑在 localhost:5000 ，跨域了。 前端请求直接用 /api/v1/...…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "ChatGPT"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": "2026-10-23T11:30:59Z",
+    "published": "2026-10-23T11:30:59Z",
+    "primary_url": "https://juejin.cn/post/7698623001063784463",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "前端对接聊天 API：我用 React 做了一个比 ChatGPT 还好看的界面",
+        "url": "https://juejin.cn/post/7698623001063784463",
+        "published": "2026-10-23T11:30:59Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_7d342b98b7",
+    "title_zh": "国家发展改革委等部门公布2027—2028年小麦最低收购价格",
+    "event_summary": "【国家发展改革委等部门公布2027—2028年小麦最低收购价格】财联社10月23日电，国家发展改革委、财政部等部门关于公布2027—2028年小麦最低收购价格的通知，2027—2028年，国家继续在小麦主产区实行最低收购价政策。综合考虑粮食生产成本、市场供求、国内外市场价格和产业发展等因素，2027—2028年当年生产的小麦（三等）最低收购价为每50公斤119元。如生产成本等发生较大变化，另行按程序调整。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "产业 + 政策"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T11:17:45Z",
+    "primary_url": "https://www.cls.cn/detail/2513827",
+    "source_count": 2,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "国家发展改革委等部门公布2027—2028年小麦最低收购价格",
+        "url": "https://www.cls.cn/detail/2513827",
+        "published": "2026-10-23T11:20:41Z"
+      },
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "国家发展改革委等部门关于公布2027—2028年小麦最低收购价格的通知",
+        "url": "https://wallstreetcn.com/livenews/3184766",
+        "published": "2026-10-23T11:17:45Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_c7835dcdf3",
+    "title_zh": "工业和信息化部组织召开汽车产业国际合作圆桌会",
+    "event_summary": "36氪获悉，10月21日，在2026世界智能网联汽车大会期间，工业和信息化部党组成员、副部长辛国斌主持召开汽车产业国际合作圆桌会。辛国斌表示，智能网联汽车正在推动汽车产品形态、能源消费结构、交通出行模式发生深刻变化。全球主要汽车国家纷纷加快战略布局，加强技术研发与示范应用，完善政策法规与标准规范，为产业发展创造良好环境。我们愿与各方一道，加强对话沟通、深化政策协同、强化务实合作，与全球行业同仁携手共建包容、共享的产业生态。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "产业 + 政策"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T11:06:08Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4038354011935875",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "工业和信息化部组织召开汽车产业国际合作圆桌会",
+        "url": "https://www.36kr.com/newsflashes/4038354011935875",
+        "published": "2026-10-23T11:06:08Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_a740c601f0",
+    "title_zh": "雄韬股份：拟变更3.36亿元募资投向AI算力中心直流电源及整机建设项目",
+    "event_summary": "【雄韬股份：拟变更3.36亿元募资投向AI算力中心直流电源及整机建设项目】财联社10月23日电，雄韬股份(002733.SZ)公告称，公司拟将原“湖北雄韬新能源锂电池(5GWh)生产基地建设项目”承诺投入的募集资金3.36亿元，变更用于“AI算力中心直流电源及整机建设项目”。新项目预计投资总额15亿元，其中3.36亿元来自募集资金，项目建成后将形成年产超大型数据中心电力方仓PTU及集成服务1800套、中型500套、小型300套的生产能力…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 算力"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T10:47:20Z",
+    "primary_url": "https://www.cls.cn/detail/2513795",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "雄韬股份：拟变更3.36亿元募资投向AI算力中心直流电源及整机建设项目",
+        "url": "https://www.cls.cn/detail/2513795",
+        "published": "2026-10-23T10:47:20Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_dc2a03a73e",
+    "title_zh": "中国联通：在联通渠道购买苹果 iPhone Duo 并开通 eSIM 可选“国际漫游券”“国内通用流量”等权益",
+    "event_summary": "IT之家 10 月 23 日消息，中国联通发文，宣布用户在中国联通办理 iPhone Duo 购机合约，可享终端最高直降 3240 元优惠。同时用户在联通渠道购买苹果 iPhone Duo、开通联通 eSIM，可获以下权益“五选一”： 30GB 境外 eSIM 10 天包 300 元国际漫游券 100GB 国内通用流量 词元（token）（注：官方未公布 AI 品牌和具体词元数量） 鲜花/ 咖啡 中国联通表示，过去一年，中国…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T10:37:57Z",
+    "primary_url": "https://www.ithome.com/1/017/195.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "中国联通：在联通渠道购买苹果 iPhone Duo 并开通 eSIM 可选“国际漫游券”“国内通用流量”等权益",
+        "url": "https://www.ithome.com/1/017/195.htm",
+        "published": "2026-10-23T10:37:57Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_97df4ed033",
+    "title_zh": "AI 智能体疯狂入侵人类系统：十几起漏洞依次排开，AI真正攻破了哪一层?",
+    "event_summary": "从漏洞被找到，到它被大规模利用，中间只剩几个小时。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "智能体"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T10:30:32Z",
+    "primary_url": "https://www.tmtpost.com/8179406.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "AI 智能体疯狂入侵人类系统：十几起漏洞依次排开，AI真正攻破了哪一层?",
+        "url": "https://www.tmtpost.com/8179406.html",
+        "published": "2026-10-23T10:30:32Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_357cdbaff6",
+    "title_zh": "智元两年投出47笔融资，多数投给了自家机器人的上游",
+    "event_summary": "智元铺生态投上游谋上市，待市场验证成败。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "机器人"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T10:19:48Z",
+    "primary_url": "https://www.tmtpost.com/8178163.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "智元两年投出47笔融资，多数投给了自家机器人的上游",
+        "url": "https://www.tmtpost.com/8178163.html",
+        "published": "2026-10-23T10:19:48Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_cded9da86e",
+    "title_zh": "谁在押注 Personal AI，谁又在害怕 Personal AI？",
+    "event_summary": "Personal Agent 的争夺战。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + Agent"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T10:19:14Z",
+    "primary_url": "https://www.tmtpost.com/8179361.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "谁在押注 Personal AI，谁又在害怕 Personal AI？",
+        "url": "https://www.tmtpost.com/8179361.html",
+        "published": "2026-10-23T10:19:14Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_885e47d801",
+    "title_zh": "别再争谁是“中国版Duet”了，卖铲子的ICT厂商先赚到了钱",
+    "event_summary": "常驻型 Agent 将 AI 搬上云端，重写了机房的 CPU、存储与网络配比。国内跨平台 Agent 受阻，基础设施先拿订单，成色仍看应用层。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + Agent"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T10:18:42Z",
+    "primary_url": "https://www.tmtpost.com/8179336.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "别再争谁是“中国版Duet”了，卖铲子的ICT厂商先赚到了钱",
+        "url": "https://www.tmtpost.com/8179336.html",
+        "published": "2026-10-23T10:18:42Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_1a7ca8b9d8",
+    "title_zh": "OpenAI、字节开始下场做机器人，创业公司如何拿到“大结果”？",
+    "event_summary": "具身智能创业公司面对的已经不只是另一个竞争对手。国内外的头部大模型公司带着算力、模型、人才和资金，从软件一路压到物理世界。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "大模型"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T10:09:37Z",
+    "primary_url": "https://www.tmtpost.com/8179212.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "OpenAI、字节开始下场做机器人，创业公司如何拿到“大结果”？",
+        "url": "https://www.tmtpost.com/8179212.html",
+        "published": "2026-10-23T10:09:37Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_53dddfe266",
+    "title_zh": "从乌兰察布到雄安，算力之战背后的国家棋局",
+    "event_summary": "文 | 蓝鲨财经社，作者 | 简安，编辑 | 卢旭成 全球AI竞争的战场进一步向芯片之外延伸。谁能更快建成数据中心、谁能获得稳定且低成本的电力、谁能把数以万计的加速芯片组织成高效运行的计算集群，谁就有机会在AI产业竞争中获得更多主动权。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 算力"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T10:08:43Z",
+    "primary_url": "https://www.tmtpost.com/8179238.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "从乌兰察布到雄安，算力之战背后的国家棋局",
+        "url": "https://www.tmtpost.com/8179238.html",
+        "published": "2026-10-23T10:08:43Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_034603829a",
+    "title_zh": "“AI 对资本回报是破坏性的”——丘栋荣和黄仁勋，其实吵的不是同一件事",
+    "event_summary": "消失两年，丘栋荣一开口就说了反市场共识：低估值不是机会是雷。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T10:08:01Z",
+    "primary_url": "https://www.tmtpost.com/8179246.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "“AI 对资本回报是破坏性的”——丘栋荣和黄仁勋，其实吵的不是同一件事",
+        "url": "https://www.tmtpost.com/8179246.html",
+        "published": "2026-10-23T10:08:01Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_96e076fcc0",
+    "title_zh": "美国拟向 4 家企业提供最高 3.89 亿美元半导体研发资金，核聚变与 AI 数据中心成重点",
+    "event_summary": "IT之家 10 月 23 日消息，美国商务部昨日宣布，计划通过美国《芯片与科学法案》框架下的半导体研发项目，向 4 家企业提供最高 3.89 亿美元 （IT之家注：现汇率约合 26.02 亿元人民币） 的研发资金，用于支持功率半导体器件及关键材料研发，相关技术将应用于核聚变发电、AI 数据中心和电力基础设施等领域。 根据美国国家标准与技术研究院（NIST）公布的信息，商务部已与 4 家企业签署资助意向书，最终资助仍需完成后续程序。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 应用"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T09:46:17Z",
+    "primary_url": "https://www.ithome.com/1/017/171.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "美国拟向 4 家企业提供最高 3.89 亿美元半导体研发资金，核聚变与 AI 数据中心成重点",
+        "url": "https://www.ithome.com/1/017/171.htm",
+        "published": "2026-10-23T09:46:17Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_6c8504f0c0",
+    "title_zh": "深圳将发布海洋标准体系建设指南、水下机器人标准体系",
+    "event_summary": "IT之家 10 月 23 日消息，10 月 22 日至 24 日，由自然资源部和广东省人民政府共同主办的中国海洋经济博览会（以下简称“海博会”）在深圳举办。 据财联社今日报道，大会期间相关活动将发布《 深圳市海洋标准体系建设指南 》《 深圳市水下机器人标准体系 》及深圳海洋科技“首发首试首用”产品清单，19…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "机器人"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T09:44:04Z",
+    "primary_url": "https://www.ithome.com/1/017/169.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "深圳将发布海洋标准体系建设指南、水下机器人标准体系",
+        "url": "https://www.ithome.com/1/017/169.htm",
+        "published": "2026-10-23T09:44:04Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_b794f231ad",
+    "title_zh": "四部门关于进一步防范不良中介机构影响优质中小企业培育认定的通知",
+    "event_summary": "工业和信息化部办公厅 国家网信办秘书局 税务总局办公厅 国家知识产权局办公室 关于进一步防范不良中介机构影响优质中小企业培育认定的通知 工信厅联企业〔2026〕40号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团中小企业主管部门、互联网信息办公室、税务局、知识产权局： 为贯彻落实党中央、国务院有关决策部署，进一步营造良好培育生态，防范不良中介机构影响，持续擦亮专精特新“金字招牌”，现将有关事项通知如下：…",
+    "source_level": "L1",
+    "policy_stage": "已发布",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "信息化"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T07:07:43Z",
+    "primary_url": "https://www.miit.gov.cn/zwgk/zcwj/wjfb/tz/art/2026/art_7cce197766e34445bf82d716b017856d.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "工信部·政策文件",
+        "level": "L1",
+        "title": "四部门关于进一步防范不良中介机构影响优质中小企业培育认定的通知",
+        "url": "https://www.miit.gov.cn/zwgk/zcwj/wjfb/tz/art/2026/art_7cce197766e34445bf82d716b017856d.html",
+        "published": "2026-10-23T07:07:43Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_d6f06f9003",
+    "title_zh": "关于公开征求《电子认证业务规则规范》等14项行业标准报批意见的公示",
+    "event_summary": "根据行业标准制修订计划，相关标准化技术组织已完成电子行业《电子认证业务规则规范》等14项行业标准的编制工作。为进一步听取社会各界意见，现予以公示。 以上标准报批稿请登录“工业和信息化标准信息服务平台”网站（https://std.miit.gov.cn）“项目公示”栏目阅览，如有意见请于公示期内反馈。 公示时间：2026年10月24日—2026年11月22日 联系电话：010–68205241 工业和信息化部科技司…",
+    "source_level": "L1",
+    "policy_stage": "征求意见",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "信息化"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T06:58:00Z",
+    "primary_url": "https://www.miit.gov.cn/gzcy/yjzj/art/2026/art_3d630ae782994bfdb0ce42101dffe0b7.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "工信部·意见征集",
+        "level": "L1",
+        "title": "关于公开征求《电子认证业务规则规范》等14项行业标准报批意见的公示",
+        "url": "https://www.miit.gov.cn/gzcy/yjzj/art/2026/art_3d630ae782994bfdb0ce42101dffe0b7.html",
+        "published": "2026-10-23T06:58:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_d9c64fd0ed",
+    "title_zh": "关于公开征求《终端毫米波天线技术要求及测量方法》等25项通信行业标准报批意见的公示",
+    "event_summary": "根据行业标准制修订计划，相关标准化技术组织已完成《终端毫米波天线技术要求及测量方法》等25项通信行业标准。为进一步听取社会各界意见，现予以公示。 以上标准报批稿请登录“工业和信息化标准信息服务平台”网站（https://std.miit.gov.cn）“项目公示”栏目阅览，如有意见请于公示期内反馈。 公示时间：2026年10月24日—2026年11月22日 联系电话：010–68205241 工业和信息化部科技司 2026年10月23日",
+    "source_level": "L1",
+    "policy_stage": "征求意见",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "信息化"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T06:50:00Z",
+    "primary_url": "https://www.miit.gov.cn/gzcy/yjzj/art/2026/art_6c2940a207a046fa86b7f1314d67a455.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "工信部·意见征集",
+        "level": "L1",
+        "title": "关于公开征求《终端毫米波天线技术要求及测量方法》等25项通信行业标准报批意见的公示",
+        "url": "https://www.miit.gov.cn/gzcy/yjzj/art/2026/art_6c2940a207a046fa86b7f1314d67a455.html",
+        "published": "2026-10-23T06:50:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
     "id": "e_b3685fd7d5",
     "title_zh": "宇树科技等多股“20cm”涨停",
     "event_summary": "10月23日，人形机器人板块持续拉升，宇树科技、利亚德、海天瑞声等多股“20cm”涨停，众诚科技“30cm”涨停，凌云光、摩尔线程、上纬新材等跟涨。",
@@ -273,11 +735,11 @@
     "needs_translation": false
   },
   {
-    "id": "e_d8175b52e7",
-    "title_zh": "国务院办公厅印发《关于适应人工智能技术发展助力构建就业友好型发展方式的意见》",
-    "event_summary": "36氪获悉，国务院办公厅印发《关于适应人工智能技术发展助力构建就业友好型发展方式的意见》。《意见》部署了6个方面18项主要任务。一是强化人工智能的就业创造效应。二是构建就业友好型人工智能升级路径。三是提升劳动者数字素养和就业能力。四是推动人工智能赋能高品质就业政策服务。五是健全劳动者权益保障制度和社会保障制度。六是完善人工智能应用就业监测预警和风险应对体系。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
+    "id": "e_2175552da4",
+    "title_zh": "国务院办公厅关于适应人工智能技术发展助力构建就业友好型发展方式的意见",
+    "event_summary": "国务院办公厅关于适应人工智能技术发展 助力构建就业友好型发展方式的意见 国办发〔2026〕29号 各省、自治区、直辖市人民政府，国务院各部委、各直属机构： 就业是最基本的民生。为贯彻落实党中央、国务院关于促进高质量充分就业的决策部署，积极适应人工智能技术发展，助力构建就业友好型发展方式，经国务院同意，现提出以下意见。 一、总体要求…",
+    "source_level": "L1",
+    "policy_stage": "已发布",
     "key_entities": [],
     "potential_impact": null,
     "topics": [
@@ -285,10 +747,17 @@
     ],
     "first_seen_at": "2026-10-23T09:34:02Z",
     "hot_seen_at": null,
-    "published": "2026-10-23T09:02:30Z",
-    "primary_url": "https://www.36kr.com/newsflashes/4038232486106246",
-    "source_count": 1,
+    "published": "2026-10-23T09:00:00Z",
+    "primary_url": "https://www.gov.cn/zhengce/content/202610/content_7084107.htm",
+    "source_count": 2,
     "links": [
+      {
+        "source": "国务院·最新政策",
+        "level": "L1",
+        "title": "国务院办公厅关于适应人工智能技术发展助力构建就业友好型发展方式的意见",
+        "url": "https://www.gov.cn/zhengce/content/202610/content_7084107.htm",
+        "published": "2026-10-23T09:00:00Z"
+      },
       {
         "source": "36氪·快讯",
         "level": "L2",
@@ -2137,31 +2606,6 @@
     "needs_translation": false
   },
   {
-    "id": "e_a89c1639c8",
-    "title_zh": "AI与科学公地的圈地",
-    "event_summary": "Press Enter to search &middot; Advanced search arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website. Both individuals and organizations…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-23T04:37:40Z",
-    "hot_seen_at": "2026-10-22T18:28:16Z",
-    "published": "2026-10-22T18:28:16Z",
-    "primary_url": "https://arxiv.org/abs/2610.27251",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "Hacker News",
-        "level": "L3",
-        "title": "AI与科学公地的圈地",
-        "url": "https://arxiv.org/abs/2610.27251",
-        "published": "2026-10-22T18:28:16Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
     "id": "e_efeec609e2",
     "title_zh": "中华人民共和国工业和信息化部公告2026年第27号",
     "event_summary": "工业和信息化部决定成立工业软件标准化技术委员会，具体如下： 工业和信息化部工业软件标准化技术委员会，编号为MIIT/TC11，主要负责关键技术、互操作、产品服务、融合应用及生态建设等行业标准制修订工作。第一届工业和信息化部工业软件标准化技术委员会由127名委员组成，秘书处由工业和信息化部电子第五研究所承担。 特此公告。 附件： 第一届工业和信息化部工业软件标准化技术委员会委员名单 工业和信息化部 2026年10月19日",
@@ -3145,106 +3589,6 @@
     "needs_translation": false
   },
   {
-    "id": "e_3992fc4ed3",
-    "title_zh": "好吧，让我们把SpaceX和Tesla混在一起，谁在乎呢",
-    "event_summary": "Oh sure, SpaceX's credit risk is pretty high because it's about to borrow another $40 billion to spend on Nvidia chips, but who cares about that? SpaceX and Tesla have formed special committees to discuss a merger! The…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T23:16:39Z",
-    "hot_seen_at": null,
-    "published": "2026-10-22T19:45:00Z",
-    "primary_url": "https://www.theverge.com/ai-artificial-intelligence/1016879/spacex-tesla-cursed-katamari",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "The Verge AI",
-        "level": "L2",
-        "title": "好吧，让我们把SpaceX和Tesla混在一起，谁在乎呢",
-        "url": "https://www.theverge.com/ai-artificial-intelligence/1016879/spacex-tesla-cursed-katamari",
-        "published": "2026-10-22T19:45:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_6dc97b2e6a",
-    "title_zh": "Discord现在正确格式化Markdown预览，整理服务器和频道",
-    "event_summary": "Discord's latest update released today has a big improvement for Markdown previews: they should now render correctly instead of with \"a bunch of symbols,\" according to the company. LLMs and AI agents often rely on…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T23:16:39Z",
-    "hot_seen_at": null,
-    "published": "2026-10-22T18:58:19Z",
-    "primary_url": "https://www.theverge.com/news/1017012/discord-markdown-previews-organize-servers-channels",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "The Verge AI",
-        "level": "L2",
-        "title": "Discord现在正确格式化Markdown预览，整理服务器和频道",
-        "url": "https://www.theverge.com/news/1017012/discord-markdown-previews-organize-servers-channels",
-        "published": "2026-10-22T18:58:19Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_2c1b17b371",
-    "title_zh": "在Meta的未来版本中，我将让我的Muse呼叫你的Muse",
-    "event_summary": "Mark Zuckerberg is barrelling toward a future in which an autonomous network of AI agents will run our lives - shopping for us, working for us, talking to other people's AI agents for us. Are humans ready for this very…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T23:16:39Z",
-    "hot_seen_at": null,
-    "published": "2026-10-22T18:15:00Z",
-    "primary_url": "https://www.theverge.com/tech/1016905/meta-earnings-fall-2026-muse-network",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "The Verge AI",
-        "level": "L2",
-        "title": "在Meta的未来版本中，我将让我的Muse呼叫你的Muse",
-        "url": "https://www.theverge.com/tech/1016905/meta-earnings-fall-2026-muse-network",
-        "published": "2026-10-22T18:15:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_98a7f3683d",
-    "title_zh": "微软称其AI工具在诊断疾病方面优于医生",
-    "event_summary": "For years, AI leaders have touted healthcare as one of the clearest examples of where their technology will improve lives. Now \"it is finally here,\" Microsoft AI CEO Mustafa Suleyman tells The Verge. The company claims…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T23:16:39Z",
-    "hot_seen_at": null,
-    "published": "2026-10-22T18:00:00Z",
-    "primary_url": "https://www.theverge.com/ai-artificial-intelligence/1016690/suleyman-microsoft-diagnostic-orchestrator-science-medical-superintelligence",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "The Verge AI",
-        "level": "L2",
-        "title": "微软称其AI工具在诊断疾病方面优于医生",
-        "url": "https://www.theverge.com/ai-artificial-intelligence/1016690/suleyman-microsoft-diagnostic-orchestrator-science-medical-superintelligence",
-        "published": "2026-10-22T18:00:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
     "id": "e_9728305976",
     "title_zh": "消息称DeepSeek已融资1000亿元",
     "event_summary": "近日，消息称DeepSeek已完成约1000亿元人民币融资，为中国历来规模最大的融资交易之一。知情人士透露，其融资目标从最初的500亿元上调至800亿元，最终达到约1000亿元，宁德时代和腾讯是主要投资者，融资也为其IPO计划铺路。",
@@ -3267,431 +3611,6 @@
         "title": "消息称DeepSeek已融资1000亿元",
         "url": "https://www.baidu.com/s?wd=%E6%B6%88%E6%81%AF%E7%A7%B0DeepSeek%E5%B7%B2%E8%9E%8D%E8%B5%841000%E4%BA%BF%E5%85%83",
         "published": "2026-10-22T19:59:43Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_62def039fb",
-    "title_zh": "报道：美国的银行正在阻止第三方AI代理访问客户账户",
-    "event_summary": "据两位知情人士透露，在美国主要银行有报道称人工智能（AI）代理正在访问银行账户并独立于用户指令采取行动后，这些银行正在阻止第三方 人工智能代理在 客户账户内操作并进行交易。 银行业越来越担心，功能强大的AI代理可能会损害银行体系以及受托保管民众财富的金融机构。有知情人士称，部分 AI代理试图采取 看似独立于用户指令的操作。（Axios，路透）",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "人工智能"
-    ],
-    "first_seen_at": "2026-10-22T19:59:43Z",
-    "hot_seen_at": null,
-    "published": "2026-10-22T19:45:42Z",
-    "primary_url": "https://wallstreetcn.com/livenews/3183951",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "华尔街见闻·快讯",
-        "level": "L2",
-        "title": "报道：美国的银行正在阻止第三方AI代理访问客户账户",
-        "url": "https://wallstreetcn.com/livenews/3183951",
-        "published": "2026-10-22T19:45:42Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_a25e352025",
-    "title_zh": "德国闲置核电站瞄准新生：或转型为AI数据中心",
-    "event_summary": "德国处于闲置状态的核电站可能迎来新生，转型为数据中心；在反应堆拆除工作持续推进的同时，运营商正在探索这些场址的再开发路径。 德国能源企业PreussenElektra GmbH周三表示，正与美国芯片制造商英伟达合作，评估能否将原核电站场址改造为数据中心，但未提供进一步细节。 原发电厂场址对数据中心尤其具有吸引力，因为它们已具备电网接入条件，并拥有大量必要基础设施。出售这些场址也能为公用事业公司带来额外收入；莱茵集团（RWE AG）和Uniper SE已筛选出多个原燃煤电厂场址，用于潜在出售。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "AI + 芯片"
-    ],
-    "first_seen_at": "2026-10-22T19:59:43Z",
-    "hot_seen_at": null,
-    "published": "2026-10-22T19:44:34Z",
-    "primary_url": "https://wallstreetcn.com/livenews/3183950",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "华尔街见闻·快讯",
-        "level": "L2",
-        "title": "德国闲置核电站瞄准新生：或转型为AI数据中心",
-        "url": "https://wallstreetcn.com/livenews/3183950",
-        "published": "2026-10-22T19:44:34Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_e651c5a5c4",
-    "title_zh": "财联社10月23日电，OpenAI正式全面开放决策API‌，决策API输入定价为每百万Tokens报0.10美元，缓存输入每百万词元Tokens报0.01美元。",
-    "event_summary": "财联社10月23日电，OpenAI正式全面开放决策API‌，决策API输入定价为每百万Tokens报0.10美元，缓存输入每百万词元Tokens报0.01美元。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "OpenAI"
-    ],
-    "first_seen_at": "2026-10-22T19:59:43Z",
-    "hot_seen_at": null,
-    "published": "2026-10-22T19:38:37Z",
-    "primary_url": "https://www.cls.cn/detail/2512860",
-    "source_count": 2,
-    "links": [
-      {
-        "source": "华尔街见闻·快讯",
-        "level": "L2",
-        "title": "OpenAI：决策API正式全面开放。 决策API将每输入100万Tokens定价在0.10美元，其输入成本为0.01美元。",
-        "url": "https://wallstreetcn.com/livenews/3183947",
-        "published": "2026-10-22T19:38:48Z"
-      },
-      {
-        "source": "财联社·电报",
-        "level": "L2",
-        "title": "财联社10月23日电，OpenAI正式全面开放决策API‌，决策API输入定价为每百万Tokens报0.10美元，缓存输入每百万词元Tokens报0.01美元。",
-        "url": "https://www.cls.cn/detail/2512860",
-        "published": "2026-10-22T19:38:37Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_be2e14795c",
-    "title_zh": "美股费城半导体指数日内跌7%。个股中，英伟达跌4.61%，博通跌4.48%，美光跌6.61%，英特尔跌8.40%，AMD跌8.79%，高通跌3.14%，台积电跌4.84%，阿斯麦ADR跌6.92%。",
-    "event_summary": "美股费城半导体指数日内跌7%。个股中，英伟达跌4.61%，博通跌4.48%，美光跌6.61%，英特尔跌8.40%，AMD跌8.79%，高通跌3.14%，台积电跌4.84%，阿斯麦ADR跌6.92%。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "英伟达"
-    ],
-    "first_seen_at": "2026-10-22T19:59:43Z",
-    "hot_seen_at": null,
-    "published": "2026-10-22T19:37:27Z",
-    "primary_url": "https://wallstreetcn.com/livenews/3183945",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "华尔街见闻·快讯",
-        "level": "L2",
-        "title": "美股费城半导体指数日内跌7%。个股中，英伟达跌4.61%，博通跌4.48%，美光跌6.61%，英特尔跌8.40%，AMD跌8.79%，高通跌3.14%，台积电跌4.84%，阿斯麦ADR跌6.92%。",
-        "url": "https://wallstreetcn.com/livenews/3183945",
-        "published": "2026-10-22T19:37:27Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_144e0bf719",
-    "title_zh": "Anthropic首次公开募股将为Iconiq、Spark和GIC带来巨额收益。",
-    "event_summary": "Anthropic首次公开募股将为Iconiq、Spark和GIC带来巨额收益。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "Anthropic"
-    ],
-    "first_seen_at": "2026-10-22T19:59:43Z",
-    "hot_seen_at": null,
-    "published": "2026-10-22T19:35:19Z",
-    "primary_url": "https://wallstreetcn.com/livenews/3183944",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "华尔街见闻·快讯",
-        "level": "L2",
-        "title": "Anthropic首次公开募股将为Iconiq、Spark和GIC带来巨额收益。",
-        "url": "https://wallstreetcn.com/livenews/3183944",
-        "published": "2026-10-22T19:35:19Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_ee7ecab289",
-    "title_zh": "1Password推出AI代理无需查看密码即可代为登录的方式",
-    "event_summary": "The new feature allows agents to log into a customer's personal accounts while still protecting the private credentials that secure those accounts.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T19:59:43Z",
-    "hot_seen_at": null,
-    "published": "2026-10-22T19:07:09Z",
-    "primary_url": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "TechCrunch AI",
-        "level": "L2",
-        "title": "1Password推出AI代理无需查看密码即可代为登录的方式",
-        "url": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
-        "published": "2026-10-22T19:07:09Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_27825e3003",
-    "title_zh": "使用Decisions API构建更响应式的应用",
-    "event_summary": "Fast, focused, low-cost decisions for any application.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T19:59:43Z",
-    "hot_seen_at": null,
-    "published": "2026-10-22T19:00:00Z",
-    "primary_url": "https://openai.com/index/decisions-api",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "OpenAI News",
-        "level": "L2",
-        "title": "使用Decisions API构建更响应式的应用",
-        "url": "https://openai.com/index/decisions-api",
-        "published": "2026-10-22T19:00:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_afbb328c26",
-    "title_zh": "Canva发布其首款图像生成模型",
-    "event_summary": "Canva is making its new image model available to all users, promising better, more customizable performance at lower costs.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T19:59:43Z",
-    "hot_seen_at": null,
-    "published": "2026-10-22T19:00:00Z",
-    "primary_url": "https://techcrunch.com/2026/10/22/canva-releases-its-first-image-generation-model/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "TechCrunch AI",
-        "level": "L2",
-        "title": "Canva发布其首款图像生成模型",
-        "url": "https://techcrunch.com/2026/10/22/canva-releases-its-first-image-generation-model/",
-        "published": "2026-10-22T19:00:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_1d8d266cc0",
-    "title_zh": "OpenAI广泛推出其Jev竞争对手，决策模型竞争加剧",
-    "event_summary": "OpenAI is launching its decision model to the world. Can it compete with the original Jev?",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T19:59:43Z",
-    "hot_seen_at": null,
-    "published": "2026-10-22T19:00:00Z",
-    "primary_url": "https://techcrunch.com/2026/10/22/openai-makes-its-jev-competitor-widely-available-as-decision-model-competition-heats-up/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "TechCrunch AI",
-        "level": "L2",
-        "title": "OpenAI广泛推出其Jev竞争对手，决策模型竞争加剧",
-        "url": "https://techcrunch.com/2026/10/22/openai-makes-its-jev-competitor-widely-available-as-decision-model-competition-heats-up/",
-        "published": "2026-10-22T19:00:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_d8c2939ee8",
-    "title_zh": "可扩展AI的基础",
-    "event_summary": "A scalable AI system requires a strong foundation. Data, engineering, platforms, operating models, and governance must converge to work as one. This session from MIT Technology Review’s EmTech Future conference…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T19:59:43Z",
-    "hot_seen_at": null,
-    "published": "2026-10-22T18:48:04Z",
-    "primary_url": "https://www.technologyreview.com/2026/10/22/1146103/the-foundations-of-scalable-ai/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "MIT Technology Review",
-        "level": "L2",
-        "title": "可扩展AI的基础",
-        "url": "https://www.technologyreview.com/2026/10/22/1146103/the-foundations-of-scalable-ai/",
-        "published": "2026-10-22T18:48:04Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_4baf690dfb",
-    "title_zh": "微软的Mustafa Suleyman称其AI在疑难病例上优于医生，同时追求“医疗超级智能”",
-    "event_summary": "Microsoft’s new AI diagnostic system beat generalist doctors on hard cases, according to a study in Science. But most of the improvement seems to come from the AI models underneath, not from Microsoft’s system itself.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T19:59:43Z",
-    "hot_seen_at": null,
-    "published": "2026-10-22T18:43:53Z",
-    "primary_url": "https://techcrunch.com/2026/10/22/microsofts-mustafa-suleyman-says-its-ai-outperforms-doctors-on-hard-cases-as-he-chases-medical-superintelligence/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "TechCrunch AI",
-        "level": "L2",
-        "title": "微软的Mustafa Suleyman称其AI在疑难病例上优于医生，同时追求“医疗超级智能”",
-        "url": "https://techcrunch.com/2026/10/22/microsofts-mustafa-suleyman-says-its-ai-outperforms-doctors-on-hard-cases-as-he-chases-medical-superintelligence/",
-        "published": "2026-10-22T18:43:53Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_450eeeb0be",
-    "title_zh": "财联社10月23日电，WTI原油期货结算价为99.47美元/桶，上涨2.32美元，涨幅2.39%。布伦特原油期货结算价为99.47美元/每桶，上涨2.32美元，涨幅2.39%。",
-    "event_summary": "财联社10月23日电，WTI原油期货结算价为99.47美元/桶，上涨2.32美元，涨幅2.39%。布伦特原油期货结算价为99.47美元/每桶，上涨2.32美元，涨幅2.39%。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "原油"
-    ],
-    "first_seen_at": "2026-10-22T19:59:43Z",
-    "hot_seen_at": null,
-    "published": "2026-10-22T18:32:40Z",
-    "primary_url": "https://www.cls.cn/detail/2512851",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "财联社·电报",
-        "level": "L2",
-        "title": "财联社10月23日电，WTI原油期货结算价为99.47美元/桶，上涨2.32美元，涨幅2.39%。布伦特原油期货结算价为99.47美元/每桶，上涨2.32美元，涨幅2.39%。",
-        "url": "https://www.cls.cn/detail/2512851",
-        "published": "2026-10-22T18:32:40Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_09776931f4",
-    "title_zh": "向Agentic AI基金会捐赠代理技能",
-    "event_summary": "Donating Agent Skills to the Agentic AI Foundation News today from Anthropic: We’re committed to keeping Agent Skills open, community-driven, and vendor-neutral. Today, we are donating the standard to the Agentic AI…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "AI + Agent"
-    ],
-    "first_seen_at": "2026-10-22T19:59:43Z",
-    "hot_seen_at": "2026-10-22T18:09:56Z",
-    "published": "2026-10-22T18:09:56Z",
-    "primary_url": "https://simonwillison.net/2026/Oct/22/donating-agent-skills/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "Simon Willison",
-        "level": "L3",
-        "title": "向Agentic AI基金会捐赠代理技能",
-        "url": "https://simonwillison.net/2026/Oct/22/donating-agent-skills/",
-        "published": "2026-10-22T18:09:56Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_4dcdb95578",
-    "title_zh": "Nvidia OpenShell",
-    "event_summary": "New in OpenShell 0.1.x: a stable release cadence, new isolation primitives, an expanded extension surface, and new APIs. Read the 0.1.0 upgrade guide . OpenShell is the safe, private runtime for…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "NVIDIA"
-    ],
-    "first_seen_at": "2026-10-22T19:59:43Z",
-    "hot_seen_at": "2026-10-22T17:44:06Z",
-    "published": "2026-10-22T17:44:06Z",
-    "primary_url": "https://github.com/NVIDIA/OpenShell",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "Hacker News",
-        "level": "L3",
-        "title": "Nvidia OpenShell",
-        "url": "https://github.com/NVIDIA/OpenShell",
-        "published": "2026-10-22T17:44:06Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_b3ab1f7b0f",
-    "title_zh": "Anthropic因训练Claude AI模型使用受版权保护音乐遭起诉",
-    "event_summary": "【Anthropic因训练Claude AI模型使用受版权保护音乐遭起诉】财联社10月23日电，据Reservoir音乐管理公司指控，Anthropic…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "Anthropic"
-    ],
-    "first_seen_at": "2026-10-22T19:59:43Z",
-    "hot_seen_at": null,
-    "published": "2026-10-22T17:32:09Z",
-    "primary_url": "https://www.cls.cn/detail/2512842",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "财联社·电报",
-        "level": "L2",
-        "title": "Anthropic因训练Claude AI模型使用受版权保护音乐遭起诉",
-        "url": "https://www.cls.cn/detail/2512842",
-        "published": "2026-10-22T17:32:09Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_7b213ad205",
-    "title_zh": "有人利用旧游戏和 AI 黑入 Switch 2",
-    "event_summary": "The Nintendo Switch 2 has apparently been jailbroken, and a modder has already shown the console running a custom version of Mario Kart World featuring new playable characters like Cinnamoroll, the red Angry Bird,…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T19:59:43Z",
-    "hot_seen_at": null,
-    "published": "2026-10-22T17:21:31Z",
-    "primary_url": "https://www.theverge.com/games/1016862/nintendo-switch-2-jailbreak-ai",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "The Verge AI",
-        "level": "L2",
-        "title": "有人利用旧游戏和 AI 黑入 Switch 2",
-        "url": "https://www.theverge.com/games/1016862/nintendo-switch-2-jailbreak-ai",
-        "published": "2026-10-22T17:21:31Z"
       }
     ],
     "needs_translation": false
@@ -6909,6 +6828,106 @@
         "title": "Vitals：什么在拖慢你的 Mac？它比「活动监视器」更直观易用",
         "url": "https://sspai.com/post/116445",
         "published": "2026-10-21T07:00:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_6763fc8bca",
+    "title_zh": "量智齐飞！4个月9款车落地，轻舟城市NOA击穿10-20万体验天花板",
+    "event_summary": "从7月到10月，城市NOA大规模量产迎来一轮密集兑现窗口。 轻舟智航凭借行业首个量产上市的地平线单征程6M城市NOA辅助驾驶解决方案， 迎来9款合作车型接力上市、开启预售或公布上市计划 。 这些车型集中覆盖 10-20万元主流价格带 ，意味着轻舟单征程6M正把城市NOA从高价旗舰带入大众市场，成为10-20万元价格带智驾普及的关键推手。 该方案以…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-22T14:22:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-21T06:40:46Z",
+    "primary_url": "https://www.qbitai.com/2026/10/504638.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "量子位",
+        "level": "L2",
+        "title": "量智齐飞！4个月9款车落地，轻舟城市NOA击穿10-20万体验天花板",
+        "url": "https://www.qbitai.com/2026/10/504638.html",
+        "published": "2026-10-21T06:40:46Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_1de8e62ff7",
+    "title_zh": "利用数千个AI代理在生物数据中发现新线索",
+    "event_summary": "See how OpenAI, PerturbAI, and Scripps Research used distributed AI agents to uncover promising research leads in data from millions of brain cells.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-22T14:22:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-21T04:50:00Z",
+    "primary_url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "OpenAI News",
+        "level": "L2",
+        "title": "利用数千个AI代理在生物数据中发现新线索",
+        "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
+        "published": "2026-10-21T04:50:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_f3a02a73ce",
+    "title_zh": "实探宁德时代总部：“去宁化”是喊太大声了",
+    "event_summary": "量子位ROBO | 公众号 AI4ROBO 理想斥资26.5亿元入股欣旺达动力，小米联合中创新航等企业开发电池……一场围绕动力电池核心技术、成本和供应链话语权的讨论，最近愈演愈烈。 就连宁德时代也亲自下场回应： 会造车，不一定会造电池。还是要专业的人，做专业的事。 然而在这场风波中，上汽旗下智己却反其道而行之，宣布即将推出的LS8 NEO纯电，将 全系搭载宁德时代电池 。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-22T14:22:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-21T04:35:56Z",
+    "primary_url": "https://www.qbitai.com/2026/10/504618.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "量子位",
+        "level": "L2",
+        "title": "实探宁德时代总部：“去宁化”是喊太大声了",
+        "url": "https://www.qbitai.com/2026/10/504618.html",
+        "published": "2026-10-21T04:35:56Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_0ef7b7288d",
+    "title_zh": "使用LLM进行置信度评分是个坏主意",
+    "event_summary": "Amrut Joshi, October 20, 2026 LLM-based agents can do a lot of tasks. Or, at least, they can appear to do them. For example, they write code, summarize papers, plan trips, and fill in forms. If you…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-22T14:22:59Z",
+    "hot_seen_at": "2026-10-21T04:27:51Z",
+    "published": "2026-10-21T04:27:51Z",
+    "primary_url": "https://rumple.github.io/blog/2026/10/20/asking-llm-for-confidence.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "Hacker News",
+        "level": "L3",
+        "title": "使用LLM进行置信度评分是个坏主意",
+        "url": "https://rumple.github.io/blog/2026/10/20/asking-llm-for-confidence.html",
+        "published": "2026-10-21T04:27:51Z"
       }
     ],
     "needs_translation": false
