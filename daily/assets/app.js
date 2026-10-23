@@ -171,6 +171,12 @@
     sort: 'date',
     keyword: '',
     filter: 'all',
+    range: 'all',
+    topics: [],
+    category: 'all',
+    topicsExpanded: false,
+    categoriesExpanded: false,
+    filterOpen: false,
     papers: [],
     news: [],
     events: [],
@@ -387,6 +393,36 @@
     return haystack.includes(q);
   }
 
+  const RANGE_LABELS = { all: '全部', today: '今天', yesterday: '昨天', '3d': '近 3 天', '7d': '近 7 天' };
+  const RANGE_KEYS = ['all', 'today', 'yesterday', '3d', '7d'];
+
+  /* 事件/论文/收藏都尽量落到「天」上，时间筛选才有意义 */
+  const itemDay = (item) => item.day || cnDay(item.first_seen_at || item.published || item.savedAt);
+
+  function inRange(item, key) {
+    if (key === 'all') return true;
+    const day = itemDay(item);
+    if (!day) return false;
+    const today = todayStr();
+    if (key === 'today') return day === today;
+    if (key === 'yesterday') return day === shiftDay(today, -1);
+    if (key === '3d') return day >= shiftDay(today, -2) && day <= today;
+    if (key === '7d') return day >= shiftDay(today, -6) && day <= today;
+    return true;
+  }
+
+  const matchesTopics = (item) =>
+    !state.topics.length || (item.topics || []).some((topic) => state.topics.includes(topic));
+
+  const matchesCategory = (item) =>
+    state.category === 'all' || item.primary_category === state.category;
+
+  function activeFilterCount() {
+    const time = state.range !== 'all' ? 1 : 0;
+    const category = state.tab === 'papers' && state.category !== 'all' ? 1 : 0;
+    return time + state.topics.length + category;
+  }
+
   function sorted(items) {
     const list = items.slice();
     if (state.sort === 'score') {
@@ -402,11 +438,17 @@
     if (state.tab === 'saved') {
       const items = Object.values(state.saved)
         .sort((a, b) => String(b.at).localeCompare(String(a.at)))
-        .map((entry) => ({ ...entry.item, kind: entry.kind }));
-      return items.filter((item) => matchesQuery(item, q));
+        .map((entry) => ({ ...entry.item, kind: entry.kind, savedAt: entry.at }));
+      return items.filter((item) => matchesQuery(item, q) && inRange(item, state.range));
     }
     const pool = state.tab === 'events' ? state.events : state.papers;
-    let items = pool.filter((item) => matchesQuery(item, q));
+    let items = pool.filter(
+      (item) =>
+        matchesQuery(item, q) &&
+        inRange(item, state.range) &&
+        matchesTopics(item) &&
+        matchesCategory(item)
+    );
     if (state.tab === 'events') {
       if (state.filter === 'l1') items = items.filter((item) => item.source_level === 'L1');
       if (state.filter === 'unread') items = items.filter((item) => !isRead('event', item.id));
@@ -423,6 +465,7 @@
     renderHeader();
     renderTabs();
     renderChips();
+    renderFilterEntry();
 
     const items = visibleItems();
     const list = $('#list');
@@ -437,26 +480,31 @@
     }
 
     if (!items.length) {
+      const filtered = activeFilterCount() > 0;
       list.innerHTML = '';
       empty.hidden = false;
       $('#empty-title').textContent = state.error
         ? '暂时拿不到数据'
         : state.query
           ? '没有匹配的内容'
-          : state.tab === 'saved'
-            ? '还没有收藏'
-            : state.tab === 'events'
-              ? '今天还没有事件'
-              : '今天这里还是空的';
+          : filtered
+            ? '当前筛选下没有内容'
+            : state.tab === 'saved'
+              ? '还没有收藏'
+              : state.tab === 'events'
+                ? '今天还没有事件'
+                : '今天这里还是空的';
       $('#empty-text').textContent = state.error
         ? state.error
         : state.query
           ? `没有找到包含「${state.query}」的条目，换个词试试。`
-          : state.tab === 'saved'
-            ? '在论文或事件卡片右上角点一下 ☆，就会收藏到这里，方便之后复习。'
-            : state.tab === 'events'
-              ? '采集还在跑，下拉刷新一次试试。'
-              : 'arXiv 在周末不发布新论文，可以先看看之前的内容。';
+          : filtered
+            ? '放宽时间范围，或者少选几个话题再试试。'
+            : state.tab === 'saved'
+              ? '在论文或事件卡片右上角点一下 ☆，就会收藏到这里，方便之后复习。'
+              : state.tab === 'events'
+                ? '采集还在跑，下拉刷新一次试试。'
+                : 'arXiv 在周末不发布新论文，可以先看看之前的内容。';
       info.textContent = '';
       return;
     }
@@ -471,6 +519,12 @@
     const label = state.tab === 'papers' ? '论文' : state.tab === 'events' ? '事件' : '收藏';
     const bits = [`共 ${total}${label}`];
     if (state.query) bits.push(`匹配「${state.query}」`);
+    if (state.range !== 'all') bits.push(RANGE_LABELS[state.range]);
+    if (state.topics.length) {
+      const shown = state.topics.slice(0, 2).join('、');
+      bits.push(`话题 ${shown}${state.topics.length > 2 ? ` 等 ${state.topics.length} 个` : ''}`);
+    }
+    if (state.tab === 'papers' && state.category !== 'all') bits.push(state.category);
     if (state.tab === 'events' && state.filter === 'l1') bits.push('仅官方 L1');
     if (state.tab === 'events' && state.filter === 'unread') bits.push('仅未读');
     if (state.tab === 'papers' && state.keyword) bits.push(`关键词 ${state.keyword}`);
@@ -793,8 +847,8 @@
     }
   }
 
-  function trapReaderFocus(event) {
-    const nodes = $$('#reader a[href], #reader button:not([disabled])').filter((node) => node.offsetParent !== null);
+  function trapFocus(event, root) {
+    const nodes = $$(`${root} a[href], ${root} button:not([disabled])`).filter((node) => node.offsetParent !== null);
     if (!nodes.length) return;
     const first = nodes[0];
     const last = nodes[nodes.length - 1];
@@ -805,6 +859,10 @@
       event.preventDefault();
       first.focus();
     }
+  }
+
+  function trapReaderFocus(event) {
+    trapFocus(event, '#reader');
   }
 
   function refreshReaderActions() {
@@ -884,6 +942,175 @@
     wrap.innerHTML = all.join('');
   }
 
+  /* ---------------------------------------------------------- filter sheet */
+
+  function renderFilterEntry() {
+    const btn = $('#btn-filter');
+    if (!btn) return;
+    const count = activeFilterCount();
+    $('#filter-count').textContent = String(count);
+    $('#filter-count').hidden = count === 0;
+    btn.classList.toggle('is-active', count > 0);
+  }
+
+  function filterSourcePool() {
+    if (state.tab === 'saved') {
+      return Object.values(state.saved).map((entry) => ({ ...entry.item, kind: entry.kind, savedAt: entry.at }));
+    }
+    return state.tab === 'events' ? state.events : state.papers;
+  }
+
+  function filterBasePool() {
+    const q = state.query.trim();
+    return filterSourcePool().filter((item) => matchesQuery(item, q));
+  }
+
+  function optionChip(kind, value, label, count, pressed) {
+    const attr =
+      kind === 'range'
+        ? `data-range="${esc(value)}"`
+        : kind === 'topic'
+          ? `data-topic="${esc(value)}"`
+          : `data-category="${esc(value)}"`;
+    return `<button class="f-chip" type="button" ${attr} aria-pressed="${pressed}"${
+      count === 0 ? ' disabled' : ''
+    }>${esc(label)}<span class="chip-n">${count}</span></button>`;
+  }
+
+  /* 只展示最常用的若干项，其余折叠；已选项始终保留在可见列表里 */
+  function visibleOptions(map, limit, selected, expanded) {
+    const list = Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
+    if (expanded) return { list, total: list.length };
+    const top = list.slice(0, limit);
+    selected.forEach((key) => {
+      if (!top.some(([value]) => value === key)) {
+        const hit = list.find(([value]) => value === key);
+        if (hit) top.push(hit);
+      }
+    });
+    return { list: top, total: list.length };
+  }
+
+  function renderFilter() {
+    const body = $('#filter-body');
+    if (!body) return;
+    const keepScroll = body.scrollTop;
+    $('#filter-title').textContent =
+      state.tab === 'events' ? '筛选事件' : state.tab === 'papers' ? '筛选论文' : '筛选收藏';
+
+    const base = filterBasePool();
+    const timeChips = RANGE_KEYS.map((key) =>
+      optionChip('range', key, RANGE_LABELS[key], base.filter((item) => inRange(item, key)).length, state.range === key)
+    ).join('');
+    const groups = [`<section class="f-group"><h3>时间</h3><div class="f-chips">${timeChips}</div></section>`];
+
+    if (state.tab === 'events') {
+      const counts = new Map();
+      base
+        .filter((item) => inRange(item, state.range))
+        .forEach((item) => (item.topics || []).forEach((topic) => counts.set(topic, (counts.get(topic) || 0) + 1)));
+      const { list, total } = visibleOptions(counts, 18, state.topics, state.topicsExpanded);
+      if (total) {
+        groups.push(
+          `<section class="f-group"><h3>话题 <span class="f-hint">可多选</span></h3><div class="f-chips">${list
+            .map(([topic, count]) => optionChip('topic', topic, topic, count, state.topics.includes(topic)))
+            .join('')}</div>${
+            total > 18
+              ? `<button class="f-more" type="button" data-more="topics">${
+                  state.topicsExpanded ? '收起' : `展开全部 ${total} 个话题`
+                }</button>`
+              : ''
+          }</section>`
+        );
+      }
+    }
+
+    if (state.tab === 'papers') {
+      const counts = new Map();
+      base
+        .filter((item) => inRange(item, state.range))
+        .forEach((item) => {
+          if (item.primary_category) counts.set(item.primary_category, (counts.get(item.primary_category) || 0) + 1);
+        });
+      const { list, total } = visibleOptions(
+        counts,
+        12,
+        state.category === 'all' ? [] : [state.category],
+        state.categoriesExpanded
+      );
+      if (total) {
+        groups.push(
+          `<section class="f-group"><h3>方向</h3><div class="f-chips">${list
+            .map(([category, count]) =>
+              optionChip('category', category, category, count, state.category === category)
+            )
+            .join('')}</div>${
+            total > 12
+              ? `<button class="f-more" type="button" data-more="categories">${
+                  state.categoriesExpanded ? '收起' : `展开全部 ${total} 个方向`
+                }</button>`
+              : ''
+          }</section>`
+        );
+      }
+    }
+
+    body.innerHTML = groups.join('');
+    body.scrollTop = keepScroll;
+    $('#filter-reset').disabled = activeFilterCount() === 0;
+    updateFilterFooter();
+  }
+
+  function updateFilterFooter() {
+    const btn = $('#filter-apply');
+    if (!btn) return;
+    const n = visibleItems().length;
+    btn.textContent = n ? `查看 ${n} 条结果` : '没有匹配结果';
+  }
+
+  let filterReturnFocus = null;
+
+  function openFilter() {
+    if (state.filterOpen || state.loading) return;
+    filterReturnFocus = document.activeElement;
+    state.filterOpen = true;
+    renderFilter();
+    const el = $('#filter-sheet');
+    el.hidden = false;
+    document.body.classList.add('is-locked');
+    requestAnimationFrame(() => el.classList.add('is-open'));
+    $('#btn-filter').setAttribute('aria-expanded', 'true');
+    try {
+      history.pushState({ filter: true }, '', location.href);
+    } catch (err) {
+      /* file:// 等环境 */
+    }
+    window.setTimeout(() => {
+      const apply = $('#filter-apply');
+      if (apply) apply.focus({ preventScroll: true });
+    }, 40);
+  }
+
+  function closeFilter({ fromHistory = false } = {}) {
+    if (!state.filterOpen) return;
+    state.filterOpen = false;
+    const el = $('#filter-sheet');
+    el.classList.remove('is-open');
+    document.body.classList.remove('is-locked');
+    $('#btn-filter').setAttribute('aria-expanded', 'false');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.setTimeout(() => {
+      if (!state.filterOpen) el.hidden = true;
+    }, reduce ? 0 : 200);
+    if (!fromHistory && history.state && history.state.filter) {
+      history.back();
+    }
+    if (filterReturnFocus && filterReturnFocus.isConnected) {
+      filterReturnFocus.focus({ preventScroll: true });
+      filterReturnFocus = null;
+    }
+  }
+
   /* ---------------------------------------------------------------- actions */
 
   function setTab(tab, { push = true } = {}) {
@@ -891,6 +1118,12 @@
     state.tab = ['events', 'papers', 'saved'].includes(tab) ? tab : 'events';
     state.keyword = '';
     state.filter = 'all';
+    state.range = 'all';
+    state.topics = [];
+    state.category = 'all';
+    state.topicsExpanded = false;
+    state.categoriesExpanded = false;
+    if (state.filterOpen) closeFilter();
     if (push) {
       const target = `#${state.tab}`;
       if (location.hash !== target) history.replaceState(null, '', target);
@@ -1017,6 +1250,55 @@
       render();
     });
 
+    // 筛选面板：时间 / 话题 / 方向
+    $('#btn-filter').addEventListener('click', () => openFilter());
+    $$('[data-filter-close]').forEach((node) => {
+      node.addEventListener('click', () => closeFilter());
+    });
+    $('#filter-apply').addEventListener('click', () => closeFilter());
+    $('#filter-reset').addEventListener('click', () => {
+      state.range = 'all';
+      state.topics = [];
+      state.category = 'all';
+      state.topicsExpanded = false;
+      state.categoriesExpanded = false;
+      render();
+      renderFilter();
+    });
+    $('#filter-body').addEventListener('click', (event) => {
+      const btn = event.target.closest('button');
+      if (!btn) return;
+      if (btn.dataset.range) {
+        state.range = btn.dataset.range;
+        render();
+        renderFilter();
+        const again = $(`#filter-body [data-range="${btn.dataset.range}"]`);
+        if (again) again.focus({ preventScroll: true });
+        return;
+      }
+      if (btn.dataset.topic) {
+        const topic = btn.dataset.topic;
+        state.topics = state.topics.includes(topic)
+          ? state.topics.filter((item) => item !== topic)
+          : [...state.topics, topic];
+        btn.setAttribute('aria-pressed', String(state.topics.includes(topic)));
+        render();
+        updateFilterFooter();
+        return;
+      }
+      if (btn.dataset.category) {
+        const category = btn.dataset.category;
+        state.category = state.category === category ? 'all' : category;
+        btn.setAttribute('aria-pressed', String(state.category === category));
+        render();
+        updateFilterFooter();
+        return;
+      }
+      if (btn.dataset.more === 'topics') state.topicsExpanded = !state.topicsExpanded;
+      if (btn.dataset.more === 'categories') state.categoriesExpanded = !state.categoriesExpanded;
+      renderFilter();
+    });
+
     // sort dropdown
     const sortBtn = $('#btn-sort');
     const sortMenu = $('#sort-menu');
@@ -1094,6 +1376,7 @@
     });
     window.addEventListener('popstate', () => {
       if (state.reader) closeReader({ fromHistory: true });
+      else if (state.filterOpen) closeFilter({ fromHistory: true });
     });
 
     $('#btn-theme').addEventListener('click', cycleTheme);
@@ -1144,6 +1427,17 @@
         }
         if (event.key === 'Tab') {
           trapReaderFocus(event);
+          return;
+        }
+      }
+      if (state.filterOpen) {
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          closeFilter();
+          return;
+        }
+        if (event.key === 'Tab') {
+          trapFocus(event, '#filter-sheet');
           return;
         }
       }
