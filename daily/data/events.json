@@ -1,5 +1,3812 @@
 [
   {
+    "id": "e_0cc9f883d6",
+    "title_zh": "前端对接聊天 API：我用 React 做了一个比 ChatGPT 还好看的界面",
+    "event_summary": "前后端联调了4遍才跑通，3个跨域坑我替你踩完了。 我是怕浪猫，上一章后端搞定了，这章搭前端。目标明确——用Vue3把聊天机器人的UI做出来，和后端API对接，实现一个完整的带UI的聊天机器人。 浏览器有同源策略：协议+域名+端口必须一致。前端跑在 localhost:5173 ，后端跑在 localhost:5000 ，跨域了。 前端请求直接用 /api/v1/...…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "ChatGPT"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": "2026-10-23T11:30:59Z",
+    "published": "2026-10-23T11:30:59Z",
+    "primary_url": "https://juejin.cn/post/7698623001063784463",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "前端对接聊天 API：我用 React 做了一个比 ChatGPT 还好看的界面",
+        "url": "https://juejin.cn/post/7698623001063784463",
+        "published": "2026-10-23T11:30:59Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_7d342b98b7",
+    "title_zh": "国家发展改革委等部门公布2027—2028年小麦最低收购价格",
+    "event_summary": "【国家发展改革委等部门公布2027—2028年小麦最低收购价格】财联社10月23日电，国家发展改革委、财政部等部门关于公布2027—2028年小麦最低收购价格的通知，2027—2028年，国家继续在小麦主产区实行最低收购价政策。综合考虑粮食生产成本、市场供求、国内外市场价格和产业发展等因素，2027—2028年当年生产的小麦（三等）最低收购价为每50公斤119元。如生产成本等发生较大变化，另行按程序调整。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "产业 + 政策"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T11:17:45Z",
+    "primary_url": "https://www.cls.cn/detail/2513827",
+    "source_count": 2,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "国家发展改革委等部门公布2027—2028年小麦最低收购价格",
+        "url": "https://www.cls.cn/detail/2513827",
+        "published": "2026-10-23T11:20:41Z"
+      },
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "国家发展改革委等部门关于公布2027—2028年小麦最低收购价格的通知",
+        "url": "https://wallstreetcn.com/livenews/3184766",
+        "published": "2026-10-23T11:17:45Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_c7835dcdf3",
+    "title_zh": "工业和信息化部组织召开汽车产业国际合作圆桌会",
+    "event_summary": "36氪获悉，10月21日，在2026世界智能网联汽车大会期间，工业和信息化部党组成员、副部长辛国斌主持召开汽车产业国际合作圆桌会。辛国斌表示，智能网联汽车正在推动汽车产品形态、能源消费结构、交通出行模式发生深刻变化。全球主要汽车国家纷纷加快战略布局，加强技术研发与示范应用，完善政策法规与标准规范，为产业发展创造良好环境。我们愿与各方一道，加强对话沟通、深化政策协同、强化务实合作，与全球行业同仁携手共建包容、共享的产业生态。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "产业 + 政策"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T11:06:08Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4038354011935875",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "工业和信息化部组织召开汽车产业国际合作圆桌会",
+        "url": "https://www.36kr.com/newsflashes/4038354011935875",
+        "published": "2026-10-23T11:06:08Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_a740c601f0",
+    "title_zh": "雄韬股份：拟变更3.36亿元募资投向AI算力中心直流电源及整机建设项目",
+    "event_summary": "【雄韬股份：拟变更3.36亿元募资投向AI算力中心直流电源及整机建设项目】财联社10月23日电，雄韬股份(002733.SZ)公告称，公司拟将原“湖北雄韬新能源锂电池(5GWh)生产基地建设项目”承诺投入的募集资金3.36亿元，变更用于“AI算力中心直流电源及整机建设项目”。新项目预计投资总额15亿元，其中3.36亿元来自募集资金，项目建成后将形成年产超大型数据中心电力方仓PTU及集成服务1800套、中型500套、小型300套的生产能力…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 算力"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T10:47:20Z",
+    "primary_url": "https://www.cls.cn/detail/2513795",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "雄韬股份：拟变更3.36亿元募资投向AI算力中心直流电源及整机建设项目",
+        "url": "https://www.cls.cn/detail/2513795",
+        "published": "2026-10-23T10:47:20Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_dc2a03a73e",
+    "title_zh": "中国联通：在联通渠道购买苹果 iPhone Duo 并开通 eSIM 可选“国际漫游券”“国内通用流量”等权益",
+    "event_summary": "IT之家 10 月 23 日消息，中国联通发文，宣布用户在中国联通办理 iPhone Duo 购机合约，可享终端最高直降 3240 元优惠。同时用户在联通渠道购买苹果 iPhone Duo、开通联通 eSIM，可获以下权益“五选一”： 30GB 境外 eSIM 10 天包 300 元国际漫游券 100GB 国内通用流量 词元（token）（注：官方未公布 AI 品牌和具体词元数量） 鲜花/ 咖啡 中国联通表示，过去一年，中国…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T10:37:57Z",
+    "primary_url": "https://www.ithome.com/1/017/195.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "中国联通：在联通渠道购买苹果 iPhone Duo 并开通 eSIM 可选“国际漫游券”“国内通用流量”等权益",
+        "url": "https://www.ithome.com/1/017/195.htm",
+        "published": "2026-10-23T10:37:57Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_97df4ed033",
+    "title_zh": "AI 智能体疯狂入侵人类系统：十几起漏洞依次排开，AI真正攻破了哪一层?",
+    "event_summary": "从漏洞被找到，到它被大规模利用，中间只剩几个小时。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "智能体"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T10:30:32Z",
+    "primary_url": "https://www.tmtpost.com/8179406.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "AI 智能体疯狂入侵人类系统：十几起漏洞依次排开，AI真正攻破了哪一层?",
+        "url": "https://www.tmtpost.com/8179406.html",
+        "published": "2026-10-23T10:30:32Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_357cdbaff6",
+    "title_zh": "智元两年投出47笔融资，多数投给了自家机器人的上游",
+    "event_summary": "智元铺生态投上游谋上市，待市场验证成败。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "机器人"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T10:19:48Z",
+    "primary_url": "https://www.tmtpost.com/8178163.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "智元两年投出47笔融资，多数投给了自家机器人的上游",
+        "url": "https://www.tmtpost.com/8178163.html",
+        "published": "2026-10-23T10:19:48Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_cded9da86e",
+    "title_zh": "谁在押注 Personal AI，谁又在害怕 Personal AI？",
+    "event_summary": "Personal Agent 的争夺战。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + Agent"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T10:19:14Z",
+    "primary_url": "https://www.tmtpost.com/8179361.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "谁在押注 Personal AI，谁又在害怕 Personal AI？",
+        "url": "https://www.tmtpost.com/8179361.html",
+        "published": "2026-10-23T10:19:14Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_885e47d801",
+    "title_zh": "别再争谁是“中国版Duet”了，卖铲子的ICT厂商先赚到了钱",
+    "event_summary": "常驻型 Agent 将 AI 搬上云端，重写了机房的 CPU、存储与网络配比。国内跨平台 Agent 受阻，基础设施先拿订单，成色仍看应用层。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + Agent"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T10:18:42Z",
+    "primary_url": "https://www.tmtpost.com/8179336.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "别再争谁是“中国版Duet”了，卖铲子的ICT厂商先赚到了钱",
+        "url": "https://www.tmtpost.com/8179336.html",
+        "published": "2026-10-23T10:18:42Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_1a7ca8b9d8",
+    "title_zh": "OpenAI、字节开始下场做机器人，创业公司如何拿到“大结果”？",
+    "event_summary": "具身智能创业公司面对的已经不只是另一个竞争对手。国内外的头部大模型公司带着算力、模型、人才和资金，从软件一路压到物理世界。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "大模型"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T10:09:37Z",
+    "primary_url": "https://www.tmtpost.com/8179212.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "OpenAI、字节开始下场做机器人，创业公司如何拿到“大结果”？",
+        "url": "https://www.tmtpost.com/8179212.html",
+        "published": "2026-10-23T10:09:37Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_53dddfe266",
+    "title_zh": "从乌兰察布到雄安，算力之战背后的国家棋局",
+    "event_summary": "文 | 蓝鲨财经社，作者 | 简安，编辑 | 卢旭成 全球AI竞争的战场进一步向芯片之外延伸。谁能更快建成数据中心、谁能获得稳定且低成本的电力、谁能把数以万计的加速芯片组织成高效运行的计算集群，谁就有机会在AI产业竞争中获得更多主动权。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 算力"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T10:08:43Z",
+    "primary_url": "https://www.tmtpost.com/8179238.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "从乌兰察布到雄安，算力之战背后的国家棋局",
+        "url": "https://www.tmtpost.com/8179238.html",
+        "published": "2026-10-23T10:08:43Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_034603829a",
+    "title_zh": "“AI 对资本回报是破坏性的”——丘栋荣和黄仁勋，其实吵的不是同一件事",
+    "event_summary": "消失两年，丘栋荣一开口就说了反市场共识：低估值不是机会是雷。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T10:08:01Z",
+    "primary_url": "https://www.tmtpost.com/8179246.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "“AI 对资本回报是破坏性的”——丘栋荣和黄仁勋，其实吵的不是同一件事",
+        "url": "https://www.tmtpost.com/8179246.html",
+        "published": "2026-10-23T10:08:01Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_96e076fcc0",
+    "title_zh": "美国拟向 4 家企业提供最高 3.89 亿美元半导体研发资金，核聚变与 AI 数据中心成重点",
+    "event_summary": "IT之家 10 月 23 日消息，美国商务部昨日宣布，计划通过美国《芯片与科学法案》框架下的半导体研发项目，向 4 家企业提供最高 3.89 亿美元 （IT之家注：现汇率约合 26.02 亿元人民币） 的研发资金，用于支持功率半导体器件及关键材料研发，相关技术将应用于核聚变发电、AI 数据中心和电力基础设施等领域。 根据美国国家标准与技术研究院（NIST）公布的信息，商务部已与 4 家企业签署资助意向书，最终资助仍需完成后续程序。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 应用"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T09:46:17Z",
+    "primary_url": "https://www.ithome.com/1/017/171.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "美国拟向 4 家企业提供最高 3.89 亿美元半导体研发资金，核聚变与 AI 数据中心成重点",
+        "url": "https://www.ithome.com/1/017/171.htm",
+        "published": "2026-10-23T09:46:17Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_6c8504f0c0",
+    "title_zh": "深圳将发布海洋标准体系建设指南、水下机器人标准体系",
+    "event_summary": "IT之家 10 月 23 日消息，10 月 22 日至 24 日，由自然资源部和广东省人民政府共同主办的中国海洋经济博览会（以下简称“海博会”）在深圳举办。 据财联社今日报道，大会期间相关活动将发布《 深圳市海洋标准体系建设指南 》《 深圳市水下机器人标准体系 》及深圳海洋科技“首发首试首用”产品清单，19…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "机器人"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T09:44:04Z",
+    "primary_url": "https://www.ithome.com/1/017/169.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "深圳将发布海洋标准体系建设指南、水下机器人标准体系",
+        "url": "https://www.ithome.com/1/017/169.htm",
+        "published": "2026-10-23T09:44:04Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_b794f231ad",
+    "title_zh": "四部门关于进一步防范不良中介机构影响优质中小企业培育认定的通知",
+    "event_summary": "工业和信息化部办公厅 国家网信办秘书局 税务总局办公厅 国家知识产权局办公室 关于进一步防范不良中介机构影响优质中小企业培育认定的通知 工信厅联企业〔2026〕40号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团中小企业主管部门、互联网信息办公室、税务局、知识产权局： 为贯彻落实党中央、国务院有关决策部署，进一步营造良好培育生态，防范不良中介机构影响，持续擦亮专精特新“金字招牌”，现将有关事项通知如下：…",
+    "source_level": "L1",
+    "policy_stage": "已发布",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "信息化"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T07:07:43Z",
+    "primary_url": "https://www.miit.gov.cn/zwgk/zcwj/wjfb/tz/art/2026/art_7cce197766e34445bf82d716b017856d.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "工信部·政策文件",
+        "level": "L1",
+        "title": "四部门关于进一步防范不良中介机构影响优质中小企业培育认定的通知",
+        "url": "https://www.miit.gov.cn/zwgk/zcwj/wjfb/tz/art/2026/art_7cce197766e34445bf82d716b017856d.html",
+        "published": "2026-10-23T07:07:43Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_d6f06f9003",
+    "title_zh": "关于公开征求《电子认证业务规则规范》等14项行业标准报批意见的公示",
+    "event_summary": "根据行业标准制修订计划，相关标准化技术组织已完成电子行业《电子认证业务规则规范》等14项行业标准的编制工作。为进一步听取社会各界意见，现予以公示。 以上标准报批稿请登录“工业和信息化标准信息服务平台”网站（https://std.miit.gov.cn）“项目公示”栏目阅览，如有意见请于公示期内反馈。 公示时间：2026年10月24日—2026年11月22日 联系电话：010–68205241 工业和信息化部科技司…",
+    "source_level": "L1",
+    "policy_stage": "征求意见",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "信息化"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T06:58:00Z",
+    "primary_url": "https://www.miit.gov.cn/gzcy/yjzj/art/2026/art_3d630ae782994bfdb0ce42101dffe0b7.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "工信部·意见征集",
+        "level": "L1",
+        "title": "关于公开征求《电子认证业务规则规范》等14项行业标准报批意见的公示",
+        "url": "https://www.miit.gov.cn/gzcy/yjzj/art/2026/art_3d630ae782994bfdb0ce42101dffe0b7.html",
+        "published": "2026-10-23T06:58:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_d9c64fd0ed",
+    "title_zh": "关于公开征求《终端毫米波天线技术要求及测量方法》等25项通信行业标准报批意见的公示",
+    "event_summary": "根据行业标准制修订计划，相关标准化技术组织已完成《终端毫米波天线技术要求及测量方法》等25项通信行业标准。为进一步听取社会各界意见，现予以公示。 以上标准报批稿请登录“工业和信息化标准信息服务平台”网站（https://std.miit.gov.cn）“项目公示”栏目阅览，如有意见请于公示期内反馈。 公示时间：2026年10月24日—2026年11月22日 联系电话：010–68205241 工业和信息化部科技司 2026年10月23日",
+    "source_level": "L1",
+    "policy_stage": "征求意见",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "信息化"
+    ],
+    "first_seen_at": "2026-10-23T11:30:59Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T06:50:00Z",
+    "primary_url": "https://www.miit.gov.cn/gzcy/yjzj/art/2026/art_6c2940a207a046fa86b7f1314d67a455.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "工信部·意见征集",
+        "level": "L1",
+        "title": "关于公开征求《终端毫米波天线技术要求及测量方法》等25项通信行业标准报批意见的公示",
+        "url": "https://www.miit.gov.cn/gzcy/yjzj/art/2026/art_6c2940a207a046fa86b7f1314d67a455.html",
+        "published": "2026-10-23T06:50:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_b3685fd7d5",
+    "title_zh": "宇树科技等多股“20cm”涨停",
+    "event_summary": "10月23日，人形机器人板块持续拉升，宇树科技、利亚德、海天瑞声等多股“20cm”涨停，众诚科技“30cm”涨停，凌云光、摩尔线程、上纬新材等跟涨。",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "机器人"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": "2026-10-23T09:34:02Z",
+    "published": "2026-10-23T09:34:02Z",
+    "primary_url": "https://www.baidu.com/s?wd=%E5%AE%87%E6%A0%91%E7%A7%91%E6%8A%80%E7%AD%89%E5%A4%9A%E8%82%A1%E2%80%9C20cm%E2%80%9D%E6%B6%A8%E5%81%9C",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "百度热搜",
+        "level": "L3",
+        "title": "宇树科技等多股“20cm”涨停",
+        "url": "https://www.baidu.com/s?wd=%E5%AE%87%E6%A0%91%E7%A7%91%E6%8A%80%E7%AD%89%E5%A4%9A%E8%82%A1%E2%80%9C20cm%E2%80%9D%E6%B6%A8%E5%81%9C",
+        "published": "2026-10-23T09:34:02Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_0cb4fccf41",
+    "title_zh": "A股三大指数全部翻红",
+    "event_summary": "A股三大指数全部翻红，上证指数涨0.22%，深证成指涨1.93%，创业板指涨3.1%。机器人、物理AI、白酒、保险等方向涨幅居前，沪深京三市上涨个股超3600只。",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "机器人"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": "2026-10-23T09:34:02Z",
+    "published": "2026-10-23T09:34:02Z",
+    "primary_url": "https://www.baidu.com/s?wd=A%E8%82%A1%E4%B8%89%E5%A4%A7%E6%8C%87%E6%95%B0%E5%85%A8%E9%83%A8%E7%BF%BB%E7%BA%A2",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "百度热搜",
+        "level": "L3",
+        "title": "A股三大指数全部翻红",
+        "url": "https://www.baidu.com/s?wd=A%E8%82%A1%E4%B8%89%E5%A4%A7%E6%8C%87%E6%95%B0%E5%85%A8%E9%83%A8%E7%BF%BB%E7%BA%A2",
+        "published": "2026-10-23T09:34:02Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_3494895193",
+    "title_zh": "AI 写代码越来越爽，但程序员可能越来越废了",
+    "event_summary": "最近发现一个挺有意思的现象： AI 越来越会写代码了，但有些程序员反而越来越不会写代码了。 以前写一个功能，得自己想逻辑、查文档、写代码、调 Bug。 现在不一样了。需求往 AI 里一扔，代码就出来了。运行一下，没报错，搞定！整个过程可能只需要几分钟。不得不说，是真的爽。 但问题也来了： 代码是写出来了，可你真的看懂了吗？ 「氛围编程」（Vibe…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": "2026-10-23T09:34:02Z",
+    "published": "2026-10-23T09:34:02Z",
+    "primary_url": "https://juejin.cn/post/7698930473150775350",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "AI 写代码越来越爽，但程序员可能越来越废了",
+        "url": "https://juejin.cn/post/7698930473150775350",
+        "published": "2026-10-23T09:34:02Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_d171b5dc57",
+    "title_zh": "为什么你的 Claude Code 还在转圈等，别人的已经干完三件事了？",
+    "event_summary": "同样是让 Claude Code 跑全量测试，有人盯着终端转圈等 8 分钟，什么也干不了；有人的 Claude Code 拿到一个任务 ID 就转头去改别的模块、查日志、写单测，等测试跑完，一条通知插进对话，它再回来接着修失败用例。 差别不在模型，在于用没用对它的 异步工具 。 我一开始也以为这只是“后台跑个命令”。直到把 Claude Code 2.1.303 和 2.1.304…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "Claude"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": "2026-10-23T09:34:02Z",
+    "published": "2026-10-23T09:34:02Z",
+    "primary_url": "https://juejin.cn/post/7698999578180747291",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "为什么你的 Claude Code 还在转圈等，别人的已经干完三件事了？",
+        "url": "https://juejin.cn/post/7698999578180747291",
+        "published": "2026-10-23T09:34:02Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_2d7d578f2a",
+    "title_zh": "DeepSeek拟新融资1000亿元，腾讯、宁德时代出资最多，这会不会改写国内大模型的竞争格局？",
+    "event_summary": "据上海证券报，10月22日，有市场消息称，国内大模型公司DeepSeek（深度求索）拟在最新一轮融资中筹得约1000亿元人民币（约150亿美元），腾讯和宁德时代为本轮出资最多的投资方，交易预计在未来数日内正式完成。…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "大模型"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": "2026-10-23T09:34:02Z",
+    "published": "2026-10-23T09:34:02Z",
+    "primary_url": "https://www.zhihu.com/question/2096713518582179306",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "知乎热榜",
+        "level": "L3",
+        "title": "DeepSeek拟新融资1000亿元，腾讯、宁德时代出资最多，这会不会改写国内大模型的竞争格局？",
+        "url": "https://www.zhihu.com/question/2096713518582179306",
+        "published": "2026-10-23T09:34:02Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_1d1597603b",
+    "title_zh": "索尼推出 IMX742 图像传感器：面向一次性内窥镜，支持图像信号本地数字化",
+    "event_summary": "IT之家 10 月 23 日消息，索尼半导体日本当地时间昨日宣布推出 IMX742 图像传感器。这一型号面向医疗场景， 适用于一次性细径内窥镜 。 IMX742 的长宽均仅有 1.0mm，分辨率 720×720。其拥有精简的模数转换单元，可在本地实现图像信号的数字化，从而 能在 5m 的距离下以单一线材同时传输 60fps 的低噪声画面和控制信号 。 相较模拟信号，数字信号技术可在低照度环境下实现噪声更低的成像，…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "半导体"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T09:26:01Z",
+    "primary_url": "https://www.ithome.com/1/017/132.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "索尼推出 IMX742 图像传感器：面向一次性内窥镜，支持图像信号本地数字化",
+        "url": "https://www.ithome.com/1/017/132.htm",
+        "published": "2026-10-23T09:26:01Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_80a7646d6d",
+    "title_zh": "国内首部 AI 院线长片《三星堆：未来往事》上映：千万元成本，首日票房超 12.5 万元",
+    "event_summary": "IT之家 10 月 23 日消息，国内首部获得国家电影局公映许可证的 AI 全流程院线长片《三星堆：未来往事》今日正式上映。截至IT之家发稿，猫眼专业版显示其首日票房超 12.5 万元，累计票房 14.2 万元。 这部影片由博越星纪蓝图（成都）与博越星际蓝图（上海）出品，生数科技 Vidu 提供首席技术支持，片长 100 分钟，备案类别为动画影片，所有角色均为原创数字形象，不含对真实演员的数字复制。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T09:20:48Z",
+    "primary_url": "https://www.ithome.com/1/017/123.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "国内首部 AI 院线长片《三星堆：未来往事》上映：千万元成本，首日票房超 12.5 万元",
+        "url": "https://www.ithome.com/1/017/123.htm",
+        "published": "2026-10-23T09:20:48Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_09b7a14f7e",
+    "title_zh": "国务院办公厅：积极增强人工智能创造就业机会等正面效应，有效减缓人工智能应用就业替代影响",
+    "event_summary": "IT之家 10 月 23 日消息，国务院办公厅今日印发《关于适应人工智能技术发展助力构建就业友好型发展方式的意见》。以人工智能赋能高质量发展为契机，以适应技术发展促进高质量充分就业为目标，以构建就业友好型发展方式为方向，积极增强人工智能创造就业机会、赋能传统岗位、提升就业质量、激发创业活力的正面效应， 有效减缓人工智能应用就业替代影响 ，努力实现技术进步、产业升级与就业促进、民生改善相协调的包容性发展。 IT之家注意到，《意见》提出…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T09:17:16Z",
+    "primary_url": "https://www.ithome.com/1/017/113.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "国务院办公厅：积极增强人工智能创造就业机会等正面效应，有效减缓人工智能应用就业替代影响",
+        "url": "https://www.ithome.com/1/017/113.htm",
+        "published": "2026-10-23T09:17:16Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_d72ea77c28",
+    "title_zh": "国务院：鼓励东部地区布局人工智能核心产业",
+    "event_summary": "36氪获悉，国务院办公厅印发《关于适应人工智能技术发展助力构建就业友好型发展方式的意见》。其中指出，拓展新兴领域人工智能就业新空间。深入实施“人工智能＋”行动，鼓励东部地区布局人工智能核心产业，引导中西部地区因地制宜承接数据标注、智能终端制造等上下游产业，加快形成人工智能领域就业新增长点。加快培育智能原生企业、专精特新“小巨人”企业等，按规定将符合条件的企业纳入金融助企稳岗扩岗专项贷款支持范围，创造更多就业新岗位新机会。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T09:07:21Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4038241928827779",
+    "source_count": 2,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "国务院：鼓励东部地区布局人工智能核心产业",
+        "url": "https://www.36kr.com/newsflashes/4038241928827779",
+        "published": "2026-10-23T09:12:07Z"
+      },
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "国办：鼓励东部地区布局人工智能核心产业",
+        "url": "https://wallstreetcn.com/livenews/3184501",
+        "published": "2026-10-23T09:07:21Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_e3918c1340",
+    "title_zh": "国务院：加快开发人工智能领域新职业",
+    "event_summary": "36氪获悉，国务院办公厅印发《关于适应人工智能技术发展助力构建就业友好型发展方式的意见》。其中指出，加快开发人工智能领域新职业。围绕人工智能场景培育和大规模应用，加快开发新职业、发布新职业标准，扩大数字化管理师、人工智能工程技术人员、人工智能训练师等新职业新工种需求。鼓励地方结合人工智能产业发展需要，增设相关职称评审专业，及时开展人工智能相关职业技能等级认定。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T09:09:28Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4038239338189960",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "国务院：加快开发人工智能领域新职业",
+        "url": "https://www.36kr.com/newsflashes/4038239338189960",
+        "published": "2026-10-23T09:09:28Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_2175552da4",
+    "title_zh": "国务院办公厅关于适应人工智能技术发展助力构建就业友好型发展方式的意见",
+    "event_summary": "国务院办公厅关于适应人工智能技术发展 助力构建就业友好型发展方式的意见 国办发〔2026〕29号 各省、自治区、直辖市人民政府，国务院各部委、各直属机构： 就业是最基本的民生。为贯彻落实党中央、国务院关于促进高质量充分就业的决策部署，积极适应人工智能技术发展，助力构建就业友好型发展方式，经国务院同意，现提出以下意见。 一、总体要求…",
+    "source_level": "L1",
+    "policy_stage": "已发布",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T09:00:00Z",
+    "primary_url": "https://www.gov.cn/zhengce/content/202610/content_7084107.htm",
+    "source_count": 2,
+    "links": [
+      {
+        "source": "国务院·最新政策",
+        "level": "L1",
+        "title": "国务院办公厅关于适应人工智能技术发展助力构建就业友好型发展方式的意见",
+        "url": "https://www.gov.cn/zhengce/content/202610/content_7084107.htm",
+        "published": "2026-10-23T09:00:00Z"
+      },
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "国务院办公厅印发《关于适应人工智能技术发展助力构建就业友好型发展方式的意见》",
+        "url": "https://www.36kr.com/newsflashes/4038232486106246",
+        "published": "2026-10-23T09:02:30Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_65c967a234",
+    "title_zh": "国务院办公厅：减缓人工智能应用就业替代影响，建立人工智能应用就业风险评估机制",
+    "event_summary": "国务院办公厅日前印发《关于适应人工智能技术发展助力构建就业友好型发展方式的意见》，对相关工作作出部署。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T09:01:35Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3184481",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "国务院办公厅：减缓人工智能应用就业替代影响，建立人工智能应用就业风险评估机制",
+        "url": "https://wallstreetcn.com/livenews/3184481",
+        "published": "2026-10-23T09:01:35Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_944b1c9d48",
+    "title_zh": "富士胶片、GE 医疗等五方携手，合作开发 2nm 医疗影像低功耗 AI 推理芯片",
+    "event_summary": "IT之家 10 月 23 日消息，LSTC 日本尖端半导体技术中心、北海道大学、富士胶片、GE 医疗、imec 五方当地时间本月 20 日宣布承接日本 NEDO 项目委托， 共同开发基于 2nm 工艺的医疗影像低功耗 AI 推理芯片 。 该芯片的设计应用场景包括： 对光子计数 CT 提供的海量数据进行高速重构与分解，实现“实时影像诊断支持”； 将超声影像与 CT / MRI 影像实时叠加，实现“实时诊疗支持”；…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 应用"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T08:59:41Z",
+    "primary_url": "https://www.ithome.com/1/017/106.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "富士胶片、GE 医疗等五方携手，合作开发 2nm 医疗影像低功耗 AI 推理芯片",
+        "url": "https://www.ithome.com/1/017/106.htm",
+        "published": "2026-10-23T08:59:41Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_a9e987b163",
+    "title_zh": "宁夏推出八项措施加力推进“算电协同”",
+    "event_summary": "10月23日，国网宁夏电力有限公司对外发布服务宁夏算力发展“八强化八满足”八项措施，重点围绕强化电网规划建设，满足算力大规模接入需求；强化供电安全保障，满足算力稳定运行需求；强化绿电交易服务，满足算力绿电消费需求；强化电碳体系构建，满足算力绿电溯源需求等展开，保障宁夏算力企业用电更高效、更绿色、更安全，加力推进“算电协同”。（新华社）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "算力"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T08:58:58Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3184479",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "宁夏推出八项措施加力推进“算电协同”",
+        "url": "https://wallstreetcn.com/livenews/3184479",
+        "published": "2026-10-23T08:58:58Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_700d083c2a",
+    "title_zh": "努比亚冰淇淋散热器推出全新配色「可可黑」：10 月 26 日开售，99 元",
+    "event_summary": "IT之家 10 月 23 日消息，努比亚今日推出冰淇淋散热器全新配色「可可黑」，现已开启预约，10 月 26 日 10:00 开售。目前，京东平台标价为 99 元。 IT之家注意到，这款散热器采用红魔散热器 8 Pro 同款散热架构，搭载第七代红魔散热技术-COLDLING 架构，打通半导体、散热片、风道、风扇、导热铜板之间的全链路冷热交换，转化效率提升 72%。 散热器内部包含纯铝高导均温片、8 Pro 同类型高密度 TEC…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "半导体"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T08:54:46Z",
+    "primary_url": "https://www.ithome.com/1/017/105.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "努比亚冰淇淋散热器推出全新配色「可可黑」：10 月 26 日开售，99 元",
+        "url": "https://www.ithome.com/1/017/105.htm",
+        "published": "2026-10-23T08:54:46Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_9d5cc3ee52",
+    "title_zh": "当超算走出实验室：一场从”算得快”到”算得值”的产业迁徙",
+    "event_summary": "记者：郭思 编辑：包永刚 导语：超算产业需要更多算力中立供应商 深夜十一点，某新能源汽车企业的仿真计算中心里，屏幕上的流体模拟进度条正在缓缓推进。窗外的城市已经安静下来，但这里的服务器仍在轰鸣——工程师白天做分析、调参数，到了晚上就把计算任务交给算力，第二天一早推开门，结果已经摆在了桌上。 这种“夕发朝看”的工作节奏，正在中国各地的研发实验室里成为新常态。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "算力"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T08:52:00Z",
+    "primary_url": "https://www.leiphone.com/category/chips/weZAv8C0bQZltLxn.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "雷峰网",
+        "level": "L2",
+        "title": "当超算走出实验室：一场从”算得快”到”算得值”的产业迁徙",
+        "url": "https://www.leiphone.com/category/chips/weZAv8C0bQZltLxn.html",
+        "published": "2026-10-23T08:52:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_7077287c2a",
+    "title_zh": "香港交易所推出人工智能及半导体指数",
+    "event_summary": "香港交易及结算所有限公司今天（星期五）宣布，推出香港交易所人工智能指数及香港交易所半导体指数。新推出的两项指数进一步拓展香港交易所自主编制的指数系列，并为投资者提供基准，捕捉人工智能及半导体两大科技主题带来的机遇。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T08:48:03Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3184461",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "香港交易所推出人工智能及半导体指数",
+        "url": "https://wallstreetcn.com/livenews/3184461",
+        "published": "2026-10-23T08:48:03Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_ce3a5aed38",
+    "title_zh": "月之暗面公布 Kimi K3.1 预热视频，发布日期暂未官宣",
+    "event_summary": "IT之家 10 月 23 日消息，Kimi 官方账号今天发布了一段 24 秒的预热视频，画面中一台老式电脑正在运行 Kimi Code，左上角模型栏显示“Model：Kimi K3.1”。结合此前一系列痕迹，无不预示着 K3.1 即将发布，开发者社区已就此展开讨论。 最早的迹象是在今年 9 月，多名开发者注意到月之暗面 API…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "Kimi"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T08:43:19Z",
+    "primary_url": "https://www.ithome.com/1/017/098.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "月之暗面公布 Kimi K3.1 预热视频，发布日期暂未官宣",
+        "url": "https://www.ithome.com/1/017/098.htm",
+        "published": "2026-10-23T08:43:19Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_9805d11bb5",
+    "title_zh": "SEMI 预测：2026 年全球半导体硅晶圆出货增长 11.8%，2027~2029 年有望持续刷新纪录",
+    "event_summary": "IT之家 10 月 23 日消息，SEMI（国际半导体产业协会）当地时间 21 日发布年度硅晶圆出货量预测报告： 2026 年全球半导体硅晶圆出货将同比增长 11.8% ，达到 144.2 亿平方英寸（相当于 1.275 亿片 12 英寸晶圆），为历史次高。 而在 2027~2029 年， 全球硅晶圆出货有望超越 2022 年的前期高点 ，持续创下新高，到期末达到 170.34 亿平方英寸（相当于 1.5061 亿片 12…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "半导体"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T08:33:28Z",
+    "primary_url": "https://www.ithome.com/1/017/092.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "SEMI 预测：2026 年全球半导体硅晶圆出货增长 11.8%，2027~2029 年有望持续刷新纪录",
+        "url": "https://www.ithome.com/1/017/092.htm",
+        "published": "2026-10-23T08:33:28Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_b9d5521993",
+    "title_zh": "从“算力”到“Token 生产力”，硅基流动助力央国企大模型规模化落地",
+    "event_summary": "在企业网 D1net 主办的 2026 秋季央国企 CIO 及数科公司高管峰会（第 19 届）上，硅基流动解决方案总监唐安波出席峰会并作主题分享：《从“算力”到“Token 生产力”：央国企大模型规模化落地的推理基础设施与 ROI 实践》。以下为分享内容精华。 当下，AI 应用正处于爆发式增长的早期阶段，Token…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "大模型"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T08:32:00Z",
+    "primary_url": "https://www.leiphone.com/category/industrynews/DVoE94j80j6cboxE.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "雷峰网",
+        "level": "L2",
+        "title": "从“算力”到“Token 生产力”，硅基流动助力央国企大模型规模化落地",
+        "url": "https://www.leiphone.com/category/industrynews/DVoE94j80j6cboxE.html",
+        "published": "2026-10-23T08:32:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_0e59ce06c0",
+    "title_zh": "OpenClaw 小龙虾之父谈 AI 智能体：上个月消耗 Token 成本约 1000 万美元",
+    "event_summary": "IT之家 10 月 23 日消息，OpenClaw 创始人、OpenAI 技术团队成员 Peter Steinberger 透露，他上个月花在 AI 工作上的 Token 费用高达 1,000 万美元 （IT之家注：现汇率约合 6,688.2 万元人民币） 。 Steinberger 在旧金山举行的 Cloudflare Connect 2026 大会上与 Cloudflare 首席技术官 Dane Knecht…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "智能体"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T08:08:54Z",
+    "primary_url": "https://www.ithome.com/1/017/081.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "OpenClaw 小龙虾之父谈 AI 智能体：上个月消耗 Token 成本约 1000 万美元",
+        "url": "https://www.ithome.com/1/017/081.htm",
+        "published": "2026-10-23T08:08:54Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_0d6a0317ed",
+    "title_zh": "字节火山引擎发布 Seedance 2.5 4K 模型，面向影视级画面生成",
+    "event_summary": "IT之家 10 月 23 日消息，今日，字节跳动旗下火山引擎正式发布 Seedance 2.5 4K，通过专项训练，Seedance 2.5 4K 更充分地学习了人物表情、细微动作与画面细节，是 Seedance 2.5 这一代中最强的模型。 据介绍， Seedance 2.5 4K 支持 Draft（样片）模式，终端用户可先用 480P 样片快速验证分镜、反复打磨镜头， 确定满意的效果后再生成 4K 正片 。在该模式下，480P…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "模型 + 发布"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T08:00:20Z",
+    "primary_url": "https://www.ithome.com/1/017/078.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "字节火山引擎发布 Seedance 2.5 4K 模型，面向影视级画面生成",
+        "url": "https://www.ithome.com/1/017/078.htm",
+        "published": "2026-10-23T08:00:20Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_64f8fb8600",
+    "title_zh": "联想杨元庆预测：未来 80% Token 将在终端和边缘生成，每个人都将需要一台家用服务器或 AI 中心",
+    "event_summary": "IT之家 10 月 23 日消息，据新浪科技今日报道，联想集团董事长兼 CEO 杨元庆在一场内部领导力发展培训项目中，分享了其对下一阶段 AI 产业发展趋势及联想战略的最新判断。 杨元庆认为，随着大模型参数规模进入万亿级别、Token 使用规模持续扩大，如何提升 AI 计算效率、降低 Token 使用成本，将成为 AI 规模化普及的重要课题。 他预测， 未来 80% 的 Token 将在终端和边缘侧生成 。这意味着，随着 AI…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "大模型"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T07:51:09Z",
+    "primary_url": "https://www.ithome.com/1/017/074.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "联想杨元庆预测：未来 80% Token 将在终端和边缘生成，每个人都将需要一台家用服务器或 AI 中心",
+        "url": "https://www.ithome.com/1/017/074.htm",
+        "published": "2026-10-23T07:51:09Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_23a313cf9e",
+    "title_zh": "千问蒋冠军：构建Personal Agent技术框架，需要模型、记忆与生态协同推进",
+    "event_summary": "10月22日，在2026中国计算机大会上，阿里巴巴千问事业部AI算法负责人蒋冠军分享了千问打造Personal Agent的技术实践。他认为，真正的Personal Agent阶段，应该带来增量价值的创造和个性化的主动服务，模型、记忆与生态是共同构建这一核心能力的三要素。 他表示，Personal…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + Agent"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T07:38:00Z",
+    "primary_url": "https://www.leiphone.com/category/industrynews/DHR4Qc9YwHX7lin8.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "雷峰网",
+        "level": "L2",
+        "title": "千问蒋冠军：构建Personal Agent技术框架，需要模型、记忆与生态协同推进",
+        "url": "https://www.leiphone.com/category/industrynews/DHR4Qc9YwHX7lin8.html",
+        "published": "2026-10-23T07:38:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_1151444135",
+    "title_zh": "百度世界2026前瞻：10+重磅分论坛，全面解码AI时代的智能组织进化路径",
+    "event_summary": "10月21日，百度官方公众号发文披露了百度世界2026分论坛的更多议程信息。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T07:35:51Z",
+    "primary_url": "https://www.qbitai.com/2026/10/504901.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "量子位",
+        "level": "L2",
+        "title": "百度世界2026前瞻：10+重磅分论坛，全面解码AI时代的智能组织进化路径",
+        "url": "https://www.qbitai.com/2026/10/504901.html",
+        "published": "2026-10-23T07:35:51Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_24b2091f06",
+    "title_zh": "从数据缺失到风险量化：机器人保险定价难在哪？",
+    "event_summary": "机器人是第一个出厂就自带行车记录仪的被保险标的，而保险公司是唯一不能撒谎的第三方。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "机器人"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T07:35:34Z",
+    "primary_url": "https://www.tmtpost.com/8178174.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "从数据缺失到风险量化：机器人保险定价难在哪？",
+        "url": "https://www.tmtpost.com/8178174.html",
+        "published": "2026-10-23T07:35:34Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_891bdbafdf",
+    "title_zh": "沃尔沃、奔驰、大众等纷纷拥抱英伟达，推动欧洲自动驾驶业务发展",
+    "event_summary": "IT之家 10 月 23 日消息，据外媒 motor1 今天（23 日）下午报道，英伟达在柏林 GTC 大会上公布了自动驾驶业务在欧洲的最新布局。 Bolt、Lucid、奔驰、大众汽车商用车、沃尔沃汽车和 Einride 均计划采用英伟达 Hyperion 计算平台，开发无人驾驶出租车、厢式货车和货运卡车。 目前，上述项目均未在公共道路上实现全面商业化运营，仍处于研发、测试或准备部署阶段，其中多数尚待监管部门批准。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "英伟达"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T07:32:51Z",
+    "primary_url": "https://www.ithome.com/1/017/067.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "沃尔沃、奔驰、大众等纷纷拥抱英伟达，推动欧洲自动驾驶业务发展",
+        "url": "https://www.ithome.com/1/017/067.htm",
+        "published": "2026-10-23T07:32:51Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_e2df66b247",
+    "title_zh": "马斯克把 SpaceX 做成了收租生意",
+    "event_summary": "当同行还在按“年”规划 AI 数据中心时，马斯克已经在按“天”交付了，还把竞争对手变成了客户。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T07:32:01Z",
+    "primary_url": "https://www.tmtpost.com/8178913.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "马斯克把 SpaceX 做成了收租生意",
+        "url": "https://www.tmtpost.com/8178913.html",
+        "published": "2026-10-23T07:32:01Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_bc862e1aba",
+    "title_zh": "融资10亿+元，亿铸科技加速通用存算一体产业化",
+    "event_summary": "国内首家通用存算一体架构（GP-IMC®）AI大算力芯片公司亿铸科技完成10亿+元融资。随着AI算力需求持续增长，通用存算一体等新型算力架构受到资本市场和产业界关注，亿铸科技也在技术研发与产品产业化方面持续推进。 亿铸科技正式运营于2022年，持续聚焦通用存算一体技术研发，坚持“通用存算一体+超异构”技术路线，围绕3D…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 芯片"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T07:16:00Z",
+    "primary_url": "https://www.leiphone.com/category/industrynews/ADXEXKrCVSzoJ36i.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "雷峰网",
+        "level": "L2",
+        "title": "融资10亿+元，亿铸科技加速通用存算一体产业化",
+        "url": "https://www.leiphone.com/category/industrynews/ADXEXKrCVSzoJ36i.html",
+        "published": "2026-10-23T07:16:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_e1e47db51b",
+    "title_zh": "中国 AI 硬件的下一个爆款，可能生在「网球场」",
+    "event_summary": "头图来源：Hirdwire 2024 年巴黎奥运会，郑钦文在罗兰·加洛斯捧起金牌的那个下午，中国的网球场预订量在一周内翻了数倍。两年后，最先把这股热潮变成生意的，是一群造机器的深圳工程师。 过去一年，至少四款中国团队打造的 AI 球类机器人在 Kickstarter 上筹得百万美元级资金。庞伯特以 26255% 的超募率卷走 265 万美元；智能家居大厂 SwitchBot 推出的 Acemate 30 天入账 180…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T06:15:58Z",
+    "primary_url": "http://www.geekpark.net/news/372807",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "极客公园",
+        "level": "L2",
+        "title": "中国 AI 硬件的下一个爆款，可能生在「网球场」",
+        "url": "http://www.geekpark.net/news/372807",
+        "published": "2026-10-23T06:15:58Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_2b5ddd82c9",
+    "title_zh": "造物 100 #10｜百万众筹的和弦合成器、52kHz 超声波去污笔、能打电话的奥特曼 AI 玩具",
+    "event_summary": "这周苹果发了新一代 HomePod mini，149 美元，10 月 30 日开卖，真正的新 Siri 要等之后的软件更新才到。科技巨头正抢着在假日季前，把 AI 小设备摆上货架。 大公司的打法很统一， 先造一个入口，再把 AI 慢慢塞进去 。但这周名单里的产品，走的是另一条路。NOPIA 把乐理做了只有一个八度的键盘，按一个键出一整个和弦。InstaSpot 把超声波清洗机缩成一支 65 克的笔。Nothing…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T06:03:13Z",
+    "primary_url": "http://www.geekpark.net/news/372803",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "极客公园",
+        "level": "L2",
+        "title": "造物 100 #10｜百万众筹的和弦合成器、52kHz 超声波去污笔、能打电话的奥特曼 AI 玩具",
+        "url": "http://www.geekpark.net/news/372803",
+        "published": "2026-10-23T06:03:13Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_7c2ea3d0c3",
+    "title_zh": "网络攻击愈发猖獗，防御方能否用AI扳回一城？",
+    "event_summary": "在最新研究中， Claude模型找到了一些曾历经数万亿次测试仍未被发现的bug，还首次在生产软件中跑通了大规模的形式化验证。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "Claude"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T05:35:10Z",
+    "primary_url": "https://www.tmtpost.com/8178797.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "网络攻击愈发猖獗，防御方能否用AI扳回一城？",
+        "url": "https://www.tmtpost.com/8178797.html",
+        "published": "2026-10-23T05:35:10Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_635a35cf50",
+    "title_zh": "擦窗机器人有了首个行业标准，你敢把窗户交给它吗？",
+    "event_summary": "“会不会掉下来？” 这是每个第一次把擦窗机器人放上玻璃的人，心里都会闪过的念头。没有一家厂商敢在宣传里写“绝不掉落”，涉及高空作业，这四个字背后的责任谁都担不起。 一台擦窗机器人卖的不只是清洁力，还有风险已被技术接管的承诺。 擦窗机器人正在成为家用机器人行业里一个越来越明显的变量。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "机器人"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T02:57:00Z",
+    "primary_url": "https://www.leiphone.com/category/smarthome/iDkOEQuhDC14QfOE.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "雷峰网",
+        "level": "L2",
+        "title": "擦窗机器人有了首个行业标准，你敢把窗户交给它吗？",
+        "url": "https://www.leiphone.com/category/smarthome/iDkOEQuhDC14QfOE.html",
+        "published": "2026-10-23T02:57:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_15c1f8ef7a",
+    "title_zh": "OpenAI 与波兰 NASK 合作推进 AI 安全与安全",
+    "event_summary": "OpenAI and Poland’s NASK are partnering on AI safety, security, and technical research to strengthen safeguards and support a more resilient digital ecosystem.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T00:00:00Z",
+    "primary_url": "https://openai.com/index/openai-nask-ai-safety-security-partnership",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "OpenAI News",
+        "level": "L2",
+        "title": "OpenAI 与波兰 NASK 合作推进 AI 安全与安全",
+        "url": "https://openai.com/index/openai-nask-ai-safety-security-partnership",
+        "published": "2026-10-23T00:00:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_ce7fed74f4",
+    "title_zh": "提问 HN：如果模型这么好，为什么 OpenAI 不直接创办 100 家公司？",
+    "event_summary": "Title is a bit of an exaggeration but the question is more: if the frontier models are so good, why even sell them as your primary money maker? Couldn't OpenAI or Anthropic make a lot more money by just starting…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "OpenAI"
+    ],
+    "first_seen_at": "2026-10-23T09:34:02Z",
+    "hot_seen_at": "2026-10-22T21:03:55Z",
+    "published": "2026-10-22T21:03:55Z",
+    "primary_url": "https://news.ycombinator.com/item?id=50200997",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "Hacker News",
+        "level": "L3",
+        "title": "提问 HN：如果模型这么好，为什么 OpenAI 不直接创办 100 家公司？",
+        "url": "https://news.ycombinator.com/item?id=50200997",
+        "published": "2026-10-22T21:03:55Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_35d94cb78f",
+    "title_zh": "白毛股神自曝10月浮亏超1300万美元",
+    "event_summary": "当地时间10月22日，纳斯达克综合指数遭遇“黑色星期四”，单日大跌2.60%创6月以来最大单日跌幅，科技股与半导体板块重挫。同日，“白毛股神”Serenity在社交平台自曝10月账户浮亏达1358.94万美元。",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "半导体"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": "2026-10-23T04:37:40Z",
+    "published": "2026-10-23T04:37:40Z",
+    "primary_url": "https://www.baidu.com/s?wd=%E7%99%BD%E6%AF%9B%E8%82%A1%E7%A5%9E%E8%87%AA%E6%9B%9D10%E6%9C%88%E6%B5%AE%E4%BA%8F%E8%B6%851300%E4%B8%87%E7%BE%8E%E5%85%83",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "百度热搜",
+        "level": "L3",
+        "title": "白毛股神自曝10月浮亏超1300万美元",
+        "url": "https://www.baidu.com/s?wd=%E7%99%BD%E6%AF%9B%E8%82%A1%E7%A5%9E%E8%87%AA%E6%9B%9D10%E6%9C%88%E6%B5%AE%E4%BA%8F%E8%B6%851300%E4%B8%87%E7%BE%8E%E5%85%83",
+        "published": "2026-10-23T04:37:40Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_2ee50b60f9",
+    "title_zh": "为啥智谱GLM海外口碑极佳，国内认知度却不及豆包DeepSeek？盈利模式、应用场景上三者有啥区别吗？",
+    "event_summary": "为什么技术实力雄厚、海外口碑扎实的智谱，在国内的大众认知中，却似乎被 DeepSeek 和豆包甩在了身后。在海外，GLM 的口碑之所以好，是因为海外的开源社区和学术圈看重的是论文质量、模型开源程度以及 API 的稳定性。智谱清言虽然也面向 C 端，但在字节庞大的流量机器和产品矩阵面前，声量自然显得微弱——2025 年初，智谱清言的月活尚在数百万级别，与豆包不在同一个量级。…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "DeepSeek"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": "2026-10-23T04:37:40Z",
+    "published": "2026-10-23T04:37:40Z",
+    "primary_url": "https://www.zhihu.com/question/2095926994475168071",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "知乎热榜",
+        "level": "L3",
+        "title": "为啥智谱GLM海外口碑极佳，国内认知度却不及豆包DeepSeek？盈利模式、应用场景上三者有啥区别吗？",
+        "url": "https://www.zhihu.com/question/2095926994475168071",
+        "published": "2026-10-23T04:37:40Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_0bde0493b1",
+    "title_zh": "三星研发24小时工作机器人，正在执行搬运货物等工作，如果机器人不用休息，制造业成本逻辑会彻底变吗？",
+    "event_summary": "10月20日，综合财联社、中新经纬报道，三星电子正瞄准明年1月在美国拉斯维加斯举行的“消费电子展(CES)2027”，研发24小时工作的机器人。其构想是凭借三星特有的快速跟随者战略，在作为后发者的机器人市场加快追赶速度。 统管三星电子机器人业务的RX业务推进室正在首尔牛眠洞首尔R&D园区验证可在产业现场24小时运转的机器人性能。这款机器人在执行搬运货物等制造、物流现场重复作业的同时，也在学习周边环境和作业方式。…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "机器人"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": "2026-10-23T04:37:40Z",
+    "published": "2026-10-23T04:37:40Z",
+    "primary_url": "https://www.zhihu.com/question/2096004164606243451",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "知乎热榜",
+        "level": "L3",
+        "title": "三星研发24小时工作机器人，正在执行搬运货物等工作，如果机器人不用休息，制造业成本逻辑会彻底变吗？",
+        "url": "https://www.zhihu.com/question/2096004164606243451",
+        "published": "2026-10-23T04:37:40Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_fe395e35e5",
+    "title_zh": "Anthropic最快将于本周提交S-1招股说明书，有望冲击史上最大IPO，会对市场带来怎样的影响？",
+    "event_summary": "据财联社援引知情人士报道，Anthropic最快将于本周五公开提交S-1招股说明书。此举将标志着这一有望冲击“史上最大IPO”的项目迈出至关重要的下一步。 Anthropic备受期待的上市预计规模将超过SpaceX今年6月的 IPO，被广泛视为检验投资者对人工智能（AI）热潮胃口的关键试金石——目前市场对该行业巨额资本支出的担忧正在升温。 Anthropic早在今年6月就已向美国证券交易委员会（SEC）秘密提交了IPO注册声明草案。根据SEC规定，企业必须在正式启动路演前的15个日然日公开提交注册文件。…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": "2026-10-23T04:37:40Z",
+    "published": "2026-10-23T04:37:40Z",
+    "primary_url": "https://www.zhihu.com/question/2096551809837790048",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "知乎热榜",
+        "level": "L3",
+        "title": "Anthropic最快将于本周提交S-1招股说明书，有望冲击史上最大IPO，会对市场带来怎样的影响？",
+        "url": "https://www.zhihu.com/question/2096551809837790048",
+        "published": "2026-10-23T04:37:40Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_578b90aeb2",
+    "title_zh": "刚做独游撞上Steam新品节“反AI风暴”，无数玩家开始避雷，这算不算一种全新形态的雅达利大崩溃？",
+    "event_summary": "千篇一律的塑料感立绘、毫无调整的粗糙模型、生硬的 AI 配音，加上套壳的玩法。这种 “批量生产、快速上架” 的短平快模式，直接引发了玩家社区的强烈反感。现在很多玩家的态度很明确：看到 AI 生成标签，直接划走避雷。",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": "2026-10-23T04:37:40Z",
+    "published": "2026-10-23T04:37:40Z",
+    "primary_url": "https://www.zhihu.com/question/2096207810589730229",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "知乎热榜",
+        "level": "L3",
+        "title": "刚做独游撞上Steam新品节“反AI风暴”，无数玩家开始避雷，这算不算一种全新形态的雅达利大崩溃？",
+        "url": "https://www.zhihu.com/question/2096207810589730229",
+        "published": "2026-10-23T04:37:40Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_e765fc5be8",
+    "title_zh": "【研选•两融数据】机器人+次新股+芯片+AI应用+文化传媒，五大热点一周以来获融资净买入情况（附表）",
+    "event_summary": "1、财联社VIP各专栏产品均系内容资讯服务，并非投资建议。栏目内容仅供参考，据此作出任何投资决策自行承担风险责任，与本公司及栏目作者无关； 2、财联社VIP专栏产品所发内容版权归财联社所有，未经书面授权任何商业机构、网站、公司及个人禁止转载或再利用文中信息，违者必究； 3、财联社VIP专栏产品为虚拟内容服务，一经订阅概不退款，请您理解。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 应用"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T04:36:11Z",
+    "primary_url": "https://www.cls.cn/detail/2512738",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "【研选•两融数据】机器人+次新股+芯片+AI应用+文化传媒，五大热点一周以来获融资净买入情况（附表）",
+        "url": "https://www.cls.cn/detail/2512738",
+        "published": "2026-10-23T04:36:11Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_e8f6207253",
+    "title_zh": "源杰科技：公司产能扩充正按业务需求推进",
+    "event_summary": "36氪获悉，源杰科技公告，公司目前生产经营活动、订单交付及产能扩建等工作均正常开展，内部生产经营秩序正常。公司产能扩充正按业务需求推进，光电通讯半导体芯片和器件研发生产基地二期项目的土建工程、部分洁净室及相关配套设施已完成建设，首批生产设备预计近期开始进厂，后续将进行设备调试，预计2026年底至2027年初开始形成产能，整体项目进展符合预期。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "半导体"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T04:35:57Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4037970454107012",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "源杰科技：公司产能扩充正按业务需求推进",
+        "url": "https://www.36kr.com/newsflashes/4037970454107012",
+        "published": "2026-10-23T04:35:57Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_c95781e7c3",
+    "title_zh": "跑步上岗的具身智能：谁在赚吆喝，谁在算细账",
+    "event_summary": "文 |霞光AI实验室，作者｜Vinco，编辑｜李小天 长假已经过去一阵子了，但由此引发的假期效应还留有余温。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "具身智能"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T04:30:00Z",
+    "primary_url": "https://www.tmtpost.com/8178732.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "跑步上岗的具身智能：谁在赚吆喝，谁在算细账",
+        "url": "https://www.tmtpost.com/8178732.html",
+        "published": "2026-10-23T04:30:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_3d225e48c5",
+    "title_zh": "小马智行携手inDrive推动Robotaxi落地哈萨克斯坦",
+    "event_summary": "36氪获悉，10月23日，自动驾驶公司小马智行宣布，与全球出行及配送平台inDrive、英伟达签署合作备忘录，共同推动自动驾驶出行产品及应用落地。哈萨克斯坦将成为该合作的首个试点市场，这也是小马智行首次将全球业务版图拓展至中亚地区。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "英伟达"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T04:24:02Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4037940129223813",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "小马智行携手inDrive推动Robotaxi落地哈萨克斯坦",
+        "url": "https://www.36kr.com/newsflashes/4037940129223813",
+        "published": "2026-10-23T04:24:02Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_43b0157ad7",
+    "title_zh": "随着人工智能涨势放缓 美国养老金巨头CalPERS减持大型科技股",
+    "event_summary": "【随着人工智能涨势放缓 美国养老金巨头CalPERS减持大型科技股】财联社10月23日电，据报道，美国最大的公共养老基金——加州公共雇员退休系统（Calpers）已在2026年上半年大幅削减了对科技巨头的持仓，将其直接持有的“科技七巨头（Magnificent 7）”股票数量减少了26%。这一举动表明，随着全球对人工智能（AI）投资可持续性的担忧加剧，大型机构投资者正在积极降低市场集中度风险。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T04:23:14Z",
+    "primary_url": "https://www.cls.cn/detail/2513240",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "随着人工智能涨势放缓 美国养老金巨头CalPERS减持大型科技股",
+        "url": "https://www.cls.cn/detail/2513240",
+        "published": "2026-10-23T04:23:14Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_0f1c173713",
+    "title_zh": "财联社10月23日电，摩根大通将北欧半导体目标价从170挪威克朗下调至165挪威克朗。",
+    "event_summary": "财联社10月23日电，摩根大通将北欧半导体目标价从170挪威克朗下调至165挪威克朗。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "半导体"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T04:22:42Z",
+    "primary_url": "https://www.cls.cn/detail/2513239",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "财联社10月23日电，摩根大通将北欧半导体目标价从170挪威克朗下调至165挪威克朗。",
+        "url": "https://www.cls.cn/detail/2513239",
+        "published": "2026-10-23T04:22:42Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_93125d1442",
+    "title_zh": "什么？一个人就能训练大模型，指标还能硬刚K3V4？",
+    "event_summary": "训练一个5000亿参数的大模型，需要多少人？ AI行业的经验是，至少几十人，大厂动辄投入数百人。 但硅谷一家叫Mirendil的初创公司，把这个数字压缩到了极致—— 只要一个人。 就在刚刚，Mirendil在官网发了一篇文章，标题非常耸人听闻：《无需预训练团队的大规模预训练》。 1名研究员、三个半月、成本不到1000万美元。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "大模型"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T04:19:27Z",
+    "primary_url": "https://www.tmtpost.com/8178778.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "什么？一个人就能训练大模型，指标还能硬刚K3V4？",
+        "url": "https://www.tmtpost.com/8178778.html",
+        "published": "2026-10-23T04:19:27Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_b91bd0d742",
+    "title_zh": "胜宏科技：在手订单饱满 迭代产品推进顺利",
+    "event_summary": "针对市场关注，记者获悉，胜宏科技与核心客户保持密切沟通，与客户合作开发的研发迭代产品正顺利推进当中。在AI算力、数据中心、高性能计算、光模块等关键领域，多款高端产品已实现大规模量产。订单层面，公司目前在手订单饱满，订单能见度处于历史高位，部分客户已释放2027年至2028年长期需求，公司对后续生产经营及效益实现充满信心。（证券时报）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 算力"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T04:18:17Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3184161",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "胜宏科技：在手订单饱满 迭代产品推进顺利",
+        "url": "https://wallstreetcn.com/livenews/3184161",
+        "published": "2026-10-23T04:18:17Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_ab11a7d985",
+    "title_zh": "阿里 Qoder 官宣支持 Linux ARM64 与龙芯平台，适配统信 UOS、银河麒麟操作系统",
+    "event_summary": "IT之家 10 月 23 日消息，阿里 Qoder 今日宣布，Qoder （国际版与中国版）现已支持 Linux ARM64 与龙芯（LoongArch64）平台，适配统信 UOS、银河麒麟操作系统。 官方表示，此次升级，将 Qoder 从需求理解到任务执行、成果交付的完整工作方式带到了国产桌面系统。用户可以在熟悉的环境中调用工具、操作文件，并让多个智能体协作， 获得与其他平台一致的编程与通用能力支持 。 至此，Qoder…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "智能体"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T04:13:59Z",
+    "primary_url": "https://www.ithome.com/1/016/927.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "阿里 Qoder 官宣支持 Linux ARM64 与龙芯平台，适配统信 UOS、银河麒麟操作系统",
+        "url": "https://www.ithome.com/1/016/927.htm",
+        "published": "2026-10-23T04:13:59Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_ede27f08f3",
+    "title_zh": "【研选•行业数据】国家数据集团正式成立，数据要素市场化配置迈出关键一步，最新整理数据要素产业链情况（附表）",
+    "event_summary": "1、财联社VIP各专栏产品均系内容资讯服务，并非投资建议。栏目内容仅供参考，据此作出任何投资决策自行承担风险责任，与本公司及栏目作者无关； 2、财联社VIP专栏产品所发内容版权归财联社所有，未经书面授权任何商业机构、网站、公司及个人禁止转载或再利用文中信息，违者必究； 3、财联社VIP专栏产品为虚拟内容服务，一经订阅概不退款，请您理解。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "数据要素"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T04:11:16Z",
+    "primary_url": "https://www.cls.cn/detail/2512685",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "【研选•行业数据】国家数据集团正式成立，数据要素市场化配置迈出关键一步，最新整理数据要素产业链情况（附表）",
+        "url": "https://www.cls.cn/detail/2512685",
+        "published": "2026-10-23T04:11:16Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_347cd4422e",
+    "title_zh": "半日主力资金加仓电力设备板块，抛售通信板块",
+    "event_summary": "主力资金早间净流入电力设备、有色金属、食品饮料等板块，净流出通信、国防军工、农林牧渔等板块。具体到个股来看，天娱数科、粤芯半导体-U、宁德时代获净流入16.55亿元、14.32亿元、12.73亿元。净流出方面，亨通光电、润建股份、长电科技遭抛售6.12亿元、3.27亿元、2.82亿元。（第一财经）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "半导体"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T04:10:12Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4037939302192000",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "半日主力资金加仓电力设备板块，抛售通信板块",
+        "url": "https://www.36kr.com/newsflashes/4037939302192000",
+        "published": "2026-10-23T04:10:12Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_d7cc4b4345",
+    "title_zh": "财联社10月23日午间新闻精选",
+    "event_summary": "【财联社10月23日午间新闻精选】 1、截至午间收盘，上证指数跌1.2%，深证成指跌1.6%，创业板指跌2.14%。 2、港股午间收盘，香港恒生指数涨0.58%，恒生科技指数涨0.86%。 3、MiniMax宣布开源MiniMax M3.1 Flash的模型权重，总参数428B，激活参数23B。据介绍，M3.1 Flash上线后，72小时内真实用户处理超过100万亿Token。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "MiniMax"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T04:03:48Z",
+    "primary_url": "https://www.cls.cn/detail/2513224",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "财联社10月23日午间新闻精选",
+        "url": "https://www.cls.cn/detail/2513224",
+        "published": "2026-10-23T04:03:48Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_690aea53d2",
+    "title_zh": "问答：AI 如何建模“混乱”的人类思维",
+    "event_summary": "Assistant Professor Benjamin Lindquist studies how engineers deliberately injected randomness into early AI, giving rise to deep-learning models that sometimes hallucinate.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T04:00:00Z",
+    "primary_url": "https://news.mit.edu/2026/qa-how-ai-came-to-model-messy-human-mind-1023",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "MIT News AI",
+        "level": "L2",
+        "title": "问答：AI 如何建模“混乱”的人类思维",
+        "url": "https://news.mit.edu/2026/qa-how-ai-came-to-model-messy-human-mind-1023",
+        "published": "2026-10-23T04:00:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_94cd4ca5fb",
+    "title_zh": "Uber竞争对手inDrive计划2027年在中亚进行Robotaxi测试，与Pony.ai和NVIDIA合作",
+    "event_summary": "inDrive plans to begin testing Pony.ai's robotaxis in Kazakhstan's capital in the first half of 2027.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T04:00:00Z",
+    "primary_url": "https://techcrunch.com/2026/10/22/uber-rival-indrive-eyes-2027-robotaxi-tests-in-central-asia-with-pony-ai-and-nvidia/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "TechCrunch AI",
+        "level": "L2",
+        "title": "Uber竞争对手inDrive计划2027年在中亚进行Robotaxi测试，与Pony.ai和NVIDIA合作",
+        "url": "https://techcrunch.com/2026/10/22/uber-rival-indrive-eyes-2027-robotaxi-tests-in-central-asia-with-pony-ai-and-nvidia/",
+        "published": "2026-10-23T04:00:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_d5fabc915b",
+    "title_zh": "前千寻具身智能负责人解浚源北美创业，成立具身数采公司 gi labs",
+    "event_summary": "据悉，前千寻具身智能部负责人解浚源已在北美创业，成立gi labs（通用智能实验室），公司主要聚焦于打造数采设备，包括动捕手套、多目相机、 机器人 夹爪等。其中EGO1GS这款一体化数采头显搭载了1080p双目相机视场角可达157H 84D，并且采样频率达到前代的两倍，约400Hz。 据前述知情人士透露， gi…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "具身智能"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T03:58:50Z",
+    "primary_url": "https://www.tmtpost.com/8178785.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "前千寻具身智能负责人解浚源北美创业，成立具身数采公司 gi labs",
+        "url": "https://www.tmtpost.com/8178785.html",
+        "published": "2026-10-23T03:58:50Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_e5c017ee89",
+    "title_zh": "报告称 2026 年国内大模型均价翻倍，每秒吞吐量也翻倍",
+    "event_summary": "IT之家 10 月 23 日消息，中国信息通信研究院（简称“中国信通院”）人工智能研究所、人工智能大模型及软硬件评测工业和信息化部重点实验室和中国人工智能产业发展联盟，今日（10 月 23 日）联合发布《大模型词元服务性能监测报告（2026 年）》。 报告称，随着大模型技术的迅速迭代，词元（Token）服务成为从技术走向应用的关键点，我国日均词元调用量持续攀升， 2026 年 6 月，国内词元日均消耗量约 500 万亿，是 2025…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T03:51:58Z",
+    "primary_url": "https://www.ithome.com/1/016/876.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "报告称 2026 年国内大模型均价翻倍，每秒吞吐量也翻倍",
+        "url": "https://www.ithome.com/1/016/876.htm",
+        "published": "2026-10-23T03:51:58Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_4b6a5c2bc3",
+    "title_zh": "DeepSeek 完成千亿元人民币新一轮融资，消息称“联想系”投资者入局",
+    "event_summary": "IT之家 10 月 23 日消息，当地时间 22 日，据《华尔街日报》援引知情人士消息称，中国 AI 初创企业 DeepSeek 完成第二轮私募融资，筹资 150 亿美元 （IT之家注：现汇率约合 1,003.23 亿元人民币） 。投资者认购意愿强烈，推动融资规模扩大至接近最初目标的两倍，为潜在上市计划提供了资金支持。 知情人士称，DeepSeek…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T03:50:10Z",
+    "primary_url": "https://www.ithome.com/1/016/875.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "DeepSeek 完成千亿元人民币新一轮融资，消息称“联想系”投资者入局",
+        "url": "https://www.ithome.com/1/016/875.htm",
+        "published": "2026-10-23T03:50:10Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_524fa1b8f3",
+    "title_zh": "不录屏的 Recall：微软测试 Pantheon 新 AI 应用，定位 Win11 的“第二大脑”",
+    "event_summary": "IT之家 10 月 23 日消息，科技媒体 Windows Latest 今天（10 月 23 日）发布博文，报道称 微软正低调测试一款适用于 Windows 11 系统的 AI 应用，内部开发代号为 Project Pantheon，测试版本名称为 Context Vault，可视为“回顾”（Recall）功能的不录屏版本。 “回顾”功能在上线后因为会自动截取屏幕而引发巨大隐私争议，而这款 Context Vault…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 应用"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T03:44:04Z",
+    "primary_url": "https://www.ithome.com/1/016/873.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "不录屏的 Recall：微软测试 Pantheon 新 AI 应用，定位 Win11 的“第二大脑”",
+        "url": "https://www.ithome.com/1/016/873.htm",
+        "published": "2026-10-23T03:44:04Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_fbb18f9bbd",
+    "title_zh": "RISC-V中国峰会在深圳开幕：车规芯片已量产上车，AI与数据中心仍在补软件",
+    "event_summary": "10月19日，第六届RISC-V中国峰会在深圳会展中心（福田）开幕，由RISC-V国际开源实验室（RIOS Lab）主办，会期两天。据主办方数据，本届峰会吸引3000余名线下专业观众、150余家参展商及研究机构，线上覆盖80万行业人群。次日，人工智能、数据中心与高性能计算、软件生态、芯片设计与验证、汽车电子与工业、嵌入式与物联网、产学合作等七个平行分论坛同时举行。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 芯片"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T03:41:14Z",
+    "primary_url": "https://www.tmtpost.com/8178185.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "RISC-V中国峰会在深圳开幕：车规芯片已量产上车，AI与数据中心仍在补软件",
+        "url": "https://www.tmtpost.com/8178185.html",
+        "published": "2026-10-23T03:41:14Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_4d88a84f7e",
+    "title_zh": "国债期货早盘收盘，30年期主力合约涨0.02%，10年期主力合约涨0.02%，5年期主力合约涨0.02%，2年期主力合约涨0.00%。",
+    "event_summary": "国债期货早盘收盘，30年期主力合约涨0.02%，10年期主力合约涨0.02%，5年期主力合约涨0.02%，2年期主力合约涨0.00%。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "国债"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T03:30:00Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3184146",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "国债期货早盘收盘，30年期主力合约涨0.02%，10年期主力合约涨0.02%，5年期主力合约涨0.02%，2年期主力合约涨0.00%。",
+        "url": "https://wallstreetcn.com/livenews/3184146",
+        "published": "2026-10-23T03:30:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_47fdc5e957",
+    "title_zh": "AI大算力芯片公司“亿铸科技”完成10亿+元融资",
+    "event_summary": "近日，国内首家通用存算一体架构（GP-IMC®）AI大算力芯片公司“亿铸科技”完成10亿+元融资。此次融资将为亿铸科技后续研发投入、产品迭代及产业化推进提供进一步支持。据了解，亿铸科技正式运营于2022年，持续聚焦通用存算一体技术研发，坚持“通用存算一体+超异构”技术路线，围绕3D DRAM存算一体等技术方向持续布局。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 芯片"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T03:27:16Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4037902939263880",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "AI大算力芯片公司“亿铸科技”完成10亿+元融资",
+        "url": "https://www.36kr.com/newsflashes/4037902939263880",
+        "published": "2026-10-23T03:27:16Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_a07f245d5f",
+    "title_zh": "消息称内存制造商已启动 SOCAMM3 模组前期准备工作",
+    "event_summary": "IT之家 10 月 23 日消息，据韩媒 THE ELEC 当地时间今日报道，该国 PCB 制造商 TLB 近日已同两家现有的内存制造商客户 就 SOCAMM3 内存模组的设计和制造方案进行早期磋商 ，各方尚未决定最终规格。 TLB 供应各种存储模组 PCB 产品，其现有产品线即覆盖 SOCAMM 类型产品。报道表示， SOCAMM3 的量产预计将从 2028 年开始 ，可能随 NVIDIA 的 Rosa CPU 一道进入市场。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "NVIDIA"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T03:23:29Z",
+    "primary_url": "https://www.ithome.com/1/016/861.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "消息称内存制造商已启动 SOCAMM3 模组前期准备工作",
+        "url": "https://www.ithome.com/1/016/861.htm",
+        "published": "2026-10-23T03:23:29Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_1c1e36d45b",
+    "title_zh": "人形机器人租金暴跌，厂商为什么还在铺渠道？",
+    "event_summary": "更多门店只能让更多人看见机器人，不能让机器人自动获得工作。机器人渠道真正成熟的标志，不是又开出多少家4S店，而是每多交付一台机器人，不必再多配一名跟在旁边的工程师。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "机器人"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T03:20:00Z",
+    "primary_url": "https://www.tmtpost.com/8177860.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "人形机器人租金暴跌，厂商为什么还在铺渠道？",
+        "url": "https://www.tmtpost.com/8177860.html",
+        "published": "2026-10-23T03:20:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_3b1fddbffe",
+    "title_zh": "马斯克的算力生意一年回本，Meta的Muse遥遥无期",
+    "event_summary": "本周，SpaceX、特斯拉、Meta相继发布三季度财报。 10月20日，SpaceX在三季度电话会上披露，按当前价格，新部署算力 不到一年就能回本 。一天后，扎克伯格向投资者说，Meta的个人智能体Muse还不能在全球推出，原因之一是跑起来太费算力。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 算力"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T03:03:00Z",
+    "primary_url": "https://www.tmtpost.com/8178416.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "马斯克的算力生意一年回本，Meta的Muse遥遥无期",
+        "url": "https://www.tmtpost.com/8178416.html",
+        "published": "2026-10-23T03:03:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_2345fe53af",
+    "title_zh": "蚂蚁数科发布LingDT-Decision-1.0",
+    "event_summary": "36氪获悉，10月22日，蚂蚁数科正式发布决策模型 LingDT-Decision-1.0。该模型专为快速决策打造，在处理结构化决策任务时，具备准确率更高、响应更快、Token成本更低等优势，尤其适合产业AI场景。LingDT-Decision-1.0提供4B和27B两个版本，目前，模型已经在蚂蚁数科 DTMaaS 平台上线，开发者可限时免费体验。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "模型 + 发布"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T03:00:58Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4037868366156932",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "蚂蚁数科发布LingDT-Decision-1.0",
+        "url": "https://www.36kr.com/newsflashes/4037868366156932",
+        "published": "2026-10-23T03:00:58Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_71041b75ae",
+    "title_zh": "谷歌推出 ACE 服务：为 AI 智能体配“独立工位”，空闲时自动下班 / 唤醒不到 500 毫秒",
+    "event_summary": "IT之家 10 月 23 日消息，谷歌昨日（10 月 22 日）发布公告，宣布推出智能体计算引擎（Agent Compute Engine，简称 ACE）， 是一款专为 AI 智能体打造的 Google Cloud 计算服务，目标让每个智能体都拥有安全、持久、可弹性伸缩的“专属电脑”。 根据官方公告，ACE 服务将为每个 AI 智能体提供独立的硬件隔离 microVM（微型虚拟机），…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "智能体"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T02:55:33Z",
+    "primary_url": "https://www.ithome.com/1/016/853.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "谷歌推出 ACE 服务：为 AI 智能体配“独立工位”，空闲时自动下班 / 唤醒不到 500 毫秒",
+        "url": "https://www.ithome.com/1/016/853.htm",
+        "published": "2026-10-23T02:55:33Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_6a00f91e6d",
+    "title_zh": "布鲁克林篮网队宣布：阿里巴巴成为AI和云合作伙伴",
+    "event_summary": "2026年时值布鲁克林篮网队60周年。纽约时间10月21日（北京时间10月22日）新赛季的揭幕赛上，布鲁克林篮网队正式宣布阿里巴巴成为球队的官方AI与云合作伙伴。双方达成多年合作协议，将通过人工智能（AI）与云计算技术，为球场内外提供全面技术支持，重塑球迷观赛与互动体验。阿里巴巴的标志也印上篮网队的新赛季球衣。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T02:55:20Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4037871540556680",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "布鲁克林篮网队宣布：阿里巴巴成为AI和云合作伙伴",
+        "url": "https://www.36kr.com/newsflashes/4037871540556680",
+        "published": "2026-10-23T02:55:20Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_2e29f9b2aa",
+    "title_zh": "阿维塔汽车 AVATR. OS 6.1.0 车机更新发布，支持离车不下电、导航双地图切换等",
+    "event_summary": "IT之家 10 月 23 日消息，阿维塔今日官宣推送 AVATR. OS 6.1.0 车机更新 ，体验更丰富，安全再加码，于今日（10 月 23 日）开始推送。 IT之家汇总更新内容如下： 一、智能 电子萌宠【新增】 阿维塔电子萌宠・塔可上线，表情丰富、可情绪互动；本次更新支持阿维塔 12、阿维塔 07、阿维塔 06T、阿维塔 06 车型。 AI 形象生成【新增】 在阿维塔 App 上传萌宠 / 亲友照片，一键生成多种风格静态、动态…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T02:32:32Z",
+    "primary_url": "https://www.ithome.com/1/016/844.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "阿维塔汽车 AVATR. OS 6.1.0 车机更新发布，支持离车不下电、导航双地图切换等",
+        "url": "https://www.ithome.com/1/016/844.htm",
+        "published": "2026-10-23T02:32:32Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_e6412500e3",
+    "title_zh": "微软 Win11 甩不掉 45 年“历史包袱”，盖茨称 Ctrl+Alt+Del 组合键是“错误”",
+    "event_summary": "IT之家 10 月 23 日消息，科技媒体 Windows Latest 昨日（10 月 22 日）发布博文，讨论称微软联合创始人比尔 · 盖茨曾多次公开表示， 将 Ctrl+Alt+Del 用作 Windows 登录和安全操作入口是一个“错误”。 该媒体指出，这个三键组合诞生于 45 年前（1981 年），在 Windows 11 已全面拥抱 AI、触控与新交互的今天，至今仍是系统安全体系的重要入口。 1981 年的 IBM PC…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T02:30:47Z",
+    "primary_url": "https://www.ithome.com/1/016/843.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "微软 Win11 甩不掉 45 年“历史包袱”，盖茨称 Ctrl+Alt+Del 组合键是“错误”",
+        "url": "https://www.ithome.com/1/016/843.htm",
+        "published": "2026-10-23T02:30:47Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_ad8f0e77db",
+    "title_zh": "微信 iOS 版 8.0.80 最新官方正式版下载发布",
+    "event_summary": "IT之家 10 月 23 日消息，微信 iOS 平台迎来了 8.0.80 正式版更新。 官方更新日志为： 本次更新： - 解决了一些已知问题。 大家在 IT之家微信号 回复“ 微信 ”两字，即可获取当前最新官方内部版微信下载。 本文由机器人发布，IT之家稍后将为大家带来具体更新内容。如果你发现了日志中未提及的更新点，欢迎发在评论区供大家参考~[微笑]",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "机器人"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T02:08:06Z",
+    "primary_url": "https://www.ithome.com/1/016/838.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "微信 iOS 版 8.0.80 最新官方正式版下载发布",
+        "url": "https://www.ithome.com/1/016/838.htm",
+        "published": "2026-10-23T02:08:06Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_804505e2ce",
+    "title_zh": "拿铁熊猫推出 Sigma 2 单板计算机，搭载英特尔酷睿 Ultra X7 处理器 358H",
+    "event_summary": "IT之家 10 月 23 日消息，智位机器人 (DFRobot) 旗下拿铁熊猫 (LattePanda) 团队近日推出了高性能单板计算机 Sigma 2。这一型号 基于英特尔酷睿 Ultra X7 处理器 358H ，板载 64GB LPDDR5X-8533 内存。 Sigma 2 尺寸为 146×202 (mm)，集成涡轮风扇散热器，拥有丰富的扩展性。其专为边缘 AI 计算和嵌入式 AI 应用设计，适合全天候本地 AI…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 应用"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T02:04:28Z",
+    "primary_url": "https://www.ithome.com/1/016/835.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "拿铁熊猫推出 Sigma 2 单板计算机，搭载英特尔酷睿 Ultra X7 处理器 358H",
+        "url": "https://www.ithome.com/1/016/835.htm",
+        "published": "2026-10-23T02:04:28Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_94d65f7b91",
+    "title_zh": "在么在么（原死了么）宣布升级为智能养老平台，2.0 系统上线定价 199 元 / 年",
+    "event_summary": "IT之家 10 月 23 日消息，此前一款名为“死了么”的 App 因直白的生存签到功能引发全网热议，也精准戳中了独居群体“怕出事、怕没人知”的普遍焦虑。今年 5 月， “死了么”App 被“收编”改名“在么在么” ，用于独居、空巢老人监测，并率先在浙江杭州上城南星街道投入应用。 10 月 22 日，在么在么 App 官方宣布升级为智能养老平台；同时升级 2.0 系统“AIP 安全网”， 定价 199 元 / 年…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 应用"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T02:02:57Z",
+    "primary_url": "https://www.ithome.com/1/016/834.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "在么在么（原死了么）宣布升级为智能养老平台，2.0 系统上线定价 199 元 / 年",
+        "url": "https://www.ithome.com/1/016/834.htm",
+        "published": "2026-10-23T02:02:57Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_16b1b9828a",
+    "title_zh": "关于公开征求《银冶炼安全生产要求》等7项强制性国家标准制修订计划项目意见的公示",
+    "event_summary": "根据标准化工作的总体安排，现将申请立项的《银冶炼安全生产要求》等7项强制性国家标准制修订计划项目予以公示（见附件1）。 如对标准项目有不同意见，请在公示期间填写《标准立项反馈意见表》（见附件2）并反馈至工业和信息化部科技司，电子邮件发送至kjbz@miit.gov.cn（邮件主题注明：强制性国家标准立项公示反馈）。 公示时间：2026年10月23日—2026年10月29日 联系电话：010-64102958，010-68205261…",
+    "source_level": "L1",
+    "policy_stage": "征求意见",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "信息化"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T01:35:00Z",
+    "primary_url": "https://www.miit.gov.cn/gzcy/yjzj/art/2026/art_f53fdc794afe4fb88ee8fef5be851ad9.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "工信部·意见征集",
+        "level": "L1",
+        "title": "关于公开征求《银冶炼安全生产要求》等7项强制性国家标准制修订计划项目意见的公示",
+        "url": "https://www.miit.gov.cn/gzcy/yjzj/art/2026/art_f53fdc794afe4fb88ee8fef5be851ad9.html",
+        "published": "2026-10-23T01:35:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_3f3925db8a",
+    "title_zh": "公开征求《汽车数据安全要求》等五项强制性国家标准的意见",
+    "event_summary": "按照《中华人民共和国标准化法》和《强制性国家标准管理办法》，工业和信息化部装备工业一司组织全国汽车标准化技术委员会开展了《汽车数据安全要求》等五项强制性国家标准的制修订，已形成征求意见稿，现公开征求社会各界意见。 征求意见截止日期为2026年12月19日，如有意见和建议，请以书面（个人需署名，单位需加盖公章，并留联系方式）或电子邮件形式进行反馈。 附件： 1.汽车数据安全要求（征求意见稿）.pdf…",
+    "source_level": "L1",
+    "policy_stage": "征求意见",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "数据安全"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T01:34:00Z",
+    "primary_url": "https://www.miit.gov.cn/gzcy/yjzj/art/2026/art_e8f18397fd014e1b87b3b05e4706ffc6.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "工信部·意见征集",
+        "level": "L1",
+        "title": "公开征求《汽车数据安全要求》等五项强制性国家标准的意见",
+        "url": "https://www.miit.gov.cn/gzcy/yjzj/art/2026/art_e8f18397fd014e1b87b3b05e4706ffc6.html",
+        "published": "2026-10-23T01:34:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_a4acc2ecff",
+    "title_zh": "DeepSeek 据悉完成 1000 亿元新一轮融资；特斯拉三季度利润大跌 43%；微信称已完成适配 iPhone Duo | 极客早知道",
+    "event_summary": "DeepSeek 新一轮融资筹得约 1000 亿 10 月 22 日，有市场消息称，国内大模型公司 DeepSeek 拟在最新一轮融资中筹得约 1000 亿元人民币 ( 约 150 亿美元 )，腾讯和宁德时代为本轮出资最多的投资方，交易预计在未来数日内正式完成。 截至目前，DeepSeek 及腾讯等相关投资方均未公开回应。记者从接近公司和投资方的多个信源交叉求证，确认上述消息属实。 消息人士透露，本轮募资目标最初设定为 500…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "大模型"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T00:49:03Z",
+    "primary_url": "http://www.geekpark.net/news/372767",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "极客公园",
+        "level": "L2",
+        "title": "DeepSeek 据悉完成 1000 亿元新一轮融资；特斯拉三季度利润大跌 43%；微信称已完成适配 iPhone Duo | 极客早知道",
+        "url": "http://www.geekpark.net/news/372767",
+        "published": "2026-10-23T00:49:03Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_b7f139331a",
+    "title_zh": "72岁董明珠：被学生喊奶奶很不开心，人的价值不用年龄来衡量；雷军：汽车产业没有安全，其他都是零；iPhone Duo全球限购，每人限购2台",
+    "event_summary": "要闻提示 1.iPhone Duo开启全球限购，每位顾客仅可购买2台 2.72岁董明珠：被学生喊奶奶很不开心，人的价值不用年龄来衡量 3.雷军：汽车产业没有安全，其他都是零 4.星巴克回应消费入座争议：10月22日起全国施行并摆放提示牌 5.宇树发新人形机器人！能徒手抬汽车，还会勇斗歹徒 6.离职Kimi后，17岁天才少年陈广宇被曝加入美国AI初创公司 7.高通拟11月启动全球裁员！ 8.马斯克证实：SpaceX、特斯拉将合并…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "Kimi"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T00:49:00Z",
+    "primary_url": "https://www.leiphone.com/category/zaobao/3jq4Bj4E3zJhjVBp.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "雷峰网",
+        "level": "L2",
+        "title": "72岁董明珠：被学生喊奶奶很不开心，人的价值不用年龄来衡量；雷军：汽车产业没有安全，其他都是零；iPhone Duo全球限购，每人限购2台",
+        "url": "https://www.leiphone.com/category/zaobao/3jq4Bj4E3zJhjVBp.html",
+        "published": "2026-10-23T00:49:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_085ba153da",
+    "title_zh": "无事可做时，AI代理开始玩游戏",
+    "event_summary": "MIT researchers marooned 13 AIs on a virtual island, and they responded by inventing games, mourning a lost ring and, eventually, getting better at their jobs.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T00:45:37Z",
+    "primary_url": "https://techcrunch.com/2026/10/22/left-alone-with-nothing-to-do-ai-agents-started-playing/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "TechCrunch AI",
+        "level": "L2",
+        "title": "无事可做时，AI代理开始玩游戏",
+        "url": "https://techcrunch.com/2026/10/22/left-alone-with-nothing-to-do-ai-agents-started-playing/",
+        "published": "2026-10-23T00:45:37Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_4e958d668f",
+    "title_zh": "派早报：Insta360 发布 Insta360 Mic，Anthropic 推出 Claude Duet 等",
+    "event_summary": "少数派的近期动态和少数派一起，在海口明日公园来一场创造之约吧。活动详情iPhone少数派共创配件上新，自由选择保护、充电、线缆和支架组合。欢迎选购你可能错过的文章终于吃到了那颗梦寐以求的小药丸：我的A ... 查看全文",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "Anthropic"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-23T00:20:32Z",
+    "primary_url": "https://sspai.com/post/117104",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "少数派",
+        "level": "L2",
+        "title": "派早报：Insta360 发布 Insta360 Mic，Anthropic 推出 Claude Duet 等",
+        "url": "https://sspai.com/post/117104",
+        "published": "2026-10-23T00:20:32Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_1360bd8eb5",
+    "title_zh": "LLMs正在大规模实现形式化软件验证",
+    "event_summary": "Keane Lucas, Aengus Lynch, Luna Tong, Luke Champine, Zygi Straznickas, Dino Distefano, Harshikaa Agrawal Evyatar Ben Asher, Ava Howell, Sami Jawhar, Chris Rohlf, Nickolai Zeldovich Nicholas Carlini,…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": "2026-10-22T22:54:43Z",
+    "published": "2026-10-22T22:54:43Z",
+    "primary_url": "https://www.anthropic.com/research/formal-verification",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "Hacker News",
+        "level": "L3",
+        "title": "LLMs正在大规模实现形式化软件验证",
+        "url": "https://www.anthropic.com/research/formal-verification",
+        "published": "2026-10-22T22:54:43Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_c7b5a9ccdc",
+    "title_zh": "Comcast失去更多客户，声称其他ISP的低价“不合理”",
+    "event_summary": "Comcast plans job cuts and more AI agents for its shrinking cable customer base.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + Agent"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T21:07:09Z",
+    "primary_url": "https://arstechnica.com/tech-policy/2026/10/comcast-loses-more-customers-claims-other-isps-cheap-prices-are-irrational/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "Ars Technica",
+        "level": "L2",
+        "title": "Comcast失去更多客户，声称其他ISP的低价“不合理”",
+        "url": "https://arstechnica.com/tech-policy/2026/10/comcast-loses-more-customers-claims-other-isps-cheap-prices-are-irrational/",
+        "published": "2026-10-22T21:07:09Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_efeec609e2",
+    "title_zh": "中华人民共和国工业和信息化部公告2026年第27号",
+    "event_summary": "工业和信息化部决定成立工业软件标准化技术委员会，具体如下： 工业和信息化部工业软件标准化技术委员会，编号为MIIT/TC11，主要负责关键技术、互操作、产品服务、融合应用及生态建设等行业标准制修订工作。第一届工业和信息化部工业软件标准化技术委员会由127名委员组成，秘书处由工业和信息化部电子第五研究所承担。 特此公告。 附件： 第一届工业和信息化部工业软件标准化技术委员会委员名单 工业和信息化部 2026年10月19日",
+    "source_level": "L1",
+    "policy_stage": "已发布",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "软件"
+    ],
+    "first_seen_at": "2026-10-23T04:37:40Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T11:21:36Z",
+    "primary_url": "https://www.miit.gov.cn/zwgk/zcwj/wjfb/gg/art/2026/art_42fbe460eb604430a910db12e784ed89.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "工信部·政策文件",
+        "level": "L1",
+        "title": "中华人民共和国工业和信息化部公告2026年第27号",
+        "url": "https://www.miit.gov.cn/zwgk/zcwj/wjfb/gg/art/2026/art_42fbe460eb604430a910db12e784ed89.html",
+        "published": "2026-10-22T11:21:36Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_9fa1330202",
+    "title_zh": "OpenAI融资磋商进入尾声 估值目标据悉下调至1.25万亿美元",
+    "event_summary": "OpenAI融资磋商进入尾声 估值目标据悉下调至1.25万亿美元",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "OpenAI"
+    ],
+    "first_seen_at": "2026-10-22T23:53:17Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T23:49:15Z",
+    "primary_url": "https://www.cls.cn/detail/2512927",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "OpenAI融资磋商进入尾声 估值目标据悉下调至1.25万亿美元",
+        "url": "https://www.cls.cn/detail/2512927",
+        "published": "2026-10-22T23:49:15Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_b43128dc4f",
+    "title_zh": "OpenAI宣布全面开放决策API",
+    "event_summary": "当地时间10月22日，OpenAI宣布正式全面开放决策API‌（Decisions API），由GPT‑6 Luna提供支持。定价方面，决策API‌输入每百万token收费0.10美元，缓存输入每百万token收费0.01美元。在整个OpenAI，团队正在将决策API‌应用于产品和业务工作流。（界面）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 应用"
+    ],
+    "first_seen_at": "2026-10-22T23:53:17Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T23:49:06Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4037681043657600",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "OpenAI宣布全面开放决策API",
+        "url": "https://www.36kr.com/newsflashes/4037681043657600",
+        "published": "2026-10-22T23:49:06Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_2ad774f7ae",
+    "title_zh": "巴克莱将裁员5000人，借助人工智能削减成本",
+    "event_summary": "巴克莱将裁减5000个岗位，以借助人工智能降低成本，成为又一家因新技术逐渐渗透整个银行业而缩减员工规模的大型银行。此次裁员相当于这家总部位于伦敦的银行总员工人数的约5%，其中约60%的削减来自支持职能，包括开发人员。5000个岗位中包括该行上半年已削减的1000个职位。此前巴克莱今年早些时候公布的费用高于预期，此次裁员是其控制成本举措的一部分。（新浪财经）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-10-22T23:53:17Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T23:48:19Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4037207118091141",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "巴克莱将裁员5000人，借助人工智能削减成本",
+        "url": "https://www.36kr.com/newsflashes/4037207118091141",
+        "published": "2026-10-22T23:48:19Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_e222ebf9c1",
+    "title_zh": "OpenAI 宣布全面开放决策 API：基于 GPT‑6 Luna，每百万 token 输入 0.1 美元",
+    "event_summary": "IT之家 10 月 23 日消息，当地时间 10 月 22 日，OpenAI 宣布全面开放决策 API（Decisions API）。 据介绍， 该 API 基于 GPT‑6 Luna 构建 ，将 Luna 的模型智能聚焦于具有限定答案（bounded answers）的问题，协助应用程序与智能体基于文本、图像及结构化输入做出准实时决策 —— 其响应速度比通过 Responses API 调用 GPT‑6 Luna 提升了高达 10…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "智能体"
+    ],
+    "first_seen_at": "2026-10-22T23:53:17Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T23:48:13Z",
+    "primary_url": "https://www.ithome.com/1/016/771.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "OpenAI 宣布全面开放决策 API：基于 GPT‑6 Luna，每百万 token 输入 0.1 美元",
+        "url": "https://www.ithome.com/1/016/771.htm",
+        "published": "2026-10-22T23:48:13Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_1d8fb4b8af",
+    "title_zh": "海博会“数智化”成焦点，多家大型央企与头部公司集中参展",
+    "event_summary": "10月22日，2026中国海洋经济博览会（简称“海博会”）在深圳正式拉开帷幕。本届海博会，“数智化”成为最突出亮点之一，人工智能（AI）正全方位赋能海洋经济和水上水下全产业链，智能航线规划、船舶自动驾驶、水下具身智能等相关新产品、新技术集中亮相。 有专家在接受采访时表示，当前数智技术叠加AI的快速发展正推动海洋经济加速进入以数据为要素、以智能化为核心驱动力的新阶段。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-10-22T23:53:17Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T23:42:18Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4037671182062468",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "海博会“数智化”成焦点，多家大型央企与头部公司集中参展",
+        "url": "https://www.36kr.com/newsflashes/4037671182062468",
+        "published": "2026-10-22T23:42:18Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_794a65ecb6",
+    "title_zh": "香港公布新一批18家重点企业，可带来840亿港元投资、创造26700个职位",
+    "event_summary": "香港推出了一批新的18家策略企业，鼓励它们在香港设立或扩展业务。 一半来自中国内地，另一半来自世界其他地方。随着新一批重点企业加入，香港至今共引进142家重点企业。这些企业预计将带来合共约840亿港元的投资，并创造约26700个职位。新的重点企业包括强生(香港)和黄金精炼商Valcambi SA，其他公司包括AI和机器人公司智元(AGIBOT)、范式智能（Phancy Group）及区块链平台Solana。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "机器人"
+    ],
+    "first_seen_at": "2026-10-22T23:53:17Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T23:41:25Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3184029",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "香港公布新一批18家重点企业，可带来840亿港元投资、创造26700个职位",
+        "url": "https://wallstreetcn.com/livenews/3184029",
+        "published": "2026-10-22T23:41:25Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_c4d3e951f0",
+    "title_zh": "【点金互动易】人形机器人+消费电子，国内四处以及海外基地正式投产，量产交付人形机器人零部件及整机，这家公司消费电子产品正值交付旺季",
+    "event_summary": "10月21日19:01《电报解读》梳理机构龙虎榜数据并覆盖“兆威机电”，发文指出：兆威机电主营微型传动及驱动系统，依托传动、微电机、电控协同体系，业务覆盖智能汽车、医疗、工业及机器人。重点布局人形机器人灵巧手，自研17自由度指关节内置驱动灵巧手，集成感知单元，适配具身智能。可提供定制方案与模组制造，形成产业闭环，开放多元合作模式，推进灵巧手商业化落地。10月22日，兆威机电涨停。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "机器人"
+    ],
+    "first_seen_at": "2026-10-22T23:53:17Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T23:39:53Z",
+    "primary_url": "https://www.cls.cn/detail/2512750",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "【点金互动易】人形机器人+消费电子，国内四处以及海外基地正式投产，量产交付人形机器人零部件及整机，这家公司消费电子产品正值交付旺季",
+        "url": "https://www.cls.cn/detail/2512750",
+        "published": "2026-10-22T23:39:53Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_8a85a85d49",
+    "title_zh": "特斯拉要为 Optimus 建“学校”，马斯克称训练机器人就像育儿",
+    "event_summary": "IT之家 10 月 23 日消息，特斯拉打算把人形机器人 Optimus 送进“学校”，让机器人通过练习掌握更多技能。 据《商业内幕》报道，当地时间 21 日，特斯拉 CEO 埃隆 · 马斯克在财报电话会议上 将训练 Optimus 比作养育幼儿 。他解释，特斯拉的自动驾驶系统可以从庞大车队积累的数据中学习，但 Optimus 没有这样的条件，只能 通过观察人类工作，再亲自练习 来掌握技能，与人类学习的方式相似。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "机器人"
+    ],
+    "first_seen_at": "2026-10-22T23:53:17Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T23:38:12Z",
+    "primary_url": "https://www.ithome.com/1/016/769.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "特斯拉要为 Optimus 建“学校”，马斯克称训练机器人就像育儿",
+        "url": "https://www.ithome.com/1/016/769.htm",
+        "published": "2026-10-22T23:38:12Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_75c6dea336",
+    "title_zh": "黄仁勋：看不到2029年内存过剩迹象，“永远用不嫌多”",
+    "event_summary": "英伟达CEO黄仁勋表示，尽管上周因供应过剩和需求走弱的担忧导致内存类股票遭遇抛售，但到2029年出现内存供应过剩的可能性不大。黄仁勋在英伟达于德国柏林GTC大会期间表示：“内存的一大优势在于，你永远可以用更多。”他认为，HBM（一种随机存取存储器，即RAM）在未来数年仍将被广泛使用。“我们是全球首家将LPDDR内存（即手机中使用的内存）引入全球数据中心的公司，这使我们能够提供能效达到当前全球任何产品两倍的算力，因此我们也将继续大量使用这类内存。”（CNBC）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "英伟达"
+    ],
+    "first_seen_at": "2026-10-22T23:53:17Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T23:36:31Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3184026",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "黄仁勋：看不到2029年内存过剩迹象，“永远用不嫌多”",
+        "url": "https://wallstreetcn.com/livenews/3184026",
+        "published": "2026-10-22T23:36:31Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_a6e6cfb56b",
+    "title_zh": "科大讯飞发布端云一体星火X2.6",
+    "event_summary": "36氪获悉，10月22日，2026科大讯飞全球1024开发者节主论坛发布端云一体讯飞星火X2.6，云端和端侧（星火X2.6-4B）能力同步提升，通过精准分工、按需协同，兼顾任务效果、安全与成本。未来，60%的应用在可本地完成，数据安全；30%的应用通过云端协同完成；10%需要云端大模型解决。同时，科大讯飞发布星火语音基座大模型SparkAudio…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "大模型"
+    ],
+    "first_seen_at": "2026-10-22T23:53:17Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T23:35:41Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4037663623074689",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "科大讯飞发布端云一体星火X2.6",
+        "url": "https://www.36kr.com/newsflashes/4037663623074689",
+        "published": "2026-10-22T23:35:41Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_e74cc14b6f",
+    "title_zh": "投资日历：周五资本市场大事提醒",
+    "event_summary": "【投资日历：周五资本市场大事提醒】 ①今日共有1只新股上市，为北交所的远大健科（920285）。 ②2026全球开发者先锋大会将于10月23日至25日举办。 ③2026全球治理论坛（雄安）将于10月23日至25日举行。 ④2026年欧洲肿瘤内科学会（ESMO）大会将于10月23日至27日举行。 ⑤英伟达：DGX SPARK（个人AI超级计算机） 64GB将于10月23日起通过主要合作伙伴发售。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "英伟达"
+    ],
+    "first_seen_at": "2026-10-22T23:53:17Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T23:29:15Z",
+    "primary_url": "https://www.cls.cn/detail/2512914",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "投资日历：周五资本市场大事提醒",
+        "url": "https://www.cls.cn/detail/2512914",
+        "published": "2026-10-22T23:29:15Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_4d4801e9d0",
+    "title_zh": "OpenAI 奥尔特曼：面对 AI，数学家们起初会觉得“我们完蛋了”，最终却还是接受现实",
+    "event_summary": "IT之家 10 月 23 日消息，据《商业内幕》今天（23 日）报道，近日，在斯坦福大学，OpenAI CEO 萨姆 · 奥尔特曼面向台下数百名担忧未来职业前景的学生发表演讲。 奥尔特曼认为，面对 AI 大举进军数学研究领域，数学家经历了类似“哀悼”的几个阶段。起初是难以置信，随后陷入痛苦。“第一天，大家的反应大概是：‘ 我们完蛋了，数学这个领域也完了 。’‘还是去 劝研究生转专业吧 。’”…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-22T23:53:17Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T23:25:40Z",
+    "primary_url": "https://www.ithome.com/1/016/766.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "OpenAI 奥尔特曼：面对 AI，数学家们起初会觉得“我们完蛋了”，最终却还是接受现实",
+        "url": "https://www.ithome.com/1/016/766.htm",
+        "published": "2026-10-22T23:25:40Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_4f4919f2a7",
+    "title_zh": "Unitree缩短具身AI时间表并开启全球竞赛",
+    "event_summary": "Two months after warning that home robots were still years away, Unitree’s founder said physical AI already shows cracks of a breakthrough. The company is pre-researching a self-evolving model, talking up scale…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-22T23:53:17Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T23:24:04Z",
+    "primary_url": "https://www.tmtpost.com/8178216.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "Unitree缩短具身AI时间表并开启全球竞赛",
+        "url": "https://www.tmtpost.com/8178216.html",
+        "published": "2026-10-22T23:24:04Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_018c879451",
+    "title_zh": "微软推出 AI 医疗诊断系统 MAI-DxO：复杂病例准确率达 83%，成果登《科学》",
+    "event_summary": "IT之家 10 月 23 日消息，当地时间 10 月 22 日，微软宣布，在基于 MIMIC-IV-ED 数据集评估美国急诊科 常见就诊病例 时，其研发的 AI 诊断系统 MAI-DxO 的诊断准确率达到了人类医生的 1.7 倍。 该系统命名为 Microsoft AI Diagnostic Orchestrator，简称 DxO，通过统一编排多个 AI 智能体来模拟医生专家联合会诊的过程 ——…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "智能体"
+    ],
+    "first_seen_at": "2026-10-22T23:53:17Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T23:23:36Z",
+    "primary_url": "https://www.ithome.com/1/016/765.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "微软推出 AI 医疗诊断系统 MAI-DxO：复杂病例准确率达 83%，成果登《科学》",
+        "url": "https://www.ithome.com/1/016/765.htm",
+        "published": "2026-10-22T23:23:36Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_cbc8e6adb8",
+    "title_zh": "OpenAI即将完成由阿联酋投资方领投的一轮最高规模达300亿美元的融资",
+    "event_summary": "OpenAI据悉即将完成由阿联酋投资方领投的一轮最高规模达300亿美元的融资，投前估值1.25万亿美元，协议将从阿联酋获得更多算力，拟于下周结束前完成协议签署。（财联社）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 算力"
+    ],
+    "first_seen_at": "2026-10-22T23:53:17Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T23:20:25Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4037633896862594",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "OpenAI即将完成由阿联酋投资方领投的一轮最高规模达300亿美元的融资",
+        "url": "https://www.36kr.com/newsflashes/4037633896862594",
+        "published": "2026-10-22T23:20:25Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_b9ba3d1dbc",
+    "title_zh": "【钛晨报】《对外投资管理办法》12月1日起施行，投资者范围明确含居民个人；DeepSeek据称完成1000亿元融资，宁德时代和腾讯参投；宁德时代董秘被打？知情人士回应",
+    "event_summary": "宇树科技创始人王兴兴明确宇树未来三大布局方向；易方达、华夏、富国、汇添富基金各斥资2亿元自购，更多基金公司将加入自购行列；特斯拉证实成立特别委员会，探讨深化与SpaceX关系；摩根大通：股市的暴跌可能已接近尾声；原“死了么”APP公布收费标准，创始人回应：最高收费199元/年，由政府集中采购；建筑机器人市场规模有望破800亿元",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "DeepSeek"
+    ],
+    "first_seen_at": "2026-10-22T23:53:17Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T23:20:00Z",
+    "primary_url": "https://www.tmtpost.com/8178065.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "【钛晨报】《对外投资管理办法》12月1日起施行，投资者范围明确含居民个人；DeepSeek据称完成1000亿元融资，宁德时代和腾讯参投；宁德时代董秘被打？知情人士回应",
+        "url": "https://www.tmtpost.com/8178065.html",
+        "published": "2026-10-22T23:20:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_01957c5790",
+    "title_zh": "美股收盘：纳指重挫2.6％科技股大跌",
+    "event_summary": "当地时间10月22日，由于市场对人工智能公司支出的担忧再次加剧，叠加地缘政治紧张局势升温，美股科技板块明显走弱。纳斯达克综合指数收盘重挫2.6%，芯片、存储及光概念股暴跌。",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-10-22T23:16:39Z",
+    "hot_seen_at": "2026-10-22T23:16:39Z",
+    "published": "2026-10-22T23:16:39Z",
+    "primary_url": "https://www.baidu.com/s?wd=%E7%BE%8E%E8%82%A1%E6%94%B6%E7%9B%98%EF%BC%9A%E7%BA%B3%E6%8C%87%E9%87%8D%E6%8C%AB2.6%EF%BC%85%E7%A7%91%E6%8A%80%E8%82%A1%E5%A4%A7%E8%B7%8C",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "百度热搜",
+        "level": "L3",
+        "title": "美股收盘：纳指重挫2.6％科技股大跌",
+        "url": "https://www.baidu.com/s?wd=%E7%BE%8E%E8%82%A1%E6%94%B6%E7%9B%98%EF%BC%9A%E7%BA%B3%E6%8C%87%E9%87%8D%E6%8C%AB2.6%EF%BC%85%E7%A7%91%E6%8A%80%E8%82%A1%E5%A4%A7%E8%B7%8C",
+        "published": "2026-10-22T23:16:39Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_c414ee7fcc",
+    "title_zh": "马斯克大胆预测：只要不受监管限制，特斯拉终将主导全球客运市场",
+    "event_summary": "IT之家 10 月 23 日消息，据《商业内幕》报道，特斯拉 CEO 埃隆 · 马斯克长期相信，自动驾驶汽车将取代人类司机，承担载客出行任务。 当地时间 21 日的特斯拉财报电话会议上，马斯克提出了更加大胆的预测： 只要不受监管限制，特斯拉最终将主导全球客运市场 。“我认为，凡是允许特斯拉自由运营的国家，特斯拉最终都将 承担当地超过一半的乘客出行里程 。大家以后可以检验这个预测，我对此很有信心。”…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "自动驾驶"
+    ],
+    "first_seen_at": "2026-10-22T23:16:39Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T23:12:30Z",
+    "primary_url": "https://www.ithome.com/1/016/763.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "马斯克大胆预测：只要不受监管限制，特斯拉终将主导全球客运市场",
+        "url": "https://www.ithome.com/1/016/763.htm",
+        "published": "2026-10-22T23:12:30Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_801a30c58a",
+    "title_zh": "DeepSeek、MiniMax已完成开源和海外授权使用",
+    "event_summary": "10月16日，商务部、科技部就修订《中国禁止出口限制出口技术目录》（以下简称《目录》）公开征求意见。其中，有23项人工智能领域技术，包括大模型、智能体、算力集群、信息处理等。《目录》出来后，一些人提出了疑问：中国强调技术开放，怎么突然要给AI加上“出口限制”了？这次是不是政策转向的信号？据悉，政策公布以来，DeepSeek、MiniMax两家头部企业已顺利履行登记手续，并完成开源和海外授权使用。商务部在相关答问中，对“什么不管”的解释，…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-10-22T23:16:39Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T23:03:53Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4037631454188680",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "DeepSeek、MiniMax已完成开源和海外授权使用",
+        "url": "https://www.36kr.com/newsflashes/4037631454188680",
+        "published": "2026-10-22T23:03:53Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_df10533c07",
+    "title_zh": "苹果更新 iWork 生产力套件 15.4.1：引入 AI 智能助理，适配 iPhone Duo",
+    "event_summary": "IT之家 10 月 23 日消息，苹果公司今天（10 月 23 日）更新其 iWork 生产力套件，为 Keynote、Numbers 和 Pages 添加了“智能助理”（Intelligent Assistant）功能，以测试版邀请 Apple 创作坊（Apple Creator Studio）订阅用户体验。 虽然发布说明中没有提及， 但此次更新还为这三款应用添加适配 iPhone Duo。 IT之家附上 Pages 15.4.1…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 应用"
+    ],
+    "first_seen_at": "2026-10-22T23:16:39Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T23:03:02Z",
+    "primary_url": "https://www.ithome.com/1/016/762.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "苹果更新 iWork 生产力套件 15.4.1：引入 AI 智能助理，适配 iPhone Duo",
+        "url": "https://www.ithome.com/1/016/762.htm",
+        "published": "2026-10-22T23:03:02Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_f9634b1e9e",
+    "title_zh": "新兴赛道崛起，硬科技企业积极参与，上市公司“红包雨”密集落地",
+    "event_summary": "继半年报中期分红金额创下历史新高后，A股上市公司在三季报窗口继续释放分红信号。近期，圣农发展、紫金龙净、善水科技等多家公司陆续披露前三季度利润分配预案，拟以真金白银回馈股东。随着“一年多次分红”政策导向逐步落地，分红节奏常态化趋势受到市场关注。从行业分布看，金融、能源、科技、医药等行业为中期分红的主力。此外，AI产业链、动力电池产业链等硬科技领域的成长型企业也开始积极参与分红，新兴赛道分红力量正在崛起。（中证报）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "科技 + 政策"
+    ],
+    "first_seen_at": "2026-10-22T23:16:39Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T22:57:05Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3184010",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "新兴赛道崛起，硬科技企业积极参与，上市公司“红包雨”密集落地",
+        "url": "https://wallstreetcn.com/livenews/3184010",
+        "published": "2026-10-22T22:57:05Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_d1a89050f4",
+    "title_zh": "A股AI叙事迎产业验证窗口",
+    "event_summary": "近期，英伟达GTC柏林大会、特斯拉三季度财报电话会等多件大事在同一窗口交汇，为A股AI产业链带来多重催化。分析人士认为，英伟达对AI工厂与物理AI的系统级布局，叠加特斯拉在Robotaxi与人形机器人上的商业化推进，正从算力基建与场景落地两端强化AI产业逻辑，A股液冷散热、高速互联、机器人执行器等配套环节有望获得事件驱动。但本轮行情能否从事件驱动转向基本面驱动，仍取决于订单能见度与场景兑现进度。（中证报）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 算力"
+    ],
+    "first_seen_at": "2026-10-22T23:16:39Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T22:55:05Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3184008",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "A股AI叙事迎产业验证窗口",
+        "url": "https://wallstreetcn.com/livenews/3184008",
+        "published": "2026-10-22T22:55:05Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_9a6d6bab2c",
+    "title_zh": "英特尔 CTO 称前沿晶圆产量最多翻倍，AI 算力扩张遭遇供应链天花板",
+    "event_summary": "IT之家 10 月 23 日消息，在接受 Dwarkesh 播客时，英特尔首席技术官（CTO）普什卡 · 拉纳德（Pushkar Ranade）表示： 即便资金充足，全球尖端晶圆产量也难以扩大十倍，更现实的增长上限约为两倍。 在播客节目中，拉纳德被问及“世界上是否有足够工具，把前沿晶圆产量提高 10 倍”。对此他回应称“不是 10 倍，但可能达到 2 倍，是的。”他认为这一限制源于整个半导体供应链协同扩产的能力，而非某个单一环节。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 算力"
+    ],
+    "first_seen_at": "2026-10-22T23:16:39Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T22:48:15Z",
+    "primary_url": "https://www.ithome.com/1/016/761.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "英特尔 CTO 称前沿晶圆产量最多翻倍，AI 算力扩张遭遇供应链天花板",
+        "url": "https://www.ithome.com/1/016/761.htm",
+        "published": "2026-10-22T22:48:15Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_65b4511df3",
+    "title_zh": "欧洲 AI，等来了黄仁勋",
+    "event_summary": "GTC 柏林开幕前的两周，半导体板块走得并不顺，费城半导体指数出现了 2008 年以来最长的一轮连跌。市场在反复算同一笔账，巨额的 GPU 投入，什么时候能变成实打实的回报。 10 月 21 日，在柏林 Tempodrom 的舞台上，黄仁勋没有发布新芯片。早已发布的 Vera Rubin 平台，这次只是确认「已全面量产」。他把更多时间留给了三个更落地的问题： 算力中心怎么建得更快，越来越能干的智能体怎么管住，物理…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "智能体"
+    ],
+    "first_seen_at": "2026-10-22T23:16:39Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T22:41:03Z",
+    "primary_url": "http://www.geekpark.net/news/372763",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "极客公园",
+        "level": "L2",
+        "title": "欧洲 AI，等来了黄仁勋",
+        "url": "http://www.geekpark.net/news/372763",
+        "published": "2026-10-22T22:41:03Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_e9651ef17e",
+    "title_zh": "上市公司“红包雨”密集落地",
+    "event_summary": "【上市公司“红包雨”密集落地】财联社10月23日电，继半年报中期分红金额创下历史新高后，A股上市公司在三季报窗口继续释放分红信号。近期，圣农发展、紫金龙净、善水科技等多家公司陆续披露前三季度利润分配预案，拟以真金白银回馈股东。随着“一年多次分红”政策导向逐步落地，分红节奏常态化趋势受到市场关注。从行业分布看，金融、能源、科技、医药等行业为中期分红的主力。此外，AI产业链、动力电池产业链等硬科技领域的成长型企业也开始积极参与分红，新兴赛道…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "科技 + 政策"
+    ],
+    "first_seen_at": "2026-10-22T23:16:39Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T22:31:25Z",
+    "primary_url": "https://www.cls.cn/detail/2512893",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "上市公司“红包雨”密集落地",
+        "url": "https://www.cls.cn/detail/2512893",
+        "published": "2026-10-22T22:31:25Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_b177093259",
+    "title_zh": "提醒：日内请重点关注（以下均为北京时间）",
+    "event_summary": "① 07:30 日本9月CPI； ② 08:30 日本10月制造业、服务业、综合PMI初值； ③ 时间待定 2026全球开发者先锋大会暨国际具身智能技能大赛； ④ 13:00 印度10月制造业、服务业、综合PMI初值； ⑤ 14:00 英国9月零售销售； ⑥ 15:15 法国10月制造业、服务业、综合PMI初值； ⑦ 15:30 德国10月制造业、服务业、综合PMI初值； ⑧ 16:00 欧元区10月制造业、服务业、综合PMI初值； ⑨ 16:30 英国10月制造业、服务业、综合PMI初值； ⑩ 18:30…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "具身智能"
+    ],
+    "first_seen_at": "2026-10-22T23:16:39Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T22:30:20Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3184000",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "提醒：日内请重点关注（以下均为北京时间）",
+        "url": "https://wallstreetcn.com/livenews/3184000",
+        "published": "2026-10-22T22:30:20Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_80e27aaf85",
+    "title_zh": "周五你需要知道的隔夜全球要闻：纳指大跌2.6% 热门科技股纷纷下挫；普京称重启俄美乌三方会谈不是仅为短暂停火；OpenAI接近完成一轮至高达300亿美元的融资",
+    "event_summary": "【周五你需要知道的隔夜全球要闻：纳指大跌2.6% 热门科技股纷纷下挫；普京称重启俄美乌三方会谈不是仅为短暂停火；OpenAI接近完成一轮至高达300亿美元的融资】 1、俄罗斯总统普京当地时间22日晚表示，俄美就重启三方会谈达成一致。三方会谈的目标是讨论在和平协议最终达成后如何确保俄罗斯和乌克兰的安全，而不是仅仅为了短暂的停火。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "OpenAI"
+    ],
+    "first_seen_at": "2026-10-22T23:16:39Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T22:18:20Z",
+    "primary_url": "https://www.cls.cn/detail/2512887",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "周五你需要知道的隔夜全球要闻：纳指大跌2.6% 热门科技股纷纷下挫；普京称重启俄美乌三方会谈不是仅为短暂停火；OpenAI接近完成一轮至高达300亿美元的融资",
+        "url": "https://www.cls.cn/detail/2512887",
+        "published": "2026-10-22T22:18:20Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_d73c3fbf5a",
+    "title_zh": "OpenAI在IPO前正寻求30亿美元融资，估值达1.25万亿美元",
+    "event_summary": "Should OpenAI command an over $1 trillion valuation with this round, it would break records as the most highly valued private company ever.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-22T23:16:39Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T22:08:24Z",
+    "primary_url": "https://techcrunch.com/2026/10/22/openai-working-on-new-30b-raise-at-1-25t-valuation-ahead-of-ipo/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "TechCrunch AI",
+        "level": "L2",
+        "title": "OpenAI在IPO前正寻求30亿美元融资，估值达1.25万亿美元",
+        "url": "https://techcrunch.com/2026/10/22/openai-working-on-new-30b-raise-at-1-25t-valuation-ahead-of-ipo/",
+        "published": "2026-10-22T22:08:24Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_3623c8106a",
+    "title_zh": "美联储10月维持利率不变的概率为92.8%",
+    "event_summary": "【美联储10月维持利率不变的概率为92.8%】财联社10月23日电，据CME“美联储观察”：美联储到10月维持利率不变的概率为92.8%，累计加息25个基点的概率为7.2%。美联储到12月维持利率不变的概率为19.5%，累计加息25个基点的概率74.8%，累计加息50个基点的概率为5.7%。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "美联储"
+    ],
+    "first_seen_at": "2026-10-22T23:16:39Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T22:00:56Z",
+    "primary_url": "https://www.cls.cn/detail/2512881",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "美联储10月维持利率不变的概率为92.8%",
+        "url": "https://www.cls.cn/detail/2512881",
+        "published": "2026-10-22T22:00:56Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_1437b0ebe8",
+    "title_zh": "Canva的首款AI图像模型在生成前先规划设计",
+    "event_summary": "Canva is diving even deeper into AI with the launch of an image generation model that competes directly with those from OpenAI, Microsoft, and Google. The model, called Canva Craft, uses a two-stage architecture that…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-22T23:16:39Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T21:51:25Z",
+    "primary_url": "https://www.theverge.com/ai-artificial-intelligence/1017151/canva-craft-in-house-ai-model",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "The Verge AI",
+        "level": "L2",
+        "title": "Canva的首款AI图像模型在生成前先规划设计",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/1017151/canva-craft-in-house-ai-model",
+        "published": "2026-10-22T21:51:25Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_a52028614d",
+    "title_zh": "Crown Castle Inc.美股盘后涨9%，AT&T则跌5%。",
+    "event_summary": "Crown Castle Inc.美股盘后涨9%，AT&T则跌5%。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "美股"
+    ],
+    "first_seen_at": "2026-10-22T23:16:39Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T21:36:39Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3183990",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "Crown Castle Inc.美股盘后涨9%，AT&T则跌5%。",
+        "url": "https://wallstreetcn.com/livenews/3183990",
+        "published": "2026-10-22T21:36:39Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_27566e8f23",
+    "title_zh": "Claude：现在，谷歌云上面可以使用Anthropic旗下Claude平台。",
+    "event_summary": "Claude：现在，谷歌云上面可以使用Anthropic旗下Claude平台。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "Anthropic"
+    ],
+    "first_seen_at": "2026-10-22T23:16:39Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T21:19:47Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3183985",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "Claude：现在，谷歌云上面可以使用Anthropic旗下Claude平台。",
+        "url": "https://wallstreetcn.com/livenews/3183985",
+        "published": "2026-10-22T21:19:47Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_2aedd54f3e",
+    "title_zh": "设计一个经久耐用的AI服务框架",
+    "event_summary": "The next competitive advantage in enterprise AI has less to do with which model you choose than with what you build around it. That’s an important shift. For the past several years, much of the AI conversation has…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-22T23:16:39Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T21:17:29Z",
+    "primary_url": "https://www.technologyreview.com/2026/10/22/1146109/designing-an-ai-serving-harness-built-to-last/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "MIT Technology Review",
+        "level": "L2",
+        "title": "设计一个经久耐用的AI服务框架",
+        "url": "https://www.technologyreview.com/2026/10/22/1146109/designing-an-ai-serving-harness-built-to-last/",
+        "published": "2026-10-22T21:17:29Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_88e73b340e",
+    "title_zh": "这款设计软件将日常物品重新构想为自感知设备",
+    "event_summary": "“X-Hinges” helps design and 3D print items like lamps and gloves with an interactive twist: automatically embedded sensors that perceive and adaptively respond to human contact.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-22T23:16:39Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T20:45:00Z",
+    "primary_url": "https://news.mit.edu/2026/design-software-reimagines-everyday-objects-as-self-aware-devices-1022",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "MIT News AI",
+        "level": "L2",
+        "title": "这款设计软件将日常物品重新构想为自感知设备",
+        "url": "https://news.mit.edu/2026/design-software-reimagines-everyday-objects-as-self-aware-devices-1022",
+        "published": "2026-10-22T20:45:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_29a87826b8",
+    "title_zh": "法律专家称Meta的AI仍可能抓取新闻网站",
+    "event_summary": "Meta has tweaked its business terms to remove language suggesting that it could freely train its AI models on news sites, like The Verge - but legal experts say these changes aren't enough to address their concerns.…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-22T23:16:39Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T20:32:05Z",
+    "primary_url": "https://www.theverge.com/tech/1017082/meta-terms-update-ai-training-concerns",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "The Verge AI",
+        "level": "L2",
+        "title": "法律专家称Meta的AI仍可能抓取新闻网站",
+        "url": "https://www.theverge.com/tech/1017082/meta-terms-update-ai-training-concerns",
+        "published": "2026-10-22T20:32:05Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_afeec198fb",
+    "title_zh": "Meta重新开启Muse分享功能",
+    "event_summary": "Meta has re-enabled Muse sharing after security researchers had reported that public conversation links could be easy to find. The researchers said they had been able to find Muse pages like a marketing company's…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-22T23:16:39Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T20:24:04Z",
+    "primary_url": "https://www.theverge.com/tech/1017066/meta-muse-sharing-back-on-artifiacts",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "The Verge AI",
+        "level": "L2",
+        "title": "Meta重新开启Muse分享功能",
+        "url": "https://www.theverge.com/tech/1017066/meta-muse-sharing-back-on-artifiacts",
+        "published": "2026-10-22T20:24:04Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_9728305976",
+    "title_zh": "消息称DeepSeek已融资1000亿元",
+    "event_summary": "近日，消息称DeepSeek已完成约1000亿元人民币融资，为中国历来规模最大的融资交易之一。知情人士透露，其融资目标从最初的500亿元上调至800亿元，最终达到约1000亿元，宁德时代和腾讯是主要投资者，融资也为其IPO计划铺路。",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "DeepSeek"
+    ],
+    "first_seen_at": "2026-10-22T19:59:43Z",
+    "hot_seen_at": "2026-10-22T19:59:43Z",
+    "published": "2026-10-22T19:59:43Z",
+    "primary_url": "https://www.baidu.com/s?wd=%E6%B6%88%E6%81%AF%E7%A7%B0DeepSeek%E5%B7%B2%E8%9E%8D%E8%B5%841000%E4%BA%BF%E5%85%83",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "百度热搜",
+        "level": "L3",
+        "title": "消息称DeepSeek已融资1000亿元",
+        "url": "https://www.baidu.com/s?wd=%E6%B6%88%E6%81%AF%E7%A7%B0DeepSeek%E5%B7%B2%E8%9E%8D%E8%B5%841000%E4%BA%BF%E5%85%83",
+        "published": "2026-10-22T19:59:43Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_540e896edf",
+    "title_zh": "OpenAI、Anthropic 和 Nvidia 创纪录的游说季度",
+    "event_summary": "It was a busy summer for AI lobbyists. Anthropic, OpenAI, and Nvidia each had their highest-spending lobbying quarter between July and September, federal disclosures show. Nvidia spent the most of the group at $2.2…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-22T19:59:43Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T15:50:30Z",
+    "primary_url": "https://www.theverge.com/policy/1016585/openai-anthropic-nvidia-lobbying-records",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "The Verge AI",
+        "level": "L2",
+        "title": "OpenAI、Anthropic 和 Nvidia 创纪录的游说季度",
+        "url": "https://www.theverge.com/policy/1016585/openai-anthropic-nvidia-lobbying-records",
+        "published": "2026-10-22T15:50:30Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_a90ae4fe91",
+    "title_zh": "极米记得 AI 记忆手环 L1 上架：两种形态自由切换，全天候 AI 录音",
+    "event_summary": "IT之家 10 月 22 日消息，极米记得 AI 记忆手环 L1 今日上架，提供黑色、米色配色，售价信息暂未公布。 据介绍，该产品支持两种形态自由切换，腕上是手环，胸前是吊坠；全天候 AI 录音，所有记忆，自动记录并整理；基于你个人记忆的 AI 对话，发生过的事它都知道；自动整理纪要、待办，到点轻轻提醒，无需刻意记录；原始音频用完即删，记忆加密存于手机；综合续航 2-5 天，短途差旅无需补电。 IT之家注意到，极米记得 AI…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-22T19:59:43Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T15:48:13Z",
+    "primary_url": "https://www.ithome.com/1/016/753.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "极米记得 AI 记忆手环 L1 上架：两种形态自由切换，全天候 AI 录音",
+        "url": "https://www.ithome.com/1/016/753.htm",
+        "published": "2026-10-22T15:48:13Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_0acbee798f",
+    "title_zh": "引用 Armin Ronacher",
+    "event_summary": "As fun as AI is, we built so much bad software over the last 30 years, and now the universe is punishing us for our sins. — Armin Ronacher Tags: security , generative-ai , armin-ronacher , ai , ai-security-research ,…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-22T19:59:43Z",
+    "hot_seen_at": "2026-10-22T15:34:13Z",
+    "published": "2026-10-22T15:34:13Z",
+    "primary_url": "https://simonwillison.net/2026/Oct/22/armin-ronacher/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "Simon Willison",
+        "level": "L3",
+        "title": "引用 Armin Ronacher",
+        "url": "https://simonwillison.net/2026/Oct/22/armin-ronacher/",
+        "published": "2026-10-22T15:34:13Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_ba6fa07d67",
+    "title_zh": "Uber 利用 OpenAI 将 ChatGPT Work 推广至全体员工",
+    "event_summary": "Uber is rolling out ChatGPT Work to more than 30,000 employees, helping teams research, analyze data, create presentations, and complete complex workflows.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-22T19:59:43Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T00:00:00Z",
+    "primary_url": "https://openai.com/index/uber-chatgpt-work-rollout",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "OpenAI News",
+        "level": "L2",
+        "title": "Uber 利用 OpenAI 将 ChatGPT Work 推广至全体员工",
+        "url": "https://openai.com/index/uber-chatgpt-work-rollout",
+        "published": "2026-10-22T00:00:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_c1d080de5b",
+    "title_zh": "Meta 想通过新创建的股票类别为其广泛的 AI 建设买单",
+    "event_summary": "The social media giant is planning a new stock strategy to help power its broad investments in AI models and services.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-22T19:59:43Z",
+    "hot_seen_at": null,
+    "published": "2026-10-21T22:45:34Z",
+    "primary_url": "https://techcrunch.com/2026/10/21/meta-wants-to-pay-for-its-broad-ai-buildout-with-a-newly-created-class-of-stock/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "TechCrunch AI",
+        "level": "L2",
+        "title": "Meta 想通过新创建的股票类别为其广泛的 AI 建设买单",
+        "url": "https://techcrunch.com/2026/10/21/meta-wants-to-pay-for-its-broad-ai-buildout-with-a-newly-created-class-of-stock/",
+        "published": "2026-10-21T22:45:34Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_b535e5817e",
+    "title_zh": "英伟达推出AI工厂运维平台Minerva 可每小时分析数十亿个数据点",
+    "event_summary": "英伟达推出AI运维平台Minerva，旨在通过整合基础设施与AI工作负载遥测数据，提前发现故障、提高GPU运行时间并提升AI工厂产出效率。该平台可每小时分析数十亿个数据点，识别异常、预测潜在故障，并将关联告警整合为可执行的故障处理事项。Minerva还配备原生AI助手，可通过自然语言查询集群运行状况并提供修复建议。英伟达表示，IREN已在使用该平台，Aolani、Bitdeer AI、IBM、Jio、Lambda、Quake…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-22T15:18:26Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T15:10:42Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4037193393067145",
+    "source_count": 2,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "英伟达推出AI工厂运维平台Minerva 可每小时分析数十亿个数据点",
+        "url": "https://www.36kr.com/newsflashes/4037193393067145",
+        "published": "2026-10-22T23:10:20Z"
+      },
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "英伟达推出AI工厂运维平台Minerva 可每小时分析数十亿个数据点",
+        "url": "https://www.cls.cn/detail/2512782",
+        "published": "2026-10-22T15:10:42Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_e732976db1",
+    "title_zh": "黑石集团总裁反驳 AI 泡沫论，称需求呈“抛物线式”增长",
+    "event_summary": "IT之家 10 月 22 日消息，据彭博社今日消息，黑石集团总裁乔恩 · 格雷（Jon Gray）发话，反驳亿万富豪肯 · 格里芬前几天关于 AI 存在泡沫的说法。 格雷表示：“说到泡沫，你想到的是先建设产能，然后期待需求出现。但在人工智能领域，你是在建设产能，同时希望自己能够跟得上需求。” IT之家注意到，这名总裁还认为， 如今人工智能的需求，与上世纪 90 年代电信泡沫等现象是“截然不同的局面” 。他提到黑石与…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-10-22T15:18:26Z",
+    "hot_seen_at": null,
+    "published": "2026-10-22T15:02:51Z",
+    "primary_url": "https://www.ithome.com/1/016/752.htm",
+    "source_count": 2,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "黑石集团总裁反驳 AI 泡沫论，称需求呈“抛物线式”增长",
+        "url": "https://www.ithome.com/1/016/752.htm",
+        "published": "2026-10-22T15:38:11Z"
+      },
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "黑石总裁反驳人工智能泡沫论 称需求呈“抛物线式”增长",
+        "url": "https://www.cls.cn/detail/2512778",
+        "published": "2026-10-22T15:02:51Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
     "id": "e_7faddebfff",
     "title_zh": "PHP：三个字母在网络上造成混乱",
     "event_summary": "Two vulnerabilities found in the programming language PHP put enormous swaths of the internet in danger. By some accounts, up to 70 percent of websites use PHP in some capacity. It powers Wikipedia, WordPress, Drupal,…",
@@ -20,33 +3827,6 @@
         "title": "PHP：三个字母在网络上造成混乱",
         "url": "https://www.theverge.com/tech/1016574/php2shell-security-vulnerability-websites-down",
         "published": "2026-10-22T15:12:27Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_4d89381912",
-    "title_zh": "英伟达推出AI工厂运维平台Minerva 可每小时分析数十亿个数据点",
-    "event_summary": "【英伟达推出AI工厂运维平台Minerva…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "英伟达"
-    ],
-    "first_seen_at": "2026-10-22T15:18:26Z",
-    "hot_seen_at": null,
-    "published": "2026-10-22T15:10:42Z",
-    "primary_url": "https://www.cls.cn/detail/2512782",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "财联社·电报",
-        "level": "L2",
-        "title": "英伟达推出AI工厂运维平台Minerva 可每小时分析数十亿个数据点",
-        "url": "https://www.cls.cn/detail/2512782",
-        "published": "2026-10-22T15:10:42Z"
       }
     ],
     "needs_translation": false
@@ -158,49 +3938,29 @@
     "needs_translation": false
   },
   {
-    "id": "e_68aa1d925c",
-    "title_zh": "黑石总裁反驳人工智能泡沫论 称需求呈“抛物线式”增长",
-    "event_summary": "【黑石总裁反驳人工智能泡沫论 称需求呈“抛物线式”增长】财联社10月22日电，黑石集团总裁Jon…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "人工智能"
-    ],
-    "first_seen_at": "2026-10-22T15:18:26Z",
-    "hot_seen_at": null,
-    "published": "2026-10-22T15:02:51Z",
-    "primary_url": "https://www.cls.cn/detail/2512778",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "财联社·电报",
-        "level": "L2",
-        "title": "黑石总裁反驳人工智能泡沫论 称需求呈“抛物线式”增长",
-        "url": "https://www.cls.cn/detail/2512778",
-        "published": "2026-10-22T15:02:51Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_0e0852d404",
+    "id": "e_b34e18ddcd",
     "title_zh": "前8月国产手术机器人出口暴涨272.9%",
-    "event_summary": "近几年，我国机器人产业蓬勃发展，而手术机器人这一专业赛道更是逐步打破了国外品牌的垄断，进入快速发展期。中国手术机器人市场规模预计将从2026年的224.5亿元增至2030年的708.5亿元，复合增长率达到33.3%。",
+    "event_summary": "近几年，我国机器人产业蓬勃发展，而手术机器人这一专业赛道更是逐步打破了国外品牌的垄断，进入快速发展期。中国手术机器人市场规模预计将从2026年的224.5亿元增至2030年的708.5亿元，复合增长率达到33.3%。 在国内市场实现国产替代突破的同时，国产手术机器人出海步伐持续加快。今年前8个月，全国手术机器人出口大幅增长，广东出口同比增4倍。 （央视财经）",
     "source_level": "L2",
     "policy_stage": "不适用",
     "key_entities": [],
     "potential_impact": null,
     "topics": [
-      "机器人"
+      "国产替代"
     ],
     "first_seen_at": "2026-10-22T15:03:25Z",
     "hot_seen_at": null,
     "published": "2026-10-22T14:57:24Z",
-    "primary_url": "https://wallstreetcn.com/livenews/3183830",
-    "source_count": 1,
+    "primary_url": "https://www.36kr.com/newsflashes/4037204804310151",
+    "source_count": 2,
     "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "前8月国产手术机器人出口暴涨272.9%",
+        "url": "https://www.36kr.com/newsflashes/4037204804310151",
+        "published": "2026-10-22T23:18:57Z"
+      },
       {
         "source": "华尔街见闻·快讯",
         "level": "L2",
@@ -585,6 +4345,301 @@
         "level": "L1",
         "title": "商务部海关总署中央军委装备发展部公告：公布优化调整无人机相关物项出口管制措施的决定",
         "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_f71c27f81b8f4097b876818abbd19851.html",
+        "published": "2026-10-22T14:22:59Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_9e3f4ab720",
+    "title_zh": "在职前端Leader学习转行AI Agent -DAY81",
+    "event_summary": "为什么 distilbart-cnn-12-6 要在 convert_ids_to_tokens 之后再 decode？前面的模型都是直接输出，没有 decode 这一步。 decode 看的是模型吐出来的是什么，不是模型名叫不叫 distilbart。分词器有两个方向：文字交给模型之前要编码成编号，编号要给人看的时候再解码成文字。 convert_ids_to_tokens 和 decode…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + Agent"
+    ],
+    "first_seen_at": "2026-10-22T14:22:59Z",
+    "hot_seen_at": "2026-10-22T14:22:59Z",
+    "published": "2026-10-22T14:22:59Z",
+    "primary_url": "https://juejin.cn/post/7698227087581134848",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "在职前端Leader学习转行AI Agent -DAY81",
+        "url": "https://juejin.cn/post/7698227087581134848",
+        "published": "2026-10-22T14:22:59Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_bd9b2a8f02",
+    "title_zh": "AI热点日报：DeepSeek V4.1-Flash落地，Meta开源816B大模型，国产AI芯片涨价20%-50%",
+    "event_summary": "今日AI领域热点密集：国产AI芯片集体涨价20%-50%引发算力成本担忧，Meta发布迄今最强开源权重模型Muse Spark…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "大模型"
+    ],
+    "first_seen_at": "2026-10-22T14:22:59Z",
+    "hot_seen_at": "2026-10-22T14:22:59Z",
+    "published": "2026-10-22T14:22:59Z",
+    "primary_url": "https://juejin.cn/post/7698331749004083243",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "AI热点日报：DeepSeek V4.1-Flash落地，Meta开源816B大模型，国产AI芯片涨价20%-50%",
+        "url": "https://juejin.cn/post/7698331749004083243",
+        "published": "2026-10-22T14:22:59Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_6e46bf0c10",
+    "title_zh": "多智能体编排：拆分、隔离与收敛的完整实战",
+    "event_summary": "一句话剧透全文： 多智能体的本质不是\"更多的 Agent\"，而是\"更小的上下文\" ——每路子 Agent 用自己的独立窗口去探索，只把结论上交。拆分、隔离、收敛这三步怎么用代码落地，和真正跑在生产上的系统相比骨架有多像、缺件缺在哪，这篇一次讲透。 想象你问智能体一个需要查三个地方的问题： 对比我知识库里那三篇讲索引的笔记，观点有什么异同？ 单个 Agent 的处理方式是串行的：检索第一篇 →…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "智能体"
+    ],
+    "first_seen_at": "2026-10-22T14:22:59Z",
+    "hot_seen_at": "2026-10-22T14:22:59Z",
+    "published": "2026-10-22T14:22:59Z",
+    "primary_url": "https://juejin.cn/post/7698625451761631268",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "多智能体编排：拆分、隔离与收敛的完整实战",
+        "url": "https://juejin.cn/post/7698625451761631268",
+        "published": "2026-10-22T14:22:59Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_5a2b608e7c",
+    "title_zh": "本地大模型微调与GGUF部署全指南",
+    "event_summary": "—— 以 Qwen2.5 打造专属\"读书智能助手\"为例 本文面向希望在 Apple Silicon 设备（MacBook / Mac mini / Mac Studio）上进行本地大模型微调和部署的开发者。我们将通过一个真实的阅读助手场景，完整走通\"数据准备 → LoRA 微调 → 格式转换 → GGUF 量化部署\"的全链路，并深入讲解每个环节背后的设计决策与技术原理。…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "大模型"
+    ],
+    "first_seen_at": "2026-10-22T14:22:59Z",
+    "hot_seen_at": "2026-10-22T14:22:59Z",
+    "published": "2026-10-22T14:22:59Z",
+    "primary_url": "https://juejin.cn/post/7698567279269199906",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "本地大模型微调与GGUF部署全指南",
+        "url": "https://juejin.cn/post/7698567279269199906",
+        "published": "2026-10-22T14:22:59Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_a331f473cf",
+    "title_zh": "DeepSeek 突发上线 V4.1-1017：552B 稀疏架构仅激活 16B，白菜价背后的工程奇迹",
+    "event_summary": "作者 ：一缕82年的清风 定位 ：【前沿极客情报局】 文章概览 ：针对 DeepSeek 10月17日突发发布的最新旗舰快照 V4.1-Flash-1017，深度实测其首创的“因果编解码（CED）+ 稀疏动态激活（MoE 552B 仅激活 16B）”架构；现场交付完整的 API 异步长程调用与压测代码，并附四大主力模型横评基准表。 就在全网还在为欧美大模型动辄每百万 Token…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "DeepSeek"
+    ],
+    "first_seen_at": "2026-10-22T14:22:59Z",
+    "hot_seen_at": "2026-10-22T14:22:59Z",
+    "published": "2026-10-22T14:22:59Z",
+    "primary_url": "https://juejin.cn/post/7698552541928734735",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "DeepSeek 突发上线 V4.1-1017：552B 稀疏架构仅激活 16B，白菜价背后的工程奇迹",
+        "url": "https://juejin.cn/post/7698552541928734735",
+        "published": "2026-10-22T14:22:59Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_58c0515493",
+    "title_zh": "从预约改期看 Agent 工具粒度：把不变量留在权威服务",
+    "event_summary": "用户要把九点的预约改到十点。模型选择了“修改结束时间”，接口返回成功，于是原本九点到十点的预约变成九点到十二点；资源占位仍是九点到十点。数据库里的两个时间字段各自都是合法整数，结束也晚于开始，业务状态却已经错了。…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "Agent + 工具"
+    ],
+    "first_seen_at": "2026-10-22T14:22:59Z",
+    "hot_seen_at": "2026-10-22T14:22:59Z",
+    "published": "2026-10-22T14:22:59Z",
+    "primary_url": "https://juejin.cn/post/7698677378390622244",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "从预约改期看 Agent 工具粒度：把不变量留在权威服务",
+        "url": "https://juejin.cn/post/7698677378390622244",
+        "published": "2026-10-22T14:22:59Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_ae68f1c235",
+    "title_zh": "React 正式登场！GenUI SDK v1.4.0 三框架渲染、出码与 Agent 生态重磅升级~",
+    "event_summary": "GenUI SDK 是 OpenTiny 团队基于生成式 UI 理念打造的解决方案，旨在增强大模型显示与交互效果。SDK 提供完整的前后端一体化集成能力，遵循 OpenAI 规范；内置 Vue、React 与 Angular 三框架渲染器，支持自定义的组件库、交互行为与主题样式。既能快速从零搭建一个 AI 对话应用，也可以在现有业务系统中嵌入生成式 UI 能力。 此前，React 渲染器已通过…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "Agent + 框架"
+    ],
+    "first_seen_at": "2026-10-22T14:22:59Z",
+    "hot_seen_at": "2026-10-22T14:22:59Z",
+    "published": "2026-10-22T14:22:59Z",
+    "primary_url": "https://juejin.cn/post/7698677378389835812",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "React 正式登场！GenUI SDK v1.4.0 三框架渲染、出码与 Agent 生态重磅升级~",
+        "url": "https://juejin.cn/post/7698677378389835812",
+        "published": "2026-10-22T14:22:59Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_d6e96bc3ae",
+    "title_zh": "谁是 AI-relay App 的真正威胁 -- 肘子的 Swift 周报 #158",
+    "event_summary": "上周应邀去北京参加了首届 Apple 应用孵化器（Apple App Incubator）的活动，期间蒂姆·库克也亲自出席并为优胜者颁奖。 与侧重于校园创意选拔与基础编程教育的既有赛事不同，Apple…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-10-22T14:22:59Z",
+    "hot_seen_at": "2026-10-22T14:22:59Z",
+    "published": "2026-10-22T14:22:59Z",
+    "primary_url": "https://juejin.cn/post/7698294342289342474",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "谁是 AI-relay App 的真正威胁 -- 肘子的 Swift 周报 #158",
+        "url": "https://juejin.cn/post/7698294342289342474",
+        "published": "2026-10-22T14:22:59Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_73d9ef4643",
+    "title_zh": "DeepSeek 又出王炸，用 DeepInfer 搭建自己的服务是不是很容易？",
+    "event_summary": "核心摘要（截至 10 月 20 日官方仓库核验） DeepSeek 在 10 月 20 日放出的 DeepInfer 官方仓库 与配套组件 deepseek-recipe…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "DeepSeek"
+    ],
+    "first_seen_at": "2026-10-22T14:22:59Z",
+    "hot_seen_at": "2026-10-22T14:22:59Z",
+    "published": "2026-10-22T14:22:59Z",
+    "primary_url": "https://juejin.cn/post/7698799059633979446",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "DeepSeek 又出王炸，用 DeepInfer 搭建自己的服务是不是很容易？",
+        "url": "https://juejin.cn/post/7698799059633979446",
+        "published": "2026-10-22T14:22:59Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_c36c650e03",
+    "title_zh": "DeepSeek 开源推理框架 DeepInfer：KVCache 存三天、投机解码少验 30% 是怎么做到的",
+    "event_summary": "10 月 20 日，DeepSeek 把线上跑 V4.1 Flash 的推理框架 DeepInfer 开源了，同时放出 Token 编解码组件 deepseek-recipe 和一份推理部署 Q&A。媒体标题多是「大模型普惠」，我更关心的是那份 Q&A：官方称单个集群每天服务 155 万亿 token，并把 Prefill / Decode 怎么分、KVCache…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "DeepSeek"
+    ],
+    "first_seen_at": "2026-10-22T14:22:59Z",
+    "hot_seen_at": "2026-10-22T14:22:59Z",
+    "published": "2026-10-22T14:22:59Z",
+    "primary_url": "https://juejin.cn/post/7698645127041089536",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "DeepSeek 开源推理框架 DeepInfer：KVCache 存三天、投机解码少验 30% 是怎么做到的",
+        "url": "https://juejin.cn/post/7698645127041089536",
+        "published": "2026-10-22T14:22:59Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_287088d4f4",
+    "title_zh": "AI Agent 评测：到底要测什么、新手怎么测？（附完整流程）",
+    "event_summary": "Claude Code 、 Codex 、 WorkBuddy 这些产品，很多人要么用过，要么天天在用。加上 AI 辅助编程，我们甚至可以让 Codex 帮忙做出一个类似 Codex 的东西。开发门槛降得飞快，一个能跑的 Agent，很快就能拼出来。 但开发不难了，难的是另一个问题， 怎么判断这个 Agent 到底做得好不好 。…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + Agent"
+    ],
+    "first_seen_at": "2026-10-22T14:22:59Z",
+    "hot_seen_at": "2026-10-22T14:22:59Z",
+    "published": "2026-10-22T14:22:59Z",
+    "primary_url": "https://juejin.cn/post/7698614955541020723",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "AI Agent 评测：到底要测什么、新手怎么测？（附完整流程）",
+        "url": "https://juejin.cn/post/7698614955541020723",
         "published": "2026-10-22T14:22:59Z"
       }
     ],
@@ -1347,9 +5402,9 @@
     ],
     "first_seen_at": "2026-10-22T14:22:59Z",
     "hot_seen_at": null,
-    "published": "2026-10-22T10:54:00Z",
+    "published": "2026-10-22T09:07:05Z",
     "primary_url": "https://www.leiphone.com/category/industrynews/IshbO1ikAgjvB6G9.html",
-    "source_count": 1,
+    "source_count": 2,
     "links": [
       {
         "source": "雷峰网",
@@ -1357,6 +5412,13 @@
         "title": "又一国产决策模型发布！准确率超过微软和Jev等决策模型",
         "url": "https://www.leiphone.com/category/industrynews/IshbO1ikAgjvB6G9.html",
         "published": "2026-10-22T10:54:00Z"
+      },
+      {
+        "source": "量子位",
+        "level": "L2",
+        "title": "又一国产决策模型发布！准确率超过微软和Jev等决策模型",
+        "url": "https://www.qbitai.com/2026/10/504879.html",
+        "published": "2026-10-22T09:07:05Z"
       }
     ],
     "needs_translation": false
@@ -1878,6 +5940,33 @@
     "needs_translation": false
   },
   {
+    "id": "e_b3cb6b9ecf",
+    "title_zh": "OpenAI CLI",
+    "event_summary": "The official command-line tool for the OpenAI REST API. Install · CLI reference · Guides Call the OpenAI REST API from your terminal or shell scripts. Generate images, upload files, submit batches,…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "OpenAI"
+    ],
+    "first_seen_at": "2026-10-22T14:22:59Z",
+    "hot_seen_at": "2026-10-22T05:23:11Z",
+    "published": "2026-10-22T05:23:11Z",
+    "primary_url": "https://github.com/openai/openai-cli",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "Hacker News",
+        "level": "L3",
+        "title": "OpenAI CLI",
+        "url": "https://github.com/openai/openai-cli",
+        "published": "2026-10-22T05:23:11Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
     "id": "e_f4f69c8e3a",
     "title_zh": "工业和信息化部等八部门关于印发《产业基础能力提升“十五五”规划》的通知",
     "event_summary": "工业和信息化部 国家发展和改革委员会 教育部 财政部 人力资源和社会保障部 国务院国有资产监督管理委员会 国家市场监督管理总局 国家国防科技工业局 关于印发《产业基础能力提升“十五五”规划》的通知 工信部联规〔2026〕208号…",
@@ -2292,6 +6381,33 @@
         "title": "沃尔玛邀请AI代理为您购物",
         "url": "https://www.theverge.com/ai-artificial-intelligence/1015715/walmart-ai-shopping-agents",
         "published": "2026-10-21T19:30:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_5dbb54a005",
+    "title_zh": "Claude Duet",
+    "event_summary": "Claude Duet Research preview Claude Duet is a proactive agent that understands what needs your attention. It takes on tasks of all sizes, keeps working while you’re away, and waits for your ok when…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "Claude"
+    ],
+    "first_seen_at": "2026-10-22T14:22:59Z",
+    "hot_seen_at": "2026-10-21T19:14:01Z",
+    "published": "2026-10-21T19:14:01Z",
+    "primary_url": "https://claude.com/product/claude-duet",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "Hacker News",
+        "level": "L3",
+        "title": "Claude Duet",
+        "url": "https://claude.com/product/claude-duet",
+        "published": "2026-10-21T19:14:01Z"
       }
     ],
     "needs_translation": false
@@ -2792,701 +6908,26 @@
     "needs_translation": false
   },
   {
-    "id": "e_7773ed2f5e",
-    "title_zh": "亚马逊 CTO Dr. Werner Vogels：二十余年技术实践，想与创业者分享这 4 点",
-    "event_summary": "在 2026 年 亚马逊云科技软件企业峰会创业加速营巅峰路演 上，亚马逊副总裁兼首席技术官 Werner Vogels 博士与极客公园创始人 & CEO 张鹏进行了一场极具深度的炉边对谈。 面对当下狂热的 AI 创业潮与复杂的技术演进，Vogels 博士分享了亚马逊云科技走过二十年的底层商业逻辑，并为初创企业给出了极具实操性的避坑建议。 左：亚马逊副总裁兼首席技术官 Werner Vogels 博士 右：极客公园创始人 & CEO…",
-    "source_level": "L2",
+    "id": "e_0ef7b7288d",
+    "title_zh": "使用LLM进行置信度评分是个坏主意",
+    "event_summary": "Amrut Joshi, October 20, 2026 LLM-based agents can do a lot of tasks. Or, at least, they can appear to do them. For example, they write code, summarize papers, plan trips, and fill in forms. If you…",
+    "source_level": "L3",
     "policy_stage": "不适用",
     "key_entities": [],
     "potential_impact": null,
     "topics": [],
     "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-21T04:16:25Z",
-    "primary_url": "http://www.geekpark.net/news/372671",
+    "hot_seen_at": "2026-10-21T04:27:51Z",
+    "published": "2026-10-21T04:27:51Z",
+    "primary_url": "https://rumple.github.io/blog/2026/10/20/asking-llm-for-confidence.html",
     "source_count": 1,
     "links": [
       {
-        "source": "极客公园",
-        "level": "L2",
-        "title": "亚马逊 CTO Dr. Werner Vogels：二十余年技术实践，想与创业者分享这 4 点",
-        "url": "http://www.geekpark.net/news/372671",
-        "published": "2026-10-21T04:16:25Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_1778fb273d",
-    "title_zh": "东南亚数字经济规模将达到3680亿美元",
-    "event_summary": "Generative AI is now an essential part of daily life for 243 million Southeast Asians. Read about how this will impact the region’s economy in our 11th e-Conomy SEA report. Managing Director,…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-21T04:00:00Z",
-    "primary_url": "https://blog.google/company-news/inside-google/around-the-globe/google-asia/e-conomy-sea-report-2026/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "Google AI Blog",
-        "level": "L2",
-        "title": "东南亚数字经济规模将达到3680亿美元",
-        "url": "https://blog.google/company-news/inside-google/around-the-globe/google-asia/e-conomy-sea-report-2026/",
-        "published": "2026-10-21T04:00:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_531d6db9b2",
-    "title_zh": "飞书豆包工作AI先锋未来人才大赛：企业正在争抢会用AI做成事的人",
-    "event_summary": "10月20日，飞书豆包工作AI先锋未来人才大赛总决赛在北京举行。12组选手围绕企业真实业务问题展开角逐，使用飞书与豆包工作完成调研、协作和成果交付，接受企业家、业务负责人及高校学者的现场检验。…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-21T02:37:39Z",
-    "primary_url": "https://www.qbitai.com/2026/10/504608.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "量子位",
-        "level": "L2",
-        "title": "飞书豆包工作AI先锋未来人才大赛：企业正在争抢会用AI做成事的人",
-        "url": "https://www.qbitai.com/2026/10/504608.html",
-        "published": "2026-10-21T02:37:39Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_d7c0f889ee",
-    "title_zh": "理想宣布：电池自燃报废赔新车！自研6年后有底气了",
-    "event_summary": "电池、电驱、超充一把梭，冬天多跑30公里",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-21T01:04:35Z",
-    "primary_url": "https://www.qbitai.com/2026/10/504551.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "量子位",
-        "level": "L2",
-        "title": "理想宣布：电池自燃报废赔新车！自研6年后有底气了",
-        "url": "https://www.qbitai.com/2026/10/504551.html",
-        "published": "2026-10-21T01:04:35Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_db4ef359f7",
-    "title_zh": "工业和信息化部关于开展专精特新赋能中心建设工作的通知",
-    "event_summary": "工信部企业函〔2026〕350号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团中小企业主管部门： 为贯彻落实党中央、国务院关于促进中小企业高质量发展的决策部署，构建促进专精特新中小企业发展壮大机制，围绕中小企业专精特新发展需求，因地制宜打造一批专精特新赋能中心。有关工作通知如下： 一、建设目标…",
-    "source_level": "L1",
-    "policy_stage": "已发布",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "信息化"
-    ],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-21T00:29:50Z",
-    "primary_url": "https://www.miit.gov.cn/zwgk/zcwj/wjfb/tz/art/2026/art_d1f358afed144620b2e9b3180d0b19ed.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "工信部·政策文件",
-        "level": "L1",
-        "title": "工业和信息化部关于开展专精特新赋能中心建设工作的通知",
-        "url": "https://www.miit.gov.cn/zwgk/zcwj/wjfb/tz/art/2026/art_d1f358afed144620b2e9b3180d0b19ed.html",
-        "published": "2026-10-21T00:29:50Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_400ca27ed4",
-    "title_zh": "早报｜小天才回应封闭社交争议/车灯新规拟禁止显示文字/马斯克回应SpaceX与特斯拉合并",
-    "event_summary": "· 车灯国标征求意见：拟限 L3 及以上车辆安装 ADS 标志灯 · Anthropic 上半年亏损超 800 亿美元，大部分来自融资工具会计计提 · 9 月 BBA 主力车型无一零售破万 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "Anthropic"
-    ],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-21T00:21:51Z",
-    "primary_url": "https://www.ifanr.com/1685079?utm_source=rss&utm_medium=rss&utm_campaign=",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "爱范儿",
-        "level": "L2",
-        "title": "早报｜小天才回应封闭社交争议/车灯新规拟禁止显示文字/马斯克回应SpaceX与特斯拉合并",
-        "url": "https://www.ifanr.com/1685079?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "published": "2026-10-21T00:21:51Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_4d1c9cb6b5",
-    "title_zh": "派早报：美国政府指示各机构停用 DeepSeek、理想发布「连山」自研三电体系等",
-    "event_summary": "工信部就自动泊车等五项强制性国标征求意见，万事达卡 Apple Pay 新增 3 家合作银行等。 查看全文",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "DeepSeek"
-    ],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-21T00:07:07Z",
-    "primary_url": "https://sspai.com/post/116887",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "少数派",
-        "level": "L2",
-        "title": "派早报：美国政府指示各机构停用 DeepSeek、理想发布「连山」自研三电体系等",
-        "url": "https://sspai.com/post/116887",
-        "published": "2026-10-21T00:07:07Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_9201054eeb",
-    "title_zh": "Cloudflare与OpenAI合作将漏洞发现与防御联系起来",
-    "event_summary": "Cloudflare uses OpenAI Daybreak to investigate vulnerabilities and propose fixes for review. Its developers use Codex to build faster and improve code quality.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-21T00:00:00Z",
-    "primary_url": "https://openai.com/index/cloudflare-cyber",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "OpenAI News",
-        "level": "L2",
-        "title": "Cloudflare与OpenAI合作将漏洞发现与防御联系起来",
-        "url": "https://openai.com/index/cloudflare-cyber",
-        "published": "2026-10-21T00:00:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_b2deaf97c9",
-    "title_zh": "前沿AI的民主治理，第二部分：赋能网络防御者",
-    "event_summary": "OpenAI outlines a blueprint for empowering cyber defenders with frontier AI, stronger safeguards, modernized cybersecurity, and more resilient public institutions.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-21T00:00:00Z",
-    "primary_url": "https://openai.com/index/empowering-cyber-defenders",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "OpenAI News",
-        "level": "L2",
-        "title": "前沿AI的民主治理，第二部分：赋能网络防御者",
-        "url": "https://openai.com/index/empowering-cyber-defenders",
-        "published": "2026-10-21T00:00:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_d4e57614c3",
-    "title_zh": "Anthropic提出AI安全法案，若模型可能导致50人以上死亡则可能被禁",
-    "event_summary": "The proposed policy seems to offer protections against AI running amok but actually forbids federal agencies from blocking a model's release without the permission of a judge.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-20T23:01:23Z",
-    "primary_url": "https://techcrunch.com/2026/10/20/anthropic-pitches-ai-safety-bill-that-may-block-a-model-if-50-people-could-be-killed/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "TechCrunch AI",
-        "level": "L2",
-        "title": "Anthropic提出AI安全法案，若模型可能导致50人以上死亡则可能被禁",
-        "url": "https://techcrunch.com/2026/10/20/anthropic-pitches-ai-safety-bill-that-may-block-a-model-if-50-people-could-be-killed/",
-        "published": "2026-10-20T23:01:23Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_9ea810a533",
-    "title_zh": "Anthropic的云合作伙伴关系变得混乱",
-    "event_summary": "Anthropic is reportedly struggling to secure enough compute from cloud providers that increasingly view it as a competitor, even as its infrastructure spending balloons ahead of a planned November IPO.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-20T21:25:22Z",
-    "primary_url": "https://techcrunch.com/2026/10/20/anthropics-cloud-partnerships-are-getting-messy/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "TechCrunch AI",
-        "level": "L2",
-        "title": "Anthropic的云合作伙伴关系变得混乱",
-        "url": "https://techcrunch.com/2026/10/20/anthropics-cloud-partnerships-are-getting-messy/",
-        "published": "2026-10-20T21:25:22Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_38bd10c8e4",
-    "title_zh": "SpaceX的AI业务超出预期",
-    "event_summary": "SpaceX hit profitability in the third quarter, with net income of $4.4 billion. AI was the engine.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-20T20:40:41Z",
-    "primary_url": "https://techcrunch.com/2026/10/20/spacexs-ai-business-is-beating-expectations/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "TechCrunch AI",
-        "level": "L2",
-        "title": "SpaceX的AI业务超出预期",
-        "url": "https://techcrunch.com/2026/10/20/spacexs-ai-business-is-beating-expectations/",
-        "published": "2026-10-20T20:40:41Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_a323e283c5",
-    "title_zh": "OpenAI收购初创公司Orchestra Bio⁠以加强其生物技术业务",
-    "event_summary": "OpenAI says it's adding Orchestra's team and technology to work on Rosalind, its AI model for life sciences research, and to its related Rosalind Workbench tool, a harness that aims to help researchers plan experiments…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-20T00:00:00Z",
-    "primary_url": "https://techcrunch.com/2026/10/20/openai-acquires-startup-orchestra-bio%e2%81%a0-to-beef-up-its-biotech-business/",
-    "source_count": 2,
-    "links": [
-      {
-        "source": "TechCrunch AI",
-        "level": "L2",
-        "title": "OpenAI收购初创公司Orchestra Bio⁠以加强其生物技术业务",
-        "url": "https://techcrunch.com/2026/10/20/openai-acquires-startup-orchestra-bio%e2%81%a0-to-beef-up-its-biotech-business/",
-        "published": "2026-10-20T20:35:10Z"
-      },
-      {
-        "source": "OpenAI News",
-        "level": "L2",
-        "title": "OpenAI 收购 Orchestra Bio",
-        "url": "https://openai.com/index/openai-to-acquire-orchestra-bio",
-        "published": "2026-10-20T00:00:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_45cc8f5886",
-    "title_zh": "Google加入Amazon行列，利用AI应用开发者攻击Nvidia的堡垒",
-    "event_summary": "Google has joined Amazon in releasing a developer tool that makes it easy for PyTorch users to move their apps off Nvidia GPUs.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-20T18:38:24Z",
-    "primary_url": "https://techcrunch.com/2026/10/20/google-has-joined-amazon-in-attacking-nvidias-stronghold-with-ai-app-developers/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "TechCrunch AI",
-        "level": "L2",
-        "title": "Google加入Amazon行列，利用AI应用开发者攻击Nvidia的堡垒",
-        "url": "https://techcrunch.com/2026/10/20/google-has-joined-amazon-in-attacking-nvidias-stronghold-with-ai-app-developers/",
-        "published": "2026-10-20T18:38:24Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_6f64ba14f4",
-    "title_zh": "ChatGPT 现在允许你锁定聊天记录",
-    "event_summary": "The company says the feature is designed for situations where users might be discussing something personal or planning a surprise and want to keep those conversations private when handing their device to friends or…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-20T18:36:53Z",
-    "primary_url": "https://techcrunch.com/2026/10/20/chatgpt-now-lets-you-lock-your-chats/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "TechCrunch AI",
-        "level": "L2",
-        "title": "ChatGPT 现在允许你锁定聊天记录",
-        "url": "https://techcrunch.com/2026/10/20/chatgpt-now-lets-you-lock-your-chats/",
-        "published": "2026-10-20T18:36:53Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_2f7a561d08",
-    "title_zh": "据报道 Eric Schmidt 拥有的 Anthropic 股份约为 CEO Dario Amodei 的一半",
-    "event_summary": "Eric Schmidt’s fortune is about to get even bigger.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-20T17:55:12Z",
-    "primary_url": "https://techcrunch.com/2026/10/20/eric-schmidt-reportedly-owns-about-half-as-much-of-anthropic-as-ceo-dario-amodei/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "TechCrunch AI",
-        "level": "L2",
-        "title": "据报道 Eric Schmidt 拥有的 Anthropic 股份约为 CEO Dario Amodei 的一半",
-        "url": "https://techcrunch.com/2026/10/20/eric-schmidt-reportedly-owns-about-half-as-much-of-anthropic-as-ceo-dario-amodei/",
-        "published": "2026-10-20T17:55:12Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_8891282d78",
-    "title_zh": "Meta 的 Muse 在 40 天内获得 1000 万次美国下载，仅 11 个其他应用达到此里程碑",
-    "event_summary": "New data also shows Muse is retaining users at higher rates than its AI rivals.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-20T17:12:48Z",
-    "primary_url": "https://techcrunch.com/2026/10/20/metas-muse-hits-10m-u-s-downloads-in-40-days-a-milestone-reached-by-only-11-other-apps/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "TechCrunch AI",
-        "level": "L2",
-        "title": "Meta 的 Muse 在 40 天内获得 1000 万次美国下载，仅 11 个其他应用达到此里程碑",
-        "url": "https://techcrunch.com/2026/10/20/metas-muse-hits-10m-u-s-downloads-in-40-days-a-milestone-reached-by-only-11-other-apps/",
-        "published": "2026-10-20T17:12:48Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_de3c9c93e7",
-    "title_zh": "从一句话到一个能玩的世界，VAST 把整条链路开源了",
-    "event_summary": "规则归交互系统，画面归模型 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "模型 + 开源"
-    ],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-20T14:13:34Z",
-    "primary_url": "https://www.ifanr.com/1685059?utm_source=rss&utm_medium=rss&utm_campaign=",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "爱范儿",
-        "level": "L2",
-        "title": "从一句话到一个能玩的世界，VAST 把整条链路开源了",
-        "url": "https://www.ifanr.com/1685059?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "published": "2026-10-20T14:13:34Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_b3fcb2e42d",
-    "title_zh": "特许经营商使用 ChatGPT Work 将对账时间缩短 94%",
-    "event_summary": "An independent Schlotzsky’s and Cinnabon franchisee cut menu repricing time by 95% and built a workflow that could free up $100K in cash flow.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-20T10:00:00Z",
-    "primary_url": "https://openai.com/index/ted-taylor-restaurant",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "OpenAI News",
-        "level": "L2",
-        "title": "特许经营商使用 ChatGPT Work 将对账时间缩短 94%",
-        "url": "https://openai.com/index/ted-taylor-restaurant",
-        "published": "2026-10-20T10:00:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_a84b6a7bee",
-    "title_zh": "Terminal X 使用 GPT-6.1 匹配资深投资者判断的准确率达 88.6%",
-    "event_summary": "Terminal X’s Eval Agent grades outputs against a 54-criterion rubric, catching 25% more deviances from a fund’s mandate with GPT-6.1 Sol.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-20T07:00:00Z",
-    "primary_url": "https://openai.com/index/terminal-x",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "OpenAI News",
-        "level": "L2",
-        "title": "Terminal X 使用 GPT-6.1 匹配资深投资者判断的准确率达 88.6%",
-        "url": "https://openai.com/index/terminal-x",
-        "published": "2026-10-20T07:00:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_2fdf5b750d",
-    "title_zh": "设计师的第一个 Personal Agent，可能就是 Lovart 2.0 的 Arti 了",
-    "event_summary": "2025 年，Lovart 作为全球首款设计 Agent 开始出现在各大设计师社区。第一次用 AI 能力把整个设计流程串联起来。从最初的设计思路、到最终图片或视频的设计物料，终于被完整的放到一块画布上完成。 随着在生成能力和指令遵循程度上的进步，AI 越发能够满足人们现实世界的真实需求，muse 此时带起关于 personal agent 的讨论显得恰逢其时。AI…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "AI + Agent"
-    ],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-20T05:46:53Z",
-    "primary_url": "http://www.geekpark.net/news/372612",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "极客公园",
-        "level": "L2",
-        "title": "设计师的第一个 Personal Agent，可能就是 Lovart 2.0 的 Arti 了",
-        "url": "http://www.geekpark.net/news/372612",
-        "published": "2026-10-20T05:46:53Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_2f5c21e43e",
-    "title_zh": "押注记忆原生，MemT 1.0 破局养成系 AI 下半场",
-    "event_summary": "MemT 1.0 开源，给出「记忆原生」新解法 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-20T03:57:44Z",
-    "primary_url": "https://www.ifanr.com/1684997?utm_source=rss&utm_medium=rss&utm_campaign=",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "爱范儿",
-        "level": "L2",
-        "title": "押注记忆原生，MemT 1.0 破局养成系 AI 下半场",
-        "url": "https://www.ifanr.com/1684997?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "published": "2026-10-20T03:57:44Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_5c5dac5c01",
-    "title_zh": "关于公开征求《钢铁行业 质量大数据分析系统技术要求》等69项行业标准计划项目意见的公示",
-    "event_summary": "根据我部标准化工作的总体安排，现将申请立项的《钢铁行 业 质量大数据分析系统技术要求》等69项行业标准计划项目予以公示（见附件）。如对拟立项标准项目有不同意见，请在公示期间登录“工业和信息化标准信息服务平台”网站（ https://std.miit.gov.cn ），在“标准立项—立项公示”栏目在线反馈。 公示时间：2026年10月20日—2026年11月18日 联系电话：010-64102958、68205241 附件：…",
-    "source_level": "L1",
-    "policy_stage": "征求意见",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "信息化"
-    ],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-20T01:48:00Z",
-    "primary_url": "https://www.miit.gov.cn/gzcy/yjzj/art/2026/art_a6d6185961dd45f08a03bfcfdaf790ae.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "工信部·意见征集",
-        "level": "L1",
-        "title": "关于公开征求《钢铁行业 质量大数据分析系统技术要求》等69项行业标准计划项目意见的公示",
-        "url": "https://www.miit.gov.cn/gzcy/yjzj/art/2026/art_a6d6185961dd45f08a03bfcfdaf790ae.html",
-        "published": "2026-10-20T01:48:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_5e1d9d9869",
-    "title_zh": "关于公开征求《钼钨合金丝》等40项推荐性国家标准报批意见的公示",
-    "event_summary": "根据标准制修订计划，相关标准化技术组织已完成《钼钨合金丝》等40项推荐性国家标准的编制工作。为进一步听取社会各界意见，现予以公示。 以上标准报批稿请登录“工业和信息化标准信息服务平台”网站（https://std.miit.gov.cn）“项目公示”栏目阅览，如有意见请于公示期内反馈。 公示时间：2026年10月20日—2026年10月26日 联系电话：010–68205241 工业和信息化部科技司 2026年10月19日",
-    "source_level": "L1",
-    "policy_stage": "征求意见",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "信息化"
-    ],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-20T01:05:00Z",
-    "primary_url": "https://www.miit.gov.cn/gzcy/yjzj/art/2026/art_7f7a4acfafde4bc99b233aba106c74d4.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "工信部·意见征集",
-        "level": "L1",
-        "title": "关于公开征求《钼钨合金丝》等40项推荐性国家标准报批意见的公示",
-        "url": "https://www.miit.gov.cn/gzcy/yjzj/art/2026/art_7f7a4acfafde4bc99b233aba106c74d4.html",
-        "published": "2026-10-20T01:05:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_a9495a9c5c",
-    "title_zh": "DeepSeek 新模型登顶开源模型榜首；国内 55% 算力用于视频和短剧？豆包发言人辟谣；微信发起公众号小说改编微短剧激励｜极客早知道",
-    "event_summary": "DeepSeek 新模型登顶 Code Arena WebDev 开源模型榜首 10 月 19 日，AI 模型评测平台 Arena 宣布，DeepSeek-V4.1-Flash-1017（Max）超过 Kimi K3（Max），成为 Code Arena: WebDev 榜单排名最高的开源模型。 截至目前，DeepSeek-V4.1-Flash-1017 在该榜单上得分为 1670 分，超过了Kimi…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "AI + 算力"
-    ],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-20T01:01:44Z",
-    "primary_url": "http://www.geekpark.net/news/372568",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "极客公园",
-        "level": "L2",
-        "title": "DeepSeek 新模型登顶开源模型榜首；国内 55% 算力用于视频和短剧？豆包发言人辟谣；微信发起公众号小说改编微短剧激励｜极客早知道",
-        "url": "http://www.geekpark.net/news/372568",
-        "published": "2026-10-20T01:01:44Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_44ab77c3ec",
-    "title_zh": "早报｜苹果定档下周发布新品，触屏MacBook Pro或将亮相/华为苹果拿下中国手机四成份额/杨立昆锐评特斯拉飞车，马斯克：放屁",
-    "event_summary": "· OpenAI 为 OpenCode 受攻击用户退还被消耗的 API 额度 · 王腾宣布今日宜休将于 10 月 29 日举办首场发布会 · 引望与宁德时代签署换电合作协议，覆盖电池与换电网络 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "OpenAI"
-    ],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-20T00:07:06Z",
-    "primary_url": "https://www.ifanr.com/1684957?utm_source=rss&utm_medium=rss&utm_campaign=",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "爱范儿",
-        "level": "L2",
-        "title": "早报｜苹果定档下周发布新品，触屏MacBook Pro或将亮相/华为苹果拿下中国手机四成份额/杨立昆锐评特斯拉飞车，马斯克：放屁",
-        "url": "https://www.ifanr.com/1684957?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "published": "2026-10-20T00:07:06Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_0dbde1ea11",
-    "title_zh": "为何教 AI 关于对称性的知识可能使产前诊断更可靠",
-    "event_summary": "A model developed by researchers at MIT and Boston Children's Hospital adjusts scans on the fly to track fetal movement, potentially sparing families repeat hospital visits.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-10-22T14:22:59Z",
-    "hot_seen_at": null,
-    "published": "2026-10-19T18:20:00Z",
-    "primary_url": "https://news.mit.edu/2026/teaching-ai-about-symmetry-could-make-prenatal-diagnosis-more-reliable-1019",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "MIT News AI",
-        "level": "L2",
-        "title": "为何教 AI 关于对称性的知识可能使产前诊断更可靠",
-        "url": "https://news.mit.edu/2026/teaching-ai-about-symmetry-could-make-prenatal-diagnosis-more-reliable-1019",
-        "published": "2026-10-19T18:20:00Z"
+        "source": "Hacker News",
+        "level": "L3",
+        "title": "使用LLM进行置信度评分是个坏主意",
+        "url": "https://rumple.github.io/blog/2026/10/20/asking-llm-for-confidence.html",
+        "published": "2026-10-21T04:27:51Z"
       }
     ],
     "needs_translation": false
