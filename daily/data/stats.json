@@ -1,14 +1,14 @@
 {
-  "run_at": "2026-10-23T23:55:35Z",
+  "run_at": "2026-10-24T00:34:09Z",
   "stages": {
     "sources": 34,
-    "sources_ok": 31,
-    "raw": 634,
-    "after_keywords": 32,
-    "merged": 389,
-    "written": 371,
-    "body_filled": 0,
-    "new_today": 38
+    "sources_ok": 34,
+    "raw": 694,
+    "after_keywords": 29,
+    "merged": 400,
+    "written": 382,
+    "body_filled": 1,
+    "new_today": 49
   },
   "sources": [
     {
@@ -18,7 +18,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 4462,
+      "ms": 1747,
       "mirror": "https://hub.slarker.me",
       "error": ""
     },
@@ -29,7 +29,7 @@
       "ok": true,
       "raw": 22,
       "kept": 0,
-      "ms": 7938,
+      "ms": 58726,
       "mirror": "https://hub.slarker.me",
       "error": ""
     },
@@ -40,7 +40,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 3514,
+      "ms": 29305,
       "mirror": "https://hub.slarker.me",
       "error": ""
     },
@@ -51,7 +51,7 @@
       "ok": true,
       "raw": 9,
       "kept": 0,
-      "ms": 1850,
+      "ms": 1593,
       "mirror": "",
       "error": ""
     },
@@ -62,7 +62,7 @@
       "ok": true,
       "raw": 16,
       "kept": 0,
-      "ms": 1429,
+      "ms": 1628,
       "mirror": "",
       "error": ""
     },
@@ -73,7 +73,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 1257,
+      "ms": 1448,
       "mirror": "https://rsshub.rssforever.com",
       "error": ""
     },
@@ -84,7 +84,7 @@
       "ok": true,
       "raw": 20,
       "kept": 1,
-      "ms": 94,
+      "ms": 115,
       "mirror": "",
       "error": ""
     },
@@ -94,8 +94,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 2,
-      "ms": 658,
+      "kept": 3,
+      "ms": 254,
       "mirror": "https://hub.slarker.me",
       "error": ""
     },
@@ -106,7 +106,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 389,
+      "ms": 171,
       "mirror": "",
       "error": ""
     },
@@ -114,12 +114,12 @@
       "id": "geekpark",
       "name": "极客公园",
       "level": "L2",
-      "ok": false,
-      "raw": 0,
-      "kept": 0,
-      "ms": 30248,
+      "ok": true,
+      "raw": 30,
+      "kept": 1,
+      "ms": 2244,
       "mirror": "",
-      "error": "GET failed after 1 attempts: https://www.geekpark.net/rss :: <urlopen error timed out>"
+      "error": ""
     },
     {
       "id": "google-ai",
@@ -128,7 +128,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 246,
+      "ms": 141,
       "mirror": "",
       "error": ""
     },
@@ -139,7 +139,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 1496,
+      "ms": 1641,
       "mirror": "",
       "error": ""
     },
@@ -150,7 +150,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 1763,
+      "ms": 2223,
       "mirror": "",
       "error": ""
     },
@@ -160,8 +160,8 @@
       "level": "L2",
       "ok": true,
       "raw": 40,
-      "kept": 5,
-      "ms": 2467,
+      "kept": 3,
+      "ms": 2328,
       "mirror": "",
       "error": ""
     },
@@ -169,12 +169,12 @@
       "id": "leiphone",
       "name": "雷峰网",
       "level": "L2",
-      "ok": false,
-      "raw": 0,
+      "ok": true,
+      "raw": 20,
       "kept": 0,
-      "ms": 30322,
+      "ms": 7399,
       "mirror": "",
-      "error": "GET failed after 1 attempts: https://www.leiphone.com/feed :: <urlopen error timed out>"
+      "error": ""
     },
     {
       "id": "mit-news-ai",
@@ -183,7 +183,7 @@
       "ok": true,
       "raw": 15,
       "kept": 1,
-      "ms": 150,
+      "ms": 54,
       "mirror": "",
       "error": ""
     },
@@ -194,7 +194,7 @@
       "ok": true,
       "raw": 10,
       "kept": 2,
-      "ms": 115,
+      "ms": 49,
       "mirror": "",
       "error": ""
     },
@@ -205,7 +205,7 @@
       "ok": true,
       "raw": 15,
       "kept": 1,
-      "ms": 573,
+      "ms": 335,
       "mirror": "",
       "error": ""
     },
@@ -213,12 +213,12 @@
       "id": "qbitai",
       "name": "量子位",
       "level": "L2",
-      "ok": false,
-      "raw": 0,
+      "ok": true,
+      "raw": 10,
       "kept": 0,
-      "ms": 151031,
+      "ms": 2130,
       "mirror": "",
-      "error": "GET failed after 1 attempts: https://www.qbitai.com/feed :: <urlopen error timed out>"
+      "error": ""
     },
     {
       "id": "sina-tech",
@@ -227,7 +227,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 1612,
+      "ms": 501,
       "mirror": "",
       "error": ""
     },
@@ -238,7 +238,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 1128,
+      "ms": 1284,
       "mirror": "",
       "error": ""
     },
@@ -248,8 +248,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 9,
-      "ms": 88,
+      "kept": 7,
+      "ms": 43,
       "mirror": "",
       "error": ""
     },
@@ -260,7 +260,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 1724,
+      "ms": 1199,
       "mirror": "",
       "error": ""
     },
@@ -270,8 +270,8 @@
       "level": "L2",
       "ok": true,
       "raw": 14,
-      "kept": 0,
-      "ms": 2882,
+      "kept": 1,
+      "ms": 2893,
       "mirror": "",
       "error": ""
     },
@@ -282,7 +282,7 @@
       "ok": true,
       "raw": 10,
       "kept": 5,
-      "ms": 75,
+      "ms": 24,
       "mirror": "",
       "error": ""
     },
@@ -292,8 +292,8 @@
       "level": "L2",
       "ok": true,
       "raw": 30,
-      "kept": 2,
-      "ms": 808,
+      "kept": 1,
+      "ms": 915,
       "mirror": "",
       "error": ""
     },
@@ -303,8 +303,8 @@
       "level": "L3",
       "ok": true,
       "raw": 50,
-      "kept": 0,
-      "ms": 4992,
+      "kept": 2,
+      "ms": 1013,
       "mirror": "https://rsshub.rssforever.com",
       "error": ""
     },
@@ -315,7 +315,7 @@
       "ok": true,
       "raw": 8,
       "kept": 0,
-      "ms": 921,
+      "ms": 907,
       "mirror": "",
       "error": ""
     },
@@ -326,7 +326,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 3294,
+      "ms": 185,
       "mirror": "",
       "error": ""
     },
@@ -337,7 +337,7 @@
       "ok": true,
       "raw": 50,
       "kept": 0,
-      "ms": 1227,
+      "ms": 1798,
       "mirror": "",
       "error": ""
     },
@@ -348,7 +348,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 59,
+      "ms": 35,
       "mirror": "",
       "error": ""
     },
@@ -358,8 +358,8 @@
       "level": "L3",
       "ok": true,
       "raw": 20,
-      "kept": 2,
-      "ms": 157,
+      "kept": 1,
+      "ms": 70,
       "mirror": "",
       "error": ""
     },
@@ -369,8 +369,8 @@
       "level": "L3",
       "ok": true,
       "raw": 50,
-      "kept": 1,
-      "ms": 762,
+      "kept": 0,
+      "ms": 1169,
       "mirror": "",
       "error": ""
     },
@@ -380,18 +380,18 @@
       "level": "L3",
       "ok": true,
       "raw": 30,
-      "kept": 1,
-      "ms": 1188,
+      "kept": 0,
+      "ms": 1501,
       "mirror": "",
       "error": ""
     }
   ],
   "events": {
-    "run_at": "2026-10-23T23:57:25Z",
-    "items": 371,
+    "run_at": "2026-10-24T00:34:47Z",
+    "items": 382,
     "events": 260,
-    "translated": 3,
-    "new_today": 46,
+    "translated": 1,
+    "new_today": 57,
     "model": "glm-4.7-flash"
   }
 }
