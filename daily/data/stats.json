@@ -1,48 +1,48 @@
 {
-  "run_at": "2026-10-26T21:00:06Z",
+  "run_at": "2026-10-26T23:53:58Z",
   "stages": {
     "sources": 34,
-    "sources_ok": 33,
-    "raw": 698,
-    "after_keywords": 34,
-    "merged": 634,
+    "sources_ok": 30,
+    "raw": 640,
+    "after_keywords": 32,
+    "merged": 632,
     "written": 600,
-    "body_filled": 4,
-    "new_today": 28
+    "body_filled": 3,
+    "new_today": 56
   },
   "sources": [
     {
       "id": "gov-zuixin",
       "name": "国务院·最新政策",
       "level": "L1",
-      "ok": true,
-      "raw": 20,
+      "ok": false,
+      "raw": 0,
       "kept": 0,
-      "ms": 8799,
-      "mirror": "https://hub.slarker.me",
-      "error": ""
+      "ms": 61328,
+      "mirror": "",
+      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/zhengce/zuixin :: HTTP Error 503: Service Unavailable"
     },
     {
       "id": "miit-yjzj",
       "name": "工信部·意见征集",
       "level": "L1",
-      "ok": true,
-      "raw": 21,
+      "ok": false,
+      "raw": 0,
       "kept": 0,
-      "ms": 4528,
-      "mirror": "https://hub.slarker.me",
-      "error": ""
+      "ms": 62001,
+      "mirror": "",
+      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/yjzj :: HTTP Error 503: Service Unavailable"
     },
     {
       "id": "miit-zcwj",
       "name": "工信部·政策文件",
       "level": "L1",
-      "ok": true,
-      "raw": 10,
+      "ok": false,
+      "raw": 0,
       "kept": 0,
-      "ms": 2090,
-      "mirror": "https://hub.slarker.me",
-      "error": ""
+      "ms": 61902,
+      "mirror": "",
+      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/zcwj :: HTTP Error 503: Service Unavailable"
     },
     {
       "id": "mofcom-home",
@@ -51,7 +51,7 @@
       "ok": true,
       "raw": 8,
       "kept": 0,
-      "ms": 810,
+      "ms": 1519,
       "mirror": "",
       "error": ""
     },
@@ -62,7 +62,7 @@
       "ok": true,
       "raw": 16,
       "kept": 0,
-      "ms": 1196,
+      "ms": 1266,
       "mirror": "",
       "error": ""
     },
@@ -72,8 +72,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 0,
-      "ms": 493,
+      "kept": 6,
+      "ms": 950,
       "mirror": "https://rsshub.rssforever.com",
       "error": ""
     },
@@ -83,8 +83,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 0,
-      "ms": 67,
+      "kept": 1,
+      "ms": 77,
       "mirror": "",
       "error": ""
     },
@@ -95,7 +95,7 @@
       "ok": true,
       "raw": 20,
       "kept": 4,
-      "ms": 42,
+      "ms": 1272,
       "mirror": "https://hub.slarker.me",
       "error": ""
     },
@@ -106,7 +106,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 199,
+      "ms": 103,
       "mirror": "",
       "error": ""
     },
@@ -117,7 +117,7 @@
       "ok": true,
       "raw": 30,
       "kept": 0,
-      "ms": 1691,
+      "ms": 1874,
       "mirror": "",
       "error": ""
     },
@@ -127,8 +127,8 @@
       "level": "L2",
       "ok": true,
       "raw": 15,
-      "kept": 1,
-      "ms": 396,
+      "kept": 0,
+      "ms": 311,
       "mirror": "",
       "error": ""
     },
@@ -139,7 +139,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 1024,
+      "ms": 1082,
       "mirror": "",
       "error": ""
     },
@@ -150,7 +150,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 1675,
+      "ms": 1623,
       "mirror": "",
       "error": ""
     },
@@ -160,8 +160,8 @@
       "level": "L2",
       "ok": true,
       "raw": 40,
-      "kept": 6,
-      "ms": 1749,
+      "kept": 7,
+      "ms": 1381,
       "mirror": "",
       "error": ""
     },
@@ -172,7 +172,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 2608,
+      "ms": 2268,
       "mirror": "",
       "error": ""
     },
@@ -182,8 +182,8 @@
       "level": "L2",
       "ok": true,
       "raw": 15,
-      "kept": 1,
-      "ms": 79,
+      "kept": 0,
+      "ms": 106,
       "mirror": "",
       "error": ""
     },
@@ -193,8 +193,8 @@
       "level": "L2",
       "ok": true,
       "raw": 10,
-      "kept": 1,
-      "ms": 47,
+      "kept": 0,
+      "ms": 123,
       "mirror": "",
       "error": ""
     },
@@ -205,7 +205,7 @@
       "ok": true,
       "raw": 15,
       "kept": 3,
-      "ms": 318,
+      "ms": 306,
       "mirror": "",
       "error": ""
     },
@@ -213,12 +213,12 @@
       "id": "qbitai",
       "name": "量子位",
       "level": "L2",
-      "ok": false,
-      "raw": 0,
+      "ok": true,
+      "raw": 10,
       "kept": 0,
-      "ms": 30596,
+      "ms": 1335,
       "mirror": "",
-      "error": "GET failed after 1 attempts: https://www.qbitai.com/feed :: <urlopen error _ssl.c:993: The handshake operation timed out>"
+      "error": ""
     },
     {
       "id": "sina-tech",
@@ -227,7 +227,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 1057,
+      "ms": 1036,
       "mirror": "",
       "error": ""
     },
@@ -238,7 +238,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 1166,
+      "ms": 1071,
       "mirror": "",
       "error": ""
     },
@@ -248,8 +248,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 3,
-      "ms": 83,
+      "kept": 0,
+      "ms": 48,
       "mirror": "",
       "error": ""
     },
@@ -259,8 +259,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 0,
-      "ms": 668,
+      "kept": 1,
+      "ms": 1478,
       "mirror": "",
       "error": ""
     },
@@ -271,7 +271,7 @@
       "ok": true,
       "raw": 17,
       "kept": 1,
-      "ms": 2082,
+      "ms": 2381,
       "mirror": "",
       "error": ""
     },
@@ -281,8 +281,8 @@
       "level": "L2",
       "ok": true,
       "raw": 10,
-      "kept": 3,
-      "ms": 111,
+      "kept": 2,
+      "ms": 120,
       "mirror": "",
       "error": ""
     },
@@ -292,8 +292,8 @@
       "level": "L2",
       "ok": true,
       "raw": 30,
-      "kept": 2,
-      "ms": 896,
+      "kept": 5,
+      "ms": 723,
       "mirror": "",
       "error": ""
     },
@@ -304,7 +304,7 @@
       "ok": true,
       "raw": 50,
       "kept": 1,
-      "ms": 1843,
+      "ms": 3682,
       "mirror": "https://rsshub.rssforever.com",
       "error": ""
     },
@@ -315,7 +315,7 @@
       "ok": true,
       "raw": 14,
       "kept": 0,
-      "ms": 1317,
+      "ms": 1012,
       "mirror": "",
       "error": ""
     },
@@ -323,12 +323,12 @@
       "id": "hn-frontpage",
       "name": "Hacker News",
       "level": "L3",
-      "ok": true,
-      "raw": 17,
-      "kept": 2,
-      "ms": 5441,
+      "ok": false,
+      "raw": 0,
+      "kept": 0,
+      "ms": 30188,
       "mirror": "",
-      "error": ""
+      "error": "GET failed after 1 attempts: https://hnrss.org/frontpage?points=100 :: <urlopen error timed out>"
     },
     {
       "id": "juejin-hot",
@@ -336,8 +336,8 @@
       "level": "L3",
       "ok": true,
       "raw": 50,
-      "kept": 2,
-      "ms": 1129,
+      "kept": 0,
+      "ms": 1588,
       "mirror": "",
       "error": ""
     },
@@ -348,7 +348,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 36,
+      "ms": 291,
       "mirror": "",
       "error": ""
     },
@@ -358,8 +358,8 @@
       "level": "L3",
       "ok": true,
       "raw": 20,
-      "kept": 1,
-      "ms": 100,
+      "kept": 0,
+      "ms": 149,
       "mirror": "",
       "error": ""
     },
@@ -369,8 +369,8 @@
       "level": "L3",
       "ok": true,
       "raw": 50,
-      "kept": 2,
-      "ms": 481,
+      "kept": 0,
+      "ms": 996,
       "mirror": "",
       "error": ""
     },
@@ -381,17 +381,17 @@
       "ok": true,
       "raw": 30,
       "kept": 1,
-      "ms": 1020,
+      "ms": 994,
       "mirror": "",
       "error": ""
     }
   ],
   "events": {
-    "run_at": "2026-10-26T21:01:52Z",
+    "run_at": "2026-10-26T23:54:38Z",
     "items": 600,
     "events": 260,
-    "translated": 25,
-    "new_today": 28,
+    "translated": 7,
+    "new_today": 53,
     "model": "glm-4.7-flash"
   }
 }
