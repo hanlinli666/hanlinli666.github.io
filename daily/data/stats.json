@@ -1,48 +1,48 @@
 {
-  "run_at": "2026-10-28T10:50:04Z",
+  "run_at": "2026-10-28T16:35:50Z",
   "stages": {
     "sources": 34,
-    "sources_ok": 31,
-    "raw": 652,
-    "after_keywords": 37,
-    "merged": 637,
+    "sources_ok": 30,
+    "raw": 636,
+    "after_keywords": 56,
+    "merged": 656,
     "written": 600,
-    "body_filled": 1,
-    "new_today": 136
+    "body_filled": 9,
+    "new_today": 8
   },
   "sources": [
     {
       "id": "gov-zuixin",
       "name": "国务院·最新政策",
       "level": "L1",
-      "ok": true,
-      "raw": 20,
+      "ok": false,
+      "raw": 0,
       "kept": 0,
-      "ms": 694,
-      "mirror": "https://hub.slarker.me",
-      "error": ""
+      "ms": 62190,
+      "mirror": "",
+      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/zhengce/zuixin :: HTTP Error 503: Service Unavailable"
     },
     {
       "id": "miit-yjzj",
       "name": "工信部·意见征集",
       "level": "L1",
-      "ok": true,
-      "raw": 23,
-      "kept": 1,
-      "ms": 8939,
-      "mirror": "https://hub.slarker.me",
-      "error": ""
+      "ok": false,
+      "raw": 0,
+      "kept": 0,
+      "ms": 63772,
+      "mirror": "",
+      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/yjzj :: HTTP Error 503: Service Unavailable"
     },
     {
       "id": "miit-zcwj",
       "name": "工信部·政策文件",
       "level": "L1",
-      "ok": true,
-      "raw": 10,
+      "ok": false,
+      "raw": 0,
       "kept": 0,
-      "ms": 2132,
-      "mirror": "https://hub.slarker.me",
-      "error": ""
+      "ms": 64749,
+      "mirror": "",
+      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/zcwj :: HTTP Error 503: Service Unavailable"
     },
     {
       "id": "mofcom-home",
@@ -51,7 +51,7 @@
       "ok": true,
       "raw": 8,
       "kept": 0,
-      "ms": 477,
+      "ms": 603,
       "mirror": "",
       "error": ""
     },
@@ -62,7 +62,7 @@
       "ok": true,
       "raw": 16,
       "kept": 0,
-      "ms": 1646,
+      "ms": 1640,
       "mirror": "",
       "error": ""
     },
@@ -72,8 +72,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 3,
-      "ms": 1225,
+      "kept": 1,
+      "ms": 4049,
       "mirror": "https://rsshub.rssforever.com",
       "error": ""
     },
@@ -83,8 +83,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 1,
-      "ms": 131,
+      "kept": 0,
+      "ms": 99,
       "mirror": "",
       "error": ""
     },
@@ -94,8 +94,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 0,
-      "ms": 250,
+      "kept": 3,
+      "ms": 50514,
       "mirror": "https://hub.slarker.me",
       "error": ""
     },
@@ -106,7 +106,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 140,
+      "ms": 483,
       "mirror": "",
       "error": ""
     },
@@ -114,12 +114,12 @@
       "id": "geekpark",
       "name": "极客公园",
       "level": "L2",
-      "ok": false,
-      "raw": 0,
+      "ok": true,
+      "raw": 30,
       "kept": 0,
-      "ms": 30313,
+      "ms": 4223,
       "mirror": "",
-      "error": "GET failed after 1 attempts: https://www.geekpark.net/rss :: <urlopen error timed out>"
+      "error": ""
     },
     {
       "id": "google-ai",
@@ -128,7 +128,7 @@
       "ok": true,
       "raw": 15,
       "kept": 1,
-      "ms": 171,
+      "ms": 180,
       "mirror": "",
       "error": ""
     },
@@ -138,8 +138,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 2,
-      "ms": 1582,
+      "kept": 0,
+      "ms": 1462,
       "mirror": "",
       "error": ""
     },
@@ -150,7 +150,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 1807,
+      "ms": 2033,
       "mirror": "",
       "error": ""
     },
@@ -160,8 +160,8 @@
       "level": "L2",
       "ok": true,
       "raw": 40,
-      "kept": 15,
-      "ms": 1916,
+      "kept": 10,
+      "ms": 2045,
       "mirror": "",
       "error": ""
     },
@@ -172,9 +172,9 @@
       "ok": false,
       "raw": 0,
       "kept": 0,
-      "ms": 30590,
+      "ms": 21957,
       "mirror": "",
-      "error": "GET failed after 1 attempts: https://www.leiphone.com/feed :: <urlopen error timed out>"
+      "error": "GET failed after 1 attempts: https://www.leiphone.com/feed :: HTTP Error 502: Bad Gateway"
     },
     {
       "id": "mit-news-ai",
@@ -182,8 +182,8 @@
       "level": "L2",
       "ok": true,
       "raw": 15,
-      "kept": 1,
-      "ms": 78,
+      "kept": 2,
+      "ms": 49,
       "mirror": "",
       "error": ""
     },
@@ -193,8 +193,8 @@
       "level": "L2",
       "ok": true,
       "raw": 10,
-      "kept": 1,
-      "ms": 60,
+      "kept": 3,
+      "ms": 46,
       "mirror": "",
       "error": ""
     },
@@ -205,7 +205,7 @@
       "ok": true,
       "raw": 15,
       "kept": 2,
-      "ms": 346,
+      "ms": 333,
       "mirror": "",
       "error": ""
     },
@@ -213,12 +213,12 @@
       "id": "qbitai",
       "name": "量子位",
       "level": "L2",
-      "ok": false,
-      "raw": 0,
-      "kept": 0,
-      "ms": 151172,
+      "ok": true,
+      "raw": 10,
+      "kept": 7,
+      "ms": 1706,
       "mirror": "",
-      "error": "GET failed after 1 attempts: https://www.qbitai.com/feed :: <urlopen error timed out>"
+      "error": ""
     },
     {
       "id": "sina-tech",
@@ -227,7 +227,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 1234,
+      "ms": 1308,
       "mirror": "",
       "error": ""
     },
@@ -238,7 +238,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 1257,
+      "ms": 1256,
       "mirror": "",
       "error": ""
     },
@@ -248,8 +248,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 2,
-      "ms": 55,
+      "kept": 5,
+      "ms": 60,
       "mirror": "",
       "error": ""
     },
@@ -259,8 +259,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 0,
-      "ms": 1387,
+      "kept": 1,
+      "ms": 1009,
       "mirror": "",
       "error": ""
     },
@@ -269,9 +269,9 @@
       "name": "钛媒体",
       "level": "L2",
       "ok": true,
-      "raw": 18,
-      "kept": 0,
-      "ms": 2724,
+      "raw": 13,
+      "kept": 5,
+      "ms": 2289,
       "mirror": "",
       "error": ""
     },
@@ -281,8 +281,8 @@
       "level": "L2",
       "ok": true,
       "raw": 10,
-      "kept": 2,
-      "ms": 48,
+      "kept": 4,
+      "ms": 59,
       "mirror": "",
       "error": ""
     },
@@ -292,8 +292,8 @@
       "level": "L2",
       "ok": true,
       "raw": 30,
-      "kept": 2,
-      "ms": 918,
+      "kept": 3,
+      "ms": 2564,
       "mirror": "",
       "error": ""
     },
@@ -304,7 +304,7 @@
       "ok": true,
       "raw": 50,
       "kept": 0,
-      "ms": 2742,
+      "ms": 356,
       "mirror": "https://rsshub.rssforever.com",
       "error": ""
     },
@@ -315,7 +315,7 @@
       "ok": true,
       "raw": 14,
       "kept": 0,
-      "ms": 1152,
+      "ms": 1201,
       "mirror": "",
       "error": ""
     },
@@ -324,9 +324,9 @@
       "name": "Hacker News",
       "level": "L3",
       "ok": true,
-      "raw": 18,
-      "kept": 0,
-      "ms": 93,
+      "raw": 20,
+      "kept": 1,
+      "ms": 3015,
       "mirror": "",
       "error": ""
     },
@@ -336,8 +336,8 @@
       "level": "L3",
       "ok": true,
       "raw": 50,
-      "kept": 1,
-      "ms": 1397,
+      "kept": 2,
+      "ms": 1264,
       "mirror": "",
       "error": ""
     },
@@ -348,7 +348,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 45,
+      "ms": 32,
       "mirror": "",
       "error": ""
     },
@@ -359,7 +359,7 @@
       "ok": true,
       "raw": 20,
       "kept": 2,
-      "ms": 111,
+      "ms": 504,
       "mirror": "",
       "error": ""
     },
@@ -369,8 +369,8 @@
       "level": "L3",
       "ok": true,
       "raw": 50,
-      "kept": 1,
-      "ms": 629,
+      "kept": 2,
+      "ms": 846,
       "mirror": "",
       "error": ""
     },
@@ -380,18 +380,18 @@
       "level": "L3",
       "ok": true,
       "raw": 30,
-      "kept": 0,
-      "ms": 673,
+      "kept": 2,
+      "ms": 867,
       "mirror": "",
       "error": ""
     }
   ],
   "events": {
-    "run_at": "2026-10-28T10:50:42Z",
+    "run_at": "2026-10-28T16:36:04Z",
     "items": 600,
     "events": 260,
-    "translated": 2,
-    "new_today": 140,
+    "translated": 14,
+    "new_today": 46,
     "model": "glm-4.7-flash"
   }
 }
