@@ -1,14 +1,14 @@
 {
-  "run_at": "2026-10-28T08:20:55Z",
+  "run_at": "2026-10-28T10:50:04Z",
   "stages": {
     "sources": 34,
-    "sources_ok": 32,
-    "raw": 678,
-    "after_keywords": 53,
-    "merged": 653,
+    "sources_ok": 31,
+    "raw": 652,
+    "after_keywords": 37,
+    "merged": 637,
     "written": 600,
-    "body_filled": 11,
-    "new_today": 109
+    "body_filled": 1,
+    "new_today": 136
   },
   "sources": [
     {
@@ -18,7 +18,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 1582,
+      "ms": 694,
       "mirror": "https://hub.slarker.me",
       "error": ""
     },
@@ -26,23 +26,23 @@
       "id": "miit-yjzj",
       "name": "工信部·意见征集",
       "level": "L1",
-      "ok": false,
-      "raw": 0,
-      "kept": 0,
-      "ms": 64734,
-      "mirror": "",
-      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/yjzj :: HTTP Error 503: Service Unavailable"
+      "ok": true,
+      "raw": 23,
+      "kept": 1,
+      "ms": 8939,
+      "mirror": "https://hub.slarker.me",
+      "error": ""
     },
     {
       "id": "miit-zcwj",
       "name": "工信部·政策文件",
       "level": "L1",
-      "ok": false,
-      "raw": 0,
+      "ok": true,
+      "raw": 10,
       "kept": 0,
-      "ms": 65744,
-      "mirror": "",
-      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/zcwj :: HTTP Error 503: Service Unavailable"
+      "ms": 2132,
+      "mirror": "https://hub.slarker.me",
+      "error": ""
     },
     {
       "id": "mofcom-home",
@@ -51,7 +51,7 @@
       "ok": true,
       "raw": 8,
       "kept": 0,
-      "ms": 781,
+      "ms": 477,
       "mirror": "",
       "error": ""
     },
@@ -62,7 +62,7 @@
       "ok": true,
       "raw": 16,
       "kept": 0,
-      "ms": 1685,
+      "ms": 1646,
       "mirror": "",
       "error": ""
     },
@@ -72,8 +72,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 1,
-      "ms": 1163,
+      "kept": 3,
+      "ms": 1225,
       "mirror": "https://rsshub.rssforever.com",
       "error": ""
     },
@@ -84,7 +84,7 @@
       "ok": true,
       "raw": 20,
       "kept": 1,
-      "ms": 149,
+      "ms": 131,
       "mirror": "",
       "error": ""
     },
@@ -95,7 +95,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 654,
+      "ms": 250,
       "mirror": "https://hub.slarker.me",
       "error": ""
     },
@@ -106,7 +106,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 222,
+      "ms": 140,
       "mirror": "",
       "error": ""
     },
@@ -114,12 +114,12 @@
       "id": "geekpark",
       "name": "极客公园",
       "level": "L2",
-      "ok": true,
-      "raw": 30,
-      "kept": 1,
-      "ms": 2334,
+      "ok": false,
+      "raw": 0,
+      "kept": 0,
+      "ms": 30313,
       "mirror": "",
-      "error": ""
+      "error": "GET failed after 1 attempts: https://www.geekpark.net/rss :: <urlopen error timed out>"
     },
     {
       "id": "google-ai",
@@ -128,7 +128,7 @@
       "ok": true,
       "raw": 15,
       "kept": 1,
-      "ms": 219,
+      "ms": 171,
       "mirror": "",
       "error": ""
     },
@@ -138,8 +138,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 1,
-      "ms": 1509,
+      "kept": 2,
+      "ms": 1582,
       "mirror": "",
       "error": ""
     },
@@ -150,7 +150,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 1603,
+      "ms": 1807,
       "mirror": "",
       "error": ""
     },
@@ -160,8 +160,8 @@
       "level": "L2",
       "ok": true,
       "raw": 40,
-      "kept": 8,
-      "ms": 1915,
+      "kept": 15,
+      "ms": 1916,
       "mirror": "",
       "error": ""
     },
@@ -169,12 +169,12 @@
       "id": "leiphone",
       "name": "雷峰网",
       "level": "L2",
-      "ok": true,
-      "raw": 20,
-      "kept": 3,
-      "ms": 2887,
+      "ok": false,
+      "raw": 0,
+      "kept": 0,
+      "ms": 30590,
       "mirror": "",
-      "error": ""
+      "error": "GET failed after 1 attempts: https://www.leiphone.com/feed :: <urlopen error timed out>"
     },
     {
       "id": "mit-news-ai",
@@ -182,8 +182,8 @@
       "level": "L2",
       "ok": true,
       "raw": 15,
-      "kept": 2,
-      "ms": 47,
+      "kept": 1,
+      "ms": 78,
       "mirror": "",
       "error": ""
     },
@@ -194,7 +194,7 @@
       "ok": true,
       "raw": 10,
       "kept": 1,
-      "ms": 25,
+      "ms": 60,
       "mirror": "",
       "error": ""
     },
@@ -204,8 +204,8 @@
       "level": "L2",
       "ok": true,
       "raw": 15,
-      "kept": 1,
-      "ms": 307,
+      "kept": 2,
+      "ms": 346,
       "mirror": "",
       "error": ""
     },
@@ -213,12 +213,12 @@
       "id": "qbitai",
       "name": "量子位",
       "level": "L2",
-      "ok": true,
-      "raw": 10,
-      "kept": 10,
-      "ms": 1643,
+      "ok": false,
+      "raw": 0,
+      "kept": 0,
+      "ms": 151172,
       "mirror": "",
-      "error": ""
+      "error": "GET failed after 1 attempts: https://www.qbitai.com/feed :: <urlopen error timed out>"
     },
     {
       "id": "sina-tech",
@@ -227,7 +227,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 2613,
+      "ms": 1234,
       "mirror": "",
       "error": ""
     },
@@ -238,7 +238,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 1284,
+      "ms": 1257,
       "mirror": "",
       "error": ""
     },
@@ -248,8 +248,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 3,
-      "ms": 64,
+      "kept": 2,
+      "ms": 55,
       "mirror": "",
       "error": ""
     },
@@ -260,7 +260,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 2196,
+      "ms": 1387,
       "mirror": "",
       "error": ""
     },
@@ -269,9 +269,9 @@
       "name": "钛媒体",
       "level": "L2",
       "ok": true,
-      "raw": 20,
-      "kept": 8,
-      "ms": 2264,
+      "raw": 18,
+      "kept": 0,
+      "ms": 2724,
       "mirror": "",
       "error": ""
     },
@@ -282,7 +282,7 @@
       "ok": true,
       "raw": 10,
       "kept": 2,
-      "ms": 57,
+      "ms": 48,
       "mirror": "",
       "error": ""
     },
@@ -292,8 +292,8 @@
       "level": "L2",
       "ok": true,
       "raw": 30,
-      "kept": 4,
-      "ms": 914,
+      "kept": 2,
+      "ms": 918,
       "mirror": "",
       "error": ""
     },
@@ -303,8 +303,8 @@
       "level": "L3",
       "ok": true,
       "raw": 50,
-      "kept": 1,
-      "ms": 5974,
+      "kept": 0,
+      "ms": 2742,
       "mirror": "https://rsshub.rssforever.com",
       "error": ""
     },
@@ -313,9 +313,9 @@
       "name": "GitHub Trending",
       "level": "L3",
       "ok": true,
-      "raw": 11,
+      "raw": 14,
       "kept": 0,
-      "ms": 1131,
+      "ms": 1152,
       "mirror": "",
       "error": ""
     },
@@ -326,7 +326,7 @@
       "ok": true,
       "raw": 18,
       "kept": 0,
-      "ms": 165,
+      "ms": 93,
       "mirror": "",
       "error": ""
     },
@@ -336,8 +336,8 @@
       "level": "L3",
       "ok": true,
       "raw": 50,
-      "kept": 2,
-      "ms": 1141,
+      "kept": 1,
+      "ms": 1397,
       "mirror": "",
       "error": ""
     },
@@ -348,7 +348,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 35,
+      "ms": 45,
       "mirror": "",
       "error": ""
     },
@@ -358,8 +358,8 @@
       "level": "L3",
       "ok": true,
       "raw": 20,
-      "kept": 1,
-      "ms": 101,
+      "kept": 2,
+      "ms": 111,
       "mirror": "",
       "error": ""
     },
@@ -370,7 +370,7 @@
       "ok": true,
       "raw": 50,
       "kept": 1,
-      "ms": 664,
+      "ms": 629,
       "mirror": "",
       "error": ""
     },
@@ -380,18 +380,18 @@
       "level": "L3",
       "ok": true,
       "raw": 30,
-      "kept": 1,
-      "ms": 879,
+      "kept": 0,
+      "ms": 673,
       "mirror": "",
       "error": ""
     }
   ],
   "events": {
-    "run_at": "2026-10-28T08:21:00Z",
+    "run_at": "2026-10-28T10:50:42Z",
     "items": 600,
     "events": 260,
-    "translated": 3,
-    "new_today": 114,
+    "translated": 2,
+    "new_today": 140,
     "model": "glm-4.7-flash"
   }
 }
