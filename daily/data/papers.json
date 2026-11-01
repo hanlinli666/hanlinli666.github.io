@@ -6247,9 +6247,13 @@
   {
     "id": "2610.38691",
     "title": "Beyond fabrication: Misattributed numbers in papers written by AI research agents",
-    "title_zh": null,
+    "title_zh": "超越捏造：AI研究代理论文中的数字错配问题",
     "abstract": "Verifying numerical claims in research written by AI agents is an important but challenging problem. Recent benchmarks show that many agent-written papers fail integrity checks, but such verdicts, often produced by a single LLM judge, identify failure without explaining its nature, and existing checks either test a paper for internal consistency or test whether a reported value appears somewhere in an agent's output. We re-analyze all 540 released judgments from a recent public benchmark of AI research agents (nine agents, fifteen open research problems) and manually label 256 numerical claims from 18 submissions. Failures concentrate on alignment between the paper and the underlying work rather than overt cheating, and about four in five unsupported claims correspond to values in the agent's own files that come from the wrong experiment, metric, or run. We introduce a deterministic claim-to-evidence checker that scores whether the surrounding context identifies the claimed result and calibrates each claim against numerical decoys. With its rules fixed before labeling, it certifies claims with over 90% precision against blinded annotators (78 of 85; Cohen's kappa = 0.89), while verifying only a subset of claims; most claims it cannot verify are nevertheless traceable, so failure to verify is not evidence of falsehood. An LLM verifier given the same evidence recovers more traceable claims but accepts about three times as many misattributed ones, so the two are best used together. Applied to 99 submissions, the checker reveals large differences in traceability across agents, and a second judge from a different vendor preserves the official agent ranking while passing twice as many papers. These findings motivate provenance-first auditing of AI-produced research.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有AI论文完整性检查无法解释失败性质，且仅测内部一致性或数值是否存在，未解决数值错配问题。",
+      "本文重新分析540个公开评测判定并手动标注256个数值声明，发现多数失败源于论文与底层工作错配而非作弊。",
+      "提出确定性声明-证据检查器，认证声明准确率超90%，结合LLM验证器可互补，揭示代理间可追溯性差异巨大。"
+    ],
     "authors": [
       "Mosab Alfaqeeh",
       "Omar Hourani",
@@ -6273,14 +6277,23 @@
     "matched": [
       "AI agent"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "AI代理",
+      "数值错配",
+      "完整性审查"
+    ]
   },
   {
     "id": "2610.38687",
     "title": "Deogen: Automatic Benchmark Generation for Reasoning over Policies",
-    "title_zh": null,
+    "title_zh": "Deogen：面向策略推理的自动基准生成器",
     "abstract": "Language models are increasingly being deployed in regulated settings, where a model must apply given rules to the facts of a situation to determine a verdict. Benchmarking this capability, known as deontic reasoning, remains a costly and manual process, with existing datasets largely hand-crafted. In this paper, we present DeoGen, a scalable, automatic, and parametrizable benchmark generator for deontic reasoning. By autoformalizing policy rules to first-order logic, we can construct decision trees that capture possible outcome trajectories. Each path down a tree becomes a benchmark entry, with each tree producing combinatorially many entries relative to tree depth. Paths ending at a leaf entail a verdict, while non-leaf paths measure a model's ability to abstain when presented with insufficient information. Evaluations show frontier models return the correct verdict 89-92% of the time. Notably, performance degrades (22-40% correct) on entries without sufficient information to claim a verdict, even with explicit instructions to abstain in such cases. In all, DeoGen presents an automatic, scalable, and parametric method for generating deontic reasoning benchmarks.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有道义推理基准依赖人工构建，成本高且难以规模化，无法满足LLM在受监管场景下的评测需求。",
+      "提出DeoGen生成器，将策略规则自动形式化为一阶逻辑并构建决策树，利用树路径组合生成大量测试条目。",
+      "前沿模型在信息充足时准确率达89-92%，但在信息不足需弃权时准确率骤降至22-40%，揭示了模型缺陷。"
+    ],
     "authors": [
       "Sam Kouteili",
       "William Liang",
@@ -6306,14 +6319,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "道义推理",
+      "基准生成",
+      "策略推理"
+    ]
   },
   {
     "id": "2610.38681",
     "title": "Weaken to Strengthen: Weakening-Induced On-Policy Self-Distillation for Large Reasoning Models",
-    "title_zh": null,
+    "title_zh": "弱化诱导的同策略自蒸馏：提升大型推理模型",
     "abstract": "Self-distillation offers a way to improve reasoning models when a suitable external teacher is unavailable. However, common approaches rely on privileged information to construct a stronger self-teacher, limiting their use when only unlabeled prompts are available. In this paper, we introduce Weakening-Induced On-Policy Self-Distillation (WISD), which instead constructs a weaker counterpart of the original model and uses the contrast between the two as a training signal without requiring privileged information. We explore two ways to construct the weaker model: low-bit quantization and magnitude pruning. We evaluate WISD across diverse architectures and scales on mathematical and coding reasoning tasks. Across these benchmarks, quantization and pruning improve average accuracy over the original models by 4.0 and 5.5 percentage points, respectively, achieving state-of-the-art performance even without privileged information. Notably, pruning raises Qwen3.5-4B's accuracy from 57.7% to 70.5% on HMMT 2025 and from 39.1% to 56.7% on LiveCodeBench v6. Quantization raises Qwen3.6-35B-A3B's accuracy from 68.5% to 74.6% and from 61.8% to 69.5% on the same benchmarks, respectively. These results establish WISD as a novel and effective self-distillation framework for large reasoning models.",
-    "summary_zh": null,
+    "summary_zh": [
+      "无外部教师时，传统自蒸馏依赖特权信息构建强教师，限制了仅含无标签提示时的应用。",
+      "提出弱化诱导同策略自蒸馏WISD，通过低比特量化或幅值剪枝构建弱模型，以两者差异作为训练信号。",
+      "WISD无需特权信息，在数学与编程推理任务上平均准确率最高提升5.5个百分点，达到SOTA水平。"
+    ],
     "authors": [
       "Yecheng Wu",
       "Song Han",
@@ -6336,14 +6358,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "自蒸馏",
+      "大型推理模型",
+      "模型弱化"
+    ]
   },
   {
     "id": "2610.38672",
     "title": "Differentiable Schwarz-Coupled Solvers for Thin Boundary Layer Transport: Inverse Modeling via Agentic AI Optimization",
-    "title_zh": null,
+    "title_zh": "基于可微Schwarz耦合求解器与Agentic AI的薄边界层逆建模",
     "abstract": "High-Péclet-number transport problems give rise to thin boundary layers with steep near-wall gradients whose accurate solution requires high-resolution meshes and could challenge inverse modeling. To address this challenge, we develop an overlapping Schwarz domain-decomposition framework grounded in perturbation theory, in which an inner equation governs near-wall dynamics and an outer equation governs bulk transport, and both subproblems are discretized using the finite element method and assembled into a fully differentiable multidomain physics solver. The formulation permits coarser mesh resolutions, reducing computational cost relative to a single-domain formulation. Exploiting the differentiability of the coupled solver, we formulate inverse problems in which the governing equations and boundary conditions are imposed as hard constraints, with the Schwarz coupling enforcing interface continuity. To accelerate the resulting adjoint-based optimization, we integrate large language models (LLMs) into the inverse workflow in two distinct configurations: a standalone optimizer that proposes successive parameter updates from the adjoint-computed sensitivities and an agentic artificial intelligence (AI) approach with access to the complete solver workflow, enabling it to perform multistage optimization procedures. The agentic AI configuration is shown to be most advantageous when the spatially varying unknown is represented in a functional basis rather than a high-dimensional nodal field representation. In this case, the AI agent grows the library of candidate basis functions during optimization under a prescribed admission policy, admitting predefined families in stages and initializing their parameters. In short, our proposed framework integrates Schwarz-coupled differentiable physics with agentic AI optimization for the inverse modeling of multiscale transport problems.",
-    "summary_zh": null,
+    "summary_zh": [
+      "高Péclet数输运产生薄边界层，其高分辨率网格需求导致逆建模困难。",
+      "提出基于扰动理论的Schwarz区域分解框架，构建内外子域耦合的完全可微求解器，允许粗网格以降低计算成本。",
+      "将LLM集成于伴随优化流程，其中Agentic AI能多阶段优化并动态扩充基函数库，显著提升逆建模效率。"
+    ],
     "authors": [
       "Siva Viknesh",
       "Amirhossein Arzani"
@@ -6364,14 +6395,24 @@
     "matched": [
       "AI agent"
     ],
-    "score": 3
+    "score": 3,
+    "tags": [
+      "薄边界层",
+      "区域分解",
+      "Agentic AI",
+      "逆建模"
+    ]
   },
   {
     "id": "2610.38634",
     "title": "\"Close enough?\" An investigation into multiplication errors in LLMs",
-    "title_zh": null,
+    "title_zh": "LLM乘法错误机制探究：“足够接近”吗？",
     "abstract": "Large language models (LLMs) frequently fail at multi-digit arithmetic, but the underlying mechanisms governing these failures remain poorly understood. While recent work demonstrates that addition errors follow a \"noisy quantisation\" model localised around carry boundaries, whether this framework generalises to multiplication remains an open question. In this work, we evaluate multiplication capabilities across several small base LLMs on a dataset of 16,991 problems spanning varied operand lengths. We show that multiplication errors do not conform to the addition-style noisy quantisation model. Instead, we uncover a novel error regime in small Qwen models: errors in lower-order columns predominantly preserve parity. Conversely, higher-order digit errors shift toward off-by-one carry failures. Our findings suggest that arithmetic computation in LLMs relies on distinct, multi-periodic internal representations where parity is tracked more robustly than exact digit identity, providing new mechanistic insights into numerical reasoning in transformers.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM多位数算术常出错，加法错误符合进位边界噪声量化模型，但该框架是否适用于乘法未知。",
+      "在16991个乘法问题上评估多个小型LLM，发现乘法错误不符合加法式噪声量化模型。",
+      "小模型低位错误多保持奇偶性，高位错误多为进位偏差；表明LLM算术依赖多周期内部表征。"
+    ],
     "authors": [
       "William Bolton",
       "Bezawit Tilaye",
@@ -6392,14 +6433,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "大语言模型",
+      "算术错误",
+      "数值推理",
+      "机制解释"
+    ]
   },
   {
     "id": "2610.38620",
     "title": "Think Before You Act: Decision Gate for LLM Agents",
-    "title_zh": null,
+    "title_zh": "三思而后行：LLM Agent的决策门控机制",
     "abstract": "LLM agents increasingly perform consequential actions through external tools, yet their proposed actions are often executed without independent verification of policy compliance or task completion. We introduce JevAct, a runtime verification framework that intercepts selected agent actions before execution and enables feedback-driven correction. JevAct compiles domain policies into executable state checks and structured questions evaluated by a prefill-only decision model, which produces probability-based judgments without relying on LLM generation. By combining deterministic verification of tool-state facts with probabilistic assessment of conversational context, the framework identifies potentially invalid actions and premature task termination, providing targeted feedback for bounded revision. JevAct operates independently of the underlying agent model and requires no modifications to its parameters or tools. We evaluate JevAct across eleven LLM agents on $τ^2$-bench Airline and Telecom tasks and BFCL. Results show improvements in agent reliability across multiple models and benchmarks, with particularly consistent gains on Telecom and BFCL, while performance on Airline is more mixed. Overall, these findings suggest that combining structured decision models with executable verification can improve the reliability of tool-using LLM agents.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM Agent执行外部工具时缺乏对策略合规与任务完成的独立验证，易产生无效操作。",
+      "提出JevAct运行时验证框架，拦截动作并利用预填充决策模型结合确定性状态检查与概率性上下文评估进行纠正。",
+      "实验表明该框架无需修改Agent参数即可提升多模型可靠性，在Telecom和BFCL上增益显著。"
+    ],
     "authors": [
       "Iftach Shoham",
       "Yuval David",
@@ -6425,14 +6476,23 @@
     "matched": [
       "LLM agent"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "LLM Agent",
+      "运行时验证",
+      "决策门控"
+    ]
   },
   {
     "id": "2610.38617",
     "title": "How Deterministic SAST and AI Security Agents Divide the Work: Coverage, Harness Policy and Cost in Snyk VulnBench 2.0",
-    "title_zh": null,
+    "title_zh": "确定性SAST与AI安全Agent的分工：覆盖、策略与成本",
     "abstract": "We ask what AI coding agents and AI security harnesses find that deterministic static application security testing (SAST) does not, and what they miss that SAST catches. VulnBench 2.0 is a benchmark of 108 hand-curated, attacker-reachable vulnerabilities in 20 open-source web applications in Go, JavaScript/TypeScript, Python and Java; 62 flow across more than one file. A finding is credited only if it locates the vulnerability's attacker-controlled source and its dangerous sink, each within two lines. We evaluate nine productized configurations under one blind protocol: the Snyk Code static analyzer, Claude Code's /security-review with three model and effort settings (one with the Snyk MCP server), Codex Security with GPT-5.6 Luna, Terra and Sol, and the DeepSec scanner with two model backends. Snyk Code reached 82.4% macro recall (89 of 108) and Claude Code with Opus 5 at xhigh effort 79.3% (85 of 108); they disagree on 28 vulnerabilities, split 16 to 12, too few to tell them apart. Neither engine was sufficient alone: together they reached 101 of 108, the ceiling of all seven comparable configurations combined, and the AI configurations also reported at least seven real vulnerabilities that the reference set did not contain and Snyk Code did not report. What an AI engine misses depends on its harness as much as on its model: without Claude Code's built-in review policy, the same model matched 16 instead of 9 of the 20 vulnerabilities in the classes that policy excludes or restricts (supplementary run on 19 of 20 applications); Codex Security with GPT-5.6 Sol located 80 vulnerabilities at file level but 34 at line level; DeepSec's model-free file selection kept a file from only 56 of the 108 flows. Coverage and cost were only loosely related. The harness, fixtures, reference sets and all run data are public.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有SAST与AI安全引擎在漏洞检测上各有遗漏，需明确二者能力边界与互补性。",
+      "基于VulnBench 2.0基准对Snyk Code及多种AI安全配置进行盲测，严格评估其定位漏洞源与汇的准确率。",
+      "SAST与AI互补性极强，二者结合可达最高覆盖率；AI检测效果高度依赖其harness策略而非仅靠模型，且覆盖率与成本松散相关。"
+    ],
     "authors": [
       "Liran Tal",
       "Chris Liu",
@@ -6457,14 +6517,24 @@
     "matched": [
       "coding agent"
     ],
-    "score": 4
+    "score": 4,
+    "tags": [
+      "静态应用安全测试",
+      "AI安全Agent",
+      "漏洞检测",
+      "基准评测"
+    ]
   },
   {
     "id": "2610.38610",
     "title": "Repairs for Whom? Evaluator-Executor Mismatch in Selecting Repairs for Failed LLM Agents",
-    "title_zh": null,
+    "title_zh": "LLM智能体修复选择中的评估-执行失配问题",
     "abstract": "When an LLM agent fails, repair methods choose which action to replace and what to put in its place. They often score candidate repairs with greedy replay, a stronger model, an environment oracle, or a judge that reads the failed log. We ask whether these evaluators pick repairs that help the agent that will actually execute them. Holding failed trajectories and candidate single-step repairs fixed, we label every candidate with independent rollouts of the deployed policy and measure how much deployment value each evaluator's choice loses. On failures not screened for repair value, pre-specified tests show that greedy replay loses 0.08-0.13 in expected net success gain in ALFWorld and 0.06-0.13 in net reward in WebShop, relative to selection with the deployed agent's own rollouts. At an equal rollout budget, selecting repairs for Qwen2.5-7B with Qwen2.5-14B rollouts loses 0.25 in ALFWorld and 0.07 in WebShop, twenty 14B rollouts per candidate are worth no more than two of the 7B agent's own, and fresh rollouts confirm that the two models prefer opposite repairs on selected disagreement cases. Between similar-sized models from different families, the losses appear in both directions in both environments (0.07-0.17). The scoring executor also changes repair-location labels and method rankings. Repairs should be verified with the executor that will run them, and repair labels should name their executor.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM智能体失败时，现有修复方法常借助外部评估器（如强模型或环境神谕）选择修复动作，但未考虑评估器与实际执行智能体的偏好差异。",
+      "本文固定失败轨迹与候选修复，以部署智能体的独立推演衡量真实收益，量化评估器选择造成的部署价值损失。",
+      "实验表明评估器与执行者失配会导致显著收益损失甚至偏好相反；修复应使用实际执行智能体验证，并标注其执行者。"
+    ],
     "authors": [
       "Yijun Liao",
       "Fanwei Liang"
@@ -6485,14 +6555,23 @@
     "matched": [
       "LLM agent"
     ],
-    "score": 14
+    "score": 14,
+    "tags": [
+      "LLM智能体",
+      "自动修复",
+      "评估失配"
+    ]
   },
   {
     "id": "2610.38579",
     "title": "Session-Bound Behavioral Watermarking for Autonomous LLM Agents",
-    "title_zh": null,
+    "title_zh": "面向自主LLM代理的会话绑定行为水印",
     "abstract": "Large Language Model (LLM) agents are increasingly acting through Web interfaces and external tools. They produce trajectories. Those trajectories may pass through several intermediaries. They can store, modify, or dispute those trajectories. In Web-based agent deployments, trajectories may pass through APIs, marketplaces, and tool servers. As such, a copied or disputed log may not by itself reveal which agent owner produced it. Behavioral watermarking can embed ownership evidence in agent action choices. However, existing methods mainly address detection, removal, rewriting, or imitation. They do not directly test whether repeated observation of watermarked trajectories enables cross-session forgery by exploiting learned action preferences. We formulate this learned-forgery threat and propose AgentAnchor, a session-keyed behavioral watermark for owner attribution from trajectory logs. We derive each step key from a secret key, a fresh public session identifier, and semantic states of recent observations, while a guarded digest of the action-policy state diversifies linear coding rows. It embeds parity evidence through a KL-bounded exponential tilt, and a trusted verifier checks a disputed log without rerunning the agent, using wrong-key calibration and abstention.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM代理轨迹易被中间节点篡改或伪造，现有水印未防范跨会话学习偏好引发的伪造威胁。",
+      "提出AgentAnchor，利用密钥、会话标识与语义状态生成步密钥，通过KL有界指数倾斜嵌入奇偶校验证据。",
+      "该水印支持可信验证者在无需重跑代理下校验争议日志归属，有效抵御跨会话伪造并实现所有者归因。"
+    ],
     "authors": [
       "Md Facklasur Rahaman",
       "Yong Xiang",
@@ -6516,14 +6595,24 @@
     "matched": [
       "LLM agent"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "行为水印",
+      "LLM代理",
+      "所有者归因",
+      "跨会话伪造"
+    ]
   },
   {
     "id": "2610.38573",
     "title": "CALM: Conflict-Aware Lifecycle Memory Governance for Long-Horizon Language Agents",
-    "title_zh": null,
+    "title_zh": "面向长周期语言智能体的冲突感知生命周期记忆治理框架",
     "abstract": "A memory can be outdated for present-day reasoning yet indispensable for reconstructing the past. Relevance-based retrieval overlooks this tension: semantic relevance, evidence-grounded validity, and query-specific eligibility are distinct. We propose CALM, a conflict-aware lifecycle memory governance framework that decouples persistent memory preservation from query-time admission. CALM converts heterogeneous records into evidence-grounded memory cells, updates validity and lifecycle states using support, conflict, and dependency signals, and admits query-appropriate evidence through training-free or learned gating informed by temporal applicability. Across LongMemEval-S and LoCoMo with Qwen and GPT backbones, CALM outperforms state-of-the-art baselines, achieving the best overall accuracy. Compared with simple filtering and reranking, query-conditioned admission further improves evidence selection. Conflict-blocking and robustness analyses show CALM suppresses erroneous retrieved memories while retaining useful evidence. Historical-reconstruction experiments demonstrate that preserving superseded records supports accurate earlier-state reasoning without compromising current-state answers.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有基于相关性的记忆检索忽略了语义相关性、有效性与适用性间的冲突，易召回过时记忆。",
+      "提出CALM框架，将记忆持久化与查询准入解耦，利用支持、冲突和依赖信号更新记忆状态，并通过门控机制筛选适用证据。",
+      "实验表明CALM总体准确率最优，能有效抑制错误记忆并保留有用证据，且保留过时记录可支持历史状态推理。"
+    ],
     "authors": [
       "Chang Li",
       "Xianhao Ou",
@@ -6551,14 +6640,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "语言智能体",
+      "记忆治理",
+      "冲突感知"
+    ]
   },
   {
     "id": "2610.38570",
     "title": "Do Audio LLMs HEAR Pain? Tracing Acoustic Evidence from Speech to Language Reasoning",
-    "title_zh": null,
+    "title_zh": "音频大语言模型能否感知疼痛？从语音到推理的声学证据追踪",
     "abstract": "Large audio language models (LALMs) can process speech directly, but it remains unclear how well they use the non-lexical acoustic information that speech carries. We study this question through pain, using TAME-Pain, which contains pain-neutral Harvard sentences and spoken pain ratings recorded at different self-reported pain levels. We introduce HEAR, a four-stage diagnostic framework that traces pain-related information from the speech signal to the model's prediction, and apply it to seven closed-source and open-weight LALMs. On the Harvard sentences, where pain can only be inferred from the voice, all models perform at chance level, and same-speaker references or few-shot examples improve balanced accuracy by no more than six points. On the spoken ratings, the same models reach 87.5-99.7% balanced accuracy. Layer-wise probing of open-weight LALMs shows that pain can be decoded from early audio representations (74.1% balanced accuracy for binary prediction and 45.0% for three-class severity), but that this information, along with most pain-associated acoustic cues, decreases in deeper layers. In an acoustic perception test, weaker models cannot distinguish even large changes in these cues, whereas stronger models can but still fail to infer pain. Finally, we recover pain-related acoustic cues and directly reinject them as structured text into the prompt, which improves pairwise pain prediction by up to 32 points. These results indicate that current LALMs encode paralinguistic information in early layers that is largely unavailable when the model produces its answer.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LALM能否利用语音中的非词汇声学信息推断疼痛尚不明确，本文通过疼痛推断任务评估其能力。",
+      "提出HEAR诊断框架追踪声学信息流向，发现模型仅靠语音推断疼痛表现极差，但早期层编码了该信息且在深层衰减。",
+      "将疼痛声学线索以结构化文本重新注入提示，可大幅提升预测准确率，揭示当前LALM深层未有效利用副语言信息。"
+    ],
     "authors": [
       "Wenqi Li",
       "Xiangjue Dong",
@@ -6581,14 +6679,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "音频大语言模型",
+      "副语言信息",
+      "疼痛推断",
+      "模型可解释性"
+    ]
   },
   {
     "id": "2610.38544",
     "title": "An Alignment Benchmark for Enterprise Agents on Era by Eon",
-    "title_zh": null,
+    "title_zh": "企业Agent对齐基准：基于Era的数字孪生测试",
     "abstract": "AI agents are widely used in enterprises to access business systems and act on them in pursuit of a goal. However, fulfilling a user's request can cause harm. Era by Eon is a product that creates a digital twin of a company by simulating its business systems and data. Its simulators implement the programming interfaces of real products. Our benchmark uses ten of these systems, including Salesforce, Zendesk, Jira and Slack. We tested whether agents would carry out harmful business requests or trust misleading information in company records. We ran 19 models on 41 tasks three times, for 2,337 runs. Of the 2,304 runs that produced an answer, 918 (40%) contained a violation. The most common were false claims about actions or records (290 runs), following planted instructions (266) and disclosing sensitive data to the wrong audience (249). Every attempted change was recorded and blocked before it took effect. Misleading Slack messages caused 16 models to report an incorrect ticket status in 47 of 57 runs. No model was free of violations. The four best models violated in 22 to 24% of their runs. Yet one of them, Nova Pro, did the task correctly in only 30 runs.",
-    "summary_zh": null,
+    "summary_zh": [
+      "企业Agent执行请求易引发违规风险，需评估其对齐安全性。",
+      "基于Era构建数字孪生基准，模拟10种真实业务系统测试Agent对有害请求和误导信息的响应。",
+      "2337次测试中40%出现违规，无模型幸免；主要违规为虚假声明、盲从植入指令和敏感数据泄露。"
+    ],
     "authors": [
       "Hai Sadon",
       "Benjamin Gruenbaum",
@@ -6614,14 +6722,23 @@
     "matched": [
       "AI agent"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "企业Agent",
+      "对齐基准",
+      "数字孪生"
+    ]
   },
   {
     "id": "2610.38521",
     "title": "Security Impact of Coding Agent's Memory Files",
-    "title_zh": null,
+    "title_zh": "编程代理记忆文件的安全影响",
     "abstract": "Coding agents automatically load project memory files such as CLAUDE.md at the start of every session and treat them as trusted project guidance. Anyone who can change such a file, for example through a pull request, can therefore steer the agent without ever touching the developer's prompt. We study memory files as an attack surface for insecure code generation and ask (1) whether a malicious memory file makes agents produce code that passes its tests but is vulnerable, and (2) whether agents disclose to the developer that the file shaped their code. For each of 12 CWE classes, we crafted two malicious memory files, a qualified variant that presents removing defensive checks as engineering best practice and a forceful variant that demands it. We ran Claude Code (Sonnet 5.5) and OpenCode (Qwen 3.8 27B, DeepSeek V4.1 Flash) on 36 SecRepoBench tasks with and without these files. The malicious files changed the rate of secure completions by -8 to +6 percentage points, with no consistent pattern across agents or variants. Agents differ sharply in what they tell the developer about the file. Claude Code names it in about two thirds of its final messages, whereas OpenCode mentions it almost exclusively in its reasoning trace, not in the final message the developer reads. Flagging the file as an attack does not reliably protect the code, as such agents still generated vulnerable code. We outline the larger studies needed to quantify this risk across agents and to design defenses.",
-    "summary_zh": null,
+    "summary_zh": [
+      "编程代理自动加载记忆文件作为可信指引，攻击者可通过PR篡改该文件，从而在不接触开发者提示词的情况下操纵代理。",
+      "针对12类CWE构造恶意记忆文件进行测试，发现其会使安全代码生成率波动-8%至+6%，且不同代理和变体间无一致规律。",
+      "代理对记忆文件的披露差异极大，且将其标记为攻击也无法可靠防护，仍会生成漏洞代码，亟需设计防御机制。"
+    ],
     "authors": [
       "Thiago Santos de Moura",
       "Selma Güler",
@@ -6644,14 +6761,24 @@
       "reasoning",
       "coding agent"
     ],
-    "score": 16
+    "score": 16,
+    "tags": [
+      "编程代理",
+      "记忆文件",
+      "安全漏洞",
+      "代码生成"
+    ]
   },
   {
     "id": "2610.38505",
     "title": "Gluon gravitational form factors of the proton from near-threshold charmonium photoproduction",
-    "title_zh": null,
+    "title_zh": "近阈值粲偶素光生过程中的质子胶子引力形状因子",
     "abstract": "Motivated by near-threshold $J/ψ$ photoproduction measurements, we investigate the gluon contributions to the gravitational form factors (GFFs) of the proton associated with the energy-momentum tensor in quantum chromodynamics. We calculate the gluon GFFs and the corresponding mechanical properties of the proton within a light-front spectator model, in which the proton is described as an active gluon accompanied by a spectator particle. The model parameters are determined from a global fit to the differential cross section for $J/ψ$ photoproduction. The resulting gluon GFFs are in reasonable agreement with recent lattice QCD determinations. We further calculate the total cross section and find reasonable agreement with the available experimental data. Using the extracted gluon GFFs, we investigate the two-dimensional light-front gluon distributions inside the proton, such as the mass, angular momentum, pressure, and shear force distributions. We also study the gluonic contributions to the two-dimensional Galilean energy density, radial and tangential pressures, isotropic pressure, and pressure anisotropy.",
-    "summary_zh": null,
+    "summary_zh": [
+      "为探究质子胶子引力形状因子，基于近阈值J/ψ光生实验测量，在光前旁观者模型中计算了胶子GFFs及力学性质。",
+      "通过全局拟合J/ψ光生微分截面确定模型参数，所得胶子GFFs与格点QCD结果吻合，且总截面与实验数据一致。",
+      "利用提取的GFFs，研究了质子内二维光前胶子分布（质量、角动量、压力与剪切力）及胶子对各项压力和能量密度的贡献。"
+    ],
     "authors": [
       "Chentao Tan",
       "Zhun Lu"
@@ -6669,14 +6796,24 @@
     "comment": "21 pages, 10 figures",
     "journal_ref": "",
     "matched": [],
-    "score": 1
+    "score": 1,
+    "tags": [
+      "引力形状因子",
+      "胶子分布",
+      "光前模型",
+      "粲偶素光生"
+    ]
   },
   {
     "id": "2610.38497",
     "title": "Vision-Based Density Estimation for Adaptive Traffic Control",
-    "title_zh": null,
+    "title_zh": "基于视觉的密度估计用于自适应交通控制",
     "abstract": "Traffic congestion is becoming a critical challenge in rapidly growing urban centers, particularly in developing nations where rapid urbanization and inadequate transport infrastructure place increasing strain on transport networks. In highly heterogeneous and chaotic traffic flows, camera-based traffic-state estimation is limited by severe vehicle occlusion and overlap. In this paper, we propose a framework to optimize traffic flow directly from stochastic visual observations. The architecture is structurally decoupled into three primary components: (a) vehicle density estimation, (b) predictive dynamics modeling, and (c) policy optimization. The proposed methodology introduces a convolutional neural network (CNN) that learns the mapping from camera feeds to spatial density maps, utilizing an adaptive k-nearest-neighbor (k-NN) Gaussian kernel to handle varying congestion levels. This feeds into an ST3DNet predictive module for spatiotemporal forecasting, followed by a hierarchical Graph-Transformer Multi-Agent Reinforcement Learning (MARL) algorithm to optimize signal phases. The density estimation stage was evaluated on 40 annotated intersection images from Rambagh 4, Jaipur, India, with a reported five-fold validation mean absolute error (MAE) of $3.32 \\pm 0.95$ vehicles and a mean absolute percentage error (MAPE) of 14.5%. These results pertain to the perception component; empirical training and evaluation of the forecasting and control stages remain future work.",
-    "summary_zh": null,
+    "summary_zh": [
+      "异构混乱车流中视觉估计受遮挡限制，提出从随机视觉观测优化交通流的解耦框架。",
+      "框架含三模块：CNN结合自适应k-NN高斯核估计密度，ST3DNet预测时空动态，MARL优化信号。",
+      "在印度路口图像评估密度估计，五折验证MAE为3.32±0.95辆，MAPE为14.5%，预测与控制待未来验证。"
+    ],
     "authors": [
       "Mohammad Usaid",
       "Deepak Silaych",
@@ -6698,14 +6835,23 @@
     "matched": [
       "multi-agent"
     ],
-    "score": 6
+    "score": 6,
+    "tags": [
+      "交通密度估计",
+      "多智能体强化学习",
+      "计算机视觉"
+    ]
   },
   {
     "id": "2610.38478",
     "title": "Lyubeznik numbers of the face rings of simplicial posets",
-    "title_zh": null,
+    "title_zh": "单纯偏序面环的 Lyubeznik 数",
     "abstract": "For a simplicial poset $P$, Stanley assigned the face ring $A_P$, which is the quotient of the polynomial ring $S:=K[t_x \\mid x \\in P \\setminus \\{\\widehat{0} \\}]$ by the ideal $I_P$. This is a generalization of Stanley-Reisner rings, but the grading of $S$ is more involved. Building on our previous paper, we further develop and complete the study of the local cohomology modules $H_{I_P}^i(S)$. In our categorical framework, $\\mathrm{Ext}_S(A_P, S)$ ``encodes\" all the information of $H_{I_P}^i(S)$. We treat $H_{I_P}^i(S)$ in a reasonably explicit way. In particular, Lyubeznik numbers $λ_{i,j}(A_P)$ can be simply expressed in terms of $[\\mathrm{Ext}_S^*(\\mathrm{Ext}_S^*(A_P,S), S)]_\\bf{0}$, and depend only on the homeomorphism class of the underlying space of the CW complex associated with $P$ and $\\mathrm{char}(K)$.",
-    "summary_zh": null,
+    "summary_zh": [
+      "单纯偏序的面环推广了 Stanley-Reisner 环，但其分度更复杂，局部上同调模的计算困难。",
+      "在范畴框架下，利用 Ext_S(A_P, S) 编码局部上同调模 H_{I_P}^i(S) 的全部信息，对其进行显式处理。",
+      "Lyubeznik 数可由 Ext 双对角简单表示，且仅依赖于关联 CW 复形的底空间同胚类与域特征。"
+    ],
     "authors": [
       "Kosuke Shibata",
       "Kohji Yanagawa"
@@ -6723,14 +6869,23 @@
     "comment": "27 pages, comments are welcome",
     "journal_ref": "",
     "matched": [],
-    "score": 1
+    "score": 1,
+    "tags": [
+      "单纯偏序集",
+      "面环",
+      "Lyubeznik 数"
+    ]
   },
   {
     "id": "2610.38458",
     "title": "Tracekit Box: Running AI Agents in Micro-VMs Where Every Way Out Is Decided and Signed",
-    "title_zh": null,
+    "title_zh": "Tracekit Box：在微型虚拟机中运行AI代理并签名所有出口",
     "abstract": "AI agents now install packages, call model APIs with their operators' keys and change code in repositories that deploy to production. The network, credentials and write access they need are also how they can leak data, steal a key or change a system nobody approved. Sandboxes contain an agent but leave little evidence of what crossed their boundary; tracing records what happened but contains nothing. We present Tracekit Box, an open-source system (MIT, v0) that does both. Each job runs in its own Firecracker micro-VM with no network card. The only ways out are doors on the host, served over vsock: commands, outbound connections, secrets, model calls and the workspace patch. At every door a Tracekit signer the agent cannot reach decides what passes and signs it into one run per box. Names are resolved on the host; private and cloud-metadata addresses are always refused; secrets never enter the VM, which sees placeholders the host proxy swaps for real values only in one header for bound hosts; and changes come back as a patch applied file by file after the signer decides each file. Box fails closed, and each job ends as a .tkb bundle anyone can verify offline. All 13 end-to-end checks pass on a real KVM runner (the test that runs them takes 28.5 s, including image pull and boot); 15 fuzz targets on the trust boundary produced nine findings, all fixed; and the demo run's 102 signed records verify. Box does not yet run Firecracker's jailer, needs a co-located signer, and records processes inside the VM only where they cross a door.",
-    "summary_zh": null,
+    "summary_zh": [
+      "AI代理的权限易导致数据泄露或未授权篡改，而沙箱与追踪各自存在边界证据缺失或无强制力的问题。",
+      "提出Tracekit Box系统，将任务隔离在无网卡的Firecracker微虚拟机中，仅通过vsock出口与宿主机交互。",
+      "宿主机上的签名器决定并签名所有出口流量，实现凭证不进虚拟机等安全控制，最终生成可离线验证的运行包。"
+    ],
     "authors": [
       "Bravish Ghosh"
     ],
@@ -6752,14 +6907,23 @@
     "matched": [
       "AI agent"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "AI代理安全",
+      "微型虚拟机",
+      "访问控制"
+    ]
   },
   {
     "id": "2610.38450",
     "title": "CoSTA: Co-Evolving Self-Play Timeline Agents for Complex Temporal Knowledge Graph Question Answering",
-    "title_zh": null,
+    "title_zh": "用于复杂时序知识图谱问答的协同进化自博弈时间线智能体",
     "abstract": "Complex Temporal Knowledge Graph Question Answering (TKGQA) involves more than retrieving facts: the timestamp or validity interval of one fact can constrain the search for another, while multiple intervals may jointly determine the answer. Existing single-agent TKGQA methods typically investigate these facts within a single reasoning context, where evidence from different event histories can become interleaved and distractors can misdirect subsequent retrieval. Distributing investigations across agents can separate event-specific evidence into distinct contexts, but effective collaboration must still be learned because question decomposition, subtask investigation, and evidence synthesis are interdependent. To address these limitations, we propose \\textbf{Co}-Evolving \\textbf{S}elf-Play \\textbf{T}imeline \\textbf{A}gents (CoSTA), which organizes facts into navigable timelines, delegates investigations to workers, and uses a coordinator to synthesize their original timestamped observations. CoSTA initializes a shared policy through role-conditioned distillation and jointly optimizes both roles through co-evolving self-play with final-answer rewards. Across three benchmarks, CoSTA achieves state-of-the-art overall performance, with particularly strong gains on complex multi-fact questions, while its compact variants outperform the evaluated closed-source LLM agents.",
-    "summary_zh": null,
+    "summary_zh": [
+      "复杂时序知识图谱问答中，单智能体易受无关事实干扰，而多智能体需学习子任务分解与证据合成的有效协作。",
+      "提出CoSTA框架，将事实组织为时间线并分配给工作智能体，由协调者合成带时间戳的观测结果。",
+      "通过角色蒸馏初始化共享策略并利用自博弈联合优化，模型在三个基准上达到SOTA，紧凑变体优于闭源LLM智能体。"
+    ],
     "authors": [
       "Haikun Liu",
       "Zhichao Yan",
@@ -6785,14 +6949,23 @@
       "LLM agent",
       "reasoning"
     ],
-    "score": 13
+    "score": 13,
+    "tags": [
+      "时序知识图谱",
+      "多智能体协作",
+      "问答系统"
+    ]
   },
   {
     "id": "2610.38448",
     "title": "Benchmarking decision models against generative large language models on medical multiple-choice questions",
-    "title_zh": null,
+    "title_zh": "医疗多选题中决策模型与生成式大模型的对比基准测试",
     "abstract": "Medical workflows often require selecting among predefined options. We compared 13 decision models with 15 generative large language model configurations, including different reasoning settings, using 1,273 four-option MedQA questions under text-only conditions. Accuracy ranged from 67.71% to 89.08% for decision models and from 78.32% to 96.86% for generative configurations. Among the tested configurations, Mercury Decide had the lowest mean final-attempt cost (USD 0.0069 per 1,000 questions), while Clef Omni had the shortest median request duration (0.291 seconds). Decision-model probabilities distinguished correct from incorrect answers, but error rates among answers assigned probabilities of at least 0.90 ranged from 1.71% to 12.77%. Answer agreement across three runs ranged from 92.30% to 100%, while probability repeatability varied. Decision models offered resource advantages alongside lower peak accuracy; selecting models for medical workflows requires considering probability quality and repeatability together with accuracy and the resources needed to detect and correct errors.",
-    "summary_zh": null,
+    "summary_zh": [
+      "【问题】医疗流程常需在预定义选项中选择，需评估不同模型表现。【方法】在1273道MedQA四选项文本题上，对比13种决策模型与15种生成式LLM配置。【结论】生成式LLM准确率（78.32%-96.86%）上限更高，决策模型（67.71%-89.08%）具资源优势。",
+      "【问题】决策模型输出的概率能否可靠区分对错？【方法】分析决策模型分配给答案的概率及多次运行的一致性。【结论】高概率（≥0.90）答案的错误率仍达1.71%-12.77%，三次运行答案一致性高但概率重复性存在差异。",
+      "【问题】如何为医疗工作流选择合适的模型？【方法】综合对比模型的准确率、概率质量、重复性及资源消耗。【结论】决策模型具资源优势但准确率上限低，选择模型需综合权衡概率质量与重复性，以及纠错所需资源。"
+    ],
     "authors": [
       "Oscar Freyer",
       "Daniel Glauert",
@@ -6817,14 +6990,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 9
+    "score": 9,
+    "tags": [
+      "医疗问答",
+      "决策模型",
+      "大语言模型",
+      "基准测试"
+    ]
   },
   {
     "id": "2610.38433",
     "title": "Does Chain-of-Thought Reliance Follow a Scaling Law?Larger Models Follow Their Steps More, Independent of Post-Training",
-    "title_zh": null,
+    "title_zh": "思维链依赖遵循缩放定律：模型越大越依赖步骤，与后训练无关",
     "abstract": "Monitoring a model's chain of thought (CoT) is useful for safety only if the final answer depends on the written steps. Prior measurements use natural tasks where true reasoning is unknown. We measure it against an exact ground truth on a synthetic box-swap task where every intermediate state is known. We replace one step inside a model's own chain with a wrong but valid state and check whether the answer follows the edit. We evaluate 25 open-weight models--Qwen3 (0.6B-14B, base and post-trained), Gemma 3 (1B-12B), Llama 3 (1B-8B), and 8 OLMo 2 checkpoints--on 7,200 items each. We find five results: (1) Reliance rises with size and saturates. In Qwen3, answer reliance rises from 16-18% at 0.6B to 97-100% at 14B; a logistic in log N fits well (R^2 = 0.89), and Gemma 3 and Llama 3 follow this trend. (2) Capability is the main driver. Across all models, reliance and step accuracy correlate at r = 0.99; equally capable models are equally reliant, regardless of family. (3) Size still matters at matched correctness. On problems solved correctly before the edit, reliance increases with size among capable models (rho = 0.80, p = 0.002). (4) Post-training does not change reliance. Base and post-trained Qwen3 differ by at most 0.03 from 4B upward; a large gap at 1.7B matches a large capability gap. (5) No model up to 14B solves the task internally. Without written steps, every capable model is at chance once a problem has four or more swaps. OLMo 2 checkpoints never become capable, making the training-token axis a limitation. On tasks requiring step-by-step computation, scale makes the chain of thought more load-bearing, supporting CoT monitoring in this regime.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有CoT依赖测量缺乏真实推理基准，本文在合成任务中替换模型CoT的中间步骤为错误状态，评估最终答案是否受此编辑影响。",
+      "实验发现CoT依赖度随模型规模呈逻辑增长并饱和，且依赖度与步骤准确率高度相关，模型能力是驱动依赖度的主要因素。",
+      "后训练不改变依赖度，且无14B以下模型能内部解决4步以上计算，表明规模增大使CoT更承重，支持在此机制下进行CoT监控。"
+    ],
     "authors": [
       "Esther Xin"
     ],
@@ -6844,14 +7027,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "思维链",
+      "缩放定律",
+      "模型安全"
+    ]
   },
   {
     "id": "2610.38426",
     "title": "The Code Behind the Layout: AI Agents for Analog Layout Generators",
-    "title_zh": null,
+    "title_zh": "模拟布局生成器的AI代理：布局背后的代码",
     "abstract": "Analog layout remains largely manual and hard to automate. Generator frameworks such as gLayout express layouts as programs, producing layouts from parameterized, design-rule-aware generators; however, writing such generators still takes expert effort. Large language models (LLMs) could now write generator code, and frontier models can even draw layout geometry from design intent. This raises a practical question: if a model can draw the layout itself, what does a generator framework still contribute, and is applying these models to a generator framework better than having them draw a layout from scratch? Through controlled experiments on gLayout in SKY130, we find that the main obstacle to drawing a layout directly is its time and token cost, and that the main advantage of a model building on a generator framework is reusability. Its verified primitives keep each model edit small enough to check, and its parameters allow a single edit to be evaluated across an entire family of layouts. Accordingly, a model is most effective when it develops the layout from the generator source of the family that the design intent belongs to, and tests each edit on the family members most likely to fail, so that one verified change improves every layout the generator produces. The results of these family tests can then serve as supervision for a local model, which learns edits that hold across the family at a fraction of the inference cost.",
-    "summary_zh": null,
+    "summary_zh": [
+      "模拟布局自动化难，手写生成器代码耗时。探究LLM直接画布局与结合生成器框架哪种更优。",
+      "在SKY130上实验发现，直接画布局的障碍是时间和token成本，而结合生成器框架的核心优势是可复用性。",
+      "提出让模型基于生成器源码开发并做族测试，验证的修改可改善整族布局；测试结果可作局部模型监督，大幅降低推理成本。"
+    ],
     "authors": [
       "Minxing Chu",
       "Anhang Li",
@@ -6875,14 +7067,24 @@
     "matched": [
       "AI agent"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "模拟布局",
+      "AI代理",
+      "生成器框架",
+      "LLM"
+    ]
   },
   {
     "id": "2610.38418",
     "title": "Backward Pseudolocality of $G_2$-Laplacian Flow",
-    "title_zh": null,
+    "title_zh": "$G_2$-Laplacian流的向后伪局部性",
     "abstract": "In this paper, we establish a new estimate on the time-derivative of pointed Nash entropy and use it to give a new proof of backward pseudolocality for Ricci flow. The proof does not rely on Bamler's compactness theorem and structure theory concerning limits of Ricci flows. Our methods also work for other reasonable geometric flows, like the $G_2$-Laplacian, at a scale depending on its deviation from Ricci flow and its scalar curvature.",
-    "summary_zh": null,
+    "summary_zh": [
+      "【问题→方法→结论】为研究几何流的向后伪局部性，建立点化Nash熵的时间导数新估计，给出Ricci流向后伪局部性的新证明。",
+      "【问题→方法→结论】针对现有证明依赖Bamler紧致性定理及结构理论的问题，利用新估计绕过该依赖，简化了证明过程。",
+      "【问题→方法→结论】为推广向后伪局部性，将该方法应用于$G_2$-Laplacian流等几何流，证明其成立尺度取决于与Ricci流的偏差及标量曲率。"
+    ],
     "authors": [
       "Weiyong He",
       "Longhuan Yan"
@@ -6900,14 +7102,24 @@
     "comment": "",
     "journal_ref": "",
     "matched": [],
-    "score": 0
+    "score": 0,
+    "tags": [
+      "微分几何",
+      "Ricci流",
+      "$G_2$-Laplacian流",
+      "伪局部性"
+    ]
   },
   {
     "id": "2610.38411",
     "title": "Governance-Aware Federated Learning for Multi-Agent AI Systems: A Policy-Driven Framework for Trustworthy Collaborative AI",
-    "title_zh": null,
+    "title_zh": "面向多智能体系统的治理感知联邦学习框架",
     "abstract": "Federated Learning (FL) enables collaborative model training without exchanging raw data, but conventional FL provides limited runtime governance, evidence verification, fairness assessment, explainability monitoring, and auditability. This paper proposes Governance-Aware Federated Learning (GAFL), which combines independent governance-evidence verification, temporal trust, fairness and explanation assessment, anomaly detection, policy enforcement, normalized aggregation, and tamper-evident audit logging. Client-reported governance values are authenticated, bound to their submitted model updates, and independently recomputed before aggregation. A cross-silo prototype with 10 participants was evaluated on the Adult Income dataset under honest, benign non-IID, biased-data, malicious-update, non-compliant, falsified-evidence, and mixed-threat scenarios. Four methods were compared across five random seeds: FedAvg, FedAvg with anomaly filtering, GAFL without independent verification, and complete GAFL. Complete GAFL intervened on all affected participants at the final round across the evaluated risk scenarios, including identifying 100% of falsified-evidence participants, whereas GAFL without verification identified none of the falsified-evidence participants. Final macro-F1 ranged from 0.7520 to 0.7733 across GAFL scenarios. Complete GAFL required 173.67 plus or minus 26.94 ms of governance processing per round, compared with 3.82 plus or minus 0.79 ms for FedAvg. A strict demographic-parity threshold also caused frequent interventions for honest participants, demonstrating a significant fairness-policy and utility trade-off.",
-    "summary_zh": null,
+    "summary_zh": [
+      "传统联邦学习缺乏运行时治理与验证机制，难以应对伪造证据等威胁。",
+      "提出GAFL框架，将信任评估、异常检测与策略执行结合，并在聚合前独立重算验证治理值。",
+      "实验表明，完整GAFL能100%识别伪造证据参与者，但治理开销增加且存在公平性与效用的权衡。"
+    ],
     "authors": [
       "Kiranmayee Janardhan",
       "Karthick S",
@@ -6930,14 +7142,23 @@
     "matched": [
       "multi-agent"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "联邦学习",
+      "多智能体系统",
+      "AI治理"
+    ]
   },
   {
     "id": "2610.38408",
     "title": "Pseudolocality of $G_2$-Laplacian Flow",
-    "title_zh": null,
+    "title_zh": "G₂-Laplacian流的伪局部性",
     "abstract": "In this paper, we give a new proof of Perelman's pseudolocality theorem for Ricci flow, which does not rely on Perelman's Harnack-type inequality. The key step is an estimate relating initial local $μ$-entropy to pointed Nash entropy at later spacetime points. The argument also works for other reasonable geometric flows, like the $G_2$-Laplacian flow, at a scale depending on its deviation from Ricci flow and its scalar curvature lower bound. As a consequence, we can also prove the quantitative rigidity results concerning pointed Nash entropy due to Hein-Naber and Bamler for such geometric flows. In the appendix, we also show that the other results in Bamler's work (arXiv:2008.07093), when suitably modified, remain valid for Laplacian flow with bounded torsion. These include log-Sobolev/Poincaré inequality for conjugate heat kernel measure, heat kernel estimates, and dependence of the pointed Nash entropy on its basepoint.",
-    "summary_zh": null,
+    "summary_zh": [
+      "问题：Ricci流的伪局部性定理原证明依赖Harnack型不等式，需寻找新证法并推广至其他几何流。方法：建立初始局部μ熵与后续时空点的Nash熵间的估计。结论：给出不依赖Harnack不等式的新证明，且该论证适用于G₂-Laplacian流等几何流。",
+      "问题：需探讨G₂-Laplacian流等几何流下的Nash熵定量刚性。方法：利用上述伪局部性新证法中的熵估计关系。结论：证明了Hein-Naber与Bamler关于Nash熵的定量刚性结果对此类几何流同样成立。",
+      "问题：需验证Bamler关于Laplacian流的其他结论是否成立。方法：对Bamler的工作进行适当修改。结论：证明有界挠Laplacian流下，共轭热核的log-Sobolev/Poincaré不等式、热核估计及Nash熵对基点依赖性依然有效。"
+    ],
     "authors": [
       "Weiyong He",
       "Longhuan Yan"
@@ -6955,14 +7176,24 @@
     "comment": "",
     "journal_ref": "",
     "matched": [],
-    "score": 0
+    "score": 0,
+    "tags": [
+      "G₂-Laplacian流",
+      "伪局部性",
+      "Nash熵",
+      "Ricci流"
+    ]
   },
   {
     "id": "2610.38405",
     "title": "SpaceAct: Benchmarking 3D Spatial and Temporal Reasoning via Closed-Loop Action and Active Perception",
-    "title_zh": null,
+    "title_zh": "SpaceAct：基于闭环动作与主动感知的3D时空推理基准",
     "abstract": "To solve problems in 3D space rather than merely describe images, multimodal large language models (MLLMs) need 3D spatiotemporal reasoning: reconstructing 3D geometry from occluded 2D views, anticipating physical dynamics, and executing precise, closed-loop actions. Prior studies test passive VQA on static images or symbolic planning, requiring no execution or supplying privileged coordinates while ignoring collision, statics, and timing. We introduce SpaceAct, an interactive benchmark evaluating 3D spatiotemporal reasoning via closed-loop physical action and active perception, with SAPA, a Spatiotemporal Active-Probing Agent framework. Built on interlocking bricks and mechanical puzzles, it has 108 verified instances across 36 task families in six categories, without privileged coordinates, and diagnostic modes (+plan, +state, no-camera, blind, L7 levers). In brick-bridging or aperture-threading, models rotate the camera to resolve occlusion, read in-scene rulers, output 6-DoF poses under swept-collision and statics checks, and self-correct via split-screen rollback feedback (dynamic tasks freeze time during deliberation and give five strobe frames). Across 10 frontier MLLMs on the 44 hardest instances, scores span 4.8-79.1 (seven solve at most 27.3% of 6-DoF tasks); for the top three, a reference plan (+plan) closes 44% of the gap while leaving collisions at 5.2 per episode, whereas adding exact 3D state (+state) closes 90% and cuts collisions to 0.5; for four others, +plan lifts the mean score from 10.9 to 35.3 and +state to 81.8; and 46% of failures are collision or observation loops. SpaceAct and SAPA advance evaluation to closed-loop physical interaction, showing that even with a valid plan, MLLMs remain bottlenecked by 3D visual grounding and action refinement, while offering a testbed for active multi-view exploration and explicit 3D grounding.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有MLLM评估多为被动VQA或符号规划，忽略碰撞与执行，无法测试3D时空推理与闭环交互。",
+      "提出SpaceAct基准与SAPA智能体框架，要求模型主动旋转相机破除遮挡，输出满足碰撞与静力学检查的6自由度位姿并自纠错。",
+      "实验表明前沿MLLM在6自由度任务上表现极差；即使提供参考规划，模型仍受限于3D视觉定位与动作执行瓶颈，近半数失败源于碰撞或观测循环。"
+    ],
     "authors": [
       "Chenglong Shi",
       "Zekai Yuan",
@@ -6986,14 +7217,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "3D时空推理",
+      "闭环动作",
+      "多模态大语言模型",
+      "基准测试"
+    ]
   },
   {
     "id": "2610.38400",
     "title": "When \"No Worries\" Went Wrong: HRI Lessons for Foundation-Model Robots",
-    "title_zh": null,
+    "title_zh": "当“没问题”出错时：基础模型机器人的人机交互教训",
     "abstract": "When a person declined our robot's invitation to play, Alice turned her shoulder away and said \"No worries, it's all good.\" Only after a brief pause did she drive off. The words and gestures were plausible but their order changed the message. In another episode, Alice informed a host that his visitor had arrived---while the visitor stood right beside him. Both came from a three-year ROS 2 HRI consortium that integrated large language and vision models as they emerged. Today's foundation models give robots broader capabilities to perceive their surroundings, reason about situations and generate behavior. Yet capability alone does not ensure that a changed situation shapes the action that reaches a person. Evidence may never be acquired, or a purpose or constraint may fail to survive planning and execution. A system may even report Success when an action no longer serves its intended purpose. Drawing on the consortium's engineering experience, we develop five design lessons about attention, knowledge, commitments, embodied timing and action authority. We then introduce TRACE, a lightweight review that changes one interaction premise, follows it to a decision or enforcement boundary, and produces an actionable architecture finding. A bounded analysis of a published LLM-generated behavior-tree system illustrates how an available clarification mechanism can go unused. The engineering lesson is to preserve accountability boundaries, not the computational pipelines that once exposed them.",
-    "summary_zh": null,
+    "summary_zh": [
+      "基础模型赋予机器人感知与推理能力，但无法保证行动随情境变化，易出现目标失效却报告成功的问题。",
+      "基于三年HRI联盟工程经验，提出关于注意力、知识、承诺、具身时序与行动权限的五项设计教训。",
+      "提出TRACE轻量级审查机制，通过改变交互前提追溯决策边界，强调应保留问责边界而非计算管线。"
+    ],
     "authors": [
       "Eliahu Khalastchi"
     ],
@@ -7010,14 +7251,24 @@
     "comment": "8 pages, 5 figures, 1 table. Submitted to IEEE Robotics & Automation Magazine",
     "journal_ref": "",
     "matched": [],
-    "score": 1
+    "score": 1,
+    "tags": [
+      "人机交互",
+      "基础模型",
+      "机器人设计",
+      "问责边界"
+    ]
   },
   {
     "id": "2610.38398",
     "title": "Agent Transfer Protocol: Server-Mediated Agent-to-Agent Communication Architecture for the Agentic Web",
-    "title_zh": null,
+    "title_zh": "智能体传输协议：面向智能体网络的服务器中介通信架构",
     "abstract": "The Agentic Web needs to support continuous collaboration among agents from different organizations. These collaborative relationships may span multiple tasks, network connections and execution instances. Such interactions require stable communication entries, message reception when instances are offline, and source verification after delayed reading. How to organize these responsibilities so that cross domain communication does not depend on specific execution instances being continuously online is a key issue for building long term agent interaction infrastructure. We propose ATP (Agent Transfer Protocol), a cross organization agent communication protocol adopting a domain mediated architecture. In this architecture, administrative domains maintain stable addresses and receiving entries for logical agents. The domain servers of both parties continuously undertake cross domain transmission. The receiving domain verifies and saves messages for execution instances to read later. The sending domain signs the complete message envelope. This allows the receiving instance to independently reverify the domain source and content integrity after the original connection ends, provided the original verification public key is still trusted and obtainable. We implemented an ATP prototype and evaluated it through a controlled cross organization LLM agent workflow, mechanism checks and latency measurements. The workflow completed subsequent business processing after instances went offline or were replaced. The independent verifier successfully verified the domain source and content integrity of saved messages. Latency measurements further quantified the communication and processing overhead introduced by the continuous mediation of domain servers.",
-    "summary_zh": null,
+    "summary_zh": [
+      "跨组织智能体长期协作面临实例离线无法收消息及延迟读取后难以验证来源的问题。",
+      "提出ATP协议，采用域中介架构，由双方域服务器负责跨域传输、验签与暂存消息。",
+      "实验表明该架构支持实例离线后继续处理，且能独立验证消息来源与完整性，并量化了通信开销。"
+    ],
     "authors": [
       "Yuqi Qiu",
       "Zuyao Xu",
@@ -7044,14 +7295,23 @@
     "matched": [
       "LLM agent"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "智能体通信",
+      "跨组织协作",
+      "ATP协议"
+    ]
   },
   {
     "id": "2610.38392",
     "title": "Masked Erosion: How Acceptance Gates Lose Redundant Safeguards in Self-Improving Agents",
-    "title_zh": null,
+    "title_zh": "掩蔽侵蚀：自改进Agent的接受门如何丢失冗余安全防护",
     "abstract": "Self-improving LLM agents edit their own harness, the prompts and rules around a fixed model, and keep an edit only if an acceptance gate scores it higher on a batch of tasks. Such a gate sees what the harness does under the current model, not what it would still prevent if one safeguard failed. When safeguards overlap, deleting one is masked: the others still block the harm, so the gate decides on task success alone and redundancy erodes unseen. We measure harm for every subset of four written safeguards in two agent environments and run 411 improvement loops under ten gate rules, mostly as controlled deletion experiments, plus three runs of the GEPA optimizer. A deletion behind another working safeguard adds almost no observable harm. A paired significance test blocks deletions that pass by chance but not deletions that genuinely raise task success, and a larger evaluation batch lets it delete cheaper safeguards: at the same cost, 20-task batches kept every harness protected while 40-task batches lost all six. Large harm audits prevent exposure but not the loss of depth, which turns into harm when the harness is reused with a weaker model. GEPA kept every safety rule verbatim, yet two of its three final harnesses misused credentials under a weaker model. A statistical model frozen before the runs predicts where each gate's protection breaks as safeguard cost and batch size change, and freezing safety text or auditing one-layer ablations preserves depth.",
-    "summary_zh": null,
+    "summary_zh": [
+      "自改进LLM agent的接受门仅看任务成功率，当安全防护重叠时，删除某防护会被其他防护掩蔽，导致冗余安全规则被悄然侵蚀。",
+      "通过411个改进循环实验发现，通过配对显著性检验和扩大评估批次，接受门会删除成本较低的防护，导致安全深度丧失。",
+      "丧失深度的防护在复用于较弱模型时会产生危害，冻结安全文本或审计单层消融可保留深度，统计模型可预测防护的失效边界。"
+    ],
     "authors": [
       "Hau-Sing So",
       "Daixian Liu",
@@ -7072,14 +7332,24 @@
     "matched": [
       "LLM agent"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "自改进Agent",
+      "安全防护",
+      "接受门",
+      "冗余侵蚀"
+    ]
   },
   {
     "id": "2610.38391",
     "title": "SCOPE: Selective Critical-Step On-Policy Self-Distillation for Agentic Reinforcement Learning",
-    "title_zh": null,
+    "title_zh": "面向智能体强化学习的选择性关键步在线自蒸馏框架",
     "abstract": "Outcome-based reinforcement learning provides coarse supervision for long-horizon LLM agents: failed trajectories may contain correct steps, while successful trajectories can contain errors. Trajectory-level skills can also shift teacher preferences at unrelated steps, introducing off-target distillation signals. We introduce SCOPE, a framework for Selective Critical-Step On-Policy Self-Distillation. After a supervised warm-up, the policy analyzes its own trajectories, generates step-specific hindsight skills, and distills their guidance only at selected error steps. A bounded signed teacher-student coefficient stabilizes auxiliary updates while preserving positive reinforcement and negative correction. A success-relative pairwise length reward further encourages efficient task completion. Experiments on ALFWorld and WebShop demonstrate consistent improvements across multiple model backbones. With Qwen2.5-3B, SCOPE achieves 97.7% success on ALFWorld and 85.2% on WebShop, outperforming SEED by 5.9 and 6.3 percentage points, respectively. On unseen ALFWorld tasks, SCOPE reaches 89.6% success, improving over GRPO by 23.2 percentage points with 46.7% fewer interactions. Scaling to Qwen3-32B, SCOPE achieves 99.2% success on seen ALFWorld tasks and 94.0% on unseen tasks.",
-    "summary_zh": null,
+    "summary_zh": [
+      "长视野LLM agent的轨迹级RL监督粗略，成功轨迹含错误步骤且易引入偏离目标的蒸馏信号。",
+      "提出SCOPE框架，策略分析自身轨迹生成步骤技能，仅在选择出的错误步进行自蒸馏，并用有界系数稳定更新。",
+      "实验表明SCOPE在ALFWorld和WebShop上持续提升，在未见任务上较GRPO提升23.2%且交互减少46.7%。"
+    ],
     "authors": [
       "Qirui Liu",
       "Wei Cao",
@@ -7105,14 +7375,23 @@
     "matched": [
       "LLM agent"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "强化学习",
+      "自蒸馏",
+      "LLM智能体"
+    ]
   },
   {
     "id": "2610.38388",
     "title": "ELEVATE: Agentic Controller Acquisition from Task Failure for Quadrupedal Manipulation",
-    "title_zh": null,
+    "title_zh": "从任务失败中自主获取四足操控的智能体控制器",
     "abstract": "Quadrupedal manipulators can extend their workspace through whole-body interaction, but task-planning agents' capabilities remain limited by their available controllers. We present ELEVATE, a framework that uses persistent failures during task-program refinement to identify and acquire missing whole-body control capabilities. When these failures suggest a missing physical capability, a coding agent formulates and iteratively refines a reinforcement-learning problem, specifying behavior-specific rewards, curricula, and termination conditions. Validated controllers are added to the capability library and composed with existing controllers to retry the task. Starting from a single pretrained loco-manipulation controller, ELEVATE autonomously acquires controllers for wall-supported elevation, supported manipulation, and wall descent across a sequence of seven simulation tasks. These controllers are reused in subsequent reaching and object-manipulation tasks. On the five tasks beyond the initial controller's workspace, ELEVATE achieves mean success rates of 98.4%-100% across five independent runs, while coding-agent baselines with a fixed controller library fail to complete these tasks. The synthesized task programs, together with the acquired controllers, also transfer to a physical quadrupedal manipulator without real-robot training or fine-tuning, achieving 18/20 successes in rack retrieval and 16/20 in floor-to-rack placement. Videos and demonstrations are available at https://agentic-quad-elevate.github.io/public/.",
-    "summary_zh": null,
+    "summary_zh": [
+      "四足操控agent受限于已有控制器，无法通过全身交互扩展工作空间。",
+      "提出ELEVATE框架，利用任务失败识别缺失能力，由coding agent构建并迭代优化RL问题以生成新控制器。",
+      "新控制器加入能力库后重试任务，在超出初始工作空间的任务中成功率近100%，且零微调迁移至真实机器人。"
+    ],
     "authors": [
       "Shiqi Liu",
       "Radu Corcodel",
@@ -7133,14 +7412,24 @@
     "matched": [
       "coding agent"
     ],
-    "score": 4
+    "score": 4,
+    "tags": [
+      "四足操控",
+      "智能体",
+      "强化学习",
+      "控制器获取"
+    ]
   },
   {
     "id": "2610.38366",
     "title": "TCC-RAG: Temporal Causal Chain-Guided RAG for Temporal Knowledge Graph Question Answering",
-    "title_zh": null,
+    "title_zh": "时序因果链引导的RAG用于时序知识图谱问答",
     "abstract": "Recent advances in large language models (LLMs) have spurred growing interest in temporal knowledge graph question answering (TKGQA). Most existing methods rely on semantic retrieval augmented generation (RAG), which suffers from fundamental limitations in complex temporal reasoning. On the one hand, semantic-based RAG methods struggle to capture the multi-hop causal knowledge required for complex temporal reasoning. On the other hand, these methods introduce excessive redundant knowledge, trapping LLMs in spurious reasoning chains that potentially result in erroneous answers. To address these problems, we propose a Temporal Causal Chain-guided RAG (TCC-RAG) to retrieve a concise yet sufficient set of causal knowledge to support complex temporal reasoning. Specifically, we reformulate the temporal knowledge graph into a multi-view causal cue graph, with causal cues inducing connections that explicitly encode temporal evolution and causal dynamics. Based on the causal cue graph, we construct a query-specific temporal causal chain to guide the retrieval process, enabling the model to focus on a concise set of causally relevant knowledge. Finally, we introduce a causal evidence filter to refine the retrieved knowledge, ensuring its causal consistency with the underlying temporal logic of the query. Experiments show that TCC-RAG achieves substantial performance gains of 10.72% and 8.40% on two TKGQA benchmarks, and delivers a remarkable 62.97% improvement for multi-step temporal reasoning.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有语义RAG难以捕获多跳因果知识，且易引入冗余知识导致LLM陷入虚假推理链。",
+      "提出TCC-RAG，将时序知识图谱重构为多视图因果线索图，构建查询特定的时序因果链引导检索。",
+      "引入因果证据过滤器精炼知识，在两个基准上性能提升超8%，多步推理提升62.97%。"
+    ],
     "authors": [
       "Xinxun Zhang",
       "Yuxiang Wang",
@@ -7167,14 +7456,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "时序知识图谱",
+      "检索增强生成",
+      "因果推理"
+    ]
   },
   {
     "id": "2610.38352",
     "title": "WeVisCut: The Whole Editing Room in One Agent From Narration to Long-Form Video",
-    "title_zh": null,
+    "title_zh": "WeVisCut：从旁白到长视频的一体化智能体",
     "abstract": "Producing long-form videos from narration requires interdependent decisions that remain coherent across shots. Existing agentic editors often use multi-stage workflows driven by general models, leaving the quality-cost trade-off of compact, task-adapted policies unclear. We address this gap with WeVisCut, a long-form script-to-video system that connects tool execution with policy learning. Its agent harness maintains shared production state so that tool feedback informs subsequent decisions and repairs. Because finished videos do not expose these decisions, our four-stage data pipeline combines editing inversion with verified replay to turn recovered editing intent into executable supervision. Applied to 3,750 finished videos, this pipeline yields over 130K training examples. We use this supervision to train a single 9B policy that coordinates production and recovers from failures within the same harness. Moreover, we introduce a 100-task benchmark and five metrics assessing editing quality and delivery reliability. Under a shared tool environment, WeVisCut substantially outperforms its base model and achieves comparable performance to Claude Opus 5 while using nearly 33x fewer generated tokens per successful output minute. It also outperforms task-matched native editors on our proposed metrics.",
-    "summary_zh": null,
+    "summary_zh": [
+      "长视频生成需跨镜头连贯决策，现有智能体编辑器多依赖通用模型的多阶段流程，紧凑策略的质量与成本权衡不明。",
+      "提出WeVisCut系统，通过编辑反演与验证回放构建数据管道，从3750个视频中提取13万+可执行监督样本，训练单一9B策略模型。",
+      "该模型在共享工具环境中协同生产并修复故障，效果远超基座模型，媲美Claude Opus 5且生成Token数减少近33倍。"
+    ],
     "authors": [
       "Chenyu Mu",
       "Wenming Weng",
@@ -7204,14 +7502,24 @@
     "matched": [
       "agent harness"
     ],
-    "score": 6
+    "score": 6,
+    "tags": [
+      "长视频生成",
+      "智能体",
+      "策略学习",
+      "视频编辑"
+    ]
   },
   {
     "id": "2610.38342",
     "title": "Investor's Last Exam: Can AI Agents Do Equity Investment Without Seeing the Future?",
-    "title_zh": null,
+    "title_zh": "投资者的终极考试：AI Agent能否在不可见未来时做股权投资",
     "abstract": "Financial agents must form forecasts and investment judgments from decision-time evidence, with predictions evaluated against subsequent outcomes. Existing benchmarks assess financial knowledge, research workflows, or forecasting, but evaluating the full research process requires a strictly frozen information set and professional evaluation criteria. We introduce Investor's Last Exam (ILE), an equity-research benchmark led by experienced buy-side investors and fund managers. Its three components are a versioned financial database spanning 3.43 million document versions and nine source categories, supplemented by structured market data, with validated timestamps governing retrieval and computation; a task taxonomy organized around professional analyst deliverables; and an expert-led framework linking scoring criteria to sources, calculations, and assumptions through financial dependency graphs. Evaluation spans 86 assignments and jointly assesses research quality, forecast accuracy, and simulated investment performance. GPT-6 Astra and Claude Opus 5.5 lead overall at 68.1 and 66.9 out of 100, yet even Astra scores only 52.5 on Forecast & Model. Our results show that even state-of-the-art models fail to translate overall research capability into predictive performance. ILE shifts the evaluation unit from isolated capabilities to the evidence--assumption--judgment chain, allowing researchers to locate where analytical advantages fail to translate into forecasts and investment judgments, and providing a traceable, diagnostic foundation for training and evaluating financial agents.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有基准缺乏严格信息集与专业标准，无法评估AI金融Agent的完整研究过程。",
+      "提出ILE基准，含版本化金融数据库、专业任务分类及专家评分框架，评估86项任务。",
+      "顶尖模型整体得分尚可，但预测能力极差，表明研究能力未能转化为预测与投资判断。"
+    ],
     "authors": [
       "Huangfei Jiang",
       "Anning Hu",
@@ -7239,14 +7547,23 @@
     "matched": [
       "AI agent"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "金融Agent",
+      "股权投资",
+      "评估基准"
+    ]
   },
   {
     "id": "2610.38336",
     "title": "Statutory Article Retrieval from Arabic Judicial Narratives: Family Law and Law of Evidence in Saudi Arabia",
-    "title_zh": null,
+    "title_zh": "沙特阿拉伯司法叙事的法定条款检索：家庭法与证据法",
     "abstract": "Reliable legal information retrieval must ground legal reasoning in authoritative statutory sources. In Arabic judicial settings, long factual narratives must be mapped to concise articles that express abstract legal rules, creating a narrative-to-legal-rule abstraction gap. Using a benchmark of 200 synthetic Saudi Arabic judicial cases and 381 articles from the Family Law and the Law of Evidence, we compare word-level and char-4 BM25, zero-shot dense encoders, per-law retrieval, dense-sparse reciprocal rank fusion (RRF), and a proposed Decompose-and-Refine (DaR) pipeline. In DaR, a large language model splits each narrative into disputed legal issues and generates, for each issue, three retrieval channels: a statute-style paraphrase, legal keywords, and a candidate taxonomy chapter. On the whole corpus, the instructed Qwen3-Embedding-8B dense encoder reaches an MRR@10 of 0.849, the best result of any non-decomposed system. Under per-law scoring, this advantage reflects Family Law only: restricted to Evidence articles, the same encoder drops to an MRR@10 of 0.087, and fusion with BM25 raises it only to 0.207. DaR changes this picture, raising Evidence MRR@10 to 0.696 and Family MRR@10 to 0.864. Without decomposition, the two laws favor different strategies; under DaR, the same retriever achieves the best MRR@10 on both.",
-    "summary_zh": null,
+    "summary_zh": [
+      "阿拉伯司法叙事与简短法条间存在叙事到规则的抽象鸿沟，需解决法定条款检索问题。",
+      "提出DaR流水线，利用LLM将叙事拆解为争议焦点，并为每个焦点生成法条释义、关键词和候选章节三个检索通道。",
+      "在证据法上，DaR将MRR@10从0.087大幅提升至0.696，使同一检索器在两部法律上均达最佳MRR@10。"
+    ],
     "authors": [
       "Zarah Shibli",
       "Areej Alhothali",
@@ -7268,14 +7585,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "法定条款检索",
+      "阿拉伯司法",
+      "大语言模型"
+    ]
   },
   {
     "id": "2610.38333",
     "title": "Fu-TCM: a multimodal large language model that learns traditional Chinese medicine diagnostic reasoning",
-    "title_zh": null,
+    "title_zh": "Fu-TCM：学习中医诊断推理的多模态大语言模型",
     "abstract": "Large language models (LLMs) are advancing in multimodal understanding and reasoning, accelerating medical model development. Traditional Chinese medicine (TCM) uses evidence from the four examinations to determine disease location and nature, differentiate syndromes and guide treatment. This diagnostic process constitutes a complete chain of reasoning. We present Fu-TCM, a multimodal TCM LLM trained on data retained after cleaning and filtering an initial collection of approximately 7.12 million examples derived from classical texts, textbooks, medical images, clinical cases and publicly available datasets. The model was further optimized using Bianzheng-Grounded Policy Optimization (BGPO), which explicitly targets syndrome differentiation through rewards for response format, intermediate TCM reasoning fields and final syndrome predictions. Fu-TCM-27B led all six benchmarks spanning TCM reasoning, text and vision, achieving a macro-average accuracy of 81.01% and surpassing the strongest reference model with complete results across all six benchmarks by 7.13 percentage points. Its largest margin was 11.90 points on Fu-bianzheng. Case-level analyses further showed a positive association between intermediate-field accuracy and final syndrome-selection accuracy in most evaluated models. These findings suggest that TCM syndrome differentiation may be computationally learnable and that structured reasoning supervision can improve performance across TCM tasks.",
-    "summary_zh": null,
+    "summary_zh": [
+      "中医诊断依赖四诊证据进行辨证论治，现有模型缺乏对该完整推理链的学习。",
+      "构建Fu-TCM模型，基于清洗后的712万样本训练，并采用BGPO算法针对辨证推理进行强化优化。",
+      "模型在六项基准上平均准确率达81.01%，超越基线7.13个百分点，证实中医辨证可计算学习。"
+    ],
     "authors": [
       "Jiahang Xie",
       "Tong Jin",
@@ -7305,14 +7631,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "多模态大语言模型",
+      "中医辨证",
+      "强化学习"
+    ]
   },
   {
     "id": "2610.38332",
     "title": "MUSE: Multi-Level Memory with Selective Runtime Injection for Scientific Coding Agents",
-    "title_zh": null,
+    "title_zh": "MUSE：面向科学编程Agent的多级记忆与选择性运行时注入",
     "abstract": "Historical experience can guide scientific coding at multiple levels, but task-level retrieval may miss implementation lessons that become relevant during execution. We introduce MUSE, a memory management framework combining multi-level memory with selective runtime injection for scientific coding agents. MUSE builds global, approach-level, and implementation-level memory from historical trajectories. At initialization, the agent receives global memory and problem-matched approach-level memory. During execution, current interactions are used to retrieve implementation-level memory. An LLM gate selects relevant experience and generates specific review advice, or skips injection. Across four benchmarks spanning numerical problem solving, kernel optimization, and scientific software repair, MUSE outperforms retrieval and memory baselines on all evaluation metrics. Ablations support the multi-level design and gated injection, while transfer experiments show that memory remains useful across kernel benchmarks. These results show that multi-level memory and selective runtime injection enable effective reuse of experience in scientific coding. Code is available at https://github.com/hr-jin/MUSE.",
-    "summary_zh": null,
+    "summary_zh": [
+      "科学编程中仅靠任务级检索易遗漏执行时才相关的实现经验，需更精细的记忆管理。",
+      "提出MUSE框架，构建全局、方法级与实现级三层记忆，并在执行时通过LLM门控选择性注入经验。",
+      "在四项基准测试中全面超越基线，消融实验验证了多级设计与门控机制的有效性，且记忆可跨域迁移。"
+    ],
     "authors": [
       "Haoran Jin",
       "Defu Lian",
@@ -7335,14 +7670,23 @@
     "matched": [
       "coding agent"
     ],
-    "score": 15
+    "score": 15,
+    "tags": [
+      "科学编程",
+      "记忆管理",
+      "智能体"
+    ]
   },
   {
     "id": "2610.38331",
     "title": "Multi-Token Prediction Done Right",
-    "title_zh": null,
+    "title_zh": "正确实现多词元预测",
     "abstract": "Multi-Token Prediction (MTP) is now a common ingredient in language-model pre-training, as it improves downstream performance and enables faster inference through speculative decoding. We identify a flaw in standard MTP training, in which a residual component of the MTP gradient interferes with both next-token and multi-token learning, increasingly so with scale. Specifically, the MTP cross-entropy gradient can be decomposed exactly into a KL self-distillation term that pulls each MTP head toward the model's own next-token prediction (NTP) distribution and improves speculative decoding, and a residual that has a low signal-to-noise ratio and buries the useful KL signal. We introduce the KL gradient-recovery trick: when two distributions share a linear output head, the gradient of their KL divergence can be recovered exactly by combining their cross-entropy gradients through straight-through gradient routing. Unlike minimizing the KL directly, this trick requires no vocabulary-sized logit matrices and is compatible with standard fused cross-entropy kernels. This enables Soft Multi-Token Prediction (Soft-MTP), a one-line code change to MTP that removes the noisy residual and backpropagates only the KL self-distillation signal by reusing the existing NTP and MTP cross-entropy computations. Soft-MTP supports both DeepSeek- and Meta-style MTP, adds no parameters, and incurs no measurable overhead. From 167M to 1.2B parameters, Soft-MTP improves over standard MTP with lower NTP perplexity, faster speculative decoding and higher zero-shot accuracy at every scale, lower MTP perplexity from 689M onward, and stronger math and code reasoning after fine-tuning at 1.2B. Soft-MTP also matches, if not exceeds, direct KL divergence minimization on most metrics. Soft-MTP is, in effect, a free lunch for MTP optimization. Our code can be found at https://github.com/JaydenTeoh/Soft-MTP.",
-    "summary_zh": null,
+    "summary_zh": [
+      "标准多词元预测（MTP）训练存在缺陷，其梯度中的残差项会干扰词元学习，且随模型规模增大而恶化。",
+      "提出 KL 梯度恢复技巧，通过直通梯度路由组合交叉熵梯度，精确恢复 KL 散度梯度且无额外开销。",
+      "据此提出 Soft-MTP，仅过滤 KL 自蒸馏信号。实验表明其降低了困惑度，提升了推理速度与零样本准确率。"
+    ],
     "authors": [
       "Jayden Teoh"
     ],
@@ -7361,14 +7705,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 8
+    "score": 8,
+    "tags": [
+      "多词元预测",
+      "语言模型预训练",
+      "自蒸馏",
+      "推测解码"
+    ]
   },
   {
     "id": "2610.38329",
     "title": "A Case Study of a Multi-Agent Kernel-Optimization Loop That Learns a New AI Accelerator",
-    "title_zh": null,
+    "title_zh": "多智能体内核优化循环学习新AI加速器的案例研究",
     "abstract": "Frontier large language models write correct CUDA kernels for most single-operator benchmark tasks, yet their accuracy collapses on accelerators whose architecture and programming language they have rarely seen. We present a case study of an LLM agent loop built for such accelerators. Our example is the FuriosaAI RNGD NPU, programmed in a recent, sparsely documented Rust DSL, where the loop optimized three Gemma-4-12B decode kernels over 12 days on a shared, scarce device. The loop builds its own target knowledge: it writes and checks a summary of the DSL documentation, measures the chip with microbenchmarks, records compiler-derived legality rules, and revisits this knowledge when the toolchain changes, rechecking rules and measurements where it can. A role-based search over per-kernel Design Trees explores whole-kernel designs and accumulates small accepted changes in the best version of each kernel. Because device time is scarce and readings are noisy, cheap checks screen new designs before any device run, and late in the run a change was accepted only after repeated comparisons with the best kernel on the device. The final kernels reach a 9.293x geomean speedup over the official baseline, each within 1.25x of the cycles needed just to move its weights. Our prompts, profiler and acceptance test are available at https://github.com/bgchun-fs/multi-agent-kernel-gen-loop.",
-    "summary_zh": null,
+    "summary_zh": [
+      "前沿LLM在罕见架构加速器上编写CUDA内核准确率骤降，需针对新加速器构建优化循环。",
+      "构建LLM智能体循环，通过总结文档、微基准测试和记录编译规则自主构建目标知识，并基于设计树搜索探索内核设计。",
+      "在FuriosaAI NPU上优化Gemma解码内核，最终实现9.293倍几何平均加速，接近权重搬运的周期下限。"
+    ],
     "authors": [
       "Byonggon Chun"
     ],
@@ -7391,14 +7745,24 @@
       "LLM agent",
       "multi-agent"
     ],
-    "score": 18
+    "score": 18,
+    "tags": [
+      "多智能体",
+      "内核优化",
+      "AI加速器",
+      "LLM"
+    ]
   },
   {
     "id": "2610.38318",
     "title": "What Should a Navigator Remember? Spatiotemporal Memory for Zero-Shot Vision-Language Navigation",
-    "title_zh": null,
+    "title_zh": "零样本视觉语言导航的时空记忆机制",
     "abstract": "Zero-shot vision-and-language navigation (VLN) requires an agent to use past observations without navigation-specific training. We study what information an 8B-scale navigation system should retain and how it should be organized for subsequent decisions. Our agent combines instruction progress, hierarchically compressed observation history anchored to poses, and accumulated geometry in complementary task, temporal, and spatial memories. An 8B observer summarizes observations, and an 8B reasoner uses the memories to select waypoint intents or request additional views, a geometric controller executes the selected targets. A semantic information perspective motivates the distinction between retaining evidence, making it accessible to the reasoner, and acquiring further observations. On R2R-CE val-unseen, the complete system achieves the highest among the evaluated Qwen3-based zero-shot baselines. Removing temporal memory reduces SR and sharply increases average path length from 16.9 to 39.1m, removing the spatial-map and planning component reduces SR as well. Real-world experiments on a Unitree Go2 show that our zero-shot method achieves higher success rates than the post-trained baseline in both corridor and office environments, suggesting better transfer to the evaluated real-world settings. As a complementary evaluation, LAW2 uses paired instruction interventions to examine behavioral responses, instruction following ability beyond endpoint success. These results support preserving task progress, observation history, and geometry in structured memory for zero-shot navigation with smaller open models.",
-    "summary_zh": null,
+    "summary_zh": [
+      "零样本VLN需利用历史观察且无特定训练，但8B规模系统应保留何种信息及如何组织尚不明确。",
+      "提出互补的任务、时序与空间记忆，结合8B观察器与推理器，并从语义信息视角区分证据保留与获取。",
+      "系统在R2R-CE及真实机器人上超越基线，消融实验证实结构化记忆对零样本导航至关重要。"
+    ],
     "authors": [
       "Yuhang Peng",
       "Zhikai Wang",
@@ -7423,14 +7787,23 @@
     "comment": "20 pages, 3 figures, 8 Tables",
     "journal_ref": "",
     "matched": [],
-    "score": 2
+    "score": 2,
+    "tags": [
+      "视觉语言导航",
+      "时空记忆",
+      "零样本学习"
+    ]
   },
   {
     "id": "2610.38311",
     "title": "Detecting Incorrect LLM Explanations for Automated Program Repair",
-    "title_zh": null,
+    "title_zh": "基于蜕变测试检测自动程序修复中错误的LLM解释",
     "abstract": "LLM-generated explanations help developers understand automated program repair (APR) rationale and assess patch quality. Incorrect explanations can mislead developers about a repair's reliability, making their detection important. However, manually inspecting the growing volume of generated repairs is impractical, motivating automated detection. Existing methods mainly target incorrect answers from general question-answering LLMs, often by sampling multiple responses and detecting contradictions. Applied to APR, they face two limitations: (1) they may depend on external verifiers that are unavailable or lack APR-specific reasoning; and (2) sampling strategies such as paraphrasing or re-prompting the same input often yield superficial, redundant responses that repeat the original error rather than expose it. We propose MetaReJ, the first method designed to detect incorrect APR explanations using metamorphic testing. Inspired by debate and viva examinations, MetaReJ challenges explanations through an argumentative strategy without requiring external verifiers. It applies novel metamorphic relations (MRs) to recursively question the LLM under equivalent and non-equivalent repair scenarios and detect contradictions. To obtain diverse samples, MetaReJ transforms the buggy program into variants that preserve or alter the underlying bug, then asks the LLM how to repair each variant. Contradictions among responses are encoded as MR violations, which indicate that the original explanation is incorrect. We evaluate MetaReJ on a manually labelled dataset of 1,756 explanations from multiple LLM-based APR systems. MetaReJ achieves an MCC of up to 0.43, outperforming prior methods by up to 333.3% in MCC.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM生成的错误解释会误导开发者，但现有检测方法依赖外部验证器且采样策略易产生冗余响应，难以适用于APR。",
+      "提出MetaReJ方法，基于蜕变测试通过递归质询LLM来检测错误解释，无需外部验证器。",
+      "通过变换缺陷程序构造变体获取多样本，以响应间的矛盾作为蜕变关系违规指示解释错误，MCC最高达0.43。"
+    ],
     "authors": [
       "Lam Nguyen Tung",
       "Chenxi Gu",
@@ -7454,7 +7827,12 @@
     "matched": [
       "reasoning"
     ],
-    "score": 6
+    "score": 6,
+    "tags": [
+      "自动程序修复",
+      "蜕变测试",
+      "大语言模型"
+    ]
   },
   {
     "id": "2610.38308",
