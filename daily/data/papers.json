@@ -1210,9 +1210,13 @@
   {
     "id": "2610.41803",
     "title": "What Standard Evaluations Hide About Detectors of Hijacked LLM Agents: Rare Attacks, Unseen Tools and Benchmark Transfer",
-    "title_zh": null,
+    "title_zh": "标准评估对被劫持LLM代理检测器的隐藏问题",
     "abstract": "Detectors can flag hijacked large language model (LLM) agents from the traces of the tools they call. In the eleven evaluations we audited, attacks or anomalies make up 16% to 86% of the test samples, no evaluation varies that share, and six report no test on data from a second benchmark or source. We ask what such evaluations hide. On the AgentDrift and AgentDojo benchmarks we test trained detectors that read tool identities, behavior, call sequences, step embeddings or text, and a released LLM action monitor, AlignmentCheck, with thresholds fixed on training data or set by the monitor's released decision rule. First, at a 2% attack rate a detector with an area under the receiver operating characteristic curve (AUROC) of 0.879 reaches a precision of 0.076, and the mix of negatives alone moves that precision between 0.039 and 0.117. Second, as tool coverage, the share of test tool calls whose tool was seen in training, falls, detector rankings cross near 50% coverage and reverse below it, because unseen tools map to inputs that training never reached. Dropout on tool inputs largely removes the reversal. Third, no detector trained on AgentDrift ranks AgentDojo traces better than chance (AUROC 0.47 to 0.52), including one that reaches 0.996 within AgentDojo. The monitor, trained on neither, reaches 0.930, but with its open backbone its released decision rule would still mostly raise false alerts at a 2% attack rate (precision 0.096). We turn these findings into a checklist for evaluating trace detectors.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有检测器评估未考虑真实低攻击率，导致2%攻击率下高AUROC检测器的精确度极低且随负样本波动。",
+      "测试集出现未见过工具时，检测器排名会反转；对工具输入使用Dropout可大幅消除此反转现象。",
+      "检测器跨基准测试泛化极差，在另一基准上表现近乎随机；据此提出评估轨迹检测器的核对清单。"
+    ],
     "authors": [
       "Mahmoud Abbasi",
       "Juan M. Núñez V.",
@@ -1234,7 +1238,12 @@
     "matched": [
       "LLM agent"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "LLM代理安全",
+      "劫持检测",
+      "基准测试泛化"
+    ]
   },
   {
     "id": "2610.41769",
@@ -1600,9 +1609,13 @@
   {
     "id": "2610.41691",
     "title": "Does Reasoning Make Language Models Agree?",
-    "title_zh": null,
+    "title_zh": "推理会让语言模型达成一致吗？",
     "abstract": "Language models face two opposing concerns: monoculture, in which models err in correlated ways, and multiplicity, in which equally accurate models make conflicting decisions. The rise of reasoning models has complicated this debate: On the one hand, reasoning may increase model agreement if models anchor on the same salient features or follow similar reasoning paths. On the other hand, stochastic reasoning traces may introduce additional branch points leading to more diverse predictions. We resolve this tension by distinguishing reasoning as an intervention from reasoning as an observed behavior. We compare agreement under controlled changes in reasoning effort with agreement across observed reasoning lengths, measuring both against the agreement expected from model accuracy. Across nine models from two developers and three classification tasks, enabling reasoning increases agreement between models evaluated on the same individuals. Yet the individuals who elicit longer reasoning traces receive less consistent predictions across models. Both patterns persist after accounting for differences in accuracy. Asking models to reason more thus promotes agreement, while observing them reason longer signals disagreement.",
-    "summary_zh": null,
+    "summary_zh": [
+      "语言模型面临错误同质化与准确但决策冲突的矛盾，推理模型因锚定相同特征或引入随机分支而使一致性影响不明。",
+      "本文将推理区分为干预手段与观测行为，通过控制推理努力程度与观测推理长度，对比模型间的一致性水平。",
+      "实验表明，启用推理会提升模型间一致性，但观测到更长推理的个体反而跨模型预测更不一致，该现象独立于准确率差异。"
+    ],
     "authors": [
       "Mila Gorecki",
       "Moritz Hardt"
@@ -1624,14 +1637,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 14
+    "score": 14,
+    "tags": [
+      "语言模型",
+      "推理一致性",
+      "模型评估"
+    ]
   },
   {
     "id": "2610.41688",
     "title": "When the Past Shapes Action: Understanding Embodied Memory",
-    "title_zh": null,
+    "title_zh": "具身记忆机制：从过去经验塑造智能体行动",
     "abstract": "Recent advances in generative foundation models have expanded the capabilities of embodied AI, enabling increasingly general navigation, manipulation, and long-horizon task execution. However, effective interaction with dynamic environments requires more than only strong perception and reasoning: agents must act with partial knowledge and retain, retrieve, and update information from past observations, actions, and experiences. This survey examines embodied memory as a mechanism for preserving decision-relevant information beyond the current observation. We organize existing approaches along two complementary dimensions: six fundamental memory requirements, spanning world-state persistence, task progress, belief maintenance, and experiential learning; and eight architectural categories, including recurrent states, fast weights, visual and symbolic representations, spatial memory, and experience-based systems. We analyze their capabilities and limitations, and examine how existing benchmarks evaluate memory-dependent behavior, distinguishing genuine use of historical information from general task performance. Finally, we identify open challenges in selecting relevant experiences, maintaining consistent beliefs in changing environments, and consolidating knowledge across episodes. Our analysis provides a framework for understanding memory as an essential component of reliable, adaptive, and lifelong-horizon embodied intelligence.",
-    "summary_zh": null,
+    "summary_zh": [
+      "具身智能在动态环境中交互时，需利用部分知识并从历史中存取信息，为此本文综述具身记忆机制。",
+      "沿六大基本记忆需求与八类架构维度组织现有方法，分析其能力与局限，并审视基准测试对记忆的评估。",
+      "指出选择相关经验与维持一致信念等开放挑战，为理解可靠、自适应的具身智能提供记忆分析框架。"
+    ],
     "authors": [
       "Siqi Li",
       "Ziyi Bai",
@@ -1656,14 +1678,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 3
+    "score": 3,
+    "tags": [
+      "具身智能",
+      "记忆机制",
+      "综述"
+    ]
   },
   {
     "id": "2610.41682",
     "title": "The Ineliminable Anchor: Human Judgment as a Structural Requirement of Autonomous Artificial Intelligence Systems",
-    "title_zh": null,
+    "title_zh": "自主AI系统中不可消除的人类判断锚点",
     "abstract": "As artificial intelligence (AI) agents carry out longer chains of tasks, oversight must establish whether their behavior still serves an authorized goal. Here, we introduce the anchor: the point at which reference information and human-authorized standards enter an autonomous system. We argue that oversight design should first identify the reference needed to assess goal drift and whether the system's internal record can supply it, then decide who checks and how often, and finally specify who may revise the goal. Goal drift can be impossible to certify from a system's internal record. The missing reference must come from outside that record. Combining a reliability model of checkpoint spacing with evidence from training, execution, and multi-agent coordination, we develop a task taxonomy to guide anchor placement and decisions about which checks to automate. For AI systems that serve human purposes, human judgment is an ineliminable structural requirement in authorizing and revising the purposes and standards that govern autonomous operation, even when routine checking and execution are automated.",
-    "summary_zh": null,
+    "summary_zh": [
+      "AI代理执行长任务链时易偏离授权目标，需引入包含参考信息与人类标准的锚点来实施监督。",
+      "仅靠系统内部记录无法确认目标漂移，必须引入外部参考，并依任务分类与可靠性模型指导锚点放置与自动化检查。",
+      "对于服务于人类目的的AI系统，即使常规检查与执行可自动化，人类判断仍是授权和修订目标的不可消除的结构要求。"
+    ],
     "authors": [
       "Junjie Li",
       "Haoran Liu",
@@ -1686,14 +1717,24 @@
     "matched": [
       "multi-agent"
     ],
-    "score": 4
+    "score": 4,
+    "tags": [
+      "AI对齐",
+      "目标漂移",
+      "人机协同",
+      "自主系统"
+    ]
   },
   {
     "id": "2610.41665",
     "title": "Breaking Information Islands in Sparse Tuning via Small-World Connectivity",
-    "title_zh": null,
+    "title_zh": "基于小世界连通性打破稀疏微调中的信息孤岛",
     "abstract": "Sparse tuning is widely used to adapt large language models due to its parameter efficiency. However, its effectiveness depends not only on the number of trainable parameters, but also on the feature-interaction topology of the sparse update's structural support. Limited or uneven connectivity in this support may isolate subsets of feature dimensions, forming information islands that restrict direct task-specific interactions through the trainable update. To address this issue, we propose Small-World Induced Fine-Tuning (SWIFT), a sparse tuning framework inspired by small-world connectivity. SWIFT combines block-diagonal sparse updates for local feature mixing with a fixed deterministic scattering permutation that routes the mixed outputs across feature groups without additional trainable parameters. We further show theoretically that certain random sparse-update models and block-diagonal updates can exhibit information islands, whereas a sufficiently scattering permutation guarantees positive block-level expansion when the trainable block-diagonal factor consists of equal-sized, structurally dense square blocks. Extensive experiments on commonsense reasoning, natural language generation, and image classification demonstrate that SWIFT outperforms the evaluated parameter-efficient fine-tuning (PEFT) baselines on average and can match or surpass full fine-tuning. Implementation is available at https://github.com/xianchaoguan/SWIFT",
-    "summary_zh": null,
+    "summary_zh": [
+      "稀疏微调中特征交互拓扑受限会形成信息孤岛，阻碍任务特定交互。",
+      "提出SWIFT框架，结合块对角稀疏更新与固定散射置换实现跨组特征混合。",
+      "理论与实验证明SWIFT能消除信息孤岛，性能优于PEFT基线且媲美全量微调。"
+    ],
     "authors": [
       "Xianchao Guan",
       "Zijun Xiong",
@@ -1719,14 +1760,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "稀疏微调",
+      "信息孤岛",
+      "小世界网络",
+      "参数高效微调"
+    ]
   },
   {
     "id": "2610.41655",
     "title": "Fooling Relying Parties of the EUDI Wallet Architecture: Credential Pooling Attacks and CRESTA, a Standard-Compliant Countermeasure",
-    "title_zh": null,
+    "title_zh": "EUDI钱包架构的凭证池化攻击与标准合规对策CRESTA",
     "abstract": "The European Digital Identity (EUDI) Wallet will let millions of EU citizens prove who they are and what they are entitled to, disclosing only what is needed. Many services need several credentials at once, such as an identity card and a university degree, so combined presentations are essential. We present credential pooling attacks on relying parties of the EUDI Wallet reference architecture. Colluding users, each holding some credentials in their own wallet, cooperate through a proxy that acts as a single synthetic user and presents all the requested credentials, although no single user holds them all. Every signature is genuine and computed by certified hardware, and nothing is extracted or forged. We ran the attack against the European Commission's reference implementation, also on two Android phones. The attack would fail if all credentials of a user carried the same public key, but colluding relying parties could then link all presentations of that user. For this reason, the Architecture and Reference Framework (ARF) requires a fresh key for each credential and recommends batches of single-use copies, each with its own key: precisely what makes pooling possible. One might think that preventing pooling requires giving up unlinkability or adopting non-standard cryptography, such as zero-knowledge proofs. We show that this is not the case: we present CRESTA (CREdential STApling), an efficient countermeasure that uses only standard cryptography and credential formats and preserves unlinkability. In CRESTA, an ordinary issuer checks at issuance that a set of keys was generated in the same secure hardware, and certifies it in a binding attestation: a standard credential whose attributes can be selectively disclosed. CRESTA works entirely within the EUDI Wallet framework and costs a relying party one additional signature verification per presentation.",
-    "summary_zh": null,
+    "summary_zh": [
+      "EUDI钱包需组合出示多凭证，但ARF要求每凭证使用新密钥以保不可链接性，这使凭证池化攻击成为可能。",
+      "合谋用户通过代理将各自持有的真实凭证组合出示，无需提取或伪造即可欺骗依赖方，该攻击已在参考实现上验证。",
+      "提出CRESTA对策，发行方验证密钥集在同一安全硬件中生成并颁发绑定证明，仅用标准密码学即可防御攻击且保留不可链接性。"
+    ],
     "authors": [
       "Leonardo Rufini",
       "Ivan Visconti"
@@ -1744,14 +1795,23 @@
     "comment": "",
     "journal_ref": "",
     "matched": [],
-    "score": 0
+    "score": 0,
+    "tags": [
+      "数字身份钱包",
+      "凭证池化攻击",
+      "不可链接性"
+    ]
   },
   {
     "id": "2610.41651",
     "title": "When Depth Lies: Benchmarking Vision-Language Models on Mirror-Induced RGB-D Ambiguity",
-    "title_zh": null,
+    "title_zh": "镜面引发的RGB-D歧义：视觉语言模型深度推理基准",
     "abstract": "Vision-language models (VLMs) have made significant progress in spatial reasoning, particularly by integrating RGB images with depth data, which is often assumed to faithfully reflect physical distances. However, mirrors violate this assumption: they distort depth readings while reproducing object appearances, making reflections difficult to distinguish from real objects. As existing benchmarks rarely consider such reflective scenarios, VLM performance in mirror scenes remains largely unexplored. In this work, we introduce a mirror-centric RGB-D dataset from reflective scenes to evaluate the spatial reasoning capabilities of state-of-the-art VLMs in these scenarios. Specifically, we collect 1,011 RGB-D images from 525 real-world scenes, spanning diverse indoor and outdoor environments, six reflective surface types, and both daytime and nighttime conditions. All images are annotated with reflective surface region masks and mask annotations for both directly observed and mirror-reflected objects. Then, we curate a benchmark named MIRA-Bench (Mirror-Induced Reasoning Ambiguity Benchmark), comprising 14,140 QA pairs across eight sub-tasks organized into three cognitive levels: Reflection-aware Perception, Spatial Reasoning, and Scene-level Decision-making. We evaluate state-of-the-art VLMs on MIRA-Bench and find consistent failures across tasks: models misclassify whether objects are directly observed or reflected, fail to match reflected instances to their real-world counterparts, and produce erroneous spatial inferences. Remarkably, providing depth data actually degrades reasoning performance, implying that VLMs cannot identify incorrect depth in mirror scenes. The code and data are available at https://github.com/EvaYin-cloud/MIRA-Bench",
-    "summary_zh": null,
+    "summary_zh": [
+      "镜面会扭曲深度数据并复现物体外观，导致VLM难以区分反射与实体，而现有基准缺乏此类场景评估。",
+      "构建MIRA-Bench基准，包含1011张多场景RGB-D图像及14140个QA对，涵盖三级认知的八项子任务。",
+      "实验表明VLM在镜面场景中普遍失效，误判反射实体且空间推理出错；引入深度数据反而降低性能。"
+    ],
     "authors": [
       "Hao Yin",
       "Tianchen Guo",
@@ -1775,14 +1835,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 6
+    "score": 6,
+    "tags": [
+      "视觉语言模型",
+      "RGB-D",
+      "空间推理",
+      "基准测试"
+    ]
   },
   {
     "id": "2610.41629",
     "title": "GRIT: Gradient Masking for Visually Misgrounded Tokens in Text-Rich Reasoning",
-    "title_zh": null,
+    "title_zh": "GRIT：针对富文本推理中视觉误基令牌的梯度掩码",
     "abstract": "Reinforcement learning with verifiable rewards (RLVR) has recently been extended to vision-language models (VLMs), yet its effectiveness remains limited for text-rich reasoning tasks. We highlight a key factor contributing to this limitation: models frequently arrive at correct final answers despite misperceiving visual information during intermediate steps. We define this phenomenon as Correct-but-Visually-Misgrounded Reasoning (CVMR). Because standard RLVR rewards only final-answer correctness, it fails to differentiate between properly grounded and misgrounded reasoning, reinforcing both equally. Through token-level analysis, we reveal that CVMR tokens exhibit distinct attention patterns that differ systematically from well-grounded ones. Based on this observation, we propose GRIT, a training framework that incorporates visual grounding into RLVR to mitigate the impact of CVMR. Furthermore, to address the lack of text-rich reasoning benchmarks that allow for systematic evaluation across text length and reasoning depth, we introduce GRIT-Bench. Experiments demonstrate that GRIT significantly improves both reasoning accuracy and grounding fidelity over existing RLVR methods.",
-    "summary_zh": null,
+    "summary_zh": [
+      "VLM在富文本推理中常出现视觉误基但仍得出正确答案，标准RLVR无法区分并同等强化此类错误推理。",
+      "发现CVMR令牌具有区别于正确基令牌的注意力模式，据此提出GRIT框架，将视觉基纳入RLVR以消除CVMR影响。",
+      "构建GRIT-Bench以系统评估不同文本长度与推理深度，实验表明GRIT显著提升了推理准确性与基保真度。"
+    ],
     "authors": [
       "Chanseul Cho",
       "Noori Bae",
@@ -1806,14 +1876,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 13
+    "score": 13,
+    "tags": [
+      "视觉语言模型",
+      "强化学习",
+      "视觉基",
+      "富文本推理"
+    ]
   },
   {
     "id": "2610.41618",
     "title": "Attention Maps Know When to Think: Training-Free Difficulty-Aware Chain-of-Thought for Reasoning Segmentation",
-    "title_zh": null,
+    "title_zh": "基于注意力图的免训练难度感知思维链推理分割",
     "abstract": "Chain-of-Thought (CoT) prompting has become a standard reasoning strategy in Multi-modal Large Language Models (MLLMs), showing strong performance in complex vision-language tasks such as reasoning segmentation. However, our analysis reveals that indiscriminate CoT usage can lead to degraded performance by inducing unnecessary reasoning, a phenomenon we term overthinking. In reasoning segmentation, overthinking often leads to misalignment between the query's intent and visual grounding. To address this, we propose Difficulty-Aware Chain-of-Thought (DA-CoT), a training-free adaptive framework that selectively triggers CoT based on the input's intrinsic difficulty. We find that the entropy of the model's attention maps reliably reflects task difficulty: low entropy indicates confident, localized grounding, while high entropy suggests uncertainty and potential benefit from CoT. DA-CoT uses this entropy signal to determine whether to apply CoT prompting. Additionally, we introduce a Bidirectional Rethinking mechanism that enables the model to automatically flip its reasoning decision when the initial output fails, enhancing robustness by recovering from failures induced by overthinking and underthinking. DA-CoT demonstrates its effectiveness by achieving state-of-the-art performance on the Reasoning Segmentation benchmarks while significantly improving inference efficiency.",
-    "summary_zh": null,
+    "summary_zh": [
+      "indiscrimate CoT 导致推理分割中过度思考与视觉定位失准，需自适应策略。",
+      "提出免训练框架 DA-CoT，利用注意力图熵反映任务难度，自适应决定是否触发 CoT。",
+      "引入双向反思机制，在初始输出失败时自动翻转推理决策，提升鲁棒性并降低推理开销。"
+    ],
     "authors": [
       "Chanseul Cho",
       "Jaesung Jun",
@@ -1836,14 +1916,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 13
+    "score": 13,
+    "tags": [
+      "推理分割",
+      "思维链",
+      "注意力图",
+      "多模态大模型"
+    ]
   },
   {
     "id": "2610.41604",
     "title": "Real Computation or Merely Naming? A Pre-Registered Mechanism Audit of 25 Cognitive-Architecture Modules in an LLM-Based Agent System",
-    "title_zh": null,
+    "title_zh": "LLM智能体认知架构模块的预注册机制审计",
     "abstract": "Agent systems built on local large language models are increasingly marketed through the vocabulary of cognitive architecture: modules named global workspace, theory of mind, causal reasoning, or active inference are listed as features, and the presence of the name is taken as the presence of the mechanism. We ask the prior question -- does the named computation actually happen -- and contribute a transferable verification method for the claim-implementation gap: a four-question static audit protocol with line-number evidence and call-chain tracing, demonstrated on two systems. We audit a system claiming 25 cognitive mechanisms, pre-register falsifiable predictions for 11 modules and execute the interventions, replicate the protocol on the IIT-phi core of a second, independent system with its own pre-committed falsification criteria, and run two repair experiments as positive controls. In 18 of 25 modules the computed value never reaches any production output; three idle-wiring shapes new to the dead-code and code-smell literatures emerge (connected-but-never-called, called-but-inert, called-but-content-blind). Of 61 frozen criteria across 12 interventions, 53 were confirmed, two partially adjudicated, five falsified, one adjudication-ambiguous. Repairs raised planner task success from 0.028 to 1.000 and cut state-controller error by 52%. Module names and module computations must be audited as independent claims; the protocol and the five-class failure taxonomy are reusable for the claim-implementation gap at two-system, case-level depth.",
-    "summary_zh": null,
+    "summary_zh": [
+      "问题：LLM智能体系统常以认知模块命名暗示机制存在，但缺乏对声明与实现落差的验证。",
+      "方法：提出含行号证据与调用链追踪的四问题静态审计协议，对两系统进行预注册干预与修复实验。",
+      "结论：25个模块中18个计算未达输出，发现三种空接线模式；修复使规划成功率升至1.0。"
+    ],
     "authors": [
       "Peter Chen",
       "Ni Zhang",
@@ -1865,14 +1955,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "LLM智能体",
+      "认知架构",
+      "机制审计",
+      "声明实现落差"
+    ]
   },
   {
     "id": "2610.41563",
     "title": "ORION: An Outcome-Driven LLM Advisor for RL-Based Multi-Domain 6G Slice Placement",
-    "title_zh": null,
+    "title_zh": "ORION：基于结果驱动的LLM与RL的6G跨域切片放置顾问",
     "abstract": "Deploying 6G network slices across administrative domains requires an online decision for each arriving request: which domain hosts each virtual network function, how traffic crosses domain boundaries, and whether the slice is admitted. This joint decision problem is NP-hard under continuous arrivals. Experiments on a parametrized family of multi-domain topologies show that no fixed planning strategy dominates across all regimes: the performance ranking reverses between topology classes, and feasible placements exist for most rejected requests but remain undiscovered. These findings identify the plan layer as the decisive performance lever. We introduce ORION, a hierarchical orchestrator in which two LLM agents translate service intents into structured requests and generate abstract placement plans. A cooperative multi-agent RL coordinator selects the cross-domain partition, treating the plan as a persistent soft prior, while per-domain agents place the functions. ORION main contribution lies at the plan layer: an outcome-driven episodic memory that records, for each completed attempt, the network-condition profile, the proposed plan, and its verified feasibility outcome. The memory feeds verified successes and labelled failures back to the planner, thereby closing the adaptation loop using deployment feasibility rather than a scalar reward assigned to the planner's own proposals. To isolate the effect of the plan quality, we evaluate the planner on held-out topology families while keeping the downstream selection and execution mechanisms fixed. Under this controlled setting, the proposed memory improves admission by $4.6$--$11.5$ percentage points over the same planner without memory, while importance-based retention accounts for most of the improvement over a first-in-first-out store.",
-    "summary_zh": null,
+    "summary_zh": [
+      "跨域6G切片放置是NP难问题，且无固定策略在所有拓扑下均占优，可行放置常未被发觉，表明规划层是性能关键。",
+      "提出ORION分层编排器：LLM agent生成抽象放置计划，多agent RL协调器选择跨域划分，域内agent执行功能放置。",
+      "引入情节记忆记录网络条件、计划及可行性结果，用部署可行性而非标量奖励闭环反馈，使准入率提升4.6-11.5个百分点。"
+    ],
     "authors": [
       "Mahmoud S. Mayaleh",
       "Fetia Bannour",
@@ -1897,14 +1997,24 @@
       "LLM agent",
       "multi-agent"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "6G网络切片",
+      "强化学习",
+      "大语言模型",
+      "跨域编排"
+    ]
   },
   {
     "id": "2610.41562",
     "title": "SCRBench: Beyond Equivalence Checking for Semantic Change Reasoning in Code",
-    "title_zh": null,
+    "title_zh": "SCRBench：超越等价性检查的代码语义变更推理",
     "abstract": "Understanding how code changes affect program semantics is a core aspect of code reasoning in language models. It is commonly evaluated by asking whether two programs are semantically equivalent, but a yes/no answer does not reveal whether a model knows which code change caused a semantic difference, or which sequence of code changes produced the modified program. We study two tasks that ask these questions directly, diagnosing semantic change and reconstructing sequences of code changes, alongside detecting semantic equivalence. We build SCRBench, 67,658 Python program pairs generated by applying sequences of code changes that preserve or alter program semantics, and evaluate five language models on a stratified subset of 4,500 pairs. Detecting semantic equivalence exposes weaker models, whose accuracy declines as changes accumulate, but the strongest models remain near the ceiling. Diagnosing semantic change reveals weaknesses that equivalence accuracy hides: a model with 94.71% equivalence accuracy diagnoses only 54.44% of semantic changes. Reconstructing sequences of code changes is much harder: the best model reconstructs the exact sequence for only 39.27% of pairs, and no model exceeds 1.11% when five changes are applied. High equivalence accuracy therefore overestimates how well models reason about the semantic effects of code changes.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有代码推理评估仅判断程序语义是否等价，无法揭示模型对语义变更原因及变更序列的理解。",
+      "构建SCRBench数据集，提出语义变更诊断与变更序列重构任务，以直接评估模型的代码语义推理能力。",
+      "实验表明高等价准确率会高估模型能力：最强模型等价准确率近100%，但语义变更诊断仅54.44%，序列重构仅39.27%。"
+    ],
     "authors": [
       "Omid Saghatchian",
       "Ali Mahzoun",
@@ -1927,14 +2037,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 14
+    "score": 14,
+    "tags": [
+      "代码推理",
+      "语义变更",
+      "基准测试"
+    ]
   },
   {
     "id": "2610.41558",
     "title": "A complete analytical characterization of optimal collision-free motion for two robots",
-    "title_zh": null,
+    "title_zh": "两机器人最优无碰撞运动的完整解析刻画",
     "abstract": "Collision-free motion planning for multi-agent robotic systems remains an active research area because of the complexity of coordinating robot trajectories, with applications ranging from coordinated drone shows to autonomous operations on land, in the air, and on water. Importantly, the analytical difficulty of nonconvex collision-avoidance constraints has so far driven the development of exclusively numerical methods. We derive a complete analytical characterization of the optimal trajectories for two robots that start and end at rest, under double-integrator dynamics and a squared-acceleration objective. We prove that these trajectories belong to eight distinct contact families and determine which family applies for each configuration of initial and final positions. We analyze the geometrical properties of the optimal trajectories, provide a numerical algorithm for computing them, and discuss how these insights may improve the performance of existing numerical trajectory optimizers.",
-    "summary_zh": null,
+    "summary_zh": [
+      "多机器人轨迹协调受非凸避障约束限制，现有方法多为纯数值求解，缺乏解析解。",
+      "针对双积分动力学与加速度平方目标，推导出两静止机器人最优轨迹的完整解析解。",
+      "证明最优轨迹分属八种接触族并给出判定条件，据此提出数值算法以优化现有求解器。"
+    ],
     "authors": [
       "Jan Kamm",
       "Antonio Terpin",
@@ -1957,14 +2076,23 @@
     "matched": [
       "multi-agent"
     ],
-    "score": 3
+    "score": 3,
+    "tags": [
+      "无碰撞运动规划",
+      "解析解",
+      "多机器人系统"
+    ]
   },
   {
     "id": "2610.41548",
     "title": "Contact-based optimization for collision-free motion planning for a million robots",
-    "title_zh": null,
+    "title_zh": "基于接触优化的百万机器人无碰撞运动规划",
     "abstract": "Multi-agent robotic systems have attracted growing interest in recent years, with applications ranging from coordinated drone shows to autonomous operations on land, in the air, and on water. At the planning level, robot motion is often modeled using double-integrator dynamics (with low-level controllers handling the physical dynamics during execution) with a minimum-energy objective subject to collision-avoidance constraints and limits on position, velocity, and acceleration. The complexity of the problem resides in the constraints, which couple the trajectories and make the optimization problem nonconvex. Existing numerical approaches typically discretize and optimize entire trajectories, which becomes expensive for large fleets. We exploit the structure of optimal trajectories by organizing optimization around contacts, at which robots reach the minimum allowed separation. We formulate a coupled algebraic system in contact variables and reconstruct trajectories analytically between contacts. Our algorithm, sequential contact insertion (SCI), starts from unconstrained trajectories, inserts contacts at separation violations, and jointly adjusts their times and states. Numerical experiments demonstrate planning for one million robots in minutes and thousands of robots in fractions of a second. On problems feasible for a fixed-grid sequential convex programming baseline, SCI achieves median speedups of several orders of magnitude at matching solution accuracy.",
-    "summary_zh": null,
+    "summary_zh": [
+      "大规模多机器人无碰撞运动规划因轨迹耦合约束导致非凸优化，现有全轨迹离散化方法计算代价过高。",
+      "利用最优轨迹结构，围绕机器人达到最小允许间距的接触点构建代数系统，并在接触间解析重构轨迹。",
+      "提出SCI算法，从无约束轨迹起逐步插入并调整接触，实现百万机器人分钟级规划，精度相同时提速数个数量级。"
+    ],
     "authors": [
       "Jan Kamm",
       "Antonio Terpin",
@@ -1986,14 +2114,24 @@
     "matched": [
       "multi-agent"
     ],
-    "score": 3
+    "score": 3,
+    "tags": [
+      "运动规划",
+      "多机器人系统",
+      "无碰撞",
+      "接触优化"
+    ]
   },
   {
     "id": "2610.41541",
     "title": "DeepWeave: Weaving Neural and Symbolic Evidence for ML-Based Network Intrusion Detection System",
-    "title_zh": null,
+    "title_zh": "DeepWeave：融合神经与符号证据的ML网络入侵检测系统",
     "abstract": "Machine learning-based network intrusion detection systems can recognize complex traffic patterns, but often require substantial labelled attack data, degrade under deployment shift, and provide limited evidence for analysts. We present DeepWeave, a probabilistic neuro-symbolic Network Intrusion Detection System (NIDS) that makes logic an integral part of detection. DeepWeave automatically constructs and validates interpretable rules, represents neural predictions as probabilistic predicates, and reconciles both evidence sources through explicit coupling policies over packet-, flow-, and hybrid-views. The resulting proofs provide intrinsic explanations for rule-supported alerts. Across multiple datasets, DeepWeave improves low-data detection, false-positive control, transferability, and robustness. With only 50 labelled packet observations per attack class, it improves macro-F1 from 0.632 to 0.924 and reduces the attack false-positive rate from 0.075 to 0.008 over the matched neural baseline. Its proofs are also more stable than post-hoc neural attributions, while batched inference keeps probabilistic reasoning practical. These results demonstrate label-efficient, adaptable, and inspectable neuro-symbolic intrusion detection.",
-    "summary_zh": null,
+    "summary_zh": [
+      "ML网络入侵检测需大量标注数据、存在部署偏移且缺乏可解释性，提出概率神经符号系统DeepWeave。",
+      "DeepWeave自动构建可解释规则，将神经预测转为概率谓词，并通过耦合策略在多视图下协调证据。",
+      "实验表明DeepWeave提升少样本检测与鲁棒性，仅50个样本下macro-F1升至0.924，且提供稳定证明。"
+    ],
     "authors": [
       "Raoul Saad",
       "Enkeleda Bardhi",
@@ -2017,14 +2155,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 3
+    "score": 3,
+    "tags": [
+      "网络入侵检测",
+      "神经符号系统",
+      "可解释性",
+      "少样本学习"
+    ]
   },
   {
     "id": "2610.41521",
     "title": "KITE: Retrieval as a Decision Procedure for Long-Term Conversational Memory",
-    "title_zh": null,
+    "title_zh": "KITE：面向长期对话记忆的决策式检索框架",
     "abstract": "Many long-term memory systems for LLM agents are built around embedding-based retrieval. Al- though effective for semantic matching, similarity ranking alone does not establish whether re- trieved memories satisfy the conditions implied by a question. In this paper, we introduce KITE (Knowledge-Indexed Temporal Evidence), a vector-free framework that formulates memory re- trieval as an explicit decision procedure. KITE organizes multi-session conversations as structured knowledge indexed by a governed topic vocabulary, which evolves through controlled expansion and consolidation. At query time, questions are compiled into inspectable retrieval plans over the same knowledge index that guides memory construction. The plans are then executed through fixed lookup and ranking operations, while sparse lexical retrieval recovers surface details omitted from the structured representation. Experiments on LoCoMo and LongMemEval-S show that KITE achieves 93.5% and 86.0% accuracy while using only about 1.6k reader-context tokens per ques- tion. These results demonstrate that conversational memory can move beyond similarity ranking by unifying memory construction and query compilation around a governed index, turning retrieval into an inspectable decision procedure for determining which evidence satisfies the question.",
-    "summary_zh": null,
+    "summary_zh": [
+      "基于嵌入的检索仅做语义匹配，无法判断检索记忆是否满足问题条件。",
+      "提出无向量框架KITE，将多轮对话组织为受控词汇索引的结构化知识，把检索转化为显式决策过程。",
+      "查询时将问题编译为可检视的检索计划并执行，实验表明该方法在低上下文开销下取得高准确率。"
+    ],
     "authors": [
       "Feng Li",
       "Kailun Tan",
@@ -2050,14 +2198,23 @@
     "matched": [
       "LLM agent"
     ],
-    "score": 8
+    "score": 8,
+    "tags": [
+      "对话记忆",
+      "检索框架",
+      "决策过程"
+    ]
   },
   {
     "id": "2610.41511",
     "title": "Specification-Guided Generation for Large Language Models",
-    "title_zh": null,
+    "title_zh": "大语言模型的规约引导生成",
     "abstract": "Large language models (LLMs) can generate structured outputs, but existing constrained-decoding methods mainly enforce syntax and cannot directly enforce satisfaction of a formal specification. We introduce a neuro-symbolic, specification-guided decoding framework that combines LLM generation with symbolic reasoning. At each step, the framework refines the decoding grammar by filtering out values that cannot be extended to an output satisfying the specification. We present a forward-only variant that guarantees specification satisfaction by construction, and a backtracking variant that revises earlier feasible choices when their downstream consequences leave only values that the LLM itself judges unsuitable. The framework is model-agnostic, requires no retraining, and builds on existing grammar-constrained decoding mechanisms. Experiments on configuration and constraint-solving benchmarks show that the forward-only variant reliably produces specification-compliant outputs while reducing repeated LLM inference compared with rejection sampling and incurring modest symbolic-reasoning overhead. The backtracking variant further reduces cases in which the model is forced to select values that it has itself judged unsuitable, thereby substantially improving adherence to the LLM's stated interpretation of the prompt.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有LLM受约束解码仅能保证语法，无法直接满足形式化规约，需解决输出语义合规问题。",
+      "提出神经符号规约引导解码框架，每步过滤无法扩展至满足规约的值，结合符号推理与LLM生成。",
+      "前向变体保证合规且减少重复推理；回溯变体大幅降低模型被迫选不适值的情况，提升对提示的遵循。"
+    ],
     "authors": [
       "Alessandro Previti",
       "Konstantinos Vandikas",
@@ -2083,14 +2240,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "受约束解码",
+      "形式化规约",
+      "神经符号推理"
+    ]
   },
   {
     "id": "2610.41508",
     "title": "HiState: Hierarchical Prefix Cache Management for Hybrid LLM Serving in Agentic Workloads",
-    "title_zh": null,
+    "title_zh": "面向智能体负载的混合LLM层级前缀缓存管理",
     "abstract": "Hybrid large language models combine full-attention and recurrent linear layers to reduce inference costs. Prefix caching can further reduce redundant computation across requests, but a recurrent checkpoint cannot recover an earlier state corresponding to a shorter prefix. Existing hybrid prefix caching systems retain checkpoints at selected boundaries to support common reuse patterns in conventional conversations. However, agent workloads modify and revisit earlier contexts, exposing reusable prefixes whose checkpoints were never saved or have already been evicted. A straightforward approach is to retain more checkpoints to reduce recomputation, but their cumulative footprint can displace reusable prefixes from other sessions and cause additional cache misses. To address these problems, we present HiState, a prefix cache management system for hybrid models serving agent workloads. Our key observation is that prefix reuse accesses all matching key-value (KV) entries but only one recurrent checkpoint, regardless of how many checkpoints are retained. This asymmetry allows HiState to retain historical checkpoints on SSD while prioritizing fast memory for KV entries: each hit retrieves only one checkpoint whose size is independent of context length. Within this hierarchy, we propose adaptive interval control to balance checkpoint storage against recomputation, and unified eviction to coordinate checkpoint sparsification with reclamation of stale trajectories. We implement HiState on top of vLLM and evaluate it on two public coding-agent trace datasets and controlled microbenchmarks. On real agent traces, HiState achieves up to 5.73x and 5.44x speedups in p99 TTFT over vLLM-Marconi and SGLang-HiCache, respectively.",
-    "summary_zh": null,
+    "summary_zh": [
+      "混合LLM中前缀缓存因循环检查点难以恢复短前缀，且智能体负载常重访早期上下文导致缓存未命中。",
+      "提出HiState系统，利用KV条目与检查点访问的不对称性，将历史检查点存于SSD，优先为KV条目分配快速内存。",
+      "结合自适应间隔控制与统一驱逐策略，在真实智能体轨迹上使p99 TTFT最高加速5.73倍。",
+      "混合LLM中前缀缓存因循环检查点难以恢复短前缀，且智能体负载常重访早期上下文导致缓存未命中。"
+    ],
     "authors": [
       "Zaifeng Pan",
       "Lucas Wang",
@@ -2114,14 +2281,23 @@
     "comment": "",
     "journal_ref": "",
     "matched": [],
-    "score": 1
+    "score": 1,
+    "tags": [
+      "混合LLM",
+      "前缀缓存",
+      "智能体负载"
+    ]
   },
   {
     "id": "2610.41482",
     "title": "KEEPER: Learning Control-Sufficient Textual Memory for Long-Horizon LLM Agents",
-    "title_zh": null,
+    "title_zh": "KEEPER：为长周期LLM智能体学习控制充分的文本记忆",
     "abstract": "Recursive textual memory can carry earlier errors into later updates, yet task performance alone does not establish memory reliability. We define self-consistency bias as the persistence of incorrect claims already present in the incoming memory. We present KEEPER, a comparative analysis of four auxiliary objectives along information-content and update-sensitivity axes within a shared recursive interface, examining how supervision targets relate to agent performance. Among evaluated conditions, reward-related prediction achieve the highest task performance before and after offline reinforcement learning, outperforming joint supervision. A claim-level analysis of one baseline trajectory documents error persistence despite corrective observations. Together, these analyses motivate evaluating error persistence and valid-information retention alongside task outcomes.",
-    "summary_zh": null,
+    "summary_zh": [
+      "递归文本记忆会将早期错误带入后续更新，且仅靠任务表现无法保证记忆可靠性，存在自洽性偏差。",
+      "提出KEEPER，在共享递归接口中沿信息内容与更新敏感度轴对比四种辅助目标，探究监督目标与智能体表现的关系。",
+      "发现奖励预测目标任务表现最优；分析证实错误持续存在，呼吁评估记忆的错误持续与有效信息保留。"
+    ],
     "authors": [
       "Jinkyeong Choi",
       "Chaebin Jeong",
@@ -2144,14 +2320,23 @@
     "matched": [
       "LLM agent"
     ],
-    "score": 16
+    "score": 16,
+    "tags": [
+      "LLM智能体",
+      "文本记忆",
+      "辅助目标"
+    ]
   },
   {
     "id": "2610.41453",
     "title": "Evidence-Guided Recovery for AI Agents with Ambiguous Tool Outcomes and Partial Execution",
-    "title_zh": null,
+    "title_zh": "模糊工具结果与部分执行下AI代理的证据引导恢复",
     "abstract": "Tool timeouts can leave AI agents facing ambiguous tool outcomes and partial execution: an action may have failed, committed or remained in flight while other workflow steps have already completed. We formulate evidence-guided task recovery over approved obligations, provider capabilities and states compatible with public evidence. A shared admissibility check handles key expiry, authorization timing, dependencies and residual effects; a terminal certificate separates actual goal satisfaction from publicly supported safe completion. The known-model implementation combines standard observation-contingent planning with a separately implemented effect-history adjudicator. In a finite study of 37 assignments, planning and three active controls each certify 28 completions; four saved synthetic fee units incur additional computation. A preregistered assignment-held-out comparison then evaluates planning advice against evidence prompting with two local model bundles. Across 58 paired units in 19 previously developed task families, advice certifies 30 completions versus 9, a 36.2-percentage-point difference (exact family sign-flip p=0.0078), using 272 proposals versus 399. All 116 trajectories pass independent replay. Both models exhibit a positive completion difference. The comparison measures the evaluated advice interface under a common shield; search-versus-rule advice requires a separate matched comparison. Unknown and handoff outcomes remain explicit, with guarantees tied to the declared provider capabilities rather than arbitrary third-party exactly-once execution.",
-    "summary_zh": null,
+    "summary_zh": [
+      "AI代理面临工具超时导致的模糊结果与部分执行问题，提出基于公开证据与提供者能力的证据引导任务恢复方法。",
+      "构建共享可容许性检查处理依赖与残余效应，并引入终止证书区分实际目标满足与安全完成，结合观察规划与效应历史裁决器实现。",
+      "实验表明，在58个配对测试单元中，规划建议比证据提示多完成30对9项任务，差异显著，且所有轨迹均通过独立重放验证。"
+    ],
     "authors": [
       "Genliang Zhu",
       "Xiaobo Chen",
@@ -2173,14 +2358,23 @@
     "matched": [
       "AI agent"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "AI代理",
+      "任务恢复",
+      "部分执行"
+    ]
   },
   {
     "id": "2610.41446",
     "title": "Beyond Trial-and-Error: A Geospatial-Guided Active Reasoning Framework for Robust Aerial Vision-and-Language Navigation",
-    "title_zh": null,
+    "title_zh": "基于地理空间引导的主动推理航空视觉语言导航框架",
     "abstract": "Aerial Vision-and-Language Navigation (VLN) requires UAVs to locate language-specified goals in large-scale urban environments, where objects often appear small and visually ambiguous from high-altitude viewpoints. Existing methods largely follow a reactive paradigm common in indoor VLN, repeatedly updating navigation states from local observations while underutilizing the geospatial structure that remains stable during navigation. As a result, visually similar distractors can cause a reactive goal search to repeatedly reinforce locally plausible goal hypotheses based on passively accumulated evidence, leading to unreliable localization. To address this, we propose GeoReasoner, a robust framework that shifts the paradigm of Aerial VLN from reactive trial-and-error to geospatial-guided active reasoning. Specifically, GeoReasoner first performs pre-search geospatial reasoning to derive region-level priors and constrain the goal hypothesis space. Building on these, it further conducts hypothesis-driven exploration to actively acquire discriminative evidence and refine competing goal hypotheses. Finally, consistency-aware goal verification adversarially assesses complementary evidence sources before stopping, hence reducing premature or erroneous goal confirmations. Experiments on the real-world CityNav benchmark demonstrate that GeoReasoner sets a new SOTA among zero-shot Aerial VLN methods while competing favorably with supervised approaches.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有航空VLN采用被动反应范式，未充分利用稳定地理空间结构，易受视觉相似干扰物误导导致定位不可靠。",
+      "提出GeoReasoner框架，将航空VLN从被动试错转为地理空间引导的主动推理，先推导区域先验约束假设空间。",
+      "该方法结合假设驱动探索主动获取判别性证据，并通过一致性感知验证减少错误确认，在CityNav实现零样本SOTA。"
+    ],
     "authors": [
       "Jiawei Ge",
       "Wenkang Gong",
@@ -2209,14 +2403,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 13
+    "score": 13,
+    "tags": [
+      "航空视觉语言导航",
+      "地理空间推理",
+      "主动推理"
+    ]
   },
   {
     "id": "2610.41435",
     "title": "BlindToChange: AI Agents Can Find Changes When Asked But Do They Look When Needed?",
-    "title_zh": null,
+    "title_zh": "BlindToChange：AI代理能否主动发现并验证所需的变化？",
     "abstract": "Given that AI agents can search the web broadly and deeply in real time, it is tempting to conclude that their outputs account for recent world events. We show that this conclusion does not hold in practice. While agents can search and easily find recent changes, the correctness of their responses depends on whether they search and what they search for. Popular agentic search benchmarks like BrowseComp cannot expose failures wherein agents do not recognize their own assumptions that should be verified, since these benchmarks explicitly state what needs to be found. In contrast, many user requests state only the final information need (e.g., an itinerary for a trip), leaving the agent to discover relevant changes (e.g., the temporary closure of a museum) and account for their consequences. To highlight such gaps, we introduce BlindToChange, a benchmark that measures whether agents proactively discover recent events that affect their responses. Our benchmark comprises requests for recommendations where an obvious candidate is no longer applicable due to a recent real-world event. These events are drawn automatically from Wikidata, allowing BlindToChange to be periodically refreshed. Strikingly, we find a big gap -- as high as 27.5 points, even at high reasoning effort -- in systems' performance, when the recent event is not explicitly mentioned compared to when we ask about it directly. Analyzing search trajectories, we learn that more than half of the failures can be attributed to the fact that agents do not directly search to verify whether a relevant fact has changed. Our benchmark highlights, and tracks, a new axis of progress, wherein systems account for recent information that is not explicitly mentioned in the user request.",
-    "summary_zh": null,
+    "summary_zh": [
+      "AI代理虽能搜索最新信息，但常未主动验证自身假设，导致输出未考虑近期事件变化。",
+      "提出BlindToChange基准，测试代理在推荐任务中能否主动发现导致原候选失效的近期事件，该基准基于Wikidata自动提取并支持定期更新。",
+      "实验发现未明确提示时系统性能最高下降27.5分，超半数失败因代理未主动搜索验证事实变化。"
+    ],
     "authors": [
       "Anirudh Phukan",
       "Tanya Goyal",
@@ -2239,14 +2442,23 @@
       "AI agent",
       "reasoning"
     ],
-    "score": 20
+    "score": 20,
+    "tags": [
+      "AI代理",
+      "信息验证",
+      "评测基准"
+    ]
   },
   {
     "id": "2610.41433",
     "title": "What Does a Repair Agent Gain from Remembering Its Failure? An Exploratory Study on Real Python Bugs",
-    "title_zh": null,
+    "title_zh": "修复Agent记忆失败有何收益？基于真实Python缺陷的探索性研究",
     "abstract": "When a coding agent fails a repair task, it is often retried with a record of the failure: the transcript, a self-written lesson, or extracted test signals. We ask what such failure memory changes in the retry. On 75 BugsInPy bugs, we retried each of 181 failed attempts of gpt-5.4-mini under five conditions, with a predeclared analysis whose deviations we report. Two predeclared follow-ups repeated the plain-retry, transcript and lesson conditions with the larger gpt-5.4 and added a notice-only control. On the bug-revealing tests, every memory condition gained over a plain retry in point estimate (+5.5 to +9.9 points over 29.8%), but none significantly. Five further findings stand out. First, a model-written lesson showed no advantage over the transcript it summarises (-1.7 points, 95% CI [-8.7, +4.9]; -3.5 for gpt-5.4), although it costs an extra model call. Second, the transcript may do more than tell the agent that it failed: a notice alone produced no significant change, while the transcript resolved 12.2 points more failures than the notice for gpt-5.4-mini (CI [+4.2, +20.0], partial run of 156 failures; the only significant one of twelve predeclared contrasts, and not significant for gpt-5.4). Third, post hoc, fewer retries with memory ended without modifying any Python file, while the share of editing retries that touched a file the fix changes was near ceiling. Fourth, in a post hoc full-test-suite check, retries that had also seen the previous attempt's test results more often failed other tests that the reference fix passes, which shrinks their apparent gains. Fifth, outcomes varied far more between failures than between conditions, and we give the sample sizes a confirmatory study would need.",
-    "summary_zh": null,
+    "summary_zh": [
+      "问题：修复Agent重试时记忆失败信息有何收益？方法：在75个Python缺陷上对gpt-5.4-mini的181次失败重试并设置5种记忆条件。结论：记忆条件点估计均高于普通重试，但无显著优势。",
+      "问题：模型生成的教训是否优于原始记录？方法：对比教训与记录摘要及仅通知条件。结论：教训无优势且多耗模型调用；记录比仅通知多解决12.2点失败，表明其作用超越仅提示失败。",
+      "问题：记忆重试的代码修改与测试表现如何？方法：事后分析重试的文件修改及全测试套件结果。结论：有记忆时更少空修改，但看过前次测试结果的重试更易破坏其他测试，且失败间差异远大于条件间差异。"
+    ],
     "authors": [
       "Wenbo Ye",
       "Yongxi Zhou",
@@ -2268,7 +2480,13 @@
     "matched": [
       "coding agent"
     ],
-    "score": 7
+    "score": 7,
+    "tags": [
+      "程序修复",
+      "Agent",
+      "失败记忆",
+      "实证研究"
+    ]
   },
   {
     "id": "2610.41432",
@@ -2305,9 +2523,13 @@
   {
     "id": "2610.41424",
     "title": "A Unified XAI-NSAI Analytical Framework for Trustworthy IoT Anomaly Detection",
-    "title_zh": null,
+    "title_zh": "面向可信IoT异常检测的统一XAI-NSAI分析框架",
     "abstract": "The widespread deployment of Internet of Things (IoT) devices in critical environments makes anomaly detection essential for identifying abnormal behaviors and supporting timely investigation and response. However, accurate detection alone is insufficient. Practical IoT deployments must also provide explanations, incorporate domain knowledge and reasoning, operate under IoT constraints, and support human decision making. Although recently proposed approaches increasingly incorporate Explainable Artificial Intelligence (XAI) or Neuro-Symbolic Artificial Intelligence (NSAI), XAI and NSAI methods are often considered independently. We argue that they should be considered together to better understand their complementary roles in supporting trustworthy IoT anomaly detection. To address this gap, we propose a unified analytical framework organized around five complementary dimensions. The framework provides a structured basis for characterizing existing approaches, identifying capability gaps and design trade-offs, and guiding the design of new anomaly detection systems for different IoT applications. We demonstrate the framework's analytical utility by applying it to three representative studies and illustrate its design utility through its application to a Medical IoT anomaly detection system.",
-    "summary_zh": null,
+    "summary_zh": [
+      "IoT异常检测不仅需准确，还需提供解释与推理，但现有XAI与NSAI方法常被孤立研究。",
+      "提出基于五个互补维度的统一分析框架，将XAI与NSAI结合以支持可信IoT异常检测。",
+      "将该框架应用于三个代表性研究与医疗IoT系统，验证了其分析现有方法与指导新系统设计的效用。"
+    ],
     "authors": [
       "Hugues Leger",
       "Giovani R. Abuaitah"
@@ -2327,14 +2549,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 8
+    "score": 8,
+    "tags": [
+      "物联网异常检测",
+      "可解释AI",
+      "神经符号AI"
+    ]
   },
   {
     "id": "2610.41402",
     "title": "DUGO: Dual-Scale Gaussian Memory for Online Temporal Action Localization in Egocentric Procedural Videos",
-    "title_zh": null,
+    "title_zh": "DUGO：面向自我中心视频在线时序动作定位的双尺度高斯记忆",
     "abstract": "Online Temporal Action Localization (OnTAL) aims to detect and localize action instances from untrimmed streaming videos in real time. Unlike offline approaches, OnTAL models have no access to future frames and cannot go back and refine earlier predictions, which makes the task considerably harder given the strict real-time constraints and narrow temporal window available. Most existing OnTAL methods lean on either brief anchor-based context or a single-scale memory of past frames, which limits how well they can capture actions unfolding across multiple time scales or requiring long-range reasoning in Procedural Videos. To address these gaps, we present DUGO (Dual-Scale Encoding and Gaussian Memory Online), a new OnTAL framework that jointly models local motion dynamics and long-range temporal dependencies. At its core, DUGO uses a Dual-Scale Temporal Encoder, pairing depth-wise local representations with global self-attention so it can pick up both fine-grained temporal patterns and broader contextual cues. We also introduce a Gaussian Memory Bank, which represents action memory as stochastic, input-conditioned Gaussian prototypes, allowing for richer temporal memory through gated cross-attention applied at both the encoder and anchor-query stages. Extensive experiments on procedural egocentric datasets (EGTEA, EPIC-Kitchens-100) demonstrate that DUGO achieves state-of-the-art performance while also providing substantial improvements on non-egocentric benchmarks such as Muses. The project page is available at: https://aman554-eq.github.io/DUGO",
-    "summary_zh": null,
+    "summary_zh": [
+      "在线时序动作定位无法获取未来帧且难以回溯，现有方法难以捕捉多时间尺度动作与长程依赖。",
+      "提出DUGO框架，采用双尺度时序编码器结合局部表示与全局自注意力，并引入高斯记忆库建模动作记忆。",
+      "在自我中心数据集上达到SOTA，并在非自我中心基准上取得显著提升。"
+    ],
     "authors": [
       "Mohammed Aman Bhuiyan",
       "Md. Sazzad Hossain Adib",
@@ -2360,14 +2591,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 7
+    "score": 7,
+    "tags": [
+      "在线时序动作定位",
+      "高斯记忆库",
+      "自我中心视频"
+    ]
   },
   {
     "id": "2610.41401",
     "title": "When Safety Checks Become Privacy Risks: A Privacy-Preserving Paradigm for LLM Agent Safety Auditing",
-    "title_zh": null,
+    "title_zh": "LLM Agent安全审计的隐私保护范式",
     "abstract": "Large language model agents interact with online services through tool calls that may access private data or perform sensitive actions. Specialized providers can supply and maintain pre-execution safety auditing capabilities for agent operators. However, sending task descriptions, call arguments, and interaction histories to an external auditor may expose sensitive user information. In this work, we propose a paradigm for privacy-preserving safety auditing that separates delegated audit computation from plaintext access and execution authority. Grounded in a three-domain auditing model, the paradigm connects trusted representation construction, encrypted audit computation, and trusted decision and execution through explicit interfaces. These interfaces accommodate alternative representations and scorers, while encrypted computation protects audit inputs from a semi-honest auditor. We instantiate this paradigm in SealCall, a framework combining learned audit representations, CKKS-based encrypted similarity computation, and execution control bound to audited tool calls. Evaluated on 1,252 public binary candidates, SealCall achieves a mean F1 score of 0.840 under grouped nested evaluation, while preserving plaintext audit decisions in all measured cases. A representative configuration completes each encrypted scoring operation in 0.176 s.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM Agent的外部安全审计会暴露用户敏感信息，需解决审计与隐私的矛盾。",
+      "提出三域审计模型，将委托计算与明文访问及执行权分离，通过加密计算保护输入。",
+      "实现SealCall框架，在加密评分耗时0.176s下达到0.840的F1分数，且完全保留明文决策。"
+    ],
     "authors": [
       "Yixiang Luo",
       "Ziheng Ma",
@@ -2391,14 +2631,23 @@
     "matched": [
       "LLM agent"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "隐私保护",
+      "LLM Agent",
+      "安全审计"
+    ]
   },
   {
     "id": "2610.41397",
     "title": "Cross-Interface Authorization for AI Computer-Use Agents",
-    "title_zh": null,
+    "title_zh": "AI计算机使用代理的跨接口授权",
     "abstract": "Computer-use agents act through graphical interfaces, command lines, APIs, scripts, and Model Context Protocol servers. A policy decision can be interface-invariant while its executable authorization is not: another route can bypass mediation, alter a security-relevant default, or commit after the authorized state has changed. We present a profile-bounded protocol for a fixed, versioned computer-use deployment. It enumerates effect-bearing routes and durable sinks, checks a route-to-sink enforcement cut, normalizes each concrete request to a canonical effect, issues a route-bound prepare ticket, and verifies the route, effect, grant, trace, profile, inventory, and authoritative state again at commit. A committed result requires an agreeing sink receipt. Under explicit assumptions, we prove profile-bounded refinement, matched-effect decision invariance, resistance to alternate-route laundering and declared cross-surface recomposition, commit-time state safety, and receipt-grounded outcomes. The reference profile registers 12 effect families, five interfaces, and 60 routes. Two structurally distinct runtime mappings produce 3,464 traces over 1,732 scenarios each: 960 commits, 2,312 denials, and 192 commits after re-preparation. An independent checker accepts every retained trace and pair and rejects 26/26 semantic regressions; coverage and normalizer suites reject 24/24 and 720/720 mutants; and 168/168 commit probes match their declared outcomes. A frozen-source audit passes 52 checks over 12 files from two independent hybrid runtimes and one public authorization substrate. Source-shaped adapter refinements commit 48/48 instrumented calls and reject 15/15 unbound cases. The resulting guarantees bind the declared profile and its effect semantics.",
-    "summary_zh": null,
+    "summary_zh": [
+      "AI代理跨接口操作时，授权易被其他路由绕过或因状态改变而失效，需解决跨接口授权一致性问题。",
+      "提出一种受配置文件约束的协议，枚举路由与接收器，规范化请求并在提交时再次验证状态与授权。",
+      "证明该协议能抵抗路由绕过与跨面重组，保障提交时状态安全；大规模测试与审计验证了其可靠性与语义一致性。"
+    ],
     "authors": [
       "Genliang Zhu",
       "Chu Wang"
@@ -2416,14 +2665,24 @@
     "comment": "31 pages, 2 figures, and 7 tables. Includes formal results, two reference runtime mappings, mutation tests, commit-time race probes, source-shaped adapter checks, and a frozen external-source audit. Guarantees bind the registered deployment profile and declared effect semantics",
     "journal_ref": "",
     "matched": [],
-    "score": 7
+    "score": 7,
+    "tags": [
+      "AI代理",
+      "跨接口授权",
+      "安全协议",
+      "形式化验证"
+    ]
   },
   {
     "id": "2610.41390",
     "title": "Hierarchical Dual-Graph Retrieval for Long-form Audio Reasoning",
-    "title_zh": null,
+    "title_zh": "面向长音频推理的层次化双图检索方法",
     "abstract": "Large audio language models (LALMs) struggle with long-form audio reasoning, as processing entire recordings often limits to capture query-relevant content distributed across distant segments while incurring substantial computational cost. We introduce AudioHelix, a hierarchical DualGraph framework tailored for LALMs' retrieval-augmented generation (RAG) systems. Unlike existing text-only or non-graph RAG approaches, AudioHelix connects related textual and acoustic evidence across temporally distant segments for multi-hop reasoning. Extensive experiments on TraceAV-Bench, MMAU-Pro, and AudioMarathon demonstrate that AudioHelix consistently outperforms full-audio processing and existing RAG methods. The project site is https://github.com/ewha-mmai/audiohelix.",
-    "summary_zh": null,
+    "summary_zh": [
+      "大音频语言模型处理长音频时难以捕捉远距离相关片段且计算开销大。",
+      "提出AudioHelix，一种为LALM的RAG系统定制的层次化双图框架。",
+      "该框架连接跨时距的文本与声学证据以支持多跳推理，实验表明其优于全音频处理及现有RAG方法。"
+    ],
     "authors": [
       "Eunsang Lee",
       "Taein Ju",
@@ -2447,14 +2706,23 @@
       "reasoning",
       "retrieval-augmented generation"
     ],
-    "score": 13
+    "score": 13,
+    "tags": [
+      "长音频推理",
+      "双图检索",
+      "RAG"
+    ]
   },
   {
     "id": "2610.41389",
     "title": "Parse Before You Execute: Efficient Spatial Reasoning with Executable Primitives",
-    "title_zh": null,
+    "title_zh": "基于可执行基元的高效空间推理：先解析后执行",
     "abstract": "Spatial reasoning in Vision-Language Models (VLMs) has increasingly benefited from tool-integrated pipelines that ground computation in explicit geometry. However, existing systems often compile queries into relatively open-ended artifacts, such as code, task constraints, tool plans, or gathered evidence, leaving what must be resolved before execution under-specified. This can lead to unnecessary tool acquisition and iterative refinement, while still producing plausible reasoning traces from incomplete spatial commitments. We identify this failure mode as under-committed query compilation. To address it, we propose PEPS, a training-free agentic paradigm Parsing Executable Primitives for Spatial reasoning under a typed FESM schema over Frame, Entity, State, and Metric. PEPS follows a parse-before-execute principle: the Parser commits each query to a compact set of executable requirements; the Executor selectively grounds the required primitives through fixed geometric APIs and deterministic computation; and the Verifier checks execution sufficiency, enabling early termination or targeted repair. Extensive experiments across challenging spatial reasoning benchmarks show that PEPS consistently improves reasoning accuracy while substantially reducing refinement rounds, API cost, and end-to-end latency over strong tool-integrated baselines. These results demonstrate that explicit requirement commitment can make tool-integrated spatial reasoning not only more reliable, but also more execution-efficient.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有VLM空间推理在查询编译时承诺不足，导致工具获取冗余、迭代修正且易产生不完整推理。",
+      "提出无训练智能体范式PEPS，遵循先解析后执行原则，将查询解析为紧凑的可执行需求集。",
+      "实验表明PEPS显著提升推理准确率，同时大幅减少修正轮次、API成本及端到端延迟。"
+    ],
     "authors": [
       "Xiwei Liu",
       "Yulong Li",
@@ -2480,14 +2748,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 13
+    "score": 13,
+    "tags": [
+      "空间推理",
+      "视觉语言模型",
+      "智能体"
+    ]
   },
   {
     "id": "2610.41378",
     "title": "Ask on Demand: Targeted Peer Communication for Parallel Agentic Systems",
-    "title_zh": null,
+    "title_zh": "按需询问：面向并行智能体系统的定向同伴通信",
     "abstract": "Parallel LLM agents tackle complex tasks by exploring multiple trajectories, yet useful discoveries remain isolated in individual execution histories. Existing sharing methods often select or summarize information before other agents' needs become clear, potentially overlooking details that become important later. We propose Ask on Demand (AOD), a communication framework that enables agents to seek targeted peer assistance when specific information needs arise. Upon an approved request, AOD retrieves relevant evidence from peer execution histories, selects a suitable peer, and generates a response tailored to the request. To determine when such assistance is worthwhile, we train a lightweight gate using paired team continuations, with supervision derived from final team outcomes and inference cost. Experiments on AppWorld and WebShop demonstrate that AOD consistently improves task performance over independent parallel execution while achieving lower inference cost than existing information-sharing baselines. These findings highlight the benefits of aligning peer communication with agents' evolving information needs to achieve more effective and efficient collaboration.",
-    "summary_zh": null,
+    "summary_zh": [
+      "并行 LLM agent 的有用发现易孤立，现有共享方法因过早汇总而遗漏后续关键细节。",
+      "提出 AOD 通信框架，允许 agent 在产生具体信息需求时，检索同伴历史并生成定制响应。",
+      "训练轻量级门控决定何时求助；实验表明 AOD 提升了任务表现，且推理成本低于现有基线。"
+    ],
     "authors": [
       "Haofu Yang",
       "Hongyang Yin",
@@ -2512,14 +2789,23 @@
     "matched": [
       "LLM agent"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "并行智能体",
+      "LLM通信",
+      "按需询问"
+    ]
   },
   {
     "id": "2610.41377",
     "title": "MolmoSpaces-CommonSense: Evaluating Commonsense in Robotic Manipulation Policies",
-    "title_zh": null,
+    "title_zh": "评估机器人操作策略常识推理的MolmoSpaces-CommonSense基准",
     "abstract": "Real-world robotic manipulation requires reasoning about cluttered scenes, partially observable or hidden objects, and semantically appropriate actions, in addition to low-level execution within those scenes. However, existing simulation benchmarks primarily test the latter and remain dominated by comparatively clean environments with limited clutter and narrowly scoped task structure, leaving many forms of commonsense reasoning untested. We address this by introducing a taxonomy of reasoning processes for robotic manipulation grounded in developmental cognitive science. We operationalize this taxonomy through a new benchmark of robot tasks, MolmoSpaces-CommonSense, that requires reasoning about occlusion, containment, support relations, semantically correct grasp points, spatial affordances, and hidden objects. These evaluations require policies not only to recognize relevant scene structure but also to execute correct actions in them. We evaluate several zero-shot generalist manipulation policies. Across model types and architectures, we observe consistent failures in commonsense reasoning: success rates in cluttered scenes drop by over 50% as distractors increase, policies act on incorrect objects in cluttered settings 30% of the time, and affordance-sensitive grasping remains unreliable even with highly specific language prompts, with correct object part selection happening only about 50% of the time. Further, VLM-based success estimation struggles to reliably evaluate rollouts in these settings, suggesting that the challenge extends beyond control to the broader perception-reasoning-action stack. Our results suggest that existing benchmarks may substantially overestimate zero-shot real-world readiness. Code and policy leaderboard link at https://github.com/allenai/molmospaces.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有机器人仿真基准多测试底层执行，缺乏对遮挡、支撑等常识推理的评估。",
+      "基于发展认知科学提出推理分类法，构建MolmoSpaces-CommonSense基准以测试策略的常识推理与操作能力。",
+      "评估发现通用策略在杂乱场景成功率骤降超50%，VLM评估也失效，现有基准高估了策略的零样本就绪度。"
+    ],
     "authors": [
       "Arjun Guru",
       "Max Argus",
@@ -2543,14 +2829,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 4
+    "score": 4,
+    "tags": [
+      "机器人操作",
+      "常识推理",
+      "评估基准"
+    ]
   },
   {
     "id": "2610.41369",
     "title": "BlindStep: A Secure One-Step Kernel for Privacy-Preserving Collaborative Reasoning",
-    "title_zh": null,
+    "title_zh": "BlindStep：隐私保护协作推理的安全单步MPC内核",
     "abstract": "A recurring step in two-party collaborative workflows combines a private candidate frontier with a partner's compatible evidence, scores the resulting candidates, and retains only a small frontier. Direct execution can expose intermediate candidates, local scores, or unauthorized evidence provenance. Existing MPC platforms and PSI protocols provide useful building blocks, but they do not define a unified post-alignment boundary for bounded-slot aggregation, fail-closed overflow handling, retained-frontier selection, and downstream disclosure. We present BlindStep, a fixed-shape MPC-online kernel for one such post-alignment step between two semi-honest parties. Given a frontend realizing the bounded-slot contract and an application enforcing the reveal policy $ρ$, BlindStep provides a per-invocation simulation-based guarantee in the $F_{\\mathrm{align}}$-hybrid model: the kernel leaks only public setup parameters, fixed execution-shape metadata, a global overflow bit, and $ρ$-authorized Layer-2 disclosures. The guarantee excludes malicious security and multi-invocation composition, and treats frontend leakage and offline preprocessing separately. Within this kernel boundary, we implement six semi2k realizations in MP-SPDZ, crossing two sharing styles and three top-K strategies: H-variants compare over arithmetic shares, while B-variants convert packed ranking values to Boolean shares before selection. Under LAN, B-Queue is 6-7 times faster and uses about 40 times less communication than H-Queue at N = 256 and 2048. Against H-Sort on the same backend, B-Queue achieves speedups of 21 and 30 times and communication reductions of 204 and 290 times at N = 2048 and 8192, respectively. Under the evaluated N = 256, 100 ms RTT WAN profile, H-Sort becomes fastest, showing that round complexity can dominate backend choice for the measured MPC-online kernel.",
-    "summary_zh": null,
+    "summary_zh": [
+      "两方协作推理直接执行易泄露中间候选和分数，现有MPC与PSI协议缺乏统一的后对齐安全边界与溢出处理。",
+      "提出BlindStep，一种定形MPC在线内核，在半诚实模型下提供模拟安全保证，仅泄露公开参数、执行元数据及授权披露。",
+      "基于MP-SPDZ实现6种变体，B-Queue在LAN下比H-Queue快6-7倍且通信降40倍，比H-Sort最高加速30倍且通信降290倍。"
+    ],
     "authors": [
       "Xiaoxian Liu",
       "Xingyu Tan",
@@ -2572,14 +2867,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "隐私保护",
+      "安全多方计算",
+      "协作推理"
+    ]
   },
   {
     "id": "2610.41368",
     "title": "RECITE: Revising Eligibility Criteria Incorporating Textual Evidence",
-    "title_zh": null,
+    "title_zh": "结合文本证据修订临床试验资格标准",
     "abstract": "Overly restrictive eligibility criteria contribute to widespread enrollment failure in clinical trials, yet published recommendations for how specific criteria should be broadened remain disconnected from trial design at scale. We introduce RECITE (Revising Eligibility Criteria Incorporating Textual Evidence), a framework for automated discovery, extraction, and implementation of evidence-based eligibility criteria revisions. RECITE uses protocol amendment documents from ClinicalTrials.gov to construct a dataset of 11,913 curated instances across 5,735 trials, each pairing original criteria with documentary evidence and target revisions. We benchmark fifteen LLM configurations under truncated-to-context-window and retrieval-augmented generation conditions, on a 3,116-instance sample under an LLM-as-judge protocol validated against ten domain experts (judge vs. human quadratic-weighted Cohen's $κ_{qw} = 0.694 \\pm 0.096$). The best open-weight model, Gemma 2 9B, achieves $κ_{qw}$-aligned ordinal score $3.0 \\pm 0.9$ on a 0--4 scale (normalized 0.742) and the best closed-weight model, GPT-4o, reaches $3.0 \\pm 0.8$ (normalized 0.745). Using an agentic literature discovery system, we then identified 44 paper--trial matches across five publications providing trial-design and EC-modification evidence. Our findings suggest that existing clinical knowledge can be operationalized into actionable trial design recommendations.",
-    "summary_zh": null,
+    "summary_zh": [
+      "临床试验资格标准过严导致入组失败，且现有放宽建议未与试验设计大规模结合。",
+      "提出RECITE框架，利用方案修订文档构建近1.2万条数据集，实现资格标准修订的自动发现与提取。",
+      "评估多种LLM配置，最优模型得分达0.745；结合agent系统发现文献证据，证明临床知识可转化为可操作的设计建议。"
+    ],
     "authors": [
       "Russell Ro",
       "Reza Abbasi-Asl"
@@ -2599,14 +2903,24 @@
     "matched": [
       "retrieval-augmented generation"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "临床试验",
+      "资格标准",
+      "大语言模型",
+      "智能体"
+    ]
   },
   {
     "id": "2610.41358",
     "title": "Do Transaction Prices Reflect Visual Preference? A Diagnostic Study with Multimodal Language Models",
-    "title_zh": null,
+    "title_zh": "交易价格能否反映视觉偏好？基于多模态语言模型的诊断研究",
     "abstract": "Existing visual preference evaluation relies on costly human annotations or preference reward models, whereas online marketplace transaction prices are readily available and reflect real purchasing behavior, offering potential low-cost supervision. However, transaction prices conflate visual preferences with non-visual factors such as provenance, demand, and competition, making aggregate accuracy insufficient to distinguish model errors, unreliable price signals, and protocol confounds. To address this identifiability challenge, we introduce MarketImage, a diagnostic framework that identifies when transaction prices reflect visual preferences, where they fail, and whether multimodal language models can recover human-supported visual preference signals. MarketImage comprises three components: (i) MarketImageArt, 266 six-image comparison sets with transaction prices and price-blind human rankings; (ii) MarketImageLens, a tie-preserving protocol that partitions 3,990 within-set image pairs into price-human agreement, conflict, and price-tie regions while separately auditing presentation-order effects; and (iii) MarketValuator, six elicitation methods spanning direct comparison, independent scoring, budget constraints, and multi-agent aggregation to evaluate signal recovery by static visual scorers and three multimodal language models. Experiments show that only 24.2% of image pairs have a non-tied price direction, of which 34.7% agree with the human majority. Within this region, HPSv2 leads at 66.4% Recoverable Accuracy; Qwen's budgeted and aggregated variants trail baselines, while GPT interface gains remain statistically unresolved. Thus, transaction prices encode recoverable visual preferences only under limited conditions and should be treated as uncertain proxies rather than ground truth.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有视觉偏好评估成本高，而交易价格易获取且反映真实行为，但受非视觉因素干扰，难以区分模型误差与价格噪声。",
+      "提出MarketImage诊断框架，包含数据集、协议及评估方法，用于识别价格何时反映视觉偏好及多模态模型能否恢复该信号。",
+      "实验表明价格仅在有限条件下编码可恢复的视觉偏好，应视为不确定代理；多模态LLM在该任务上的增益尚不明确。"
+    ],
     "authors": [
       "Fengxian Ji",
       "Jingpu Yang",
@@ -2633,14 +2947,24 @@
     "matched": [
       "multi-agent"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "视觉偏好",
+      "多模态语言模型",
+      "交易价格",
+      "诊断框架"
+    ]
   },
   {
     "id": "2610.41350",
     "title": "Operon-S1: a fast decision controller for long-horizon biomedical agents",
-    "title_zh": null,
+    "title_zh": "Operon-S1：面向长程生物医学Agent的快速决策控制器",
     "abstract": "Language-model agents now carry out long scientific work in biology, but their judgements about conventions, skills, errors, evidence and stopping are made inside the reasoning that does the work, where they cannot be measured, replaced or improved on their own. Here we present Operon-S1, a fast decision system, a System 1 for the agent, that separates judging from doing. A decision harness poses the agent's recurring judgements as closed questions at 13 decision points and acts only through fixed messages that never contain an answer, so any model that answers the questions can serve as the judge. Across seven life-science benchmarks, a local decision model took over these judgements in 0.6 s at the median for an in-loop request on CPU at no request cost, with no measurable change in the agent's score on five of six benchmarks, whereas the general language model that drives the agent, asked the same questions, accounted for 8.0% to 35.2% of task cost. Every decision is recorded with its consequence. Retraining on labels from task construction, verifiers or execution raised decision accuracy on every question in each of three trained versions, and a new version enters service only through a promotion gate. Task-level results in this study use the public checkpoint. The same closed decisions serve wet-laboratory protocol troubleshooting and the design of a germline target enrichment panel. Like the regulator of an operon, which switches genes on and off without making their products, Operon-S1 steers the agent without doing its work, and makes the agent's judgements a layer that can be measured, replaced and trained.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM Agent在长程生物任务中，决策与执行耦合在推理内，导致决策无法独立测量、替换或改进。",
+      "提出Operon-S1决策系统，将判断与执行分离，通过13个决策点的封闭问题与固定消息交互，实现决策模型即插即用。",
+      "本地决策模型中位耗时0.6秒且无请求成本，不改变任务得分；重训练可提升各问题决策准确率，使决策成为可优化的独立层。"
+    ],
     "authors": [
       "Genoria AI Team",
       "Yuejie Hou",
@@ -2664,14 +2988,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "生物医学Agent",
+      "决策控制",
+      "系统解耦"
+    ]
   },
   {
     "id": "2610.41339",
     "title": "Updated $Σ_{c}$ excitation spectrum including the $2P$- and $1F$-wave fine structures",
-    "title_zh": null,
+    "title_zh": "包含2P与1F波精细结构的Σc激发谱更新",
     "abstract": "In order to study the new $Σ_{c}$ baryons observed by the LHCb collaboration recently, we update the previously predicted $Σ_{c}$ excitation spectrum by extending the excited states up to the highly excited $2P$- and $1F$-wave states. The calculation is performed in the framework of the relativized quark model and Gaussian expansion method by considering the mixing effect. The radially and orbitally excited states in the calculation are determined by the truncation convention proposed in this work and the mechanism of the heavy-quark dominance. The contribution of each Hamiltonian term to the energy levels is precisely calculated by using the two-step Gaussian expansion method. Then, the concerned $Σ_{c}$ states are obtained and the $Σ_{c}$ excitation spectrum including the $2P$- and $1F$-wave fine structures is established. Based on these, several important topics are discussed and analyzed, including the root-mean-square radii, off-diagonal matrix elements, mixing effect, fine structures and assignments of the newly observed $Σ_{c}(2800)^{0}$, $Σ_{c}(2900)^{0}$ and $Σ_{c}(3200)^{0}$ states. Meanwhile, it is found that the approximate decoupling phenomenon emerges in different $nL$-wave groups. This implies the reasonability of the truncation convention and is of great significance for further improving the calculation scheme for all the baryon spectra. Moreover, it is demonstrated that in the very high-lying $nL$-wave groups such as the $1F$-wave group, the energy level gaps become small even degenerate, and each of the baryon states has a big radius and therefore a loosely bound structure. In addition, by examining the experimental and calculated data, we suggest more precise experiments to search for more $Σ_{c}$ baryon states in the predicted $1P$- and $2P$-wave fine structures whose central energies are around 2822 and 3210 MeV, respectively.",
-    "summary_zh": null,
+    "summary_zh": [
+      "为研究LHCb新观测的Σc重子，在相对论夸克模型中扩展至2P和1F波高激发态以更新激发谱。",
+      "基于重夸克主导与截断约定确定激发态，用两步高斯展开法精确计算哈密顿量贡献，并分析新态的均方根半径、混合效应及指认。",
+      "发现不同nL波群存在近似退耦现象；高激发态能级间隙变小甚至简并，呈松散束缚结构；建议实验寻找更多1P和2P波Σc态。"
+    ],
     "authors": [
       "Zhen-Yu Li",
       "Guo-Liang Yu",
@@ -2691,14 +3024,24 @@
     "comment": "11 pages, 2 figures, 4 tables",
     "journal_ref": "",
     "matched": [],
-    "score": 1
+    "score": 1,
+    "tags": [
+      "Σc重子",
+      "激发谱",
+      "精细结构",
+      "夸克模型"
+    ]
   },
   {
     "id": "2610.41335",
     "title": "Pix2Evidence: A Multimodal RAG System for Text and Visual Evidence",
-    "title_zh": null,
+    "title_zh": "Pix2Evidence：面向文本与视觉证据的多模态RAG系统",
     "abstract": "Retrieval-augmented generation (RAG) over visually rich documents must find both relevant content and the evidence that supports an answer. Screenshot retrieval preserves images and page structure, but written facts within screenshots also need to be searchable. Moreover, topical relevance alone does not identify which retrieved tile contains evidence for the answer. We introduce Pix2Evidence, a multimodal RAG system that encodes each screenshot tile together with its available transcription into a single fused image--text representation, so that layout and readable text are considered jointly during retrieval. To guide evidence selection, a vision-language teacher describes the visible content that supports each training question. We use these descriptions to adapt the retriever, then rerank the retrieved candidates before answer generation. Extensive experiments demonstrate that Pix2Evidence outperforms state-of-the-art methods. Across five widely-used Wikipedia QA benchmarks, the non-reranked Pix2Evidence leads the main comparison in answer accuracy on four. On MMSearch, it reaches 26.0\\%, 4.4 percentage points above PixelRAG. We will release the code and share derived data where licensing and privacy reviews permit.",
-    "summary_zh": null,
+    "summary_zh": [
+      "视觉富文档RAG需同时检索内容与证据，但截图检索难以搜索图中文字，且仅靠主题相关性无法定位证据。",
+      "提出Pix2Evidence，将截图分块与转录文本融合为单一表示，实现布局与文本联合检索，并利用视觉语言教师模型指导证据选择与重排。",
+      "实验表明该方法优于现有SOTA，在4个Wikipedia QA基准上准确率领先，MMSearch上达26.0%，较PixelRAG高4.4个百分点。"
+    ],
     "authors": [
       "Ziniu Liu",
       "Xiaoyang Chen",
@@ -2722,14 +3065,23 @@
     "matched": [
       "retrieval-augmented generation"
     ],
-    "score": 6
+    "score": 6,
+    "tags": [
+      "多模态RAG",
+      "视觉富文档",
+      "证据检索"
+    ]
   },
   {
     "id": "2610.41333",
     "title": "StrictPRMBench: A Replayable Evaluation Benchmark for Auditing Fixed-Score PRM Aggregation",
-    "title_zh": null,
+    "title_zh": "StrictPRMBench：审计固定评分PRM聚合的可重放评估基准",
     "abstract": "Process reward models (PRMs) score reasoning steps, but best-of-N selection also requires a rule that aggregates those scores. We study that rule as a separate evaluation object. StrictPRMBench fixes mathematical reasoning pools, scorer evidence, and the source trace of a deletion intervention, so that different reducers face the same recorded selection problem. Across seven scoring checkpoints and two benchmarks, the stored N=32 outcomes give higher deletion-induced selection instability for product than geometric mean (GM) in all 14 cells. The equal-cell difference is +0.0965; a shared-problem bootstrap, conditional on these checkpoints and frozen pools, gives a 95% interval of [0.0846,0.1086]. A pre-injection-defined sensitivity excludes replacement slots that are either reducer's clean winner and retains 4,459 of 4,622 cell-problem records. The retained difference is +0.0986 [0.0875,0.1098]. Effects are heterogeneous: the two Qwen cells have positive percentile-bootstrap intervals on retained support but two-sided exact paired p-values of 0.0625 and 0.0703. Clean-pool Qwen accuracy does not detect a product advantage, but this is not an equivalence result. We provide versioned outcome records, CPU reanalysis, and an explicit evidence-availability contract. The contribution is a diagnostic evaluation protocol and a reproducible audit of recorded selector behavior, not a new PRM, a universally optimal reducer, or evidence of deployment-wide harm. Raw-score replay and outcome-record reanalysis are distinguished: missing primary edited-score vectors limit independent evaluation of new reducers under the same stress.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有PRM评估忽视聚合规则，本文将其独立评估，提出StrictPRMBench固定推理池与评分证据以审计选择行为。",
+      "在14个测试单元中，乘积聚合的删除诱导选择不稳定性均高于几何平均，差异达+0.0965。",
+      "贡献为诊断评估协议与可复现审计，而非新PRM或通用最优聚合器，并区分了原始分数重放与结果记录再分析。"
+    ],
     "authors": [
       "Pengfei Zheng"
     ],
@@ -2748,14 +3100,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 7
+    "score": 7,
+    "tags": [
+      "过程奖励模型",
+      "聚合规则",
+      "评估基准",
+      "数学推理"
+    ]
   },
   {
     "id": "2610.41320",
     "title": "Learning from Physical Experience:Context-Space Adaptation for Robotic Manipulation",
-    "title_zh": null,
+    "title_zh": "基于物理经验与上下文空间适应的机器人操作学习",
     "abstract": "Recent multimodal foundation models exhibit strong perception, reasoning, and in-context learning capabilities, but translating these capabilities into physical action remains challenging. Through real-world experiments across diverse manipulation tasks, we find that ChatGPT-6-Astra, a state-of-the-art general-purpose reasoner, can serve as a physically actionable, context-responsive manipulation policy, demonstrating effective fine manipulation and spatial reasoning. Building on these findings, we introduce LEXP, a harness for learning from physical experience through context-space adaptation. LEXP combines task-level planning with an experience module that interprets execution evidence, extracts and retains lessons with applicability conditions, and reuses relevant lessons to generate contextual feedback for subsequent actions. Model weights and the action interface remain fixed throughout. Across 12 real-world manipulation tasks, LEXP achieves $23/36$ successful trials (63.9\\%), compared with $19/36$ (52.8\\%) with memory alone and $2/36$ (5.6\\%) for vanilla Astra. On three tasks, bread transfer, sort trash and toiletries, and retrieve drawer, removing planning reduces success from $7/9$ to $4/9$, while removing retained experience reduces it to $3/9$. Execution traces illustrate feedback-guided corrections and cross-episode reuse of an inspection strategy. Execution analyses illustrate how task structure and experience-derived feedback guide task progression, action correction, and experience reuse. These results support context-space adaptation as a practical mechanism for turning physical interaction into reusable guidance for robotic manipulation.",
-    "summary_zh": null,
+    "summary_zh": [
+      "多模态基础模型感知推理强但转化为物理动作难，需探索如何将其有效用于机器人操作。",
+      "提出LEXP框架，结合任务规划与经验模块，从执行证据中提取并复用经验，生成上下文反馈指导后续动作。",
+      "在12项真实任务中LEXP成功率达63.9%，远超基线，证明上下文空间适应能将物理交互转化为可复用指导。"
+    ],
     "authors": [
       "Yihan Zeng",
       "Yisu Li",
@@ -2785,7 +3147,12 @@
     "matched": [
       "reasoning"
     ],
-    "score": 4
+    "score": 4,
+    "tags": [
+      "机器人操作",
+      "上下文适应",
+      "经验学习"
+    ]
   },
   {
     "id": "2610.41319",
