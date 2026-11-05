@@ -1,14 +1,14 @@
 {
-  "run_at": "2026-11-05T12:43:10Z",
+  "run_at": "2026-11-05T21:03:58Z",
   "stages": {
     "sources": 34,
-    "sources_ok": 32,
-    "raw": 676,
-    "after_keywords": 29,
-    "merged": 629,
+    "sources_ok": 33,
+    "raw": 687,
+    "after_keywords": 59,
+    "merged": 659,
     "written": 600,
-    "body_filled": 0,
-    "new_today": 150
+    "body_filled": 5,
+    "new_today": 28
   },
   "sources": [
     {
@@ -18,7 +18,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 665,
+      "ms": 52466,
       "mirror": "https://hub.slarker.me",
       "error": ""
     },
@@ -29,20 +29,20 @@
       "ok": false,
       "raw": 0,
       "kept": 0,
-      "ms": 62650,
+      "ms": 120447,
       "mirror": "",
-      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/yjzj :: HTTP Error 503: Service Unavailable"
+      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/yjzj :: HTTP Error 504: Gateway Time-out"
     },
     {
       "id": "miit-zcwj",
       "name": "工信部·政策文件",
       "level": "L1",
-      "ok": false,
-      "raw": 0,
-      "kept": 0,
-      "ms": 62650,
-      "mirror": "",
-      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/zcwj :: HTTP Error 503: Service Unavailable"
+      "ok": true,
+      "raw": 10,
+      "kept": 1,
+      "ms": 25910,
+      "mirror": "https://hub.slarker.me",
+      "error": ""
     },
     {
       "id": "mofcom-home",
@@ -51,7 +51,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 1202,
+      "ms": 1798,
       "mirror": "",
       "error": ""
     },
@@ -62,7 +62,7 @@
       "ok": true,
       "raw": 16,
       "kept": 0,
-      "ms": 1316,
+      "ms": 1526,
       "mirror": "",
       "error": ""
     },
@@ -72,8 +72,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 2,
-      "ms": 9824,
+      "kept": 0,
+      "ms": 1447,
       "mirror": "https://rsshub.rssforever.com",
       "error": ""
     },
@@ -83,8 +83,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 2,
-      "ms": 126,
+      "kept": 1,
+      "ms": 110,
       "mirror": "",
       "error": ""
     },
@@ -94,8 +94,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 2,
-      "ms": 289,
+      "kept": 5,
+      "ms": 195,
       "mirror": "https://hub.slarker.me",
       "error": ""
     },
@@ -105,8 +105,8 @@
       "level": "L2",
       "ok": true,
       "raw": 15,
-      "kept": 1,
-      "ms": 179,
+      "kept": 2,
+      "ms": 188,
       "mirror": "",
       "error": ""
     },
@@ -116,8 +116,8 @@
       "level": "L2",
       "ok": true,
       "raw": 30,
-      "kept": 0,
-      "ms": 1950,
+      "kept": 1,
+      "ms": 3095,
       "mirror": "",
       "error": ""
     },
@@ -127,8 +127,8 @@
       "level": "L2",
       "ok": true,
       "raw": 15,
-      "kept": 1,
-      "ms": 354,
+      "kept": 0,
+      "ms": 455,
       "mirror": "",
       "error": ""
     },
@@ -138,8 +138,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 0,
-      "ms": 1350,
+      "kept": 1,
+      "ms": 1601,
       "mirror": "",
       "error": ""
     },
@@ -150,7 +150,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 1565,
+      "ms": 1974,
       "mirror": "",
       "error": ""
     },
@@ -160,8 +160,8 @@
       "level": "L2",
       "ok": true,
       "raw": 40,
-      "kept": 2,
-      "ms": 1988,
+      "kept": 10,
+      "ms": 769,
       "mirror": "",
       "error": ""
     },
@@ -172,7 +172,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 3339,
+      "ms": 2649,
       "mirror": "",
       "error": ""
     },
@@ -182,8 +182,8 @@
       "level": "L2",
       "ok": true,
       "raw": 15,
-      "kept": 2,
-      "ms": 162,
+      "kept": 1,
+      "ms": 153,
       "mirror": "",
       "error": ""
     },
@@ -194,7 +194,7 @@
       "ok": true,
       "raw": 10,
       "kept": 1,
-      "ms": 100,
+      "ms": 139,
       "mirror": "",
       "error": ""
     },
@@ -204,8 +204,8 @@
       "level": "L2",
       "ok": true,
       "raw": 15,
-      "kept": 3,
-      "ms": 323,
+      "kept": 2,
+      "ms": 244,
       "mirror": "",
       "error": ""
     },
@@ -216,7 +216,7 @@
       "ok": true,
       "raw": 9,
       "kept": 1,
-      "ms": 1449,
+      "ms": 1743,
       "mirror": "",
       "error": ""
     },
@@ -227,7 +227,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 802,
+      "ms": 839,
       "mirror": "",
       "error": ""
     },
@@ -238,7 +238,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 1050,
+      "ms": 1163,
       "mirror": "",
       "error": ""
     },
@@ -248,8 +248,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 5,
-      "ms": 92,
+      "kept": 10,
+      "ms": 138,
       "mirror": "",
       "error": ""
     },
@@ -260,7 +260,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 1283,
+      "ms": 1364,
       "mirror": "",
       "error": ""
     },
@@ -270,8 +270,8 @@
       "level": "L2",
       "ok": true,
       "raw": 15,
-      "kept": 0,
-      "ms": 2008,
+      "kept": 2,
+      "ms": 4063,
       "mirror": "",
       "error": ""
     },
@@ -281,8 +281,8 @@
       "level": "L2",
       "ok": true,
       "raw": 10,
-      "kept": 0,
-      "ms": 80,
+      "kept": 7,
+      "ms": 140,
       "mirror": "",
       "error": ""
     },
@@ -292,8 +292,8 @@
       "level": "L2",
       "ok": true,
       "raw": 30,
-      "kept": 4,
-      "ms": 832,
+      "kept": 3,
+      "ms": 796,
       "mirror": "",
       "error": ""
     },
@@ -303,9 +303,9 @@
       "level": "L3",
       "ok": true,
       "raw": 50,
-      "kept": 0,
-      "ms": 5365,
-      "mirror": "https://rsshub.rssforever.com",
+      "kept": 3,
+      "ms": 60672,
+      "mirror": "https://hub.slarker.me",
       "error": ""
     },
     {
@@ -315,7 +315,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 1569,
+      "ms": 1486,
       "mirror": "",
       "error": ""
     },
@@ -325,8 +325,8 @@
       "level": "L3",
       "ok": true,
       "raw": 17,
-      "kept": 0,
-      "ms": 429,
+      "kept": 1,
+      "ms": 226,
       "mirror": "",
       "error": ""
     },
@@ -336,8 +336,8 @@
       "level": "L3",
       "ok": true,
       "raw": 50,
-      "kept": 0,
-      "ms": 2111,
+      "kept": 2,
+      "ms": 1427,
       "mirror": "",
       "error": ""
     },
@@ -348,7 +348,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 243,
+      "ms": 82,
       "mirror": "",
       "error": ""
     },
@@ -359,7 +359,7 @@
       "ok": true,
       "raw": 20,
       "kept": 3,
-      "ms": 136,
+      "ms": 222,
       "mirror": "",
       "error": ""
     },
@@ -370,7 +370,7 @@
       "ok": true,
       "raw": 50,
       "kept": 0,
-      "ms": 648,
+      "ms": 651,
       "mirror": "",
       "error": ""
     },
@@ -379,19 +379,19 @@
       "name": "知乎热榜",
       "level": "L3",
       "ok": true,
-      "raw": 29,
-      "kept": 0,
-      "ms": 1071,
+      "raw": 30,
+      "kept": 2,
+      "ms": 1026,
       "mirror": "",
       "error": ""
     }
   ],
   "events": {
-    "run_at": "2026-11-05T12:43:12Z",
+    "run_at": "2026-11-05T21:04:18Z",
     "items": 600,
     "events": 260,
-    "translated": 0,
-    "new_today": 142,
+    "translated": 22,
+    "new_today": 45,
     "model": "glm-4.7-flash"
   }
 }
