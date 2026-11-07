@@ -1,5 +1,949 @@
 [
   {
+    "id": "e_1ce2dd0d60",
+    "title_zh": "常用提示词（Prompt）框架总结",
+    "event_summary": "一份可以随时翻查的提示词框架速查手册。覆盖 13 个主流框架 + 4 类推理技术 + 5 类内容构建技巧，每个框架都给出 含义表 → 模板 → 实例 → 适用场景 。 适用模型：GPT-4/5、Claude、Gemini、Qwen、DeepSeek、GLM 等主流大模型。 所有模板统一采用 # Role: 结构化标题写法 （见 前置：写法约定 ）。…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "提示词"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": "2026-11-07T05:52:45Z",
+    "published": "2026-11-07T05:52:45Z",
+    "primary_url": "https://juejin.cn/post/7704153929698197558",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "常用提示词（Prompt）框架总结",
+        "url": "https://juejin.cn/post/7704153929698197558",
+        "published": "2026-11-07T05:52:45Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_19624f0738",
+    "title_zh": "实测 agent-desktop：AI 控制桌面不截图、不占鼠标键盘，连点 55 次计算器 0 失误",
+    "event_summary": "以前让 AI 操作电脑上的软件，常规做法都是屏幕截图塞给模型看、猜像素坐标再用鼠标点过去：既费 token，干活时还会直接抢占你的鼠标和键盘。 Vercel Labs 昨天（11 月 5 日）给开源工具 agent-desktop 发布了 1.2.0 版本，加入了 MCP 支持。它的原理是直接读取操作系统的无障碍树，给界面的每个控件编号，让 AI…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + Agent"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": "2026-11-07T05:52:45Z",
+    "published": "2026-11-07T05:52:45Z",
+    "primary_url": "https://juejin.cn/post/7704923158558621750",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "实测 agent-desktop：AI 控制桌面不截图、不占鼠标键盘，连点 55 次计算器 0 失误",
+        "url": "https://juejin.cn/post/7704923158558621750",
+        "published": "2026-11-07T05:52:45Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_6ddef77d45",
+    "title_zh": "一天一个开源项目（第253篇）：dsh-superagent —— DeepSeek 开源的“主动式”编程智能体原型，核心原则是少占人的注意力",
+    "event_summary": "一个能替整个团队干活的智能体，也能浪费整个团队的注意力。 这是\"一天一个开源项目\"系列的 第 253 篇 文章。今天带你了解的项目是 dsh-superagent （deepseek-ai/dsh-superagent-prototype）。 先把 README 开头的声明放在前面，因为它很重要： 这是一个仅供参考的研究原型，不是 DeepSeek 的官方产品。…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "智能体"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": "2026-11-07T05:52:45Z",
+    "published": "2026-11-07T05:52:45Z",
+    "primary_url": "https://juejin.cn/post/7704197912934875170",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "一天一个开源项目（第253篇）：dsh-superagent —— DeepSeek 开源的“主动式”编程智能体原型，核心原则是少占人的注意力",
+        "url": "https://juejin.cn/post/7704197912934875170",
+        "published": "2026-11-07T05:52:45Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_cd7af80599",
+    "title_zh": "为何美国民主党要推动超级AI禁令？个人违规20年监禁、企业强制解散，量刑堪比非法研发核武器，动机是啥？",
+    "event_summary": "据财闻，当地时间11月4日，美国众议员亚萨明.安萨里(亚利桑那州)在社交网络平台上写道：“民主党在第一天的议程顶部需要暂停先进人工智能的发展，监管失控行业，并禁止人工超级智能。”这条帖文发表于民主党在中期选举中夺回参众两院控制权之后不到24小时。 安萨里所呼吁的“禁止人工超级智能”，并非即兴提议。参议院版本S.5493由伯尼.桑德斯于9月23日提出，众议院版本H.R.10538由卡萨尔于9月24日提出，目前均处于“Introduced”状态，尚未通过委员会审议。安萨里本人是“ASI Prohibition…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": "2026-11-07T05:52:45Z",
+    "published": "2026-11-07T05:52:45Z",
+    "primary_url": "https://www.zhihu.com/question/2101942075734471491",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "知乎热榜",
+        "level": "L3",
+        "title": "为何美国民主党要推动超级AI禁令？个人违规20年监禁、企业强制解散，量刑堪比非法研发核武器，动机是啥？",
+        "url": "https://www.zhihu.com/question/2101942075734471491",
+        "published": "2026-11-07T05:52:45Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_2697b5c1db",
+    "title_zh": "特斯拉宣布终止 Cybertruck 生产，扩大 Cybercab 的产能，怎样解读这一调整？",
+    "event_summary": "特斯拉决定停产旗下标志性电动皮卡Cybertruck，这款曾被马斯克寄予厚望的产品在销量疲软与多次召回的双重压力下黯然落幕。 马斯克周五在X平台发文称，特斯拉将于明年年中左右在德克萨斯超级工厂逐步\"收尾\"Cybertruck的生产，转而扩大自动驾驶出租车Cybercab的产能。 Cybertruck的首席工程师Wes Morrill随即在社交媒体上表示：\"Cybertruck是一个了不起的技术开发平台，它的生命将通过Cybercab延续下去。\"…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "自动驾驶"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": "2026-11-07T05:52:45Z",
+    "published": "2026-11-07T05:52:45Z",
+    "primary_url": "https://www.zhihu.com/question/2102306579311588297",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "知乎热榜",
+        "level": "L3",
+        "title": "特斯拉宣布终止 Cybertruck 生产，扩大 Cybercab 的产能，怎样解读这一调整？",
+        "url": "https://www.zhihu.com/question/2102306579311588297",
+        "published": "2026-11-07T05:52:45Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_4d9bbf245a",
+    "title_zh": "马斯克：特斯拉 Optimus 机器人考虑只租不卖，生产力是人类的 5 倍、初期造价约 3 万美元",
+    "event_summary": "IT之家 11 月 7 日消息，科技媒体 Not a Tesla App 昨日（11 月 6 日）发布博文，报道称当地时间周五在美国纽约市林肯中心举行的第 33 届巴伦投资大会上， 全球首富埃隆 · 马斯克（Elon Musk）透露特斯拉 Optimus 机器人可能会采用“只租不售”方式。 在被问及特斯拉 Optimus…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "机器人"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T05:32:39Z",
+    "primary_url": "https://www.ithome.com/1/023/675.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "马斯克：特斯拉 Optimus 机器人考虑只租不卖，生产力是人类的 5 倍、初期造价约 3 万美元",
+        "url": "https://www.ithome.com/1/023/675.htm",
+        "published": "2026-11-07T05:32:39Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_0bb4e4f8d5",
+    "title_zh": "OpenAI 窃听案进入抗辩阶段：被告拒不认罪，若定罪最高监禁五年",
+    "event_summary": "北京时间 11 月 7 日，据《华尔街日报》报道，沙特公民阿卜杜勒拉赫曼 · 阿尔福赞 (Abdulrahman Alfozan) 被指控在 OpenAI 一间限制进入的会议室内安装窃听设备。当地时间周五，他在旧金山联邦法院出庭，对相关指控表示不认罪。 周五，阿尔福赞参加了美国联邦治安法官的提审听证会。他的律师戴维 ·W· 里兹 (David W. Rizk)…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "OpenAI"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T05:22:44Z",
+    "primary_url": "https://www.ithome.com/1/023/674.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "OpenAI 窃听案进入抗辩阶段：被告拒不认罪，若定罪最高监禁五年",
+        "url": "https://www.ithome.com/1/023/674.htm",
+        "published": "2026-11-07T05:22:44Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_4445b6a3fd",
+    "title_zh": "曝 Anthropic 计划下周启动 IPO 路演，目标是在感恩节前完成上市",
+    "event_summary": "IT之家 11 月 7 日消息，据 The Information 今日报道，美国人工智能初创公司 Anthropic 正加快推进首次公开募股（IPO）计划。 消息人士称，Anthropic 计划于下周启动 IPO 正式推介，向潜在投资者介绍公司业务及上市计划，计划于 11 月 16 日当周在美国资本市场挂牌，争取在美国感恩节（11 月 26 日）假期前完成上市。 不过，近期美国科技股市场波动加剧，投资者对 AI…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T05:17:43Z",
+    "primary_url": "https://www.ithome.com/1/023/672.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "曝 Anthropic 计划下周启动 IPO 路演，目标是在感恩节前完成上市",
+        "url": "https://www.ithome.com/1/023/672.htm",
+        "published": "2026-11-07T05:17:43Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_5af304d7b1",
+    "title_zh": "欧洲央行考虑审查银行对数据中心的贷款，以评估人工智能相关风险",
+    "event_summary": "11月6日，据报道，欧洲央行正考虑审查银行对数据中心的贷款，以评估人工智能市场情绪变化及估值波动可能带来的风险。据悉，欧洲央行高级官员已在内部及与受其监管的银行讨论这一方案。审查可能包括现场检查，重点考察银行如何评估未来现金流、抵押品价值及应对潜在违约风险。此次审查范围可能小于欧洲央行数年前开展的杠杆融资审查，具体方案尚未敲定。（界面）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T04:42:44Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4059026136388742",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "欧洲央行考虑审查银行对数据中心的贷款，以评估人工智能相关风险",
+        "url": "https://www.36kr.com/newsflashes/4059026136388742",
+        "published": "2026-11-07T04:42:44Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_abf8173d18",
+    "title_zh": "机械革命推出无界 15X 暴风雪电竞版：锐龙 AI 9 365、16GB + 1TB，首发 6499 元",
+    "event_summary": "IT之家 11 月 7 日消息，机械革命新上架了一款“无界 15X 暴风雪电竞版”，搭载 AMD 锐龙 AI 9 365 处理器、240Hz 电竞屏，首发价 6499 元，叠加国补后 5524.15 元。 IT之家从商品页面获悉，这款新机采用了 15.3 英寸 2.5K 240Hz 电竞屏，拥有 2560*1600 分辨率、100% sRGB 色域、500nits 亮度，支持 DC 调光 + 雾面防眩光，支持约 180°…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T04:17:07Z",
+    "primary_url": "https://www.ithome.com/1/023/668.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "机械革命推出无界 15X 暴风雪电竞版：锐龙 AI 9 365、16GB + 1TB，首发 6499 元",
+        "url": "https://www.ithome.com/1/023/668.htm",
+        "published": "2026-11-07T04:17:07Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_2907881c44",
+    "title_zh": "台积电据悉考虑进军先进存储芯片领域，为英伟达生产3D DRAM",
+    "event_summary": "11月6日，据报道，台积电正评估扩大先进存储芯片生产，以争取更多人工智能基础设施投资。据悉，台积电应主要客户英伟达要求，已开始制定生产垂直堆叠3D DRAM的计划。消息传台积电据悉考虑进军先进存储芯片领域，为英伟达生产3D DRAM出后，台积电美国存托凭证周五早盘一度上涨7.7%。（界面）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T03:58:13Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4059024621392777",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "台积电据悉考虑进军先进存储芯片领域，为英伟达生产3D DRAM",
+        "url": "https://www.36kr.com/newsflashes/4059024621392777",
+        "published": "2026-11-07T03:58:13Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_1860f35182",
+    "title_zh": "男子利用 AI 眼镜、智能戒指驾考作弊被成都交管查获：罚款 1900 元 + 禁考一年",
+    "event_summary": "IT之家 11 月 7 日消息，据成都交警，近日，成都公安交管部门查处一起机动车驾驶人考试舞弊案。 10 月 16 日上午，成都公安交管十分局摩托车考场驻场民警在开展机动车驾驶员理论考试巡查过程中，发现一男子 神色紧张， 答题状态异常， 行为举止不自然， 当即对其开展核查。 男子佩戴的眼镜暗藏玄机，手上还配有一枚智能戒指，长按可触发扫描，答案就显示在眼镜上。面对询问，该男子 承认自己利用 高科技设备作弊的违法行为。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T03:49:42Z",
+    "primary_url": "https://www.ithome.com/1/023/665.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "男子利用 AI 眼镜、智能戒指驾考作弊被成都交管查获：罚款 1900 元 + 禁考一年",
+        "url": "https://www.ithome.com/1/023/665.htm",
+        "published": "2026-11-07T03:49:42Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_7755e535d6",
+    "title_zh": "绿地集团、库帕思科技与济南市槐荫区人民政府达成三方战略合作",
+    "event_summary": "据绿地集团公众号，11月6日，绿地集团山东区域管理总部、济南市槐荫区政府、上海库帕思科技有限公司在上海签署战略合作协议，三方将携手围绕人工智能语料数据服务、AI产业生态培育、产业载体招商运营等进行深化合作，共筑人工智能产业新生态。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T03:45:00Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3196349",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "绿地集团、库帕思科技与济南市槐荫区人民政府达成三方战略合作",
+        "url": "https://wallstreetcn.com/livenews/3196349",
+        "published": "2026-11-07T03:45:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_c8831f2d68",
+    "title_zh": "AGENTS.MD，危险危险危险！！！",
+    "event_summary": "ay发自 凹非寺 量子位 | 公众号QbitAI AGENTS.MD，正在成为AI时代的电脑病毒。 你只是随手打开了一个网页。没点任何弹窗，没点任何「确定下载」，手都没怎么动。 就在你切走网页的一瞬间，一个叫AGENTS.md的纯文本文件，已经悄无声息躺进了你电脑的「下载」（~/Downloads）文件夹里。 但到这一步也还好，对于根本不知道Claude…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T03:43:55Z",
+    "primary_url": "https://www.qbitai.com/2026/11/508244.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "量子位",
+        "level": "L2",
+        "title": "AGENTS.MD，危险危险危险！！！",
+        "url": "https://www.qbitai.com/2026/11/508244.html",
+        "published": "2026-11-07T03:43:55Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_52ac476ada",
+    "title_zh": "肉眼不可见：苹果 iOS 27.2 新增隐形水印，图像工具 AI 生图 / 修图均有迹可查",
+    "event_summary": "IT之家 11 月 7 日消息，苹果公司于 11 月 5 日更新官方支持文档，宣布从 iOS / iPadOS / macOS 27.2 等版本系统开始， 为部分 Apple Intelligence 图像工具引入 SynthID 隐形水印。 IT之家援引博文介绍，在涉及的图像工具方面，涵盖图乐园（Image Playground）和图像魔法棒（Image Wand），以及“照片”中的清理（Clean…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T03:41:42Z",
+    "primary_url": "https://www.ithome.com/1/023/663.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "肉眼不可见：苹果 iOS 27.2 新增隐形水印，图像工具 AI 生图 / 修图均有迹可查",
+        "url": "https://www.ithome.com/1/023/663.htm",
+        "published": "2026-11-07T03:41:42Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_08ccfe539a",
+    "title_zh": "博世用豆包工作：让工程师少搬信息，多解问题",
+    "event_summary": "头图来源：豆包工作 客户在群里抛出一个问题，到工程师真正坐下来分析故障，中间隔着多少工作？ 在博世的某研发事业部，答案曾经是：找齐散落在各个群和私聊里的消息，按多个维度整理成完整描述，凭经验判断该找谁，接着再开会，再把结论写成报告。 故障分析还没开始，大半天已经过去了。 如今，这中间的一大段路，工程师交给了豆包工作和豆包工作伙伴。 博世的尝试：让 AI 接手沟通之后的工作…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T03:35:36Z",
+    "primary_url": "http://www.geekpark.net/news/373643",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "极客公园",
+        "level": "L2",
+        "title": "博世用豆包工作：让工程师少搬信息，多解问题",
+        "url": "http://www.geekpark.net/news/373643",
+        "published": "2026-11-07T03:35:36Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_5e6359da6f",
+    "title_zh": "IMF总裁：各国央行需考量AI驱动增长或放缓",
+    "event_summary": "国际货币基金组织（IMF）总裁格奥尔基耶娃6日表示，各国央行在评估抗击通胀的举措时，需要将人工智能（AI）驱动的增长可能出现放缓纳入考量。格奥尔基耶娃当天在IMF位于美国首都华盛顿的总部表示，人们对于经济过度依赖AI投资热潮以及资产估值过高的担忧，正对全球市场产生影响。市场行情起伏不定，且这种态势很可能持续。在物价稳定所面临的风险日益加剧的背景下，市场波动将使各国央行的工作变得更加复杂。（新华社）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T03:34:24Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4059143612322688",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "IMF总裁：各国央行需考量AI驱动增长或放缓",
+        "url": "https://www.36kr.com/newsflashes/4059143612322688",
+        "published": "2026-11-07T03:34:24Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_91c4071a76",
+    "title_zh": "办公提效之后，企业级 Agent 开始对经营结果负责",
+    "event_summary": "头图来源：腾讯云 过去一年，智能体是 AI 行业最受关注的方向之一。 从查资料、写文档到处理日常办公事务，桌面办公智能体完成了第一轮普及，办公提效的价值已经成为行业共识。但当 AI 进一步走向企业核心业务，搭出一个智能体不难，难的是让它真正跑进业务流程，适配复杂的系统、权限与规则，持续产出可量化的经营价值。 在腾讯云副总裁吴永坚看来，未来企业级智能体的核心赛道，对话式的桌面办公 Agent 和服务经营的 Service Agent…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "智能体"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T03:31:37Z",
+    "primary_url": "http://www.geekpark.net/news/373642",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "极客公园",
+        "level": "L2",
+        "title": "办公提效之后，企业级 Agent 开始对经营结果负责",
+        "url": "http://www.geekpark.net/news/373642",
+        "published": "2026-11-07T03:31:37Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_9a05312ed9",
+    "title_zh": "Jeff Dean李飞飞最新对谈：全是RSI非共识",
+    "event_summary": "听雨 发自 凹非寺 量子位 | 公众号 QbitAI RSI这么火，它真的能让AI的进步速度快到无限吗？ 他举了个例子：一个人启动实验，凌晨2点实验结束，他要等到早上8点回到工位，才会查看结果。 自动化系统可以省掉这段等待，及时决定下一轮做什么。但训练、计算、保存数据、评估结果，这些步骤仍然需要时间。 要构建基座模型并提升它，仍然需要大量训练和实验， 这些过程不可能以无限快的速度完成 。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T03:23:29Z",
+    "primary_url": "https://www.qbitai.com/2026/11/508196.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "量子位",
+        "level": "L2",
+        "title": "Jeff Dean李飞飞最新对谈：全是RSI非共识",
+        "url": "https://www.qbitai.com/2026/11/508196.html",
+        "published": "2026-11-07T03:23:29Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_b8b8e978bb",
+    "title_zh": "Diamond Foundry 成功制造世界首个 200mm（8 英寸）金刚石单晶",
+    "event_summary": "IT之家 11 月 7 日消息，企业 Diamond Foundry 当地时间本月 5 日宣布，其成功制造出世界首个 200mm（8 英寸）金刚石单晶。 更大的单晶尺寸意味着更优秀的晶边面积利用率和更高的生产效率， 有助于加速金刚石材料在半导体领域的商业化应用 。 金刚石拥有超宽禁带、高载流子迁移率、高击穿场强、高热导率等出色材料特性，是功率半导体、芯片散热器件的优良材料；同时其还具有良好透光性和折射率，也适用于光电器件。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "半导体"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T03:15:58Z",
+    "primary_url": "https://www.ithome.com/1/023/658.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "Diamond Foundry 成功制造世界首个 200mm（8 英寸）金刚石单晶",
+        "url": "https://www.ithome.com/1/023/658.htm",
+        "published": "2026-11-07T03:15:58Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_837a45e702",
+    "title_zh": "部分投资者下修Anthropic IPO估值至1.5万亿美元",
+    "event_summary": "本周民主党在中期选举中大获全胜，进一步加剧了市场对AI相关建设将放缓的担忧。部分Anthropic投资者如今预计该公司上市时的估值将低于1.5万亿美元，其中一些人称这一数字可能进一步下探至1万亿美元。该公司向美国证券交易委员会（SEC）秘密递交文件时的目标估值为2万亿美元。Anthropic对此拒绝置评，这家人工智能新贵公司预计将于下周启动路演。（第一财经）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T03:15:33Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4059012212282246",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "部分投资者下修Anthropic IPO估值至1.5万亿美元",
+        "url": "https://www.36kr.com/newsflashes/4059012212282246",
+        "published": "2026-11-07T03:15:33Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_4d0f2f6cce",
+    "title_zh": "美国司法部 SI 工作组投运，保护创新与防范攻击并行",
+    "event_summary": "IT之家 11 月 7 日消息，美国司法部于当地时间 11 月 5 日发布公告，宣布“超级智能工作组”（Super Intelligence Task Force，简称 DOJ-SITF）已投入运作， 保护创新与防范攻击并行，负责统筹司法部涉及 SI（国内主流使用 AI）的刑事和民事诉讼。 IT之家附上相关截图如下： 根据司法部公开的 10 月 13…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T03:01:09Z",
+    "primary_url": "https://www.ithome.com/1/023/655.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "美国司法部 SI 工作组投运，保护创新与防范攻击并行",
+        "url": "https://www.ithome.com/1/023/655.htm",
+        "published": "2026-11-07T03:01:09Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_05ed8e20b7",
+    "title_zh": "北京：支持企业面向基础硬件、基础软件、工业软件、网络安全等领域开展自主攻关",
+    "event_summary": "【北京：支持企业面向基础硬件、基础软件、工业软件、网络安全等领域开展自主攻关】财联社11月7日电，北京经济技术开发区管理委员会印发《北京经济技术开发区关于加快建设开源开放信创产业高地的若干措施》的通知。其中提到，支持企业面向基础硬件、基础软件、工业软件、网络安全等领域开展自主攻关；聚焦通用人工智能“极基础+极应用”，支持企业在算法理论、软件框架、智算芯片、新型算力集群，以及软件智能、工业智能、数据智能、具身智能等方向创新突破；加快布局量…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T02:42:53Z",
+    "primary_url": "https://www.cls.cn/detail/2528020",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "北京：支持企业面向基础硬件、基础软件、工业软件、网络安全等领域开展自主攻关",
+        "url": "https://www.cls.cn/detail/2528020",
+        "published": "2026-11-07T02:42:53Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_265c126092",
+    "title_zh": "百图生科与11家伙伴战略合作，AI生物计算覆盖医药研发及农业育种",
+    "event_summary": "活动焦点： · 百图生科主办、港投公司支持的第三届峰会2026年11月6日开幕，汇聚约300名科研、产业及投资界代表，探讨人工智能与生命科学的融合发展 · 百图生科InnoHub分别与大学、科企及投资机构合作，以AI生物计算聚焦乳癌及中医药研究、农业育种、研发与产业配套，包括与香港大学推进「乳腺癌虚拟细胞大模型」项目，以及与香港浸会大学筹建「AI中医药联合实验室」；合作网络延伸至日本、新加坡及「一带一路」沿线市场 ·…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T02:40:00Z",
+    "primary_url": "https://www.leiphone.com/category/industrynews/X7HwwQTEXJhiVVzK.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "雷峰网",
+        "level": "L2",
+        "title": "百图生科与11家伙伴战略合作，AI生物计算覆盖医药研发及农业育种",
+        "url": "https://www.leiphone.com/category/industrynews/X7HwwQTEXJhiVVzK.html",
+        "published": "2026-11-07T02:40:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_c3f281f80e",
+    "title_zh": "北京：加快布局人工智能、量子信息、6G等前沿领域技术转化、试验验证、中试熟化等共性技术赋能中心",
+    "event_summary": "36氪获悉，北京经济技术开发区管理委员会印发《北京经济技术开发区关于加快建设开源开放信创产业高地的若干措施》的通知。其中提到，…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T02:35:46Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4059085964923785",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "北京：加快布局人工智能、量子信息、6G等前沿领域技术转化、试验验证、中试熟化等共性技术赋能中心",
+        "url": "https://www.36kr.com/newsflashes/4059085964923785",
+        "published": "2026-11-07T02:35:46Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_60c69b710a",
+    "title_zh": "北京：支持超节点服务器、AI终端、超级智能体、量子计算云平台、下一代移动通信等新技术新产品",
+    "event_summary": "36氪获悉，北京经济技术开发区管理委员会印发《北京经济技术开发区关于加快建设开源开放信创产业高地的若干措施》的通知。其中提到，…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "智能体"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T02:35:06Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4059085316166784",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "北京：支持超节点服务器、AI终端、超级智能体、量子计算云平台、下一代移动通信等新技术新产品",
+        "url": "https://www.36kr.com/newsflashes/4059085316166784",
+        "published": "2026-11-07T02:35:06Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_22b3c9e8fc",
+    "title_zh": "AI 热潮撞上资源争议，微软荷兰在建数据中心遭抗议",
+    "event_summary": "IT之家 11 月 7 日消息，路透社最新发布博文， 报道称荷兰当地时间昨日（11 月 6 日）百余名活动人士聚集并闯入微软在建的数据中心工地，抗议 AI 基建扩张。 报道称百余名活动人士在现场集结，随后进入施工区域，部分人爬上起重机、悬挂气球并展示抗议标语。抗议者主要关注大型数据中心的电力、水资源消耗及环境影响，要求暂停大规模新建项目。组织方“Stop Dirty Data Centres”表示，环保与数字权利团体计划于 11 月…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T02:27:50Z",
+    "primary_url": "https://www.ithome.com/1/023/650.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "AI 热潮撞上资源争议，微软荷兰在建数据中心遭抗议",
+        "url": "https://www.ithome.com/1/023/650.htm",
+        "published": "2026-11-07T02:27:50Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_36231604b2",
+    "title_zh": "Crusoe 将 troubled Wyoming 数据中心项目出售给 Google",
+    "event_summary": "The deal highlights the challenges of developing massive AI data centers.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T01:40:28Z",
+    "primary_url": "https://techcrunch.com/2026/11/06/crusoe-sells-troubled-wyoming-data-center-project-to-google/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "TechCrunch AI",
+        "level": "L2",
+        "title": "Crusoe 将 troubled Wyoming 数据中心项目出售给 Google",
+        "url": "https://techcrunch.com/2026/11/06/crusoe-sells-troubled-wyoming-data-center-project-to-google/",
+        "published": "2026-11-07T01:40:28Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_6a131eea1d",
+    "title_zh": "“史上最大 IPO”遇挑战：Anthropic 上市估值存分歧，1.5 万亿美元仍被嫌贵",
+    "event_summary": "IT之家 11 月 7 日消息，路透社昨日（11 月 6 日）发布博文，报道称 AI 公司 Anthropic 的首次公开募股（IPO）计划面临投资者估值质疑， 部分投资者认为 1.5 万亿美元 （现汇率约合 10.03 万亿元人民币） 估值依然偏高 。Anthropic 拒绝就相关疑虑置评。 报道指出在冲击“史上最大 IPO”的道路上，Anthropic 的公司估值预期不断下调。Anthropic 公司原计划于 11 月 9…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T01:36:48Z",
+    "primary_url": "https://www.ithome.com/1/023/640.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "“史上最大 IPO”遇挑战：Anthropic 上市估值存分歧，1.5 万亿美元仍被嫌贵",
+        "url": "https://www.ithome.com/1/023/640.htm",
+        "published": "2026-11-07T01:36:48Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_83f3c9df48",
+    "title_zh": "刷新算力巅峰：IBM 在美国芝加哥揭幕其最强量子计算机",
+    "event_summary": "IT之家 11 月 7 日消息，IBM 昨日（11 月 6 日）发布联合公告，宣布携手芝加哥大学、美国伊利诺伊州政府、以及伊利诺伊量子与微电子园（IQMP）， 已在芝加哥海德公园实验室投运 IBM Quantum System Two 量子计算机。 这是 IBM 在伊利诺伊州部署的首台量子计算机，也是该公司当前最先进的量子计算系统，其核心为 IBM Quantum Nighthawk 芯片，被 IBM 称为迄今打造的最强大量子芯片。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "算力"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T01:22:48Z",
+    "primary_url": "https://www.ithome.com/1/023/635.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "刷新算力巅峰：IBM 在美国芝加哥揭幕其最强量子计算机",
+        "url": "https://www.ithome.com/1/023/635.htm",
+        "published": "2026-11-07T01:22:48Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_4fc0922f38",
+    "title_zh": "AI基建预期生变，万盛股份2.85亿溢价并购遭上交所三问",
+    "event_summary": "11月6日， 万盛股份 （603010.SH）披露监管工作函回复，回应上交所对公司拟收购标的青岛金博行新材料科技有限公司(以下简称&ldquo;博行新材&rdquo;）业务与财务、交易定价及分红安排等的追问。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 监管"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T01:21:27Z",
+    "primary_url": "https://www.tmtpost.com/8196758.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "AI基建预期生变，万盛股份2.85亿溢价并购遭上交所三问",
+        "url": "https://www.tmtpost.com/8196758.html",
+        "published": "2026-11-07T01:21:27Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_9fa149693b",
+    "title_zh": "Edge AI Daily 早报（11月7日）",
+    "event_summary": "Anthropic递交修订版S-1，机构将估值由2万亿美元压至1.5万亿至1.6万亿；OpenAI完成110亿美元首期交割，投前估值1.25万亿，总额由300亿砍至约200亿，AI一级市场进入现金流定价期。中期选举后10州41项数据中心公投多数通过限制，得州、弗吉尼亚监管转向与微软终止甲骨文逾30亿美元租约共振；英伟达单日跌9.26%、纳指周跌5.52%，麦格理套现560亿美元离场转投电力。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 监管"
+    ],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T00:28:54Z",
+    "primary_url": "https://www.tmtpost.com/8196982.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "Edge AI Daily 早报（11月7日）",
+        "url": "https://www.tmtpost.com/8196982.html",
+        "published": "2026-11-07T00:28:54Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_91ea696190",
+    "title_zh": "A\\三大内部模型曝光！领先Opus5.5三个月，RSI缩短80%实验时间",
+    "event_summary": "听雨 发自 凹非寺 量子位 | 公众号QbitAI Anthropic的三个内部神秘模型，曝光了。 Model 2、Model 3、Model 4。 真名还没公开，但训练时间和部分成绩已经出现了。 第三方评估机构METR的新报告披露：三个模型分别在今年7月、8-9月、9-10月完成训练。 其中最强的 Model 4，在Anthropic的综合能力指数AECI上，已经超过了Opus5.5。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-06T15:21:56Z",
+    "primary_url": "https://www.qbitai.com/2026/11/508184.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "量子位",
+        "level": "L2",
+        "title": "A\\三大内部模型曝光！领先Opus5.5三个月，RSI缩短80%实验时间",
+        "url": "https://www.qbitai.com/2026/11/508184.html",
+        "published": "2026-11-06T15:21:56Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_d99d79c284",
+    "title_zh": "为什么每个 Personal Agent 背后，都必须配备一台“云电脑”？",
+    "event_summary": "PPIO 沙箱，把“云电脑”做成开箱即用的 API",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-06T09:25:59Z",
+    "primary_url": "https://www.qbitai.com/2026/11/508174.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "量子位",
+        "level": "L2",
+        "title": "为什么每个 Personal Agent 背后，都必须配备一台“云电脑”？",
+        "url": "https://www.qbitai.com/2026/11/508174.html",
+        "published": "2026-11-06T09:25:59Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_e7f4cbc712",
+    "title_zh": "阶跃终端 STEPX Neo 智能体手机亮相进博会高通展台，软硬模一体打造智能体新体验",
+    "event_summary": "阶跃终端旗下 STEPX Neo 智能体手机首次亮相",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-06T09:21:51Z",
+    "primary_url": "https://www.qbitai.com/2026/11/508170.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "量子位",
+        "level": "L2",
+        "title": "阶跃终端 STEPX Neo 智能体手机亮相进博会高通展台，软硬模一体打造智能体新体验",
+        "url": "https://www.qbitai.com/2026/11/508170.html",
+        "published": "2026-11-06T09:21:51Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_665ba4f479",
+    "title_zh": "阿里巴巴发布《2026 AI向善行动报告》 AI数据中心可持续发展成年度亮点",
+    "event_summary": "11月5日，阿里巴巴发布《2026 AI向善行动报告》",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-07T05:52:45Z",
+    "hot_seen_at": null,
+    "published": "2026-11-06T09:19:00Z",
+    "primary_url": "https://www.qbitai.com/2026/11/508165.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "量子位",
+        "level": "L2",
+        "title": "阿里巴巴发布《2026 AI向善行动报告》 AI数据中心可持续发展成年度亮点",
+        "url": "https://www.qbitai.com/2026/11/508165.html",
+        "published": "2026-11-06T09:19:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
     "id": "e_51afbd0f03",
     "title_zh": "消息称台积电考虑进军先进内存芯片制造，有望为英伟达打造 3D DRAM",
     "event_summary": "IT之家 11 月 7 日消息，科技媒体《The Information》昨日（11 月 6 日）援引两名知情人士报道， 台积电正考虑扩大业务版图，进军先进内存芯片制造，以在快速扩张的 AI 硬件供应链中获取更大份额。 报道称， 台积电近期已应其最大客户英伟达的要求，开始规划生产一种名为“3D DRAM”的先进内存芯片 。该架构通过垂直堆叠存储单元来提升容量，被视为应对 AI 算力对高带宽、高密度内存需求的关键方向之一。…",
@@ -4732,85 +5676,6 @@
     "needs_translation": false
   },
   {
-    "id": "e_5e3d97fee3",
-    "title_zh": "Claude Code 同需求写两版对比：装不装 frontend-design 差多远？",
-    "event_summary": "大家好，我是孟健。很多想靠 AI 编程做工具出海或做内容运营的朋友，自己手写前端耗时耗力，用 AI 随手敲出来的页面又往往排版丑陋、交互混乱。 今天用 5 段提示词，零手动写代码，带你用 Claude Code 做一个具备专业质感、支持原图网格与像素标注的在线切图工具，并附带零成本上线方案。 打开 Windows…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "Claude"
-    ],
-    "first_seen_at": "2026-11-05T21:03:56Z",
-    "hot_seen_at": "2026-11-05T21:03:56Z",
-    "published": "2026-11-05T21:03:56Z",
-    "primary_url": "https://juejin.cn/post/7704499167134335018",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "掘金热榜",
-        "level": "L3",
-        "title": "Claude Code 同需求写两版对比：装不装 frontend-design 差多远？",
-        "url": "https://juejin.cn/post/7704499167134335018",
-        "published": "2026-11-05T21:03:56Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_a2e7270d46",
-    "title_zh": "冯远征认为 AI 短剧里的角色长相完美，却让人看完就忘，「因为角色没有呼吸」，你同意此观点吗？",
-    "event_summary": "冯远征 2026 年 11 月 3…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-05T21:03:56Z",
-    "hot_seen_at": "2026-11-05T21:03:56Z",
-    "published": "2026-11-05T21:03:56Z",
-    "primary_url": "https://www.zhihu.com/question/2101279300045338395",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "知乎热榜",
-        "level": "L3",
-        "title": "冯远征认为 AI 短剧里的角色长相完美，却让人看完就忘，「因为角色没有呼吸」，你同意此观点吗？",
-        "url": "https://www.zhihu.com/question/2101279300045338395",
-        "published": "2026-11-05T21:03:56Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_1a4c712e58",
-    "title_zh": "彭博美元指数张超0.1%",
-    "event_summary": "周四（11月5日）纽约尾盘，ICE美元指数持平，报101.565点，日内交投区间为101.195-101.706点，北京时间15:00以来持续上扬、22:38刷新日高，之后随着美国半导体/AI板块被抛售而一度回撤至101.4点下方。 彭博美元指数涨0.15%，报1221.86点，日内交投区间为1216.91-1222.03点，15:01以来持续上扬。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "半导体"
-    ],
-    "first_seen_at": "2026-11-05T21:03:56Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T20:17:17Z",
-    "primary_url": "https://wallstreetcn.com/livenews/3195326",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "华尔街见闻·快讯",
-        "level": "L2",
-        "title": "彭博美元指数张超0.1%",
-        "url": "https://wallstreetcn.com/livenews/3195326",
-        "published": "2026-11-05T20:17:17Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
     "id": "e_f6bdb96753",
     "title_zh": "英伟达庆祝首款支持 CUDA 显卡 GeForce 8800 GTX 诞生 20 周年，同步推出纪念游戏带 PC 玩家重返 2006 年",
     "event_summary": "IT之家 11 月 5 日消息，英伟达官方今日庆祝 GeForce 8800 GTX 显卡诞生 20 周年， 同步推出一款 Steam 演示游戏 ，带领 PC 玩家回到 2006 年，一睹这款经典显卡的外貌。 据IT之家了解，GeForce 8800 GTX 诞生于 2006 年 11 月 8 日，是首款支持 CUDA 的 NVIDIA 显卡，为图形渲染以外的 GPU 计算奠定了基础，并推动形成了加速计算平台。 GeForce…",
@@ -6080,878 +6945,6 @@
         "title": "布伦特原油期货涨幅扩大至2%",
         "url": "https://www.cls.cn/detail/2526537",
         "published": "2026-11-05T11:51:53Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_f62e731cf3",
-    "title_zh": "河南：积极开展以旧换新进社区、进乡村、进机关、进平台、进展会活动，提高“得补率”",
-    "event_summary": "近日，河南省政府办公厅出台《河南省进一步提振消费若干政策措施》。其中提出，优化消费品以旧换新补贴政策。用足用好2026年消费品以旧换新政策，在落实全国统一补贴政策、补贴品类的基础上，我省将家用灶具（含集成灶）、吸油烟机、净水器（含直饮机、管线机）、洗碗机、干衣机、智能清洁机器人（含扫洗地机、擦窗机器人）、数码相机（含运动相机）等产品纳入补贴范围，按照最终销售价格的15%给予补贴，每件补贴不超过1500元。每位消费者每类产品省内可补贴1件，补贴资金按照“总量控制、先到先得、用完为止”原则执行。积极开展以旧换新进社区、…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "机器人"
-    ],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T11:32:32Z",
-    "primary_url": "https://wallstreetcn.com/livenews/3195077",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "华尔街见闻·快讯",
-        "level": "L2",
-        "title": "河南：积极开展以旧换新进社区、进乡村、进机关、进平台、进展会活动，提高“得补率”",
-        "url": "https://wallstreetcn.com/livenews/3195077",
-        "published": "2026-11-05T11:32:32Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_c88ad98fdb",
-    "title_zh": "嫌不够大气？消息称 Meta 不再使用水果命名 AI 模型",
-    "event_summary": "IT之家 11 月 5 日消息，据 Business Insider 报道，Meta 不再打算用水果给 AI 模型命名了。一名知情人士透露，这家社交媒体巨头已在内部决定，今后不再以水果为 AI 模型取代号。 这一调整主要出于品牌定位方面的考虑。知情人士表示，以水果命名的代号与 Meta 雄心勃勃的 AI 发展目标并不相称。 Meta 最新 AI 模型 Wonder Full 的内部代号是“Watermelon”（西瓜）。Meta…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T11:24:19Z",
-    "primary_url": "https://www.ithome.com/1/022/963.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "嫌不够大气？消息称 Meta 不再使用水果命名 AI 模型",
-        "url": "https://www.ithome.com/1/022/963.htm",
-        "published": "2026-11-05T11:24:19Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_0335fdc5fa",
-    "title_zh": "反对声浪下 OpenAI 重申将承担数据中心供电成本，承诺征求社区意见、公开建设规划",
-    "event_summary": "IT之家 11 月 5 日消息，面对全美各地针对数据中心耗电、耗水及噪音等问题的强烈抵制，当地时间 11 月 5 日，OpenAI 发布《国家社区契约》（National Community Compact）与《算力园区政策蓝图》（Compute Campus Policy Blueprint）。 OpenAI 宣布，未来在就项目选址进行协商沟通时，将不再要求地方公职人员签署保密协议，不过核心商业秘密仍将依法保留。 OpenAI…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "AI + 算力"
-    ],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T11:04:59Z",
-    "primary_url": "https://www.ithome.com/1/022/958.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "反对声浪下 OpenAI 重申将承担数据中心供电成本，承诺征求社区意见、公开建设规划",
-        "url": "https://www.ithome.com/1/022/958.htm",
-        "published": "2026-11-05T11:04:59Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_a564784dad",
-    "title_zh": "我国将加快“AI+机械”复合型人才培养",
-    "event_summary": "今年以来，我国将“AI+机械”复合型人才培养作为行业转型升级的核心支撑，全面启动全产业链的产教协同人才培养项目。专家表示，随着人工智能加速赋能制造业，产业出现人才结构性矛盾，比如懂人工智能技术的人员不熟悉工业业务流程，熟悉机械工艺的技能人员又缺少AI应用能力。（央视新闻）",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "人工智能"
-    ],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T11:00:34Z",
-    "primary_url": "https://www.36kr.com/newsflashes/4056751052166018",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "36氪·快讯",
-        "level": "L2",
-        "title": "我国将加快“AI+机械”复合型人才培养",
-        "url": "https://www.36kr.com/newsflashes/4056751052166018",
-        "published": "2026-11-05T11:00:34Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_b8c0e66ba8",
-    "title_zh": "直到有人叫停，大型科技公司的 AI 基础设施建设才不会停止",
-    "event_summary": "After four of the biggest competitors in the AI race held quarterly earnings calls late last month, two things are clear: Big Tech is not done spending record amounts on the AI data center buildout, and the AI data…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T10:45:00Z",
-    "primary_url": "https://www.theverge.com/ai-artificial-intelligence/1027344/amazon-microsoft-alphabet-google-meta-data-centers-earnings-q3",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "The Verge AI",
-        "level": "L2",
-        "title": "直到有人叫停，大型科技公司的 AI 基础设施建设才不会停止",
-        "url": "https://www.theverge.com/ai-artificial-intelligence/1027344/amazon-microsoft-alphabet-google-meta-data-centers-earnings-q3",
-        "published": "2026-11-05T10:45:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_3a4961a44a",
-    "title_zh": "具身智能，变天了",
-    "event_summary": "文 | 定焦One（dingjiaoone），作者 | 王汉星，编辑 | 魏佳 一家成立一年半左右的具身智能数据服务公司，最近两周接到的数据采购订单超过了此前两个月的量，这在整个具身行业融资环境收紧的背景下就像是一针强心剂。 &ldquo;订单不仅来自具身行业，一些曾经只询价不下单的基模大厂也开始下单了。&rdquo;这家公司的创始人告诉「定焦One」。 变化始于GPT-6…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "具身智能"
-    ],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T10:31:01Z",
-    "primary_url": "https://www.tmtpost.com/8194393.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "钛媒体",
-        "level": "L2",
-        "title": "具身智能，变天了",
-        "url": "https://www.tmtpost.com/8194393.html",
-        "published": "2026-11-05T10:31:01Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_ceca32162b",
-    "title_zh": "机器人，开始卷K12了",
-    "event_summary": "给孩子买机器人，也会像今天买学习机、平板和电话手表一样自然。家长的理由还是那句最朴素的话：给孩子学习。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "机器人"
-    ],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T10:30:34Z",
-    "primary_url": "https://www.tmtpost.com/8194643.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "钛媒体",
-        "level": "L2",
-        "title": "机器人，开始卷K12了",
-        "url": "https://www.tmtpost.com/8194643.html",
-        "published": "2026-11-05T10:30:34Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_e5d061cf93",
-    "title_zh": "Chromebook 统治美国校园，AI 成了没得选的「套餐」",
-    "event_summary": "为什么 AI 成了搜索的 「必选项」 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T10:00:23Z",
-    "primary_url": "https://www.ifanr.com/1687912?utm_source=rss&utm_medium=rss&utm_campaign=",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "爱范儿",
-        "level": "L2",
-        "title": "Chromebook 统治美国校园，AI 成了没得选的「套餐」",
-        "url": "https://www.ifanr.com/1687912?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "published": "2026-11-05T10:00:23Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_5ffc9581cf",
-    "title_zh": "自带摄像头的头戴式耳机 AuraCam 现身：支持图像识别、实时翻译等",
-    "event_summary": "IT之家 11 月 5 日消息，穿戴设备品牌 Rollme（罗麦）最近在海外推出 AuraCam 耳机。 这是一款自带摄像头的头戴式无线耳机 ，支持图像识别、实时翻译等功能， 定价 89.99 美元 （IT之家注：现汇率约合 601.6 元人民币） 。 据介绍，这款耳机正面配备一枚 800 万像素摄像头，支持电子图像防抖技术。具备 OpenAI…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "OpenAI"
-    ],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T09:55:25Z",
-    "primary_url": "https://www.ithome.com/1/022/916.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "自带摄像头的头戴式耳机 AuraCam 现身：支持图像识别、实时翻译等",
-        "url": "https://www.ithome.com/1/022/916.htm",
-        "published": "2026-11-05T09:55:25Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_05bb39e263",
-    "title_zh": "比亚迪腾势 Z9S 首次 OTA：AI 超级智能体迪迪虾上车，新增代言人王力宏场景播报",
-    "event_summary": "IT之家 11 月 5 日消息，比亚迪腾势汽车今日宣布腾势 Z9S 首次 OTA ，AI 超级智能体迪迪虾上车。 IT之家附主要更新内容如下： AI 超级智能体迪迪虾上线 新增代言人王力宏场景播报 新增磁吸玩偶主题联动功能 新增无麦 K 歌功能 新增 AI 日报功能 延伸阅读 腾势 Z9S 是比亚迪旗下腾势汽车推出的全新科技豪华智能轿车，于 2026 年 9 月 23…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "智能体"
-    ],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T09:39:01Z",
-    "primary_url": "https://www.ithome.com/1/022/911.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "比亚迪腾势 Z9S 首次 OTA：AI 超级智能体迪迪虾上车，新增代言人王力宏场景播报",
-        "url": "https://www.ithome.com/1/022/911.htm",
-        "published": "2026-11-05T09:39:01Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_38fed7c5f3",
-    "title_zh": "赛力斯康波：面向自动驾驶，问界正布局 L3/L4 级，全新迭代魔方技术平台已支持 L3 架构",
-    "event_summary": "IT之家 11 月 5 日消息，赛力斯集团董事、副总裁康波今日发文，分享了自己在 2026 年世界互联网大会乌镇峰会的发言。 据介绍，问界品牌已有超百万辆高端存量车、超百万活跃用户和超百亿公里里程，截至 10 月底，已累计避免可能发生的碰撞超 450 万次。 康波提到，面向自动驾驶新时代， 问界正布局 L3/L4 级，全新迭代的魔方技术平台已支持 L3 架构 。 据IT之家昨日报道，赛力斯在互动平台表示，L3…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "自动驾驶"
-    ],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T09:30:14Z",
-    "primary_url": "https://www.ithome.com/1/022/905.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "赛力斯康波：面向自动驾驶，问界正布局 L3/L4 级，全新迭代魔方技术平台已支持 L3 架构",
-        "url": "https://www.ithome.com/1/022/905.htm",
-        "published": "2026-11-05T09:30:14Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_d2046f8989",
-    "title_zh": "具身大脑行业迎来“终极反派”",
-    "event_summary": "Astra突破具身智能边界，展现通用大模型操控机械臂画金门大桥的能力，引发行业对机器人大脑的热议。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "大模型"
-    ],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T09:22:36Z",
-    "primary_url": "https://www.tmtpost.com/8194579.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "钛媒体",
-        "level": "L2",
-        "title": "具身大脑行业迎来“终极反派”",
-        "url": "https://www.tmtpost.com/8194579.html",
-        "published": "2026-11-05T09:22:36Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_b6a55ed771",
-    "title_zh": "世界互联网大会领先科技奖背后，Qoder 凭什么拿下中国 AI 编程市场第一",
-    "event_summary": "作者｜Cynthia 编辑｜郑玄 2026 年 11 月，每年乌镇世界互联网大会期间举办的领先科技奖，已经走到第十年。 作为面向全球征集互联网领域领先成果的国际性科技奖项，领先科技奖每年会选出涵盖基础研究、关键技术与工程研发约 15 至 20 项获奖项目。一定程度上，它的评选也预示了未来几年潮水的走向。 这一年，传统互联网的光环逐渐退去，AI 成了最大的关键词。其中，仅工程研发组的 8 项获奖成果，从 AMD 的 AI…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T09:19:17Z",
-    "primary_url": "http://www.geekpark.net/news/373542",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "极客公园",
-        "level": "L2",
-        "title": "世界互联网大会领先科技奖背后，Qoder 凭什么拿下中国 AI 编程市场第一",
-        "url": "http://www.geekpark.net/news/373542",
-        "published": "2026-11-05T09:19:17Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_25330a03b6",
-    "title_zh": "OpenAI 总裁布罗克曼：AI 或将能让死亡成为一种选择",
-    "event_summary": "IT之家 11 月 5 日消息，自人类拥有自我意识以来，死亡始终是困扰人类思想的一大难题，犹如一个至今仍无法找到有效解法的复杂谜题。不过，人工智能（AI）或许能在不久的将来帮助人类实现某些形式的永生，甚至让死亡成为一种可以自主选择的事情。OpenAI 总裁格雷格 · 布罗克曼（Greg Brockman）近日发表了这一观点，而他的看法与埃隆 · 马斯克（Elon Musk）此前表达的类似观点不谋而合。 OpenAI…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "人工智能"
-    ],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T09:16:16Z",
-    "primary_url": "https://www.ithome.com/1/022/901.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "OpenAI 总裁布罗克曼：AI 或将能让死亡成为一种选择",
-        "url": "https://www.ithome.com/1/022/901.htm",
-        "published": "2026-11-05T09:16:16Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_80bef83ef4",
-    "title_zh": "一个人用得好 AI，为什么一家公司却用不好？",
-    "event_summary": "作者｜老 S 编辑｜郑玄 今天的 Agent，已经能够独立完成不少具体的工作。 写方案、写代码、做分析报告，过去可能需要员工花费几天才能完成的任务，如今 Agent 往往能在较短时间里交出不错的结果。 但在企业里，完成一份方案，可能只是一项工作的开始。比如，Agent 可以很快制定一份员工考核方案。但要用它真正完成一次考核，还需要获取员工的考勤、业绩等数据，处理特殊情况，并经过业务负责人和 HR 的确认，才能最终确定绩效。…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "AI + Agent"
-    ],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T09:15:38Z",
-    "primary_url": "http://www.geekpark.net/news/373541",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "极客公园",
-        "level": "L2",
-        "title": "一个人用得好 AI，为什么一家公司却用不好？",
-        "url": "http://www.geekpark.net/news/373541",
-        "published": "2026-11-05T09:15:38Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_ad627458ee",
-    "title_zh": "百度开源文心5.5 Flash Base，多基准测试刷新同尺寸模型 SOTA",
-    "event_summary": "11月5日，百度正式开源最新基座模型文心5.5 Flash Base（ERNIE 5.5 Flash Base）。模型采用MoE架构，总参数量2800亿，每个 Token 激活140亿参数，使用33.5万亿个 Token 完成预训练，预训练上下文长度最高达128K，微调与推理阶段支持最长100万 Token上下文。在知识、推理、数学、代码、多语言和长上下文等多个基准测试中取得同尺寸模型 SOTA 表现，超过…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "微调"
-    ],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T06:53:00Z",
-    "primary_url": "https://www.leiphone.com/category/industrynews/XOv7MDFAP99kUMEW.html",
-    "source_count": 2,
-    "links": [
-      {
-        "source": "量子位",
-        "level": "L2",
-        "title": "百度开源文心5.5 Flash Base，多基准测试刷新同尺寸模型 SOTA",
-        "url": "https://www.qbitai.com/2026/11/507787.html",
-        "published": "2026-11-05T07:15:13Z"
-      },
-      {
-        "source": "雷峰网",
-        "level": "L2",
-        "title": "百度开源文心5.5 Flash Base，多基准测试刷新同尺寸模型 SOTA",
-        "url": "https://www.leiphone.com/category/industrynews/XOv7MDFAP99kUMEW.html",
-        "published": "2026-11-05T06:53:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_3d1036e6ad",
-    "title_zh": "MIT神作被锤：Astra爆改Qwen权重？就吹吧！",
-    "event_summary": "Jay 发自 凹非寺 量子位 | 公众号 QbitAI Astra修改小模型权重？MIT那篇爆火研究，被大佬公开质疑了。 Astra前两天刚刚凭借一项惊人能力刷屏AI圈——不用训练、不算梯度，直接修改另一个AI模型的权重。 MIT团队宣称，Astra仅修改Qwen3.5-0.8B的0.016%权重，就让数学成绩从7.9%暴涨至48.1%，相当于提升到原来的6倍多。…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T07:10:56Z",
-    "primary_url": "https://www.qbitai.com/2026/11/507782.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "量子位",
-        "level": "L2",
-        "title": "MIT神作被锤：Astra爆改Qwen权重？就吹吧！",
-        "url": "https://www.qbitai.com/2026/11/507782.html",
-        "published": "2026-11-05T07:10:56Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_8480d321b9",
-    "title_zh": "对话星尘智能来杰：机器人的「iPhone 4 时刻」还没到，但可能比想象中更近丨多样性公司",
-    "event_summary": "机器人是帮助人的，不是替代人的。 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "机器人"
-    ],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T06:29:09Z",
-    "primary_url": "https://www.ifanr.com/1687805?utm_source=rss&utm_medium=rss&utm_campaign=",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "爱范儿",
-        "level": "L2",
-        "title": "对话星尘智能来杰：机器人的「iPhone 4 时刻」还没到，但可能比想象中更近丨多样性公司",
-        "url": "https://www.ifanr.com/1687805?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "published": "2026-11-05T06:29:09Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_f2947ec2d1",
-    "title_zh": "GPT Images 2.6 突然发布，蓝色大肥鱼实现 GIF 表情包自由",
-    "event_summary": "以后表情包斗图，全靠 AI 了 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T06:14:03Z",
-    "primary_url": "https://www.ifanr.com/1687778?utm_source=rss&utm_medium=rss&utm_campaign=",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "爱范儿",
-        "level": "L2",
-        "title": "GPT Images 2.6 突然发布，蓝色大肥鱼实现 GIF 表情包自由",
-        "url": "https://www.ifanr.com/1687778?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "published": "2026-11-05T06:14:03Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_45b005af13",
-    "title_zh": "91% ≈ 0%？谷歌最新研究，戳破工程 Agent 的高正确率泡沫",
-    "event_summary": "41.3% 的设计项跨过安全门槛，复杂工程仍困于约束耦合。 作者丨 郑佳美 岑 峰 编辑丨岑 峰 在工程世界里，91% 的正确，有时和 0% 的交付能力没有区别。 一条电缆桥架在机房顶部穿过消防管线，就能让几十页正确的计算书失去交付价值。载流量算对了，电压降符合要求，设备选型也有依据，但进入三维空间后，几套系统争夺同一段净空，工程师只能退回方案。 AI Agent…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "AI + Agent"
-    ],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T05:51:00Z",
-    "primary_url": "https://www.leiphone.com/category/ai/YZ0bP2vh94KY45RG.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "雷峰网",
-        "level": "L2",
-        "title": "91% ≈ 0%？谷歌最新研究，戳破工程 Agent 的高正确率泡沫",
-        "url": "https://www.leiphone.com/category/ai/YZ0bP2vh94KY45RG.html",
-        "published": "2026-11-05T05:51:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_2c80f4f273",
-    "title_zh": "以“真实工作”检验机器人价值，XROGO在CeMAT ASIA发布机器人到岗计划",
-    "event_summary": "11月3日，在CeMAT ASIA 2026亚洲国际物流技术与运输系统展览会期间，XROGO负责人发表《像雇人一样雇机器人——XROGO作业网络与物流伙伴的合作机会》主题演讲，围绕机器人如何进入企业工作岗位、如何通过灵活服务模式降低使用门槛，以及如何与物流伙伴共同推进场景应用，分享了XROGO的实践与思考。…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T05:25:37Z",
-    "primary_url": "https://www.qbitai.com/2026/11/507767.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "量子位",
-        "level": "L2",
-        "title": "以“真实工作”检验机器人价值，XROGO在CeMAT ASIA发布机器人到岗计划",
-        "url": "https://www.qbitai.com/2026/11/507767.html",
-        "published": "2026-11-05T05:25:37Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_16de4ca3c2",
-    "title_zh": "厘清机器人的模糊记忆",
-    "event_summary": "A new system identifies and corrects unreliable object descriptions stored in a robot’s memory, improving the robot’s ability to interact with its environment.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T05:00:00Z",
-    "primary_url": "https://news.mit.edu/2026/clearing-up-robot-fuzzy-memory-1105",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "MIT News AI",
-        "level": "L2",
-        "title": "厘清机器人的模糊记忆",
-        "url": "https://news.mit.edu/2026/clearing-up-robot-fuzzy-memory-1105",
-        "published": "2026-11-05T05:00:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_16ca6e8996",
-    "title_zh": "金元政治的惨败：马斯克砸重金挡不住蓝色浪潮，AI数据中心遇逆风",
-    "event_summary": "在2026年美国中期选举中，民主党掀起的“蓝色浪潮”不仅强势夺回了国会参众两院的控制权，更在共和党深红重镇得克萨斯州引发了罕见的政治“地震”。全球首富埃隆·马斯克豪掷数亿美元的政治豪赌以惨败收场；与此同时，作为近年来资本市场强大驱动力的AI数据中心基础设施建设，也面临逆风与清算。…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "数据中心 + AI"
-    ],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T04:23:05Z",
-    "primary_url": "https://www.thepaper.cn/newsDetail_forward_34410722",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "澎湃·热新闻",
-        "level": "L2",
-        "title": "金元政治的惨败：马斯克砸重金挡不住蓝色浪潮，AI数据中心遇逆风",
-        "url": "https://www.thepaper.cn/newsDetail_forward_34410722",
-        "published": "2026-11-05T04:23:05Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_9a1d56effd",
-    "title_zh": "清洁机器人出海患上「三高」：高库存、高税率、高门槛",
-    "event_summary": "01 墙 “北美市场不搞了。老品接着卖，新品没有了。” 一位传感器企业负责人周铭最近拜访一家头部智能硬件公司时，对方如此表态。据他观察，几家清洁电器头部企业的新品规划，也都在往欧洲、澳洲挪。…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "机器人"
-    ],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T03:58:00Z",
-    "primary_url": "https://www.leiphone.com/category/weiwu/DGcLJU9RgJPPzGhP.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "雷峰网",
-        "level": "L2",
-        "title": "清洁机器人出海患上「三高」：高库存、高税率、高门槛",
-        "url": "https://www.leiphone.com/category/weiwu/DGcLJU9RgJPPzGhP.html",
-        "published": "2026-11-05T03:58:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_1b0532de8d",
-    "title_zh": "子公司把母公司告了！安世半导体起诉闻泰科技，索赔134亿元；中兴手机账号主体变更，将调整为上海申启纪元；腾讯混元正式发布Hy4",
-    "event_summary": "要闻提示 1.子公司把母公司告了！安世半导体索赔134亿元，闻泰科技强硬回击 2.中兴手机账号主体变更，将调整为上海申启纪元 3.腾讯混元发布最新一代大语言模型Hy4，跻身最强开源模型队列 4.iPhone系统天气Bug显示下周五-32℃，苹果客服致歉：系统端口问题 5.京东本地生活业务负责人郭庆离职 6.蔚来李斌：自动驾驶不应让出租车和网约车司机失去工作 7.特斯拉为进欧盟妥协！放弃FSD名称，还把超速上线限制在10%…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "半导体"
-    ],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T02:07:00Z",
-    "primary_url": "https://www.leiphone.com/category/zaobao/uojoiQ2Owilfvr8B.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "雷峰网",
-        "level": "L2",
-        "title": "子公司把母公司告了！安世半导体起诉闻泰科技，索赔134亿元；中兴手机账号主体变更，将调整为上海申启纪元；腾讯混元正式发布Hy4",
-        "url": "https://www.leiphone.com/category/zaobao/uojoiQ2Owilfvr8B.html",
-        "published": "2026-11-05T02:07:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_fe9a94277a",
-    "title_zh": "基于本体+知识+Harness+Datat Agent的智能体完整落地链路！",
-    "event_summary": "Data + AI 技术实践巡展 · 上海站",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T02:01:51Z",
-    "primary_url": "https://www.qbitai.com/2026/11/507696.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "量子位",
-        "level": "L2",
-        "title": "基于本体+知识+Harness+Datat Agent的智能体完整落地链路！",
-        "url": "https://www.qbitai.com/2026/11/507696.html",
-        "published": "2026-11-05T02:01:51Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_f935675761",
-    "title_zh": "为负责任的 AI 基础设施设定新标准",
-    "event_summary": "OpenAI introduces its National Community Compact and Compute Campus Policy Blueprint to protect local resources, create jobs, and guide responsible AI infrastructure development.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T02:00:00Z",
-    "primary_url": "https://openai.com/index/setting-new-standard-responsible-ai-infrastructure",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "OpenAI News",
-        "level": "L2",
-        "title": "为负责任的 AI 基础设施设定新标准",
-        "url": "https://openai.com/index/setting-new-standard-responsible-ai-infrastructure",
-        "published": "2026-11-05T02:00:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_5279acc13e",
-    "title_zh": "GPT-Image-2.6全量上线！直出GIF和SVG，6.2 Astra也现身了",
-    "event_summary": "衡宇 发自 凹非寺 量子位 | 公众号 QbitAI 整体生成时间缩短50%，最快6秒出图；原生支持生成GIF动图；支持直接导出SVG矢量格式。 OpenAI在API中首次把模型的“场景规划脑力”和“像素渲染画质”拆成了两个独立参数，大幅降低了多轮修改的成本和耗时。 目前，GPT-Image-2.6在ChatGPT、Codex以及API中全量上线，全线免费及付费用户均可直接使用。…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T01:59:37Z",
-    "primary_url": "https://www.qbitai.com/2026/11/507707.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "量子位",
-        "level": "L2",
-        "title": "GPT-Image-2.6全量上线！直出GIF和SVG，6.2 Astra也现身了",
-        "url": "https://www.qbitai.com/2026/11/507707.html",
-        "published": "2026-11-05T01:59:37Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_f6fcbc7ee6",
-    "title_zh": "太初元碁入选2026年世界互联网大会领先科技奖收录成果集《科技之魅》",
-    "event_summary": "11月2日，2026年世界互联网大会领先科技奖收录成果集《科技之魅》正式对外发布。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-05T12:12:36Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T01:42:43Z",
-    "primary_url": "https://www.qbitai.com/2026/11/507688.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "量子位",
-        "level": "L2",
-        "title": "太初元碁入选2026年世界互联网大会领先科技奖收录成果集《科技之魅》",
-        "url": "https://www.qbitai.com/2026/11/507688.html",
-        "published": "2026-11-05T01:42:43Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_7f32e63a57",
-    "title_zh": "DeepSeek Harness入驻B站，评论区被干成了大型插件集市！",
-    "event_summary": "DeepSeek Harness（下面简称DSH）官方入驻B站，发了一条视频，24小时播放破了211万，账号一天涨了40万粉。 有人在晒自己给DSH写的插件，有人在讨论某个插件的实现细节，有人在问“我这边十五个插件了，有没有比我还多的”。 还有人把自己女儿画的画做成了一个平台跳跃小游戏，拿了六千多个赞。 这不是官方组织的活动，这是一群人在自发地“造东西”。…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "DeepSeek"
-    ],
-    "first_seen_at": "2026-11-05T02:19:03Z",
-    "hot_seen_at": "2026-11-05T02:19:03Z",
-    "published": "2026-11-05T02:19:03Z",
-    "primary_url": "https://juejin.cn/post/7704165786369490995",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "掘金热榜",
-        "level": "L3",
-        "title": "DeepSeek Harness入驻B站，评论区被干成了大型插件集市！",
-        "url": "https://juejin.cn/post/7704165786369490995",
-        "published": "2026-11-05T02:19:03Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_31a66054d1",
-    "title_zh": "DeepSeek 再次崩了，DeepSeek V5正在路上？",
-    "event_summary": "DeepSeek近期再次出现访问响应迟缓与短时中断，这类服务端波动迅速引发了广泛讨论。每一次系统抖动，都会引来社区关于新版本迭代的猜想。从官方评测代码仓库中显露的标识，到供应链传出华为昇腾950可能承接训练任务的消息，关于DeepSeek V5的线索确实在逐步汇集。不过客观审视现有事实，这些迹象更多体现了前期工程筹备与算力验证，距离正式发布仍有明确的时间差。 DeepSeek…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "DeepSeek"
-    ],
-    "first_seen_at": "2026-11-05T02:19:03Z",
-    "hot_seen_at": "2026-11-05T02:19:03Z",
-    "published": "2026-11-05T02:19:03Z",
-    "primary_url": "https://juejin.cn/post/7704168443986214966",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "掘金热榜",
-        "level": "L3",
-        "title": "DeepSeek 再次崩了，DeepSeek V5正在路上？",
-        "url": "https://juejin.cn/post/7704168443986214966",
-        "published": "2026-11-05T02:19:03Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_d3a236a0ce",
-    "title_zh": "为什么 Skill 很难商业化？Bot 才是 AI 时代真正的商业机会",
-    "event_summary": "最近 Skill 这个概念越来越火。无论是 Claude Code、Codex，还是各种 Agent 平台，都在推动 Skill 生态的发展。开发者可以把一套提示词、工具调用逻辑、工作流程和领域知识封装成 Skill，让 AI 在需要的时候自动调用。 这看起来是一个很好的创业机会：既然 Skill 可以复用，是不是就可以像过去的软件插件一样，建立一个 Skill 市场，让开发者出售自己的…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-05T02:19:03Z",
-    "hot_seen_at": "2026-11-05T02:19:03Z",
-    "published": "2026-11-05T02:19:03Z",
-    "primary_url": "https://juejin.cn/post/7703881101718306825",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "掘金热榜",
-        "level": "L3",
-        "title": "为什么 Skill 很难商业化？Bot 才是 AI 时代真正的商业机会",
-        "url": "https://juejin.cn/post/7703881101718306825",
-        "published": "2026-11-05T02:19:03Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_142550ce20",
-    "title_zh": "如何评价 DeepSeek 工程师高熙说的「AI竞赛中，真正的对手不是其他大模型公司，而是时间」？",
-    "event_summary": "11月3日，在2026年世界互联网大会乌镇峰会的人工智能对话环节，DeepSeek研究工程师高熙讲述了DeepSeek的开源逻辑。对于将研究成果开源，他表示是为了让AGI更快到来。 当前，AI技术发展呈指数级增长，每年都有巨大突破：从简单翻译到深度推理，再到解决复杂数学和计算机问题。…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "人工智能"
-    ],
-    "first_seen_at": "2026-11-05T02:19:03Z",
-    "hot_seen_at": "2026-11-05T02:19:03Z",
-    "published": "2026-11-05T02:19:03Z",
-    "primary_url": "https://www.zhihu.com/question/2101053619059389232",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "知乎热榜",
-        "level": "L3",
-        "title": "如何评价 DeepSeek 工程师高熙说的「AI竞赛中，真正的对手不是其他大模型公司，而是时间」？",
-        "url": "https://www.zhihu.com/question/2101053619059389232",
-        "published": "2026-11-05T02:19:03Z"
       }
     ],
     "needs_translation": false
