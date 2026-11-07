@@ -1,5 +1,84 @@
 [
   {
+    "id": "e_b29e1049af",
+    "title_zh": "一天一个开源项目（第255篇）：Mika —— 装在安卓手机里的 AI 代理，在后台虚拟屏上替你操作 App 和网页",
+    "event_summary": "「没有 App API，没有逐个 App 适配。」 这是「一天一个开源项目」系列的 第 255 篇 。今天的项目是 Mika ，一个跑在安卓手机上的 AI 代理。 让 AI 替你操作手机，常见的做法有两条：要么靠各个 App 开放接口（绝大多数没有），要么给每个 App 单独写适配（维护不过来）。Mika 走的是第三条：像人一样看屏幕、找按钮、点击、输入。README 的说法是「不需要 App…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-07T12:54:14Z",
+    "hot_seen_at": "2026-11-07T12:54:14Z",
+    "published": "2026-11-07T12:54:14Z",
+    "primary_url": "https://juejin.cn/post/7704935347230408755",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "一天一个开源项目（第255篇）：Mika —— 装在安卓手机里的 AI 代理，在后台虚拟屏上替你操作 App 和网页",
+        "url": "https://juejin.cn/post/7704935347230408755",
+        "published": "2026-11-07T12:54:14Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_70bfea6c82",
+    "title_zh": "《“人工智能+媒体”全球发展年度蓝皮书（2026）》智库报告发布",
+    "event_summary": "【《“人工智能+媒体”全球发展年度蓝皮书（2026）》智库报告发布】财联社11月7日电，在7日于北京举行的第七届世界媒体峰会开幕式上，新华社国家高端智库发布《“人工智能+媒体”全球发展年度蓝皮书（2026）》智库报告。报告提出，人工智能技术正加快重塑全球信息生态和传播权力结构，给新闻媒体带来新的机遇和挑战：生成能力的跃升丰富了内容供给，也让伪造变得轻而易举；智能入口带来新的触达渠道，也削弱了媒体与用户之间的直接联系；智能工具提升了生产效…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-07T12:54:14Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T11:34:02Z",
+    "primary_url": "https://www.cls.cn/detail/2528117",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "《“人工智能+媒体”全球发展年度蓝皮书（2026）》智库报告发布",
+        "url": "https://www.cls.cn/detail/2528117",
+        "published": "2026-11-07T11:34:02Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_4b9a35b163",
+    "title_zh": "第七届世界媒体峰会发布北京共识",
+    "event_summary": "第七届世界媒体峰会7日在北京举行。峰会开幕式上，发布了《第七届世界媒体峰会北京共识》。共识说，与会代表看到，人工智能正在引领新一轮科技革命和产业变革，深刻改变了人类生产生活方式和世界发展格局。愿发挥媒体独特优势，凝聚各方共识，共同推进合作行动落地见效，推动人工智能时代全球媒体转型发展。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-07T12:54:14Z",
+    "hot_seen_at": null,
+    "published": "2026-11-07T11:29:22Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3196420",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "第七届世界媒体峰会发布北京共识",
+        "url": "https://wallstreetcn.com/livenews/3196420",
+        "published": "2026-11-07T11:29:22Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
     "id": "e_5e3d97fee3",
     "title_zh": "Claude Code 同需求写两版对比：装不装 frontend-design 差多远？",
     "event_summary": "大家好，我是孟健。很多想靠 AI 编程做工具出海或做内容运营的朋友，自己手写前端耗时耗力，用 AI 随手敲出来的页面又往往排版丑陋、交互混乱。 今天用 5 段提示词，零手动写代码，带你用 Claude Code 做一个具备专业质感、支持原图网格与像素标注的在线切图工具，并附带零成本上线方案。 打开 Windows…",
@@ -6846,85 +6925,6 @@
         "title": "Aina 的智能戒指配备屏幕、摇杆和麦克风，以便您与 AI 代理对话",
         "url": "https://techcrunch.com/2026/11/05/ainas-smart-ring-has-a-screen-a-joystick-and-a-mic-so-you-can-talk-to-ai-agents/",
         "published": "2026-11-05T14:42:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_31978fdb64",
-    "title_zh": "NASA 公布 X-70 Fractal 实验飞机：探索极限机动能力，两年内首飞",
-    "event_summary": "IT之家 11 月 5 日消息，NASA 昨日宣布，X 系列实验飞机家族迎来新成员 ——X-70 Fractal。该系列此前诞生过近 80 年前首次突破音障的贝尔 X-1，以及近年来备受关注的 X-59 静音超音速验证机。 NASA 表示，X-70 Fractal 是一个“高性能、高适应性的研究平台”，将作为新一代航空技术的试验平台，用于相关技术的开发与测试。 目前，NASA 仅公布了一张由人工智能生成的 X-70…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "人工智能"
-    ],
-    "first_seen_at": "2026-11-05T21:03:56Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T14:31:36Z",
-    "primary_url": "https://www.ithome.com/1/023/005.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "NASA 公布 X-70 Fractal 实验飞机：探索极限机动能力，两年内首飞",
-        "url": "https://www.ithome.com/1/023/005.htm",
-        "published": "2026-11-05T14:31:36Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_aee8a4bbb8",
-    "title_zh": "Linux 内核新补丁进入审核：为 T2 芯片的 Intel Mac 电脑提供隔空投送支持",
-    "event_summary": "IT之家 11 月 5 日消息，据科技媒体 Phoronix 今天报道，开发者 Andre Eikmeyer 日前将一组 Linux 内核补丁提交审核， 如果最终能够合并到主线内核 ， 搭载 T2 芯片的 Intel Mac 电脑将能够在 Linux 下实现隔空投送（AirDrop） 。 据报道，这名开发者提交了 Broadcom（博通） brcmfmac 驱动补丁，旨在通过 Apple Wireless Direct…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "AI + 芯片"
-    ],
-    "first_seen_at": "2026-11-05T21:03:56Z",
-    "hot_seen_at": null,
-    "published": "2026-11-05T14:14:07Z",
-    "primary_url": "https://www.ithome.com/1/023/000.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "Linux 内核新补丁进入审核：为 T2 芯片的 Intel Mac 电脑提供隔空投送支持",
-        "url": "https://www.ithome.com/1/023/000.htm",
-        "published": "2026-11-05T14:14:07Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_00fad6531e",
-    "title_zh": "MCP 详解",
-    "event_summary": "Model Context Protocol An open standard for connecting AI apps to the tools and data they use. A server says what it can do, the app shows that to the model, and when the model wants something the…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-05T21:03:56Z",
-    "hot_seen_at": "2026-11-05T14:08:35Z",
-    "published": "2026-11-05T14:08:35Z",
-    "primary_url": "https://mcp-explained.com/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "Hacker News",
-        "level": "L3",
-        "title": "MCP 详解",
-        "url": "https://mcp-explained.com/",
-        "published": "2026-11-05T14:08:35Z"
       }
     ],
     "needs_translation": false
