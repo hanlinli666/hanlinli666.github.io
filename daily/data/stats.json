@@ -1,26 +1,26 @@
 {
-  "run_at": "2026-11-08T05:54:05Z",
+  "run_at": "2026-11-08T11:32:14Z",
   "stages": {
     "sources": 34,
-    "sources_ok": 29,
-    "raw": 584,
-    "after_keywords": 40,
-    "merged": 640,
+    "sources_ok": 30,
+    "raw": 614,
+    "after_keywords": 48,
+    "merged": 648,
     "written": 600,
-    "body_filled": 2,
-    "new_today": 43
+    "body_filled": 8,
+    "new_today": 80
   },
   "sources": [
     {
       "id": "gov-zuixin",
       "name": "国务院·最新政策",
       "level": "L1",
-      "ok": false,
-      "raw": 0,
+      "ok": true,
+      "raw": 20,
       "kept": 0,
-      "ms": 120902,
-      "mirror": "",
-      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/zhengce/zuixin :: The read operation timed out"
+      "ms": 1356,
+      "mirror": "https://hub.slarker.me",
+      "error": ""
     },
     {
       "id": "miit-yjzj",
@@ -29,7 +29,7 @@
       "ok": false,
       "raw": 0,
       "kept": 0,
-      "ms": 120907,
+      "ms": 120455,
       "mirror": "",
       "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/yjzj :: The read operation timed out"
     },
@@ -40,7 +40,7 @@
       "ok": false,
       "raw": 0,
       "kept": 0,
-      "ms": 120904,
+      "ms": 120447,
       "mirror": "",
       "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/zcwj :: The read operation timed out"
     },
@@ -51,7 +51,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 1346,
+      "ms": 944,
       "mirror": "",
       "error": ""
     },
@@ -62,7 +62,7 @@
       "ok": true,
       "raw": 16,
       "kept": 0,
-      "ms": 1588,
+      "ms": 1868,
       "mirror": "",
       "error": ""
     },
@@ -72,9 +72,9 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 2,
-      "ms": 61150,
-      "mirror": "https://hub.slarker.me",
+      "kept": 4,
+      "ms": 1162,
+      "mirror": "https://rsshub.rssforever.com",
       "error": ""
     },
     {
@@ -84,7 +84,7 @@
       "ok": true,
       "raw": 20,
       "kept": 1,
-      "ms": 43,
+      "ms": 55,
       "mirror": "",
       "error": ""
     },
@@ -92,12 +92,12 @@
       "id": "cls-telegraph",
       "name": "财联社·电报",
       "level": "L2",
-      "ok": false,
-      "raw": 0,
-      "kept": 0,
-      "ms": 120833,
-      "mirror": "",
-      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/cls/telegraph :: The read operation timed out"
+      "ok": true,
+      "raw": 20,
+      "kept": 6,
+      "ms": 631,
+      "mirror": "https://hub.slarker.me",
+      "error": ""
     },
     {
       "id": "deepmind",
@@ -106,7 +106,7 @@
       "ok": true,
       "raw": 15,
       "kept": 1,
-      "ms": 269,
+      "ms": 166,
       "mirror": "",
       "error": ""
     },
@@ -117,7 +117,7 @@
       "ok": true,
       "raw": 30,
       "kept": 1,
-      "ms": 4569,
+      "ms": 6399,
       "mirror": "",
       "error": ""
     },
@@ -128,7 +128,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 319,
+      "ms": 299,
       "mirror": "",
       "error": ""
     },
@@ -138,8 +138,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 1,
-      "ms": 1339,
+      "kept": 0,
+      "ms": 1512,
       "mirror": "",
       "error": ""
     },
@@ -150,7 +150,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 2113,
+      "ms": 2169,
       "mirror": "",
       "error": ""
     },
@@ -160,8 +160,8 @@
       "level": "L2",
       "ok": true,
       "raw": 40,
-      "kept": 8,
-      "ms": 1095,
+      "kept": 11,
+      "ms": 1395,
       "mirror": "",
       "error": ""
     },
@@ -171,8 +171,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 0,
-      "ms": 3004,
+      "kept": 1,
+      "ms": 4610,
       "mirror": "",
       "error": ""
     },
@@ -183,7 +183,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 184,
+      "ms": 48,
       "mirror": "",
       "error": ""
     },
@@ -194,7 +194,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 43,
+      "ms": 28,
       "mirror": "",
       "error": ""
     },
@@ -205,7 +205,7 @@
       "ok": true,
       "raw": 15,
       "kept": 2,
-      "ms": 324,
+      "ms": 330,
       "mirror": "",
       "error": ""
     },
@@ -214,9 +214,9 @@
       "name": "量子位",
       "level": "L2",
       "ok": true,
-      "raw": 9,
-      "kept": 0,
-      "ms": 1587,
+      "raw": 10,
+      "kept": 1,
+      "ms": 1547,
       "mirror": "",
       "error": ""
     },
@@ -227,7 +227,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 830,
+      "ms": 680,
       "mirror": "",
       "error": ""
     },
@@ -238,7 +238,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 1467,
+      "ms": 1492,
       "mirror": "",
       "error": ""
     },
@@ -249,7 +249,7 @@
       "ok": true,
       "raw": 20,
       "kept": 6,
-      "ms": 41,
+      "ms": 66,
       "mirror": "",
       "error": ""
     },
@@ -260,7 +260,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 1492,
+      "ms": 1346,
       "mirror": "",
       "error": ""
     },
@@ -269,9 +269,9 @@
       "name": "钛媒体",
       "level": "L2",
       "ok": true,
-      "raw": 17,
-      "kept": 4,
-      "ms": 2909,
+      "raw": 18,
+      "kept": 1,
+      "ms": 3066,
       "mirror": "",
       "error": ""
     },
@@ -282,7 +282,7 @@
       "ok": true,
       "raw": 10,
       "kept": 1,
-      "ms": 157,
+      "ms": 87,
       "mirror": "",
       "error": ""
     },
@@ -292,8 +292,8 @@
       "level": "L2",
       "ok": true,
       "raw": 30,
-      "kept": 0,
-      "ms": 2624,
+      "kept": 2,
+      "ms": 2330,
       "mirror": "",
       "error": ""
     },
@@ -304,7 +304,7 @@
       "ok": false,
       "raw": 0,
       "kept": 0,
-      "ms": 120820,
+      "ms": 120590,
       "mirror": "",
       "error": "all mirrors failed :: GET failed after 1 attempts: https://hub.slarker.me/baidu/top :: The read operation timed out"
     },
@@ -312,21 +312,21 @@
       "id": "github-trending",
       "name": "GitHub Trending",
       "level": "L3",
-      "ok": true,
-      "raw": 15,
+      "ok": false,
+      "raw": 0,
       "kept": 0,
-      "ms": 1319,
+      "ms": 30028,
       "mirror": "",
-      "error": ""
+      "error": "GET failed after 1 attempts: https://github.com/trending?since=daily :: The read operation timed out"
     },
     {
       "id": "hn-frontpage",
       "name": "Hacker News",
       "level": "L3",
       "ok": true,
-      "raw": 13,
+      "raw": 15,
       "kept": 1,
-      "ms": 146,
+      "ms": 5625,
       "mirror": "",
       "error": ""
     },
@@ -336,8 +336,8 @@
       "level": "L3",
       "ok": true,
       "raw": 50,
-      "kept": 7,
-      "ms": 1563,
+      "kept": 5,
+      "ms": 1410,
       "mirror": "",
       "error": ""
     },
@@ -348,7 +348,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 105,
+      "ms": 31,
       "mirror": "",
       "error": ""
     },
@@ -359,7 +359,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 67,
+      "ms": 85,
       "mirror": "",
       "error": ""
     },
@@ -369,8 +369,8 @@
       "level": "L3",
       "ok": true,
       "raw": 50,
-      "kept": 2,
-      "ms": 840,
+      "kept": 3,
+      "ms": 714,
       "mirror": "",
       "error": ""
     },
@@ -379,19 +379,19 @@
       "name": "知乎热榜",
       "level": "L3",
       "ok": true,
-      "raw": 29,
-      "kept": 3,
-      "ms": 992,
+      "raw": 30,
+      "kept": 1,
+      "ms": 1019,
       "mirror": "",
       "error": ""
     }
   ],
   "events": {
-    "run_at": "2026-11-08T05:55:13Z",
+    "run_at": "2026-11-08T11:34:18Z",
     "items": 600,
     "events": 260,
-    "translated": 1,
-    "new_today": 39,
+    "translated": 0,
+    "new_today": 72,
     "model": "glm-4.7-flash"
   }
 }
