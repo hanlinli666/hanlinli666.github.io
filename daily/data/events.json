@@ -1,5 +1,900 @@
 [
   {
+    "id": "e_a19ce5d70a",
+    "title_zh": "Anthropic 的 IPO 路演视频",
+    "event_summary": "Anthropic's IPO roadshow video Anthropic kicked off their IPO roadshow yesterday, and their roadshow video has some previously unreleased information about how their business works. The section on \"Approach to compute\"…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "Anthropic"
+    ],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": "2026-11-11T15:11:59Z",
+    "published": "2026-11-11T15:11:59Z",
+    "primary_url": "https://simonwillison.net/2026/Nov/11/anthropic-ipo-roadshow/",
+    "source_count": 2,
+    "links": [
+      {
+        "source": "百度热搜",
+        "level": "L3",
+        "title": "Anthropic IPO遭疯抢",
+        "url": "https://www.baidu.com/s?wd=Anthropic+IPO%E9%81%AD%E7%96%AF%E6%8A%A2",
+        "published": "2026-11-11T17:52:01Z"
+      },
+      {
+        "source": "Simon Willison",
+        "level": "L3",
+        "title": "Anthropic 的 IPO 路演视频",
+        "url": "https://simonwillison.net/2026/Nov/11/anthropic-ipo-roadshow/",
+        "published": "2026-11-11T15:11:59Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_d2c78dc0c9",
+    "title_zh": "Anthropic披露逾百亿美元云计算协议",
+    "event_summary": "Anthropic周二在一份监管文件中披露，过去一个月内与微软和谷歌新增约100亿美元的云服务器租用承诺，合同期延伸至2033年。",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "Anthropic"
+    ],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": "2026-11-11T17:52:01Z",
+    "published": "2026-11-11T17:52:01Z",
+    "primary_url": "https://www.baidu.com/s?wd=Anthropic%E6%8A%AB%E9%9C%B2%E9%80%BE%E7%99%BE%E4%BA%BF%E7%BE%8E%E5%85%83%E4%BA%91%E8%AE%A1%E7%AE%97%E5%8D%8F%E8%AE%AE",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "百度热搜",
+        "level": "L3",
+        "title": "Anthropic披露逾百亿美元云计算协议",
+        "url": "https://www.baidu.com/s?wd=Anthropic%E6%8A%AB%E9%9C%B2%E9%80%BE%E7%99%BE%E4%BA%BF%E7%BE%8E%E5%85%83%E4%BA%91%E8%AE%A1%E7%AE%97%E5%8D%8F%E8%AE%AE",
+        "published": "2026-11-11T17:52:01Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_6a3d93b565",
+    "title_zh": "某律师为了不把敏感资料上传云端，用 8 张 V100 搭建一台数千瓦功耗的本地 AI 服务器值得吗？",
+    "event_summary": "据 Tom’s Hardware 报道，一名律师为了避免将客户案件材料上传到云端，利用 8 张二手 Nvidia Tesla V100 显卡，搭建了一套完全本地运行的 AI 服务器。 这套设备拥有约 256GB HBM2 显存，可以在本地运行经过压缩的大模型。目前，它被用于读取案件资料、提取事实和日期、生成摘要，并起草常规法律文本。报道称，其代码生成速度最高约为 215 tokens/s，法律文本生成速度最高约为 118 tokens/s。律师同时强调，AI 生成的内容必须经过人工复核。…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "大模型"
+    ],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": "2026-11-11T17:52:01Z",
+    "published": "2026-11-11T17:52:01Z",
+    "primary_url": "https://www.zhihu.com/question/2103844614528395225",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "知乎热榜",
+        "level": "L3",
+        "title": "某律师为了不把敏感资料上传云端，用 8 张 V100 搭建一台数千瓦功耗的本地 AI 服务器值得吗？",
+        "url": "https://www.zhihu.com/question/2103844614528395225",
+        "published": "2026-11-11T17:52:01Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_a1085efb85",
+    "title_zh": "不少 AI 生成内容越来越晦涩难懂，Gemini 是怎么做到输出内容「说人话」的？",
+    "event_summary": "近期刚刚上线的Gemini 4 Argon引发了很多争议，比如编程似乎没那Benchmark那么强、Antigravity Pro订户都不让用等等，但大家一致认为，它是现在所有前沿模型里写作最好的那个。 这并非是从Gemini 4这个时代就开始的，在Claude说话依然优雅的时代里，Gemini 2.5 Pro也是以说人话著称。 但在过去一年里，OpenAI和Anthropic的模型说出来的话都开始越来越难以让人理解。如果说Anthropic只是连接卡壳，那OpenAI就都有点前言不搭后语的水平了。 2026…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": "2026-11-11T17:52:01Z",
+    "published": "2026-11-11T17:52:01Z",
+    "primary_url": "https://www.zhihu.com/question/2102869416480354456",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "知乎热榜",
+        "level": "L3",
+        "title": "不少 AI 生成内容越来越晦涩难懂，Gemini 是怎么做到输出内容「说人话」的？",
+        "url": "https://www.zhihu.com/question/2102869416480354456",
+        "published": "2026-11-11T17:52:01Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_9e2e1c68cf",
+    "title_zh": "Big Walk 用 AI 修复了一个漏洞，现在独立游戏界正在清算",
+    "event_summary": "Any amount of AI coding is too much for many Indie Game Festival judges.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T17:37:32Z",
+    "primary_url": "https://arstechnica.com/gaming/2026/11/big-walk-used-ai-to-fix-a-bug-now-the-indie-gaming-world-is-having-a-reckoning/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "Ars Technica",
+        "level": "L2",
+        "title": "Big Walk 用 AI 修复了一个漏洞，现在独立游戏界正在清算",
+        "url": "https://arstechnica.com/gaming/2026/11/big-walk-used-ai-to-fix-a-bug-now-the-indie-gaming-world-is-having-a-reckoning/",
+        "published": "2026-11-11T17:37:32Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_395b6d66f9",
+    "title_zh": "谷歌公司：将在全球范围内向苹果CarPlay接入Gemini Live功能。",
+    "event_summary": "谷歌公司：将在全球范围内向苹果CarPlay接入Gemini Live功能。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "Gemini"
+    ],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T17:10:52Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3198562",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "谷歌公司：将在全球范围内向苹果CarPlay接入Gemini Live功能。",
+        "url": "https://wallstreetcn.com/livenews/3198562",
+        "published": "2026-11-11T17:10:52Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_79f442f938",
+    "title_zh": "英国财政大臣希利承诺：将避免美式数据中心“无序扩张”",
+    "event_summary": "英国财政大臣希利（John Healey）表示，英国不会允许像美国那样引发公众和政治反弹的数据中心“无序扩张”，以免威胁人工智能（AI）投资。 希利对议会财政特别委员会议成员表示，他在10月披露的预算案中同步推出了一项新的“数据中心公约”（data center covenant），“因为我不希望看到美国的数据中心争论在英国重演。”",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T17:10:15Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3198561",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "英国财政大臣希利承诺：将避免美式数据中心“无序扩张”",
+        "url": "https://wallstreetcn.com/livenews/3198561",
+        "published": "2026-11-11T17:10:15Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_0daa4c8f5b",
+    "title_zh": "纳指涨2.1%，纳斯达克100指数涨2.8%，半导体指数涨7.5%。",
+    "event_summary": "纳指涨2.1%，纳斯达克100指数涨2.8%，半导体指数涨7.5%。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "半导体"
+    ],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T16:59:28Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3198557",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "纳指涨2.1%，纳斯达克100指数涨2.8%，半导体指数涨7.5%。",
+        "url": "https://wallstreetcn.com/livenews/3198557",
+        "published": "2026-11-11T16:59:28Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_2ccead9d47",
+    "title_zh": "美股费城半导体指数日内涨7%，有望创7月份以来最大单日涨幅。 英伟达涨4.05%，博通涨6.66%，美光涨13.37%，英特尔涨9.68%，AMD涨7.46%，高通涨2.49%，台积电涨4.70%，阿斯麦涨3.52%。",
+    "event_summary": "美股费城半导体指数日内涨7%，有望创7月份以来最大单日涨幅。 英伟达涨4.05%，博通涨6.66%，美光涨13.37%，英特尔涨9.68%，AMD涨7.46%，高通涨2.49%，台积电涨4.70%，阿斯麦涨3.52%。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "英伟达"
+    ],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T16:44:04Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3198548",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "美股费城半导体指数日内涨7%，有望创7月份以来最大单日涨幅。 英伟达涨4.05%，博通涨6.66%，美光涨13.37%，英特尔涨9.68%，AMD涨7.46%，高通涨2.49%，台积电涨4.70%，阿斯麦涨3.52%。",
+        "url": "https://wallstreetcn.com/livenews/3198548",
+        "published": "2026-11-11T16:44:04Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_7e3f5d35b5",
+    "title_zh": "保险经纪公司Marsh呼吁美联储降低银行对已投保AI贷款的资本计提要求",
+    "event_summary": "【保险经纪公司Marsh呼吁美联储降低银行对已投保AI贷款的资本计提要求】财联社11月12日电，全球最大保险经纪公司Marsh & McLennan Cos.正在游说美国监管机构，允许银行对有信用风险保险覆盖的贷款计提较少资本。银行正寻求通过新的方式，降低数据中心相关风险敞口。该公司信用专业业务董事总经理Azi…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 监管"
+    ],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T16:25:16Z",
+    "primary_url": "https://www.cls.cn/detail/2532014",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "保险经纪公司Marsh呼吁美联储降低银行对已投保AI贷款的资本计提要求",
+        "url": "https://www.cls.cn/detail/2532014",
+        "published": "2026-11-11T16:25:16Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_f6d8c8c8a9",
+    "title_zh": "财联社11月12日电，谷歌允许员工测试新版GEMINI AI模型。",
+    "event_summary": "财联社11月12日电，谷歌允许员工测试新版GEMINI AI模型。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "Gemini"
+    ],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T16:17:29Z",
+    "primary_url": "https://www.cls.cn/detail/2532013",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "财联社11月12日电，谷歌允许员工测试新版GEMINI AI模型。",
+        "url": "https://www.cls.cn/detail/2532013",
+        "published": "2026-11-11T16:17:29Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_32bc3a2f62",
+    "title_zh": "Jensen Huang 的不良行为是否比看起来更普遍？",
+    "event_summary": "“There are a lot of senior people in the industry that know this is happening, and are effectively condoning it,” an investment intel consultant said.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T16:16:07Z",
+    "primary_url": "https://techcrunch.com/2026/11/11/is-jensen-huangs-bad-behavior-more-commonplace-than-it-seems/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "TechCrunch AI",
+        "level": "L2",
+        "title": "Jensen Huang 的不良行为是否比看起来更普遍？",
+        "url": "https://techcrunch.com/2026/11/11/is-jensen-huangs-bad-behavior-more-commonplace-than-it-seems/",
+        "published": "2026-11-11T16:16:07Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_29f521837a",
+    "title_zh": "OpenAI 季度收入据报道首次突破 100 亿美元",
+    "event_summary": "Sales of $10B represents an almost 50% jump from revenue of $6.7 billion the company recorded in the second quarter.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T16:14:44Z",
+    "primary_url": "https://techcrunch.com/2026/11/11/openais-quarterly-revenue-reportedly-crosses-10b-for-the-first-time/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "TechCrunch AI",
+        "level": "L2",
+        "title": "OpenAI 季度收入据报道首次突破 100 亿美元",
+        "url": "https://techcrunch.com/2026/11/11/openais-quarterly-revenue-reportedly-crosses-10b-for-the-first-time/",
+        "published": "2026-11-11T16:14:44Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_59de406764",
+    "title_zh": "谷歌公司允许员工测试名为Hydrogen的新型“快速”Gemini人工智能模型。（Business Insider）",
+    "event_summary": "谷歌公司允许员工测试名为Hydrogen的新型“快速”Gemini人工智能模型。（Business Insider）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T16:14:38Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3198538",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "谷歌公司允许员工测试名为Hydrogen的新型“快速”Gemini人工智能模型。（Business Insider）",
+        "url": "https://wallstreetcn.com/livenews/3198538",
+        "published": "2026-11-11T16:14:38Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_97adab01db",
+    "title_zh": "尝试 Tabletop：供小组规划、游玩和共同协作的可定制空间",
+    "event_summary": "Design & Engineering Lead, Google Labs Whether you’re planning a family trip, running a rec league or hosting a potluck, coordinating as a group is easier when everyone can pitch in, build and…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T16:00:00Z",
+    "primary_url": "https://blog.google/innovation-and-ai/models-and-research/google-labs/tabletop/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "Google AI Blog",
+        "level": "L2",
+        "title": "尝试 Tabletop：供小组规划、游玩和共同协作的可定制空间",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-labs/tabletop/",
+        "published": "2026-11-11T16:00:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_2d8f602ac5",
+    "title_zh": "Google 的 Tabletop AI 实验允许你构建自定义协作应用",
+    "event_summary": "Google has cooked up a new experimental AI tool called Tabletop that generates customized collaborative hubs to help you coordinate with family, and friends. The Tabletop platform shares some visual similarities with…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T16:00:00Z",
+    "primary_url": "https://www.theverge.com/tech/1031526/google-tabletop-ai-experiment-waitlist-availability",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "The Verge AI",
+        "level": "L2",
+        "title": "Google 的 Tabletop AI 实验允许你构建自定义协作应用",
+        "url": "https://www.theverge.com/tech/1031526/google-tabletop-ai-experiment-waitlist-availability",
+        "published": "2026-11-11T16:00:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_79ecf6fd15",
+    "title_zh": "谷歌 DeepMind 发布 AlphaGenome 2 基因序列模型：识别致病变异能力提升近一倍",
+    "event_summary": "IT之家 11 月 11 日消息，谷歌 DeepMind 发布新一代 DNA 序列模型 AlphaGenome 2 ，可预测 DNA 序列及其变异对特定人体细胞类型的影响，为科研人员挖掘疾病的细胞驱动因素提供全新工具。 人体每个细胞携带相同的 DNA 蓝图，但不同细胞类型会通过开关不同基因完成特定功能。全球的人类细胞图谱项目已对数百万细胞的基因表达进行绘制，但预测细微 DNA 变异如何影响细胞基因表达，仍是尚未解决的难题。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "模型 + 发布"
+    ],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T15:19:51Z",
+    "primary_url": "https://www.ithome.com/1/025/822.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "谷歌 DeepMind 发布 AlphaGenome 2 基因序列模型：识别致病变异能力提升近一倍",
+        "url": "https://www.ithome.com/1/025/822.htm",
+        "published": "2026-11-11T15:19:51Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_5b916f1bea",
+    "title_zh": "AlphaGenome 2：解读细胞如何读取 DNA 以更好地理解疾病",
+    "event_summary": "Predicting how DNA sequences and their variations impact specific human cell types and disease.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T15:00:15Z",
+    "primary_url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "Google DeepMind",
+        "level": "L2",
+        "title": "AlphaGenome 2：解读细胞如何读取 DNA 以更好地理解疾病",
+        "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+        "published": "2026-11-11T15:00:15Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_7d4c517a68",
+    "title_zh": "Databricks 的新 AI 代理向 CEO Ali Ghodsi直言不讳",
+    "event_summary": "At 12,000 employees, AI Ghodsi is the first to admit that he can't know everyone and that they are unlikely to confess the things that go wrong to him. But he doesn't need them to. He uses Databricks' newly revised…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T15:00:00Z",
+    "primary_url": "https://techcrunch.com/2026/11/11/databricks-new-ai-agent-tells-ceo-ali-ghodsi-the-unvarnished-truth/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "TechCrunch AI",
+        "level": "L2",
+        "title": "Databricks 的新 AI 代理向 CEO Ali Ghodsi直言不讳",
+        "url": "https://techcrunch.com/2026/11/11/databricks-new-ai-agent-tells-ceo-ali-ghodsi-the-unvarnished-truth/",
+        "published": "2026-11-11T15:00:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_a86af765ff",
+    "title_zh": "Google’s AlphaGenome 2 zooms in on the cellular roots of disease",
+    "event_summary": "Researchers at Google DeepMind have unveiled a new AI model designed to unravel how changes in our DNA affect different cells, giving scientists a more detailed view of a notoriously difficult problem that could hold…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T15:00:00Z",
+    "primary_url": "https://www.theverge.com/ai-artificial-intelligence/1031524/google-deepmind-alphagenome-2-genetic-ai-model",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "The Verge AI",
+        "level": "L2",
+        "title": "Google’s AlphaGenome 2 zooms in on the cellular roots of disease",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/1031524/google-deepmind-alphagenome-2-genetic-ai-model",
+        "published": "2026-11-11T15:00:00Z"
+      }
+    ],
+    "needs_translation": true
+  },
+  {
+    "id": "e_5024f246bf",
+    "title_zh": "Adobe 公布四项 AI 实验项目：照片秒变 3D 场景，还能通过聊天设计 AI 角色",
+    "event_summary": "IT之家 11 月 11 日消息，每年举办的 Adobe MAX 大会上，Adobe 展示的最令人印象深刻的技术之一，往往是那些仍处于实验阶段、尚未正式推出的创新功能。今天，该公司公布了最新一批实验项目：它们能够将普通图片转换为可探索的 3D 场景，通过与 AI 角色对话来设计角色形象，还能让照片编辑变成简单的复制粘贴操作。 首先是非常奇特的 Project Screen Test 项目，其旨在让用户更轻松地创建 AI…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T14:32:05Z",
+    "primary_url": "https://www.ithome.com/1/025/815.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "Adobe 公布四项 AI 实验项目：照片秒变 3D 场景，还能通过聊天设计 AI 角色",
+        "url": "https://www.ithome.com/1/025/815.htm",
+        "published": "2026-11-11T14:32:05Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_ef892408be",
+    "title_zh": "Google DeepMind 刚刚用 AI 数学验证了 Signal 的关键部分",
+    "event_summary": "The four-week project hints that AI could make formal verification far more practical.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T14:08:57Z",
+    "primary_url": "https://arstechnica.com/ai/2026/11/signals-encryption-just-passed-an-ai-powered-mathematical-checkup/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "Ars Technica",
+        "level": "L2",
+        "title": "Google DeepMind 刚刚用 AI 数学验证了 Signal 的关键部分",
+        "url": "https://arstechnica.com/ai/2026/11/signals-encryption-just-passed-an-ai-powered-mathematical-checkup/",
+        "published": "2026-11-11T14:08:57Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_66f930294c",
+    "title_zh": "DeepL 推出旗下最逼真语音 AI 翻译模型 Aure，实时复现说话者语气起伏、情绪流转等",
+    "event_summary": "IT之家 11 月 11 日消息，当地时间 11 月 11 日，DeepL 推出语音 AI 翻译模型 Aure， 官方称这是其迄今最具动态感、表现最逼真的语音 AI（Voice AI）模型 ，不过该模型暂不支持中文。 据介绍，作为 DeepL Voice 的底层驱动核心，Aure 能够持续动态适配翻译语音， 实时复现说话者的语气起伏、情绪流转、重音强调及语速快慢…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T14:06:51Z",
+    "primary_url": "https://www.ithome.com/1/025/810.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "DeepL 推出旗下最逼真语音 AI 翻译模型 Aure，实时复现说话者语气起伏、情绪流转等",
+        "url": "https://www.ithome.com/1/025/810.htm",
+        "published": "2026-11-11T14:06:51Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_7c021a2e6c",
+    "title_zh": "Plurai 希望利用帮助自动驾驶汽车上路的方法帮助 AI 代理更好地工作",
+    "event_summary": "Like the end-to-end models trained to drive cars, AI agents are probabilistic systems operating in unpredictable environments.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T14:00:00Z",
+    "primary_url": "https://techcrunch.com/2026/11/11/plurai-wants-to-help-ai-agents-work-better-using-the-same-approach-that-helped-get-self-driving-cars-to-roads/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "TechCrunch AI",
+        "level": "L2",
+        "title": "Plurai 希望利用帮助自动驾驶汽车上路的方法帮助 AI 代理更好地工作",
+        "url": "https://techcrunch.com/2026/11/11/plurai-wants-to-help-ai-agents-work-better-using-the-same-approach-that-helped-get-self-driving-cars-to-roads/",
+        "published": "2026-11-11T14:00:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_450a9863af",
+    "title_zh": "Adobe 的 AI 实验让你能在照片中漫步并与角色对话",
+    "event_summary": "Some of the most impressive tech that Adobe showcases at its annual Max conference each year is the experimental features it's developing, and the latest of those tools are being announced today: they can transform…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T14:00:00Z",
+    "primary_url": "https://www.theverge.com/tech/1031505/adobe-max-2026-sneaks-experiments-ai",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "The Verge AI",
+        "level": "L2",
+        "title": "Adobe 的 AI 实验让你能在照片中漫步并与角色对话",
+        "url": "https://www.theverge.com/tech/1031505/adobe-max-2026-sneaks-experiments-ai",
+        "published": "2026-11-11T14:00:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_8a79d4b1b4",
+    "title_zh": "马斯克旗下 Grok 被指生成儿童色情图像，xAI 面临多起集体诉讼",
+    "event_summary": "IT之家 11 月 11 日消息，据彭博社报道，简 · 多伊（Jane Doe）已经多年没有想起过自己的初中毕业典礼，直到一名执法调查人员拿出当年庆祝活动的一张照片，开始向她询问相关情况。 照片中的她当时只有 14 岁，身穿黄色碎花连衣裙，面带笑容，双臂搭在几名朋友的肩膀上。其中一些朋友，她如今已经很少联系。 调查人员告诉她，照片中一名同学的成年哥哥，曾利用埃隆 · 马斯克（Elon Musk）旗下的人工智能聊天机器人…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T13:56:44Z",
+    "primary_url": "https://www.ithome.com/1/025/809.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "马斯克旗下 Grok 被指生成儿童色情图像，xAI 面临多起集体诉讼",
+        "url": "https://www.ithome.com/1/025/809.htm",
+        "published": "2026-11-11T13:56:44Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_b0f52f92b8",
+    "title_zh": "沐曦和优必选联姻造具身芯片，消息称合资公司曦选创智融资 5 亿元",
+    "event_summary": "IT之家 11 月 11 日消息，据 21 世纪经济报道消息，曦选创智科技（无锡）有限公司（以下简称“曦选创智”）近期完成 5 亿元人民币天使轮融资。本轮融资由纪源资本、经纬创投联合领投。 据悉，本轮资金计划主要用于核心芯片与计算平台研发、软件工具链建设、研发团队扩充，以及与机器人厂商和行业客户开展联合验证，完成量产交付。 IT之家查询官网获悉，曦选创智成立于 2026 年 5 月，是由国产 GPU“四小龙”之一 沐曦股份…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "机器人"
+    ],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T13:46:31Z",
+    "primary_url": "https://www.ithome.com/1/025/807.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "沐曦和优必选联姻造具身芯片，消息称合资公司曦选创智融资 5 亿元",
+        "url": "https://www.ithome.com/1/025/807.htm",
+        "published": "2026-11-11T13:46:31Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_59be04e3fa",
+    "title_zh": "AI 提升飓风预报精度，人类气象专家仍不可替代",
+    "event_summary": "IT之家 11 月 11 日消息，人工智能经常因为数据中心能耗巨大而受到批评。数据中心对电力的庞大需求推动了化石燃料的使用，也进一步加剧了气候变化。 但与此同时，AI 也正在帮助气象学家显著提高天气预报的准确性，其中就包括飓风预测。这类天气系统以预测难度极高著称，而在全球变暖的背景下，飓风带来的威胁也日益加剧。 据 Techxplore 报道，美国国家飓风中心（NHC）去年开始使用谷歌 DeepMind 的 AI…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T13:42:22Z",
+    "primary_url": "https://www.ithome.com/1/025/806.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "AI 提升飓风预报精度，人类气象专家仍不可替代",
+        "url": "https://www.ithome.com/1/025/806.htm",
+        "published": "2026-11-11T13:42:22Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_ad8780c2a1",
+    "title_zh": "下载：保存意识与权衡 OpenAI 风险",
+    "event_summary": "This is today’s edition of The Download, our weekday newsletter that provides a daily dose of what’s going on in the world of technology. Six wild ideas for perpetuating your mind As we age, we forget most of what…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T13:10:00Z",
+    "primary_url": "https://www.technologyreview.com/2026/11/11/1148424/the-download-preserving-minds-open-ai-risks/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "MIT Technology Review",
+        "level": "L2",
+        "title": "下载：保存意识与权衡 OpenAI 风险",
+        "url": "https://www.technologyreview.com/2026/11/11/1148424/the-download-preserving-minds-open-ai-risks/",
+        "published": "2026-11-11T13:10:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_a568ca3627",
+    "title_zh": "大水冲了龙王庙？AI 编程工具 Grok Build 漏洞导致 SpaceXSI 敏感资料暴露",
+    "event_summary": "IT之家 11 月 11 日消息，网络安全公司 Claroc 发现，SpaceXSI 旗下的 AI 编程工具 Grok Build 存在安全漏洞，导致数千名用户的敏感数据泄露， 连 SpaceXSI 自己的内部资料也未能幸免 。 Claroc 向外媒 Ars Technica 透露，Grok 生成的应用分享链接 可以通过某些 DNS 服务被公开检索 ，造成一家医院集团、一家消防部门以及 SpaceXSI 的员工信息泄露。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 应用"
+    ],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T13:08:20Z",
+    "primary_url": "https://www.ithome.com/1/025/790.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "大水冲了龙王庙？AI 编程工具 Grok Build 漏洞导致 SpaceXSI 敏感资料暴露",
+        "url": "https://www.ithome.com/1/025/790.htm",
+        "published": "2026-11-11T13:08:20Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_e633e175da",
+    "title_zh": "广东省新增3款已完成备案的生成式人工智能服务",
+    "event_summary": "36氪获悉，据网信广东，截至11月11日，广东省新增3款已完成备案的生成式人工智能服务，累计已完成230款生成式人工智能服务备案。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T12:35:40Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4065338009654400",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "广东省新增3款已完成备案的生成式人工智能服务",
+        "url": "https://www.36kr.com/newsflashes/4065338009654400",
+        "published": "2026-11-11T12:35:40Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_d82f1c4893",
+    "title_zh": "Anthropic新增约100亿美元微软、谷歌云算力采购承诺，Lambda算力协议存在取消风险",
+    "event_summary": "Anthropic在周二提交的文件中表示，过去一个月，公司与微软、谷歌达成新采购承诺，从现在至2033年，云服务器租赁支出将较此前披露值增加约100亿美元。与此同时，Anthropic称，和规模较小的云服务商Lambda签署的349亿美元服务器租赁协议存在被取消的可能，原因是Lambda未能在双方约定的期限内建成数据中心。不过Anthropic表示，虽然合同赋予其取消该协议的权利，但公司 “目前无意” 这么做。（新浪财经）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "Anthropic"
+    ],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T12:27:27Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4065329936487298",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "Anthropic新增约100亿美元微软、谷歌云算力采购承诺，Lambda算力协议存在取消风险",
+        "url": "https://www.36kr.com/newsflashes/4065329936487298",
+        "published": "2026-11-11T12:27:27Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_e3c1f66505",
+    "title_zh": "Google SWE 将 48 个 AI 代理指向 NASA 激光雷达，72 小时内发现未绘制的玛雅金字塔",
+    "event_summary": "Update (11 November): it turns out the site had already been mapped in Estrada-Belli et al. 2025 . The agents missed it while going through the literature, so they rediscovered it rather than…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + Agent"
+    ],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": "2026-11-11T12:05:22Z",
+    "published": "2026-11-11T12:05:22Z",
+    "primary_url": "https://pietromiotti.com/latest/maya-site/?maya",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "Hacker News",
+        "level": "L3",
+        "title": "Google SWE 将 48 个 AI 代理指向 NASA 激光雷达，72 小时内发现未绘制的玛雅金字塔",
+        "url": "https://pietromiotti.com/latest/maya-site/?maya",
+        "published": "2026-11-11T12:05:22Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_db66188bf7",
+    "title_zh": "和大疆抢食，这家公司做了台桌面摄影机器人",
+    "event_summary": "一个美食创作者想把镜头从餐桌全景慢慢推到一碗面上。这个动作不难，难的是他没有第二个人帮他推，也没有空间在桌上架一条滑轨。最后他切了一个固定机位，画面清楚，但缺少呼吸感。 这张桌子，是今天很多内容创作的真实现场。产品测评、美食、美妆、直播、带货，大量拍摄都发生在几平方米之内。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "机器人"
+    ],
+    "first_seen_at": "2026-11-11T17:52:01Z",
+    "hot_seen_at": null,
+    "published": "2026-11-11T10:29:00Z",
+    "primary_url": "https://www.leiphone.com/category/weiwu/7us3N77Jwt0jzWda.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "雷峰网",
+        "level": "L2",
+        "title": "和大疆抢食，这家公司做了台桌面摄影机器人",
+        "url": "https://www.leiphone.com/category/weiwu/7us3N77Jwt0jzWda.html",
+        "published": "2026-11-11T10:29:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
     "id": "e_68c45cce4a",
     "title_zh": "AI 十年内攻克癌症？Anthropic CEO 阿莫迪预测引医学界质疑",
     "event_summary": "IT之家 11 月 11 日消息，“癌症、阿尔茨海默病、心脏病和精神疾病，我认为这些疾病将在不到十年的时间里成为历史。”Claude 开发商 Anthropic 首席执行官达里奥 · 阿莫迪（Dario Amodei）近日作出了这一大胆预测。 这些并非罕见疾病，它们影响着数百万个家庭，其中一些至今仍是医学界最难攻克的挑战。…",
@@ -1704,58 +2599,6 @@
     "needs_translation": false
   },
   {
-    "id": "e_ae3c6c28ce",
-    "title_zh": "追踪 Anthropic 发现的漏洞",
-    "event_summary": "We're seven months into Anthropic's flagship Project Glasswing, and it's time for another update on the results. I've been tracking the project to see whether its claims are overhyped or grounded in…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "Anthropic"
-    ],
-    "first_seen_at": "2026-11-11T09:16:00Z",
-    "hot_seen_at": "2026-11-10T22:17:56Z",
-    "published": "2026-11-10T22:17:56Z",
-    "primary_url": "https://www.vulncheck.com/blog/anthropic-glasswing-november-update",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "Hacker News",
-        "level": "L3",
-        "title": "追踪 Anthropic 发现的漏洞",
-        "url": "https://www.vulncheck.com/blog/anthropic-glasswing-november-update",
-        "published": "2026-11-10T22:17:56Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_168143ea42",
-    "title_zh": "苹果推出新 Mac 应用简化本地 AI 模型运行",
-    "event_summary": "Leaker Aaron Perris has discovered evidence of a new Mac app in the works at Apple called Harbor, which makes it easy to run local AI models across one or more Macs. The Mac has been getting a lot…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-11T09:16:00Z",
-    "hot_seen_at": "2026-11-10T21:25:03Z",
-    "published": "2026-11-10T21:25:03Z",
-    "primary_url": "https://9to5mac.com/2026/11/10/apple-has-new-mac-app-coming-to-make-running-local-ai-models-easy/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "Hacker News",
-        "level": "L3",
-        "title": "苹果推出新 Mac 应用简化本地 AI 模型运行",
-        "url": "https://9to5mac.com/2026/11/10/apple-has-new-mac-app-coming-to-make-running-local-ai-models-easy/",
-        "published": "2026-11-10T21:25:03Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
     "id": "e_f574bb1b18",
     "title_zh": "英伟达机器人开源撞上Fable 5.2发布！Jim Fan：不是寒冬是夏天",
     "event_summary": "全体起立！时隔一年半，英伟达的新一代机器人基础模型终于来了！ 刚刚，在今年奥斯汀举行的CoRL大会上，英伟达GEAR领导朱玉可和Jim Fan，搬出了新一代世界动作模型—— 在时长1分半的官方demo中，GR00T 2可以拿剪刀裁标签、安装显卡、擦火柴、切香蕉做早餐、擦咖啡、收桌子、卖爆米花。 看下来，几乎是样样全能。从双手精细操作到全身移动，模型的任务范围几乎覆盖了机器人能力的各个方向。…",
@@ -3255,426 +4098,6 @@
         "title": "Ring 摄像头走向移动化，亚马逊推出 AI 驱动的安全无人机和机器人",
         "url": "https://arstechnica.com/ai/2026/11/ring-cameras-go-mobile-as-amazon-debuts-ai-powered-security-drone-and-robot/",
         "published": "2026-11-10T22:35:01Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_cbae3fa796",
-    "title_zh": "英伟达董事会聘请前美国联邦检察官，调查 CEO 黄仁勋相关事件",
-    "event_summary": "IT之家 11 月 11 日消息，英伟达今日发布公告，宣布已聘请美国前联邦检察官金正贤（Joon H. Kim）及其所在的律师事务所 Wachtell, Lipton, Rosen & Katz，负责开展一项全面、独立的调查。 IT之家注：此次调查此前已于 11 月 8 日对外宣布，调查工作将由金正贤及其所在律所参与推进。 此前，英伟达董事会表示，鉴于近期有关公司创始人兼 CEO…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "英伟达"
-    ],
-    "first_seen_at": "2026-11-11T00:14:16Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T22:32:07Z",
-    "primary_url": "https://www.ithome.com/1/025/201.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "英伟达董事会聘请前美国联邦检察官，调查 CEO 黄仁勋相关事件",
-        "url": "https://www.ithome.com/1/025/201.htm",
-        "published": "2026-11-10T22:32:07Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_bd2a6830d8",
-    "title_zh": "OpenAI 收购 Sonder 创始人创立的旅行初创公司 Odessia",
-    "event_summary": "OpenAI has not yet said what its plans are for the future of travel. But Sonder founder Francis Davidson is a well-known figure in the travel industry.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-11T00:14:16Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T21:08:52Z",
-    "primary_url": "https://techcrunch.com/2026/11/10/openai-acquires-odessia-travel-startup-created-by-sonder-founder/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "TechCrunch AI",
-        "level": "L2",
-        "title": "OpenAI 收购 Sonder 创始人创立的旅行初创公司 Odessia",
-        "url": "https://techcrunch.com/2026/11/10/openai-acquires-odessia-travel-startup-created-by-sonder-founder/",
-        "published": "2026-11-10T21:08:52Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_91faed0650",
-    "title_zh": "纽约 AI 安全法生效，OpenAI 和 Anthropic 面临新监管",
-    "event_summary": "New York is preparing to enforce its sweeping AI safety law, requiring major developers like OpenAI and Anthropic to register, disclose safety practices, and report critical incidents or face fines.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-11T00:14:16Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T20:52:13Z",
-    "primary_url": "https://techcrunch.com/2026/11/10/openai-anthropic-face-new-oversight-as-new-yorks-ai-safety-law-takes-effect/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "TechCrunch AI",
-        "level": "L2",
-        "title": "纽约 AI 安全法生效，OpenAI 和 Anthropic 面临新监管",
-        "url": "https://techcrunch.com/2026/11/10/openai-anthropic-face-new-oversight-as-new-yorks-ai-safety-law-takes-effect/",
-        "published": "2026-11-10T20:52:13Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_c4b2e9a503",
-    "title_zh": "当 AI 成为神谕时，数学会发生什么？",
-    "event_summary": "Mathematician Steven Strogatz discusses his new book, Big Math: The Hidden Codes That Run Our World .",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-11T00:14:16Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T20:30:01Z",
-    "primary_url": "https://arstechnica.com/science/2026/11/what-happens-to-mathematics-when-ai-becames-an-oracle/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "Ars Technica",
-        "level": "L2",
-        "title": "当 AI 成为神谕时，数学会发生什么？",
-        "url": "https://arstechnica.com/science/2026/11/what-happens-to-mathematics-when-ai-becames-an-oracle/",
-        "published": "2026-11-10T20:30:01Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_c1fbfe2e3f",
-    "title_zh": "llm-gemini 0.36",
-    "event_summary": "Release: llm-gemini 0.36 Gemini 4 Carbon was announced two weeks ago for \"a subset of cyber defenders\", but today it's available to everyone else . This is Google's best ever Gemini, priced at $2/million input and…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-11T00:14:16Z",
-    "hot_seen_at": "2026-11-10T20:09:44Z",
-    "published": "2026-11-10T20:09:44Z",
-    "primary_url": "https://simonwillison.net/2026/Nov/10/llm-gemini/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "Simon Willison",
-        "level": "L3",
-        "title": "llm-gemini 0.36",
-        "url": "https://simonwillison.net/2026/Nov/10/llm-gemini/",
-        "published": "2026-11-10T20:09:44Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_844dfa7cd5",
-    "title_zh": "Anthropic正式启动募资计划",
-    "event_summary": "11月10日，Anthropic正式启动首次公开募股（IPO）路演，并在官网发布相关路演视频。公司计划发行8.25亿股A类普通股，发行价区间为每股70至78美元，按发行价上限计算，基础发行规模最高约643.5亿美元。公司拟以代码“ANT”在纳斯达克全球精选市场上市。",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "Anthropic"
-    ],
-    "first_seen_at": "2026-11-10T20:46:39Z",
-    "hot_seen_at": "2026-11-10T20:46:39Z",
-    "published": "2026-11-10T20:46:39Z",
-    "primary_url": "https://www.baidu.com/s?wd=Anthropic%E6%AD%A3%E5%BC%8F%E5%90%AF%E5%8A%A8%E5%8B%9F%E8%B5%84%E8%AE%A1%E5%88%92",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "百度热搜",
-        "level": "L3",
-        "title": "Anthropic正式启动募资计划",
-        "url": "https://www.baidu.com/s?wd=Anthropic%E6%AD%A3%E5%BC%8F%E5%90%AF%E5%8A%A8%E5%8B%9F%E8%B5%84%E8%AE%A1%E5%88%92",
-        "published": "2026-11-10T20:46:39Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_608818d624",
-    "title_zh": "阿里宣布平头哥赴港独立上市",
-    "event_summary": "11月10日，阿里巴巴公告称，拟分拆全资子公司平头哥（上海）技术股份有限公司赴香港联交所主板独立上市。平头哥已于2026年9月11日向港交所递交保密上市申请。分平头哥目前是中国领先的全栈数据中心芯片供应商，相关芯片可提供系统级算力解决方案。分拆完成后，平头哥预计仍将为阿里巴巴子公司。",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "算力"
-    ],
-    "first_seen_at": "2026-11-10T20:46:39Z",
-    "hot_seen_at": "2026-11-10T20:46:39Z",
-    "published": "2026-11-10T20:46:39Z",
-    "primary_url": "https://www.baidu.com/s?wd=%E9%98%BF%E9%87%8C%E5%AE%A3%E5%B8%83%E5%B9%B3%E5%A4%B4%E5%93%A5%E8%B5%B4%E6%B8%AF%E7%8B%AC%E7%AB%8B%E4%B8%8A%E5%B8%82",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "百度热搜",
-        "level": "L3",
-        "title": "阿里宣布平头哥赴港独立上市",
-        "url": "https://www.baidu.com/s?wd=%E9%98%BF%E9%87%8C%E5%AE%A3%E5%B8%83%E5%B9%B3%E5%A4%B4%E5%93%A5%E8%B5%B4%E6%B8%AF%E7%8B%AC%E7%AB%8B%E4%B8%8A%E5%B8%82",
-        "published": "2026-11-10T20:46:39Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_f704ff42f8",
-    "title_zh": "七巨头260亿美元“押注”Anthropic",
-    "event_summary": "当地时间11月9日，Anthropic发布两款新模型，在性能与价格上直接叫板OpenAI。而目前Anthropic最快于10日启动IPO路演，谷歌等7家科技巨头仍计划以发行价合计投入260亿美元进行私募配售。",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "OpenAI"
-    ],
-    "first_seen_at": "2026-11-10T20:46:39Z",
-    "hot_seen_at": "2026-11-10T20:46:39Z",
-    "published": "2026-11-10T20:46:39Z",
-    "primary_url": "https://www.baidu.com/s?wd=%E4%B8%83%E5%B7%A8%E5%A4%B4260%E4%BA%BF%E7%BE%8E%E5%85%83%E2%80%9C%E6%8A%BC%E6%B3%A8%E2%80%9DAnthropic",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "百度热搜",
-        "level": "L3",
-        "title": "七巨头260亿美元“押注”Anthropic",
-        "url": "https://www.baidu.com/s?wd=%E4%B8%83%E5%B7%A8%E5%A4%B4260%E4%BA%BF%E7%BE%8E%E5%85%83%E2%80%9C%E6%8A%BC%E6%B3%A8%E2%80%9DAnthropic",
-        "published": "2026-11-10T20:46:39Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_62e2d16457",
-    "title_zh": "Anthropic IPO拟发行8.25亿股",
-    "event_summary": "11月10日，媒体援引最新招股说明书草案报道，Anthropic计划在IPO中发行8.25亿股，指示性价格区间为每股70至78美元，拟筹资高达644亿美元。AMD、谷歌、微软及英伟达等将作为基石投资者，参与独立私募配售，合计认购260亿美元普通股。",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "Anthropic"
-    ],
-    "first_seen_at": "2026-11-10T20:46:39Z",
-    "hot_seen_at": "2026-11-10T20:46:39Z",
-    "published": "2026-11-10T20:46:39Z",
-    "primary_url": "https://www.baidu.com/s?wd=Anthropic+IPO%E6%8B%9F%E5%8F%91%E8%A1%8C8.25%E4%BA%BF%E8%82%A1",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "百度热搜",
-        "level": "L3",
-        "title": "Anthropic IPO拟发行8.25亿股",
-        "url": "https://www.baidu.com/s?wd=Anthropic+IPO%E6%8B%9F%E5%8F%91%E8%A1%8C8.25%E4%BA%BF%E8%82%A1",
-        "published": "2026-11-10T20:46:39Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_751da0d6c6",
-    "title_zh": "为什么越来越多人用 AI Gateway？",
-    "event_summary": "前阵子有球友反馈说，他们做了一个 AI 客服系统，光是“调模型”这个动作，他们在业务层写了三个适配器：一个 OpenAI 的，一个 Anthropic 的，一个通义千问的。 每个适配器里都有自己的一套重试逻辑、自己的一套错误码映射、自己的一套 Token 统计。 我问他：“如果明天老板说 DeepSeek 便宜，全量切过去，你要改多少地方？”…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-10T20:46:39Z",
-    "hot_seen_at": "2026-11-10T20:46:39Z",
-    "published": "2026-11-10T20:46:39Z",
-    "primary_url": "https://juejin.cn/post/7706346256684023846",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "掘金热榜",
-        "level": "L3",
-        "title": "为什么越来越多人用 AI Gateway？",
-        "url": "https://juejin.cn/post/7706346256684023846",
-        "published": "2026-11-10T20:46:39Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_fb42342ddb",
-    "title_zh": "2027 Android 开发者路线图：学习、面试与 AI",
-    "event_summary": "本文译自「Android Developer Roadmap 2027: What to Learn, What Interviews Ask, and Where AI Fits」，原文链接 medium.com/proandroidd… ，由Mayank Kumar发布于2026年10月30日。 如果你是一名安卓开发者，你现在可能会问自己三个问题： 过去一年并没有让情况变得更容易。2026…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-10T20:46:39Z",
-    "hot_seen_at": "2026-11-10T20:46:39Z",
-    "published": "2026-11-10T20:46:39Z",
-    "primary_url": "https://juejin.cn/post/7705961716425834511",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "掘金热榜",
-        "level": "L3",
-        "title": "2027 Android 开发者路线图：学习、面试与 AI",
-        "url": "https://juejin.cn/post/7705961716425834511",
-        "published": "2026-11-10T20:46:39Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_fc0929f243",
-    "title_zh": "美联储官员鲍曼认为美股估值存在大幅回调的风险",
-    "event_summary": "【美联储官员鲍曼认为美股估值存在大幅回调的风险】财联社11月11日电，美联储官员鲍曼认为美股估值存在大幅回调的风险。通胀压力迹象持续存在，正在扩大。关注人工智能回报令人失望可能带来的金融稳定风险。预计若干推升通胀的因素将在2027年减弱。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "人工智能"
-    ],
-    "first_seen_at": "2026-11-10T20:46:39Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T20:34:35Z",
-    "primary_url": "https://www.cls.cn/detail/2530838",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "财联社·电报",
-        "level": "L2",
-        "title": "美联储官员鲍曼认为美股估值存在大幅回调的风险",
-        "url": "https://www.cls.cn/detail/2530838",
-        "published": "2026-11-10T20:34:35Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_52251dfca9",
-    "title_zh": "英伟达跌幅扩大至7%。",
-    "event_summary": "英伟达跌幅扩大至7%。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "英伟达"
-    ],
-    "first_seen_at": "2026-11-10T20:46:39Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T20:05:15Z",
-    "primary_url": "https://wallstreetcn.com/livenews/3197901",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "华尔街见闻·快讯",
-        "level": "L2",
-        "title": "英伟达跌幅扩大至7%。",
-        "url": "https://wallstreetcn.com/livenews/3197901",
-        "published": "2026-11-10T20:05:15Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_167afae82f",
-    "title_zh": "美国商品期货交易委员会（CFTC）推迟批准AI计算期货交易。 这家美国衍生品监管部门将此类合约的审查期延长至少60天。（英国金融时报）",
-    "event_summary": "美国商品期货交易委员会（CFTC）推迟批准AI计算期货交易。 这家美国衍生品监管部门将此类合约的审查期延长至少60天。（英国金融时报）",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "AI + 监管"
-    ],
-    "first_seen_at": "2026-11-10T20:46:39Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T20:02:32Z",
-    "primary_url": "https://wallstreetcn.com/livenews/3197900",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "华尔街见闻·快讯",
-        "level": "L2",
-        "title": "美国商品期货交易委员会（CFTC）推迟批准AI计算期货交易。 这家美国衍生品监管部门将此类合约的审查期延长至少60天。（英国金融时报）",
-        "url": "https://wallstreetcn.com/livenews/3197900",
-        "published": "2026-11-10T20:02:32Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_ec68496d83",
-    "title_zh": "财联社11月11日电，美国商品期货交易委员会据称推迟批准AI算力期货交易。",
-    "event_summary": "财联社11月11日电，美国商品期货交易委员会据称推迟批准AI算力期货交易。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "AI + 算力"
-    ],
-    "first_seen_at": "2026-11-10T20:46:39Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T20:02:14Z",
-    "primary_url": "https://www.cls.cn/detail/2530833",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "财联社·电报",
-        "level": "L2",
-        "title": "财联社11月11日电，美国商品期货交易委员会据称推迟批准AI算力期货交易。",
-        "url": "https://www.cls.cn/detail/2530833",
-        "published": "2026-11-10T20:02:14Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_cc35cdb716",
-    "title_zh": "惠誉评级：民主党获胜对美国人工智能（AI）生态系统、能源、医疗保健和国防领域的影响喜忧参半。",
-    "event_summary": "惠誉评级：民主党获胜对美国人工智能（AI）生态系统、能源、医疗保健和国防领域的影响喜忧参半。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "人工智能"
-    ],
-    "first_seen_at": "2026-11-10T20:46:39Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T20:00:13Z",
-    "primary_url": "https://wallstreetcn.com/livenews/3197899",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "华尔街见闻·快讯",
-        "level": "L2",
-        "title": "惠誉评级：民主党获胜对美国人工智能（AI）生态系统、能源、医疗保健和国防领域的影响喜忧参半。",
-        "url": "https://wallstreetcn.com/livenews/3197899",
-        "published": "2026-11-10T20:00:13Z"
       }
     ],
     "needs_translation": false
@@ -6493,430 +6916,6 @@
         "title": "35 秒内“叫停”失控的 AI 智能体，OpenAI 部署“控制室”系统",
         "url": "https://www.ithome.com/1/024/631.htm",
         "published": "2026-11-10T02:05:45Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_ed0157e32a",
-    "title_zh": "6999 元，“第二代豆包手机”努比亚 NaviX Ultra 星空典藏版开启预售",
-    "event_summary": "IT之家 11 月 10 日消息，努比亚今日宣布 NaviX Ultra 星空典藏版将于 10:00 开启预售，11 月 16 日 10:00 正式开售。IT之家查询获悉，新品售价 6999 元，仅提供 16GB+512GB 一个版本。 据此前官方介绍， 努比亚 NaviX Ultra 手机的“星空典藏版”采用 微纳米浮雕工艺 ，灵感源自梵高《星空》。官方表示，也是努比亚星空影像基因的一次传承。…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "豆包"
-    ],
-    "first_seen_at": "2026-11-10T02:24:40Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T02:02:40Z",
-    "primary_url": "https://www.ithome.com/1/024/624.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "6999 元，“第二代豆包手机”努比亚 NaviX Ultra 星空典藏版开启预售",
-        "url": "https://www.ithome.com/1/024/624.htm",
-        "published": "2026-11-10T02:02:40Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_8d78a737ea",
-    "title_zh": "马斯克透露擎天柱机器人最新消息",
-    "event_summary": "特斯拉的人形机器人“擎天柱”是市场关注的焦点产品之一，特斯拉公司首席执行官马斯克日前表示，“擎天柱”将在2027年底左右开始交付，但交付形式可能是“租”而不是“卖”。马斯克表示，擎天柱的初期成本可能与电动汽车差不多，每台机器人的初始成本约为3万美元，之后会降至2万美元左右。马斯克预计擎天柱至少需要一年时间才能达到全面量产，在对外交付前，擎天柱将先在特斯拉的自有工厂中使用。特斯拉方面此前表示，“擎天柱”的工作效率将达到普通人的五倍左右。据…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "机器人"
-    ],
-    "first_seen_at": "2026-11-10T02:24:40Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T01:56:50Z",
-    "primary_url": "https://www.36kr.com/newsflashes/4063283749589897",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "36氪·快讯",
-        "level": "L2",
-        "title": "马斯克透露擎天柱机器人最新消息",
-        "url": "https://www.36kr.com/newsflashes/4063283749589897",
-        "published": "2026-11-10T01:56:50Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_c0c379baa1",
-    "title_zh": "Anthropic拟通过首次公开募股筹集至多693亿美元",
-    "event_summary": "Anthropic拟通过首次公开募股筹集至多693亿美元，发行价区间为每股70至80美元。Anthropic拟在IPO中发行866，666，664股A类股。（新浪财经）",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "Anthropic"
-    ],
-    "first_seen_at": "2026-11-10T02:24:40Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T01:50:10Z",
-    "primary_url": "https://www.36kr.com/newsflashes/4063279194592131",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "36氪·快讯",
-        "level": "L2",
-        "title": "Anthropic拟通过首次公开募股筹集至多693亿美元",
-        "url": "https://www.36kr.com/newsflashes/4063279194592131",
-        "published": "2026-11-10T01:50:10Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_235ed035c5",
-    "title_zh": "Anthropic告知银行家，此前发送给他们的IPO申报文件有误，公司将向银行更新数据。（路透）",
-    "event_summary": "Anthropic告知银行家，此前发送给他们的IPO申报文件有误，公司将向银行更新数据。（路透）",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "Anthropic"
-    ],
-    "first_seen_at": "2026-11-10T02:24:40Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T01:47:07Z",
-    "primary_url": "https://wallstreetcn.com/livenews/3197296",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "华尔街见闻·快讯",
-        "level": "L2",
-        "title": "Anthropic告知银行家，此前发送给他们的IPO申报文件有误，公司将向银行更新数据。（路透）",
-        "url": "https://wallstreetcn.com/livenews/3197296",
-        "published": "2026-11-10T01:47:07Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_24b4052fa4",
-    "title_zh": "澳航与埃森哲达成多年期战略合作，未来数年约850个岗位将受影响",
-    "event_summary": "澳洲航空集团（Qantas Group）宣布与埃森哲达成多年期战略合作，推进后台系统、业务流程和数据平台现代化，并加大人工智能投资。合作将涉及企业职能调整，部分服务将转由埃森哲提供，主要由其印度团队及部分澳大利亚团队负责，后续进一步引入自动化和人工智能。澳航预计，未来数年集团约850个岗位将受到影响，首批调整预计于2027年年中前实施。公司表示，将与受影响员工及工会协商，并尽可能安排员工转岗、提供再培训和其他支持。（界面）",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "人工智能"
-    ],
-    "first_seen_at": "2026-11-10T02:24:40Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T01:46:14Z",
-    "primary_url": "https://www.36kr.com/newsflashes/4063234067403657",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "36氪·快讯",
-        "level": "L2",
-        "title": "澳航与埃森哲达成多年期战略合作，未来数年约850个岗位将受影响",
-        "url": "https://www.36kr.com/newsflashes/4063234067403657",
-        "published": "2026-11-10T01:46:14Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_bda9788eb2",
-    "title_zh": "腾讯首款专属 AI 游戏陪伴 Agent“鹅次元”开启内测，支持实时陪聊、手机 QQ 陪伴聊天等",
-    "event_summary": "IT之家 11 月 10 日消息，腾讯首款专属 AI 游戏陪伴 Agent“鹅次元”今日开启内测。这款产品面向 PC 玩家，提供拟人化的 AI 陪伴和实时语音互动。 IT之家了解到， “鹅次元”主打游戏场景实时陪伴 ，AI 能够看到用户的游戏画面，并根据画面信息与人互动。如果玩家在游戏中遇到不懂的东西，可以随时向这款 AI 陪伴提问。 同时， 这款产品支持 PC / 手机 QQ 陪伴聊天 ，还具备桌宠、一键更换壁纸、嘴替 /…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "AI + Agent"
-    ],
-    "first_seen_at": "2026-11-10T02:24:40Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T01:43:25Z",
-    "primary_url": "https://www.ithome.com/1/024/620.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "腾讯首款专属 AI 游戏陪伴 Agent“鹅次元”开启内测，支持实时陪聊、手机 QQ 陪伴聊天等",
-        "url": "https://www.ithome.com/1/024/620.htm",
-        "published": "2026-11-10T01:43:25Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_b5d861a446",
-    "title_zh": "消息称三星电子、SK 海力士均将向 ASML EUV 光刻机投资超 10 万亿韩元",
-    "event_summary": "IT之家 11 月 10 日消息，韩媒《ChosunBiz》当地时间本月 8 日报道称，该国两大半导体企业 三星电子、SK 海力士正竞相采购 ASML 的 EUV 光刻机 ，相关投资额均在 10~20 万亿韩元 （IT之家注：现汇率约合 491.3 ~ 982.6 亿元人民币） 区间。 作为这波 AI 半导体浪潮中受益最为明显的那批企业，三星电子、SK 海力士都在努力提升晶圆厂产能， 而 EUV 机台是产能增长的关键要素 。 SK…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-10T02:24:40Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T01:42:05Z",
-    "primary_url": "https://www.ithome.com/1/024/619.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "消息称三星电子、SK 海力士均将向 ASML EUV 光刻机投资超 10 万亿韩元",
-        "url": "https://www.ithome.com/1/024/619.htm",
-        "published": "2026-11-10T01:42:05Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_8bacbbc68e",
-    "title_zh": "黄仁勋的麻烦，才刚开始",
-    "event_summary": "2024年6月台北的一场行业酒局上，身处声望顶峰的黄仁勋，被一众举杯敬酒的科技大佬环绕。紧靠在他身侧的，是一位身穿粉红色衣服的女性。 两年后，这张照片出现在《纽约时报》的报道中。 随后引发的这场风波，在黄仁勋11月8日发表公开道歉信后进一步升级。他在信中承认出轨，向妻子、家人，以及英伟达员工、董事会、合作伙伴和股东道歉。 这件事发展至今，早已超出一场简单的个人道德危机。…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "英伟达"
-    ],
-    "first_seen_at": "2026-11-10T02:24:40Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T01:39:55Z",
-    "primary_url": "https://www.tmtpost.com/8198618.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "钛媒体",
-        "level": "L2",
-        "title": "黄仁勋的麻烦，才刚开始",
-        "url": "https://www.tmtpost.com/8198618.html",
-        "published": "2026-11-10T01:39:55Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_adba597d9d",
-    "title_zh": "超节点走向规模交付，算力军备升级了",
-    "event_summary": "规模化交付带来的连锁反应，在产业链上已经开始显现。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "算力"
-    ],
-    "first_seen_at": "2026-11-10T02:24:40Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T01:35:06Z",
-    "primary_url": "https://www.tmtpost.com/8198808.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "钛媒体",
-        "level": "L2",
-        "title": "超节点走向规模交付，算力军备升级了",
-        "url": "https://www.tmtpost.com/8198808.html",
-        "published": "2026-11-10T01:35:06Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_4501a4f15d",
-    "title_zh": "董明珠回应格力电器业绩下滑：因为铜在涨价，宁可损失几十亿利润，也不降低产品品质",
-    "event_summary": "IT之家 11 月 10 日消息，格力电器董事长董明珠上周做客天猫双 11《生活提案局》，与淘宝天猫家享生活总经理恩重深度对谈“AI 未来家”。 谈到格力电器今年的业绩下滑，董明珠表示， 因为铜在涨价，铜价是铝价的 5~6 倍，如果要维护品牌，肯定要舍弃一部分利益 ，所以格力电器坚持使用铜来保证品质。“铝一定是可以做的，但稳定性、可靠性、持续性都要打上问号，那消费者就变成受害者了。”…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-10T02:24:40Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T01:32:49Z",
-    "primary_url": "https://www.ithome.com/1/024/617.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "董明珠回应格力电器业绩下滑：因为铜在涨价，宁可损失几十亿利润，也不降低产品品质",
-        "url": "https://www.ithome.com/1/024/617.htm",
-        "published": "2026-11-10T01:32:49Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_98071e4b97",
-    "title_zh": "Anthropic据报道将推进IPO计划",
-    "event_summary": "The AI company is expected to set its valuation range this week, the Wall Street Journal reported.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-10T02:24:40Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T01:27:12Z",
-    "primary_url": "https://techcrunch.com/2026/11/09/anthropic-reportedly-plans-to-move-forward-with-ipo-plans/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "TechCrunch AI",
-        "level": "L2",
-        "title": "Anthropic据报道将推进IPO计划",
-        "url": "https://techcrunch.com/2026/11/09/anthropic-reportedly-plans-to-move-forward-with-ipo-plans/",
-        "published": "2026-11-10T01:27:12Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_4dac11e1a9",
-    "title_zh": "董明珠称格力年底有一款能重新定义家电的产品，也许用完 10 年以后可以原价卖掉",
-    "event_summary": "IT之家 11 月 10 日消息，格力电器董事长董明珠上周做客天猫双 11《生活提案局》，与淘宝天猫家享生活总经理恩重深度对谈“AI 未来家”。 谈到 AI 家电是不是概念游戏的问题，董明珠在节目中表示：“对没有实力的企业，AI 就是个概念游戏； 对有实力的企业，它是实打实的技术升级 。” 董明珠还透露，年底会推出一款能重新定义家电应该是什么状态的产品，而且一定是成为一款奢侈品，“ 也许这空调用完 10 年以后可以原价卖掉 ”。…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-10T02:24:40Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T01:22:04Z",
-    "primary_url": "https://www.ithome.com/1/024/612.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "董明珠称格力年底有一款能重新定义家电的产品，也许用完 10 年以后可以原价卖掉",
-        "url": "https://www.ithome.com/1/024/612.htm",
-        "published": "2026-11-10T01:22:04Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_58d8580169",
-    "title_zh": "验证码拦不住个人Agent了",
-    "event_summary": "至少代填邮件验证码这一步，现在AI可以代劳了。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "AI + Agent"
-    ],
-    "first_seen_at": "2026-11-10T02:24:40Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T01:10:37Z",
-    "primary_url": "https://www.tmtpost.com/8198652.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "钛媒体",
-        "level": "L2",
-        "title": "验证码拦不住个人Agent了",
-        "url": "https://www.tmtpost.com/8198652.html",
-        "published": "2026-11-10T01:10:37Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_2bf1ceb846",
-    "title_zh": "中信建投计算机行业2027年投资策略：建议关注国产算力等四个方向",
-    "event_summary": "36氪获悉，中信建投证券研报称，2026年A股AI产业基于“小龙虾”的火爆、模型快速迭代和全球Capex投入持续加大，计算机板块走出上半年“资本开支增加带动硬件需求预期持续上升”，下半年“应用预期升温”的行情。当前，国内智算中心建设加速，国产AI芯片在训练、推理侧渗透率持续提升，AI应用从概念验证走向垂直场景落地，模型ARR和token增长呈指数级，算力服务价格水涨船高，AI产业发展高景气度维持。展望2027年，AI行业投资主线将从投入…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "AI + 应用"
-    ],
-    "first_seen_at": "2026-11-10T02:24:40Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T01:09:01Z",
-    "primary_url": "https://www.36kr.com/newsflashes/4063229051458433",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "36氪·快讯",
-        "level": "L2",
-        "title": "中信建投计算机行业2027年投资策略：建议关注国产算力等四个方向",
-        "url": "https://www.36kr.com/newsflashes/4063229051458433",
-        "published": "2026-11-10T01:09:01Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_8df84faaf2",
-    "title_zh": "券商密集发布2027年投资策略：AI叙事尚未结束，做好分散配置",
-    "event_summary": "进入11月，卖方机构密集发布2027年投资策略。继中信证券、华泰证券之后，中信建投证券、浙商证券等多家券商本周将举办线下策略会。整体来看，券商普遍认为，AI（人工智能）产业叙事尚未结束，科技板块内部走势或将分化，非AI板块同样具备结构性修复空间，市场不必过度悲观。在结构性机会大于全市场估值抬升的预期下，多家卖方机构建议，投资者布局2027年市场应立足基本面，做好分散配置。（证券时报）",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "人工智能"
-    ],
-    "first_seen_at": "2026-11-10T02:24:40Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T01:01:32Z",
-    "primary_url": "https://www.36kr.com/newsflashes/4063197970174850",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "36氪·快讯",
-        "level": "L2",
-        "title": "券商密集发布2027年投资策略：AI叙事尚未结束，做好分散配置",
-        "url": "https://www.36kr.com/newsflashes/4063197970174850",
-        "published": "2026-11-10T01:01:32Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_65febf3c64",
-    "title_zh": "早报｜苹果国行AI备案新增iPad和笔记本/Claude Fable 5.2发布，价格降20%/曝玛莎拉蒂拟与尊界合作，新车将由江淮生产",
-    "event_summary": "· 曝苹果调整 iOS 28 开发节奏，首阶段留出六周探索功能 · 谷歌发布两套第八代 TPU 系统，分别面向长上下文和保密推理 · 迪士尼与 Adobe 达成多年合作，将为旗下 IP 定制生成模型 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "Claude"
-    ],
-    "first_seen_at": "2026-11-10T02:24:40Z",
-    "hot_seen_at": null,
-    "published": "2026-11-10T00:47:46Z",
-    "primary_url": "https://www.ifanr.com/1688654?utm_source=rss&utm_medium=rss&utm_campaign=",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "爱范儿",
-        "level": "L2",
-        "title": "早报｜苹果国行AI备案新增iPad和笔记本/Claude Fable 5.2发布，价格降20%/曝玛莎拉蒂拟与尊界合作，新车将由江淮生产",
-        "url": "https://www.ifanr.com/1688654?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "published": "2026-11-10T00:47:46Z"
       }
     ],
     "needs_translation": false
