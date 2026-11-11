@@ -1604,9 +1604,13 @@
   {
     "id": "2611.12305",
     "title": "HumanSightBench: A Benchmark for Human Visual Perception in MLLMs",
-    "title_zh": null,
+    "title_zh": "HumanSightBench：多模态大模型的人类视觉感知基准",
     "abstract": "Multimodal large language models (MLLMs) have demonstrated strong performance on knowledge-intensive and reasoning-based vision-language benchmark datasets, but still struggle to solve the visual questions that people can solve easily. Evaluating the differences between MLLMs and human-level visual perception is challenging due to end-to-end evaluation which combines various skills, or because we are uncertain if individual items are valid. Specifically, observed errors may reflect visual perception, language priors, background knowledge, question ambiguity, and underspecified answers. Our guideline for HumanSightBench is that we construct items that are human-easy by construction and model-hard by evaluation. HumanSightBench contains 2,876 visual questions with short answers across 7 top-level perceptual categories and 21 subcategories. We only include items that pass five inclusion gates: question clarity, answer uniqueness, visual grounding, human solvability, and text-only shortcut filtering. According to the protocol, errors are defined as incorrect answers on human-validated visual tasks with the evaluated interface. The inclusion gates are intended to reduce confounds from ambiguity and external knowledge. The best pass@3 score is 65.6% across eight evaluated MLLMs. No evaluated model exceeds 27.5% on Counting. These results identify capability gaps that are hidden by overall scores and can help future training experiments and held-out evaluation.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有MLLM在端到端评估中难以区分视觉感知与其他因素误差，需构建纯视觉感知基准。",
+      "构建HumanSightBench，包含2876道视觉题，经五道筛选门控确保问题清晰、答案唯一且无文本捷径。",
+      "八款MLLM最佳pass@3仅65.6%，计数任务均不超27.5%，揭示了被总分掩盖的感知能力缺陷。"
+    ],
     "authors": [
       "Zixin Su",
       "Yangguang Lin",
@@ -1638,14 +1642,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 6
+    "score": 6,
+    "tags": [
+      "多模态大模型",
+      "视觉感知",
+      "基准测试"
+    ]
   },
   {
     "id": "2611.12300",
     "title": "Reconfigurable Action Theories: A Formal Foundation for Dynamically Composable Agent Harnesses",
-    "title_zh": null,
+    "title_zh": "可重构行动理论：动态可组合智能体线束的形式基础",
     "abstract": "Action theories typically fix their vocabulary and causal laws, whereas agent harnesses can change their tools, providers, and policies during execution. We introduce Reconfigurable Action Theories (RAT), in which actions can change the action theory itself. A theory module in RAT contains a vocabulary, causal laws, and an initializer. A RAT configuration records the active modules and the world state. Module loading and unloading are represented by actions governed by ordinary causal laws. RAT retains the standard causal action semantics of its language fragment when the active module set is fixed. We give sufficient conditions for at most one next configuration, preservation of existing behavior when a module is added, and equal results when modules are loaded in either order. We establish the computational complexity of reasoning tasks in RAT and translate finite RAT systems into nonmonotonic causal theories and Answer Set Programming (ASP), preserving bounded executions. Experiments compare finite RAT models with executions of official DeepSeek Harness, Pi, and OpenHands implementations. RAT provides a formal basis for checking how component changes affect a harness's available actions, behavior, and reachable goals.",
-    "summary_zh": null,
+    "summary_zh": [
+      "传统行动理论词汇与因果律固定，无法描述智能体线束执行中动态变更工具与策略的问题，故提出可重构行动理论（RAT）。",
+      "RAT将模块加载与卸载建模为受因果律控制的行动，且在模块集固定时保留标准因果行动语义。",
+      "给出模块添加保行为与加载顺序无关等充分条件，证明推理复杂度，可转换为ASP，实验验证了RAT对线束行为与可达目标检查的形式化基础作用。"
+    ],
     "authors": [
       "Jianmin Ji"
     ],
@@ -1665,14 +1678,24 @@
       "agent harness",
       "reasoning"
     ],
-    "score": 19
+    "score": 19,
+    "tags": [
+      "可重构行动理论",
+      "智能体线束",
+      "形式化验证",
+      "ASP"
+    ]
   },
   {
     "id": "2611.12293",
     "title": "Depth as a Candidate Source: Portfolio Allocation for Recurrent Test-Time Scaling in Large Language Models",
-    "title_zh": null,
+    "title_zh": "大语言模型循环测试时扩展的深度组合分配策略",
     "abstract": "Recurrent latent reasoning in large lanugage models (LLMs) scales test-time computation by increasing recurrent depth, naturally framing inference as a problem of deciding when to stop. We identify a previously overlooked limitation of this single-depth view through systematic preliminary analysis: deeper recurrence can lose correct solutions found at shallower depths, while depth-specific success sets remain broadly non-nested even after controlling for marginal accuracy. This suggests that depth determines not only computation cost, but also access to distinct candidate solutions. Motivated by this finding, we propose Depth Portfolio Allocation (DPA), which reformulates recurrent test-time scaling as budgeted allocation across depth-specific candidate sources. DPA supports both fixed portfolios and feedback-guided sequential allocation under a shared inference budget. Experiments on GSM8K, SVAMP, MultiArith, and MBPP show that mixed-depth portfolios expand oracle coverage under matched candidate counts and nominal costs, while feedback-guided allocation generally matches or improves uniform allocation and can reduce computation in high-budget settings. Code and data are avaible at : https://anonymous.4open.science/r/LLM-latent-B7BC/.",
-    "summary_zh": null,
+    "summary_zh": [
+      "循环推理增加深度会丢失浅层已找到的正确解，且不同深度的成功集无包含关系，深度决定了对不同候选解的访问。",
+      "提出深度组合分配（DPA），将循环测试时扩展重构为跨深度候选源的预算分配，支持固定组合与反馈引导的序列分配。",
+      "实验表明混合深度组合扩大了正确解覆盖，反馈引导分配匹配或优于均匀分配，且在高预算下可降低计算量。"
+    ],
     "authors": [
       "Chaoyuan Hao",
       "Wentao Yue",
@@ -1699,14 +1722,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "测试时扩展",
+      "循环推理",
+      "预算分配",
+      "大语言模型"
+    ]
   },
   {
     "id": "2611.12288",
     "title": "ForgeSystem: An Architecture for Demand-Specific Artefact Production with AI Agents",
-    "title_zh": null,
+    "title_zh": "ForgeSystem：基于AI代理的按需制品生产架构",
     "abstract": "General-purpose software serves many different demands, but this flexibility costs performance and efficiency on any specific demand. Software tailored to a specific demand avoids these losses, yet developing it requires substantial time and effort from human experts. AI agents offer an alternative: they can design, implement and test artefacts tailored to individual demands. We call this production paradigm Forge. Forging for a demand is economically justified when the cumulative benefit of specialisation exceeds the total cost of construction, verification and maintenance. To make Forge a repeatable production process, we propose ForgeSystem, which consists of a control layer, a forge loop and a recursive self-improvement (RSI) loop. The control layer selects which artefact serves each demand and decides which demands to forge, when to forge them and from which starting point; the forge loop iterates between production and verification until a candidate artefact passes verification; and the RSI loop draws on accumulated production records to supply starting points, refine the harness and train models. We implement ForgeSystem for training frameworks, decoding megakernels and individual computational kernels. Forged training engines reach 1.047-1.332x the model-FLOPs utilisation of their reference frameworks, forged megakernels achieve a geometric-mean decoding speedup of 1.21x over SGLang across thirteen configurations, and forged kernels match or exceed expert libraries in eighteen of twenty-two configurations, while satisfying task-specific quality requirements. Controlled comparisons show that explicit quality requirements steer agents towards optimisations that preserve training quality. We also discuss a gradual transition to Forge through service routing, and how demand-specific production may shift value accumulation and trust towards production systems.",
-    "summary_zh": null,
+    "summary_zh": [
+      "通用软件因兼顾多方需求而牺牲特定性能，人工定制开发成本高，需利用AI代理按需生成制品。",
+      "提出ForgeSystem架构，含控制层决策、forge循环迭代验证及RSI循环利用历史优化起点与模型。",
+      "在训练框架等场景验证，定制引擎性能超参考框架，解码加速1.21倍，显式质量要求可引导代理优化。"
+    ],
     "authors": [
       "Qingfeng He",
       "Zhui Zhu",
@@ -1734,14 +1767,24 @@
     "matched": [
       "AI agent"
     ],
-    "score": 15
+    "score": 15,
+    "tags": [
+      "AI代理",
+      "软件定制",
+      "系统架构",
+      "代码生成"
+    ]
   },
   {
     "id": "2611.12285",
     "title": "Learning Evidence-Grounded Reasoning for Context-Aware Time Series Forecasting",
-    "title_zh": null,
+    "title_zh": "面向上下文感知时序预测的证据推理学习",
     "abstract": "LLM-driven time series forecasting has become increasingly promising by leveraging contextual features to generate future values directly or refine forecast priors. However, incorporating contextual features alone does not ensure that models can identify which features matter for forecasting and understand what they suggest about future dynamics. We argue that the fundamental challenge is how to extract predictive evidence from contextual features and when and how to leverage it to guide forecasting decisions. In this paper, we propose CastReasoner, an evidence-grounded reasoning model for context-aware time series forecasting. Specifically, CastReasoner uses a structured chain of thought (CoT) to extract predictive evidence from contextual features, infer the future dynamics suggested by this evidence, and assess these dynamics against the forecast prior to guide adaptive forecasting decisions. To enable this capability, we design a reasoning-centric two-stage post-training framework including supervised fine-tuning (SFT) and reinforcement learning (RL). First, we synthesize reasoning trajectories through controllable multi-teacher guidance and select high-quality ones using a novel student-aware difficulty metric. Second, we design fine-grained multi-objective rewards to further improve reasoning and forecasting. To address heterogeneous learning needs across domains in both stages, we introduce a convergence-guided data balancing strategy. Through this two-stage training, CastReasoner improves both reasoning quality and predictive accuracy. Extensive experiments across multi-domain forecasting benchmarks demonstrate that CastReasoner achieves superior forecasting performance.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有LLM时序预测难以从上下文特征中提取关键预测证据，无法理解其对未来动态的影响。",
+      "提出CastReasoner模型，利用结构化CoT提取证据、推断动态，并据此自适应调整预测决策。",
+      "设计推理中心的两阶段后训练框架（含SFT和RL），并引入收敛引导的数据平衡策略，实现卓越预测性能。"
+    ],
     "authors": [
       "Xingpeng Gao",
       "Mingyue Cheng",
@@ -1764,14 +1807,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 14
+    "score": 14,
+    "tags": [
+      "时序预测",
+      "证据推理",
+      "大语言模型"
+    ]
   },
   {
     "id": "2611.12271",
     "title": "Public, Identifiable, and Effectively Immutable: Ethical Lessons from Research on arXiv",
-    "title_zh": null,
+    "title_zh": "arXiv研究中的伦理教训：公开、可识别与有效不可变",
     "abstract": "Ethical decision-making is central to safe cybersecurity research. Recent studies, one of which is our own, analyzing the source files of arXiv papers bring this challenge to light - arXiv publicly distributes the source files, to the surprise of many authors. Unique aspects reveal ethical challenges and dilemmas that extend beyond established ethical frameworks, institutional processes, and community best practices. In this work, we examine this case and provide insights for similar research on other public live resources, such as Zenodo or the Wayback Machine. While such empirical studies are particularly realistic, they must account for personally identifiable information, leaked secrets, and other sensitive details that could expose, shame, or otherwise negatively affect individuals, possibly leading to both reputational and practical harm. sDrawing on our collective experience and discussions among researchers, affected authors, and readers, we make three contributions: First, we define the ethical setting and highlight that even intentionally-public data with deliberate real-name attribution can raise ethical concerns when repurposed for empirical analysis. Second, we discuss the ethical issues surrounding the use of arXiv data and derive four higher-level dilemmas that researchers may face when working with similar data. Third, we derive practical guidance for ethically navigating such settings and, in doing so, distill four lessons for research on arXiv and similar public, live datasets: public availability should serve as the starting point of ethical reasoning; research should minimize the amplification it induces on exposed information; disclosure should be calibrated to the harm, confidence, and actionability of a finding; and effective immutability must be accounted for. Together, these contribute to community resources for ethically-sound cybersecurity experiments.",
-    "summary_zh": null,
+    "summary_zh": [
+      "arXiv公开分发论文源文件，其中常含个人可识别信息或泄露秘密，超出既有伦理框架，对作者造成潜在伤害。",
+      "以arXiv等公开活资源为对象，分析其数据使用引发的伦理问题，并提炼出研究者在类似数据上面临的四项高层困境。",
+      "提出实践指南并总结四条教训：公开性是伦理推理起点；须最小化信息暴露放大效应；披露须与危害匹配；须考虑有效不可变性。"
+    ],
     "authors": [
       "Jan Pennekamp",
       "Johannes Lohmöller",
@@ -1793,14 +1845,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 4
+    "score": 4,
+    "tags": [
+      "网络安全伦理",
+      "数据隐私",
+      "公开数据集"
+    ]
   },
   {
     "id": "2611.12269",
     "title": "Agent4Crypto: A Dual-Reflective and Market-Feedback-Aligned LLM-Based Multi-Agent System for Cryptocurrency Trading",
-    "title_zh": null,
+    "title_zh": "面向加密货币交易的双反思与市场反馈对齐多智能体系统",
     "abstract": "Cryptocurrency markets provide a natural testbed for autonomous AI agents because they are digital-native, high-frequency, and machine-speed environments, yet existing methods often struggle with non-stationary market regimes, opaque decisions, and fixed aggregation rules. In this paper, we propose Agent4Crypto, a dual-reflective and market-feedback-aligned multi-agent system. The framework coordinates specialized agents for data collection, analysis, risk assessment, reflection, and trading, synthesizing heterogeneous signals from prices, indicators, news, and charts in an interpretable decision pipeline. Our central design is a trader-centric decision mechanism: three style-specific trader agents, Aggressive, Neutral, and Conservative, generate candidate actions and natural-language rationales from the same market context, while their influence is learned rather than manually fixed. A PPO-based gating policy dynamically allocates trader weights through a dual-reflective feedback process. One reflection stream evaluates post-trade decision quality from realized portfolio outcomes and distills reusable lessons into a Financial ReasoningBank for retrieval in subsequent trader prompts, while the other estimates trader-level counterfactual contribution, indicating which style has recently aligned better with market movements. The PPO state combines Counterfactual Contribution Memory with market features, previous trader weights, and current trader actions, so trader influence adapts across bull, sideways, and bear regimes. Experiments on BTC, ETH, and XRP show that Agent4Crypto improves total return and Sharpe ratio over traditional strategies, machine learning and reinforcement learning baselines, and existing LLM-based trading systems, demonstrating the value of interpretable trader competition and market-feedback-driven adaptation in volatile cryptocurrency markets.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有加密货币交易方法难以应对非平稳市场且决策不透明，本文提出双反思与市场反馈对齐的多智能体系统Agent4Crypto。",
+      "系统协调多专用智能体，由三种风格交易智能体生成候选动作与解释，并通过PPO门控策略动态学习并分配其权重。",
+      "双反思机制评估决策质量以积累经验库，并估算反事实贡献，使智能体权重能自适应牛熊等市场状态，显著提升收益与夏普比率。"
+    ],
     "authors": [
       "Guangyan Gan",
       "Jiahao Li",
@@ -1825,14 +1886,23 @@
       "reasoning",
       "multi-agent"
     ],
-    "score": 22
+    "score": 22,
+    "tags": [
+      "加密货币交易",
+      "多智能体系统",
+      "强化学习"
+    ]
   },
   {
     "id": "2611.12256",
     "title": "Predictability of Collective Behavior in Networks of LLM Agents",
-    "title_zh": null,
+    "title_zh": "LLM智能体网络中集体行为的可预测性",
     "abstract": "As AI agents built on large language models (LLMs) increasingly interact at scale, anticipating their collective behavior becomes necessary. Unlike humans, individual LLM agents can be probed in {controlled scenarios}; however, the predictability of their collective outcomes hinges on what such measurements capture. We study information cascades on networks of LLM agents that decide whether to share a post given how many of their contacts have shared it. At the same fraction of sharing contacts, an agent's response depends on how many contacts it has and on the post. Responses that ignore the number of contacts mispredict the cascades, increasingly on heterogeneous networks, by an error we derive analytically and that network topology alone cannot reveal. Measured in context, the response predicts, through mean-field theory, the cascades of full LLM simulations, tipping points included. Anticipating the collective behavior of AI agents thus requires evaluating them in their local network context.",
-    "summary_zh": null,
+    "summary_zh": [
+      "【问题】LLM智能体大规模交互时，需预测其集体行为，但个体探测能否预测集体结果尚不明确。",
+      "【方法】研究LLM网络上的信息级联，发现智能体响应受局部网络上下文影响，忽略此特征的模型会产生解析可推导的预测误差。",
+      "【结论】结合局部上下文测量的响应与平均场理论，可准确预测含临界点的级联，故评估AI智能体须在其局部网络上下文中进行。"
+    ],
     "authors": [
       "Fabian Baumann",
       "Michele Starnini"
@@ -1853,14 +1923,24 @@
       "LLM agent",
       "AI agent"
     ],
-    "score": 13
+    "score": 13,
+    "tags": [
+      "集体行为",
+      "信息级联",
+      "LLM智能体",
+      "网络拓扑"
+    ]
   },
   {
     "id": "2611.12244",
     "title": "Prospective Action-Resource Graph Multi-Agent Reinforcement Learning for Electric HGV Fleets under Shared Charging Infrastructure",
-    "title_zh": null,
+    "title_zh": "共享充电下电动重卡车队的前瞻动作资源图MARL",
     "abstract": "Electric heavy goods vehicle (eHGV) fleet coordination requires each vehicle to choose driving, charging and resting actions whose consequences depend on shared infrastructure. Existing multi-agent reinforcement learning (MARL) methods mainly represent current states, leaving action-specific futures and resource interactions to be learned indirectly. We develop Horizon-Preview and Graph-Coordinated Proximal Policy Optimisation (HGC-PPO), which integrates horizon preview and candidate-resource graph coordination into the PPO decision architecture. Horizon preview represents each legal action through its short-horizon operational consequences. Graph message passing then updates these candidates through station, charger-type and time-slot resources shared across the fleet. On the 794km Folkestone-Glasgow task, HGC-PPO achieved the lowest mean charging cost among five RL methods at £504.32 per vehicle, with a fleet completion time of 24.920h. It also completed the task 1.763h faster and cost £36.51 less per vehicle than a replay-verified finite-budget MILP benchmark. Across six unseen routes and fleet sizes from 5 to 20 vehicles, HGC-PPO delivered the lowest macro-average completion time, charging cost and charging frequency among the RL methods. A 2 by 2 ablation showed that the full preview-graph architecture performed best across all four operational metrics. These results show that prospective action information and fleet-wide resource coordination improve eHGV decisions under charging and driver-hours constraints.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有MARL多表征当前状态，未直接建模动作的未来影响与共享资源交互，难以优化车队决策。",
+      "提出HGC-PPO算法，将短视界动作后果与候选资源图消息传递集成至PPO架构，实现车队资源协调。",
+      "实验表明HGC-PPO在多路线与车队规模下均获最低成本与耗时，验证了前瞻信息与资源协调的有效性。"
+    ],
     "authors": [
       "Yiming Xu",
       "Fulong Yao",
@@ -1883,14 +1963,23 @@
     "matched": [
       "multi-agent"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "多智能体强化学习",
+      "电动重卡车队",
+      "资源协调"
+    ]
   },
   {
     "id": "2611.12241",
     "title": "SNAPRAG: Cost-Efficient Knowledge Extraction Attack on RAG Systems via Adversarial Perturbations",
-    "title_zh": null,
+    "title_zh": "SNAPRAG：基于对抗扰动的RAG系统低成本知识提取攻击",
     "abstract": "Retrieval-Augmented Generation (RAG) systems improve Large Language Model (LLM) responses by incorporating information from external knowledge bases. However, recent studies have shown that attackers can extract substantial portions of private knowledge bases from RAG systems through repeated querying. Yet, state-of-the-art extraction attacks either rely heavily on external LLMs to generate adversarial queries or require a large number of queries. In this paper, we propose SNAPRAG, a novel and cost-efficient attack for extracting RAG knowledge bases through adversarial perturbations. Our approach algorithmically generates adversarial queries without relying on external LLMs and allows for a strictly configurable query budget. In particular, SNAPRAG uses a discrete token-mutation algorithm to generate novel queries in a strict black-box setting. Our adaptive dissimilarity threshold calibration systematically forces queries into unexplored semantic regions of the target database, enabling extraction with fewer queries. Specifically, to extract half of the target knowledge base, our method requires up to 6.77$\\times$ fewer queries than existing approaches. Furthermore, within a fixed query budget, our method recovers up to 96.9%, outperforming the closest approach by 7.7-19.9%. We further evaluate SNAPRAG against active defenses, where it remains the leading attack on four of five defended targets, achieving 50.7-96.3% extraction rate.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有RAG知识提取攻击依赖外部LLM或需大量查询，存在成本高的问题。",
+      "提出SNAPRAG攻击，用离散词元变异算法生成对抗查询，自适应阈值迫使查询探索未知语义区域。",
+      "该方法提取一半知识库的查询量减少6.77倍，固定预算下恢复率达96.9%，且能有效对抗主动防御。"
+    ],
     "authors": [
       "Melih Coşğun",
       "Mehmet Emre Gürsoy",
@@ -1912,14 +2001,23 @@
     "matched": [
       "retrieval-augmented generation"
     ],
-    "score": 4
+    "score": 4,
+    "tags": [
+      "RAG系统",
+      "知识提取攻击",
+      "对抗扰动"
+    ]
   },
   {
     "id": "2611.12225",
     "title": "A Cost That Practice Accuracy Hides: Worked Solutions in Self-Generated Training Data and the Compositional Use of New Rules",
-    "title_zh": null,
+    "title_zh": "自生成训练数据中的解题过程对新规则组合复用的影响",
     "abstract": "A worked solution can make self-generated training targets shorter and cheaper, but accuracy on the practiced operation may hide how well a model can reuse newly learned rules. We study this choice in a 2B-parameter reasoning model learning two invented quantitative rules. The model generates targets from a rule sheet alone or from the sheet plus a program-written worked solution; targets are accepted for final-answer correctness, and the support is removed for fine-tuning and evaluation. Training questions request forward use in one segment; composition requires sequential reuse of the same rule across two segments. After six passes, using a program-checked numerical signature, sheet-only targets lead by 24.3 percentage points (95% item-bootstrap CI 14.6-34.0) on composition in a prospective test. On unseen argument values, observed forward accuracy is identical (87.5% each), but composition accuracy is 58.3% versus 23.6%, a 34.7-point gap (25.7-43.8). An independently sampled second target-bank pair repeats the direction (+14.6 points, 2.1-26.0). Ten passes on the shorter worked-solution targets, approximately matching the domain tokens of six sheet-only passes while changing other training quantities, narrow the gap to 16.3 points (6.3-26.7) in the first bank pair and 6.2 points (-6.3 to 18.8) in the second, where the pre-specified test does not hold. At six passes each, the worked-solution policy uses fewer capture tokens and less update time, yet the trained models use 2.6 times as many generated tokens per composition success under the numerical signature (2.1 times in the second bank pair). Choosing a capture context therefore requires testing how the new rules are reused, alongside the inference cost of those uses, rather than relying on forward accuracy alone.",
-    "summary_zh": null,
+    "summary_zh": [
+      "问题：自生成训练数据加入解题过程虽降本，但可能掩盖模型对新规则组合复用的能力。",
+      "方法：用2B参数推理模型学习两条新规则，对比仅用规则表与加入程序生成解题过程两种训练目标。",
+      "结论：加入解题过程虽正向准确率相同，但组合复用准确率显著落后，且推理时生成token开销更大。"
+    ],
     "authors": [
       "Jiantong Xu"
     ],
@@ -1940,14 +2038,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 7
+    "score": 7,
+    "tags": [
+      "自生成训练数据",
+      "规则组合复用",
+      "推理模型"
+    ]
   },
   {
     "id": "2611.12222",
     "title": "PARIS: A multi-agent LLM framework for end-to-end, PRISMA-guided systematic literature reviews with pre-synthesis corpus quality assessment",
-    "title_zh": null,
+    "title_zh": "PARIS：基于多智能体LLM的PRISMA系统综述框架",
     "abstract": "Systematic literature reviews (SRs) remain slow and labor-intensive, and most automation tools address single stages of the workflow. We present PARIS (PRISMA Agentic Research Intelligence System), an open-source framework in which a conductor agent running in Claude Code orchestrates 15 specialized large language model (LLM) agents, from scoping a research question to exporting a manuscript draft. Agents are specified declaratively, coordinate exclusively through persisted artifacts that the conductor validates before every transition, and delegate retrieval, bibliometric analysis and scoring to deterministic Python utilities. Three human checkpoints gate study inclusion, corpus adequacy and the synthesis outline. We also introduce QualityScore, a pre-synthesis index that aggregates normalized network, bibliometric, semantic and process sub-scores into a 0-100 grade. Two case studies illustrate both: AI chatbots and university students' learning (388 records, 100 included) and AI-assisted SR methods (131 records, 123 included, QualityScore 69.1 recomputed with a proxy network sub-score). They show end-to-end feasibility across domains and the diagnostic use of QualityScore: in the first run, corpus improvements chosen at the corpus-adequacy checkpoint raised the score from 74.6 to 81.9 and the number of pre-2023 studies from 1 to 19. Audits of both runs exposed failure modes: incomplete retrieval, counts that drifted between agents, unrecorded or delegated checkpoint decisions and a grade that depends on how citation data are handled. PARIS fully supports 8 of the 27 PRISMA 2020 items and partially supports 11. Output quality has so far been judged only by an internal reviewer agent; independent validation against human reviews is the next step.",
-    "summary_zh": null,
+    "summary_zh": [
+      "系统综述耗时费力且现有工具多局限于单阶段。提出PARIS框架，通过编排15个专用LLM agent实现端到端自动化。",
+      "引入QualityScore指标，在合成前评估语料库质量。案例表明该指标具诊断作用，改进语料后分数从74.6升至81.9。",
+      "审计发现检索不全等失败模式。目前框架部分支持PRISMA 2020，输出仅经内部评估，尚需独立人工验证。"
+    ],
     "authors": [
       "Christophe Cruz",
       "Hussam Ghanem",
@@ -1970,14 +2077,24 @@
     "matched": [
       "multi-agent"
     ],
-    "score": 16
+    "score": 16,
+    "tags": [
+      "多智能体",
+      "系统综述",
+      "大语言模型",
+      "PRISMA"
+    ]
   },
   {
     "id": "2611.12177",
     "title": "Embodied First Exam",
-    "title_zh": null,
+    "title_zh": "具身首次考试：面向编码智能体的统一评测框架",
     "abstract": "Early successes on agentic robotics point to a potential paradigm shift toward using coding agents to control robots. Existing robotics benchmarks are built around visuomotor policy learning, leaving it open whether coding agents can reliably control diverse robots under physical-world constraints. We therefore introduce the Embodied First Exam, a unified, comprehensive, and agent-native evaluation framework where coding agents can choose their own control approach: direct control, code to control, or train a policy to control. We hope it serves as a first exam for coding agents before they enter the physical world, with 1,156 tasks in 35 suites on 47 robots, including 9 new suites that go beyond pick-and-place to spatial puzzles, dexterous manipulation, multi-robot interaction, dynamic whole-body control, and sim-to-sim engineering. Each task can be run in up to three evaluation settings. The Standard Setting mimics the real world: the agent receives only sensor observations and, by default, cannot reset the environment. Its Realtime variant keeps the environment running while the agent reasons. The Privileged Setting gives the agent access to the full simulator state and unlimited resets, allowing it to search for an oracle solution for training purposes. Success rates in this setting serve as an approximate upper bound. On the 456 core tasks, the strongest of eight agents, GPT-6 Astra in Codex, achieves a success rate of 34% in the Standard Setting, leaving much room for improvement. To see where agents fail, we label the stage at which failed attempts go wrong and compare failures across agents, settings, and stage categories.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有机器人基准多关注视觉运动策略，未验证编码智能体在物理约束下控制机器人的可靠性。",
+      "提出Embodied First Exam评测框架，支持智能体自主选择直接控制、代码控制或训练策略控制。",
+      "构建含47种机器人与1156项任务的评测集，最强智能体在标准设定下成功率仅34%，揭示巨大提升空间。"
+    ],
     "authors": [
       "Kangrui Wang",
       "Qineng Wang",
@@ -2008,14 +2125,23 @@
     "matched": [
       "coding agent"
     ],
-    "score": 5
+    "score": 5,
+    "tags": [
+      "具身智能",
+      "编码智能体",
+      "机器人评测"
+    ]
   },
   {
     "id": "2611.12175",
     "title": "GeoMind: A Benchmark for Spatial Understanding in Robotic Manipulation",
-    "title_zh": null,
+    "title_zh": "GeoMind：机器人操作中的空间理解基准",
     "abstract": "Robotic manipulation has advanced rapidly in mapping visual observations and language instructions to actions. However, reliable manipulation in open-world environments requires robust spatial understanding: the ability to identify targets in complex layouts (spatial reasoning) and adapt to scenes that continuously evolve through interaction (spatial memory). Yet existing embodied benchmarks fall short in evaluating spatial understanding: they often introduce strong visual cues that bypass spatial reasoning, and focus on static scenes that offer little insight into an agent's capacity for spatial memory. To address this gap, we introduce GeoMind, a systematic benchmark for structured spatial understanding through tabletop manipulation. GeoMind comprises 54 evaluated task variants organized around spatial reasoning and spatial memory. It also incorporates a scalable pipeline that automates the generation and annotation of task instances with verified targets and executable interactions. Extensive evaluations across diverse embodied agents reveal their consistent weaknesses in spatial understanding. Our findings highlight that these agents struggle to track identities after spatial changes and convert relational or geometric constraints into executable actions. We release the GeoMind benchmark at https://github.com/Notfound-JH/GEOMIND-benchmark.git.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有具身基准缺乏对动态空间记忆的评估，且常引入视觉线索绕过空间推理，无法衡量开放世界操作所需的空间理解能力。",
+      "提出 GeoMind 基准，包含 54 种桌面操作任务变体，聚焦空间推理与记忆，并引入可扩展流水线自动生成带验证目标的任务实例。",
+      "评估发现各类 embodied agent 在空间理解上普遍薄弱，难以追踪空间变化后的目标身份，也无法将关系或几何约束转化为可执行动作。"
+    ],
     "authors": [
       "Jinghe Wang",
       "Xinrui Cao",
@@ -2042,7 +2168,12 @@
     "matched": [
       "reasoning"
     ],
-    "score": 4
+    "score": 4,
+    "tags": [
+      "机器人操作",
+      "空间理解",
+      "具身智能基准"
+    ]
   },
   {
     "id": "2611.12164",
@@ -2078,9 +2209,13 @@
   {
     "id": "2611.12163",
     "title": "Zero-inflated generalized linear latent variable models for microbiome compositional data",
-    "title_zh": null,
+    "title_zh": "面向微生物组数据的零膨胀广义线性潜变量模型",
     "abstract": "In this paper, we incorporate the Dirichlet--multinomial distribution into the generalized linear latent variable model (GLLVM) framework to accommodate high-dimensional, overdispersed compositional count data and capture complex covariation among taxa with a low-rank structure. Advances in high-throughput sequencing technologies have generated large amounts of microbiome count data, stimulating research into their associations with human diseases and traits. Such data are compositional and often highly sparse for various reasons, posing challenges for statistical analysis. Conventional zero-replacement approaches ignore the underlying causes of zeros, further complicating the analysis. We therefore propose a zero-inflated Dirichlet--multinomial latent variable model (ZIDM-LVM). Since the marginal likelihood has no closed-form expression, we develop a variational approximation (VA) approach for efficient parameter estimation. Simulation studies and applications to two microbiome datasets are presented to evaluate the performance of the proposed method.",
-    "summary_zh": null,
+    "summary_zh": [
+      "高通量测序产生的微生物组计数数据具有成分性和高稀疏性，传统零替换法忽略零的成因，导致分析困难。",
+      "提出零膨胀Dirichlet-multinomial潜变量模型，融入GLLVM框架以处理过分散成分数据并捕获分类群协变异。",
+      "针对边际似然无闭式解，开发变分近似法进行参数估计，仿真与实际数据验证了方法的有效性。"
+    ],
     "authors": [
       "Wenqi Tang",
       "Pekka Korhonen",
@@ -2101,14 +2236,24 @@
     "comment": "45 pages, including references and appendices",
     "journal_ref": "",
     "matched": [],
-    "score": 1
+    "score": 1,
+    "tags": [
+      "微生物组数据",
+      "零膨胀模型",
+      "潜变量模型",
+      "变分近似"
+    ]
   },
   {
     "id": "2611.12155",
     "title": "StealthyPoison: Manipulating LLM Agent Behavior through Procedural Poisoning of Third-Party Skills",
-    "title_zh": null,
+    "title_zh": "StealthyPoison：通过过程投毒操纵LLM智能体行为",
     "abstract": "LLM agents increasingly retrieve third-party skills from public registries and follow their procedures to complete user tasks. This reliance allows attackers to manipulate agent behavior by poisoning the skills. However, overtly malicious instructions can provide explicit signals for detection. We present StealthyPoison, a stealthy procedural poisoning attack that corrupts a skill's decision-critical rules to induce incorrect task outcomes while preserving its advertised functionality and normal execution. Unlike prior knowledge corruption attacks that craft poisoned content for known target question-answer pairs, StealthyPoison constructs reusable poisoned procedures from a publicly available third-party skill, without access to actual user requests or their ground-truth answers. To make the poisoned procedure generalize to unseen requests, it first synthesizes requests from the target skill and executes its clean version using a surrogate agent to obtain pseudo-references. These references and surrogate execution feedback guide the iterative refinement of payloads that alter decision-critical rules. To increase the likelihood that the poisoned skill is retrieved and selected over benign alternatives, the attack augments the poisoned skill's retrieval metadata with independently generated request descriptions. We evaluate StealthyPoison on 566 eligible target skills and 5,244 requests against more than 26,000 registry entries. It improves top-1 poisoned-skill placement by 13.6% relative to both HotFlip and GCG. Constructed using feedback from a single surrogate model, the procedural poisoning payloads transfer effectively and without modification to three held-out victim models and achieve end-to-end attack success in a Claude Code workflow powered by Opus 4.8. The defense evaluation further shows that most of these payloads evade detection by both SkillSpector and GPT-5.4-mini.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM智能体依赖第三方技能易受投毒攻击，但显式恶意指令易被检测。",
+      "提出StealthyPoison，通过篡改技能决策规则诱导错误结果，同时保持正常功能与执行。",
+      "该攻击无需真实请求即可构建可复用投毒过程，且投毒载荷可跨模型迁移并在Claude中攻击成功。"
+    ],
     "authors": [
       "Jingfen Qiao",
       "Rui Li",
@@ -2132,14 +2277,24 @@
     "matched": [
       "LLM agent"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "LLM智能体",
+      "投毒攻击",
+      "第三方技能",
+      "模型安全"
+    ]
   },
   {
     "id": "2611.12144",
     "title": "DisasterVL: Evidence-Based Visual Reasoning Dataset and Model for Disaster Scene Understanding",
-    "title_zh": null,
+    "title_zh": "DisasterVL：面向灾害场景理解的循证视觉推理数据集与模型",
     "abstract": "We introduce DisasterVL, a dataset and benchmark for evidence-grounded reasoning about disaster imagery. It contains approximately 1.2 million images from 142 countries, paired with 25 million structured annotations covering scene captions, incident and location assessments, spatial relationships, and visual question answering (VQA). The VQA annotations link answers to visible evidence and include questions about both present and absent cues, multiple answer formats, and difficulty labels. Region-level annotations link caption phrases to bounding boxes and spatial relationships to the regions they connect. The test set contains 38,254 images spanning 75 countries and 28 hazard types. Gemini 3.1 Pro audited the test annotations, and human reviewers validated a stratified subset. On this benchmark, the 9B DisasterVLM model outperforms the evaluated general-purpose baselines on captioning, open-ended VQA, incident reasoning, and region-level grounding. Gains in text overlap are larger than gains in evidence scores. We plan to publicly release the dataset, trained models, and code.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有灾害视觉数据缺乏细粒度推理与证据支撑，故构建含120万图像及250万结构化标注的DisasterVL基准。",
+      "该数据集提供场景描述、灾害评估、空间关系及VQA标注，VQA将答案关联可见证据并区分难度，区域标注链接短语与边界框。",
+      "提出9B参数的DisasterVLM模型，在描述、VQA及区域定位等任务上超越通用基线，但证据得分提升弱于文本重叠度提升。"
+    ],
     "authors": [
       "Ali Diba",
       "Aisha Al-Mohannadi",
@@ -2162,14 +2317,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 12
+    "score": 12,
+    "tags": [
+      "灾害场景理解",
+      "视觉推理",
+      "视觉问答",
+      "数据集"
+    ]
   },
   {
     "id": "2611.12139",
     "title": "BioMARS 2.0: a robotic biologist for formulating and adapting biological experiments",
-    "title_zh": null,
+    "title_zh": "BioMARS 2.0：制定与适应生物实验的机器人生物学家",
     "abstract": "Biological experimentation is not reducible to a single optimization problem, but requires decisions at multiple levels of abstraction: translating scientific knowledge into experimental procedures, adapting culture conditions to measured phenotypes and selecting interventions that test biological hypotheses. Automating experimental execution does not, by itself, determine which experiments should be performed next or how they should change in response to biological feedback. Here we introduce BioMARS, a human-in-the-loop multi-agent robotic system that connects knowledge-guided experimental decision-making with robotic execution and biological feedback. At the procedural level, BioMARS generated literature-grounded protocols and traceable action plans, improving expert-reviewed protocol quality scores across four model backends. At the parametric level, BioMARS used image-derived phenotypes from robotic retinal organoid culture to select subsequent experimental conditions, with higher reported scores in later rounds of the three-round experiment. At the intervention level, BioMARS nominated drug-repurposing candidates from biomedical evidence and advanced six candidates to wet-lab testing by researchers. Together, these studies demonstrate feedback-driven robotic biological experimentation within a framework that supports decisions about experimental procedures, culture conditions and biological interventions.",
-    "summary_zh": null,
+    "summary_zh": [
+      "生物实验需多层级决策，仅自动化执行无法根据反馈决定后续实验，故需连接决策与执行的系统。",
+      "提出人机多智能体系统BioMARS，连接知识引导的决策、机器人执行与生物反馈，实现多层级实验决策。",
+      "实验表明BioMARS在程序层提升协议质量，参数层优化培养条件，干预层成功提名并推进重用药候选物。"
+    ],
     "authors": [
       "Yibo Qiu",
       "Zan Huang",
@@ -2200,14 +2365,24 @@
     "matched": [
       "multi-agent"
     ],
-    "score": 4
+    "score": 4,
+    "tags": [
+      "多智能体系统",
+      "机器人生物学家",
+      "实验自动化",
+      "人机交互"
+    ]
   },
   {
     "id": "2611.12136",
     "title": "LHNav: Long-Horizon Humanoid Navigation via Multirate Coordination and Physics-Grounded Action Data",
-    "title_zh": null,
+    "title_zh": "基于多速率协调与物理数据引擎的长时距人形导航",
     "abstract": "We study humanoid navigation across multiple destinations under long-horizon language instructions. This task is challenging because robots must maintain progress across successive goals while continuously producing natural, stable whole-body motion through confined spaces. However, task decomposition in existing methods does not by itself ensure progress throughout execution, while waypoint-based navigation does not guarantee natural, route-faithful whole-body motion. Our key idea is to organize navigation into three complementary roles operating at different time scales: a Brain for task reasoning, a Cerebellum for local motion generation, and a Brainstem for whole-body execution. We realize this idea in LHNav, an asynchronous system that uses progress and arrival feedback to coordinate navigation goals, VLA motion-token prediction, and whole-body control. To train the Cerebellum for natural, route-faithful motion, we develop a physics-grounded data engine that improves physical tracking of motion references along collision-aware routes and pairs the resulting demonstrations with rendered visual observations. Together, these designs allow task planning to proceed alongside continuous movement and extend single-goal navigation to successive destinations with natural, route-faithful whole-body motion. In simulation, our navigation VLA outperforms OmniNav and DualVLN in single-goal success and motion smoothness, with fewer collisions and falls. Using a VLA trained only on single-goal demonstrations, LHNav achieves a 75.56% success rate on long-horizon navigation tasks. Deployment on the Unitree G1 further demonstrates single-goal navigation and zero-shot long-horizon task execution in real-world environments, including layouts with repositioned objects. Project website: https://robbyant-research.github.io/LHNav/.",
-    "summary_zh": null,
+    "summary_zh": [
+      "长时距人形导航需在连续目标间保持进展并生成自然全身运动，现有方法无法同时保证执行进展与路线忠实运动。",
+      "提出LHNav异步系统，将导航分为Brain、Cerebellum和Brainstem三角色多速率协调，结合反馈实现任务规划与连续运动并行。",
+      "开发物理数据引擎生成碰撞感知路线的跟踪演示以训练Cerebellum，使LHNav在长时距任务达75.56%成功率，并成功实机部署。"
+    ],
     "authors": [
       "Xueyang Wang",
       "Zehong Shen",
@@ -2235,14 +2410,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 4
+    "score": 4,
+    "tags": [
+      "人形导航",
+      "多速率协调",
+      "VLA",
+      "物理数据引擎"
+    ]
   },
   {
     "id": "2611.12127",
     "title": "Lost in Rounding: bf16 Recurrent State Makes Hybrid Reasoning Models Think Longer",
-    "title_zh": null,
+    "title_zh": "bf16舍入误差导致混合推理模型思考更长",
     "abstract": "Hybrid reasoning models interleave attention with recurrent mixers such as Mamba-2 and Gated DeltaNet, whose state is cached between decoding steps. Prior work showed that storing this state in FP16 or INT8 with round-to-nearest (RTN) makes Mamba-2 and GDN hybrids more verbose, and that stochastic rounding (SR) fixes it. We study the other 16-bit format that serving engines expose, bf16, on six open hybrid reasoning models and 590 competition-math problems. With bf16 RTN state, five of six models reason longer (geometric-mean length 1.07x to 1.27x; also under greedy decoding in the two models tested) and hit the 32K token cap more often. On Qwen3.5-9B, cap hits rise from 118 to 223 and accuracy falls from 85.6% to 70.8%. On LiveCodeBench, both models tested also reason longer and lose 12.6 and 13.4 points of pass@1. Rerunning the capped items with a 128K budget halves the accuracy gap but does not close it (93.6% vs. 86.6%): bf16 runs that never finish are twice as common, and 85% of them are exact repetition loops. On Nemotron-Nano-9B-v2, by contrast, 30 of 31 extra caps finish at 128K, so the cost there is mostly extra tokens (exploratory). Same-width bf16 SR removes the length increase in four of five affected models, restores Qwen3.5-9B to 87.6% and brings code length and pass@1 near FP32 levels, so the failure is mostly rounding bias, not missing resolution. With an integer-hash random generator, SR on Qwen3.5-9B matches FP32 on cap hits and accuracy (113 vs. 118; 85.6% for both) at the memory and decoding speed of bf16 RTN. In the Nemotron-Nano-v2 lineage, SR on 25% of heads (an intermediate-decay band) removes the effect, while random heads and the top teacher-forced-KL octiles do not; in Nemotron-3 and Qwen3.5-9B the effect is spread across heads. We recommend that evaluations of hybrid models report the state dtype, cap rate and output length alongside accuracy.",
-    "summary_zh": null,
+    "summary_zh": [
+      "混合推理模型使用bf16 RTN缓存循环状态时，会因舍入偏差导致推理变长且更易触及token上限，降低准确率。",
+      "使用bf16随机舍入（SR）可消除推理变长问题，恢复模型准确率至接近FP32水平，证明该问题源于舍入偏差。",
+      "采用整数哈希随机数生成器的SR，能在保持bf16内存与速度的同时，使模型表现与FP32完全一致。"
+    ],
     "authors": [
       "Yuchuan Weng",
       "Xin Chen",
@@ -2264,14 +2449,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "混合推理模型",
+      "bf16舍入",
+      "随机舍入",
+      "循环状态"
+    ]
   },
   {
     "id": "2611.12125",
     "title": "CARE-PO: Controllable Tool-Call Efficiency for LLM Agents",
-    "title_zh": null,
+    "title_zh": "CARE-PO：LLM Agent的可控工具调用效率优化",
     "abstract": "External tool calls are a major running cost of an LLM agent, while its training objectives align almost exclusively with task completion. In a step-level diagnosis of Qwen3.5 trajectories at two model sizes on GAIA, a long-horizon tool-use benchmark, we find that most contain removable calls, at a similar rate at both sizes. Some methods add an efficiency reward to the objective to reduce the call count, but introduce problems of their own: the anchor they price calls against is computed from the policy's own rollouts (e.g., the group's shortest correct rollout) and so moves with the policy; training can drift toward a collapsed policy that issues no tool call at all, a degeneracy seen in published reports and in our 27B baseline; and a training run delivers a single operating point, so the user cannot trade efficiency against capability. We present CARE-PO (Controllable Anchored Relative Efficiency Policy Optimization) to mitigate these problems. The efficiency reward prices calls against a reference budget anchored to the task's own difficulty and fixed before training. Injecting a successful trajectory from the training data into each online GRPO rollout group and charging for evidence a trajectory never gathers ease the drift toward a collapsed call count. Shaping the cost curve by an effort tag in the prompt yields an efficiency and a capability operating point from a single training run. On GAIA, five of the six operating points across three model sizes improve on their base model in success rate and call count at once. On four held-out multi-hop benchmarks the result is size-dependent: at 27B and 4B success rate is held or raised at a lower call count, while at 9B both operating points trade success rate for fewer calls. The call count remains well above zero throughout training at all three sizes.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM Agent工具调用成本高，现有加效率奖励的方法因锚点随策略漂移，易导致策略坍缩至零调用，且无法权衡效率与能力。",
+      "提出CARE-PO，以任务难度固定参考预算计算效率奖励，注入成功轨迹并收取未收集证据的费用，缓解策略坍缩。",
+      "通过提示中的effort标签控制成本曲线，单次训练即可输出多个效率与能力权衡点；实验表明多数权衡点可同时提升成功率和调用效率。"
+    ],
     "authors": [
       "Xiaoyang Ye",
       "Xiao Yao",
@@ -2299,14 +2494,24 @@
     "matched": [
       "LLM agent"
     ],
-    "score": 16
+    "score": 16,
+    "tags": [
+      "LLM Agent",
+      "工具调用效率",
+      "策略优化",
+      "强化学习"
+    ]
   },
   {
     "id": "2611.12122",
     "title": "System Optimizations for Cost-Efficient Agent Harnesses",
-    "title_zh": null,
+    "title_zh": "面向低成本智能体框架的系统优化",
     "abstract": "AI agent harnesses play the critical role of providing LLMs with an interface to a computing environment. Recent studies show that AI agents' task-execution accuracy depends mostly on the LLM used, while harness-side variances such as system prompts or tools have minimal impact. Rather, such harness-side variances show a larger impact on the cost of agent executions, achieving cost reductions up to 2.6 times on the same model and task. To further explore these harness-side cost optimization opportunities, we analyze the cost accumulation patterns across various agent traces and identify system opportunities to reduce token use and LLM calls without modifying the model or affecting task accuracy. Based on this analysis, we design Agency, a harness interposition platform that provides a unified abstraction and allows easy and portable implementation of harness-side system optimizations on existing off-the-shelf harnesses such as Claude Code or OpenAI Codex. Using Agency, we implement proof-of-concept optimization techniques based on our analysis and achieve cost reductions up to 35% across various real-world benchmarks on existing harnesses without compromising accuracy.",
-    "summary_zh": null,
+    "summary_zh": [
+      "AI agent的准确率主要取决于LLM，而框架侧差异对准确率影响极小，却显著影响执行成本。",
+      "分析agent轨迹的成本累积模式，识别出无需修改模型即可减少token和LLM调用的系统优化机会。",
+      "设计Agency平台实现框架侧优化，在不损失准确率的前提下，实际基准测试中最高降低35%成本。"
+    ],
     "authors": [
       "Jongseok Park",
       "Jiaxiang Yu",
@@ -2334,14 +2539,24 @@
       "agent harness",
       "AI agent"
     ],
-    "score": 20
+    "score": 20,
+    "tags": [
+      "智能体框架",
+      "成本优化",
+      "LLM调用"
+    ]
   },
   {
     "id": "2611.12120",
     "title": "SCALE: Small-Model-First Concept Abstraction with LLM-Guided Experience Internalization",
-    "title_zh": null,
+    "title_zh": "SCALE：小模型优先的概念抽象与LLM引导的经验内化",
     "abstract": "Autonomous agents must continually acquire reusable knowledge from experience without relying on costly large language model (LLM) reasoning for every decision. However, existing experience-based approaches often struggle to transform accumulated observations and reasoning into compact knowledge that lightweight models can independently apply. This paper proposes SCALE, a small-model-first framework that integrates selective LLM reasoning, experience-driven concept abstraction, and knowledge internalization. A lightweight model handles routine predictions, while prediction errors and accumulated cross-episode evidence selectively trigger LLM reflection. The LLM analyzes relevant historical experiences, generates positive and negative counterfactual examples, and proposes reusable concept hypotheses. Independently validated concepts are progressively incorporated into hierarchical neural representations, enabling lightweight models to exploit increasingly abstract knowledge. Meanwhile, mastered experiences are excluded from active memory while their original records remain available in a complete archive. Experiments across ten random seeds show that historical recall improves held-out accuracy from 87.11% to 98.28%, hierarchical concept knowledge increases difficult-case accuracy from 55.33% to 66.47%, and abstract archiving reduces active experience records from 6,000 to 1,528.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有经验方法难以将推理转化为轻量模型可用的紧凑知识，导致决策过度依赖LLM推理。",
+      "提出SCALE框架：轻量模型处理常规预测，错误触发LLM反思，生成反事实示例并提出概念假设。",
+      "验证的概念渐进内化至层级神经表征，使轻量模型利用抽象知识，已掌握经验归档以缩减活跃记忆。",
+      "实验表明该方法显著提升泛化与难例准确率，并将活跃经验记录从6000降至1528。"
+    ],
     "authors": [
       "Hong Su"
     ],
@@ -2362,14 +2577,23 @@
       "autonomous agent",
       "reasoning"
     ],
-    "score": 12
+    "score": 12,
+    "tags": [
+      "自主智能体",
+      "经验内化",
+      "概念抽象"
+    ]
   },
   {
     "id": "2611.12114",
     "title": "OGDA: Ontology-Grounded Data Agents for Reliable Analysis over Heterogeneous Data Lakes",
-    "title_zh": null,
+    "title_zh": "基于本体的数据代理：异构数据湖的可靠分析",
     "abstract": "Full-pipeline data analysis over real-world data lakes requires LLM agents to locate and integrate information across large collections of tables with different schemas. Existing data agents follow task-specific exploration, which exhausts the context window in massive lakes. As the context fills, the agent's reasoning degrades, leading it to locate and process incorrect data files. These errors propagate into the final answer. To overcome these limitations, we introduce Ontology-Grounded Data Agent (OGDA), which utilizes a compact ontology to reduce exploration overhead and constrain data processing. OGDA constructs the ontology through agentic hypothesis testing. At each step, a proposer agent induces schemas, concepts, and relations from raw sources, and a verifier checks each proposal against the underlying data. During task execution, the ontology serves as a representation of the data lake for the agent to explore. Every data-processing action is constrained by a task graph, which the agent can extend only after observing the semantic meaning of the data. Across KramaBench and DiscoveryBench with three LLM backbones, OGDA outperforms the strongest baselines by up to 10.82 points. These results suggest that explicitly modeling the data lake is a key step toward reliable end-to-end data agents.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有数据代理在异构数据湖中按任务探索，易耗尽上下文窗口并导致推理降级与错误传播。",
+      "提出OGDA，通过智能体假设测试构建紧凑本体，将其作为数据湖表示以降低探索开销。",
+      "数据处理受任务图约束，仅在观测语义后扩展；实验表明OGDA较最强基线提升达10.82分。"
+    ],
     "authors": [
       "Boyi Zhang",
       "Hong Ting Tsang",
@@ -2398,14 +2622,24 @@
       "LLM agent",
       "reasoning"
     ],
-    "score": 13
+    "score": 13,
+    "tags": [
+      "数据代理",
+      "本体构建",
+      "数据湖",
+      "LLM"
+    ]
   },
   {
     "id": "2611.12112",
     "title": "LiveWorkspace: Externalizing Visual Understanding as Persistent Shared State for Screenshot-to-Code Agents",
-    "title_zh": null,
+    "title_zh": "LiveWorkspace：将视觉理解外化为截图转代码Agent的持久共享状态",
     "abstract": "Screenshot-to-Code requires coding agents to sustain visual understanding across code generation, execution, and revision. We introduce LiveWorkspace, a visual coding harness that externalizes this understanding as Shared Visual State (Shared VS), an implementation-independent representation of visual hierarchy, node attributes, and layout relations. LiveWorkspace constructs and retains \\textit{Target} from screenshots and recovers \\textit{Current} from browser execution in the same schema. Structured Diff and implementation bindings guide code modifications; user edits update \\textit{Target} and reuse the alignment loop. Using GPT-5.2 for both methods, LiveWorkspace improves end-to-end Avg by 1.8 points on Design2Code and 2.0 on ScreenBench over a control with matched model-call counts and stagewise budget limits. Further experiments demonstrate reuse of constructed Shared VS across coders and improvements in iterative repair. LiveWorkspace also achieves 93.0\\% edit success across 100 controlled editing cases. These findings support treating visual understanding as a persistent shared working state throughout code generation, execution, and modification.",
-    "summary_zh": null,
+    "summary_zh": [
+      "截图转代码Agent难以维持跨代码生成与修改的视觉理解，提出LiveWorkspace将其外化为持久共享视觉状态。",
+      "LiveWorkspace从截图与浏览器执行中提取并统一视觉层级与布局，通过结构化差异与绑定指导代码修改。",
+      "实验表明该方法在两个基准上提升端到端性能，支持跨编码器复用与迭代修复，且编辑成功率达93.0%。"
+    ],
     "authors": [
       "Shijun Xiao",
       "Zonghui Yang",
@@ -2429,14 +2663,23 @@
     "matched": [
       "coding agent"
     ],
-    "score": 7
+    "score": 7,
+    "tags": [
+      "截图转代码",
+      "共享视觉状态",
+      "编码Agent"
+    ]
   },
   {
     "id": "2611.12095",
     "title": "From Fluent Text to Ontology-Compatible Definitions: A Quality-Control Agentic Workflow",
-    "title_zh": null,
+    "title_zh": "从流畅文本到本体兼容定义：质量控制智能体工作流",
     "abstract": "Biomedical ontologies are structured knowledge systems that must evolve continuously to represent newly emerging knowledge, but their manual maintenance remains time-consuming and laborintensive. Textual definitions are especially costly because they must be readable to humans and compatible with controlled entities, relations, and logical constraints. Large language models (LLMs) offer a promising way to assist ontology engineering tasks, including definition generation. However, textual plausibility does not guarantee knowledge-system compatibility. A generated definition may be fluent and close to a reference definition, yet still fail to ground its implied entities or violate ontology-level constraints. Directly inserting such definitions into ontology libraries may therefore introduce entity-level hallucinations and logical inconsistencies. To address this problem, we propose two structured-knowledge incompatibility metrics, Entity Error Rate (EER) and Logical Inconsistency Rate (LIR), to quantify entity grounding and logical consistency for LLM-generated ontology definitions. We further develop an agentic quality-control (QC) workflow that treats definition generation as an iterative process rather than a direct decoding step: it generates definitions, extracts axioms, checks entity existence and logical consistency, and uses the resulting diagnostics to drive repair loops. Comprehensive experiments on Disease Ontology, Uberon Ontology, and Uberon-ConstraintStress demonstrate that EER and LIR complement conventional reference-based metrics by evaluating whether generated content can be grounded and checked inside the target ontology. The workflow effectively decreases EER while maintaining strong conventional text-generation performance. LIR further exposes sparse ontology-level logical failures that are invisible to text similarity metrics, although their repair remains limited.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM生成的本体定义可能流畅但违反逻辑约束，直接引入会产生实体幻觉与不一致。",
+      "提出实体错误率与逻辑不一致率两个指标，量化评估生成定义的实体落地与逻辑一致性。",
+      "开发迭代式质量控制智能体工作流，通过生成、提取公理、检查与修复循环有效降低实体错误率。"
+    ],
     "authors": [
       "Kun Feng",
       "Chenchen Chu",
@@ -2463,14 +2706,24 @@
     "matched": [
       "agentic workflow"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "本体工程",
+      "智能体工作流",
+      "质量控制",
+      "大语言模型"
+    ]
   },
   {
     "id": "2611.12094",
     "title": "Introduction to genetic simulation for animal breeding and genetics",
-    "title_zh": null,
+    "title_zh": "动物育种与遗传学中的遗传模拟导论",
     "abstract": "This article introduces genetic simulation for animal breeding and genetics. We will discuss some of the reasons to perform simulations in science, terms used to describe different types of genetic simulations, examples of common simulation approaches and tools that implement them, and how to get started with simulation in your research. The three simulation programs discussed are the population genetic coalescent simulator msprime, the evolutionary forward-in-time simulator SLiM and the quantitative genetic simulator AlphaSimR, with an emphasis on the latter as it is the most important for animal breeding and genetics. An example is also given about how to write simple population genetic simulations from scratch in a scripting language like R. Small code examples are provided.",
-    "summary_zh": null,
+    "summary_zh": [
+      "为解决动物育种等领域缺乏遗传模拟入门指导的问题，本文系统介绍了模拟的科学动机、术语分类及常用工具。",
+      "重点剖析了群体遗传模拟器msprime、正向时间模拟器SLiM和数量遗传模拟器AlphaSimR，强调AlphaSimR对动物育种最关键。",
+      "为降低模拟入门门槛，展示了如何使用R等脚本语言从零编写简单的群体遗传模拟，并提供了代码示例。"
+    ],
     "authors": [
       "Martin Johnsson"
     ],
@@ -2487,14 +2740,23 @@
     "comment": "",
     "journal_ref": "",
     "matched": [],
-    "score": 0
+    "score": 0,
+    "tags": [
+      "动物育种",
+      "遗传模拟",
+      "AlphaSimR"
+    ]
   },
   {
     "id": "2611.12092",
     "title": "CRAFT-AI: Capability and Requirement Alignment for Flexible Manufacturing through Agentic AI",
-    "title_zh": null,
+    "title_zh": "CRAFT-AI：基于智能体的柔性制造能力与需求对齐",
     "abstract": "One of the fundamental needs for reaching resilient production infrastructure is flexible manufacturing, which requires translating changing production requirements into implementable system configurations. This paper introduces \\textbf{CRAFT-AI}, an agentic AI approach combining natural language (NL) requirement interpretation, Asset Administration Shell (AAS)-based capability descriptions, and reusable engineering knowledge from existing manufacturing configurations. A tool-using AI agent matches requirements with available capabilities and reference implementations to generate manufacturing scenes and corresponding AAS instances. The approach is demonstrated using a Factory I/O prototype with twelve reference scenes and five illustrative manufacturing tasks of varying complexity, providing an initial feasibility assessment of the proposed AAS-enabled, system-level generative engineering approach. For the four valid user task descriptions, proper requirements, correct references to the relevant engineering knowledge, correct components and lastly a valid Factory I/O scene are generated. For the task with missing engineering knowledge and a wrong sensor selection, the user is informed about which requirements of the scene generation lack domain knowledge and also which sensor is not compatible with the selected raw material by the user with link to the related documentation. After fixing the task description, the correct scene is seamlessly generated. \\textbf{CRAFT-AI} highlights the importance of safeguards for risk perception and communication in foundation model-driven solutions.",
-    "summary_zh": null,
+    "summary_zh": [
+      "柔性制造需将多变需求转为系统配置，为此提出CRAFT-AI方法，结合自然语言解释、AAS能力描述与复用工程知识，实现需求到配置的自动生成。",
+      "该方法利用工具调用AI agent匹配需求与能力，生成制造场景及AAS实例。在Factory I/O原型中验证，对有效任务均成功生成正确场景。",
+      "对缺失知识或错误选件的任务，系统能识别不兼容项并提示用户；修正后可无缝生成正确场景，凸显了基础模型方案中风险感知与安全防护的重要性。"
+    ],
     "authors": [
       "Kiavash Fathi",
       "Hans Wernher van de Venn"
@@ -2514,14 +2776,24 @@
     "matched": [
       "AI agent"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "柔性制造",
+      "智能体",
+      "资产管理壳",
+      "需求对齐"
+    ]
   },
   {
     "id": "2611.12088",
     "title": "Zero-Search Reinforcement Learning for Slay the Spire 2 with Failure-Driven Restarts",
-    "title_zh": null,
+    "title_zh": "杀戮尖塔2零搜索强化学习与失败驱动重启",
     "abstract": "Slay the Spire 2 (STS2) is a deck-building roguelike in which a winning run at the highest difficulty takes several hundred decisions, and most losses happen in late boss fights that a learner seldom reaches. We train agents that choose every action with one forward pass of a 6.6M-parameter entity transformer, without lookahead. Training and evaluation run the game's own compiled assembly (v0.107.1) in a headless .NET host. The host replays a run exactly from its seed and actions, so training episodes can restart from states the learner has visited, and a failure-driven curriculum allocates these restarts in proportion to where complete runs are lost. On 12,800 held-out games at Ascension 10 (A10), the released policies win 8.05% averaged over the five characters (Ironclad 15.6%, Regent 12.5%), and AlphaSpire's released networks used without search win 0.55% on a common panel. Longer A10 training raised Ironclad from 12.4% to 15.6% and Defect from 3.0% to 8.1% on these games. At Ascension 0 the released policies win 80.2%, level with the 80.3% that the tree-search agent Spire Mentor reports, while Mentor leads by 5 to 8 points from A4 upward. Run in our host on the same 2,000 A10 games, Mentor's search wins 8.8% against 8.2% for our policies, which need 21-27 ms per decision on one CPU core. GPT-6 Astra at maximum reasoning won none of 11 A10 games through our text interface. In a controlled study of 18 training runs from six random initializations, failure-driven allocation exceeds uniform restart allocation on each of three Regent initializations, by 3.6 percentage points on average, while the Silent effect is small and changes sign. Code, trained policies, an in-game mod and the records behind every table are at https://github.com/HalfVulpes/sts2ai.",
-    "summary_zh": null,
+    "summary_zh": [
+      "卡牌游戏STS2高难度下失败多发生于后期，导致智能体难以学习，需解决长序列决策与后期状态稀疏问题。",
+      "采用6.6M参数实体Transformer单步前向推理决策，并引入失败驱动重启机制，按失败比例分配重启以强化后期状态学习。",
+      "该方法在A10难度下胜率8.05%，超越无搜索基线；失败驱动重启在Regent上较均匀重启平均提升3.6个百分点。"
+    ],
     "authors": [
       "Xiangqin Chen",
       "Zhengxuan Xie"
@@ -2542,14 +2814,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 8
+    "score": 8,
+    "tags": [
+      "强化学习",
+      "卡牌游戏AI",
+      "Transformer"
+    ]
   },
   {
     "id": "2611.12087",
     "title": "Compass 1: Towards Open-World and Persistent Embodied Navigation from Monocular RGB Videos",
-    "title_zh": null,
+    "title_zh": "Compass 1：面向开放世界与持久具身导航的单目视频基础模型",
     "abstract": "Embodied navigation requires agents to achieve persistent spatial awareness and long-horizon execution stability in open-world environments. However, existing navigation architectures struggle to sustain both capabilities, remaining effective only over a handful of recent frames. We present Compass 1, the first embodied navigation foundation model to unify language understanding and video generation while enabling memory backtracking through nearly 2mins of visual history. Without altering the underlying architecture, we introduce History Representation, which integrates sparse visual keyframes with an explicit History Representation Map to preserve long-term spatiotemporal context. To effectively leverage this history, we further introduce History Utilization, a structured VQA supervision protocol comprising three categories: task-stage grounding, exploration consistency, and spatiotemporal target retrieval, enabling map-grounded reasoning and stable persistent long-horizon navigation. To fuel this system, we establish a complete annotation pipeline for monocular RGB videos and open-source a massive dataset featuring over 500 hours of high-quality real-world interactions and over 2,000 hours of annotated web videos. Trained mainly on the distribution of 1m height camera, Compass 1 generalizes seamlessly across diverse embodiments and scenarios, ranging from indoor environments to pedestrian-dense streets, spanning wheeled robot at 0.35m, quadruped dog at 0.5m, humanoid at 0.85m, and aerial drone at 1.5m. Compass 1achieves a dominant overall success rate of 79.4% across open-world evaluations, compared to 17.8% for the strongest baseline. It demonstrates exceptional zero-shot execution exceeding 90% on foundational tasks, a 250% boost in exploration, and an unparalleled leap from 0% to 58% in challenging persistent history backtracking.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有具身导航架构难以在开放世界中维持长期空间感知与执行稳定性，仅能处理少量近期帧。",
+      "提出Compass 1模型，引入历史表征与历史利用机制，整合稀疏关键帧与显式地图，实现近2分钟视觉记忆回溯。",
+      "构建超500小时真实交互与2000小时网络视频标注数据集；模型在开放世界评测中成功率79.4%，且零样本泛化与探索能力大幅提升。"
+    ],
     "authors": [
       "Hai Zhang",
       "Siqi Liang",
@@ -2580,14 +2861,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 7
+    "score": 7,
+    "tags": [
+      "具身导航",
+      "长时序记忆",
+      "开放世界",
+      "视频数据集"
+    ]
   },
   {
     "id": "2611.12085",
     "title": "Next-Generation Segmentation in Radiotherapy: A Narrative Review from Atlas-Based Methods to Agentic Vision-Language Models",
-    "title_zh": null,
+    "title_zh": "放疗分割综述：从图谱法到智能体视觉语言模型",
     "abstract": "Precise segmentation of target volumes and organs at risk is an essential prerequisite for modern, high-precision radiation therapy. However, this task has traditionally been time-consuming and subject to high interobserver variability. Motivated by these limitations, more advanced and novel approaches to automating this task have been developed over the past two decades. This narrative review highlights representative milestones, with a focus on the most recent developments. These approaches include atlas-based label propagation, convolutional architectures, promptable foundation models, and, most recently, vision-language models (VLMs), which integrate clinical text with volumetric segmentation. Each methodological generation has addressed limitations of its predecessor while introducing new ones. A substantial gap remains between research progress and clinical deployment, as routine workflows continue to be dominated by atlas-based and narrow task-specific deep-learning tools, which remain strong baselines in geometric overlap metrics but are highly rigid in terms of application, versatility, portability, and interpretability. As contouring systems further grow in complexity, conventional geometric overlap metrics become insufficient, motivating evaluation paradigms that incorporate surface-based, dosimetric, and prompt-adherence assessment. Emerging agentic architectures that combine large language models, retrieval-augmented generation, and vision-language segmentation modules are leading towards more flexible, guideline-aware, interactive contouring workflows. These systems could automate flexible and interpretable knowledge-based contouring and actively support the clinical reasoning underlying target volume definition.",
-    "summary_zh": null,
+    "summary_zh": [
+      "放疗靶区与危及器官分割耗时且观察者差异大，需发展自动化方法，历经图谱法、CNN到可提示基础模型与VLM的演进。",
+      "研究进展与临床应用脱节，现有刚性模型在泛化与可解释性上受限，促使评估范式向表面、剂量及提示遵循度扩展。",
+      "结合LLM、RAG与VLM的智能体架构正引领交互式轮廓生成，有望实现可解释的知识驱动分割并辅助临床推理。"
+    ],
     "authors": [
       "Josef A. Buchner",
       "Richard Osuala",
@@ -2613,14 +2904,23 @@
       "reasoning",
       "retrieval-augmented generation"
     ],
-    "score": 6
+    "score": 6,
+    "tags": [
+      "放疗分割",
+      "视觉语言模型",
+      "智能体架构"
+    ]
   },
   {
     "id": "2611.12083",
     "title": "SWE-Time: Benchmarking Temporal Repository Understanding",
-    "title_zh": null,
+    "title_zh": "SWE-Time：时序代码仓库理解基准测试",
     "abstract": "Repository-level code-understanding benchmarks have progressively expanded the spatial scope of reasoning, from local code to entire repositories, while largely treating each repository as a static snapshot. However, how models reason about repository evolution over time remains largely unexplored. We introduce SWE-Time, a benchmark for temporal repository understanding that makes repository evolution itself the reasoning target. SWE-Time evaluates two complementary temporal directions: retrospective understanding of repository evolution through historical regression analysis and prospective understanding of intended changes from pre-change repository states. To enable realistic yet reliable evaluation in these settings, we introduce the RealWorld-to-Verifiable Construction Framework, which transforms real-world developer queries and historical evidence into verifiable evaluation tasks. We evaluate 15 coding agents on 1,661 cases from 65 GitHub repositories. Within Claude Code, Claude Opus 4.8 achieves the highest SWE-Time Avg. of 61.9, leaving substantial headroom. Controlled analyses highlight the importance of historical code evidence and developer intent, while consistent reasoning across repository states remains challenging. These results highlight repository evolution as a distinct and challenging dimension of code understanding.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有代码理解基准多视仓库为静态快照，缺乏对代码随时间演化的推理探索。",
+      "提出SWE-Time基准，通过历史回归分析与预期变更理解，评估模型对仓库演化的时序推理能力。",
+      "实验显示最强模型仍有较大提升空间，证实仓库演化是代码理解中极具挑战的独立维度。"
+    ],
     "authors": [
       "Shijun Xiao",
       "Xinrong Chen",
@@ -2644,14 +2944,24 @@
       "reasoning",
       "coding agent"
     ],
-    "score": 9
+    "score": 9,
+    "tags": [
+      "代码理解",
+      "基准测试",
+      "代码演化",
+      "Coding Agent"
+    ]
   },
   {
     "id": "2611.12079",
     "title": "Correct First, Fast Second: What a Local 7B Code Model Can and Cannot Do for GPU Kernel Optimization",
-    "title_zh": null,
+    "title_zh": "本地7B代码模型在GPU内核优化中的能力与局限",
     "abstract": "We study how much the interaction strategy around a fixed, locally hosted 7B-parameter code model (Qwen2.5-Coder-7B-Instruct) affects its ability to replace PyTorch operators with custom CUDA kernels. On 30 KernelBench tasks (levels 1-3, first 10 each, evaluated on a V100), we compare four regimes of increasing structure: zero-shot prompting, profiling-guided prompting, iterative refinement on execution feedback, and a multi-agent loop (analysis, retrieval, generation, evaluation, feedback triage) in which the same model fills four roles around a non-LLM evaluator. Three findings stand out. (1) Correctness, not speed, is the binding constraint: even correct generated kernels average 0.97-0.99x the speed of eager PyTorch, because a 7B model cannot out-write cuBLAS/cuDNN on dense GEMM and convolution; the only real wins are fused memory-bound epilogues. (2) The best strategy depends on difficulty: profiling-guided prompting is strongest overall (43% correct, 27% faster than baseline), but the agent loop is the only method that solves any level-2 fusion problem (3/10 vs. 0/10 for all others). (3) Naive agentic scaffolding is actively harmful: our first agent scored 3% correct, below zero-shot's 30%, and the decisive repairs were matching the agent's ambition to the model's competence and spending compute on best-of-n sampling under a real execution oracle (3% to 33% correct from n=1 to n=8), not on more reasoning steps.",
-    "summary_zh": null,
+    "summary_zh": [
+      "探究不同交互策略对本地7B代码模型替换PyTorch算子为自定义CUDA内核的影响，发现正确性而非速度是主要瓶颈。",
+      "性能引导提示整体最优（43%正确且27%加速），但多智能体循环是唯一能解决Level-2融合问题的策略。",
+      "朴素智能体架构有害，关键修复在于匹配智能体野心与模型能力，并通过执行预言机进行best-of-n采样。"
+    ],
     "authors": [
       "Jui-Chien Tsou",
       "Po-Yi Wu"
@@ -2672,14 +2982,23 @@
       "reasoning",
       "multi-agent"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "GPU内核优化",
+      "代码模型",
+      "智能体策略"
+    ]
   },
   {
     "id": "2611.12068",
     "title": "MIRIX-2.0: Multi-Agent Memory System",
-    "title_zh": null,
+    "title_zh": "MIRIX-2.0：多智能体记忆系统",
     "abstract": "Long-term memory lets LLM agents personalize, stay consistent, and reuse what worked before. Parametric memories need training, consolidation can lose details for good, and keeping every record leaves a growing store to search. We present MIRIX-2.0, a multi-agent memory system designed to be practical, accurate, and efficient at once. It is the most accurate of the compared systems on four of five QA benchmarks. It reaches 91.4% on LoCoMo and 72.6% on LongMemEval-S, where it leads the strongest baseline by 14.3 points, and with AutoDream disabled it gains 31.0 and 22.0 points over HyperMem on single-hop and multi-hop document QA. As procedural memory, it yields the highest mean success among the compared memory methods on ALFWorld and WebShop and reaches 49.2% on MetaClaw-Bench, against 44.0% for MetaClaw's skill library. Six typed memory agents keep complete records as the system of record, and a provenance hypergraph indexes episodic and semantic records with n-ary frames that cite their rows. Retrieval runs under explicit budgets, so the evidence a question inspects does not grow with the history. AutoDream merges duplicate anchors outside the write path without rewriting any record, and it distills task sessions into skills. With AutoDream disabled, MIRIX-2.0 answers faster than HyperMem on all five timed benchmarks. It needs no fine-tuning, runs with closed and open models, and its code is public.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有LLM智能体记忆面临训练开销、细节丢失或检索膨胀问题，提出MIRIX-2.0系统，实现高效准确的多智能体记忆管理。",
+      "引入超图索引与预算检索控制证据规模，AutoDream去重并提取技能；无需微调，检索开销不随历史增长。",
+      "在多项QA与程序记忆基准上准确率领先，如LongMemEval-S超基线14.3分，且比HyperMem更快。"
+    ],
     "authors": [
       "Wei-Chieh Huang",
       "Weizhi Zhang",
@@ -2703,14 +3022,23 @@
       "LLM agent",
       "multi-agent"
     ],
-    "score": 20
+    "score": 20,
+    "tags": [
+      "多智能体",
+      "长期记忆",
+      "大语言模型"
+    ]
   },
   {
     "id": "2611.12066",
     "title": "Weight-Space Programming for Medical Imaging: Do We Still Need Training Data?",
-    "title_zh": null,
+    "title_zh": "医学影像的权重空间编程：我们还需要训练数据吗？",
     "abstract": "Can a large language model (LLM) write the parameters of a medical image classifier from medical knowledge alone, without any training data? Such classifiers normally require labelled images, which are costly and often unavailable. We investigate this question through weight-space programming (WSP), in which an LLM writes or adapts the weights and biases of a neural network directly, without optimisation on training data. Claude Opus 5.5 and GPT-6 Astra each generate the parameters of a small LeNet-style CNN in a single reply, without tool use and without access to any image. We compare these networks against zero-shot MedSigLIP and against the same architecture trained on labels using the Adam optimiser, across 7 classification tasks in four modalities: chest X-ray, breast ultrasound and abdominal CT (all from MedMNIST), and pelvic MRI (SynthUterus). The LLM-written networks perform above chance on all six MedMNIST tasks, with a mean test AUC of 0.719 for Opus and 0.711 for Astra. Both models outperform MedSigLIP on 5 of 6 tasks while using more than 10,000 times fewer parameters. However, the same network trained with Adam on only 256 labelled images achieves a higher AUC on every MedMNIST task (mean AUC 0.828). On SynthUterus, Opus attains an AUC of 0.764, whereas Astra falls below chance (AUC 0.136) owing to a systematic error. These results show that LLMs can write functional medical classifiers, but that they do not yet replace training data. We release the protocol, logs and all generated weights at https://github.com/MaximilianLindholz/weight-space-programming-medical.",
-    "summary_zh": null,
+    "summary_zh": [
+      "医学图像分类通常依赖昂贵的标注数据，本研究探索无训练数据时，仅靠医学知识让LLM直接生成网络参数的可行性。",
+      "采用权重空间编程（WSP）方法，让Claude Opus和GPT-6 Astra直接写出小型CNN的权重，无需优化或图像输入。",
+      "LLM生成的分类器在多数任务上优于零样本MedSigLIP且参数极少，但仍不及少量数据训练的模型，表明其有效但暂无法替代训练数据。"
+    ],
     "authors": [
       "Maximilian Lindholz",
       "Richard Ruppel",
@@ -2740,14 +3068,23 @@
     "matched": [
       "tool use"
     ],
-    "score": 6
+    "score": 6,
+    "tags": [
+      "医学影像",
+      "权重空间编程",
+      "大语言模型"
+    ]
   },
   {
     "id": "2611.12048",
     "title": "Evaluating AI Agents for Industrial-Level Chip Floorplanning: A Framework and Empirical Study",
-    "title_zh": null,
+    "title_zh": "工业级芯片布图规划AI智能体评估框架与实证研究",
     "abstract": "Floorplanning is an early step in turning a logical circuit into a physical chip: it positions large circuit modules and constrains the space available for subsequent logic placement and wiring. These decisions affect congestion and timing, but their physical consequences emerge through downstream implementation. For AI agents, the task requires translating engineering constraints into spatial decisions whose quality cannot be judged by successful tool execution alone. We present an evaluation framework that connects submitted layouts to a prescribed downstream implementation flow, checks geometric validity, measures physical quality, and reports resource use. On one industrial design whose 99 macros occupy approximately 71\\% of a fixed L-shaped layout region, we compare our specialized system Nova-SI with general-purpose engineering agents and agents restricted to file access, obtaining complete physical measurements for 39 layout outputs. Under our 0--100 composite quality score, Nova-SI achieves a mean of 57.97 without online feedback from the prescribed power-grid and placement evaluation, compared with 31.17 for the strongest measured general-purpose configuration, GPT-6 Astra. The difference is supported by raw congestion and timing measurements and persists across scoring-sensitivity checks. Layout-level analysis further shows that similar global utilization can conceal substantially different local congestion. Together, the protocol and case study assess agents through the physical consequences of their delivered layouts and provide evidence about system performance on this industrial instance.",
-    "summary_zh": null,
+    "summary_zh": [
+      "芯片布图规划需将工程约束转化为空间决策，仅靠工具执行成功无法判断质量，需评估下游物理后果。",
+      "提出评估框架，将布局连接至下游实现流程，检查几何有效性、测量物理质量并报告资源使用情况。",
+      "实证表明专用系统Nova-SI综合得分57.97，远超最强通用配置GPT-6 Astra的31.17，证明专用系统优势。"
+    ],
     "authors": [
       "Nova-Silicon Team"
     ],
@@ -2766,14 +3103,23 @@
     "matched": [
       "AI agent"
     ],
-    "score": 16
+    "score": 16,
+    "tags": [
+      "芯片布图规划",
+      "AI智能体",
+      "评估框架"
+    ]
   },
   {
     "id": "2611.12024",
     "title": "FocusBranch: Combinatorial Branch-and-Bound for $\\ell_0$ Neural Network Robustness Verification",
-    "title_zh": null,
+    "title_zh": "FocusBranch：基于组合分支限界的ℓ0神经网络鲁棒性验证",
     "abstract": "Verifying the local robustness of neural networks under $\\ell_0$ perturbations is inherently combinatorial, as it must reason over all sparse subsets of $ε$ perturbed pixels. This paper presents FocusBranch, a combinatorial branch-and-bound framework for $\\ell_0$ robustness verification. The key insight is to make the $\\ell_0$-ball decomposable and branchable using a node abstraction, which consists of a focus pixel set $\\mathcal{S}$ and a level $l$, permitting at most $ε-l$ pixels outside $\\mathcal{S}$. This abstraction unifies two branching mechanisms: concrete nodes branch through upper shadows to fix additional perturbed locations, while super nodes branch through covering designs to cover many perturbation cases with fewer child nodes. FocusBranch proves node safety by concretizing linear relaxations over node-constrained $\\ell_0$-balls and recursively branches on unknown nodes. Rather than relying on a fixed verification plan, it samples nodes across levels to estimate safe rates and costs, then selects a starting level and branching strategy predicted to minimize verification time. Experiments on fully connected and convolutional classifiers for MNIST, Fashion-MNIST, and CIFAR-10 show that FocusBranch verifies $\\ell_0$ robustness effectively across architectures and outperforms state-of-the-art verifiers. The code is available at: https://github.com/simpl-group/FocusBranch.",
-    "summary_zh": null,
+    "summary_zh": [
+      "ℓ0扰动下的神经网络鲁棒性验证需遍历所有稀疏像素子集，具有内在组合爆炸问题。",
+      "提出FocusBranch框架，引入节点抽象统一具体节点与超级节点的分支机制，递归验证节点安全性。",
+      "实验表明，该框架能自适应选择验证策略，在多种架构上有效验证ℓ0鲁棒性并超越现有验证器。"
+    ],
     "authors": [
       "Renwei Deng",
       "Yang He",
@@ -2793,14 +3139,24 @@
     "comment": "Accepted to NeurIPS 2026. 32 pages, 11 figures, 6 tables",
     "journal_ref": "",
     "matched": [],
-    "score": 5
+    "score": 5,
+    "tags": [
+      "神经网络验证",
+      "鲁棒性",
+      "组合优化",
+      "分支限界"
+    ]
   },
   {
     "id": "2611.12014",
     "title": "Benchmarking language models and agents for scientific reasoning in evolving materials laboratories",
-    "title_zh": null,
+    "title_zh": "面向演进材料实验室的科学推理与智能体基准测试",
     "abstract": "Large language models and the multi-agent systems built around them could accelerate materials discovery by connecting scientific knowledge with experimental decisions. Existing benchmarks establish capabilities in domain knowledge, multimodal interpretation and scientific tool use. As language models increasingly support materials research workflows, their ability to distinguish closely related material states and reason accurately with quantitative evidence remains insufficiently evaluated. These abilities are essential for comparing material responses, assessing mechanisms and maintaining reliable judgements as experimental evidence accumulates. We introduce MatScope to evaluate three connected capabilities. M1 tests unaided, condition-specific reasoning through 200 tasks spanning ten research functions, using aluminium and high-entropy alloys as representative material systems. M2 tests agent-assisted transfer of related knowledge to unresolved materials questions. MatEvoBench-20 tests initial forecasts across scientific dependency chains and revisions of still-hidden responses as observations accumulate. Across eleven model deployments, including GPT-6 Astra and Claude Fable 5.1, given-input calculations and many physical explanations are handled well. Fine-grained response estimates, comparisons between similar states and quantitatively supported choices remain substantially weaker. Related literature improves selected estimates, while condition and baseline mismatches limit transfer. Progressive observations calibrate some downstream responses and destabilize earlier accurate predictions. MatScope establishes measurable targets for developing reliable scientific reasoning in future self-evolving materials laboratories and materials-aware world models.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有基准未充分评估LLM区分相近材料状态及定量推理的能力，提出MatScope评估框架。",
+      "MatScope含三部分：无辅助条件推理(M1)、智能体辅助知识迁移(M2)及依赖链预测与修正。",
+      "实验表明模型擅长计算与物理解释，但在细粒度估计、相似状态比较与定量选择上较弱。"
+    ],
     "authors": [
       "Xuyu Dong",
       "Yixuan Li",
@@ -2831,14 +3187,24 @@
       "reasoning",
       "multi-agent"
     ],
-    "score": 24
+    "score": 24,
+    "tags": [
+      "科学推理",
+      "材料发现",
+      "多智能体",
+      "基准测试"
+    ]
   },
   {
     "id": "2611.12012",
     "title": "Robust Domain-Mixture Scheduling for Multi-Teacher On-Policy Distillation",
-    "title_zh": null,
+    "title_zh": "多教师在线策略蒸馏的鲁棒域混合调度",
     "abstract": "Multi-teacher on-policy distillation (MOPD) merges the capabilities of multiple domain-expert teachers, such as mathematical reasoning, code generation, and instruction following, into a single compact student. Since all domains share a limited training budget, how to allocate it across domains directly determines the quality of distillation. Existing methods allocate the budget by each domain's learning progress, but offer no guarantee for lagging domains. We therefore introduce distributionally robust optimization (DRO) into MOPD to prioritize the worst-performing domain. However, the per-domain training signals are estimated from a few rollouts and are inherently noisy, so directly applying DRO mistakes noise for the worst case, lets occasional spikes hijack the budget, and protects inherently hard domains rather than truly regressing ones. To address these issues, we propose RDS-MOPD, which keeps the DRO objective and redesigns its three parts: it shifts the allocation only when differences clearly exceed the noise, bounds the influence of any single anomaly, and defines the worst case as the regression from each domain's own best level, all with theoretical guarantees. Experiments show that RDS-MOPD outperforms recent competing methods and ranks first on most mathematical reasoning, code generation, and instruction-following benchmarks.",
-    "summary_zh": null,
+    "summary_zh": [
+      "多教师在线策略蒸馏需将多领域能力融合至单一学生模型，现有按学习进度分配预算的方法无法保障落后域。",
+      "直接引入分布鲁棒优化（DRO）易受噪声干扰，误将噪声或固有难域视为最差情况，导致预算被异常劫持。",
+      "提出RDS-MOPD方法，改进DRO的三个部分以抗噪、限异常并按自身最优水平定义退步，在多数基准上排名第一。"
+    ],
     "authors": [
       "Yankai Chen",
       "Sida Lin",
@@ -2868,7 +3234,12 @@
     "matched": [
       "reasoning"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "知识蒸馏",
+      "分布鲁棒优化",
+      "多领域融合"
+    ]
   },
   {
     "id": "2611.11981",
