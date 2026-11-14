@@ -1,5 +1,362 @@
 [
   {
+    "title": "关于 DeepSeek 的 SuperAgent，以及我们的实践",
+    "link": "https://juejin.cn/post/7707090962476613641",
+    "published": "2026-11-14T11:44:41Z",
+    "source": "掘金热榜",
+    "summary": "本文摘自《Alibaba Cloud AI Agent Handbook》，项目地址： github.com/aliyun/ai-a… 阿里云 AgentCore 已支持 DeepSeek Harness 部署，加速企业生产化验证。 DeepSeek 的 SuperAgent 发布之后，行业内的普遍观点是 Agent 的设计基本收敛，对于我们也是一样，本文除介绍 DeepSeek…",
+    "categories": [],
+    "author": null,
+    "level": "L3",
+    "source_id": "juejin-hot",
+    "id": "https://juejin.cn/post/7707090962476613641",
+    "day": "2026-11-14",
+    "matched": [
+      "DeepSeek"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "我用Claude Skills把出海视频月账单从$86打到了$16",
+    "link": "https://juejin.cn/post/7707063663786999844",
+    "published": "2026-11-14T11:44:41Z",
+    "source": "掘金热榜",
+    "summary": "做出海短视频，最劝退的就是生视频模型：单月几十美金的额度根本不经烧，而且前后镜头频繁崩脸串戏，改一句台词就得推倒重新抽卡。Anthropic 刚把 Claude Skills 捐赠给 Linux 基金会，这套被 70 多个平台集成的开放标准解决了 AI 办事没流程的老毛病。我用它在本地手搓了一套纯代码火柴人动画流，单条 15 秒 60 帧短片实测只要 $0.54，改台词零重抽成本。…",
+    "categories": [],
+    "author": null,
+    "level": "L3",
+    "source_id": "juejin-hot",
+    "id": "https://juejin.cn/post/7707063663786999844",
+    "day": "2026-11-14",
+    "matched": [
+      "Claude"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "我用 Go 和 AI 做了一个 macOS 磁盘清理工具：Vole（开源）",
+    "link": "https://juejin.cn/post/7706912573577642022",
+    "published": "2026-11-14T11:44:41Z",
+    "source": "掘金热榜",
+    "summary": "开源地址： github.com/hellozhangr… 做开发的 Mac 用不了多久，磁盘就会被各种缓存塞满：Xcode 的编译产物、模拟器、 node_modules 、uv / pip / Go 的包缓存、各种 Electron app 的缓存……每次清理都得手动翻目录，或者在网上搜「哪些东西可以删」。 GitHub 上有个很好用的开源命令行工具 Mole （作者…",
+    "categories": [],
+    "author": null,
+    "level": "L3",
+    "source_id": "juejin-hot",
+    "id": "https://juejin.cn/post/7706912573577642022",
+    "day": "2026-11-14",
+    "matched": [
+      "/\\bAI\\b/"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "AI Agent 技术全景解析 —— 从提示词工程到高级智能体构建",
+    "link": "https://juejin.cn/post/7706812748684886043",
+    "published": "2026-11-14T11:44:41Z",
+    "source": "掘金热榜",
+    "summary": "大家都用过 ChatGPT 或类似的大语言模型。交互方式很简单：你问一个问题，它给一个回答。这种\"对话式\"交互已经很强大了，但仔细想想，它有三个明显的局限： 打个比方：这就像一个博学但没有手脚、也没有记忆的顾问。你每次都得把背景重新交代一遍，他给你建议，但你得自己动手执行。 我们真正想要的是什么？是一个能 理解目标、自主规划、并执行复杂任务…",
+    "categories": [],
+    "author": null,
+    "level": "L3",
+    "source_id": "juejin-hot",
+    "id": "https://juejin.cn/post/7706812748684886043",
+    "day": "2026-11-14",
+    "matched": [
+      "智能体"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "开源项目第258期：Harness² —— Google Research 的「递归式 Agent Harness 优化」，模型权重不动，只改 Agent 的外壳",
+    "link": "https://juejin.cn/post/7706797172071333931",
+    "published": "2026-11-14T11:44:41Z",
+    "source": "掘金热榜",
+    "summary": "\"A harness is the system around a model that enables it to act as an agent. Harnessing is the process of optimizing that system.\" 这是「每日一个开源项目」系列的 第 258 篇 。今天的项目是 Harness² （读作 Harness Squared）——…",
+    "categories": [],
+    "author": null,
+    "level": "L3",
+    "source_id": "juejin-hot",
+    "id": "https://juejin.cn/post/7706797172071333931",
+    "day": "2026-11-14",
+    "matched": [
+      "Agent + 模型"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "美股这轮牛市还能持续吗",
+    "link": "https://www.toutiao.com/trending/7707981454197657129/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2213%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227707981454197657129%22%2C%22hot_board_impr_id%22%3A%22202611141943402CE5D7893D78012FD1DF%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E7%BE%8E%E8%82%A1%E8%BF%99%E8%BD%AE%E7%89%9B%E5%B8%82%E8%BF%98%E8%83%BD%E6%8C%81%E7%BB%AD%E5%90%97%22%7D&rank=&style_id=40132&topic_id=7707981454197657129",
+    "published": "2026-11-14T11:44:41Z",
+    "source": "今日头条热榜",
+    "summary": "",
+    "categories": [],
+    "author": null,
+    "level": "L3",
+    "source_id": "toutiao-hot",
+    "id": "https://toutiao.com/trending/7707981454197657129?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2213%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227707981454197657129%22%2C%22hot_board_impr_id%22%3A%22202611141943402CE5D7893D78012FD1DF%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E7%BE%8E%E8%82%A1%E8%BF%99%E8%BD%AE%E7%89%9B%E5%B8%82%E8%BF%98%E8%83%BD%E6%8C%81%E7%BB%AD%E5%90%97%22%7D&rank=&style_id=40132&topic_id=7707981454197657129",
+    "day": "2026-11-14",
+    "matched": [
+      "美股"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "《持械入宋》制片人称算力投入超百万且没投流，团队每部短剧都盈利，怎样看待这一高收益性？哪些思路能借鉴？",
+    "link": "https://www.zhihu.com/question/2104167693242691717",
+    "published": "2026-11-14T11:44:41Z",
+    "source": "知乎热榜",
+    "summary": "爆款诞生之后，很多人猜测，这么爆的剧，一定砸了重金投流。 但李朝华坦言，团队自己做剧以来从没投过流。“我们都是从外行进来的，做的时间不长，投流真不懂，所有时间都放在制作上了。” 除了100万的算力，每部作品的ROI，李朝华也坦言“没计算过”“不懂这东西”，除了把内容做好，剩下的都顺其自然。 与此同时，李朝华再次向娱理工作室提到，分账是“先上线后结算”，团队的AI短剧每一部都盈利了。但他也强调只是个例，不能作为参考。",
+    "categories": [],
+    "author": null,
+    "level": "L3",
+    "source_id": "zhihu-hot",
+    "id": "https://zhihu.com/question/2104167693242691717",
+    "day": "2026-11-14",
+    "matched": [
+      "AI + 算力"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "DeepSeek harness相比codex有什么劣势？",
+    "link": "https://www.zhihu.com/question/2072669811511922890",
+    "published": "2026-11-14T11:44:41Z",
+    "source": "知乎热榜",
+    "summary": "",
+    "categories": [],
+    "author": null,
+    "level": "L3",
+    "source_id": "zhihu-hot",
+    "id": "https://zhihu.com/question/2072669811511922890",
+    "day": "2026-11-14",
+    "matched": [
+      "DeepSeek"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "高盛：将中国H股评级上调至“超配”",
+    "link": "https://www.cls.cn/detail/2534527",
+    "published": "2026-11-14T11:34:51Z",
+    "source": "财联社·电报",
+    "summary": "【高盛：将中国H股评级上调至“超配”】财联社11月14日电，高盛集团预计，尽管人工智能（AI）领域的不确定性可能加剧市场波动，但企业盈利增长仍将推动MSCI日本以外亚洲指数（MSCI Asia ex-Japan Index）明年以美元计价实现19%的回报率。该行将中国H股和印度股市的评级上调至“超配”，维持对韩国和日本股市的“超配”观点。",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "cls-telegraph",
+    "id": "https://cls.cn/detail/2534527",
+    "day": "2026-11-14",
+    "matched": [
+      "人工智能"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "高盛预计2027年日本以外亚洲股市回报率将达19%",
+    "link": "https://wallstreetcn.com/livenews/3200127",
+    "published": "2026-11-14T11:13:55Z",
+    "source": "华尔街见闻·快讯",
+    "summary": "高盛集团预计，尽管人工智能（AI）领域的不确定性可能加剧市场波动，但企业盈利增长仍将推动MSCI日本以外亚洲指数（MSCI Asia ex-Japan Index）明年以美元计价实现19%的回报率。该行将中国H股和印度股市的评级上调至“超配”，维持对韩国和日本股市的“超配”观点。",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "wallstreetcn-live",
+    "id": "https://wallstreetcn.com/livenews/3200127",
+    "day": "2026-11-14",
+    "matched": [
+      "人工智能"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "Cursor 披露安全事件调查结果，恶意 Claude Code 扩展最多波及 5000 用户",
+    "link": "https://www.ithome.com/1/027/215.htm",
+    "published": "2026-11-14T10:52:39Z",
+    "source": "IT之家",
+    "summary": "IT之家 11 月 14 日消息，当地时间 10 月 29 日， Cursor 发布公告 ，称 Cursor VS Code 扩展市场中出现了一个恶意且未经授权的 Anthropic Claude Code 扩展副本。 当地时间 11 月 13 日，经过过去两周的全面调查， Cursor 披露了此次安全事件调查结果 。官方称绝大多数客户未受影响， 最多波及 5,000 名用户…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "ithome",
+    "id": "https://ithome.com/1/027/215.htm",
+    "day": "2026-11-14",
+    "matched": [
+      "Anthropic"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "库克接班，可能真是英伟达的最优解",
+    "link": "https://www.tmtpost.com/8205427.html",
+    "published": "2026-11-14T10:37:06Z",
+    "source": "钛媒体",
+    "summary": "黄仁勋辞职的消息刚传出来，硅谷还在消化这场大地震，特朗普已经先出来指点江山了。 他直接点名刚刚卸任苹果CEO、转任董事长的库克去接英伟达的班，还给了一句排面十足的评价：&ldquo;一个传奇接替另一个传奇。&rdquo; 很多人的第一反应是离谱，评论区里满屏都在刷：&ldquo;This is a joke, right？&rdquo;（这是在开玩笑吧？）英伟达投资人Ross…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "tmtpost",
+    "id": "https://tmtpost.com/8205427.html",
+    "day": "2026-11-14",
+    "matched": [
+      "英伟达"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "美国首届 AI 音乐奖颁奖典礼举行，入围者坦言背后同样凝聚真人心血",
+    "link": "https://www.ithome.com/1/027/210.htm",
+    "published": "2026-11-14T10:22:58Z",
+    "source": "IT之家",
+    "summary": "IT之家 11 月 14 日消息，据路透社报道，当地时间 13 日，美国首届 AI 音乐奖颁奖典礼正式举行，表彰利用 AI 参与歌曲创作的音乐人。 AI 音乐虽然饱受争议，甚至引发诉讼，但仍在流媒体平台获得数百万次播放，并成功登上音乐排行榜。 在洛杉矶市中心举行的颁奖典礼上，负责颁奖和领奖的真人音乐人认为，AI 音乐应该被视为 一种新的音乐类型 。创作者 不仅需要具备艺术才能，还要花上数小时反复调整提示词 ，才能得到满意的音乐效果。…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "ithome",
+    "id": "https://ithome.com/1/027/210.htm",
+    "day": "2026-11-14",
+    "matched": [
+      "提示词"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "Cloudflare 开源为 AI 智能体打造的浏览器 Kitesurf，消耗资源低于 Chromium",
+    "link": "https://www.ithome.com/1/027/197.htm",
+    "published": "2026-11-14T10:06:01Z",
+    "source": "IT之家",
+    "summary": "IT之家 11 月 14 日消息，今年 8 月，Cloudflare 推出专为 AI 智能体打造的浏览器 Kitesurf。当地时间 11 月 13 日，Cloudflare 宣布开源 Kitesurf。 据介绍，Kitesurf 运行在 Cloudflare Workers 之上，无需依赖传统的浏览器容器，即可完成 HTML 解析、CSS 应用、执行页面中的 JavaScript 以及网页截图渲染。 同时，它支持 Chrome…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "ithome",
+    "id": "https://ithome.com/1/027/197.htm",
+    "day": "2026-11-14",
+    "matched": [
+      "智能体"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "华为麒麟 9050 系列新马良 GPU、AI ISP 情报公开：实装二代硬件光追，首次实现 2 亿像素融合拍照",
+    "link": "https://www.ithome.com/1/027/181.htm",
+    "published": "2026-11-14T09:09:09Z",
+    "source": "IT之家",
+    "summary": "IT之家 11 月 14 日消息，华为官方今日继续揭秘首款「逻辑折叠」技术 τ 芯片 —— 麒麟 9050 系列更多配置信息， 目前最新公开了新一代马良 GPU 和麒麟 AI ISP 的情报 。 据介绍，麒麟 9050 系列搭载新一代马良 GPU，实现性能、能效与图形体验的升级。其采用第四代 GPU 微架构， GPU 性能提升 40%、功耗下降 45% 。 系列新芯支持第二代硬件光追， 光追性能提升 78%…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "ithome",
+    "id": "https://ithome.com/1/027/181.htm",
+    "day": "2026-11-14",
+    "matched": [
+      "AI + 芯片"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "英特尔联合 23 家韩国企业成立“K-AI 全栈联盟”，构建 AI 基础设施生态",
+    "link": "https://www.ithome.com/1/027/180.htm",
+    "published": "2026-11-14T09:03:04Z",
+    "source": "IT之家",
+    "summary": "IT之家 11 月 14 日消息，据韩媒 The Elec 报道，英特尔于 11 月 12 日在首尔 COEX 举办的“2026 英特尔人工智能峰会”上，宣布 联合 23 家韩国本土企业正式成立“K-AI 全栈联盟” 。 K-AI 全栈联盟是以英特尔为核心、由多家韩国本土 AI 企业组成的广泛产业联合体，旨在为韩国构建一套覆盖完整技术栈的综合性 AI 生态系统，联盟成员将在硬件、软件、行业专属 AI…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "ithome",
+    "id": "https://ithome.com/1/027/180.htm",
+    "day": "2026-11-14",
+    "matched": [
+      "人工智能"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "美联储理事巴尔：AI 快速普及，短期内收入不平等恐加剧",
+    "link": "https://www.ithome.com/1/027/177.htm",
+    "published": "2026-11-14T08:54:52Z",
+    "source": "IT之家",
+    "summary": "IT之家 11 月 14 日消息，据彭博社 12 日报道，美联储理事迈克尔 · 巴尔在耶鲁大学发表演讲时警告，AI 快速普及可能 在短期内加剧社会不平等 ，政策制定者必须为劳动力市场可能遭受的严重冲击做好准备。AI 影响的程度及持续时间，将取决于现阶段采取的防范措施。 巴尔警告，如果 少数 AI 企业主导市场 ，市场集中度上升可能进一步加剧不平等。占据优势的 AI…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "ithome",
+    "id": "https://ithome.com/1/027/177.htm",
+    "day": "2026-11-14",
+    "matched": [
+      "/\\bAI\\b/"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "中信证券：看好中国光通信的长期发展趋势 建议重点关注深度受益于全球AI基建的核心龙头标的",
+    "link": "https://wallstreetcn.com/livenews/3200116",
+    "published": "2026-11-14T08:04:34Z",
+    "source": "华尔街见闻·快讯",
+    "summary": "中信证券指出，光互联产业的技术升级与需求爆发仍在持续演进，光模块向高速率加速迭代，光网络向NPO/CPO/OCS多维拓展。近期市场对海外地缘政策传闻存在担忧，中信证券认为，不宜过度博弈短期的政策情绪，而应回归全球AI算力建设的真实需求。",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "wallstreetcn-live",
+    "id": "https://wallstreetcn.com/livenews/3200116",
+    "day": "2026-11-14",
+    "matched": [
+      "AI + 算力"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "中金公司与蚂蚁集团达成战略合作",
+    "link": "https://www.36kr.com/newsflashes/4069303294546825",
+    "published": "2026-11-14T07:49:22Z",
+    "source": "36氪·快讯",
+    "summary": "11月13日，中金公司与蚂蚁集团签署战略合作协议。双方将结合中金公司投研、金融服务积累与蚂蚁集团人工智能、行业生态、客户运营优势，围绕金融大模型技术创新、AI赋能财富管理、客户全生命周期服务等开展合作。根据协议，双方重点探索AI赋能财富管理人机协同模式，打造服务与营销协同的智能体集群；共建覆盖客户全生命周期的精细化财富经营体系；围绕智能体评测基准建设，在投研研判、财务文本解析、估值建模等场景开展技术验证。中金公司王曙光、蚂蚁集团韩歆毅出…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "36kr-flash",
+    "id": "https://36kr.com/newsflashes/4069303294546825",
+    "day": "2026-11-14",
+    "matched": [
+      "人工智能"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "299 美元月费约为 1% 车价：马斯克回应 Cybercab 自动驾驶订阅费太高，应在 115 美元左右",
+    "link": "https://www.ithome.com/1/027/159.htm",
+    "published": "2026-11-14T07:46:58Z",
+    "source": "IT之家",
+    "summary": "IT之家 11 月 14 日消息，全球首富埃隆 · 马斯克（Elon Musk）今天（11 月 14 日）在 X 平台发布推文，回应科技博主 @MKBHD 关于“Cybercab 每月 299 美元 （IT之家注：现汇率约合 1,999 元人民币） 的订阅费用过高”情况， 认为合理价格应该在 115 美元 （现汇率约合 768.8 元人民币） 左右。 IT之家今天报道，特斯拉开始向部分个人用户开放 Cybercab…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "ithome",
+    "id": "https://ithome.com/1/027/159.htm",
+    "day": "2026-11-14",
+    "matched": [
+      "自动驾驶"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "特斯拉：开始面向个人销售Cybercab",
+    "link": "https://www.36kr.com/newsflashes/4069071474480002",
+    "published": "2026-11-14T06:24:21Z",
+    "source": "36氪·快讯",
+    "summary": "特斯拉表示，已向一小部分客户开放Cybercab预订，意味着该公司准备向普通消费者推出这款无人驾驶汽车。这款两座车型没有方向盘和脚踏板，此前已作为特斯拉自动驾驶出租车服务的一部分在奥斯汀上线。特斯拉自动驾驶出租车官方账号周五在X平台发文称，如今Cybercab将对服务覆盖区域内的“选定客户”开放购买。目前尚不清楚特斯拉对个人使用的定义，也不清楚个人版Cybercab是否只能在奥斯汀现有的地理围栏区域内行驶——奥斯汀也是目前该自动驾驶车辆…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "36kr-flash",
+    "id": "https://36kr.com/newsflashes/4069071474480002",
+    "day": "2026-11-14",
+    "matched": [
+      "自动驾驶"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
     "title": "Anthropic为何比SpaceX上市定价保守",
     "link": "https://www.baidu.com/s?wd=Anthropic%E4%B8%BA%E4%BD%95%E6%AF%94SpaceX%E4%B8%8A%E5%B8%82%E5%AE%9A%E4%BB%B7%E4%BF%9D%E5%AE%88",
     "published": "2026-11-14T06:08:53Z",
@@ -187,6 +544,23 @@
     "first_seen": "2026-11-14T06:08:53Z"
   },
   {
+    "title": "百度词元所发布首日：供应商暴增超100家，客户新增超1000家",
+    "link": "https://www.leiphone.com/category/industrynews/cqPXhF38rM4VcVa7.html",
+    "published": "2026-11-14T05:45:00Z",
+    "source": "雷峰网",
+    "summary": "11月14日，从百度获悉，百度词元所发布首日，新增申请入驻的供应商已超过100家，新增超过1000家客户接入。 词元所在11月12日举行的百度世界2026上正式发布，百度创始人李彦宏将其称为“大模型的交易所”。据介绍，词元所一端汇聚模型和模型提供商，另一端服务企业和个人，让用户便捷地找到、购买和使用可信的模型Token。…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "leiphone",
+    "id": "https://leiphone.com/category/industrynews/cqPXhF38rM4VcVa7.html",
+    "day": "2026-11-14",
+    "matched": [
+      "大模型"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
     "title": "谷歌高管借 Gemini AI 成功让苹果 iPhone Duo 运行微软 Win11",
     "link": "https://www.ithome.com/1/027/118.htm",
     "published": "2026-11-14T05:31:28Z",
@@ -304,6 +678,23 @@
       "人工智能"
     ],
     "first_seen": "2026-11-14T06:08:53Z"
+  },
+  {
+    "title": "高质量数据集和数据标注先行先试现场会在厦门市召开",
+    "link": "https://wallstreetcn.com/livenews/3200101",
+    "published": "2026-11-14T04:53:02Z",
+    "source": "华尔街见闻·快讯",
+    "summary": "国家数据局消息，11月10日下午，高质量数据集和数据标注先行先试建设现场会在厦门市召开。会议强调，国家数据局将深入贯彻落实党中央、国务院关于人工智能发展的决策部署，加快推进高质量数据集建设和数据标注产业发展。",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "wallstreetcn-live",
+    "id": "https://wallstreetcn.com/livenews/3200101",
+    "day": "2026-11-14",
+    "matched": [
+      "人工智能"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
   },
   {
     "title": "吴清：深化人工智能与资本市场双向赋能研究",
@@ -644,6 +1035,40 @@
       "大模型"
     ],
     "first_seen": "2026-11-14T00:28:24Z"
+  },
+  {
+    "title": "Unsloth Qwen3.8-27B Quantizations – Dynamic v3.1 Update",
+    "link": "https://unsloth.ai/docs/models/qwen3.8",
+    "published": "2026-11-14T00:06:04Z",
+    "source": "Hacker News",
+    "summary": "Qwen3.8-27B is a 27B parameter dense model Qwen, featuring vision and reasoning capabilities, a 256K context window, and runs locally on 17GB RAM/VRAM setups. Qwen3.8 excels at agentic coding,…",
+    "categories": [],
+    "author": null,
+    "level": "L3",
+    "source_id": "hn-frontpage",
+    "id": "https://unsloth.ai/docs/models/qwen3.8",
+    "day": "2026-11-14",
+    "matched": [
+      "Qwen"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
+  },
+  {
+    "title": "早报｜英伟达员工请愿黄仁勋回归/余承东重申华为与赛力斯分工/Microsoft 365故障延续至48小时",
+    "link": "https://www.ifanr.com/1689450?utm_source=rss&utm_medium=rss&utm_campaign=",
+    "published": "2026-11-14T00:00:42Z",
+    "source": "爱范儿",
+    "summary": "· 两部门公布新型储能方案，提出到 2030 年平均储能约 3 小时 · LangChain 完成 3 亿美元 C 轮融资，估值 30 亿美元 · 荣耀 700 系列定档 11 月 23 日，背屏可贴 GIF、看通知 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "ifanr",
+    "id": "https://ifanr.com/1689450",
+    "day": "2026-11-14",
+    "matched": [
+      "英伟达"
+    ],
+    "first_seen": "2026-11-14T11:44:41Z"
   },
   {
     "title": "美联储副主席Jefferson：通胀将决定利率决策",
@@ -9771,431 +10196,6 @@
     "day": "2026-11-10",
     "matched": [
       "台积电"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "Ukraine’s fiber-optic drones get squeezed by AI data center demand",
-    "link": "https://arstechnica.com/gadgets/2026/11/ukraines-fiber-optic-drones-get-squeezed-by-ai-data-center-demand/",
-    "published": "2026-11-10T12:15:32Z",
-    "source": "Ars Technica",
-    "summary": "Ukraine competes with Russia and data centers for China’s optical fiber supply.",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "ars-technica",
-    "id": "https://arstechnica.com/gadgets/2026/11/ukraines-fiber-optic-drones-get-squeezed-by-ai-data-center-demand",
-    "day": "2026-11-10",
-    "matched": [
-      "/\\bAI\\b/"
-    ],
-    "first_seen": "2026-11-10T12:58:39Z"
-  },
-  {
-    "title": "中微公司首台等离子体晶圆切割设备成功交付",
-    "link": "https://wallstreetcn.com/livenews/3197693",
-    "published": "2026-11-10T12:07:42Z",
-    "source": "华尔街见闻·快讯",
-    "summary": "近日，中微半导体设备（上海）股份有限公司正式发布其全新产品——Primo Matrix双反应台等离子体晶圆切割设备，并宣布全球首台设备已顺利付运国内重要集成电路封装客户。（澎湃）",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "wallstreetcn-live",
-    "id": "https://wallstreetcn.com/livenews/3197693",
-    "day": "2026-11-10",
-    "matched": [
-      "半导体"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "Introducing AlphaProof Code: a breakthrough in verifying complex software at depth",
-    "link": "https://deepmind.google/blog/introducing-alphaproof-code/",
-    "published": "2026-11-10T12:02:28Z",
-    "source": "Google DeepMind",
-    "summary": "AlphaProof Code agents wrote three million lines of proofs in Lean to verify Signal’s core encryption.",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "deepmind",
-    "id": "https://deepmind.google/blog/introducing-alphaproof-code",
-    "day": "2026-11-10",
-    "matched": [
-      "*"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "台积电批准409亿美元资本预算，用于长期产能扩张",
-    "link": "https://wallstreetcn.com/livenews/3197686",
-    "published": "2026-11-10T12:01:58Z",
-    "source": "华尔街见闻·快讯",
-    "summary": "台积电公告，为了因应基于市场需求预测及技术开发蓝图所制定的长期产能规划，董事会核准资本预算约409.27亿美元，内容主要包括：建置及升级先进制程产能；建置及升级先进封装、成熟及/或特殊制程产能；厂房兴建及厂务设施工程；2027年研发资本预算、经常性资本预算及资本化租赁资产预算。",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "wallstreetcn-live",
-    "id": "https://wallstreetcn.com/livenews/3197686",
-    "day": "2026-11-10",
-    "matched": [
-      "台积电"
-    ],
-    "first_seen": "2026-11-10T12:58:39Z"
-  },
-  {
-    "title": "Helping caregivers use AI in everyday life",
-    "link": "https://openai.com/index/helping-caregivers-use-ai-in-everyday-life",
-    "published": "2026-11-10T12:00:00Z",
-    "source": "OpenAI News",
-    "summary": "OpenAI Academy is bringing free, hands-on ChatGPT workshops to caregivers in five U.S. cities, helping them build practical AI skills for everyday life.",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "openai-news",
-    "id": "https://openai.com/index/helping-caregivers-use-ai-in-everyday-life",
-    "day": "2026-11-10",
-    "matched": [
-      "*"
-    ],
-    "first_seen": "2026-11-10T12:58:39Z"
-  },
-  {
-    "title": "台积电：董事会核准以不超5亿美元认购OpenAI特别股股份",
-    "link": "https://www.36kr.com/newsflashes/4063884296230020",
-    "published": "2026-11-10T11:56:53Z",
-    "source": "36氪·快讯",
-    "summary": "台积电11月10日公告，董事会核准以不超过5亿美元的额度认购OpenAI特别股股份。（界面）",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "36kr-flash",
-    "id": "https://36kr.com/newsflashes/4063884296230020",
-    "day": "2026-11-10",
-    "matched": [
-      "OpenAI"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "Anthropic预计IPO定价中点74美元，净募资额937亿美元",
-    "link": "https://www.36kr.com/newsflashes/4063882408596354",
-    "published": "2026-11-10T11:54:57Z",
-    "source": "36氪·快讯",
-    "summary": "Anthropic预计IPO定价中点74美元，计入超额配售权和私募配售后，净募资额达937亿美元。（财联社）",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "36kr-flash",
-    "id": "https://36kr.com/newsflashes/4063882408596354",
-    "day": "2026-11-10",
-    "matched": [
-      "Anthropic"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "台积电批准409亿美元资本预算，用于长期产能扩张",
-    "link": "https://www.36kr.com/newsflashes/4063881724203911",
-    "published": "2026-11-10T11:54:16Z",
-    "source": "36氪·快讯",
-    "summary": "台积电董事会批准约409.27亿美元资本预算，主要用于先进制程产能的安装与升级、先进封装及成熟和特殊制程产能扩充、晶圆厂建设及厂务设施系统安装，以及2027年研发资本投资、维持性资本支出和资本化租赁资产。这不是台积电首次公布长期产能投资计划，而是董事会定期批准资本预算的延续。（财联社）",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "36kr-flash",
-    "id": "https://36kr.com/newsflashes/4063881724203911",
-    "day": "2026-11-10",
-    "matched": [
-      "台积电"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "Anthropic表示可向博通发行至多420亿美元票据。（彭博）",
-    "link": "https://wallstreetcn.com/livenews/3197682",
-    "published": "2026-11-10T11:54:07Z",
-    "source": "华尔街见闻·快讯",
-    "summary": "Anthropic表示可向博通发行至多420亿美元票据。（彭博）",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "wallstreetcn-live",
-    "id": "https://wallstreetcn.com/livenews/3197682",
-    "day": "2026-11-10",
-    "matched": [
-      "Anthropic"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "谷歌、英伟达等七家公司承诺向Anthropic投资260亿美元",
-    "link": "https://www.36kr.com/newsflashes/4063879337333637",
-    "published": "2026-11-10T11:51:50Z",
-    "source": "36氪·快讯",
-    "summary": "11月10日，一份文件显示，谷歌、英伟达、AMD、博通、美光、微软及台积电合作伙伴公司已同意通过同步私募方式，合计认购260亿美元的Anthropic无投票权普通股，认购价格与IPO发行价相同。（界面）",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "36kr-flash",
-    "id": "https://36kr.com/newsflashes/4063879337333637",
-    "day": "2026-11-10",
-    "matched": [
-      "Anthropic"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "Anthropic预计IPO及配售的净收益约为846亿美元。",
-    "link": "https://wallstreetcn.com/livenews/3197681",
-    "published": "2026-11-10T11:51:41Z",
-    "source": "华尔街见闻·快讯",
-    "summary": "Anthropic预计IPO及配售的净收益约为846亿美元。",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "wallstreetcn-live",
-    "id": "https://wallstreetcn.com/livenews/3197681",
-    "day": "2026-11-10",
-    "matched": [
-      "Anthropic"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "台积电将分别向Anthropic和OpenAI投资5亿美元",
-    "link": "https://wallstreetcn.com/livenews/3197678",
-    "published": "2026-11-10T11:48:02Z",
-    "source": "华尔街见闻·快讯",
-    "summary": "台积电周二发布的文件显示，公司已批准向Anthropic和OpenAI投资合计至多10亿美元。台积电批准投资至多5亿美元，以Anthropic IPO发行价购买其普通股；董事会还批准投资至多5亿美元，购买OpenAI优先股。台积电还表示，将设立一只专注于芯片领域的基金。",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "wallstreetcn-live",
-    "id": "https://wallstreetcn.com/livenews/3197678",
-    "day": "2026-11-10",
-    "matched": [
-      "AI + 芯片"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "Anthropic：模型可能出现非预期、与目标不一致的行为。",
-    "link": "https://wallstreetcn.com/livenews/3197677",
-    "published": "2026-11-10T11:47:32Z",
-    "source": "华尔街见闻·快讯",
-    "summary": "Anthropic：模型可能出现非预期、与目标不一致的行为。",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "wallstreetcn-live",
-    "id": "https://wallstreetcn.com/livenews/3197677",
-    "day": "2026-11-10",
-    "matched": [
-      "Anthropic"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "Anthropic：IPO目标估值约1万亿美元",
-    "link": "https://www.36kr.com/newsflashes/4063869365277824",
-    "published": "2026-11-10T11:41:41Z",
-    "source": "36氪·快讯",
-    "summary": "Anthropic：IPO目标估值约1万亿美元。（新浪财经）",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "36kr-flash",
-    "id": "https://36kr.com/newsflashes/4063869365277824",
-    "day": "2026-11-10",
-    "matched": [
-      "Anthropic"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "Anthropic宣布IPO路演：发行价区间预计为每股70–78美元",
-    "link": "https://www.36kr.com/newsflashes/4063868756792453",
-    "published": "2026-11-10T11:41:04Z",
-    "source": "36氪·快讯",
-    "summary": "Anthropic（公益法人PBC）今日启动A类普通股首次公开发行（IPO）路演。本次拟发行8.25亿股A类普通股，其中8.01351354亿股由Anthropic发行，2364.8646万股由部分现有股东出售。现有股东出售股份的收益不归Anthropic所有。Anthropic拟授予承销商30天超额配售权，可额外认购最多1.2375亿股A类普通股。发行价区间预计为每股70–78美元。公司已申请在纳斯达克全球精选市场上市，股票代码ANT…",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "36kr-flash",
-    "id": "https://36kr.com/newsflashes/4063868756792453",
-    "day": "2026-11-10",
-    "matched": [
-      "Anthropic"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "曝 Anthropic 拟通过 IPO 筹集最多 644 亿美元，上市推介启动在即",
-    "link": "https://www.ithome.com/1/025/127.htm",
-    "published": "2026-11-10T11:40:20Z",
-    "source": "IT之家",
-    "summary": "IT之家 11 月 10 日消息，据路透社今天（10 日）晚间公布的最新招股说明书草案，Anthropic 计划通过首次公开募股（IPO）筹集最多 644 亿美元 （IT之家注：现汇率约合 4,306.16 亿元人民币） ，并准备启动上市推介。 招股说明书草案显示，Anthropic 还计划通过另一笔私募配售交易，向谷歌、英伟达和 AMD 等基石投资者 融资 260 亿美元 （现汇率约合 1,738.51 亿元人民币）…",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "ithome",
-    "id": "https://ithome.com/1/025/127.htm",
-    "day": "2026-11-10",
-    "matched": [
-      "Anthropic"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "分析｜AI产业维持高景气度、能源价格上升，10月进出口延续高增态势",
-    "link": "https://www.thepaper.cn/newsDetail_forward_34446211",
-    "published": "2026-11-10T11:37:22Z",
-    "source": "澎湃·热新闻",
-    "summary": "11月10日，海关总署公布10月中国外贸数据。以美元计，10月，中国进出口总值7193.8亿美元，同比增长37.9%；出口总值4123.3亿美元，同比增长35.2%；进口总值3070.5亿美元，同比增长41.6%；贸易顺差1052.8亿美元。…",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "thepaper-hot",
-    "id": "https://thepaper.cn/newsDetail_forward_34446211",
-    "day": "2026-11-10",
-    "matched": [
-      "AI + 出口"
-    ],
-    "first_seen": "2026-11-10T20:46:39Z"
-  },
-  {
-    "title": "Anthropic将IPO发行规模定为8.25亿股，预计IPO发行价区间为每股70至78美元，AMD、博通、英伟达等将向Anthropic投资260亿美元。",
-    "link": "https://wallstreetcn.com/livenews/3197671",
-    "published": "2026-11-10T11:34:39Z",
-    "source": "华尔街见闻·快讯",
-    "summary": "Anthropic将IPO发行规模定为8.25亿股，预计IPO发行价区间为每股70至78美元，AMD、博通、英伟达等将向Anthropic投资260亿美元。",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "wallstreetcn-live",
-    "id": "https://wallstreetcn.com/livenews/3197671",
-    "day": "2026-11-10",
-    "matched": [
-      "Anthropic"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "号称行业首个具身全模态端到端交互大模型，智元发布 WITA-Omni",
-    "link": "https://www.ithome.com/1/025/122.htm",
-    "published": "2026-11-10T11:24:05Z",
-    "source": "IT之家",
-    "summary": "IT之家 11 月 10 日消息，“智元 AGIBOT”公众号今天（10 日）晚间发文宣布，智元正式发布 WITA-Omni（硅光动语全模态大模型）。 根据官方介绍，该模型也是 行业首个具身全模态端到端交互大模型 。WITA-Omni 基于机器人本体感知数据深度训练，除了音视频输入输出，还新增支持 触觉、本体状态等输入 ，以及 机器人动作、表情等输出 ，让机器人第一次拥有为物理世界而生的“交互大脑”。…",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "ithome",
-    "id": "https://ithome.com/1/025/122.htm",
-    "day": "2026-11-10",
-    "matched": [
-      "大模型"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "华为：鸿蒙电脑应用数量已突破 2.1 万款，通用办公基本盘稳固、多款专业软件已完成适配",
-    "link": "https://www.ithome.com/1/025/121.htm",
-    "published": "2026-11-10T11:22:07Z",
-    "source": "IT之家",
-    "summary": "IT之家 11 月 10 日消息，华为宣布旗下鸿蒙电脑应用数量已正式突破 2.1 万款，通用办公基本盘稳固，AI 赛道快速崛起，多款专业电脑应用也逐步向鸿蒙平台延伸，形成兼顾便携与专业的移动办公体验。 华为表示，目前 WPS Office、钉钉、飞书、企业微信等头部应用已全面适配鸿蒙系统，WorkBuddy、豆包、豆包办公、千问等应用陆续上架，千问办公三端一致首发上架鸿蒙电脑，可为鸿蒙电脑带来全场景 AI 体验。 同时，中望…",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "ithome",
-    "id": "https://ithome.com/1/025/121.htm",
-    "day": "2026-11-10",
-    "matched": [
-      "AI + 应用"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "智谱：拟根据一般授权回购H股，预期总金额上限为40亿港元",
-    "link": "https://www.36kr.com/newsflashes/4063843360428928",
-    "published": "2026-11-10T11:15:14Z",
-    "source": "36氪·快讯",
-    "summary": "36氪获悉，智谱在港交所公告，于接获董事长刘德兵的股份购回提议后，公司拟根据股东于6月22日举行的年度股东会上授予的购回H股的一般授权，不时于公开市场购回公司H股。股份购回计划的预期总金额上限为40亿港元，而根据股份购回计划将予购回的H股总数不得超过于本公告日期公司已发行股份总数的1%。就股份购回计划而言，将会考虑集团的财务状况、营运资金要求及业务发展需求，以维持充足的财务资源供其持续营运及增长。",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "36kr-flash",
-    "id": "https://36kr.com/newsflashes/4063843360428928",
-    "day": "2026-11-10",
-    "matched": [
-      "智谱"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "澳洲航空与埃森哲达成技术合作，将裁员850人",
-    "link": "https://www.36kr.com/newsflashes/4063842431358088",
-    "published": "2026-11-10T11:14:17Z",
-    "source": "36氪·快讯",
-    "summary": "澳洲航空与埃森哲签署一份技术及人工智能合作协议，这家澳大利亚最大航空公司将因此裁减约850个岗位。澳洲航空表示，本次合作旨在完成系统、业务流程与数据体系的现代化升级。与此同时，航司正在加大技术与AI领域投入，并推进公司史上规模最大的机队更新计划。 这份多年期合作协议的合同金额并未对外披露。（新浪财经）",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "36kr-flash",
-    "id": "https://36kr.com/newsflashes/4063842431358088",
-    "day": "2026-11-10",
-    "matched": [
-      "人工智能"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "【智谱：拟最多40亿港元回购H股，上限为已发行股份1%】 智谱公告，接获董事长刘德兵股份购回提议后，拟根据2026年6月22日年度股东会授予的一般授权，不时在公开市场购回H股，计划总金额上限40亿港元，购回总数不超过公告日已发行股份总数的1%。董事会及授权人士不会行使购回授权以致产生收购守则规则26项下强制性要约责任，或使公众股东持有的H股降至联交所规定的最低百分比以下。",
-    "link": "https://wallstreetcn.com/livenews/3197663",
-    "published": "2026-11-10T11:10:43Z",
-    "source": "华尔街见闻·快讯",
-    "summary": "【智谱：拟最多40亿港元回购H股，上限为已发行股份1%】 智谱公告，接获董事长刘德兵股份购回提议后，拟根据2026年6月22日年度股东会授予的一般授权，不时在公开市场购回H股，计划总金额上限40亿港元，购回总数不超过公告日已发行股份总数的1%。董事会及授权人士不会行使购回授权以致产生收购守则规则26项下强制性要约责任，或使公众股东持有的H股降至联交所规定的最低百分比以下。",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "wallstreetcn-live",
-    "id": "https://wallstreetcn.com/livenews/3197663",
-    "day": "2026-11-10",
-    "matched": [
-      "智谱"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "东风本田 CR-V 全能荣耀款新车上市：华为云技术赋能云车机应用，现时售价 13.79 万元起",
-    "link": "https://www.ithome.com/1/025/076.htm",
-    "published": "2026-11-10T10:54:13Z",
-    "source": "IT之家",
-    "summary": "IT之家 11 月 10 日消息，东风本田 CR-V 全能荣耀款新车今晚正式上市， 现时售价 13.79 万元起 ，2,000 元可选价值 5,000 元智享选装包（13 寸 AI 智能屏 + 配套车机、360° 全景影像）。 燃油版 活力版：13.79 万元起 风尚版：15.89 万元起 风尚 7 座版：16.59 万元起 风尚四驱版：17.19 万元起 活力版 + 智享选装包：13.99 万元 混动版 电混活力版：15.69…",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "ithome",
-    "id": "https://ithome.com/1/025/076.htm",
-    "day": "2026-11-10",
-    "matched": [
-      "AI + 应用"
-    ],
-    "first_seen": "2026-11-10T12:31:27Z"
-  },
-  {
-    "title": "投资者担心 AI 编译、反编译助长盗版游戏，泽尔尼克表态 Take-Two 会加强防范",
-    "link": "https://www.ithome.com/1/025/057.htm",
-    "published": "2026-11-10T10:44:40Z",
-    "source": "IT之家",
-    "summary": "IT之家 11 月 10 日消息，在今天举行的 2027 财年第二季度财报电话会议上，Take-Two CEO 施特劳斯 · 泽尔尼克回答了投资者的提问。其中一名投资者担心，近几周 利用 AI 编译、反编译游戏 的现象越来越普遍，可能加剧游戏发行商面临的盗版问题。 泽尔尼克指出，由于游戏文件体积庞大、游戏主机生态相对封闭，以及许多游戏需要联网等原因，盗版问题一直没有给游戏行业造成太大影响。然而，AI 带来了新的风险。…",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "ithome",
-    "id": "https://ithome.com/1/025/057.htm",
-    "day": "2026-11-10",
-    "matched": [
-      "/\\bAI\\b/"
     ],
     "first_seen": "2026-11-10T12:31:27Z"
   }
