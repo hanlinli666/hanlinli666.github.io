@@ -1,14 +1,14 @@
 {
-  "run_at": "2026-11-18T07:15:06Z",
+  "run_at": "2026-11-18T13:24:18Z",
   "stages": {
     "sources": 34,
-    "sources_ok": 28,
-    "raw": 582,
-    "after_keywords": 42,
-    "merged": 642,
+    "sources_ok": 29,
+    "raw": 623,
+    "after_keywords": 50,
+    "merged": 650,
     "written": 600,
-    "body_filled": 4,
-    "new_today": 141
+    "body_filled": 8,
+    "new_today": 150
   },
   "sources": [
     {
@@ -18,9 +18,9 @@
       "ok": false,
       "raw": 0,
       "kept": 0,
-      "ms": 120509,
+      "ms": 109665,
       "mirror": "",
-      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/zhengce/zuixin :: HTTP Error 504: Gateway Time-out"
+      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/zhengce/zuixin :: HTTP Error 503: Service Unavailable"
     },
     {
       "id": "miit-yjzj",
@@ -29,9 +29,9 @@
       "ok": false,
       "raw": 0,
       "kept": 0,
-      "ms": 120507,
+      "ms": 109169,
       "mirror": "",
-      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/yjzj :: HTTP Error 504: Gateway Time-out"
+      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/yjzj :: HTTP Error 503: Service Unavailable"
     },
     {
       "id": "miit-zcwj",
@@ -40,9 +40,9 @@
       "ok": false,
       "raw": 0,
       "kept": 0,
-      "ms": 120496,
+      "ms": 110066,
       "mirror": "",
-      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/zcwj :: The read operation timed out"
+      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/zcwj :: HTTP Error 503: Service Unavailable"
     },
     {
       "id": "mofcom-home",
@@ -51,7 +51,7 @@
       "ok": true,
       "raw": 9,
       "kept": 0,
-      "ms": 1735,
+      "ms": 631,
       "mirror": "",
       "error": ""
     },
@@ -62,7 +62,7 @@
       "ok": true,
       "raw": 16,
       "kept": 0,
-      "ms": 1552,
+      "ms": 1420,
       "mirror": "",
       "error": ""
     },
@@ -72,8 +72,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 5,
-      "ms": 632,
+      "kept": 6,
+      "ms": 816,
       "mirror": "https://rsshub.rssforever.com",
       "error": ""
     },
@@ -84,7 +84,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 138,
+      "ms": 144,
       "mirror": "",
       "error": ""
     },
@@ -92,12 +92,12 @@
       "id": "cls-telegraph",
       "name": "财联社·电报",
       "level": "L2",
-      "ok": true,
-      "raw": 20,
-      "kept": 3,
-      "ms": 6272,
-      "mirror": "https://hub.slarker.me",
-      "error": ""
+      "ok": false,
+      "raw": 0,
+      "kept": 0,
+      "ms": 100015,
+      "mirror": "",
+      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/cls/telegraph :: The read operation timed out"
     },
     {
       "id": "deepmind",
@@ -106,7 +106,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 170,
+      "ms": 272,
       "mirror": "",
       "error": ""
     },
@@ -116,8 +116,8 @@
       "level": "L2",
       "ok": true,
       "raw": 30,
-      "kept": 2,
-      "ms": 5527,
+      "kept": 0,
+      "ms": 4010,
       "mirror": "",
       "error": ""
     },
@@ -128,7 +128,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 234,
+      "ms": 260,
       "mirror": "",
       "error": ""
     },
@@ -139,7 +139,7 @@
       "ok": true,
       "raw": 20,
       "kept": 1,
-      "ms": 1483,
+      "ms": 1511,
       "mirror": "",
       "error": ""
     },
@@ -150,7 +150,7 @@
       "ok": false,
       "raw": 0,
       "kept": 0,
-      "ms": 1361,
+      "ms": 1199,
       "mirror": "",
       "error": "HTTP Error 404: Not Found"
     },
@@ -160,8 +160,8 @@
       "level": "L2",
       "ok": true,
       "raw": 40,
-      "kept": 14,
-      "ms": 1432,
+      "kept": 9,
+      "ms": 454,
       "mirror": "",
       "error": ""
     },
@@ -171,8 +171,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 2,
-      "ms": 2772,
+      "kept": 5,
+      "ms": 2351,
       "mirror": "",
       "error": ""
     },
@@ -182,8 +182,8 @@
       "level": "L2",
       "ok": true,
       "raw": 15,
-      "kept": 1,
-      "ms": 95,
+      "kept": 0,
+      "ms": 185,
       "mirror": "",
       "error": ""
     },
@@ -193,8 +193,8 @@
       "level": "L2",
       "ok": true,
       "raw": 10,
-      "kept": 2,
-      "ms": 58,
+      "kept": 4,
+      "ms": 63,
       "mirror": "",
       "error": ""
     },
@@ -204,8 +204,8 @@
       "level": "L2",
       "ok": true,
       "raw": 15,
-      "kept": 2,
-      "ms": 307,
+      "kept": 3,
+      "ms": 274,
       "mirror": "",
       "error": ""
     },
@@ -213,12 +213,12 @@
       "id": "qbitai",
       "name": "量子位",
       "level": "L2",
-      "ok": false,
-      "raw": 0,
-      "kept": 0,
-      "ms": 30899,
+      "ok": true,
+      "raw": 10,
+      "kept": 7,
+      "ms": 1604,
       "mirror": "",
-      "error": "GET failed after 1 attempts: https://www.qbitai.com/feed :: <urlopen error _ssl.c:994: The handshake operation timed out>"
+      "error": ""
     },
     {
       "id": "sina-tech",
@@ -227,7 +227,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 884,
+      "ms": 2198,
       "mirror": "",
       "error": ""
     },
@@ -238,7 +238,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 1415,
+      "ms": 1046,
       "mirror": "",
       "error": ""
     },
@@ -248,8 +248,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 0,
-      "ms": 92,
+      "kept": 3,
+      "ms": 122,
       "mirror": "",
       "error": ""
     },
@@ -260,7 +260,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 1416,
+      "ms": 1414,
       "mirror": "",
       "error": ""
     },
@@ -269,9 +269,9 @@
       "name": "钛媒体",
       "level": "L2",
       "ok": true,
-      "raw": 18,
-      "kept": 4,
-      "ms": 2195,
+      "raw": 15,
+      "kept": 3,
+      "ms": 1721,
       "mirror": "",
       "error": ""
     },
@@ -281,8 +281,8 @@
       "level": "L2",
       "ok": true,
       "raw": 10,
-      "kept": 0,
-      "ms": 103,
+      "kept": 2,
+      "ms": 102,
       "mirror": "",
       "error": ""
     },
@@ -292,8 +292,8 @@
       "level": "L2",
       "ok": true,
       "raw": 30,
-      "kept": 2,
-      "ms": 1603,
+      "kept": 1,
+      "ms": 3204,
       "mirror": "",
       "error": ""
     },
@@ -301,21 +301,21 @@
       "id": "baidu-top",
       "name": "百度热搜",
       "level": "L3",
-      "ok": false,
-      "raw": 0,
-      "kept": 0,
-      "ms": 120503,
-      "mirror": "",
-      "error": "all mirrors failed :: GET failed after 1 attempts: https://hub.slarker.me/baidu/top :: The read operation timed out"
+      "ok": true,
+      "raw": 50,
+      "kept": 1,
+      "ms": 50426,
+      "mirror": "https://rsshub.rssforever.com",
+      "error": ""
     },
     {
       "id": "github-trending",
       "name": "GitHub Trending",
       "level": "L3",
       "ok": true,
-      "raw": 15,
-      "kept": 0,
-      "ms": 1479,
+      "raw": 20,
+      "kept": 1,
+      "ms": 1755,
       "mirror": "",
       "error": ""
     },
@@ -326,7 +326,7 @@
       "ok": true,
       "raw": 20,
       "kept": 2,
-      "ms": 1214,
+      "ms": 223,
       "mirror": "",
       "error": ""
     },
@@ -335,9 +335,9 @@
       "name": "掘金热榜",
       "level": "L3",
       "ok": true,
-      "raw": 49,
+      "raw": 48,
       "kept": 1,
-      "ms": 1832,
+      "ms": 1407,
       "mirror": "",
       "error": ""
     },
@@ -348,7 +348,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 58,
+      "ms": 97,
       "mirror": "",
       "error": ""
     },
@@ -359,7 +359,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 131,
+      "ms": 112,
       "mirror": "",
       "error": ""
     },
@@ -370,7 +370,7 @@
       "ok": true,
       "raw": 50,
       "kept": 1,
-      "ms": 1340,
+      "ms": 1030,
       "mirror": "",
       "error": ""
     },
@@ -381,17 +381,17 @@
       "ok": true,
       "raw": 30,
       "kept": 0,
-      "ms": 1124,
+      "ms": 1323,
       "mirror": "",
       "error": ""
     }
   ],
   "events": {
-    "run_at": "2026-11-18T07:15:52Z",
+    "run_at": "2026-11-18T13:24:56Z",
     "items": 600,
     "events": 260,
-    "translated": 3,
-    "new_today": 150,
+    "translated": 11,
+    "new_today": 159,
     "model": "glm-4.7-flash"
   }
 }
