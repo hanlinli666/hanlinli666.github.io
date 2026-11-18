@@ -457,9 +457,13 @@
   {
     "id": "2611.21515",
     "title": "Beyond Leaderboard Ranks: Selecting Software Engineering Agents Under Budget Constraints",
-    "title_zh": null,
+    "title_zh": "预算约束下的软件工程Agent选择",
     "abstract": "Teams that adopt LLM agents for issue resolution must decide which agent to pay for, and how much to spend finding out. Leaderboard ranks give weak evidence for this decision. Accuracy differences may be statistically unresolved, reported costs may be inconsistent, and evaluating candidate agents can itself be expensive. We investigate budget-constrained agent selection using 58,197 run--task records extracted from the Holistic Agent Leaderboard (HAL), focusing on SWE-bench and six additional benchmarks. Across seven benchmarks, 27 of 35 steps along the accuracy--cost Pareto frontiers are statistically unresolved. On SWE-bench, a run costing $34.16 trails the $170.78 leader by 14.6 percentage points, but the available tasks cannot statistically distinguish their accuracy. Reported costs also differ from standardized token-based estimates by up to 11.7x, while selective task evaluation can bias estimates of full-benchmark execution cost. We therefore compare evaluation strategies under explicit evaluation budgets and deployment-cost caps. Under advance knowledge of task costs, successive halving reaches our uncertainty-aware selection target on SWE-bench using 6.6% of exhaustive evaluation spend, achieving the lowest cost on six of seven benchmarks and tying on the seventh. Its advantage narrows when task costs are unknown before execution or exact-best selection is required. Our findings motivate decision-oriented agent evaluation that accounts for accuracy uncertainty, validates execution costs, and compares complex selection methods against simple adaptive allocation.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有LLM Agent排行榜的排名无法可靠指导选择，其精度差异常无统计显著性，且报告成本不一致。",
+      "基于HAL排行榜数据，发现在精度-成本帕累托前沿上大量步长无统计差异，报告成本与标准估算最高偏差11.7倍。",
+      "在明确评估预算与部署成本上限下，连续减半策略仅需6.6%的穷举开销即可达成目标，优于其他评估策略。"
+    ],
     "authors": [
       "Srinath Srinivasan",
       "Tim Menzies"
@@ -479,7 +483,12 @@
     "matched": [
       "LLM agent"
     ],
-    "score": 6
+    "score": 6,
+    "tags": [
+      "软件工程Agent",
+      "预算约束",
+      "评估策略"
+    ]
   },
   {
     "id": "2611.21513",
@@ -841,9 +850,13 @@
   {
     "id": "2611.21407",
     "title": "Harness Leverage Across Model Size: A Ladder of Five Local Agent Harnesses from 0.75B to 4.7B",
-    "title_zh": null,
+    "title_zh": "跨模型规模的Harness效应：0.75B至4.7B的五种本地Agent Harness",
     "abstract": "A harness turns a model into a system that completes tasks: it builds the prompt, exposes tools and decides when work is done. Harness comparisons hold the model fixed. Model comparisons hold the harness fixed. We vary both: five shipped harnesses, 18 artifact-producing tasks, four locally deployable open-weight models from 0.75B to 4.7B and a 35.5B anchor, with one deterministic checker scoring all 360 ladder cells. The completion-controlling harness, Mingbird, has the highest mean at every size. Of four pre-registered paired contrasts, two survive Holm correction, at 0.75B and 4.7B. Thirteen of sixteen paired intervals exclude zero under the deployment reading, with leads from 0.075 over the strongest rival to 0.819 over the weakest. The completion gate is not the carrier: disabling all six executable checks moves the mean by +0.080, +0.117, +0.003 and -0.004, every interval including zero, and only at 1.9B does disabling it create empty runs. Removing one repeat-blocking rule alone costs 0.411 at 0.75B and leaves eight of eighteen tasks with no artifact. The harness effect is a progress effect: it decides whether a run leaves anything on disk. Of 357 usable cells, 127 leave none of their declared artifacts and 85 of those exit normally, so a scorer that reads exit status credits work that was never written. Whether the effect grows or shrinks with size, four rungs cannot settle: a floor arm produces a rise, a ceiling a decline, and a cross-family rung a peak.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有研究固定模型或Harness对比，本文同时变化两者，在18个任务上评估5种Harness与5个模型，构建360个测试单元。",
+      "控制任务完成的Mingbird在所有模型规模上均值最高，其优势在0.75B和4.7B上经Holm校正后依然显著。",
+      "研究发现Harness效应本质是进度效应，决定运行是否产出文件；且该效应随模型规模的变化趋势无法由现有四档规模定论。"
+    ],
     "authors": [
       "Hao Wang",
       "Ting Huang"
@@ -864,7 +877,12 @@
     "matched": [
       "agent harness"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "Agent框架",
+      "模型规模",
+      "任务完成度"
+    ]
   },
   {
     "id": "2611.21404",
@@ -1628,9 +1646,13 @@
   {
     "id": "2611.21164",
     "title": "Microstate Response Model: A Unified IRT Framework from Latent Nominal States to a Theory of Tests",
-    "title_zh": null,
+    "title_zh": "微观状态响应模型：从潜名义状态到测验理论的统一IRT框架",
     "abstract": "Several features outside of the conventional assumptions in traditional item response theory (IRT) models have been revealed to be related, yet no unifying framework explains the features simultaneously. They can be unified by treating each cause as a distinct reason, and then regarding every reason as a choice in a latent multiple-choice item. Here, we propose the Microstate Response Model (MiRM), which decomposes each response category (macrostate) into multiple latent reasons (microstates) using Boltzmann weights. The consequences of this simple framework are substantial; for example, it reads the lower and upper asymptotes of item characteristic curves (ICCs) as additional states, and ICC asymmetry and item complexity as multiple states. The model unifies many classical models from the dichotomous logistic family to mixture models. Moreover, the algebra of the model provides the intuition that items and tests are the same object. Two consequences naturally come out: partial credits and test scores are unified, and a new test-level monotonicity condition is proposed. We examine item characteristics including nonmonotonicity on PISA 2015, and show that MiRM provides a deeper understanding of items while achieving the strongest overall performance across fit, parsimony, and prediction.",
-    "summary_zh": null,
+    "summary_zh": [
+      "传统IRT模型外的多个特征缺乏统一解释框架，本文提出微观状态响应模型MiRM，将宏观响应分解为多个潜原因的微观状态。",
+      "MiRM利用Boltzmann权重分解响应类别，将ICC的上下渐近线、非对称性及项目复杂度解释为附加或多重状态，从而统一了多种经典模型。",
+      "该模型的代数性质揭示项目与测验为同一对象，统一了部分信用与测验分数，并提出新测验级单调性条件，在PISA数据上展现出最优综合性能。"
+    ],
     "authors": [
       "Seongsu Lee",
       "Junghyo Jo"
@@ -1648,14 +1670,23 @@
     "comment": "31 pages, 9 figures",
     "journal_ref": "",
     "matched": [],
-    "score": 1
+    "score": 1,
+    "tags": [
+      "项目反应理论",
+      "微观状态响应模型",
+      "测验理论"
+    ]
   },
   {
     "id": "2611.21155",
     "title": "Edit Recommendation: Can LLMs Anticipate Edit Requests from Users, and When?",
-    "title_zh": null,
+    "title_zh": "LLM能否及何时预测用户的编辑请求",
     "abstract": "After a large language model (LLM) agent generates an artifact, users often send edit requests for it. This paper studies whether an LLM can anticipate these requests before they are sent. Such anticipation is useful in practice because it reduces the effort of user review and feedback. We formalize this task as edit recommendation and build EditRecBench, a benchmark for evaluating the performance of LLMs on this task, from real-world conversation logs in WildChat-4.8M. Through benchmarking and failure analysis, we identify a practical challenge that some cases are inherently difficult to predict in real-world settings. To address this, we introduce decision model-based gating to filter out cases where predictions are unlikely to be correct before they are presented to the user. Our trained model outperforms existing decision models and raises pass@5 among shown suggestions by 12--25 points at a gating threshold. Our code is available at https://github.com/ntt-dkiku/llm-edit-recommendation.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM生成内容后常需用户修改，为减少用户反馈成本，提出编辑推荐任务以预测用户编辑请求。",
+      "基于WildChat构建EditRecBench基准，发现部分真实场景的编辑请求难以预测。",
+      "引入决策模型门控过滤不可预测案例，训练后的模型使展示建议的pass@5提升12-25点。"
+    ],
     "authors": [
       "Daisuke Kikuta"
     ],
@@ -1674,14 +1705,23 @@
     "comment": "Blog: https://ntt-dkiku.github.io/llm-edit-recommendation, Code: https://github.com/ntt-dkiku/llm-edit-recommendation",
     "journal_ref": "",
     "matched": [],
-    "score": 7
+    "score": 7,
+    "tags": [
+      "编辑推荐",
+      "LLM",
+      "基准测试"
+    ]
   },
   {
     "id": "2611.21152",
     "title": "From Repositories to Training Environments: Scaling Long-Horizon Coding Agents with Environment Evolution Loop",
-    "title_zh": null,
+    "title_zh": "基于环境演化循环扩展长周期编程Agent",
     "abstract": "Training coding agents for long-horizon tasks requires environments with verifiable feedback. Existing pipelines often follow a linear process that ends with validation, establishing usability but providing little guidance on improving training value. Recursive self-improvement (RSI) often requires model rollouts or model training followed by downstream evaluation, with costs and feedback delays amplified on long-horizon tasks. How can we use timely, reliable proxy signals to improve training value and synthesize environments at scale? We present RepoFactory, an automated pipeline that converts real repositories into verifiable environments where agents build complete projects from scratch given a language specification. Its Environment Evolution Loop optimizes a multiplicative objective combining validity, structural coupling, and implementation scope through proxy feedback. RepoFactory produces 10,159 environments across 17 software domains. Training Qwen3.5-35B-A3B on these environments yields RepoHorizen-35B-A3B, which achieves gains of 22.6 percentage points on NL2Repo-Bench and 8.5 points on average across five benchmarks covering long-horizon coding and agentic tasks in real-world production settings, compared with 17.5 and 6.4 points without environment evolution. These results highlight the training value of RepoFactory environments and the additional gains from the Environment Evolution Loop.",
-    "summary_zh": null,
+    "summary_zh": [
+      "长周期编程任务缺乏高质量可验证训练环境，现有线性流程难以提升环境训练价值且反馈延迟高。",
+      "提出RepoFactory自动流水线，通过环境演化循环优化有效性、结构耦合与实现范围的乘积目标，规模化合成环境。",
+      "基于此训练的模型在NL2Repo-Bench提升22.6分，五项基准平均提升8.5分，验证了环境演化循环的增益。"
+    ],
     "authors": [
       "Yang Tian",
       "Tianyu Zheng",
@@ -1707,14 +1747,23 @@
     "matched": [
       "coding agent"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "编程Agent",
+      "环境演化",
+      "长周期任务"
+    ]
   },
   {
     "id": "2611.21129",
     "title": "Linglong Agent Service: A Runtime for Centralized Agent Reasoning and Distributed Execution",
-    "title_zh": null,
+    "title_zh": "Linglong Agent 服务：集中推理与分布式执行运行时",
     "abstract": "LLM agents can use remote tools and cloud sandboxes, but integrating reasoning, session state, and heterogeneous execution sites remains a runtime design problem. We present Linglong Agent Service (agentsvc), a self-hosted HTTP service and embeddable Python runtime that treats execution site as a configurable dimension alongside model, tools, and context. A parent service retains inference orchestration, tool descriptions, and conversation history; each inference request selects one child environment for file, shell, terminal, and MCP operations. Direct HTTP and child-initiated WebSocket tunnels carry the same application interfaces, including portable request context and centrally managed updates. The normal core path requires no third-party Python packages, with an optional Windows pseudo-terminal dependency. We further present online_debugger as the process-scale special case of execution-site separation: an instrumented program submits exception evidence, executes session-scoped inspection tools inside the incident process, and resumes the same diagnostic session. Its default prompt requires failing-then-passing reproduction evidence for source changes, while runtime patch activation and failed-call recovery remain unimplemented. We explain the design through constrained expected-utility reasoning, compare concrete mechanisms with Hermes Agent, Pi, Codex, and Claude Code, and report implementation and regression-test evidence. The current evidence establishes executable contracts, not performance advantages, repair accuracy, or production recovery. The source code is open source under the MIT license at https://github.com/mz24cn/agents.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM agent 难以统一推理、会话状态与异构执行站点，本文提出 Linglong Agent Service 解决该运行时设计问题。",
+      "该运行时将执行站点视为可配置维度，父服务保留推理编排与历史，子环境执行具体操作，通过 HTTP 与 WebSocket 通信。",
+      "提出 online_debugger 实现进程级执行分离，当前证据验证了可执行契约，尚未实现运行时补丁激活与故障恢复。"
+    ],
     "authors": [
       "Hua Zhang",
       "Min Jiang"
@@ -1736,14 +1785,23 @@
       "LLM agent",
       "reasoning"
     ],
-    "score": 13
+    "score": 13,
+    "tags": [
+      "LLM agent",
+      "运行时设计",
+      "分布式执行"
+    ]
   },
   {
     "id": "2611.21105",
     "title": "CivilBench: Benchmarking Vision-Language Models for Multimodal Information Integration in Civil Engineering",
-    "title_zh": null,
+    "title_zh": "CivilBench：土木工程多模态信息整合的VLM基准",
     "abstract": "Artificial intelligence (AI), particularly large language models (LLMs) and vision-language models (VLMs), is increasingly applied in civil and structural engineering for disaster assessment, structural analysis, and engineering decision support. However, the extent to which current VLMs possess the reasoning capabilities required for reliable engineering judgments remains unclear. In this work, we introduce CivilBench, a comprehensive benchmark for evaluating VLMs in civil engineering and disaster-related scenarios. CivilBench covers three major task families: Sequential Reasoning, Image-based Structural Understanding, and Open-world Understanding, encompassing numerical reasoning, structural damage assessment, risk inference, causal analysis, and repair planning. The benchmark is constructed through a systematic pipeline of domain-specific data collection, engineering-oriented captioning, expert annotation, question design, and quality verification. Evaluation of representative state-of-the-art VLMs reveals substantial limitations in domain-specific reasoning, with Sequential Reasoning emerging as a major bottleneck, particularly when models must infer numerical relationships from sparse structured observations. Further experiments show that numerical priors and external knowledge can alleviate these limitations, although their effectiveness depends on the model's ability to reliably interpret and use the available evidence. CivilBench provides a capability-oriented testbed for identifying reasoning limitations and evaluating progress toward reliable AI-assisted engineering decision-making. The benchmark will be publicly available at https://huggingface.co/datasets/traceuryuan/CivilBench.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有VLM在土木工程决策中的推理能力尚不明确，故构建CivilBench基准以系统评估其表现。",
+      "该基准涵盖序列推理、图像结构理解与开放世界理解三大任务，经专家标注与质量验证构建。",
+      "评估发现现有VLM领域推理受限且序列推理为瓶颈，引入数值先验与外部知识可部分缓解该局限。"
+    ],
     "authors": [
       "Dan Yuan",
       "Yue Wen",
@@ -1768,14 +1826,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "土木工程",
+      "视觉语言模型",
+      "基准测试",
+      "序列推理"
+    ]
   },
   {
     "id": "2611.21099",
     "title": "ForceHarness: Turning Force into Action and Physics for Frozen Frontier Models",
-    "title_zh": null,
+    "title_zh": "ForceHarness：让冻结前沿模型利用力信息执行动作与物理推理",
     "abstract": "Frontier multimodal models can now control robots zero-shot from images, yet many manipulation tasks depend on contact forces that images cannot show. Bringing force to an API-only frozen model raises two challenges. First, contact evolves much faster than an API model can decide, so the system must close the loop on force beneath the model. Second, a frozen model cannot interpret raw force streams, so force must be returned in a form the model can reason about. Therefore, we present ForceHarness, a harness that lets frozen models use force without demonstrations or finetuning. After calibrating hand force from a wrist sensor or joint torques alone, ForceHarness addresses the first challenge with self-terminating force primitives that regulate force on their own and return at a contact event. To address the second challenge, a physics translation layer turns each force trace into physical quantities with uncertainty as the tool result. To evaluate ForceHarness against expert force controllers and learned policies under identical conditions, we also build HiddenPhys, a seven-task MuJoCo benchmark with hidden physical variables. On a real arm without a wrist force sensor, ForceHarness raises the zero-shot success rate of GPT-6 Astra from 3.3% to 90.0%. In simulation, it adds 17.5 percentage points on the public ForceBench suite and 34.3 percentage points on HiddenPhys, surpassing force-aware policies trained on demonstrations on both benchmarks and matching hand-written expert controllers on HiddenPhys. Ablations further show that smaller models make significantly better decisions when given physical quantities rather than raw force values.",
-    "summary_zh": null,
+    "summary_zh": [
+      "冻结多模态模型无法感知接触力，且API响应慢、无法解析原始力数据，导致难以完成依赖力的操作任务。",
+      "提出ForceHarness框架，通过自终止力原语在底层闭环控制力，并用物理转换层将力轨迹转为含不确定性的物理量供模型推理。",
+      "在真实机械臂上将GPT-4o零样本成功率提升至90%，在仿真中超越基于示范训练的策略，且小模型使用物理量决策远优于原始力值。"
+    ],
     "authors": [
       "Ke Sun",
       "Kevin Yuchen Ma",
@@ -1796,14 +1864,24 @@
     "comment": "31 pages: 8-page main paper, references, and supplementary material. Project page: https://showlab.github.io/ForceHarness",
     "journal_ref": "",
     "matched": [],
-    "score": 1
+    "score": 1,
+    "tags": [
+      "机器人操作",
+      "力感知",
+      "冻结模型",
+      "物理推理"
+    ]
   },
   {
     "id": "2611.21095",
     "title": "SWE-WhatIf: Simulating Real Users of Coding Agents from Recorded Session",
-    "title_zh": null,
+    "title_zh": "SWE-WhatIf：基于录制会话模拟编程助手的真实用户",
     "abstract": "Recorded sessions between users and coding agents offer a way to evaluate how agents complete real-world tasks and interact with users. However, these sessions cannot simply be replayed with new agents, because recorded user replies may no longer apply when an agent takes a different trajectory. We introduce SWE-WhatIf, which replays recorded sessions with new agents by modeling the user's intents, the criteria for satisfying them, and the conditions under which they arise. Using this model, a user simulator generates replies that adapt to unseen agent turns while remaining grounded in the recording. Across 89 real-world sessions, SWE-WhatIf generated the replies most similar to those of real users and matched the strongest baseline when sessions were rewritten. To test adaptation, we replay sessions with agents instructed to avoid or repeat actions that the recorded user pushed back on. SWE-WhatIf produced the highest win rate for avoiding these actions (66.3%), significantly above chance. We further demonstrate its utility by ranking five LLMs as coding agents, where the highest-ranked model depended on how users specified and developed their intents, and a study with 16 users, where replaying their own sessions changed 14 participants' rankings and informed their future agent use.",
-    "summary_zh": null,
+    "summary_zh": [
+      "录制会话无法直接重放新Agent，因轨迹改变致原用户回复失效，需动态适应用户意图。",
+      "提出SWE-WhatIf，通过建模用户意图及满足条件，生成适应Agent新轨迹且基于原录制的回复。",
+      "实验表明该模拟器回复最似真实用户，适应动作避免率达66.3%，并成功用于LLM排名与用户研究。"
+    ],
     "authors": [
       "Tae Soo Kim",
       "Tongshuang Wu",
@@ -1826,7 +1904,12 @@
     "matched": [
       "coding agent"
     ],
-    "score": 16
+    "score": 16,
+    "tags": [
+      "用户模拟",
+      "编程助手",
+      "会话重放"
+    ]
   },
   {
     "id": "2611.21084",
@@ -1862,9 +1945,13 @@
   {
     "id": "2611.21083",
     "title": "Think2Listen: Evidence-Centric Learning For Agentic Audio Understanding With LALMS",
-    "title_zh": null,
+    "title_zh": "Think2Listen：面向LALM的证据中心型智能体音频理解框架",
     "abstract": "Recent advances in large audio-language models (LALMs) have broadened audio understanding across speech, sound, and music, with tool-based agents further supporting these tasks by invoking predefined audio tools. However, a persistent gap remains between perceiving acoustic content and using it as evidence for reasoning: recognizing what is audible does not ensure that a model can identify which cues resolve an uncertain decision. To bridge this gap, we propose Think2Listen, an evidence-centric learning framework for agentic audio understanding. Guided by evidence before commitment, Think2Listen couples iterative reasoning with a targeted LALM interaction to actively seek acoustic cues that distinguish competing hypotheses and revise candidate judgments based on the observations returned. It learns what to ask, how to use evidence, and when to stop, using observation-induced changes in candidate-state to inform training credit. Extensive evaluations on two benchmarks spanning seven audio categories demonstrate that Think2Listen achieves (I) enhanced multi-step audio reasoning, with gains in overall accuracy of 5.08%--17.67% over competing audio agents; and (II) improved audio understanding and reasoning across speech, sound, and music, boosting overall accuracy by 2.29%--13.10% over the corresponding baselines. The source code is available at https://github.com/JinWang79/Think2Listen.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LALM虽能感知音频并调用工具，但存在感知与推理脱节问题，无法确定哪些线索能解决决策不确定性。",
+      "提出Think2Listen框架，通过迭代推理与LALM交互主动寻找声学线索，以区分竞争假设并修正判断。",
+      "该框架利用观测引起的候选状态变化指导训练，在两大基准上音频推理准确率最高提升17.67%。"
+    ],
     "authors": [
       "Jin Wang",
       "Liang Lin",
@@ -1893,14 +1980,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 4
+    "score": 4,
+    "tags": [
+      "音频理解",
+      "智能体",
+      "大音频语言模型"
+    ]
   },
   {
     "id": "2611.21072",
     "title": "Sage S2.1 Flash Technical Report",
-    "title_zh": null,
+    "title_zh": "Sage S1.5 Flash 技术报告",
     "abstract": "We introduce Sage S1.5 Flash, a 320-billion-parameter general-purpose mixture-of-experts model designed to reason over scientific evidence and act in interactive environments. Sage Sci-Perception uses dedicated encoders for molecular graphs and biological sequences and represents spectra as ordered patches of measurements. Modality-specific projectors map these representations into the input space of a shared backbone, which processes them alongside text and images. To develop the model's agent capabilities, we construct verifiable environments for tool use, search, and coding, as well as specialized workflows involving machine learning experiments and scientific software. Task completion is checked against execution results, changes in environment state, or submitted artifacts. We evaluate Sage S1.5 Flash on 33 benchmarks across seven domains. In the primary comparison against five baselines, it ranks first on OfficeQA Pro (72.2), MLE-bench Lite (90.3 HumanRank), Harvey LAB, and SpreadsheetBench~2, and second on OSWorld-Verified (85.2), WebArena-Verified (67.6), and DeepResearch Bench~II (54.2). These results show particular strengths in using documentary evidence, producing verifiable workbooks, and carrying out machine learning tasks, alongside competitive performance in desktop and browser workflows that require the model to act on visual feedback.",
-    "summary_zh": null,
+    "summary_zh": [
+      "问题：需处理科学证据并在交互环境中执行操作。方法：构建320B参数MoE模型，用专用编码器处理分子图与生物序列等科学数据。结论：实现科学感知与交互行动的统一。",
+      "问题：需提升模型的智能体能力。方法：构建工具使用、搜索及科学软件等可验证环境，通过执行结果与环境状态检查任务完成情况。结论：形成可靠的智能体训练与评估机制。",
+      "问题：评估模型在多领域的实际表现。方法：在7个领域33个基准上测试。结论：在OfficeQA Pro等4项基准夺冠，OSWorld等3项居亚，擅长处理文档证据与ML任务。"
+    ],
     "authors": [
       "Kun Cai",
       "Haodong Chen",
@@ -1930,7 +2026,12 @@
     "matched": [
       "tool use"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "混合专家模型",
+      "科学智能体",
+      "多模态"
+    ]
   },
   {
     "id": "2611.21069",
@@ -1968,9 +2069,14 @@
   {
     "id": "2611.21056",
     "title": "Evaluation-Free Recursive Self-Improvement for Coding Agents",
-    "title_zh": null,
+    "title_zh": "无需评估的编码智能体递归自我改进",
     "abstract": "Recent self-improving coding agents have achieved strong benchmark performance by iteratively modifying their own executable implementations. A common pattern uses downstream task-derived evidence to decide which candidates or lineages continue evolving, which we term evaluate-and-select. Obtaining this signal requires repeatedly executing evolved agents on downstream tasks, so broader exploration incurs increasing evaluation cost, while repeated optimization against a fixed evaluation distribution may encourage benchmark-specific adaptation. We ask: can coding agents self-improve without downstream task evaluation inside the evolution loop? We introduce Explore-then-Integrate (ELITE), which integrates implementation mechanisms rather than selecting a single exploratory child to continue the lineage. At each generation, ELITE proposes diverse focused improvements, implements them independently from the same parent, and inspects the resulting programs to identify complementary, redundant, and conflicting mechanisms before reimplementing a compatible subset as one coherent descendant. No downstream task outcomes or task-solving trajectories of evolved candidates are used to guide evolution; only deterministic checks of structural and operational validity are used inside the loop. On SWE-bench Pro, ELITE improves the initial agent from 60.0% to 85.6%, compared with 86.7% for the Darwin Godel Machine (DGM) and 88.3% for the Huxley-Godel Machine (HGM), while using zero candidate task evaluations and reducing observed wall-clock evolution time by 8.8x and 3.2x, respectively, under the evaluated configurations. In cross-benchmark transfer without further adaptation, ELITE averages 73.3% on SWE-bench Verified and 69.3% on Polyglot. Together, these results demonstrate the feasibility of coding-agent self-improvement without downstream candidate task evaluation in our setting.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有编码智能体依赖下游任务评估进行自我改进，存在评估成本高且易过拟合特定基准的问题。",
+      "提出ELITE方法，在进化循环内不使用任务评估，而是提出并独立实现多样改进，再检查并整合兼容机制为连贯后代。",
+      "ELITE在SWE-bench Pro上将性能从60.0%提升至85.6%，无需任务评估且大幅缩短进化时间，跨基准泛化表现良好。",
+      "提出ELITE方法，在进化循环内不使用任务评估，而是提出并独立实现多样改进，再检查并整合兼容机制为连贯后代。"
+    ],
     "authors": [
       "Zhe Ren",
       "Guowei Rong",
@@ -1997,14 +2103,24 @@
     "matched": [
       "coding agent"
     ],
-    "score": 18
+    "score": 18,
+    "tags": [
+      "编码智能体",
+      "自我改进",
+      "评估免策略",
+      "代码进化"
+    ]
   },
   {
     "id": "2611.21053",
     "title": "System 1 agents: a method for local, reliable and fast agentic AI",
-    "title_zh": null,
+    "title_zh": "构建本地可靠快速的System 1智能体方法",
     "abstract": "Agentic artificial intelligence could automate analyses of sensitive clinical data, but current agents depend on large language models (LLMs). Cloud LLMs expose patient data. Local LLMs hallucinate, and an invented value in a tool call propagates through every later step. Here we present a method to build System 1 agents: local agents that call tools without generating text. A deterministic compiler turns each tool's schema and the request into multiple-choice questions whose options come from the request and the schema, then a one-pass decision model answers them. On 1,952 requests to 157 biomedical tools, the best System 1 agent chose the right tool, or correctly declined, for 97.0% of requests, significantly ahead of all 18 local LLM-agent settings (best 95.2%). The System 1 agent filled 97.0% of 6,056 stated argument values. No System 1 call contained invented content, against 5.5-19.7% of LLM calls. The System 1 Agents framework is freely available as open-source software at https://github.com/eltzanis/SystemOneAgents.",
-    "summary_zh": null,
+    "summary_zh": [
+      "当前依赖LLM的agent处理敏感临床数据时，云LLM存在隐私泄露风险，本地LLM则会产生幻觉并传播虚构值。",
+      "提出System 1 agent方法，通过确定性编译器将工具模式与请求转为多项选择题，由单次决策模型作答，无需生成文本。",
+      "在生物医学工具测试中，该方法准确率达97.0%，超越所有本地LLM agent，且完全消除了工具调用中的虚构内容。"
+    ],
     "authors": [
       "Eleftherios Tzanis",
       "Michail E. Klontzas"
@@ -2022,14 +2138,24 @@
     "comment": "18 pages, 5 figures, 9 tables. Code and data: https://github.com/eltzanis/SystemOneAgents",
     "journal_ref": "",
     "matched": [],
-    "score": 7
+    "score": 7,
+    "tags": [
+      "智能体",
+      "本地大模型",
+      "临床数据",
+      "幻觉消除"
+    ]
   },
   {
     "id": "2611.21020",
     "title": "SWE-OPD: On-Policy Distillation for Agentic Coding",
-    "title_zh": null,
+    "title_zh": "SWE-OPD：面向智能体编码的同策略蒸馏",
     "abstract": "In this work, we study on-policy distillation (OPD) for transferring agentic coding capabilities from a large teacher model to a smaller student model. Prior work has focused primarily on reasoning and short-horizon agentic tasks. We present SWE-OPD, a minimal OPD study for software engineering, where the student interacts with executable repositories and the teacher supervises the prefixes visited by the student. Across three teacher--student pairs, two training sources, and three SWE benchmarks, we find that on-policy supervision transfers coding capability: supervision from Qwen3.6-27B increases the SWE-bench Pro resolve rate of Qwen3.5-9B from 35.9% to 39.4%. Refreshing trajectories is not strictly required either, as an offline variant with cached teacher scores still improves over the student baselines while cutting end-to-end GPU-hours by 59.4%--72.6% and halving peak GPU allocation, at benchmark-dependent accuracy. Furthermore, we extend the offline variant to corss-tokenizer scenarios: distilling GLM-4.5-Air from DeepSeek-V4-Flash-0731 raises its SWE-bench Pro and Multilingual resolve rate from 35.8% to 39.7% and from 41.8% to 46.2%, around 4% and 4.6% improvement, respectively. We also find that a decreasing loss, however, does not necessarily indicate improved agent performance: under top-$K$ reverse-KL loss, one student exhibits severe repetition despite a decreasing loss. We identify a support-mass gradient term as a potential mechanism underlying this failure.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有蒸馏多关注推理与短视任务，本文提出SWE-OPD，将同策略蒸馏应用于软件工程，实现大模型向小模型的智能体编码能力迁移。",
+      "学生模型与环境交互并由教师模型监督，实验表明该方法有效转移编码能力，且离线变体在大幅降低GPU开销的同时仍保持性能提升。",
+      "将离线变体扩展至跨分词器场景成功提升GLM性能；同时发现损失下降未必代表智能体性能改善，并揭示了支持质量梯度项是导致重复失败的潜在机制。"
+    ],
     "authors": [
       "Yuhang He",
       "Yanyu Chen",
@@ -2060,14 +2186,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "同策略蒸馏",
+      "智能体编码",
+      "软件工程",
+      "大模型"
+    ]
   },
   {
     "id": "2611.21019",
     "title": "MemDoctor: Stage-wise Error Attribution and Repair for MLLM Agent Memory",
-    "title_zh": null,
+    "title_zh": "MemDoctor：MLLM Agent记忆的阶段误差归因与修复",
     "abstract": "Multimodal large language models (MLLMs) now assist users across sessions of images and text, carried by an external memory of what was said and shown. When such an assistant answers wrongly, the failure usually began earlier, in how a record was written, updated or retrieved, and the answer alone does not say where. We formalize multimodal memory as four stages, Write, Update, Retrieve and Answer, and define nine error types across them. A stage-resolved analysis on Mem-Gallery traces most failures to a source stage, and most of those lie before the answer. Injecting known errors against fact-preserving control edits, we then follow each tainted record downstream. Early errors survive to the answer as apparent evidence, and hurt most when no other record holds the fact. A diagnosis that trusts the quoted evidence therefore blames the stage where the error surfaces, not the one where it began. We propose MemDoctor, in which the MLLM that built the memory diagnoses its own failures. It traces each needed fact backward through the four stages, accepts a diagnosis only when the cited evidence is found in memory, and repairs that stage before answering again. On a 4B backbone, MemDoctor improves accuracy on both Mem-Gallery and MemLens, outperforming all evaluated 8B baselines, and the same loop also improves MuRAG and A-Mem.",
-    "summary_zh": null,
+    "summary_zh": [
+      "MLLM Agent记忆错误常源于写入或检索等早期阶段，但仅凭错误答案难以定位源头。",
+      "本文将多模态记忆分为写入、更新、检索和回答四阶段，提出MemDoctor让MLLM自我诊断。",
+      "MemDoctor沿四阶段反向追踪事实并修复出错阶段，在4B模型上准确率超越8B基线。"
+    ],
     "authors": [
       "Ruiyang Jiang",
       "Xinyang Liao",
@@ -2091,14 +2227,23 @@
     "matched": [
       "LLM agent"
     ],
-    "score": 16
+    "score": 16,
+    "tags": [
+      "多模态大模型",
+      "记忆诊断",
+      "智能体"
+    ]
   },
   {
     "id": "2611.21003",
     "title": "K2-Horizon: A Frontier Fleet of Open Source Language Models",
-    "title_zh": null,
+    "title_zh": "K2-Horizon：前沿开源大语言模型系列",
     "abstract": "We present K2-Horizon, a fleet of six fully open language models, from a 0.9B dense model to a 375B-A23B MoE, built for general-purpose reasoning and agentic work across math and science, software engineering, deep research, office automation, and beyond. The models lead or are competitive with strong open models of their size on agentic and coding benchmarks. On the modeling side, to strengthen reasoning, we introduce Mixture-of-Value Attention (MoVA), applying MoE to attention value projections, and softplus attention gating, a more flexible, theoretically motivated gate. Our 36B-A4B model uses both and nearly matches a 32B dense model trained on the same data, with one-seventh the active parameters. We also introduce Uno, lossless diffusion adapters that speed up decoding by up to 2.2x without a separate draft model. Our release follows the LLM360 definition of open source for transparency and reproducibility: the full development history, including intermediate checkpoints from every training stage, pre-training data, training logs, and all training, evaluation, and infrastructure code, notably our production-scale xLLM framework for dense and MoE training and the RL360 reinforcement-learning stack. Beyond the data itself, we release and document in detail every pipeline that built it, the part of model development that open releases most rarely disclose. These pipelines produced roughly 10T synthetic pre-training tokens, showing that synthetic data can be a major ingredient of pre-training at scale. Four of the models share one 22T-token pre-training corpus and recipe, revealing consistent scaling behavior and enabling controlled studies of scale and sparsity. All artifacts are available at https://ifm.ai/k2/",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有开源LLM在通用推理与智能体任务上表现不足，提出K2-Horizon系列模型，在多项基准测试中达到同量级领先水平。",
+      "为增强推理并降低计算开销，提出MoVA注意力与softplus门控，使4B激活参数的MoE模型媲美32B稠密模型；并引入Uno适配器实现2.2倍无损加速。",
+      "开源生态缺乏透明度与合成数据经验，全面公开训练全流程代码、日志及10T合成预训练数据，证明合成数据可作为预训练核心成分。"
+    ],
     "authors": [
       "K2 Team",
       "Zhengzhong Liu",
@@ -2128,14 +2273,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "开源大模型",
+      "混合专家模型",
+      "智能体",
+      "合成数据"
+    ]
   },
   {
     "id": "2611.20997",
     "title": "OpenMAS-GApp: A Comprehensive Benchmark for Domain-Adaptive Multi-Agent Application Construction",
-    "title_zh": null,
+    "title_zh": "跨领域多智能体应用构建的综合基准OpenMAS-GApp",
     "abstract": "Constructing multi-agent system (MAS) applications across domains requires translating diverse requirements into executable systems, involving task decomposition, agent and tool selection, and execution organization. Existing studies have explored individual aspects of MAS construction, including agent generation, architecture design, workflow generation, and component selection. However, these methods are often developed and evaluated independently, using different task specifications, component resources, and execution settings. This makes it difficult to compare their construction capabilities or determine how they can be applied to different domains. To address this problem, we propose OpenMAS-GApp, a One-for-All benchmark for MAS application construction across diverse domains. It standardizes task inputs, component resources, construction interfaces, and execution environments to support MAS construction under consistent conditions. Within OpenMAS-GApp, we provide Graph Harness as a reference construction method that derives task dependencies, selects compatible agents and tools, and organizes their interactions into executable graphs. We evaluate construction methods across 19 benchmark datasets under 20 evaluation settings spanning four application types and four professional domains.",
-    "summary_zh": null,
+    "summary_zh": [
+      "跨领域构建多智能体系统需处理任务分解与组件选择，但现有方法独立评估，难以比较构建能力及跨领域适用性。",
+      "提出OpenMAS-GApp基准，标准化任务输入、组件资源、构建接口与执行环境，以支持一致条件下的MAS构建。",
+      "提供Graph Harness参考方法生成可执行图，并在4类应用与4个专业领域的19个数据集上进行了全面评估。"
+    ],
     "authors": [
       "Xunkai Li",
       "Kairui Yang",
@@ -2161,14 +2316,23 @@
     "matched": [
       "multi-agent"
     ],
-    "score": 16
+    "score": 16,
+    "tags": [
+      "多智能体系统",
+      "基准测试",
+      "跨领域构建"
+    ]
   },
   {
     "id": "2611.20994",
     "title": "Development of an HPLC Analytical Method Based on Large Language Models:A Case Study of the Eczema External Wash Formula",
-    "title_zh": null,
+    "title_zh": "基于大语言模型的HPLC分析方法开发：以湿疹外洗方为例",
     "abstract": "Traditional Chinese medicine (TCM) formulas feature complex chemical compositions, and their HPLC quality control method development is time-consuming and experience-dependent. Large language models (LLMs) provide a promising strategy for intelligently assisting analytical method construction. Taking the Eczema External Wash Formula as the research object, this work constructed a human-machine collaborative workflow involving intelligent recommendation, experimental validation and iterative optimization for HPLC method development. Among five prompt strategies tested, expert-role setting with structured reasoning performed best. After inputting formula information, the LLM proposed five chromatographic schemes. Through experimental screening and optimization, the final HPLC method used a SunShell C18 column, mobile phase of 0.1% aqueous formic acid-acetonitrile for gradient elution, with seven markers separated within 55 min. Twenty components were characterized by LC-MS. The validated method exhibited satisfactory linearity, precision, repeatability, stability and recovery. This indicates LLMs can reduce the workload of chromatographic condition exploration and boost the development efficiency of TCM formula analytical methods, supporting intelligent TCM quality control.",
-    "summary_zh": null,
+    "summary_zh": [
+      "中药复方化学成分复杂，其HPLC质控方法开发耗时且依赖经验，亟需智能化辅助策略。",
+      "构建人机协作工作流，测试五种提示策略后发现，专家角色设定结合结构化推理效果最佳。",
+      "实验验证表明，LLM能有效减少色谱条件探索工作量，提升中药分析方法开发效率。"
+    ],
     "authors": [
       "Kexin Guo",
       "Xueting Sun",
@@ -2191,14 +2355,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 6
+    "score": 6,
+    "tags": [
+      "大语言模型",
+      "HPLC方法开发",
+      "中药质量控制"
+    ]
   },
   {
     "id": "2611.20992",
     "title": "MedJev: A System One Vision-Language Decision Model for Fast and Effective Medical Image Understanding",
-    "title_zh": null,
+    "title_zh": "MedJev：面向快速有效医学图像理解的系统一视觉语言决策模型",
     "abstract": "Medical image understanding with vision-language models (VLMs) typically relies on autoregressively generating reasoning and answer tokens. These unnecessary tokens make the inference cost scale with the response length and force the answer to be parsed from free-form text, incurring avoidable latency and decision errors. To this end, we introduce \\textsc{MedJev}, a \\emph{system one} vision-language decision model that maps medical images, questions, and candidate answers directly to decisions in a single multimodal forward pass, without any autoregressive generation process. For fast inference, \\textsc{MedJev} removes the upper language layers and the generative output pathway, while keeping the full vision pathway and all visual tokens. On this shortened backbone, a decision head scores each candidate by pretrained query--key matching and refines the scores with a lightweight multilayer perceptron (MLP) residual, coupling the pretrained matching structure with task-specific nonlinear discrimination. Built on Qwen3.5-4B, \\textsc{MedJev}-4B improves both accuracy and speed over the original model on each of four medical image classification and visual question answering benchmarks, with an absolute accuracy gain of \\textbf{7.93\\%} and a \\textbf{6.04$\\times$} end-to-end speedup. Further comparison with 20 cutting-edge models shows that \\textsc{MedJev}-4B achieves state-of-the-art performance and inference speed among 4B--9B general and medical VLMs, indicating that direct multimodal decision making is an effective route to fast and effective medical image understanding.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有VLM依赖自回归生成文本推理，导致推理延迟高且易产生决策错误。",
+      "提出MedJev模型，移除语言生成层，通过单次前向传播直接映射至决策，利用预训练匹配与MLP残差评分候选答案。",
+      "在4个医学基准上，MedJev-4B较原模型准确率提升7.93%，速度提升6.04倍，在4B-9B级VLM中达到SOTA。"
+    ],
     "authors": [
       "Fan Zhang",
       "Hao Wu",
@@ -2224,14 +2397,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 6
+    "score": 6,
+    "tags": [
+      "医学图像理解",
+      "视觉语言模型",
+      "决策模型"
+    ]
   },
   {
     "id": "2611.20988",
     "title": "Hivemind: A Federated Protocol for AI-Mediated Tacit Knowledge Sharing in Organisations",
-    "title_zh": null,
+    "title_zh": "Hivemind：面向组织内隐知识共享的联邦协议",
     "abstract": "This paper presents Hivemind, a federated protocol that enables AI agents to exchange tacit knowledge on behalf of their users, asynchronously and without requiring any direct human interaction. Individual AI memory systems capture the decisions, reasoning, and contextual knowledge that surface during AI-assisted work. Hivemind creates the shared space in which this captured knowledge can flow between individuals across team and departmental boundaries, addressing a structural gap that neither centralised knowledge repositories nor existing AI tooling closes, even where partial solutions such as expert-finding systems exist. The paper evaluates centralised versus decentralised design approaches, proposes a federated architecture grounded in Nonaka and Takeuchi's (1995) Socialisation, Externalisation, Combination and Internalisation (SECI) model, and demonstrates a proof-of-concept implementation using Design Science Research (DSR) methodology. Measuring the enterprise benefit of federated tacit expertise sharing remains an open task for future work.",
-    "summary_zh": null,
+    "summary_zh": [
+      "组织内隐知识难以跨团队流动，现有中心化知识库与AI工具存在结构性缺口。",
+      "提出Hivemind联邦协议，让AI agent异步代用户交换隐知识，基于SECI模型构建联邦架构。",
+      "采用设计科学研究方法实现概念验证，但量化该共享机制的企业效益仍是未来工作。"
+    ],
     "authors": [
       "Srinivasan Sundaresan"
     ],
@@ -2252,14 +2434,23 @@
       "AI agent",
       "reasoning"
     ],
-    "score": 13
+    "score": 13,
+    "tags": [
+      "隐知识共享",
+      "联邦协议",
+      "AI agent"
+    ]
   },
   {
     "id": "2611.20986",
     "title": "Calpha: Toward Native Biomolecular Intelligence in a General-Purpose Language Model",
-    "title_zh": null,
+    "title_zh": "Calpha：面向通用大模型的原生生物分子智能",
     "abstract": "Biomolecular foundation models predict the structures of proteins and their complexes accurately, and large language models (LLMs) reason in natural language, but the two remain separate: the abilities of the former are not part of a general-purpose LLM, and the reasoning of the latter does not enter a structure prediction. Calpha aims at one general model that folds proteins and complexes, understands protein sequence and structure, and lets its language reasoning influence the structures it predicts. This report covers the first step, in which an LLM outputs single-chain protein structures. Qwen3.5-9B reads a sequence enriched with ESM2 residue features. It can respond in text or emit a token that invokes a pretrained SimpleFold structure head, which receives information about the protein only through Qwen's residue states. Under a fixed folding request, the head achieves mean TM-scores of 0.808 on the FoldBench-334 development set, 0.635 on CASP16 domains and 0.900 on a CAMEO-style PDB set. We compare these predictions with a baseline in which ESM2-3B encodes the sequence and a fine-tuned SimpleFold-3B head predicts the coordinates. The two systems also differ in trainable weights, training duration and crop length. For chains of 100--299 residues, all three paired confidence intervals include zero. At 300--600 residues, the mean differences are -0.044, -0.160 and -0.025, respectively. In a separate test, four English request types triggered folding on every evaluated example. Protein training reduced accuracy on a 350-item MMLU-Pro subset from 77.4% to 70.3%. An LLM can therefore output single-chain structures from its own states, with lower long-chain scores in the current comparisons and reduced accuracy on the evaluated MMLU-Pro subset. Complex prediction, structure understanding and the effect of language reasoning on the predicted coordinates remain future work.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有生物分子模型与LLM相互割裂，无法在通用模型中同时实现结构预测与语言推理。",
+      "提出Calpha模型，让LLM读取ESM2特征序列，通过调用预训练SimpleFold结构头输出蛋白质结构。",
+      "LLM能基于自身状态输出单链结构，但当前长链评分较低，且蛋白质训练导致MMLU-Pro准确率下降。"
+    ],
     "authors": [
       "Yong Liu",
       "Zhanpeng Shi",
@@ -2286,14 +2477,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 4
+    "score": 4,
+    "tags": [
+      "生物分子智能",
+      "蛋白质结构预测",
+      "大语言模型"
+    ]
   },
   {
     "id": "2611.20983",
     "title": "GRACE: Parallel Best-of-N Multi-Agent Analysis of Closed-Form Questions over Dataframes with Guardrail Selection and Adaptive Retry",
-    "title_zh": null,
+    "title_zh": "GRACE：基于数据框闭式问题的并行多智能体分析与护栏选择",
     "abstract": "LLM agents answer closed-form questions over a tabular dataframe by writing and executing Python, almost always as a single rollout: one interpretation, one script, one result, accepted without comparison. The few pipelines that produce several candidates reconcile them by answer-agreement voting, which needs a single comparable scalar and always returns one, even when every candidate is wrong. We present GRACE (Generative, Ranked, Adaptive Code Ensemble), a production-oriented pipeline that instead runs parallel best-of-N selection specialised to dataframe code. N agents run concurrently under a strict, machine-checkable output contract, diversified by persona hints, per-retry rotation, and a two-regime temperature schedule. Rather than vote, GRACE judges the executed artefacts: a pairwise tournament pre-filters the pool and a domain-specialised guardrail either selects the best candidate or, when none is defensible, rejects the whole pool and abstains with a diagnosis (an option voting structurally lacks), which in turn drives an adaptive retry with per-agent feedback. On InfiAgent-DABench (DAEval, M = 246), using Qwen3.6-35B-A3B as the backbone, GRACE raises answer match from 39% for a single-rollout baseline to 71% (+32 pp, 1.8x), recovering 53% of previously wrong answers. On the same DAEval task, the smaller dense Qwen3.5-9B lifts answer match from 38% to 63% (+25 pp, 1.7x). A controlled 3 x 3 study that sweeps the number of parallel agents against the retry budget finds, on the 35B backbone, the two levers largely substitutable: once either one is generous, the other adds little, identifying a cheap operating point for deployment. The same directional pattern replicates on the independent DataBench benchmark, again on the Qwen3.6-35B-A3B backbone, where answer match rises by 15 percentage points (from 70% to 85%) across 400 sampled questions.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有LLM处理数据框闭式问题多为单次生成，少数多候选流水线依赖投票且无法拒绝错误答案。",
+      "提出GRACE流水线，并行运行N个智能体生成代码，通过锦标赛预筛选与领域护栏判断候选。",
+      "护栏可拒绝全池并驱动自适应重试；实验表明该方法将准确率提升至71%，且智能体数与重试预算可相互替代。"
+    ],
     "authors": [
       "Fabio Picariello",
       "Salvatore Cipolla",
@@ -2317,14 +2517,24 @@
       "LLM agent",
       "multi-agent"
     ],
-    "score": 20
+    "score": 20,
+    "tags": [
+      "多智能体",
+      "LLM代码生成",
+      "护栏选择",
+      "数据框分析"
+    ]
   },
   {
     "id": "2611.20976",
     "title": "Living Context Graphs: Continual Semantic Learning for Enterprise Data Reasoning",
-    "title_zh": null,
+    "title_zh": "活上下文图：面向企业数据推理的持续语义学习",
     "abstract": "Enterprise AI can now perform analytics, reporting, and data-driven workflows, yet the data foundations it relies on remain hard to operationalize: business meaning, relationships, metric definitions, and reporting conventions are absent from database schemas and scattered across undocumented systems and tribal knowledge. We introduce the Living Context Graph (LCG), a continually learned context layer that makes existing enterprise data operational for AI without requiring a copy or transformation of the underlying warehouse. LCG bootstraps base semantics and relationships from the data itself, builds a concept graph that indexes business context as queries are served, writes durable semantic learnings from verified outcomes, and withdraws or re-earns context when later outcomes contradict prior routes. We evaluate LCG through text-to-SQL, a core data-reasoning task, on a transfer-aware split of three BIRD databases comprising 499 questions: 353 form the learning history and 146 are held out and never used to update the context layer. Bootstrapping alone improves overall accuracy by +4.6 percentage points. Learning only from the history raises accuracy on the untouched held-out transfer set by +22.6 points (95% CI [+14.4, +30.8]), exceeding five-shot retrieval from the same history by +12.3 points. Incremental learning reaches the one-shot endpoint within observed evaluation noise on every database. Ablating the graph changes held-out accuracy by at most one question per database but increases per-query cost 2.3-3.3x and median latency 1.8-3.4x: continually learned semantics drive accuracy, while the graph makes that context efficient to serve.",
-    "summary_zh": null,
+    "summary_zh": [
+      "企业AI依赖的数据语义与关系散落各处，难以直接用于数据推理。",
+      "提出活上下文图（LCG），通过自举语义、构建概念图并从验证结果中持续学习，使现有数据可直接供AI使用。",
+      "在text-to-SQL任务上，持续学习使未见过数据的准确率提升22.6%，且图结构在几乎不影响准确率的情况下，使查询成本和延迟大幅降低。"
+    ],
     "authors": [
       "Varun Agrawal",
       "Ayush Srivastava",
@@ -2351,14 +2561,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "企业数据推理",
+      "持续语义学习",
+      "知识图谱",
+      "text-to-SQL"
+    ]
   },
   {
     "id": "2611.20956",
     "title": "From Vision to Interaction: Evaluating Dynamic Social Intelligence of VLM Agents in ALIVE-World",
-    "title_zh": null,
+    "title_zh": "VLM智能体的动态社交智能评估：ALIVE-World环境与基准",
     "abstract": "As AI agents are increasingly deployed in real-world applications and take on social roles, dynamic social intelligence, the ability to continuously perceive multimodal cues, infer latent cognitive states, intervene through embodied actions, and ultimately achieve social goals, has become essential. However, existing evaluations largely fragment social intelligence into text-based abstractions, static reasoning tasks, or embodied simulators that lack social dynamics. These approaches fail to capture the multimodal, continuous, and interpersonal complexity of authentic human interactions. To bridge this gap, we introduce ALIVE-World, an embodied simulation environment supporting dynamic multimodal interactions encompassing egocentric vision, language, and non-verbal action. To provide socially grounded interactive feedback, we populate this environment with counterpart agents driven by a profile-conditioned, dual-system (intuitive-affective and logical-cognitive) architecture. Building upon this platform, we propose ALIVE-Bench to transform the assessment of social intelligence into a trackable quantitative framework. By deeply leveraging underlying environmental states and agents' internal variables, ALIVE-Bench systematically evaluates Vision-Language Model (VLM) agents across four critical dimensions: perception, understanding, influence, and outcome. Extensive evaluations reveal that dynamic social intelligence is fundamentally multi-dimensional and scenario-dependent. We identify a critical bottleneck between upstream perception and downstream social intervention, exposing VLM vulnerabilities in fine-grained proxemic awareness, adaptive intervention, and multi-party coordination. By uncovering these limitations and the diverse interaction strategies they produce, this benchmark provides actionable insights for the future behavioral alignment of multimodal agents.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有社交智能评估多基于文本或静态任务，缺乏真实交互的多模态、连续性与人际复杂性，提出ALIVE-World环境以支持动态多模态交互。",
+      "构建ALIVE-Bench基准，利用环境状态与智能体内部变量，从感知、理解、影响和结果四个维度系统评估VLM agent的动态社交智能。",
+      "评估发现动态社交智能具多维与情境依赖性，揭示VLM在近距感知与自适应干预上存在瓶颈，暴露上游感知与下游干预间的脱节。"
+    ],
     "authors": [
       "Yue Xu",
       "Xiaoyu Qin",
@@ -2382,14 +2602,24 @@
       "AI agent",
       "reasoning"
     ],
-    "score": 12
+    "score": 12,
+    "tags": [
+      "动态社交智能",
+      "VLM智能体",
+      "具身仿真环境",
+      "交互评估"
+    ]
   },
   {
     "id": "2611.20946",
     "title": "Dynamical theory of the East model. I. A review on the Zwanzig-Mori projection-operator formalism",
-    "title_zh": null,
+    "title_zh": "East模型的动力学理论：Zwanzig-Mori投影算子形式评述",
     "abstract": "The East model is a paradigmatic kinetically constrained spin model in one dimension that exhibits glassy dynamics. This review surveys the progress on the theoretical description of the dynamics of the East model, focusing on the spin time correlation function and the relaxation time. We summarize rigorous results on the super-Arrhenius scaling of the relaxation time in the low-temperature limit. We then present a unified derivation of the Zwanzig-Mori projection-operator formalism for both the fluctuation and domain bases. Within this formalism, an infinite hierarchy of coupled equations for the time correlation function and memory kernels emerges---a structure reminiscent of generalized mode-coupling theory developed for supercooled liquids. We review the analytical approximations obtained by truncating or closing the hierarchy at first or second orders and compare them against Monte Carlo simulations. Although these approaches perform reasonably at moderate temperatures, they universally fail in the low-temperature regime: mode-coupling closure schemes in the fluctuation basis introduce spurious ergodicity-breaking transitions, while truncations in the domain basis discard slower modes and fail to capture the asymptotic divergence of the relaxation time. The loss of analytical tractability beyond second order remains the central obstacle, underscoring the fundamental difficulty of describing hierarchical relaxation even in this ``simplest'' model of glassy dynamics.",
-    "summary_zh": null,
+    "summary_zh": [
+      "East模型是一维玻璃态动力学的典型模型，本文综述其自旋时间关联函数与弛豫时间的理论进展。",
+      "基于Zwanzig-Mori投影算子形式推导出关联函数与记忆核的无限耦合方程层级，截断至低阶可与蒙特卡洛模拟对比。",
+      "低阶截断在低温下均失效：会引入虚假遍历性破缺或遗漏慢模；高阶解析不可解是描述层级弛豫的核心障碍。"
+    ],
     "authors": [
       "Chong Zha",
       "Yuliang Jin"
@@ -2408,14 +2638,23 @@
     "comment": "13 pages, 4 figures",
     "journal_ref": "",
     "matched": [],
-    "score": 1
+    "score": 1,
+    "tags": [
+      "East模型",
+      "玻璃态动力学",
+      "投影算子形式"
+    ]
   },
   {
     "id": "2611.20936",
     "title": "ReAccess: Look Once, Stay Focused with Efficient Test Time Memory",
-    "title_zh": null,
+    "title_zh": "ReAccess：基于高效测试时记忆的视觉聚焦框架",
     "abstract": "Despite recent advances, vision-language models (VLMs) still struggle with fine-grained visual understanding, often failing to effectively utilize critical evidence already encoded in their visual representations. Existing approaches address this limitation through repeated visual processing or explicit reasoning, introducing substantial computational overhead. In this paper, we propose ReAccess, a lightweight framework that preserves and reuses question-relevant visual evidence through compact associative memory. Constructed during a single visual prefill, the memory supports progressive evidence retrieval that steers both attention queries and hidden representations, enabling effective visual grounding without repeated image encoding or explicit reasoning traces. Extensive experiments demonstrate consistent improvements in both general visual understanding and fine-grained perception, while achieving substantially faster inference than existing reasoning-intensive approaches, demonstrating a promising path to efficient multimodal reasoning.",
-    "summary_zh": null,
+    "summary_zh": [
+      "VLM难以利用已编码的关键视觉证据，现有重复处理或显式推理方法计算开销大。",
+      "提出ReAccess框架，通过单次视觉预填充构建紧凑关联记忆，渐进检索相关证据。",
+      "该方法引导注意力与隐层表示实现视觉定位，无需重复编码，推理速度显著提升。"
+    ],
     "authors": [
       "Tianhao Chen",
       "Yilong Fan",
@@ -2439,14 +2678,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 6
+    "score": 6,
+    "tags": [
+      "视觉语言模型",
+      "关联记忆",
+      "视觉定位"
+    ]
   },
   {
     "id": "2611.20935",
     "title": "Razavi-Bench: Tracking AI Progress in Analog Circuit Reasoning",
-    "title_zh": null,
+    "title_zh": "Razavi-Bench：追踪AI在模拟电路推理中的进展",
     "abstract": "We propose Razavi-Bench, a benchmark built from the 50 questions in Razavi's two Analog Design Experiments With AI articles and graded by GPT-6 Luna against reference answers and rubrics, and use it to track how fast AI models improve at analog circuit analysis. Across 73 multimodal large language models released between May 2024 and November 2026, the top score rose from 28.83% to 98.33% in 30 months, mostly before the reference answers were published. The leading models now answer almost every textbook question correctly; the hardest questions show a circuit that resembles a textbook one but works differently, or ask about behavior the obvious analysis misses. Within two and a half years, a set of questions that exposed the limits of AI models has become one they answer almost perfectly.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有AI在模拟电路分析上缺乏评测标准，提出Razavi-Bench基准，基于Razavi的50道问题并由GPT-6 Luna评分，以追踪模型能力演进。",
+      "评测73个多模态LLM，发现30个月内最高分从28.83%升至98.33%，且主要提升发生在参考答案公布前。",
+      "结论表明AI已近乎完美解答教科书问题，但最难题目仍具挑战；两年半内，曾暴露AI极限的问题已被其攻克。"
+    ],
     "authors": [
       "Zhishuai Zhang",
       "Oscar Toomey",
@@ -2467,14 +2715,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "模拟电路",
+      "基准测试",
+      "多模态大语言模型"
+    ]
   },
   {
     "id": "2611.20927",
     "title": "LEDGER: Auditable Agent Memory Under Change",
-    "title_zh": null,
+    "title_zh": "LEDGER：支持变更与审计的智能体记忆系统",
     "abstract": "Agent memory systems are mostly evaluated on fixed histories, and only their final answers are scored. In real use, facts change, sources differ in reliability, and users ask the agent to forget things. We present LEDGER, a memory layer in which a language model proposes facts and explicit rules decide which value is current, which source to trust, and what to delete. Each fact keeps its source and the period in which it held. LEDGER+EP adds a search over raw conversation turns for questions the ledger does not cover, and scrubs these turns on deletion. We compare both against no memory, full-history replay, retrieval over raw transcripts, and Mem0, with the same answering model and prompt, on a synthetic multi-session coding-agent workload and a 210-question subset of LongMemEval, and we score both the evidence each memory sends to the model and the answer. On the coding workload, LEDGER+EP in fallback mode answers 94.3% of questions correctly on five development seeds and 91.1% on five held-out seeds, against 82.1% and 83.3% for full replay, the strongest baseline. When a deletion request only describes the fact, no deleted value reached our systems' evidence in any evaluated probe. On LongMemEval, LEDGER+EP in augment mode has the same observed accuracy as full replay (74.8%) with 1% of its context. The main limitation is that the coding workload is synthetic and built by us; on LongMemEval, the differences between the strongest systems are within the confidence intervals.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有智能体记忆评估多基于固定历史，难以应对事实变更、信源差异及用户遗忘请求等现实问题。",
+      "提出LEDGER记忆层，由LM提议事实并依显式规则决定当前值、可信源与删除项，且保留事实来源与有效时段；结合LEDGER+EP检索原始对话并安全擦除。",
+      "实验表明，在编码任务中LEDGER+EP准确率超最强基线，遗忘请求后无已删值泄露；在LongMemEval上以1%上下文达到全量回放的同等准确率。"
+    ],
     "authors": [
       "Md Aidul Islam",
       "Md Nasir Uddin Shuvo",
@@ -2496,14 +2753,23 @@
     "comment": "",
     "journal_ref": "",
     "matched": [],
-    "score": 5
+    "score": 5,
+    "tags": [
+      "智能体记忆",
+      "事实变更",
+      "数据审计"
+    ]
   },
   {
     "id": "2611.20924",
     "title": "Navital Gym: Rule-Graded Agent Environments for Indian Workflows",
-    "title_zh": null,
+    "title_zh": "Navital Gym：面向印度工作流的规则分级智能体环境",
     "abstract": "AI agents are being deployed on Indian workflows such as payments, tax, forms, travel and customer support in Hindi and Hinglish. Public agent evaluations rarely cover these workflows, and many score with another language model. We present Navital Gym, a set of six open environments with 321 public tasks in five task families: trip planning, UPI payments and disputes, GST invoicing and returns, form filling (including a multi-document split) and customer support in Hindi, Hinglish and three experimental Indian languages. Every task is graded by named, deterministic rules that recompute the outcome from a synthetic sandbox world. No language model judges any score. We report one run per task for three models on all six environments, Claude Opus 5.5, Claude Sonnet 5.5 and Claude Haiku 4.5, and for Gemini 3.1 Flash-Lite on two (UPI and the Support core). Opus solves 315 of 321 tasks, Sonnet 302 and Haiku 205. Trip planning and Hindi/Hinglish support separate the models most. We also describe a private held-out set that is not published, and a 7B adapter trained in the gym. Code is Apache-2.0 and task data is CC BY 4.0. The rules are a documented simplification of Indian practice, not the live systems.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有公开智能体评估缺乏对印度支付、税务等工作流的覆盖，且常依赖语言模型评分。",
+      "提出Navital Gym，包含6个开放环境与321个任务，全部由确定性规则重新计算结果评分，不使用语言模型裁判。",
+      "多模型测试表明Opus解决315项任务表现最佳，旅行规划与印地语支持是区分模型能力的关键。"
+    ],
     "authors": [
       "Daksh Bathla"
     ],
@@ -2522,14 +2788,23 @@
     "matched": [
       "AI agent"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "智能体评估",
+      "印度工作流",
+      "规则分级"
+    ]
   },
   {
     "id": "2611.20915",
     "title": "Multi-LLM Agentic AI at the Edge: Joint Agent Scheduling and Resource Allocation",
-    "title_zh": null,
+    "title_zh": "边缘多LLM智能AI：联合代理调度与资源分配",
     "abstract": "In this paper, an edge-enabled multi-large language model (LLM) agentic AI architecture is proposed, where one supervisor AI agent and multiple worker AI agents cooperatively execute users' requests at the edge. The supervisor AI agent decouples the user request into a series of sub-tasks and dynamically dispatches them to LLM-equipped worker AI agents via two agentic workflows, i.e., parallel and serial workflows, with a two-level retry mechanism to enhance execution reliability. To prolong the service duration of worker AI agents, the energy minimization problems are formulated by jointly considering AI agent selection and resource allocation, subject to task execution latency and quality of service (QoS) constraints. A resource allocation scheme based on alternating optimization (AO) is proposed. Specifically, for the parallel workflow, the scheme decouples the original problem into bandwidth allocation, retrieval selection and AI agent selection sub-problems, which are iteratively solved by the proposed successive convex approximation (SCA), Lagrangian relaxation (LR), and Gale-Shapley (GS) or LLM-based algorithms, respectively. For the serial workflow, the problem is similarly decoupled into service time allocation, retrieval selection and AI agent selection sub-problems; the optimal service time allocation is obtained via Karush-Kuhn-Tucker (KKT) conditions, while the latter two sub-problems are addressed by extending the proposed algorithms to the serial scenario. Simulation results show that the proposed resource allocation scheme can reduce system energy consumption compared with other benchmarks, while experiments on a multi-LLM agentic AI system based on Qwen and Llama demonstrate improved task execution success rates.",
-    "summary_zh": null,
+    "summary_zh": [
+      "针对边缘多LLM智能体协作执行请求的问题，提出含监督者与工作智能体的架构，通过串并行工作流与两级重试机制提升可靠性。",
+      "为延长工作智能体服务时长，构建联合代理选择与资源分配的能耗最小化问题，并提出基于交替优化的资源分配方案。",
+      "方案将问题解耦为多个子问题并分别求解，仿真与实验表明该方法有效降低系统能耗，且提升了任务执行成功率。"
+    ],
     "authors": [
       "Yuanyan Song",
       "Kezhi Wang",
@@ -2553,14 +2828,23 @@
       "AI agent",
       "agentic workflow"
     ],
-    "score": 22
+    "score": 22,
+    "tags": [
+      "边缘计算",
+      "多LLM智能体",
+      "资源分配"
+    ]
   },
   {
     "id": "2611.20908",
     "title": "How Elasticity and Chiral Damping Shape Domain-Wall Creep",
-    "title_zh": null,
+    "title_zh": "弹性和手性阻尼如何影响畴壁蠕变",
     "abstract": "Asymmetric domain-wall expansion in the creep regime provides an experimentally accessible probe of the interfacial Dzyaloshinskii-Moriya interaction (iDMI) and, in principle, chiral damping. However, severe discrepancies with complementary measurement techniques and the lack of a model describing the full experimental phenomenology of the creep of chiral domain walls, limits the application of these measurements. Here, using a symmetry decomposition of the velocity curve, we derive an analytical model describing the coupled influence of domain-wall stiffness and chiral damping in the creep regime. Their interplay generates the antisymmetric distortion that shifts the velocity minimum away from the DMI field. Applied to Co-based magnetic multilayers, the model yields iDMI values consistent with BLS and flow-regime benchmarks and identifies the reasons for the longstanding discrepancy. The model provides insights for possible strategies to measure chiral damping via creep dynamics of domain walls.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有畴壁蠕变测量与互补技术存在严重差异，且缺乏描述手性畴壁蠕变完整现象的模型，限制了其应用。",
+      "通过对速度曲线进行对称性分解，推导出解析模型，描述蠕变区中畴壁刚度与手性阻尼的耦合影响。",
+      "该模型揭示了速度最小值偏移的机制，消除了长期测量差异，并为通过蠕变动力学测量手性阻尼提供策略。"
+    ],
     "authors": [
       "Adriano Di Pietro",
       "Alessandro Magni",
@@ -2589,14 +2873,23 @@
     "comment": "Main: 8 pages, 4 figures . Supplementary: 27 pages , 8 figures",
     "journal_ref": "",
     "matched": [],
-    "score": 2
+    "score": 2,
+    "tags": [
+      "畴壁蠕变",
+      "手性阻尼",
+      "界面DMI"
+    ]
   },
   {
     "id": "2611.20891",
     "title": "From Recursion to Convolution: Parallel Self-Improvement for Multi-Agent Systems",
-    "title_zh": null,
+    "title_zh": "从递归到卷积：多智能体系统的并行自我改进",
     "abstract": "Multi-agent self-improvement enables agents to improve through interaction and feedback. However, sequential dependencies across agents and refinement rounds can propagate errors, increase computational costs, and limit parallelism. Moreover, refining individual features or agents in isolation can overlook their dependencies and restrict collective coordination. To address these challenges, we propose ConvRSI, a framework for parallelizing multi-agent self-improvement through convolution. ConvRSI couples intra-agent convolution, which jointly refines related agent features, with inter-agent graph convolution, which aggregates messages according to the collaboration topology. Both stages operate in latent space, enabling parallel updates without repeatedly decoding and re-encoding intermediate messages. Experiments on MATH-500 show that ConvRSI achieves 5.04% performance improvement while reducing 17.27% inference cost, and 45.11% latency compared with RecursiveMAS. It also supports diverse collaboration patterns by representing their topologies as adjacency matrices. These results demonstrate the potential of convolutional co-evolution for efficient multi-agent self-improvement. Our code and datasets are provided in https://github.com/LYA2333/ConvRSI.",
-    "summary_zh": null,
+    "summary_zh": [
+      "多智能体顺序自我改进存在误差传播、计算成本高且并行度低的问题，孤立优化则易忽略依赖关系。",
+      "提出ConvRSI框架，通过潜在空间内的智能体内卷积与智能体间图卷积，实现多智能体并行自我改进。",
+      "实验表明ConvRSI较递归基线提升5.04%性能，降低17.27%推理成本与45.11%延迟，且支持多种协作拓扑。"
+    ],
     "authors": [
       "Zheng Wang",
       "Yuang Liu",
@@ -2626,14 +2919,24 @@
     "matched": [
       "multi-agent"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "多智能体系统",
+      "并行自我改进",
+      "图卷积",
+      "协作拓扑"
+    ]
   },
   {
     "id": "2611.20882",
     "title": "Accelerate Bench: Evaluating Agents for Application-Level Program Optimization",
-    "title_zh": null,
+    "title_zh": "Accelerate Bench：评估应用级程序优化的智能体基准",
     "abstract": "Application optimization requires coding agents to discover useful changes and coordinate them across a complete program while preserving the required computation. We introduce Accelerate Bench, a benchmark of 32 CPU optimization tasks adapted from scientific applications and supercomputing competitions. Each task provides a working program and specifies the workload, correctness requirements, timing boundaries, and permitted edits, leaving agents to choose where and how to optimize. Public testing supports iterative development, and a separate verifier scores the final submission. On benchmark version 1.1, we evaluate 16 coding agents, each pairing a model with a harness. Their Score@1 ranges from 25.5% to 67.4%. Most of their programs are correct, and the size of the speedup separates them: the two leading agents are at least 2x faster on 22 or more of the 32 tasks, while the other fourteen reach 2x on 8 to 17 and leave 125 of their 412 correct outcomes below 1.25x. Controlled replays show why coordination across an application matters: identical source code runs between 0.29x and 2.12x depending only on build and runtime settings, and one code change is worth 1.01x or 6.4x depending on another. Accelerate Bench pairs executable workloads with agents' programs and trajectories to evaluate both their gains and the process behind them.",
-    "summary_zh": null,
+    "summary_zh": [
+      "应用优化需智能体发现有效变更并全局协调，同时保持计算正确性，缺乏相关评估基准。",
+      "提出Accelerate Bench基准，包含32个CPU优化任务，设定正确性与时序边界，支持迭代开发与独立验证。",
+      "评估16个智能体发现加速比差异显著，且验证了全局协调的重要性：相同代码因配置或依赖变更加速比差异极大。"
+    ],
     "authors": [
       "Bowen Liu",
       "Yuhan Li",
@@ -2661,14 +2964,23 @@
     "matched": [
       "coding agent"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "程序优化",
+      "智能体评估",
+      "基准测试"
+    ]
   },
   {
     "id": "2611.20873",
     "title": "Re-Reading Is Not Free: Token Traces and Cache-Aware Energy Estimation for LLM Agents in Software Engineering",
-    "title_zh": null,
+    "title_zh": "LLM代理缓存感知能耗估计：重读非免费",
     "abstract": "As large language models (LLMs) evolve from conversational assistants into autonomous agents embedded in software development workflows, estimating their environmental footprint requires moving beyond conventional token-based accounting. Existing energy estimators focus on isolated request-response interactions, overlooking the repeated processing of accumulated context, cache reuse, and work delegated to subagents. We analyze nearly one billion tokens collected across 42 sessions and 752 task episodes over ten weeks of real-world AI-assisted software development. Cached-context reads make up 94.8% of all API-reported tokens, while uncached input accounts for only 0.017%; for every generated token, approximately 260 cached tokens are read. Context grows 5.3-fold over a session compared with 1.4-fold within individual tasks. To quantify the energy implications, we extend an existing analytical inference-energy model to account for cached-context processing, yielding a cache-aware hybrid estimator. It estimates approximately 250 kWh for the workload, compared with approximately 10 kWh from the output-based estimator EcoLogits, a 25-fold difference largely driven by cached-context reads. Neither estimator has been validated on long cached contexts, but no modeling assumption we varied closes the gap. Starting each task from a fresh context would lower our estimate by about 60%. We also find that parent-session logs report only a subagent's final internal call, undercounting delegated tokens by a factor of ten; for this workload the correction changes the energy estimate by about 5%, but token-volume studies are fully exposed to it. Our findings expose a substantial gap between how current energy estimators and agentic workloads treat context, highlighting the need for workflow-level energy accounting that captures context accumulation, cache reuse, and delegated execution.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有LLM能耗估计器忽略代理重复处理累积上下文与缓存复用，导致严重低估软件工程中LLM代理的能耗。",
+      "基于近10亿Token的真实开发数据分析，扩展推理能耗模型，提出缓存感知混合估计器以量化缓存上下文处理的能耗影响。",
+      "新估计器算得能耗约250kWh，较仅基于输出的估计器高25倍；主因是缓存读取，且子代理日志漏计会进一步影响评估。"
+    ],
     "authors": [
       "Tina Vartziotis",
       "Ketevan Peranidze",
@@ -2696,14 +3008,24 @@
       "LLM agent",
       "autonomous agent"
     ],
-    "score": 18
+    "score": 18,
+    "tags": [
+      "LLM代理",
+      "能耗估计",
+      "缓存感知",
+      "软件工程"
+    ]
   },
   {
     "id": "2611.20868",
     "title": "It Depends on the Task: Rethinking Rhetorical Segmentation of Dutch Judicial Decisions",
-    "title_zh": null,
+    "title_zh": "依任务而变：重新思考荷兰司法判决的修辞分割",
     "abstract": "Classifying the material facts, submissions, judicial reasoning, and the court's decision (rhetorical roles) in case law is a prerequisite for high-quality performance across virtually all NLP-in-law tasks, including legal information retrieval, summarisation, and LLM-based analysis. These rhetorical roles often intertwine and shift sentence by sentence, making reliable classification difficult. This paper introduces the first sentence-level annotated dataset of Dutch judicial decisions, labelled across four legally meaningful categories: material facts, submissions, judicial reasoning, and the court's decision, alongside non-annotated (None) content, and compares several classification strategies, including a staged pipeline that separates None detection from the rhetorical roles, and a Bayesian update that leverages information about the section-header a sentence belongs to. Our results show that no single strategy dominates on both precision and recall: header priors help most when the None sentences are excluded and offer little benefit for None detection itself. These trade-offs matter in practice. For instance, extractive summarisation depends more on recall so it does not miss relevant facts, whereas outcome prediction depends more on precision regarding decision and facts sentences so that the predicted ruling is not contaminated by noise. We use these trade-offs and map the approaches tested in this study onto a set of representative legal NLP use cases.",
-    "summary_zh": null,
+    "summary_zh": [
+      "法律NLP任务需对判决书进行修辞角色分类，但角色常交织且逐句变化，分类困难。",
+      "构建首个荷兰司法判决句级标注数据集，对比含None检测流水线与利用章节标题的贝叶斯更新等多种分类策略。",
+      "发现无单一策略在精确率与召回率上均占优，不同法律NLP任务对二者依赖不同，据此将各策略映射至对应用例。"
+    ],
     "authors": [
       "Samyak Sheth",
       "Gerasimos Spanakis",
@@ -2724,14 +3046,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 9
+    "score": 9,
+    "tags": [
+      "修辞角色分类",
+      "法律NLP",
+      "司法判决"
+    ]
   },
   {
     "id": "2611.20856",
     "title": "Synapse: Optimizing Natural-Language Agent Skills through Program Repair",
-    "title_zh": null,
+    "title_zh": "Synapse：通过程序修复优化自然语言Agent技能",
     "abstract": "Large language model (LLM) agents can improve task performance by optimizing reusable natural-language skills without updating model parameters. Execution feedback reveals failures but does not directly identify which instructions to edit, which related instructions matter, or which tasks an edit may break. We propose Synapse, which casts skill optimization as generate-and-validate repair over a partial program view. A deterministic compiler translates recognized skill constructs into SkIR, a source-linked intermediate representation, while retaining other requirements in the text. Synapse combines execution traces with control-flow and dependence relations to localize faults, propose typed mutations, and select related repair tests, including previously passing ones. Each mutation is written back to its mapped source span and recompiled; validation determines acceptance. Every accepted patch yields a well-formed skill and preserves untargeted instruction spans. Under a one-hop-local execution assumption, selected tests include every test an edit can affect. On DocVQA and LiveMath with three execution models, Synapse improves task success rates over SkillOpt by 3.74-4.54 and 2.40-4.00 percentage points, respectively, and outperforms Trace2Skill and SkillBoost in all six settings. Replacing SkIR-based repair and its test screening with constrained text editing screened only on failing tests lowers DocVQA success rates by 2.40 and 2.67 percentage points for two models. In two recorded repair runs, structural relations add tests for 23 of 37 patches; in one repair, a test added through a control-flow relation exposes a regression missed by coverage of the edited instruction.",
-    "summary_zh": null,
+    "summary_zh": [
+      "LLM Agent优化技能时，执行反馈无法直接定位需修改的指令及相关影响，易破坏其他任务。",
+      "提出Synapse，将技能优化转化为部分程序视图的生成与验证修复，结合执行轨迹与依赖关系定位故障并提出类型化变异。",
+      "在DocVQA和LiveMath上，Synapse显著优于基线方法；结构关系能补充测试，有效暴露仅靠覆盖率无法发现的回归缺陷。"
+    ],
     "authors": [
       "Lijuan Li",
       "Zhenpeng Chen",
@@ -2753,14 +3084,23 @@
     "comment": "",
     "journal_ref": "",
     "matched": [],
-    "score": 3
+    "score": 3,
+    "tags": [
+      "LLM Agent",
+      "程序修复",
+      "技能优化"
+    ]
   },
   {
     "id": "2611.20827",
     "title": "ProcReverser: Multi-Agent Black-Box Microarchitectural Reverse Engineering for Processor Vulnerability Analysis",
-    "title_zh": null,
+    "title_zh": "ProcReverser：面向处理器漏洞分析的多智能体黑盒微架构逆向工程",
     "abstract": "When processor implementation details are unavailable, black-box microarchitectural reverse engineering helps security researchers identify hardware conditions related to security vulnerabilities. However, this process requires substantial manual effort to design experiments, develop test programs, and analyze results for each processor. We present ProcReverser, a multi-agent system that automates this process. ProcReverser uses execution feedback to improve experimental plans and test programs and identifies microarchitectural properties from measurements. We develop a comprehensive suite of property identification tasks focused on hardware mechanisms relevant to Spectre-class attacks, covering speculative execution, branch prediction, memory dependence, and cache behavior. We evaluate ProcReverser on the XuanTie C910, the gem5 RISC-V O3 CPU model, and the SiFive P550. ProcReverser achieves Pass@1 and Pass@5 scores of 81.3% and 93.8%, respectively, on C910, and 83.0% and 100.0% on gem5 O3. On the SiFive P550, ProcReverser further characterizes microarchitectural properties covered by the proposed task suite. These findings highlight the potential of automated microarchitectural reverse engineering to support processor vulnerability analysis and defense evaluation.",
-    "summary_zh": null,
+    "summary_zh": [
+      "处理器黑盒微架构逆向工程需大量人工设计实验与分析，为识别安全漏洞相关硬件条件带来挑战。",
+      "提出多智能体系统ProcReverser，利用执行反馈改进实验计划与测试程序，并从测量中识别微架构属性。",
+      "在多款RISC-V处理器上评估，C910和gem5 O3的Pass@5达93.8%和100%，验证了自动化逆向支持漏洞分析的潜力。"
+    ],
     "authors": [
       "Guanqi Lyu",
       "Decheng Qiu",
@@ -2786,7 +3126,12 @@
     "matched": [
       "multi-agent"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "微架构逆向工程",
+      "处理器漏洞分析",
+      "多智能体系统"
+    ]
   },
   {
     "id": "2611.20823",
