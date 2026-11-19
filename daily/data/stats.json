@@ -1,26 +1,26 @@
 {
-  "run_at": "2026-11-19T13:47:11Z",
+  "run_at": "2026-11-19T20:28:33Z",
   "stages": {
     "sources": 34,
     "sources_ok": 30,
-    "raw": 606,
-    "after_keywords": 45,
-    "merged": 645,
+    "raw": 640,
+    "after_keywords": 73,
+    "merged": 673,
     "written": 600,
-    "body_filled": 0,
-    "new_today": 150
+    "body_filled": 6,
+    "new_today": 35
   },
   "sources": [
     {
       "id": "gov-zuixin",
       "name": "国务院·最新政策",
       "level": "L1",
-      "ok": true,
-      "raw": 20,
+      "ok": false,
+      "raw": 0,
       "kept": 0,
-      "ms": 756,
-      "mirror": "https://hub.slarker.me",
-      "error": ""
+      "ms": 65619,
+      "mirror": "",
+      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/zhengce/zuixin :: HTTP Error 503: Service Unavailable"
     },
     {
       "id": "miit-yjzj",
@@ -29,9 +29,9 @@
       "ok": false,
       "raw": 0,
       "kept": 0,
-      "ms": 120237,
+      "ms": 66221,
       "mirror": "",
-      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/yjzj :: The read operation timed out"
+      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/yjzj :: HTTP Error 503: Service Unavailable"
     },
     {
       "id": "miit-zcwj",
@@ -40,9 +40,9 @@
       "ok": false,
       "raw": 0,
       "kept": 0,
-      "ms": 120237,
+      "ms": 66879,
       "mirror": "",
-      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/zcwj :: HTTP Error 504: Gateway Time-out"
+      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/zcwj :: HTTP Error 503: Service Unavailable"
     },
     {
       "id": "mofcom-home",
@@ -51,7 +51,7 @@
       "ok": true,
       "raw": 7,
       "kept": 0,
-      "ms": 853,
+      "ms": 95,
       "mirror": "",
       "error": ""
     },
@@ -62,7 +62,7 @@
       "ok": true,
       "raw": 16,
       "kept": 0,
-      "ms": 1516,
+      "ms": 1686,
       "mirror": "",
       "error": ""
     },
@@ -73,8 +73,8 @@
       "ok": true,
       "raw": 20,
       "kept": 2,
-      "ms": 60637,
-      "mirror": "https://hub.slarker.me",
+      "ms": 714,
+      "mirror": "https://rsshub.rssforever.com",
       "error": ""
     },
     {
@@ -83,8 +83,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 0,
-      "ms": 49,
+      "kept": 3,
+      "ms": 87,
       "mirror": "",
       "error": ""
     },
@@ -94,8 +94,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 5,
-      "ms": 164,
+      "kept": 4,
+      "ms": 253,
       "mirror": "https://hub.slarker.me",
       "error": ""
     },
@@ -105,8 +105,8 @@
       "level": "L2",
       "ok": true,
       "raw": 15,
-      "kept": 0,
-      "ms": 311,
+      "kept": 2,
+      "ms": 77,
       "mirror": "",
       "error": ""
     },
@@ -117,7 +117,7 @@
       "ok": true,
       "raw": 30,
       "kept": 0,
-      "ms": 32515,
+      "ms": 2083,
       "mirror": "",
       "error": ""
     },
@@ -127,8 +127,8 @@
       "level": "L2",
       "ok": true,
       "raw": 15,
-      "kept": 1,
-      "ms": 237,
+      "kept": 4,
+      "ms": 202,
       "mirror": "",
       "error": ""
     },
@@ -138,8 +138,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 0,
-      "ms": 1205,
+      "kept": 1,
+      "ms": 1573,
       "mirror": "",
       "error": ""
     },
@@ -150,7 +150,7 @@
       "ok": false,
       "raw": 0,
       "kept": 0,
-      "ms": 2004,
+      "ms": 1470,
       "mirror": "",
       "error": "HTTP Error 404: Not Found"
     },
@@ -160,8 +160,8 @@
       "level": "L2",
       "ok": true,
       "raw": 40,
-      "kept": 18,
-      "ms": 762,
+      "kept": 10,
+      "ms": 416,
       "mirror": "",
       "error": ""
     },
@@ -171,8 +171,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 5,
-      "ms": 3226,
+      "kept": 0,
+      "ms": 2635,
       "mirror": "",
       "error": ""
     },
@@ -182,7 +182,7 @@
       "level": "L2",
       "ok": true,
       "raw": 15,
-      "kept": 1,
+      "kept": 3,
       "ms": 72,
       "mirror": "",
       "error": ""
@@ -193,8 +193,8 @@
       "level": "L2",
       "ok": true,
       "raw": 10,
-      "kept": 1,
-      "ms": 62,
+      "kept": 0,
+      "ms": 63,
       "mirror": "",
       "error": ""
     },
@@ -204,8 +204,8 @@
       "level": "L2",
       "ok": true,
       "raw": 15,
-      "kept": 3,
-      "ms": 276,
+      "kept": 2,
+      "ms": 305,
       "mirror": "",
       "error": ""
     },
@@ -216,7 +216,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 2247,
+      "ms": 1835,
       "mirror": "",
       "error": ""
     },
@@ -227,7 +227,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 1023,
+      "ms": 730,
       "mirror": "",
       "error": ""
     },
@@ -238,7 +238,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 2213,
+      "ms": 1296,
       "mirror": "",
       "error": ""
     },
@@ -248,8 +248,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 1,
-      "ms": 42,
+      "kept": 16,
+      "ms": 44,
       "mirror": "",
       "error": ""
     },
@@ -260,7 +260,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 653,
+      "ms": 1106,
       "mirror": "",
       "error": ""
     },
@@ -270,8 +270,8 @@
       "level": "L2",
       "ok": true,
       "raw": 16,
-      "kept": 2,
-      "ms": 1765,
+      "kept": 1,
+      "ms": 1972,
       "mirror": "",
       "error": ""
     },
@@ -281,8 +281,8 @@
       "level": "L2",
       "ok": true,
       "raw": 10,
-      "kept": 2,
-      "ms": 27,
+      "kept": 7,
+      "ms": 54,
       "mirror": "",
       "error": ""
     },
@@ -292,8 +292,8 @@
       "level": "L2",
       "ok": true,
       "raw": 30,
-      "kept": 2,
-      "ms": 2745,
+      "kept": 7,
+      "ms": 1876,
       "mirror": "",
       "error": ""
     },
@@ -301,12 +301,12 @@
       "id": "baidu-top",
       "name": "百度热搜",
       "level": "L3",
-      "ok": false,
-      "raw": 0,
-      "kept": 0,
-      "ms": 120227,
-      "mirror": "",
-      "error": "all mirrors failed :: GET failed after 1 attempts: https://hub.slarker.me/baidu/top :: HTTP Error 504: Gateway Time-out"
+      "ok": true,
+      "raw": 50,
+      "kept": 1,
+      "ms": 2621,
+      "mirror": "https://rsshub.rssforever.com",
+      "error": ""
     },
     {
       "id": "github-trending",
@@ -315,7 +315,7 @@
       "ok": true,
       "raw": 16,
       "kept": 0,
-      "ms": 1459,
+      "ms": 1449,
       "mirror": "",
       "error": ""
     },
@@ -324,9 +324,9 @@
       "name": "Hacker News",
       "level": "L3",
       "ok": true,
-      "raw": 16,
-      "kept": 0,
-      "ms": 2097,
+      "raw": 20,
+      "kept": 4,
+      "ms": 7291,
       "mirror": "",
       "error": ""
     },
@@ -336,8 +336,8 @@
       "level": "L3",
       "ok": true,
       "raw": 50,
-      "kept": 0,
-      "ms": 1077,
+      "kept": 1,
+      "ms": 938,
       "mirror": "",
       "error": ""
     },
@@ -348,7 +348,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 35,
+      "ms": 108,
       "mirror": "",
       "error": ""
     },
@@ -359,7 +359,7 @@
       "ok": true,
       "raw": 20,
       "kept": 1,
-      "ms": 82,
+      "ms": 212,
       "mirror": "",
       "error": ""
     },
@@ -369,8 +369,8 @@
       "level": "L3",
       "ok": true,
       "raw": 50,
-      "kept": 0,
-      "ms": 1116,
+      "kept": 2,
+      "ms": 509,
       "mirror": "",
       "error": ""
     },
@@ -380,18 +380,18 @@
       "level": "L3",
       "ok": true,
       "raw": 30,
-      "kept": 1,
-      "ms": 642,
+      "kept": 2,
+      "ms": 923,
       "mirror": "",
       "error": ""
     }
   ],
   "events": {
-    "run_at": "2026-11-19T13:47:26Z",
+    "run_at": "2026-11-19T20:29:05Z",
     "items": 600,
     "events": 260,
-    "translated": 3,
-    "new_today": 157,
+    "translated": 25,
+    "new_today": 51,
     "model": "glm-4.7-flash"
   }
 }
