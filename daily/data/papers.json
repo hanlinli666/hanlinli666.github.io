@@ -1639,9 +1639,13 @@
   {
     "id": "2611.26199",
     "title": "Learning to Think with Images Faithfully via Adaptive Data Selection",
-    "title_zh": null,
+    "title_zh": "基于自适应数据选择的图像思考忠实性学习",
     "abstract": "Thinking with images (TwI) empowers vision-language models (VLMs) to overcome perceptual bottlenecks by actively cropping and zooming into fine-grained visual details, promising both higher accuracy and interpretable, region-grounded reasoning. However, our analysis shows that the improved accuracy of TwI models does not guarantee faithful tool use; they frequently invoke tools without actually relying on the zoomed region, undermining the reliability of tool-assisted reasoning. We trace this unfaithful behaviour to the training data: when questions are answerable without zooming, the model can answer correctly while ignoring the returned evidence, and this problem is exacerbated during training as the model becomes better at answering without tools. To keep zooming useful throughout training, we adapt the training data to the model's evolving capability and train on questions where correct zoomed evidence can still help the model answer correctly. This selection is supported by a data synthesis pipeline that localises small objects and constructs verifiable questions about their fine details, and complemented by an adaptiveness reward that favours tool-free answers when zooming is unnecessary. The experimental results show that our method substantially improves reasoning faithfulness and achieves state-of-the-art performance on visual search benchmarks (+11.6% on V*, +7.9% on HR-Bench 4K, and +9.4% on HR-Bench 8K). On multimodal hallucination benchmarks, our model also outperforms the compared TwI baselines. These results suggest that improving TwI faithfulness does not sacrifice accuracy and that both can be learnt from the right training data without directly supervising the reasoning process.",
-    "summary_zh": null,
+    "summary_zh": [
+      "视觉语言模型在图像思考中频繁误用工具，未真正依赖放大区域即作答，降低了推理可靠性。",
+      "问题源于训练数据，模型在无需放大即可作答时忽略证据，且随能力提升该问题加剧。",
+      "提出自适应数据选择与合成管线，结合自适应奖励，显著提升推理忠实度并在多个基准上达到SOTA。"
+    ],
     "authors": [
       "Yu Zhao",
       "Jiaxin Zhang",
@@ -1667,7 +1671,13 @@
       "tool use",
       "reasoning"
     ],
-    "score": 8
+    "score": 8,
+    "tags": [
+      "视觉语言模型",
+      "图像思考",
+      "工具使用忠实性",
+      "自适应数据选择"
+    ]
   },
   {
     "id": "2611.26172",
@@ -1703,9 +1713,13 @@
   {
     "id": "2611.26171",
     "title": "The FrontierOR Challenge: Agentic Algorithm Design for Operations Research",
-    "title_zh": null,
+    "title_zh": "FrontierOR挑战：面向运筹优化的智能体算法设计",
     "abstract": "Operations research (OR) relies on algorithms that experts tailor to each problem: a new routing, scheduling or network design problem can take weeks of specialist work before it is solved well at scale. Large language model (LLM) agents now write, test and improve code, but whether they can design algorithms that scale to realistic instances is open: in the FrontierOR benchmark's one-shot evaluation, the strongest model matches Gurobi, with an objective within 1% of Gurobi's and no slower, on only 39% of the large instances. The FrontierOR Challenge asks teams to build agentic workflows that design, test, and improve algorithms for many optimization problems at once. Stage 1 releases 60 of the benchmark's 180 audited problems, spanning six application categories and five formulation types, in weekly rounds of 15; Stage 2 introduces new problems outside the benchmark, with unseen instances. Two tracks are ranked separately: in the Main track we run the submitted algorithms in a network-isolated sandbox with open-source dependencies only; in the Self-hosted track teams solve the instances on their own machines, with any software, within a timed window. Every solution is checked for feasibility, and a feasible solution scores the ratio of its objective to a frozen known reference, averaged over hidden instances.",
-    "summary_zh": null,
+    "summary_zh": [
+      "运筹优化依赖专家耗时数周定制算法，而LLM agent能否设计出可扩展至真实规模实例的算法仍属未知。",
+      "提出FrontierOR挑战，要求构建智能体工作流，为多类优化问题同时设计、测试并改进算法。",
+      "挑战分两阶段与双赛道进行，通过可行性与目标值比值评估方案，推动算法在未知实例上的泛化。"
+    ],
     "authors": [
       "Hai Wang",
       "Bretislav Hajek",
@@ -1733,14 +1747,23 @@
     "matched": [
       "agentic workflow"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "运筹优化",
+      "LLM agent",
+      "算法设计"
+    ]
   },
   {
     "id": "2611.26167",
     "title": "Planning to Stop: Factored Certification and Terminal Repair for Noncircular Robots",
-    "title_zh": null,
+    "title_zh": "面向非圆形机器人的停止规划：分解认证与终端修复",
     "abstract": "Tight-space navigation requires a robot to clear obstacles and stop inside its goal despite uncertainty. We present GeoDiff, a motion-program planner coupling original-goal stopped-set inclusion, witness-guided terminal repair, and factored proof compilation. An exact feasible-translation characterization guides repair; request-local reuse reduces repeated geometric work. We establish conditions for compiler equivalence and reach-and-stop soundness. Across 11,440 floorplan-derived jobs, GeoDiff certifies 61/139 tasks at 5-cm tolerance within 15 s, versus 44/139 for the stop-set baseline. The strongest observed external certificate adapter certifies 13/139 tasks from 119/139 native routes, separating route availability from certification. On tasks derived from public BARN maps, GeoDiff certifies 202/270 at 5-cm tolerance for a Jackal-shaped body, versus 3/270 for the portal baseline. Development analyses distinguish emitter savings from solver coverage, and 1,420 route-tracking episodes characterize the execution interface. These results show how terminal reasoning and proof reuse increase finite-budget certification coverage while preserving the original physical task and goal.",
-    "summary_zh": null,
+    "summary_zh": [
+      "狭窄空间导航要求机器人在不确定性下避开障碍并准确停在目标处，但现有方法难以兼顾任务目标与有限预算内的安全认证。",
+      "提出 GeoDiff 运动规划器，结合原始目标停止集包含、见证引导的终端修复与分解证明编译，并利用局部复用减少重复几何计算。",
+      "实验表明该方法显著提升了有限时间内的认证覆盖率，同时保留了原始物理任务与目标，验证了终端推理与证明复用的有效性。"
+    ],
     "authors": [
       "Runtian Zheng",
       "Congpeng Zhang",
@@ -1761,14 +1784,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 3
+    "score": 3,
+    "tags": [
+      "机器人导航",
+      "运动规划",
+      "安全认证"
+    ]
   },
   {
     "id": "2611.26145",
     "title": "Can World Models Predict Rice Growth? Toward Agricultural World Models",
-    "title_zh": null,
+    "title_zh": "世界模型能否预测水稻生长？迈向农业世界模型",
     "abstract": "World models can imagine how a physical scene evolves over the next few seconds, but growers need to know how a crop will develop over weeks to months: will this rice plant have headed a month from now, and how will it look at harvest? We introduce agricultural world modeling, the task of predicting how the same plant will look at a requested horizon of days to months, from one photo of it, its cultivar, and its camera view. In preliminary analysis, even state-of-the-art image generators get this wrong: they often grow the plant too little or give it the color and form of the wrong growth stage. We argue that they do not work out the plant's developmental state, which the photo reveals only indirectly. We therefore propose AgroWM, which reasons about development before it draws growth. Its reasoning module, PhenoClock, works out the current growth stage, predicts the future one, and writes a Growth Script with numeric targets for height, plant area, and color; its generation module, the Rooted Renderer, then edits the photo to follow this script, adding new organs and colors to the photographed plant. Because pixel scores can prefer an unchanged copy of the photo, we instead check each forecast's traits and developmental timing against the plant's own later photos. On rice, 54.6% of the forecasts of AgroWM are matched to the target stage (Stage R@1), against 34.8% for GPT Image 2.5, 24.0% for Qwen Image 2.1, and 47.4% for the strongest domain-specific baseline, the same backbone fine-tuned without Growth Scripts; 9 to 20 weeks ahead, it still reaches 46.4%, against 35.7% for that baseline. On maize, a crop with a different body plan and stage scale, the same design again scores best on all four measures.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有图像生成模型无法推断植物发育状态，难以准确预测作物在数周至数月后的生长形态。",
+      "提出AgroWM，先由PhenoClock推断当前与未来生长阶段并生成生长脚本，再由Rooted Renderer据此编辑图像。",
+      "在水稻和玉米预测任务上，AgroWM在目标阶段匹配度等指标上均优于GPT Image等基线模型。"
+    ],
     "authors": [
       "Wenkai Ji",
       "Zeteng Li",
@@ -1793,14 +1825,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 5
+    "score": 5,
+    "tags": [
+      "农业世界模型",
+      "作物生长预测",
+      "图像生成"
+    ]
   },
   {
     "id": "2611.26131",
     "title": "SCARVA: Interpretable Agentic Reasoning in Software Supply-Chain Analysis",
-    "title_zh": null,
+    "title_zh": "SCARVA：软件供应链分析中的可解释智能体推理",
     "abstract": "Complex applications may inherit security vulnerabilities from their dependencies, though a vulnerable dependency does not necessarily endanger the application. Existing tools flag dependencies associated with public vulnerabilities, and more advanced ones analyze the call graph to assess whether the vulnerable code is reachable. However, these approaches are limited to specific programming languages and ecosystems. LLM agents are promising candidates for this task, yet they hallucinate, take shortcuts, and reward hack. As these behaviors are opaque, the agents' conclusions may not be trusted. We present SCARVA a framework designed to produce interpretable reports. SCARVA combines advanced agent reasoning with an evidence-collection methodology that assesses the agent's analysis and improves its trustworthiness. Specifically, the ANALYST performs a software security assessment while SCARVA records every tool call, file access, and web request. Then, one or more independent JUDGE agents inspect the ANALYST's result and produce an evidence-backed report. We evaluate SCARVA on 54 manually curated cases, balanced across exploitable, non-exploitable, and vulnerability-free projects, using both open-weight and frontier models. The best ANALYST model, Qwen 3.8, reaches 82% balanced accuracy and surpasses the evaluated proprietary models. Human annotation validates the JUDGE findings: Claude Opus 5.5 performs best, agreeing with annotators in 94% of claim checks. Finally, we discuss the most common failure modes of agents on supply-chain vulnerability assessment.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有软件供应链漏洞分析工具受限于特定语言生态，而 LLM agent 存在幻觉和走捷径等不可信行为。",
+      "提出 SCARVA 框架，结合 agent 推理与证据收集方法，通过 ANALYST 分析并由 JUDGE agent 审查生成证据报告。",
+      "在 54 个测试案例中，最佳模型达 82% 平衡准确率，JUDGE 结论与人工标注高度一致，提升了分析可信度。"
+    ],
     "authors": [
       "Tim Barsch",
       "Bruno Nogueira",
@@ -1824,14 +1865,24 @@
       "LLM agent",
       "reasoning"
     ],
-    "score": 13
+    "score": 13,
+    "tags": [
+      "软件供应链安全",
+      "LLM agent",
+      "漏洞分析",
+      "可解释性"
+    ]
   },
   {
     "id": "2611.26090",
     "title": "Dynamic Human-Robot Role Allocation through Entropy-Based Monitoring and LLM Reasoning",
-    "title_zh": null,
+    "title_zh": "基于熵监控与LLM推理的人机动态角色分配",
     "abstract": "Role allocation strategies in human-robot collaboration typically assign tasks to both the human and the robot, limiting the user's ability to take initiative. Furthermore, allocation decisions may conflict with the user's intentions, and the rationale behind such allocations may remain unclear, potentially reducing both acceptance and collaboration fluency. The novelty of the proposed framework is that the human is left free to contribute to the task, while the robot is dynamically allocated activities through a cost-driven Behavior Tree architecture according to user-expressed preferences and behavior. Explicit preferences are extracted from natural language instructions using a large language model, whereas human activity is monitored online through a Shannon entropy-based analysis of hand-object interactions. Furthermore, the framework can recognize anomalies in human execution and autonomously trigger corrective robot actions. The approach was validated through a pilot study and a multi-subject experiment involving 14 participants. Results demonstrate the potential of such an allocation strategy for enabling intuitive and engaging collaboration without increasing the perceived workload.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有人机协作任务分配限制用户主动性，且决策不透明易降低接受度与协作流畅性。",
+      "利用LLM提取自然语言偏好，结合手部交互的Shannon熵在线监控人类行为，通过行为树动态分配机器人任务。",
+      "实验表明该策略能实现直观且具吸引力的协作，同时不增加用户的感知工作量。"
+    ],
     "authors": [
       "Elena Merlo",
       "Marta Lagomarsino",
@@ -1853,14 +1904,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "人机协作",
+      "角色分配",
+      "大语言模型",
+      "行为树"
+    ]
   },
   {
     "id": "2611.26069",
     "title": "SheetAlign: Grounded Interaction and Stage-Isolated Learning for Spreadsheet Agents",
-    "title_zh": null,
+    "title_zh": "SheetAlign：面向电子表格 agent 的交互与阶段隔离学习方法",
     "abstract": "Spreadsheets are widely used for data analysis and supporting decision-making. Automating spreadsheet analysis while protecting sensitive data and controlling deployment costs motivates locally deployed open-weight large language models (LLMs). Meanwhile, complex spreadsheet tasks require both task reasoning and workbook understanding, while predefined operation interfaces impose additional tool-selection and invocation demands. We introduce SheetAlign, a spreadsheet manipulation framework with stage-isolated policy learning, organized around where to operate, what to change, and how to implement transformations. Task-guided inspection and API grounding anchor code generation in workbook observations and available operations, while stage-isolated learning optimizes program generation and review using edit-progress rewards. At inference, execution consistency selects programs through agreement among workbook states. On SpreadsheetBench, our grounded task interface improves Qwen3-4B's accuracy from 13.5% to 29.2% on average without training. With learning and execution consistency, SheetAlign achieves 32.8% accuracy on average on SpreadsheetBench and 30.1% on Domain-Spreadsheet, outperforming comparable baselines. The code will be made publicly available upon publication.",
-    "summary_zh": null,
+    "summary_zh": [
+      "复杂电子表格任务需兼顾推理与工作簿理解，且本地部署 LLM 面临工具选择与调用难题。",
+      "提出 SheetAlign 框架，通过 API grounding 与阶段隔离学习优化代码生成、审查及执行一致性。",
+      "在 SpreadsheetBench 等基准上显著提升 Qwen3-4B 准确率并超越同类基线方法。"
+    ],
     "authors": [
       "Yuxiang Wang",
       "Junhao Gan",
@@ -1882,14 +1943,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "电子表格",
+      "LLM agent",
+      "代码生成"
+    ]
   },
   {
     "id": "2611.26036",
     "title": "Presenting Your Figures: Data-informed Animated Transitions Across Scientific Figure Panels",
-    "title_zh": null,
+    "title_zh": "跨科学图表面板的动画过渡设计与作者系统",
     "abstract": "Multi-panel figures are commonly used in research papers to show scientific data, and researchers often reuse them when presenting their work. Presenting these figures often involves explaining how data across chart panels are related. Animated transitions can progressively reveal these relationships, but two static panels specify only the endpoints, leaving what intermediate keyframes should show and how the transition should progress unclear. To support transition design across diverse scientific figures, we developed Figure Space and Transition Space through iterative analysis of 48 published multi-panel figures across eight scientific subject areas. Figure Space represents panel composition, data transformations, and visual encodings while retaining the links needed to trace panel results back to records. Transition Space uses this representation and source data to construct and sequence keyframes that make corresponding data visible and align them while preserving the meaning of each panel's position encodings. Building on these spaces, we developed FigFlux, a human-in-the-loop authoring system that guides AI agents in generating animated transitions from a multi-panel figure and its associated materials. Researchers can revise keyframes in natural language before animation generation. We evaluate FigFlux through cross-domain case studies, a study with 16 scientific authors, and expert assessment. Authors reported lower overall workload than with their familiar tools, while experts gave FigFlux transitions higher ratings than transitions created with participants' familiar tools or generated by AI alone. The example gallery have been published online: https://figflux.github.io.",
-    "summary_zh": null,
+    "summary_zh": [
+      "多面板图表常用于展示数据关系，但静态面板仅提供端点，难以设计中间关键帧与过渡过程。",
+      "提出 Figure Space 与 Transition Space 表示法，结合面板构成与源数据构建关键帧，保留位置编码语义。",
+      "开发人机协作系统 FigFlux，利用 AI agent 生成动画过渡，作者反馈工作量更低且专家评价优于现有工具。"
+    ],
     "authors": [
       "Lu Ying",
       "Can Liu",
@@ -1913,14 +1983,24 @@
     "matched": [
       "AI agent"
     ],
-    "score": 5
+    "score": 5,
+    "tags": [
+      "数据可视化",
+      "动画过渡",
+      "人机交互",
+      "AI辅助创作"
+    ]
   },
   {
     "id": "2611.26024",
     "title": "ForeSeek: Foresight-Driven Reasoning for Long-Form Video Understanding",
-    "title_zh": null,
+    "title_zh": "ForeSeek：面向长视频理解的前瞻驱动推理",
     "abstract": "Long-form video understanding, as a fundamental yet crucial vision task, is being revolutionized by multimodal large language model (MLLM)-based video agents. However, the retrieval-driven nature inherent to these agents creates a significant bottleneck, forcing them to reactively fetch clips based on local saliency without a global temporal plan. To address this, we present ForeSeek, a foresight-driven video agent that transforms long-video reasoning from reactive retrieval into predictive exploration. Rather than blindly probing the timeline, ForeSeek forms visually grounded expectations over unseen temporal regions, verifies them through targeted observations, and continuously refines its search based on emerging evidence, where failed expectations serve as informative signals for principled backtracking. Furthermore, we develop a two-stage training framework that equips MLLMs with foresight-guided reasoning and efficient decision making. Extensive experiments on five long-video benchmarks demonstrate that ForeSeek consistently improves the efficiency--accuracy trade-off of long-video reasoning, achieving competitive or superior accuracy while observing $2.5$--$4.4\\times$ fewer frames than the strongest search-based agent. Code is available at https://github.com/harry0021/ForeSeek",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有基于MLLM的视频agent因依赖局部显著性被动检索片段，缺乏全局时间规划而遭遇瓶颈。",
+      "提出ForeSeek框架，通过对未见区域生成预期并验证，将被动检索转化为预测性探索，并设计两阶段训练方法。",
+      "在五个长视频基准上，该方法在保持高准确率的同时，观察帧数减少2.5至4.4倍，显著提升效率与精度的平衡。"
+    ],
     "authors": [
       "Yuchen Sun",
       "Siyuan Cheng",
@@ -1944,14 +2024,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 16
+    "score": 16,
+    "tags": [
+      "长视频理解",
+      "多模态大语言模型",
+      "视频agent",
+      "前瞻推理"
+    ]
   },
   {
     "id": "2611.26007",
     "title": "System-One RSI: Building Muscle Memory for Interactive Agents through Guided Practice",
-    "title_zh": null,
+    "title_zh": "System-One RSI：通过引导练习为交互式智能体构建肌肉记忆",
     "abstract": "Reasoning models provide strong multimodal task understanding but struggle with sub-second control because deliberation increases decision latency. Fast decision models can meet the response window, yet prompting and few-shot examples do not readily provide the fine-grained experience required by a new task. Inspired by coached motor learning, this paper presents System-One Recursive Self-Improvement (System-One RSI), which couples two loops. The high-frequency online inner loop is an Observe, Orient, Decide, Act (OODA) cycle: a decision model maps each visual observation and task question to structured judgments, and a decision tree converts them into timed actions without invoking a reasoning model. The offline outer loop is a recursive improvement cycle carried out by a team of reasoning agents. The team revises the decision-model prompt and decision tree, captures interaction records, derives supervision from those records, and trains or deploys updated model parameters. The improved system then returns to the environment and generates the experience for the next round, consolidating learned distinctions as external muscle memory. The framework operates with a small number of real episodes, without expert demonstrations, environment modification, sandboxing, or parallel simulation. Experiments in Snake, Zenless Zone Zero, and Black Myth: Wukong use a 27B decision model. Mean Snake score increases from 1.30 to 7.35. In an evaluated scenario of Zenless Zone Zero, median completion time decreases by 8.4%. In an evaluated combat scenario of Black Myth: Wukong, the evasive policy achieves 11 times the mean survival time of a stationary reference, while the offensive policy win rate rises from 0% to 66.7% across the evaluated configurations.",
-    "summary_zh": null,
+    "summary_zh": [
+      "推理模型决策延迟高，而快速决策模型缺乏新任务的细粒度经验，难以满足亚秒级控制需求。",
+      "提出双循环框架：在线内环用OODA决策树实现快速反应，离线外环由多agent递归改进提示、决策树并更新模型参数。",
+      "在少量真实交互且无需专家示范下，该方法在贪吃蛇及两款游戏中显著提升得分、缩短通关时间并大幅提高生存与胜率。"
+    ],
     "authors": [
       "Qingxu Fu",
       "Xuanfa Jin",
@@ -1974,14 +2064,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 10
+    "score": 10,
+    "tags": [
+      "交互式智能体",
+      "肌肉记忆",
+      "递归自我改进",
+      "决策模型"
+    ]
   },
   {
     "id": "2611.26003",
     "title": "AI agents can redesign engineering parts with more than a thousand CAD parameters and nonlinear simulations",
-    "title_zh": null,
+    "title_zh": "AI agent结合非线性仿真实现千参数CAD零件重设计",
     "abstract": "Simulation-driven design of real engineering components has to meet three conditions at once. It runs on few solves, since a nonlinear finite-element simulation of a 3D part takes hours; its design space has many values, the hundreds to thousands of values of the part's CAD model; and a better design often needs a redesign, coordinated changes of the part's proportions rather than local polishing of its surface. Automated optimisers meet at most two of these conditions. Classical optimisers, Bayesian or derivative-free, need a person to cut the design down to a few parameters, and on all the values they need far more solves; industrial shape optimisers move every surface node of the mesh in one solve per cycle, but only in small steps that polish rather than redesign. We ask whether a general-purpose large language model (LLM) can meet all three by joining what it knows with what the simulation shows. GPT-6 Astra edits a magnesium stent through a CAD geometry parametrisation of about 1,650 values, with a budget of 15 simulations; every proposal is built in CAD, meshed and simulated with large-deformation plasticity and contact, and the LLM reads the full results of every solve. Within that budget it lowered the objective, a high percentile of the strains in the stent's bends, by 32%; on the same budget, the industrial shape optimiser Tosca improved the original design by a tenth and then stopped improving. An earlier GPT-6 Astra design, 25% lower in the same objective, was checked in an independent, higher-fidelity model of the full deployment with crimping and damage: it was 14% less strained than the original after the full chain, and its most damaged spot began to fail later and carried 63% less damage at full expansion. LLMs can thus join their learned knowledge with simulation data to adjust more than a thousand design values and reach valid designs with real improvements.",
-    "summary_zh": null,
+    "summary_zh": [
+      "工程零件仿真驱动设计需同时满足少求解、多参数和整体重设计，现有优化器最多只能满足其中两项。",
+      "研究利用通用LLM结合仿真结果，在约1650个CAD参数和15次仿真预算下对镁合金支架进行重设计。",
+      "该方法将目标应变降低32%，优于工业优化器，且高保真独立验证表明其损伤显著降低，证明LLM能有效结合先验知识与仿真。"
+    ],
     "authors": [
       "Alexandra Starostina",
       "Alexander Hermann",
@@ -2005,14 +2105,24 @@
     "matched": [
       "AI agent"
     ],
-    "score": 16
+    "score": 16,
+    "tags": [
+      "AI agent",
+      "CAD重设计",
+      "非线性仿真",
+      "LLM"
+    ]
   },
   {
     "id": "2611.25985",
     "title": "Law at the Speed of AI: Critical Legal Infrastructure for the Machine Age: Autonomy Under Law Architecture (AULA)",
-    "title_zh": null,
+    "title_zh": "机器时代的法律基础设施：自主守法架构（AULA）",
     "abstract": "The global deployment of autonomous AI agents within and across organisations exceeds the governance infrastructure available to constrain it. Agent communication and authentication protocols, principally the Model Context Protocol and the Agent2Agent Protocol, are maturing quickly, but maturity at the protocol layer does not produce legal legibility at the governance layer. Runtime enforcement written by the deploying organisation fixes the resources an AI agent can reach, not the authority under which it acts. Legal legibility is the capacity of a legal system to recognise, interpret and regulate activity by mapping it onto legal personhood, property, rights and liabilities. Existing (analogue) legal infrastructure cannot supply it for autonomous deployment. The resulting deficit is bidirectional. It concerns the attribution of liability when an AI agent causes harm, and the allocation of rights, including data and economic rights, generated by agentic activity and by the AI agent itself as a source of value and form of property. This paper characterises that deficit as the legal attribution gap, a material and unaddressed risk to economies, organisations and citizens that is magnified in cross-organisational multi-agent deployment. The paper describes the Autonomy Under Law Architecture (AULA), in which AI systems and data assets are registered as legal objects anchored to one or more identified legal persons, governed by cryptographically tethered smart legal instruments and evaluated at runtime. Each smart legal instrument can carry a legal context clause, through which the legislation, regulation and judicial decisions in force at the time of the act are given practical and legal effect in that evaluation. Infrastructure of this kind is a precondition for the continued function of any legal, property and economic system with both human and autonomous machine stakeholders.",
-    "summary_zh": null,
+    "summary_zh": [
+      "自主AI agent跨组织部署超出现有治理能力，协议层成熟无法解决治理层的法律可读性缺失。",
+      "现有法律基础设施无法应对AI致害的责任归属及agent活动产生的权利分配，形成法律归属缺口。",
+      "提出AULA架构，将AI系统注册为法律对象，通过加密智能法律工具在运行时进行法律评估。"
+    ],
     "authors": [
       "Natasha E Blycha",
       "James Myint",
@@ -2041,14 +2151,24 @@
       "AI agent",
       "multi-agent"
     ],
-    "score": 8
+    "score": 8,
+    "tags": [
+      "AI治理",
+      "法律基础设施",
+      "智能合约",
+      "自主代理"
+    ]
   },
   {
     "id": "2611.25979",
     "title": "Multi-View Transformer with Geometry-Guided Multi-Modal ControlNet for 3D Virtual Try-On",
-    "title_zh": null,
+    "title_zh": "基于多视图Transformer与几何引导ControlNet的3D虚拟试穿",
     "abstract": "Editing a 3D Gaussian Splatting (3DGS) capture of a person so that they wear a new garment requires every rendered view to agree on the same garment details. Existing 3D virtual try-on (VTON) pipelines, however, edit training views largely independently and fuse them with hand-designed heuristics such as manually chosen reference views and fixed attention-blending weights. The resulting inconsistencies are baked into the 3D representation and surface as texture drift, blurred prints, and implausible geometry in novel views. We present GS-VTON-MVT, a three-stage framework that combines implicit and explicit 3D reasoning for consistent 3DGS try-on. (i) A multi-view inpainting transformer jointly edits a set of training views with full cross-view self-attention, so that cross-view correspondence is learned rather than imposed. (ii) A geometry-guided multi-modal ControlNet conditions the diffusion editor on the garment image together with depth and surface normals rendered from the current 3DGS state, supplying explicit structure where visual evidence is weakest. (iii) A pose-adaptive persona-aware attention replaces the fixed blending weight between current-view and reference-view features with weights derived from camera-pose proximity. On the 3D-VTONBench benchmark, GS-VTON-MVT improves FID, KID, LPIPS-based cross-view consistency, and user preference over general-purpose 3D editors and prior 3D try-on methods.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有3D虚拟试穿方法独立编辑视图并依赖手工启发式融合，导致新视角出现纹理漂移与几何失真等问题。",
+      "提出三阶段框架，利用多视图修复Transformer联合编辑视图，并结合深度与法线等几何信息引导扩散模型。",
+      "采用姿态自适应注意力机制动态调整特征权重，在多项指标与用户偏好上显著优于现有3D编辑与试穿方法。"
+    ],
     "authors": [
       "Sarthak Batra",
       "Armin Mustafa",
@@ -2070,14 +2190,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 6
+    "score": 6,
+    "tags": [
+      "3D虚拟试穿",
+      "3D高斯泼溅",
+      "多视图Transformer",
+      "ControlNet"
+    ]
   },
   {
     "id": "2611.25932",
     "title": "Coordinated Offloading: Cooperative Multi-Agent Reinforcement Learning for the Edge-Cloud Continuum",
-    "title_zh": null,
+    "title_zh": "面向边云协同计算卸载的多智能体强化学习方法",
     "abstract": "The increasing demand for intelligent, low-latency services in edge-cloud continuum systems poses new challenges for dynamic and efficient task offloading. We propose a Multi-Agent Reinforcement Learning (MARL) framework for distributed task offloading under partial observability, where each device offloads only a portion of its computation to a target edge server while executing the remaining portion locally (partial offloading). The problem is formulated as a Markov Decision Process (MDP), where each device independently learns an optimal policy under partially observable system states. To address the non-convexity, high-dimensional state space, and continuous action space, we develop a multi-agent Advantage-Weighted Actor-Critic (AWAC)-enhanced Proximal Policy Optimization (PPO)-based computation offloading algorithm. The proposed method combines the stable policy updates of PPO with an advantage-weighting mechanism inspired by AWAC to emphasize higher-quality actions during training. To encourage cooperation without inter-device communication, a shared global reward aligned with system cost is employed. Extensive simulations demonstrate rapid convergence and significant improvement in overall system cost compared with baselines, e.g., Deep Deterministic Policy Gradient (DDPG) and Deep Q-Network (DQN).",
-    "summary_zh": null,
+    "summary_zh": [
+      "边云系统中低延迟服务需求增加，部分可观测下的动态任务卸载面临非凸及高维连续空间等挑战。",
+      "提出基于AWAC增强PPO的MARL算法，设备无需通信即可通过共享全局奖励实现协同的局部部分卸载。",
+      "仿真表明该方法收敛迅速，相比DDPG和DQN基线显著降低了系统总成本。"
+    ],
     "authors": [
       "Muhammad Rafid",
       "Golshan Famitafreshi",
@@ -2100,14 +2230,23 @@
     "matched": [
       "multi-agent"
     ],
-    "score": 11
+    "score": 11,
+    "tags": [
+      "边云协同",
+      "任务卸载",
+      "多智能体强化学习"
+    ]
   },
   {
     "id": "2611.25926",
     "title": "ROAM-GRPO: Enforcing Reasoning Diversity in GRPO via Routed Off-mode Approach Mining",
-    "title_zh": null,
+    "title_zh": "ROAM-GRPO：通过路由离模方法挖掘增强GRPO的推理多样性",
     "abstract": "Supervised fine-tuning (SFT) paired with Reinforcement Learning with Verifiable Rewards (RLVR) has become the dominant recipe for post-training LLMs on complex reasoning tasks, but has been shown to collapse the policy into a low-diversity mode. Repeated LLM outputs are nearly identical, and pass@k accuracy converges or degrades as a result. We propose ROAM-GRPO (Routed Off-mode Approach Mining for GRPO), an augmentation to the GRPO algorithm which incentivizes exploration of distinct reasoning strategies and aims to increase output creativity during evaluation. ROAM-GRPO detects well-solved problems during training and transfers them to an \"off-mode\" track. The model is prompted to produce distinct solution strategies to such problems, which are verified for logical validity and distinctness by an LLM judge and subsequently self-distilled into the policy. Training Qwen3.5-2b on a 1,000-problem subset of the MATH lvl5 dataset, ROAM-GRPO implementation increases peak pass@16 by 4.7% and correct embedding cosine distance by approximately 1.5-2x on a difficult evaluation set.",
-    "summary_zh": null,
+    "summary_zh": [
+      "SFT结合RLVR训练LLM会导致策略坍缩至低多样性模式，使输出趋同且pass@k准确率停滞或下降。",
+      "提出ROAM-GRPO算法，将已解决问题转入离模轨道，由LLM评判验证并自蒸馏新的解题策略至策略中。",
+      "在MATH数据集上训练Qwen3.5-2b，显著提升了模型输出的多样性，且困难评估集的pass@16提升4.7%。"
+    ],
     "authors": [
       "Jeff Duan",
       "Matt Thomson"
@@ -2127,14 +2266,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "强化学习",
+      "大语言模型",
+      "推理多样性",
+      "GRPO"
+    ]
   },
   {
     "id": "2611.25925",
     "title": "SpatialMem: Building Quantitative Spatial Reasoning Agents with Hierarchical Memory",
-    "title_zh": null,
+    "title_zh": "SpatialMem：基于分层记忆的定量空间推理agent",
     "abstract": "Vision Language Models (VLMs) have shown remarkable capabilities in qualitative spatial reasoning, but remain limited in quantitative spatial reasoning. Current work leverages the VLM agent to invoke external vision tools to perform computation. However, these methods usually bind each functional requirement to a single predefined vision specialist, implicitly resulting in fixed and rigid tool pipelines. In practice, addressing diverse spatial scenarios and tasks demands a broader diversity in pipeline orchestration and vision specialist selection to achieve robust spatial reasoning. However, such diversity leads to a combinatorial execution space, making it challenging for the agent to orchestrate the optimal pipelines and specialists for different scenarios. In this work, we propose SpatialMem, a memory framework that enables a VLM agent to accumulate tool-use experience and leverage that memory to orchestrate vision specialists to solve the spatial reasoning problem. SpatialMem builds a two-level memory structure, with task memory capturing tool orchestration and scene memory capturing tool selection. It further introduces a dual-state trajectory optimization process to preserve successful tool experiences and refine suboptimal ones. Moreover, existing spatial reasoning benchmarks suffer from quality issues and limited coverage of scene types and tasks. To address these gap, we propose MetricBench, a benchmark covering both indoor and outdoor scenes and three quantitative spatial reasoning tasks. Our method achieves state-of-the-art results on MetricBench, Q-Spatial, and SpatilRGPT-Bench, outperforming best VLM baselines by 32% on MetricBench. Additionally, the memory design yields a 9.1% absolute gain over a memory-free agent on MetricBench.",
-    "summary_zh": null,
+    "summary_zh": [
+      "VLM在定量空间推理上受限，现有方法依赖固定工具管线，难以应对多样空间场景。",
+      "提出SpatialMem分层记忆框架，用任务记忆编排工具、场景记忆选择工具，并优化轨迹。",
+      "构建MetricBench基准，方法在多个基准达SOTA，在MetricBench上较最优VLM提升32%。"
+    ],
     "authors": [
       "Zinan Zheng",
       "Nuo Chen",
@@ -2155,14 +2304,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 12
+    "score": 12,
+    "tags": [
+      "空间推理",
+      "分层记忆",
+      "视觉语言模型",
+      "基准测试"
+    ]
   },
   {
     "id": "2611.25924",
     "title": "Ground Truth Bias in AI-Assisted Medical Annotation: A Crossover Study Using an Independent Radiologist Reference Standard",
-    "title_zh": null,
+    "title_zh": "AI辅助医学标注中的基准偏差：基于独立放射科医师参考标准的交叉研究",
     "abstract": "Behavioural evaluations of artificial-intelligence-assisted annotation score every human decision against a reference standard, so their conclusions inherit that standard's validity. We tested how far conclusions about assistance, reliance and individual differences depend on it. Fifty-one non-expert high-school students annotated 50 knee radiographs for osteoarthritis, with and without a deliberately imperfect classifier, in a crossover design; personality and non-verbal reasoning were also measured. Decisions were scored against the public repository labels and against an independent reference standard from a radiologist panel, which graded 23 of the 50 images as indeterminate. Against the repository labels, assistance raised accuracy from 60.4% to 65.3% (odds ratio 1.23, p=0.002). Against the independent standard, the gain on the 27 determinate images was smaller and not significant in the primary model (78.4% to 80.8%; odds ratio 1.16, p=0.178). The apparent benefit had been concentrated on the indeterminate images and was not significant when those images were assigned to either class. The direction of residual over-reliance depended on how indeterminate cases were handled, and the personality trait most strongly associated with accuracy changed identity and sign between standards. Reliance measures are only as valid as the reference standard that defines when the assistant is right.",
-    "summary_zh": null,
+    "summary_zh": [
+      "AI辅助标注的评估结论依赖于参考标准的有效性，但该标准对辅助效果、依赖性及个体差异的影响尚不明确。",
+      "采用交叉设计让51名高中生标注膝关节X线片，对比公开库标签与独立放射科医师小组的参考标准进行评估。",
+      "发现辅助带来的准确率提升在独立标准下不显著，且过度依赖方向和相关人格特质均随标准改变，证明依赖性测量的有效性受限于参考标准。"
+    ],
     "authors": [
       "Márton Baltay",
       "Tamás Ilcsik",
@@ -2183,14 +2342,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 5
+    "score": 5,
+    "tags": [
+      "AI辅助标注",
+      "参考标准",
+      "医学影像评估"
+    ]
   },
   {
     "id": "2611.25918",
     "title": "From Code Review Comments to Reuse in Production: An Industrial Study of Extracted Rules",
-    "title_zh": null,
+    "title_zh": "从代码审查评论到生产复用：提取规则的工业实证研究",
     "abstract": "Much organization-specific code review knowledge remains embedded in comments on individual changes, and recent systems reuse it by turning those comments into rules a language model applies to later changes. Teams must then decide which rules to keep, and the evidence at hand is how often the system's later comments name each rule. Tracing the rules of one such system, Kleene, through 65 days of production use, we found that such a count does not show what a rule contributed. A rule attribution indicates neither whether the source content was preserved nor whether the comment requested a change. Of 56 clauses in 12 rules that later comments named as their reason, 2 were explicit in a source review thread, 38 added conditions to a corresponding passage, and 16 had no passage we could locate; 45 of 79 further comments naming those rules requested no change, 27 of them while stating that the rule applied. On 20 constructed code changes, a reviewer model given only the unedited source thread met the detection criteria on 8 of the 10 that require a report, against 10 of 10 with the extracted rule, a difference whose confidence interval includes zero. Stage counts locate where rules drop out but not why: of 464 rules deployed while the rule-based reviewer subagent ran in their repository, 259 (55.8%) were named, 195 (42.0%) produced a comment that was not withheld, and 94 (20.3%) one with a recorded code change; the largest reduction occurred before any rule was named. Nor did the deployment-time properties we tested settle the choice in advance: retaining the top-ranked half preserved 53.8% of the rules that later produced a non-withheld comment, against 49.2% at random, a difference whose confidence interval includes zero. Judging extracted rules therefore calls for recording each stage separately and comparing each rule against the threads it was extracted from.",
-    "summary_zh": null,
+    "summary_zh": [
+      "组织特定的代码审查知识常隐含在评论中，现有系统将其转为规则交由语言模型复用，但仅凭规则被引用的次数无法衡量其实际贡献。",
+      "通过追踪生产系统Kleene 65天的数据，发现规则归因既不能反映源内容是否被保留，也无法判断评论是否要求代码修改。",
+      "实验表明部署时属性与排名均无法提前有效筛选规则，评估提取规则需要超越引用计数的更深入方法。"
+    ],
     "authors": [
       "Mutsuha Asada",
       "Yuhei Nakasaka",
@@ -2210,14 +2378,23 @@
     "comment": "12 pages, 2 figures, 3 tables",
     "journal_ref": "",
     "matched": [],
-    "score": 4
+    "score": 4,
+    "tags": [
+      "代码审查",
+      "规则提取",
+      "语言模型"
+    ]
   },
   {
     "id": "2611.25908",
     "title": "CRAFT: Analog Circuit Design by Reasoning LLM Agents from Pre-Computed Lookup Tables",
-    "title_zh": null,
+    "title_zh": "CRAFT：基于推理 LLM Agent 与预计算查找表的模拟电路设计",
     "abstract": "Automated analog circuit sizing methods, from black-box optimizers to recent large language model (LLM) agents, typically search the design space with a SPICE simulator in the loop, whereas an experienced designer works out a design by hand analysis. This paper presents CRAFT, a flow in which an LLM agent designs a given topology by calculation, as a designer does, and without an initial sizing. The agent works only through DeX, a service that uses pre-computed lookup tables to provide device characteristics and to solve the whole netlist for its operating point and small-signal response. It thus designs without SPICE, and every final design is verified independently in HSPICE. We test CRAFT on four circuits in a commercial 28 nm process; the largest is a 37-transistor three-stage amplifier with 53 design variables, 20 specifications and 74 saturation constraints. With Claude Opus 5.5, CRAFT meets every specification and constraint in all 20 runs, five per circuit. On that amplifier, with DeX in place of HSPICE and an identical request for both, the same agent passes in 10 of 10 runs instead of 6 of 10 within an hour and is 2.0x faster at the median.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有自动化模拟电路尺寸设计方法依赖 SPICE 仿真器循环搜索，而经验丰富的设计师通常通过手工计算完成设计。",
+      "本文提出 CRAFT 流程，让 LLM agent 像设计师一样通过计算进行设计，利用预计算查找表服务 DeX 提供器件特性并求解电路工作点。",
+      "在 28nm 工艺的四个电路上测试，CRAFT 在所有运行中均满足规格与约束；相比直接使用 HSPICE，该方法通过率更高且速度提升 2.0 倍。"
+    ],
     "authors": [
       "Hyunjun Park",
       "Seungyub Han",
@@ -2245,14 +2422,23 @@
       "LLM agent",
       "reasoning"
     ],
-    "score": 22
+    "score": 22,
+    "tags": [
+      "模拟电路设计",
+      "LLM agent",
+      "查找表"
+    ]
   },
   {
     "id": "2611.25905",
     "title": "Validation-driven Deployment of LLM Inference Platforms for Agentic Workloads",
-    "title_zh": null,
+    "title_zh": "面向Agent负载的LLM推理平台验证驱动部署",
     "abstract": "Enterprises are moving agentic workloads from closed APIs to their own open-weight model deployments. For this reason, lifecycle-wide validation, from small-scale testing through sizing and pre-production to production, becomes all the more important. Typically, rollouts are evaluated with ad hoc tools whose accuracy is rarely checked. We present an end-to-end evaluation pipeline for agentic LLM serving and empirically ground the design choices that connect its stages. Our experiments show that replaying captured traces reproduces the per-session load of the original agent sessions: at the 95th percentile replay stays within 1.18x of the recorded input tokens while live re-runs reach 4.98x, so a small set of recorded sessions yields a repeatable per-session token load. A code-coverage analysis of vLLM further shows that the evaluated live, replayed, and synthetic workloads are complementary in this configuration: each exercises Python serving paths not reached in the measured runs of the others. In a case study rolling out four large mixture-of-experts (MoE) models on llm-d, experiments show that the target models reached about half the optimal concurrency, and correspondingly about 60% of the throughput, on captured workloads compared with public traces. We open-source the relevant tools and release a trace dataset.",
-    "summary_zh": null,
+    "summary_zh": [
+      "企业将Agent负载从封闭API转向自建部署，但现有评估工具缺乏准确性，亟需全生命周期验证。",
+      "提出端到端评估流水线，实验证明回放捕获的trace能稳定复现原始会话负载，且与真实、合成负载形成互补。",
+      "在llm-d上部署MoE模型的案例表明，目标模型在捕获负载下仅达到约最优并发的一半及60%的吞吐量。"
+    ],
     "authors": [
       "Shai Gretz",
       "Alon Halfon",
@@ -2280,14 +2466,24 @@
     "comment": "",
     "journal_ref": "",
     "matched": [],
-    "score": 7
+    "score": 7,
+    "tags": [
+      "LLM推理",
+      "Agent负载",
+      "验证评估",
+      "MoE模型"
+    ]
   },
   {
     "id": "2611.25898",
     "title": "Verifiable Logic in Medical LLMs: A Critical Review of Agentic Clinical Reasoning Optimization and Neuro-Symbolic Grounding",
-    "title_zh": null,
+    "title_zh": "医疗LLM的可验证逻辑：临床推理优化与神经符号 grounding 综述",
     "abstract": "Clinical large language models are usually judged by whether the final answer is right. Yet a model can reach a fluent, plausible output through invalid reasoning that static benchmarks do not detect, and confident hallucination, causally invalid inference, and spurious demographic shortcuts can pass conventional evaluation. This critical review covers four paradigms in turn: how clinical hallucination arises and why static metrics miss it; the agentic hallucination cascade, in which multi-agent and tool-augmented systems propagate and amplify early reasoning errors; process reward modeling as step-level supervision; and neuro-symbolic grounding, in which formal logic engines, ontology reasoners, and knowledge graphs place verifiable constraints on neural output. Within their encoded domains, systems with symbolic veto layers offer guarantees that hold relative to their encoded knowledge, and they report large gains on the safety measures they use. These results come from single studies, mostly in simulated or small-sample settings, and are not directly comparable with neural baselines. Process reward models remain bounded by the statistics of their training data. We propose a conceptual framework that maps each agentic failure mode to a symbolic intervention point, and we argue that clinical AI safety depends substantially on system architecture. Because current regulation emphasizes performance and does not require verification of reasoning steps, we argue that responsible certification should also audit reasoning trajectories alongside accuracy on static benchmarks.",
-    "summary_zh": null,
+    "summary_zh": [
+      "临床LLM常因无效推理产生幻觉，而传统静态评估仅看最终答案，难以察觉此类因果谬误与虚假捷径。",
+      "本文梳理了agent幻觉级联、过程奖励模型及神经符号 grounding 等范式，提出将agent失效模式映射至符号干预点的概念框架。",
+      "研究表明系统架构对临床AI安全至关重要，呼吁监管机构在静态基准外，增加对推理轨迹的审计与认证。"
+    ],
     "authors": [
       "Youssef ElNahas",
       "Adel Ammar",
@@ -2313,14 +2509,24 @@
       "reasoning",
       "multi-agent"
     ],
-    "score": 19
+    "score": 19,
+    "tags": [
+      "医疗大语言模型",
+      "神经符号系统",
+      "临床推理",
+      "AI安全"
+    ]
   },
   {
     "id": "2611.25891",
     "title": "Meta-RTL: Evolving Agent Harnesses for RTL Optimization",
-    "title_zh": null,
+    "title_zh": "Meta-RTL：用于RTL优化的智能体框架进化方法",
     "abstract": "Large language models enable agents to optimize RTL using EDA feedback, yet their executable search procedures remain largely hand- engineered. We present Meta-RTL, an EDA-grounded framework that evolves RTL optimization harnesses from a minimal loop while keeping the optimization model, EDA flow, and per-design budgets fixed. Compared with Dr. RTL, Meta-RTL* reduces aggregate WNS/TNS violations by 7.8%/11.0% across 20 development designs, with area reductions on 70% of them. Without further evolution, Meta-RTL* transfers to 10 unseen IC-RTL designs, reducing aggregate WNS/TNS violations by 20.5%/14.0% and total synthesized area by 12.6%. We further characterize three search mechanisms in the evolved harness and assess their contributions through ablations and a case study.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有LLM agent优化RTL的搜索流程多为人工设计，限制了优化效果。",
+      "提出Meta-RTL框架，在固定模型、EDA流程和预算下，从最小循环进化优化框架。",
+      "相比基线显著减少违例并缩减面积，且能泛化至未见设计，还通过消融分析验证了机制贡献。"
+    ],
     "authors": [
       "Xinzhuang Xiong",
       "Yonghao Wang",
@@ -2344,14 +2550,24 @@
     "matched": [
       "agent harness"
     ],
-    "score": 17
+    "score": 17,
+    "tags": [
+      "RTL优化",
+      "智能体",
+      "EDA",
+      "大语言模型"
+    ]
   },
   {
     "id": "2611.25889",
     "title": "EvoMem: Self-Evolving Skills for Time-Aware Long Video Memory Agents",
-    "title_zh": null,
+    "title_zh": "EvoMem：面向长视频记忆的自进化检索技能agent",
     "abstract": "Although memory-augmented architectures have expanded the ability of large vision-language models (LVLMs) to process long videos, existing retrieval processes still largely rely on global semantic matching and lack state-driven temporal control, often returning fragmented or redundant evidence and failing to maintain a coherent evidence chain. To address this challenge, we propose EvoMem, a time-aware long-video memory agent guided by self-evolving retrieval skills. EvoMem constructs a hierarchical time-indexed memory, where different types of evidence are aligned onto a unified video timeline; during retrieval, temporal cues from acquired evidence are further converted into explicit signals that constrain subsequent memory access. To address recurring procedural errors in long-video question answering, such as unclear retrieval targets, improper memory access paths, or premature stopping, EvoMem introduces retrieval skills to provide process-level guidance, enabling the agent to dynamically adjust retrieval content, memory operations, and target temporal ranges according to the current evidence state, while deciding when to stop. Furthermore, inspired by reinforcement learning, we formulate skill evolution as a reward-guided policy improvement process. Each candidate skill is treated as an external policy patch, and rewards are assigned according to answer-correctness state transitions on the validation set. In this way, effective skills are accepted and low-quality skills are rejected without updating model parameters. Experiments on four long-video question answering benchmarks show that EvoMem significantly outperforms existing baselines, achieving an average accuracy of 60.1% and an average improvement of 8.6 percentage points over the previous best methods, demonstrating its effectiveness for long-video reasoning.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有长视频检索依赖全局语义匹配，缺乏时间状态控制，易返回碎片化证据。EvoMem构建分层时间索引记忆，将证据统一对齐至视频时间轴。",
+      "针对长视频问答中的检索目标不清等错误，EvoMem引入检索技能提供过程级指导，根据当前证据状态动态调整记忆访问与时间范围。",
+      "受强化学习启发，将技能进化建模为奖励引导的策略改进过程，无需更新参数即可筛选有效技能。实验表明其平均准确率达60.1%。"
+    ],
     "authors": [
       "Yutong Guan",
       "Meixing Shi",
@@ -2375,14 +2591,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 5
+    "score": 5,
+    "tags": [
+      "长视频问答",
+      "记忆增强",
+      "agent",
+      "强化学习"
+    ]
   },
   {
     "id": "2611.25873",
     "title": "WHU-Road3D: A dataset and benchmark towards fine-grained road surface mapping",
-    "title_zh": null,
+    "title_zh": "WHU-Road3D：面向细粒度路面测绘的数据集与基准",
     "abstract": "Accurately extracting and mapping road surface elements is crucial for applications such as high-definition maps, road asset management, and intelligent transportation systems. This study first provides a comprehensive review of the benchmark datasets for extracting and mapping road elements, encompassing overhead-to-perspective data, large-to-local scales, and coarse-to-fine details. Subsequently, we thoroughly review the relevant approaches for extracting road surface elements. However, we argue that existing datasets still require enhancements in semantic richness, data modality diversity, and scenario complexity. To bridge these gaps, this paper presents WHU-Road3D, a large-scale multimodal dataset for fine-grained road surface mapping to address these shortcomings. WHU-Road3D provides approximately 100 km of diverse Chinese highways and urban streets. It features a rich combination of MLS point clouds, associated panoramic images, vehicle trajectories, detailed vectorized annotations, and pointwise instance annotations for road surface elements. The dataset carefully annotates 15 distinct categories of road elements, including common markings like road boundaries, zebra crossings, lane dividers, stop lines, as well as 10 types of direction symbols. To our knowledge, WHU-Road3D stands as the first multimodal dataset for mapping such a comprehensive range of road surface elements, designed to facilitate cutting-edge research in instance segmentation, full-element extraction and mapping on road surfaces. Beyond these immediate applications, WHU-Road3D also provides a valuable source for hierarchical road topology reasoning, map updating, and street scene generation. The dataset, along with the code for our benchmark methods, will be made publicly available at \\href{https://github.com/WHU-USI3DV/WHU-Road3D.git}{https://github.com/WHU-USI3DV/WHU-Road3D.git}.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有道路要素提取数据集在语义丰富度、数据模态多样性和场景复杂性上存在不足，难以满足高精地图等应用需求。",
+      "构建WHU-Road3D大规模多模态数据集，提供约100公里道路的MLS点云、全景图像及15类要素的矢量与实例标注。",
+      "该数据集是首个涵盖全面路面要素的多模态数据集，可推动实例分割、全要素提取及道路拓扑推理等前沿研究。"
+    ],
     "authors": [
       "Xiaoxin Mi",
       "Zhen Cao",
@@ -2408,7 +2634,12 @@
     "matched": [
       "reasoning"
     ],
-    "score": 7
+    "score": 7,
+    "tags": [
+      "多模态数据集",
+      "路面测绘",
+      "实例分割"
+    ]
   },
   {
     "id": "2611.25868",
@@ -2447,9 +2678,13 @@
   {
     "id": "2611.25865",
     "title": "Thinking in Streams: Proactive Spatial Reasoning with Vision-Language Models",
-    "title_zh": null,
+    "title_zh": "流式视频中的主动空间推理与视觉语言模型",
     "abstract": "Recognizing when a requested spatial condition holds in streaming video can require maintaining and updating spatial knowledge across changing viewpoints. We study this capability through proactive spatial reasoning, where a model receives a query in advance and determines whether and when to respond as the stream unfolds. We introduce ProSpace-Bench, comprising nine tasks across object, camera, and scene reasoning, and ProSpace-Train for supervised training. To support spatial decisions, we propose ProSpace-VLM, which injects explicit geometric encodings estimated causally from incoming frames into intermediate VLM layers, using the existing KV cache as spatial memory and spatial token selection for efficient streaming. Experiments reveal a substantial gap between VLMs and humans, while ProSpace-VLM improves timely responses and correct abstention over fine-tuned baselines. Analyses examine how ProSpace-VLM represents previously observed spatial information across changing viewpoints.",
-    "summary_zh": null,
+    "summary_zh": [
+      "流式视频的空间条件判断需跨视角维护知识，现有VLM在此主动空间推理任务上存在不足。",
+      "构建ProSpace-Bench基准与训练集，提出ProSpace-VLM，将因果估计的几何编码注入VLM层，并利用KV缓存与空间token选择实现高效流式处理。",
+      "实验表明该方法提升了及时响应与正确弃答能力，缩小了VLM与人类在空间推理上的差距。"
+    ],
     "authors": [
       "Junyoung Hong",
       "Minsu Kim",
@@ -2473,14 +2708,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 13
+    "score": 13,
+    "tags": [
+      "空间推理",
+      "流式视频",
+      "视觉语言模型"
+    ]
   },
   {
     "id": "2611.25862",
     "title": "HALTT: A HAte Lexicon Through Time",
-    "title_zh": null,
+    "title_zh": "HALTT：历时仇恨词汇词典构建与分析框架",
     "abstract": "Automated hate speech detection degrades over time as everyday vocabulary is weaponized into covert slurs while retaining original benign meanings (polysemy retention). Existing lexical semantic change detection (LSCD) frameworks struggle with this phenomenon due to a lack of standardized, sense-delineated diachronic resources. We propose a multi-stage framework to construct and validate a diachronic lexicon of semantically shifted hate speech terms. Filtering > 20,000 candidates, our pipeline combines historical (1770-1964) and modern (2001-2024) corpus frequency grounding, masked definition-level scoring to mitigate LLM temporal bias, and a dual-persona reasoning prompt paradigm. We release HALTT, a grounded lexicon of 19 polysemous terms with literal and derogatory senses, analyze shift typologies, and establish evaluation protocols for downstream diachronic benchmarking.",
-    "summary_zh": null,
+    "summary_zh": [
+      "仇恨检测随日常词汇被武器化为隐蔽贬义词而退化，现有 LSCD 框架因缺乏历时资源难以应对。",
+      "提出多阶段框架，结合历史与现代语料频率、掩码定义评分及双人格推理提示，构建历时仇恨词典。",
+      "发布含 19 个多义词的 HALTT 词典，分析语义转变类型并建立下游历时基准评估协议。"
+    ],
     "authors": [
       "Dario Franzese",
       "Farah Benamara",
@@ -2502,14 +2746,23 @@
     "matched": [
       "reasoning"
     ],
-    "score": 9
+    "score": 9,
+    "tags": [
+      "仇恨言论检测",
+      "词汇语义演变",
+      "历时词典"
+    ]
   },
   {
     "id": "2611.25855",
     "title": "HabitusMem: Belief Memory over Evolving User Preferences for LLM Agents",
-    "title_zh": null,
+    "title_zh": "HabitusMem：面向LLM Agent用户偏好演化的信念记忆",
     "abstract": "Personalized LLM agents must act on a user's current preferences, which change across interactions and are rarely stated in full. Existing memory systems store and retrieve content from the interaction history and leave the agent to work out which preferences still hold and where they apply. Such content does not indicate whether a preference is still current or where it applies, so agents often act on outdated or misapplied preferences. We instead treat memory as the assistant's belief about the user. Following Bourdieu's account of habitus as durable but revisable dispositions, we model the user as a latent preference state that every interaction, including the current request, both reveals and updates. The belief summarizes what the history supports about this state, and memory consists of the individual beliefs that bear on the agent's current decision, each with its evidence, scope, and status. We implement this view in HabitusMem, a trained writer that states these beliefs as text records for a frozen agent. Across two agent families, HabitusMem achieves the best results among memory systems on both PersonaMem-v2 and VitaBench 2.0. Controlled analyses show that learned request conditioning drives the answering gain, while auxiliary training tasks improve tool use.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有记忆系统无法判断偏好是否过期或适用场景，导致Agent误用过时偏好。",
+      "将记忆建模为Agent对用户的信念，记录偏好的证据、范围与状态以支持当前决策。",
+      "训练HabitusMem生成文本信念记录，在两个基准测试中取得最佳效果。"
+    ],
     "authors": [
       "Yifan Lu",
       "Gaoyang Guo",
@@ -2536,14 +2789,23 @@
       "LLM agent",
       "tool use"
     ],
-    "score": 20
+    "score": 20,
+    "tags": [
+      "LLM Agent",
+      "记忆系统",
+      "用户偏好"
+    ]
   },
   {
     "id": "2611.25849",
     "title": "EgoWitness: Benchmarking Instance-Level Spatial Memory and Reasoning in Egocentric Video Streams",
-    "title_zh": null,
+    "title_zh": "EgoWitness：第一视角视频的实例级空间记忆与推理基准",
     "abstract": "Recalling where and when an object was last seen and who saw it requires recognizing it across days and people. Existing long-video benchmarks focus on events, object categories, or relative locations, leaving instance-level spatial memory largely untested in multimodal models. To address this gap, we present EgoWitness, a benchmark for instance-level spatial memory and reasoning in egocentric video. Its 8,453 human-verified questions span approximately 324 hours of week-long and short-horizon recordings and test seven abilities, from recognizing an object or room to recalling who saw it and reasoning about room visits. Over one million reviewed masks of 34 registered landmarks and 21 movable-object labels are linked through room timelines. Among twelve direct vision-language models (VLMs), open-weight models reach at most 46.97% accuracy, and none exceeds 35% on identifying who saw an object last. We therefore propose EgoClue, a spatial-memory agent that retrieves candidate intervals, verifies instance identity, and computes spatial and temporal relations with five tools. Two-stage training with supervised fine-tuning (SFT) and Group Relative Policy Optimization (GRPO) raises its 4B controller from 23.64% to 72.65% accuracy on 1,320 held-out questions. Evidence-trace synthesis matches the best direct VLM at 74.85% on week-long questions and achieves 80.56% in environments excluded from training.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有长视频基准缺乏对多模态模型实例级空间记忆的测试，无法评估其回忆物体何时何地被谁看到的能力。",
+      "提出EgoWitness基准，包含8453个问题，覆盖七项能力；测试发现十二个VLM在识别谁最后看到物体上准确率均低于35%。",
+      "提出EgoClue空间记忆agent，结合SFT与GRPO两阶段训练，将准确率提升至72.65%，并在新环境中达到80.56%。"
+    ],
     "authors": [
       "Zhengru Fang",
       "Zehao Liu",
@@ -2571,14 +2833,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 14
+    "score": 14,
+    "tags": [
+      "第一视角视频",
+      "空间记忆",
+      "VLM",
+      "agent"
+    ]
   },
   {
     "id": "2611.25841",
     "title": "Whose Risks Count? What 1,901 AI Incidents Reveal About Corporate Disclosures",
-    "title_zh": null,
+    "title_zh": "1901起AI事件揭示企业披露中的风险盲区",
     "abstract": "AI systems can harm people, yet the AI actors that provide or deploy them are rarely obliged to disclose these risks. US securities regulation is an exception. Companies registered with the Securities and Exchange Commission (SEC) must disclose their material risks, including those of their AI systems, in filings that carry liability for misstatement. Materiality, however, is defined by what a reasonable investor would consider important, so harms to third parties enter disclosure only insofar as they become financial risks for the company. We test whether AI harms do so by matching 9,001 AI incidents to 18,229 SEC filings of 328 AI actors by risk type. Of the 1,901 incidents with filings before and after them, half belong to a risk type that the AI actor never disclosed, and this share varies with the kind of harm. Filings disclose the risk types of 67\\% of system failures but only 2\\% of social system harms, and AI actors themselves report fewer than 2\\% of incidents. Securities disclosure thus records the risks that AI actors face rather than the harms that people subject to AI bear. Public authorities that hold AI actors accountable for such harms could make them financially material. We release DISC, the Disclosure--Incident Securities Corpus, to support this work.",
-    "summary_zh": null,
+    "summary_zh": [
+      "AI系统常造成第三方伤害，但企业通常无义务披露，SEC证券披露仅在伤害构成企业财务风险时才纳入。",
+      "研究将9001起AI事件与328家企业的SEC文件匹配，发现半数事件风险未被披露，且不同伤害类型披露率差异巨大。",
+      "证券披露主要反映企业面临的财务风险而非AI受害者承受的伤害，监管机构若追究责任可使这些伤害具有财务重要性。"
+    ],
     "authors": [
       "Simeon Allmendinger",
       "Edyta Paulina Bogucka",
@@ -2598,14 +2870,24 @@
     "comment": "",
     "journal_ref": "",
     "matched": [],
-    "score": 6
+    "score": 6,
+    "tags": [
+      "AI风险",
+      "企业披露",
+      "证券监管",
+      "AI事件"
+    ]
   },
   {
     "id": "2611.25840",
     "title": "Harnessing Medical Visual-Language Models with Agentic Evidence Management",
-    "title_zh": null,
+    "title_zh": "基于智能体证据管理的医学视觉语言模型",
     "abstract": "Medical vision-language agents increasingly rely on segmentation tools, and recent work has focused on acquiring the right mask, often treating a good mask as the end point of tool use. But do these agents use the resulting evidence effectively? To answer this question, we need a benchmark that separates evidence use from segmentation quality, spans multiple medical image types, and allows the same mask to be presented in different ways. Existing medical VQA datasets do not jointly provide these properties. We therefore construct Mask-Evidence MedVQA, a 2.5K-example benchmark spanning four image types, where each question is paired with an answer-relevant ground-truth mask and multiple possible renderings. Our study reveals two limitations of direct tool use. First, evidence presentation matters. Different renderings of the same fixed mask can substantially change model behavior. Second, masks introduce an evidence trade-off. Highlighting a relevant region can expose diagnostic evidence the model previously missed, but the added visual cue can also induce incorrect associations. As a result, even a ground-truth mask can correct some answers while turning initially correct ones into incorrect ones. Together, these findings show that acquiring the right mask is not enough. An agent must also decide how to present the evidence and whether it should change the answer. We therefore introduce TUNE (Tool Use is Not Enough), an evidence-management harness that explicitly manages what evidence to acquire, how to present it, and whether to accept the resulting answer update. Across three public medical VQA benchmarks, evidence management improves the fine-tuned Qwen3.5-9B backbone's mean accuracy by 4.0 percentage points. Full TUNE improves over direct tool use by 9.1 points on average across seven benchmarks and achieves competitive results against existing medical VLMs and agents.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有医学视觉问答基准无法单独评估证据使用效果，作者构建了包含2.5K样本的Mask-Evidence MedVQA基准。",
+      "研究发现获取正确掩码不足以保证效果，证据呈现方式会影响模型行为，且掩码会引入证据权衡问题。",
+      "提出证据管理框架TUNE，显式管理证据获取、呈现及答案更新，在多个基准上显著提升模型准确率。"
+    ],
     "authors": [
       "Qiming Huang",
       "Hanze Dong",
@@ -2630,14 +2912,24 @@
     "matched": [
       "tool use"
     ],
-    "score": 6
+    "score": 6,
+    "tags": [
+      "医学视觉问答",
+      "视觉语言模型",
+      "智能体",
+      "证据管理"
+    ]
   },
   {
     "id": "2611.25837",
     "title": "Software-Defined Internet Integration of Satellite Networks (SDISN)",
-    "title_zh": null,
+    "title_zh": "卫星网络的软件定义互联网融合架构",
     "abstract": "This paper proposes SDISN, a software-defined Internet integration of satellite networks. It facilitates the transmission of IP traffic from user terminals (UTs) or Internet nodes over a satellite network with inter-satellite links (ISLs). Gateways (GWs) together with Points of Presence (PoPs) support the transition between the satellite network and the Internet. UTs and GWs connect to the satellite network via serving satellites (SrvSats). As the satellites orbit the Earth at high speed, UTs and GWs frequently change their SrvSats. This causes frequent changes to their reachability, which poses a major challenge for integration. In the proposed solution, GWs and SrvSats encapsulate traffic with forwarding information so that the traffic can be carried over the satellite network towards appropriate SrvSats of UTs or GWs. The forwarding information on the encapsulating nodes is continuously updated by a controller to reflect changed SrvSats and possibly changed topology of the satellite network. Design goals for the proposed architecture were low complexity on satellites, high ability for traffic engineering, and keeping UTs out of the routing system for security and compatibility reasons. UTs may have increased security requirements (ISRs) such that their traffic should be carried within the constellation to avoid non-trusted terrestrial infrastructure. Extensions are proposed to support such ISRs. UTs may obtain either dynamic IP addresses from a nearby GW/PoP wherever they roam or they may obtain static IP addresses from a fixed Home GW/PoP. In the latter case, triangle routing via the Home GW occurs when the UT roams away from the Home GW. As this adds latency to the communication, we investigate architectural extensions for latency reduction. In addition, we show how traffic engineering can be performed in such an architecture with the help of alternate GWs and SrvSats.",
-    "summary_zh": null,
+    "summary_zh": [
+      "卫星高速运动导致终端与网关服务卫星频繁切换，引发可达性变化，阻碍卫星网络与互联网融合。",
+      "提出SDISN架构，由控制器动态更新转发信息，网关与服务卫星封装流量，实现IP报文在星间链路传输。",
+      "该架构降低卫星复杂度并提升流量工程能力，支持终端安全需求与移动IP分配，并优化漫游三角路由延迟。"
+    ],
     "authors": [
       "Michael Menth",
       "Moritz Flüchter",
@@ -2656,14 +2948,23 @@
     "comment": "",
     "journal_ref": "",
     "matched": [],
-    "score": 0
+    "score": 0,
+    "tags": [
+      "卫星网络",
+      "软件定义网络",
+      "网络架构"
+    ]
   },
   {
     "id": "2611.25832",
     "title": "RAVEN: A Self-RAG Based Agent for Threat Classification and Response",
-    "title_zh": null,
+    "title_zh": "基于 Self-RAG 的安全威胁分类与响应 agent RAVEN",
     "abstract": "Security event analysis in large enterprises can be overwhelming, as each alert typically requires manual in- spection by human operators. This process is time-consuming and prone to inconsistencies, especially in high-volume Secu- rity Operations Center (SOC) environments. In this work- in-progress paper, we present RAVEN: Retrieval-Augmented Vulnerability & Event aNalysis, an agentic framework designed to support SOC analysts by automating the initial stages of alert investigation. The proposed system leverages a Self- Reflective Retrieval-Augmented Generation-based approach to provide an initial classification of security events and enables interactive refinement through analyst-in-the-loop queries. Un- like traditional approaches that rely on generic mitigation strategies, RAVEN generates context-aware remediation sug- gestions by incorporating knowledge of the target enterprise infrastructure. We implement an early-stage prototype and report preliminary results on three balanced test sets of 400 curated web payloads each (SQLi, XSS, SSTI) and a qualitative case study of mitigation generation; an evaluation on IDS- generated alerts and a user study are ongoing and outlined as remaining work.",
-    "summary_zh": null,
+    "summary_zh": [
+      "企业 SOC 环境中安全告警依赖人工排查，耗时且易出现不一致问题。",
+      "提出 RAVEN 框架，利用 Self-RAG 方法自动分类安全事件，并支持分析师交互式优化查询。",
+      "结合企业基础设施知识生成上下文感知的缓解建议，初步测试验证了其分类与缓解生成能力。"
+    ],
     "authors": [
       "Pironti Francesco Aurelio",
       "Arena Luigi",
@@ -2687,14 +2988,24 @@
     "matched": [
       "retrieval-augmented generation"
     ],
-    "score": 3
+    "score": 3,
+    "tags": [
+      "安全运营",
+      "检索增强生成",
+      "威胁分类",
+      "漏洞缓解"
+    ]
   },
   {
     "id": "2611.25809",
     "title": "ALIoTh: Orchestrating Multi-Agent LLMs for Autonomous IoT Penetration Testing",
-    "title_zh": null,
+    "title_zh": "ALIoTh：面向物联网自动化渗透测试的多智能体LLM编排框架",
     "abstract": "Penetration testing in Internet of Things (IoT) environments, especially those composed of various different devices, e.g., smart plugs, smart cameras, and smart doors, presents great challenges across the phases of information gathering, attack surface enumeration, privilege escalation, and lateral movement. This paper introduces ALIoTh, a multi-agent, workflow-driven penetration testing framework that integrates Large Language Models agents within a Self-Retrieval-Augmented Generation (Self-RAG) architecture to autonomously identify and exploit vulnerabilities in IoT and Industrial-IoT (IIoT) environments. By leveraging state-of-the-art language models and orchestrating specialized agents via the LangGraph framework, ALIoTh dynamically plans and executes a full-spectrum offensive pipeline. This includes network, devices, and service enumeration, vulnerability assessment, payload generation, reverse shell deployment, and privilege escalation on each device. The Self-RAG mechanism equips expert agents with contextual access to IoT security knowledge, e.g., related documentation, tool manuals, and known attack techniques, enhancing their reasoning capabilities in scenarios involving multiple device exploitation and group policy manipulation.",
-    "summary_zh": null,
+    "summary_zh": [
+      "物联网环境设备多样，导致信息收集、攻击面枚举、提权和横向移动等渗透测试阶段面临巨大挑战。",
+      "提出多智能体框架ALIoTh，结合Self-RAG架构与LangGraph编排专家智能体，动态规划并执行全谱系攻击流程。",
+      "Self-RAG机制为智能体提供IoT安全知识上下文，增强了多设备利用与组策略操控等场景下的推理能力。"
+    ],
     "authors": [
       "Pironti Francesco Aurelio",
       "Arena Luigi",
@@ -2720,14 +3031,24 @@
       "multi-agent",
       "retrieval-augmented generation"
     ],
-    "score": 16
+    "score": 16,
+    "tags": [
+      "物联网安全",
+      "渗透测试",
+      "多智能体",
+      "大语言模型"
+    ]
   },
   {
     "id": "2611.25800",
     "title": "Personalized Privacy-Aware MARL Offloading in the Edge-Cloud Continuum",
-    "title_zh": null,
+    "title_zh": "边缘云连续体中个性化隐私感知的MARL任务卸载",
     "abstract": "Task offloading in End-Edge-Cloud computing enables resource-constrained User Devices (UDs) to execute computation-intensive applications with reduced latency and energy consumption. However, existing task offloading schemes generally overlook the heterogeneous privacy requirements of users, leading to inefficient privacy-aware offloading decisions. In this paper, we propose a personalized privacy-aware task offloading framework, where the privacy requirement of each task is quantified through a User-Centric Privacy (UCP) model that considers task sensitivity, user privacy preferences, and task urgency. The task offloading problem is formulated as a Markov Decision Process (MDP) to jointly optimize the offloading ratio and the target computing server while minimizing the long-term system cost under latency, energy, and privacy constraints. To efficiently solve the resulting high-dimensional continuous optimization problem, we develop an Advantage-Weighted Actor-Critic (AWAC)-enhanced Proximal Policy Optimization (PPO)-based Multi-Agent Reinforcement Learning (MARL) algorithm under the Centralized Training and Decentralized Execution (CTDE) paradigm. Simulation results demonstrate that the proposed framework achieves lower average system cost, lower energy consumption, and higher task success rate than representative baselines under diverse privacy requirements.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有任务卸载方案忽略了用户异构的隐私需求，导致隐私感知卸载决策低效。",
+      "提出个性化隐私感知卸载框架，结合UCP模型量化隐私需求，并将其建模为MDP以联合优化卸载比例与目标服务器。",
+      "设计基于AWAC增强PPO的MARL算法求解，仿真表明该框架有效降低系统成本与能耗，并提升任务成功率。"
+    ],
     "authors": [
       "Muhammad Rafid",
       "Golshan Famitafreshi",
@@ -2750,14 +3071,24 @@
     "matched": [
       "multi-agent"
     ],
-    "score": 4
+    "score": 4,
+    "tags": [
+      "任务卸载",
+      "隐私感知",
+      "多智能体强化学习",
+      "边缘云连续体"
+    ]
   },
   {
     "id": "2611.25793",
     "title": "When Safety Rationales Hallucinate: Diagnosing and Grounding Multimodal Safety Guards",
-    "title_zh": null,
+    "title_zh": "多模态安全护栏中的理由幻觉诊断与缓解",
     "abstract": "Multimodal safety guards increasingly generate rationales alongside safety predictions, yet whether these rationales are reliable remains largely unexplored. We systematically study *rationale hallucination* from two perspectives: visual rationale hallucination, where rationales contain unsupported visual facts, and safety attribution hallucination, where grounded content is assigned an incorrect safety interpretation. Across rationale-generation methods, multiple vision-language backbones, and safety datasets, we find that rationale hallucination is widespread and does not consistently diminish with higher classification accuracy or increased model scale. Further analysis of the Think-with-Image paradigm shows that hallucination is concentrated in fine-grained attributes and relations, while visual tools are often invoked infrequently or without sufficient spatial focus. Based on these findings, we propose *Tool-Contrastive Grounding Reinforcement Learning* (TCG-RL), which rewards tool use only when it improves rationale grounding over a tool-free reference. TCG-RL substantially reduces rationale hallucination while maintaining competitive safety prediction performance. By revealing the gap between prediction correctness and rationale reliability, our study motivates a shift in multimodal safety guarding from outcome-only evaluation toward safety decisions that are both accurate and verifiably grounded.",
-    "summary_zh": null,
+    "summary_zh": [
+      "多模态安全护栏生成的解释理由存在视觉事实无支撑与安全归因错误等幻觉问题，且幻觉现象普遍存在，不随分类准确率或模型规模提升而减少。",
+      "分析发现幻觉集中于细粒度属性与关系，且视觉工具调用频率低或空间聚焦不足，为此提出TCG-RL方法，仅在工具能改善无工具基准的解释时给予奖励。",
+      "TCG-RL大幅减少了理由幻觉并保持安全预测性能，促使多模态安全评估从仅看结果转向准确且可验证的决策。"
+    ],
     "authors": [
       "Yingshuo Wang",
       "Weixiang Zhao",
@@ -2781,14 +3112,23 @@
     "matched": [
       "tool use"
     ],
-    "score": 9
+    "score": 9,
+    "tags": [
+      "多模态安全",
+      "幻觉",
+      "强化学习"
+    ]
   },
   {
     "id": "2611.25780",
     "title": "RouteVerify: Routing Interventions for Step-Level Verification in Mixture-of-Experts Models",
-    "title_zh": null,
+    "title_zh": "RouteVerify：面向MoE模型步骤级验证的路由干预研究",
     "abstract": "Routing states in mixture-of-experts (MoE) models can distinguish correct from erroneous reasoning steps. If changing routing also changes a model's step-level verification judgment, it is tempting to conclude that the judgment follows what routing encodes. We test this inference with RouteVerify, a controlled intervention study that replaces selected internal activations from one solution trace with activations from another, while keeping the evaluated input unchanged. Across nine MoE checkpoints, we compare three intervention interfaces: router logits, MoE outputs, and post-MoE residual states. We vary the layers and token positions at which activations are replaced. We measure changes in a verification margin that quantifies the model's preference for INCORRECT over CORRECT. We also evaluate the same input with activations from correct versus erroneous steps to test whether the resulting judgment depends on the source step's correctness. We report four linked results. First, probes on router logits separate correct from erroneous steps in eight checkpoints (AUROC 0.80-0.88). Second, replacing router logits across all routed layers changes the judgment in all nine checkpoints, and by more than a norm-matched random replacement. Third, this change rarely depends on whether the source step is correct. At one layer, routing from erroneous steps and from correct steps produces indistinguishable margins in all nine checkpoints. Under all-layer routing, their difference is resolved and positive in only one. Fourth, the same difference is positive for local residual replacements in eight of nine checkpoints, so the measure does detect such dependence where it exists. Correctness is therefore readable from routing, and routing replacements move the judgment, but the movement rarely follows correctness.",
-    "summary_zh": null,
+    "summary_zh": [
+      "现有MoE模型的路由状态能否区分正确与错误推理步骤尚需验证，研究者提出RouteVerify方法，通过替换不同接口的内部激活进行受控干预实验。",
+      "探针测试表明路由logits能有效区分步骤正误，且全层路由替换会显著改变模型验证判断，超出随机基线水平。",
+      "然而判断变化很少依赖源步骤正确性，局部残差替换则能检测到这种依赖，说明路由可读出正确性但机制更复杂。"
+    ],
     "authors": [
       "Yucheng Du",
       "Ryan A. Rossi",
@@ -2810,14 +3150,24 @@
     "matched": [
       "reasoning"
     ],
-    "score": 8
+    "score": 8,
+    "tags": [
+      "混合专家模型",
+      "步骤级验证",
+      "路由干预",
+      "可解释性"
+    ]
   },
   {
     "id": "2611.25779",
     "title": "Intelligent Imaging of Thermal Transport in Nanostructures",
-    "title_zh": null,
+    "title_zh": "纳米结构热传输的智能成像技术",
     "abstract": "The ability to measure thermal properties and visualize heat transport processes with high spatial resolution is becoming increasingly important for materials discovery, next-generation electronics, and advanced manufacturing. As critical dimensions and architectures of novel materials and high performance electronics shrink and become more heterogeneous, thermal transport is no longer governed by bulk material properties alone, but by local variations in microstructure, such as interfaces and defects, while the operating conditions can also play a role. With the development of non-contact pump-probe thermoreflectance techniques, specific heat, thermal conductivity, and interface conductance can be mapped either through wide-field thermos-reflectance images or by scanning technique. However, key challenges remain such as the balance between imaging throughput and measurement accuracy, the extraction of multiple parameters with high confidence, and non-intrusive subsurface characterization, etc. This Review highlights recent advancements in artificial intelligence (AI)-assistance in high-throughput data processing, visualizing interfacial thermal transport, and nonintrusive subsurface analysis, and offers outlooks for future research directions such as spectral mapping of heat carriers, three-dimensional property mapping, and AI-agentic experimental designs. We anticipate this Review will motivate future efforts in combining AI with experimental techniques to achieve unprecedented capabilities for thermal characterization of nanoscale materials and device characterization, facilitating materials discovery and electronics revolution.",
-    "summary_zh": null,
+    "summary_zh": [
+      "纳米材料与电子器件尺寸缩小且趋于异构，热传输受微观局部特征影响，传统测量难以兼顾通量与精度并实现高置信参数提取",
+      "本文综述AI辅助的高通量数据处理、界面热传输可视化及无损伤亚表面分析等进展，探讨热载流子光谱成像与AI-agentic实验设计等方向",
+      "结合AI与实验技术有望实现纳米材料热表征能力的突破，推动新材料发现与电子器件革新"
+    ],
     "authors": [
       "Xin Qian",
       "Te-Huan Liu",
@@ -2837,14 +3187,24 @@
     "comment": "",
     "journal_ref": "",
     "matched": [],
-    "score": 0
+    "score": 0,
+    "tags": [
+      "纳米结构",
+      "热传输",
+      "人工智能",
+      "无损检测"
+    ]
   },
   {
     "id": "2611.25776",
     "title": "Suppressing the Shortcut Hidden Behind the Gains of VideoLLM Fine-Tuning",
-    "title_zh": null,
+    "title_zh": "抑制VideoLLM微调背后的文本捷径",
     "abstract": "Supervised fine-tuning (SFT) is the stage in which Video Large Language Models (VideoLLMs) advance their capability to reason over video. However, the VideoLLM also learns to answer from textual regularities of its training data, a shortcut that bypasses the video. The regularities behind the shortcut are hard to define at the data level, and the shortcut forms regardless of training epoch, data size, or backbone. The shortcut is hidden behind a rise in accuracy within the training distribution, yet it is not required for the rise and even costs SFT the gain the video offers under distribution shift. We therefore propose Video-Evidence Training via Orthogonal projection (VETO), which intervenes on the fine-tuning update where the shortcut is written rather than on the data. VETO calibrates the subspace that the text alone occupies in the activations of the base model and projects the update onto its orthogonal complement. The VideoLLM is thus left to ground its answer in the full input, with the shortcut suppressed as it forms and never defined. Across seven VideoLLMs, VETO preserves the gain of SFT on the training distribution and suppresses the shortcut. On six benchmarks under shift it gains more than SFT and answers from the full input rather than the shortcut. Code is available at https://github.com/Youngwoo-git/VETO.",
-    "summary_zh": null,
+    "summary_zh": [
+      "VideoLLM在SFT时会利用文本规律走捷径绕过视频，导致分布偏移时性能下降。",
+      "提出VETO方法，在微调更新时投影到文本子空间的正交补空间，抑制捷径形成。",
+      "实验表明VETO在训练分布上保持增益，在分布偏移下优于SFT并基于完整输入回答。"
+    ],
     "authors": [
       "Youngwoo Shin",
       "Jongsuk Kim",
@@ -2863,7 +3223,12 @@
     "comment": "21 pages, 6 figures",
     "journal_ref": "",
     "matched": [],
-    "score": 3
+    "score": 3,
+    "tags": [
+      "VideoLLM",
+      "监督微调",
+      "捷径学习"
+    ]
   },
   {
     "id": "2611.25767",
