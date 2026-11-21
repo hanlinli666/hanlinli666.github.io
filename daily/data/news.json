@@ -1,5 +1,158 @@
 [
   {
+    "title": "cursor/plugins",
+    "link": "https://github.com/cursor/plugins",
+    "published": "2026-11-21T23:55:46Z",
+    "source": "GitHub Trending",
+    "summary": "",
+    "categories": [],
+    "author": null,
+    "level": "L3",
+    "source_id": "github-trending",
+    "id": "https://github.com/cursor/plugins",
+    "day": "2026-11-22",
+    "matched": [
+      "Cursor"
+    ],
+    "first_seen": "2026-11-21T23:55:46Z"
+  },
+  {
+    "title": "产品 RAG 知识库与 AI 顾问 设计与实现",
+    "link": "https://juejin.cn/post/7709442455398154275",
+    "published": "2026-11-21T23:55:46Z",
+    "source": "掘金热榜",
+    "summary": "本文是产品知识库（RAG）+ AI 产品顾问的 规范设计与实现说明 ，面向后续整合与二次开发。 下图是这套「产品 RAG 知识库 + AI 顾问」的系统结构：谁调用谁、数据怎么流动、向量从哪来。三条访问路径最终都汇聚到 $lib/server/products.js 这唯一一份实现。 产品是 SurrealDB product 表中的 独立记录 。整条链路分三层，边界如下：…",
+    "categories": [],
+    "author": null,
+    "level": "L3",
+    "source_id": "juejin-hot",
+    "id": "https://juejin.cn/post/7709442455398154275",
+    "day": "2026-11-22",
+    "matched": [
+      "/\\bAI\\b/"
+    ],
+    "first_seen": "2026-11-21T23:55:46Z"
+  },
+  {
+    "title": "怎么看 OpenAI 宣布升级反蒸馏防御，隐藏推理提取成功率从 54% 降至 0.2% ？",
+    "link": "https://www.zhihu.com/question/2107430398359885371",
+    "published": "2026-11-21T23:55:46Z",
+    "source": "知乎热榜",
+    "summary": "OpenAI 公布对抗蒸馏研究，表示蒸馏可能复制能力却丢掉配套安全措施，同时介绍如何检测和打断有组织的蒸馏尝试。https://openai.com/index/combatting-adversarial-distillation/",
+    "categories": [],
+    "author": null,
+    "level": "L3",
+    "source_id": "zhihu-hot",
+    "id": "https://zhihu.com/question/2107430398359885371",
+    "day": "2026-11-22",
+    "matched": [
+      "OpenAI"
+    ],
+    "first_seen": "2026-11-21T23:55:46Z"
+  },
+  {
+    "title": "OSTA 新特性放开：华为鸿蒙 HarmonyOS 7 系统更多机型小艺助理上线“小艺星芒”音色",
+    "link": "https://www.ithome.com/1/030/519.htm",
+    "published": "2026-11-21T23:35:28Z",
+    "source": "IT之家",
+    "summary": "IT之家 11 月 22 日消息，首款为 AI 而生的鸿蒙手机 —— 华为星芒 OSTA O1 Pro 已于 11 月 20 日下午正式发布 ，叠加国补后 4999 元起。华为星芒品牌总经理刘赫开通微博， 透露最受欢迎的 16G 版本已经在全平台售罄 。 ▲ IT之家开箱：华为全新子品牌星芒 OSTA O1 Pro 手机实拍 据介绍，华为星芒 OSTA O1 Pro 首搭 HarmonyOS 7 AI 先锋版系统，支持全新 AI…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "ithome",
+    "id": "https://ithome.com/1/030/519.htm",
+    "day": "2026-11-22",
+    "matched": [
+      "/\\bAI\\b/"
+    ],
+    "first_seen": "2026-11-21T23:55:46Z"
+  },
+  {
+    "title": "IT早报 1122：曝其他厂商也考虑推出阔直板形态手机；Anthropic 研究员预测 2027 年底 AI 比肩顶尖专家；华为星芒 O1 Pro 定价 5499 元起引争议...",
+    "link": "https://www.ithome.com/1/030/518.htm",
+    "published": "2026-11-21T23:31:46Z",
+    "source": "IT之家",
+    "summary": "“IT早报”时间，大家好，现在是 2026 年 11 月 22 日星期日，今天的重要科技资讯有： 1. 不只是华为，消息称其他厂商也考虑为旗舰产品线引入阔直板形态 博主 @数码闲聊站 21 日下午爆料称，当下手机市场“阔形态”升级势不可挡：除了华为，其他家也考虑在正代旗舰线加入阔形态，与常规直板机双线并行。>> 查看详情 2. “几乎所有人将永久失业”：Anthropic 研究员预测 2027 年底 AI 在几乎所有领域超越顶尖专家…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "ithome",
+    "id": "https://ithome.com/1/030/518.htm",
+    "day": "2026-11-22",
+    "matched": [
+      "/\\bAI\\b/"
+    ],
+    "first_seen": "2026-11-21T23:55:46Z"
+  },
+  {
+    "title": "加密聊天应用 Signal 默认屏蔽截图，防止 AI 智能体读取用户消息",
+    "link": "https://www.ithome.com/1/030/517.htm",
+    "published": "2026-11-21T23:28:10Z",
+    "source": "IT之家",
+    "summary": "IT之家 11 月 22 日消息，开源端到端加密聊天应用 Signal 近日推出 iOS / Android 版更新，默认关闭应用程序内截图功能，以阻止 Siri AI 和 Gemini 等 AI 智能体读取用户私人消息。 Signal 总裁 Meredith Whittaker 表示，系统级 AI 智能体的影响力正不断扩大，这对 Signal 长期建立的隐私机制构成威胁，因为这些智能体可能在用户毫不知情的情况下访问私人对话。 在…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "ithome",
+    "id": "https://ithome.com/1/030/517.htm",
+    "day": "2026-11-22",
+    "matched": [
+      "智能体"
+    ],
+    "first_seen": "2026-11-21T23:55:46Z"
+  },
+  {
+    "title": "谷歌智能家居应用 Nest 明年停服，功能全面整合进 Google Home",
+    "link": "https://www.ithome.com/1/030/515.htm",
+    "published": "2026-11-21T23:08:37Z",
+    "source": "IT之家",
+    "summary": "IT之家 11 月 22 日消息，谷歌近日在官网支持页面公布了智能家居应用程序 Nest 的最新动态。官方宣称， 独立版 Nest（App、网页端）将于 2027 年 1 月 15 日停止服务 ，相关功能将整合进 Google Home 应用。 IT之家注意到，谷歌还将在 2027 年 8 月 2 日停止智能音箱等设备的 Google 助理服务，届时 Google Home 和 Google Gemini 将全面接管智能音箱等设备。…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "ithome",
+    "id": "https://ithome.com/1/030/515.htm",
+    "day": "2026-11-22",
+    "matched": [
+      "Gemini"
+    ],
+    "first_seen": "2026-11-21T23:55:46Z"
+  },
+  {
+    "title": "Signal restricts mobile screenshots as it confronts ‘existential threat’ of AI surveillance",
+    "link": "https://techcrunch.com/2026/11/21/signal-restricts-mobile-screenshots-as-it-confronts-existential-threat-of-ai-surveillance/",
+    "published": "2026-11-21T21:37:10Z",
+    "source": "TechCrunch AI",
+    "summary": "Signal is limiting users' ability to take screenshots in both its Android and iOS apps.",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "techcrunch-ai",
+    "id": "https://techcrunch.com/2026/11/21/signal-restricts-mobile-screenshots-as-it-confronts-existential-threat-of-ai-surveillance",
+    "day": "2026-11-22",
+    "matched": [
+      "*"
+    ],
+    "first_seen": "2026-11-21T23:55:46Z"
+  },
+  {
+    "title": "A tale of two Nvidias",
+    "link": "https://techcrunch.com/2026/11/21/a-tale-of-two-nvidias/",
+    "published": "2026-11-21T21:07:42Z",
+    "source": "TechCrunch AI",
+    "summary": "We got two very different pictures of Nvidia — the company’s latest earnings report vs. the tech executives loudly calling for Jensen Huang’s return.",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "techcrunch-ai",
+    "id": "https://techcrunch.com/2026/11/21/a-tale-of-two-nvidias",
+    "day": "2026-11-22",
+    "matched": [
+      "*"
+    ],
+    "first_seen": "2026-11-21T23:55:46Z"
+  },
+  {
     "title": "8万星开源HyperFrames，我用WorkBuddy免费模型做了3条视频",
     "link": "https://juejin.cn/post/7709609115640184883",
     "published": "2026-11-21T20:28:20Z",
@@ -10045,158 +10198,5 @@
       "*"
     ],
     "first_seen": "2026-11-17T22:13:38Z"
-  },
-  {
-    "title": "商汤发布 SenseNova Loop-9B 模型：部署显存需求低至 10 GB 内",
-    "link": "https://www.ithome.com/1/028/534.htm",
-    "published": "2026-11-17T13:56:34Z",
-    "source": "IT之家",
-    "summary": "IT之家 11 月 17 日消息，商汤科技今天（17 日）晚间正式发布 SenseNova Loop-9B 模型。 该模型 延续了 Preview 版本对参数效率的探索 ：通过 Loop 结构复用模型层的参数，并结合流形约束超连接（mHC），在约 9B 参数规模下扩展计算深度，面向复杂推理、代码、工具调用和多模态任务。 模型得益于 Loop 的高效循环结构， 官方 4bit 量化后权重仅约 4.9GB ，部署显存需求低至 10 GB…",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "ithome",
-    "id": "https://ithome.com/1/028/534.htm",
-    "day": "2026-11-17",
-    "matched": [
-      "多模态"
-    ],
-    "first_seen": "2026-11-17T22:13:38Z"
-  },
-  {
-    "title": "为何说特斯拉离不开英伟达",
-    "link": "https://www.toutiao.com/trending/7709091941903765011/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2213%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227709091941903765011%22%2C%22hot_board_impr_id%22%3A%22202611172147310A60361A5F9FC460A6A2%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E4%B8%BA%E4%BD%95%E8%AF%B4%E7%89%B9%E6%96%AF%E6%8B%89%E7%A6%BB%E4%B8%8D%E5%BC%80%E8%8B%B1%E4%BC%9F%E8%BE%BE%22%7D&rank=&style_id=40132&topic_id=7709091941903765011",
-    "published": "2026-11-17T13:48:22Z",
-    "source": "今日头条热榜",
-    "summary": "",
-    "categories": [],
-    "author": null,
-    "level": "L3",
-    "source_id": "toutiao-hot",
-    "id": "https://toutiao.com/trending/7709091941903765011?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2213%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227709091941903765011%22%2C%22hot_board_impr_id%22%3A%22202611172147310A60361A5F9FC460A6A2%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E4%B8%BA%E4%BD%95%E8%AF%B4%E7%89%B9%E6%96%AF%E6%8B%89%E7%A6%BB%E4%B8%8D%E5%BC%80%E8%8B%B1%E4%BC%9F%E8%BE%BE%22%7D&rank=&style_id=40132&topic_id=7709091941903765011",
-    "day": "2026-11-17",
-    "matched": [
-      "英伟达"
-    ],
-    "first_seen": "2026-11-17T13:48:22Z"
-  },
-  {
-    "title": "美国封堵新马泰等国远程算力租赁通道",
-    "link": "https://www.toutiao.com/trending/7709121423012269587/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2213%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227709121423012269587%22%2C%22hot_board_impr_id%22%3A%22202611172147310A60361A5F9FC460A6A2%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E7%BE%8E%E5%9B%BD%E5%B0%81%E5%A0%B5%E6%96%B0%E9%A9%AC%E6%B3%B0%E7%AD%89%E5%9B%BD%E8%BF%9C%E7%A8%8B%E7%AE%97%E5%8A%9B%E7%A7%9F%E8%B5%81%E9%80%9A%E9%81%93%22%7D&rank=&style_id=40132&topic_id=7709121423012269587",
-    "published": "2026-11-17T13:48:22Z",
-    "source": "今日头条热榜",
-    "summary": "",
-    "categories": [],
-    "author": null,
-    "level": "L3",
-    "source_id": "toutiao-hot",
-    "id": "https://toutiao.com/trending/7709121423012269587?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2213%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227709121423012269587%22%2C%22hot_board_impr_id%22%3A%22202611172147310A60361A5F9FC460A6A2%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E7%BE%8E%E5%9B%BD%E5%B0%81%E5%A0%B5%E6%96%B0%E9%A9%AC%E6%B3%B0%E7%AD%89%E5%9B%BD%E8%BF%9C%E7%A8%8B%E7%AE%97%E5%8A%9B%E7%A7%9F%E8%B5%81%E9%80%9A%E9%81%93%22%7D&rank=&style_id=40132&topic_id=7709121423012269587",
-    "day": "2026-11-17",
-    "matched": [
-      "算力"
-    ],
-    "first_seen": "2026-11-17T13:48:22Z"
-  },
-  {
-    "title": "机器人正在接手汽车工业家底吗",
-    "link": "https://www.toutiao.com/trending/7709100360987577883/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2213%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227709100360987577883%22%2C%22hot_board_impr_id%22%3A%22202611172147310A60361A5F9FC460A6A2%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%AD%A3%E5%9C%A8%E6%8E%A5%E6%89%8B%E6%B1%BD%E8%BD%A6%E5%B7%A5%E4%B8%9A%E5%AE%B6%E5%BA%95%E5%90%97%22%7D&rank=&style_id=40132&topic_id=7709100360987577883",
-    "published": "2026-11-17T13:48:22Z",
-    "source": "今日头条热榜",
-    "summary": "",
-    "categories": [],
-    "author": null,
-    "level": "L3",
-    "source_id": "toutiao-hot",
-    "id": "https://toutiao.com/trending/7709100360987577883?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%2213%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227709100360987577883%22%2C%22hot_board_impr_id%22%3A%22202611172147310A60361A5F9FC460A6A2%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%AD%A3%E5%9C%A8%E6%8E%A5%E6%89%8B%E6%B1%BD%E8%BD%A6%E5%B7%A5%E4%B8%9A%E5%AE%B6%E5%BA%95%E5%90%97%22%7D&rank=&style_id=40132&topic_id=7709100360987577883",
-    "day": "2026-11-17",
-    "matched": [
-      "机器人"
-    ],
-    "first_seen": "2026-11-17T13:48:22Z"
-  },
-  {
-    "title": "商汤发布SenseNova Loop-9B模型",
-    "link": "https://wallstreetcn.com/livenews/3201342",
-    "published": "2026-11-17T13:46:25Z",
-    "source": "华尔街见闻·快讯",
-    "summary": "商汤科技正式发布SenseNova Loop-9B。该模型总参数量约为9B。模型通过两次执行共享的中间层，将32个物理解码层扩展为56次层计算；支持文本、图像输入和文本输出，上下文长度最高可达512K tokens。（界面）",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "wallstreetcn-live",
-    "id": "https://wallstreetcn.com/livenews/3201342",
-    "day": "2026-11-17",
-    "matched": [
-      "商汤"
-    ],
-    "first_seen": "2026-11-17T13:48:22Z"
-  },
-  {
-    "title": "投资者Steve Eisman：AI新云概念股因英伟达事件而陷入“巨大麻烦”。",
-    "link": "https://wallstreetcn.com/livenews/3201338",
-    "published": "2026-11-17T13:40:43Z",
-    "source": "华尔街见闻·快讯",
-    "summary": "投资者Steve Eisman：AI新云概念股因英伟达事件而陷入“巨大麻烦”。",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "wallstreetcn-live",
-    "id": "https://wallstreetcn.com/livenews/3201338",
-    "day": "2026-11-17",
-    "matched": [
-      "英伟达"
-    ],
-    "first_seen": "2026-11-17T13:48:22Z"
-  },
-  {
-    "title": "Alphabet 旗下药物 AI 企业 Isomorphic Labs 完成 50 亿美元 C 轮融资",
-    "link": "https://www.ithome.com/1/028/533.htm",
-    "published": "2026-11-17T13:39:32Z",
-    "source": "IT之家",
-    "summary": "IT之家 11 月 17 日消息，由诺贝尔奖得主 Demis Hassabis（戴米斯 · 哈萨比斯）领导的 Alphabet 旗下 AI 赋能药物研发企业 Isomorphic Labs 当地时间今日宣布， 其完成了总额 50 亿美元 （IT之家注：现汇率约合 333.96 亿元人民币） 的 C 轮融资 。 本轮融资由 Greenoaks 和 Sequoia Capital 共同领投，a16z (Andreessen…",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "ithome",
-    "id": "https://ithome.com/1/028/533.htm",
-    "day": "2026-11-17",
-    "matched": [
-      "/\\bAI\\b/"
-    ],
-    "first_seen": "2026-11-17T22:13:38Z"
-  },
-  {
-    "title": "黄仁勋卸任英伟达 CEO 后 X 账号企业徽章等被移除，马斯克回应免费恢复蓝标",
-    "link": "https://www.ithome.com/1/028/532.htm",
-    "published": "2026-11-17T13:38:17Z",
-    "source": "IT之家",
-    "summary": "IT之家 11 月 17 日消息，英伟达前 CEO 黄仁勋的官方 X 账号 @JensenHuang 今天（11 月 17 日）更新，在个人账号中移除了原本标注的“CEO”职务头衔和企业徽标等，账号简介仅保留“Founder of NVIDIA”（英伟达创始人）。 这一情况随后被一位名叫亚历山德拉 · 梅尔茨（Alexandra Merz）的网民转发。公开资料显示，梅尔茨是马斯克旗下电动汽车公司特斯拉的铁杆支持者和散户股东。…",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "ithome",
-    "id": "https://ithome.com/1/028/532.htm",
-    "day": "2026-11-17",
-    "matched": [
-      "英伟达"
-    ],
-    "first_seen": "2026-11-17T22:13:38Z"
-  },
-  {
-    "title": "Altimeter CEO透露Anthropic IPO超购10-20倍",
-    "link": "https://www.cls.cn/detail/2537082",
-    "published": "2026-11-17T13:37:32Z",
-    "source": "财联社·电报",
-    "summary": "【Altimeter CEO透露Anthropic IPO超购10-20倍】财联社11月17日电，Altimeter Capital首席执行官布拉德・格斯特纳透露，Anthropic的首次公开募股(IPO)认购热度极高，超额认购倍数达10至20倍。他同时表示，其投资机构已经申报了价值50亿美元的新股认购意向。",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "cls-telegraph",
-    "id": "https://cls.cn/detail/2537082",
-    "day": "2026-11-17",
-    "matched": [
-      "Anthropic"
-    ],
-    "first_seen": "2026-11-17T13:48:22Z"
   }
 ]

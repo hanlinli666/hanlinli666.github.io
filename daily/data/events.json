@@ -1,5 +1,211 @@
 [
   {
+    "id": "e_7f039718bf",
+    "title_zh": "产品 RAG 知识库与 AI 顾问 设计与实现",
+    "event_summary": "本文是产品知识库（RAG）+ AI 产品顾问的 规范设计与实现说明 ，面向后续整合与二次开发。 下图是这套「产品 RAG 知识库 + AI 顾问」的系统结构：谁调用谁、数据怎么流动、向量从哪来。三条访问路径最终都汇聚到 $lib/server/products.js 这唯一一份实现。 产品是 SurrealDB product 表中的 独立记录 。整条链路分三层，边界如下：…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-21T23:55:46Z",
+    "hot_seen_at": "2026-11-21T23:55:46Z",
+    "published": "2026-11-21T23:55:46Z",
+    "primary_url": "https://juejin.cn/post/7709442455398154275",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "产品 RAG 知识库与 AI 顾问 设计与实现",
+        "url": "https://juejin.cn/post/7709442455398154275",
+        "published": "2026-11-21T23:55:46Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_9cc136749f",
+    "title_zh": "怎么看 OpenAI 宣布升级反蒸馏防御，隐藏推理提取成功率从 54% 降至 0.2% ？",
+    "event_summary": "OpenAI 公布对抗蒸馏研究，表示蒸馏可能复制能力却丢掉配套安全措施，同时介绍如何检测和打断有组织的蒸馏尝试。https://openai.com/index/combatting-adversarial-distillation/",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "OpenAI"
+    ],
+    "first_seen_at": "2026-11-21T23:55:46Z",
+    "hot_seen_at": "2026-11-21T23:55:46Z",
+    "published": "2026-11-21T23:55:46Z",
+    "primary_url": "https://www.zhihu.com/question/2107430398359885371",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "知乎热榜",
+        "level": "L3",
+        "title": "怎么看 OpenAI 宣布升级反蒸馏防御，隐藏推理提取成功率从 54% 降至 0.2% ？",
+        "url": "https://www.zhihu.com/question/2107430398359885371",
+        "published": "2026-11-21T23:55:46Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_ef20b7faea",
+    "title_zh": "OSTA 新特性放开：华为鸿蒙 HarmonyOS 7 系统更多机型小艺助理上线“小艺星芒”音色",
+    "event_summary": "IT之家 11 月 22 日消息，首款为 AI 而生的鸿蒙手机 —— 华为星芒 OSTA O1 Pro 已于 11 月 20 日下午正式发布 ，叠加国补后 4999 元起。华为星芒品牌总经理刘赫开通微博， 透露最受欢迎的 16G 版本已经在全平台售罄 。 ▲ IT之家开箱：华为全新子品牌星芒 OSTA O1 Pro 手机实拍 据介绍，华为星芒 OSTA O1 Pro 首搭 HarmonyOS 7 AI 先锋版系统，支持全新 AI…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-21T23:55:46Z",
+    "hot_seen_at": null,
+    "published": "2026-11-21T23:35:28Z",
+    "primary_url": "https://www.ithome.com/1/030/519.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "OSTA 新特性放开：华为鸿蒙 HarmonyOS 7 系统更多机型小艺助理上线“小艺星芒”音色",
+        "url": "https://www.ithome.com/1/030/519.htm",
+        "published": "2026-11-21T23:35:28Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_09f062a102",
+    "title_zh": "IT早报 1122：曝其他厂商也考虑推出阔直板形态手机；Anthropic 研究员预测 2027 年底 AI 比肩顶尖专家；华为星芒 O1 Pro 定价 5499 元起引争议...",
+    "event_summary": "“IT早报”时间，大家好，现在是 2026 年 11 月 22 日星期日，今天的重要科技资讯有： 1. 不只是华为，消息称其他厂商也考虑为旗舰产品线引入阔直板形态 博主 @数码闲聊站 21 日下午爆料称，当下手机市场“阔形态”升级势不可挡：除了华为，其他家也考虑在正代旗舰线加入阔形态，与常规直板机双线并行。>> 查看详情 2. “几乎所有人将永久失业”：Anthropic 研究员预测 2027 年底 AI 在几乎所有领域超越顶尖专家…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-21T23:55:46Z",
+    "hot_seen_at": null,
+    "published": "2026-11-21T23:31:46Z",
+    "primary_url": "https://www.ithome.com/1/030/518.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "IT早报 1122：曝其他厂商也考虑推出阔直板形态手机；Anthropic 研究员预测 2027 年底 AI 比肩顶尖专家；华为星芒 O1 Pro 定价 5499 元起引争议...",
+        "url": "https://www.ithome.com/1/030/518.htm",
+        "published": "2026-11-21T23:31:46Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_0abd7e0423",
+    "title_zh": "加密聊天应用 Signal 默认屏蔽截图，防止 AI 智能体读取用户消息",
+    "event_summary": "IT之家 11 月 22 日消息，开源端到端加密聊天应用 Signal 近日推出 iOS / Android 版更新，默认关闭应用程序内截图功能，以阻止 Siri AI 和 Gemini 等 AI 智能体读取用户私人消息。 Signal 总裁 Meredith Whittaker 表示，系统级 AI 智能体的影响力正不断扩大，这对 Signal 长期建立的隐私机制构成威胁，因为这些智能体可能在用户毫不知情的情况下访问私人对话。 在…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "智能体"
+    ],
+    "first_seen_at": "2026-11-21T23:55:46Z",
+    "hot_seen_at": null,
+    "published": "2026-11-21T23:28:10Z",
+    "primary_url": "https://www.ithome.com/1/030/517.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "加密聊天应用 Signal 默认屏蔽截图，防止 AI 智能体读取用户消息",
+        "url": "https://www.ithome.com/1/030/517.htm",
+        "published": "2026-11-21T23:28:10Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_d3f05ccb6e",
+    "title_zh": "谷歌智能家居应用 Nest 明年停服，功能全面整合进 Google Home",
+    "event_summary": "IT之家 11 月 22 日消息，谷歌近日在官网支持页面公布了智能家居应用程序 Nest 的最新动态。官方宣称， 独立版 Nest（App、网页端）将于 2027 年 1 月 15 日停止服务 ，相关功能将整合进 Google Home 应用。 IT之家注意到，谷歌还将在 2027 年 8 月 2 日停止智能音箱等设备的 Google 助理服务，届时 Google Home 和 Google Gemini 将全面接管智能音箱等设备。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "Gemini"
+    ],
+    "first_seen_at": "2026-11-21T23:55:46Z",
+    "hot_seen_at": null,
+    "published": "2026-11-21T23:08:37Z",
+    "primary_url": "https://www.ithome.com/1/030/515.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "谷歌智能家居应用 Nest 明年停服，功能全面整合进 Google Home",
+        "url": "https://www.ithome.com/1/030/515.htm",
+        "published": "2026-11-21T23:08:37Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_8d54d4add3",
+    "title_zh": "Signal 限制移动端截图以应对 AI 监视的生存威胁",
+    "event_summary": "Signal is limiting users' ability to take screenshots in both its Android and iOS apps.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-21T23:55:46Z",
+    "hot_seen_at": null,
+    "published": "2026-11-21T21:37:10Z",
+    "primary_url": "https://techcrunch.com/2026/11/21/signal-restricts-mobile-screenshots-as-it-confronts-existential-threat-of-ai-surveillance/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "TechCrunch AI",
+        "level": "L2",
+        "title": "Signal 限制移动端截图以应对 AI 监视的生存威胁",
+        "url": "https://techcrunch.com/2026/11/21/signal-restricts-mobile-screenshots-as-it-confronts-existential-threat-of-ai-surveillance/",
+        "published": "2026-11-21T21:37:10Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_127326b87b",
+    "title_zh": "两个 Nvidia 的故事",
+    "event_summary": "We got two very different pictures of Nvidia — the company’s latest earnings report vs. the tech executives loudly calling for Jensen Huang’s return.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-21T23:55:46Z",
+    "hot_seen_at": null,
+    "published": "2026-11-21T21:07:42Z",
+    "primary_url": "https://techcrunch.com/2026/11/21/a-tale-of-two-nvidias/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "TechCrunch AI",
+        "level": "L2",
+        "title": "两个 Nvidia 的故事",
+        "url": "https://techcrunch.com/2026/11/21/a-tale-of-two-nvidias/",
+        "published": "2026-11-21T21:07:42Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
     "id": "e_419fd7472f",
     "title_zh": "菲尔兹奖得主邓煜称「人类不能放弃自主思考给 AI 当狗」，如何看待这一观点？",
     "event_summary": "问AI · 邓煜获菲尔兹奖的贡献与人工智能思考有何关联？ IT之家 10 月 28 日消息，据界面新闻报道，菲尔兹奖得主、芝加哥大学教授邓煜近日在一场论坛上阐述了他对 AI 时代数学研究的思考。 邓煜引用帕斯卡“人是一根会思考的芦苇”的名言指出，如果人类因为有了 AI，就放弃了自主思考能力的话，真的就和动物没什么区别了。邓煜提醒，切莫过度依赖工具、放弃独立思辨，如果甘愿把思考的权利完全交给 AI，给 AI 做狗，人也就丢掉了自身最核心的特质。…",
@@ -6624,214 +6830,6 @@
         "title": "谷歌与蓝色起源合作，计划 2029 年发射 AI 服务器卫星",
         "url": "https://www.ithome.com/1/029/695.htm",
         "published": "2026-11-19T14:26:06Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_0b3a38ae0a",
-    "title_zh": "随着史上最大的 IPO，Anthropic 的“好人”声誉面临考验",
-    "event_summary": "Today is a new beginning for Anthropic: a years-in-the-making IPO that beat out SpaceX for most valuable of all time, having raised $81.3 billion and set an important precedent for the other public AI lab debuts to…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-19T20:28:32Z",
-    "hot_seen_at": null,
-    "published": "2026-11-19T14:25:37Z",
-    "primary_url": "https://www.theverge.com/ai-artificial-intelligence/1037459/anthropic-ipo-safe-ai-reputation-power-structure",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "The Verge AI",
-        "level": "L2",
-        "title": "随着史上最大的 IPO，Anthropic 的“好人”声誉面临考验",
-        "url": "https://www.theverge.com/ai-artificial-intelligence/1037459/anthropic-ipo-safe-ai-reputation-power-structure",
-        "published": "2026-11-19T14:25:37Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_ba8e83c6c8",
-    "title_zh": "Uber 前 CEO 卡兰尼克声援黄仁勋：若英伟达员工罢工要求其复职，愿亲自参与",
-    "event_summary": "IT之家 11 月 19 日消息，Uber 前首席执行官特拉维斯 · 卡兰尼克（Travis Kalanick）表示，如果英伟达员工发起集体罢工，要求黄仁勋复职，他愿意站出来支持，甚至亲自参与行动。 卡兰尼克表示：“我会带着一个镶满晶圆的扩音器，前往英伟达总部，身边还会有大批希望参与罢工的英伟达员工，以及众多企业首席执行官和创始人。”这里提到的晶圆，是制造 AI 芯片所使用的基础材料。 当地时间周三，卡兰尼克在奥斯汀举行的…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "AI + 芯片"
-    ],
-    "first_seen_at": "2026-11-19T20:28:32Z",
-    "hot_seen_at": null,
-    "published": "2026-11-19T14:05:03Z",
-    "primary_url": "https://www.ithome.com/1/029/691.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "Uber 前 CEO 卡兰尼克声援黄仁勋：若英伟达员工罢工要求其复职，愿亲自参与",
-        "url": "https://www.ithome.com/1/029/691.htm",
-        "published": "2026-11-19T14:05:03Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_d943a23e58",
-    "title_zh": "研究揭示数据中心对空气质量的远距离影响",
-    "event_summary": "Researchers find air pollution from data center electricity use can affect communities far from the facilities, with some of the highest impacts in the Midwest.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-19T20:28:32Z",
-    "hot_seen_at": null,
-    "published": "2026-11-19T14:00:00Z",
-    "primary_url": "https://news.mit.edu/2026/study-reveals-data-centers-long-distance-damage-air-quality-1119",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "MIT News AI",
-        "level": "L2",
-        "title": "研究揭示数据中心对空气质量的远距离影响",
-        "url": "https://news.mit.edu/2026/study-reveals-data-centers-long-distance-damage-air-quality-1119",
-        "published": "2026-11-19T14:00:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_1501adb883",
-    "title_zh": "Superhuman 推广其 Go 助手至各个场景",
-    "event_summary": "Superhuman is making Go its central agent and making it available in Docs and Mail.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-19T20:28:32Z",
-    "hot_seen_at": null,
-    "published": "2026-11-19T14:00:00Z",
-    "primary_url": "https://techcrunch.com/2026/11/19/superhuman-pushes-its-go-assistant-everywhere/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "TechCrunch AI",
-        "level": "L2",
-        "title": "Superhuman 推广其 Go 助手至各个场景",
-        "url": "https://techcrunch.com/2026/11/19/superhuman-pushes-its-go-assistant-everywhere/",
-        "published": "2026-11-19T14:00:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_50d66b509f",
-    "title_zh": "AI 模型大幅降低古籍数字化成本：识别 1000 页内容费用已不到 0.1 美元",
-    "event_summary": "IT之家 11 月 19 日消息，借助免费开放的 AI 模型，从扫描版书籍和档案中提取文字的成本已经大幅下降。 Hugging Face 的丹尼尔 · 范斯特里恩（Daniel van Strien）对 8 款能够识别图像中文字的 AI 模型进行了对比测试。测试材料共计 850 页，包括旧版自然历史书籍、1771 年版《大英百科全书》，以及打字和印刷的历史档案文件。 所有模型均在同一款 GPU 上运行，即英伟达（Nvidia）RTX…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-19T20:28:32Z",
-    "hot_seen_at": null,
-    "published": "2026-11-19T13:49:04Z",
-    "primary_url": "https://www.ithome.com/1/029/688.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "AI 模型大幅降低古籍数字化成本：识别 1000 页内容费用已不到 0.1 美元",
-        "url": "https://www.ithome.com/1/029/688.htm",
-        "published": "2026-11-19T13:49:04Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_2f25b07c57",
-    "title_zh": "从英伟达到苹果、微软：同样拥抱AI，为什么企业的财富命运截然不同？",
-    "event_summary": "本文先讨论AI改变的四条决策前提，再借助七阶行为逻辑，观察不同领导方式可能带来的财富后果。这里讨论的是作用机制，不意味着某一种行为逻辑必然对应某一种财富结果。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "英伟达"
-    ],
-    "first_seen_at": "2026-11-19T20:28:32Z",
-    "hot_seen_at": null,
-    "published": "2026-11-19T13:48:30Z",
-    "primary_url": "https://www.tmtpost.com/8211622.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "钛媒体",
-        "level": "L2",
-        "title": "从英伟达到苹果、微软：同样拥抱AI，为什么企业的财富命运截然不同？",
-        "url": "https://www.tmtpost.com/8211622.html",
-        "published": "2026-11-19T13:48:30Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_64a843bb0f",
-    "title_zh": "欧盟委员会证实遭到 AI 驱动的网络攻击，事态规模暂难判断",
-    "event_summary": "IT之家 11 月 19 日消息，据路透社报道，当地时间 19 日，欧盟委员会证实遭受了利用 AI 工具进行的网络攻击。有关此事的调查尚未结束，事态规模暂难判断。 发言人托马斯 · 雷尼耶在记者会上说：“我可以确认，我们近期发现了一起网络攻击，并采取了必要的应对措施。为防止事态扩大和避免进一步风险， 我们暂时下线了几个应用程序，大部分后来恢复了运行 。调查还在继续，我们会根据陆续查明的情况采取必要措施。这场网络攻击是用 AI…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "AI + 应用"
-    ],
-    "first_seen_at": "2026-11-19T20:28:32Z",
-    "hot_seen_at": null,
-    "published": "2026-11-19T13:38:39Z",
-    "primary_url": "https://www.ithome.com/1/029/687.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "欧盟委员会证实遭到 AI 驱动的网络攻击，事态规模暂难判断",
-        "url": "https://www.ithome.com/1/029/687.htm",
-        "published": "2026-11-19T13:38:39Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_06cb95609a",
-    "title_zh": "摩根大通预计美联储将加息三次",
-    "event_summary": "摩根大通预计美联储将加息三次，分别在12月、1月和3月，使联邦基金利率达到4.5%-4.75%。（财联社）",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "美联储"
-    ],
-    "first_seen_at": "2026-11-19T20:28:32Z",
-    "hot_seen_at": null,
-    "published": "2026-11-19T11:36:28Z",
-    "primary_url": "https://www.36kr.com/newsflashes/4076604427490179",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "36氪·快讯",
-        "level": "L2",
-        "title": "摩根大通预计美联储将加息三次",
-        "url": "https://www.36kr.com/newsflashes/4076604427490179",
-        "published": "2026-11-19T11:36:28Z"
       }
     ],
     "needs_translation": false
