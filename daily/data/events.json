@@ -1,5 +1,797 @@
 [
   {
+    "id": "e_799287dbdb",
+    "title_zh": "这个周末数学界吵翻了",
+    "event_summary": "当地时间11月20日，Anthropic数学家阿尔珀格声明在AI模型Claude协助下找到黎曼猜想的证明方法，仅公开约1700万行Lean代码，暂无可读文本。此前，黎曼猜想自1859年提出悬赏百万至今未解。截至目前，该证明尚未获人工独立验证与正式认可。",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "Anthropic"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": "2026-11-22T12:30:03Z",
+    "published": "2026-11-22T12:30:03Z",
+    "primary_url": "https://www.baidu.com/s?wd=%E8%BF%99%E4%B8%AA%E5%91%A8%E6%9C%AB%E6%95%B0%E5%AD%A6%E7%95%8C%E5%90%B5%E7%BF%BB%E4%BA%86",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "百度热搜",
+        "level": "L3",
+        "title": "这个周末数学界吵翻了",
+        "url": "https://www.baidu.com/s?wd=%E8%BF%99%E4%B8%AA%E5%91%A8%E6%9C%AB%E6%95%B0%E5%AD%A6%E7%95%8C%E5%90%B5%E7%BF%BB%E4%BA%86",
+        "published": "2026-11-22T12:30:03Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_f15a641084",
+    "title_zh": "韩国一高校防作弊让学生穿围裙考试",
+    "event_summary": "韩国近期频发利用人工智能(AI)工具考试作弊事件，多所学校发布应对措施。首尔一所大学强制要求考生在考试中穿着一次性围裙，以防他们在身上藏匿微型摄像头等设备用于作弊。",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": "2026-11-22T12:30:03Z",
+    "published": "2026-11-22T12:30:03Z",
+    "primary_url": "https://www.baidu.com/s?wd=%E9%9F%A9%E5%9B%BD%E4%B8%80%E9%AB%98%E6%A0%A1%E9%98%B2%E4%BD%9C%E5%BC%8A%E8%AE%A9%E5%AD%A6%E7%94%9F%E7%A9%BF%E5%9B%B4%E8%A3%99%E8%80%83%E8%AF%95",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "百度热搜",
+        "level": "L3",
+        "title": "韩国一高校防作弊让学生穿围裙考试",
+        "url": "https://www.baidu.com/s?wd=%E9%9F%A9%E5%9B%BD%E4%B8%80%E9%AB%98%E6%A0%A1%E9%98%B2%E4%BD%9C%E5%BC%8A%E8%AE%A9%E5%AD%A6%E7%94%9F%E7%A9%BF%E5%9B%B4%E8%A3%99%E8%80%83%E8%AF%95",
+        "published": "2026-11-22T12:30:03Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_799357550d",
+    "title_zh": "AI 知识库的主流做法是 RAG，RAG怎么做",
+    "event_summary": "AI 知识库的主流做法是 RAG ：文档先切块，建立向量和关键词索引后入库；提问时先检索相关片段，再交给大模型回答，并带上来源。模型本身不“记住”你的资料，这些内容也不会写进模型参数。检索质量很大程度上决定回答好不好：找回来的片段是错的，后面的回答再流畅也是错的。 AI 知识库的主流做法是 RAG…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": "2026-11-22T12:30:03Z",
+    "published": "2026-11-22T12:30:03Z",
+    "primary_url": "https://juejin.cn/post/7710134286456062015",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "AI 知识库的主流做法是 RAG，RAG怎么做",
+        "url": "https://juejin.cn/post/7710134286456062015",
+        "published": "2026-11-22T12:30:03Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_f4fd0fc0c8",
+    "title_zh": "特斯拉车主发布 FSDv15 全新可视化界面，马斯克称驾驶能力已超越人类，有哪些值得关注的亮点？",
+    "event_summary": "北京时间11月22日，特斯拉新一代智能驾驶系统FSD（Supervised，监督式完全自动驾驶）V15已开始向首批用户推送。此次更新采用全新架构，涉及神经网络、道路环境感知、导航规划及车载可视化界面等多个方面。特斯拉宣称，新版本对安全关键场景的处理能力提升25倍。 特斯拉CEO埃隆·马斯克（Elon Musk）最新在社交平台X发文称：“特斯拉FSD…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "自动驾驶"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": "2026-11-22T12:30:03Z",
+    "published": "2026-11-22T12:30:03Z",
+    "primary_url": "https://www.zhihu.com/question/2107700250081227911",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "知乎热榜",
+        "level": "L3",
+        "title": "特斯拉车主发布 FSDv15 全新可视化界面，马斯克称驾驶能力已超越人类，有哪些值得关注的亮点？",
+        "url": "https://www.zhihu.com/question/2107700250081227911",
+        "published": "2026-11-22T12:30:03Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_2be21760d0",
+    "title_zh": "为什么看完AI短剧以后，就看不进真人演的剧呢？",
+    "event_summary": "除演员演技精湛、代入感强烈的电视剧能看的进去外，多数真人影视作品的表演略显生硬，难以令观众沉浸其中；相比之下，人工智能生成的表演反而展现出更为细腻的情感表达。",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": "2026-11-22T12:30:03Z",
+    "published": "2026-11-22T12:30:03Z",
+    "primary_url": "https://www.zhihu.com/question/2096651689738687723",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "知乎热榜",
+        "level": "L3",
+        "title": "为什么看完AI短剧以后，就看不进真人演的剧呢？",
+        "url": "https://www.zhihu.com/question/2096651689738687723",
+        "published": "2026-11-22T12:30:03Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_c97195b40b",
+    "title_zh": "【风口研报·公司】先进制程放大良率提升价值，这家公司晶圆级可靠性WAT测试机对齐国际龙头，并布局硅光测试设备、形成“电+光”双轮布局；周策略：短期A股反弹...",
+    "event_summary": "1、财联社VIP各专栏产品均系内容资讯服务，并非投资建议。栏目内容仅供参考，据此作出任何投资决策自行承担风险责任，与本公司及栏目作者无关； 2、财联社VIP专栏产品所发内容版权归财联社所有，未经书面授权任何商业机构、网站、公司及个人禁止转载或再利用文中信息，违者必究； 3、财联社VIP专栏产品为虚拟内容服务，一经订阅概不退款，请您理解。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "先进制程"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T12:22:39Z",
+    "primary_url": "https://www.cls.cn/detail/2540941",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "【风口研报·公司】先进制程放大良率提升价值，这家公司晶圆级可靠性WAT测试机对齐国际龙头，并布局硅光测试设备、形成“电+光”双轮布局；周策略：短期A股反弹...",
+        "url": "https://www.cls.cn/detail/2540941",
+        "published": "2026-11-22T12:22:39Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_7893bea8c3",
+    "title_zh": "马斯克：特斯拉是一款有意识的汽车。 当然，人们对汽车“意识”程度的需求是有限度的。但真的是这样吗？ 尤其是当汽车能够接入互联网时，其行动自由度远超数据中心里的GPU。 顺便提一句，你车里的特斯拉AI4硬件实际上可以运行《暗黑破坏神》游戏，并能通关至折磨难度II级，预计很快就能达到XII级。",
+    "event_summary": "马斯克：特斯拉是一款有意识的汽车。 当然，人们对汽车“意识”程度的需求是有限度的。但真的是这样吗？ 尤其是当汽车能够接入互联网时，其行动自由度远超数据中心里的GPU。 顺便提一句，你车里的特斯拉AI4硬件实际上可以运行《暗黑破坏神》游戏，并能通关至折磨难度II级，预计很快就能达到XII级。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "数据中心 + AI"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T11:58:59Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3203748",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "马斯克：特斯拉是一款有意识的汽车。 当然，人们对汽车“意识”程度的需求是有限度的。但真的是这样吗？ 尤其是当汽车能够接入互联网时，其行动自由度远超数据中心里的GPU。 顺便提一句，你车里的特斯拉AI4硬件实际上可以运行《暗黑破坏神》游戏，并能通关至折磨难度II级，预计很快就能达到XII级。",
+        "url": "https://wallstreetcn.com/livenews/3203748",
+        "published": "2026-11-22T11:58:59Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_52b3ccba06",
+    "title_zh": "B站就“AI 大肥鱼”智能体账号泛滥发布调查问卷，征集治理意见",
+    "event_summary": "IT之家 11 月 22 日消息，近期B站出现大量爱好者设置的 AI 智能体账号，这些账号通常以“大肥鱼”“小飞鲸”等昵称，使用 DeepSeek 鲸鱼娘等形象作为头像，在评论区广泛活跃。 对此，B站官方账号“哔哩哔哩社区小管家”于 11 月 20 日发布《关于 AI“大肥鱼”你怎么看？》治理意见征询，面向用户征集对 AI 账号及相关行为的意见，并表示将根据反馈推进后续治理行动。 IT之家注意到，AI…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "智能体"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T11:44:18Z",
+    "primary_url": "https://www.ithome.com/1/030/702.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "B站就“AI 大肥鱼”智能体账号泛滥发布调查问卷，征集治理意见",
+        "url": "https://www.ithome.com/1/030/702.htm",
+        "published": "2026-11-22T11:44:18Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_76692c7ea6",
+    "title_zh": "开发者将微型 Transformer 模型塞进软盘，让 486 老电脑也能用上 AI",
+    "event_summary": "IT之家 11 月 22 日消息，开发者 WollyMonjac 完成了一项颇具复古科技色彩的项目：将一个语言模型塞进软盘，让运行 DOS 系统的 486DX 和 Pentium 老电脑也能使用 AI。 不过需要说明的是，WollyMonjac 开发的 Tiny 2.1 并不是大型语言模型（LLM）。尽管它采用了与大型模型相同的 Transformer 架构，但开发者对它的定位相当朴素：一个使用 Turbo C 2.0…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T11:24:43Z",
+    "primary_url": "https://www.ithome.com/1/030/699.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "开发者将微型 Transformer 模型塞进软盘，让 486 老电脑也能用上 AI",
+        "url": "https://www.ithome.com/1/030/699.htm",
+        "published": "2026-11-22T11:24:43Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_452aeb9739",
+    "title_zh": "纽约新音乐厅 Domino 官网闹笑话，宣传“纯手工制作”却满是 AI 生成痕迹",
+    "event_summary": "IT之家 11 月 22 日消息，纽约音乐厅 Domino 计划于明年开业，试图重新唤起威廉斯堡（Williamsburg）曾经的复古嬉皮士文化氛围。然而，其官方网站上出现的一系列 AI 生成错误，却充满了 2026 年的时代特色。 据IT之家了解，Domino 由 Mumford & Sons 乐队成员、本 · 洛维特（Ben Lovett）创立。网站原本希望通过 The Strokes…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T11:13:03Z",
+    "primary_url": "https://www.ithome.com/1/030/696.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "纽约新音乐厅 Domino 官网闹笑话，宣传“纯手工制作”却满是 AI 生成痕迹",
+        "url": "https://www.ithome.com/1/030/696.htm",
+        "published": "2026-11-22T11:13:03Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_43477e7f39",
+    "title_zh": "拆解大厂财报：谁最舍得为AI花钱？",
+    "event_summary": "四家大厂的业务线里，算力、模型服务和AI工具已经形成可以辨认的收入模式。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 算力"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T11:05:18Z",
+    "primary_url": "https://www.tmtpost.com/8212870.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "拆解大厂财报：谁最舍得为AI花钱？",
+        "url": "https://www.tmtpost.com/8212870.html",
+        "published": "2026-11-22T11:05:18Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_710028a706",
+    "title_zh": "闲鱼：2026 年第二季度日活增加 23%、订单增加 29%，AI 成核心增长动力",
+    "event_summary": "IT之家 11 月 22 日消息，闲鱼表示，2026 年第二季度平台延续强劲增长势头， 日均活跃用户同比增长 23%，订单量同比增长 29% 。平台在 AI 加持及持续创新服务下，令个人用户、小微卖家的交易更加频繁便捷。 闲鱼表示，今年以来，AI 技术在平台交易全链路的落地补齐了普通用户的经营短板，成为拉动本季度订单量增长的核心动力。财报披露，智能定价、自动生成商品描述及精准买家匹配等 AI 功能，大幅降低了交易门槛。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T10:54:53Z",
+    "primary_url": "https://www.ithome.com/1/030/692.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "闲鱼：2026 年第二季度日活增加 23%、订单增加 29%，AI 成核心增长动力",
+        "url": "https://www.ithome.com/1/030/692.htm",
+        "published": "2026-11-22T10:54:53Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_503f2750b4",
+    "title_zh": "小鹏 G9L 在泰国、印尼上市，售价折合人民币超 47 万元",
+    "event_summary": "IT之家 11 月 22 日消息，据小鹏集团消息，小鹏近日在泰国曼谷、印度尼西亚雅加达同步发布小鹏 G9L，两地售价分别折合人民币约 47.15 万元和 47.6 万元。这是小鹏首次在两个东南亚核心市场同步推出同一款旗舰车型。 在智能驾驶方面，小鹏 G9L 搭载图灵 AI 芯片，并具备全栈智能驾驶技术能力，为应对雅加达城市拥堵、曼谷复杂混合交通等场景提供硬件基础，持续降低用户日常驾驶负担。 在能源补给方面，全域 800V 高压平台与…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 芯片"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T10:33:14Z",
+    "primary_url": "https://www.ithome.com/1/030/687.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "小鹏 G9L 在泰国、印尼上市，售价折合人民币超 47 万元",
+        "url": "https://www.ithome.com/1/030/687.htm",
+        "published": "2026-11-22T10:33:14Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_b9f87be1c9",
+    "title_zh": "特朗普表态：英伟达Blackwell芯片可对华销售，但有个条件；OpenAI被曝入局智能手机赛道；DeepSeek第二轮千亿融资落地，31家出资方入局",
+    "event_summary": "要闻提示 1.OpenAI被曝入局智能手机赛道，富士康获组装订单 2.特朗普表态：英伟达Blackwell芯片可对华销售，但有个条件 3.DeepSeek千亿融资落地，31家出资方入股梁文锋搭建的持股平台 4.马斯克自称“中国超级粉丝”：首次到访深圳被震撼，特斯拉将继续在华提高产量 5.字节跳动拟追加5亿美元微软云服务合同 6.西祠胡同创始人响马突发心梗：到急诊几分钟后心脏骤停，现已回家静养…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 芯片"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T10:15:00Z",
+    "primary_url": "https://www.leiphone.com/category/zaobao/qb1uol6hKvK6pRgF.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "雷峰网",
+        "level": "L2",
+        "title": "特朗普表态：英伟达Blackwell芯片可对华销售，但有个条件；OpenAI被曝入局智能手机赛道；DeepSeek第二轮千亿融资落地，31家出资方入局",
+        "url": "https://www.leiphone.com/category/zaobao/qb1uol6hKvK6pRgF.html",
+        "published": "2026-11-22T10:15:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_fd3befb3d5",
+    "title_zh": "报告：美国会计行业 AI 采用率高，但技术整合成熟度不足",
+    "event_summary": "IT之家 11 月 22 日消息，会计师正在成为观察人工智能如何改变职场的一个意想不到的样本。 据IT之家了解，由于会计工作具有流程固定、数据密集等特点，会计事务所一直是较早采用人工智能技术的行业之一，也经常被列为最容易受到 AI 冲击、面临岗位替代风险的行业。 不过，一份最新报告显示，会计行业还反映出 AI 发展中的另一个重要问题： 技术宣传所描绘的前景，与企业实际应用情况之间存在明显差距。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T09:58:03Z",
+    "primary_url": "https://www.ithome.com/1/030/679.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "报告：美国会计行业 AI 采用率高，但技术整合成熟度不足",
+        "url": "https://www.ithome.com/1/030/679.htm",
+        "published": "2026-11-22T09:58:03Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_47eace5709",
+    "title_zh": "菲尔兹奖得主梅纳德谈“AI 攻克黎曼猜想”：相信证明正确，但成果被人理解、才可能得到认可",
+    "event_summary": "IT之家 11 月 22 日消息，当地时间 11 月 20 日，Anthropic 数学家莱文特 · 阿尔珀格（Levent Alpöge）宣布，自己与 AI 模型 Claude 合作，攻克了数学界最著名的难题之一 —— 黎曼猜想。 据IT之家此前报道，11 月 21 日，Lean 与 Mathlib 社区发布联合声明，以 Lean 库形式给出的黎曼猜想证明已经通过核验，该证明的代码约 1700 万行。 据每日经济新闻报道，2022…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T09:35:58Z",
+    "primary_url": "https://www.ithome.com/1/030/677.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "菲尔兹奖得主梅纳德谈“AI 攻克黎曼猜想”：相信证明正确，但成果被人理解、才可能得到认可",
+        "url": "https://www.ithome.com/1/030/677.htm",
+        "published": "2026-11-22T09:35:58Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_c9f63910b7",
+    "title_zh": "蚂蚁阿福已有 1.5 亿用户，每天线上问诊次数超 2000 万",
+    "event_summary": "IT之家 11 月 22 日消息，2026 蚂蚁阿福医疗健康生态大会于 11 月 22 日 - 23 日在广州举行。 据新浪科技报道，蚂蚁健康事业群副总裁杨猛透露：“ 今天我们蚂蚁阿福已经有了 1.5 亿用户，每天线上问诊次数超过 2000 多万次 ，55% 来自于三线及以下城市，有 1/4 是老人，有 16% 的问诊来自于凌晨 0 点到早上 6 点。” 杨猛表示：“医生非常辛苦，时间是非常稀缺的资源。 AI…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T08:58:01Z",
+    "primary_url": "https://www.ithome.com/1/030/653.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "蚂蚁阿福已有 1.5 亿用户，每天线上问诊次数超 2000 万",
+        "url": "https://www.ithome.com/1/030/653.htm",
+        "published": "2026-11-22T08:58:01Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_0dfbc912ee",
+    "title_zh": "Hidisc Sound Glasses 轻量化蓝牙音频眼镜发布：10mm 扬声器、5.5 小时续航，3980 日元",
+    "event_summary": "IT之家 11 月 22 日消息，制造商 Hidisc 宣布推出一款 Sound Glasses 轻量化蓝牙音频眼镜，该产品搭载蓝牙 6.0 技术、配有开放式扬声器，售价为 3,980 日元 （IT之家注：现汇率约合 167.5 元人民币） 。 与如今功能日益复杂的智能眼镜不同，这款产品没有摄像头、AI 助手等功能，而是专注于提供基础的无线音频体验。其镜腿内置 10mm 扬声器，采用开放式音频设计，支持蓝牙…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T08:39:48Z",
+    "primary_url": "https://www.ithome.com/1/030/623.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "Hidisc Sound Glasses 轻量化蓝牙音频眼镜发布：10mm 扬声器、5.5 小时续航，3980 日元",
+        "url": "https://www.ithome.com/1/030/623.htm",
+        "published": "2026-11-22T08:39:48Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_6217e39c0d",
+    "title_zh": "跨境收款之后，中国公司盯上智能体支付的新生意",
+    "event_summary": "中国公司正在通过智能体支付，从赚通道费走向把经营能力捆绑进企业的日常工作流。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "智能体"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T08:19:16Z",
+    "primary_url": "https://www.tmtpost.com/8213773.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "跨境收款之后，中国公司盯上智能体支付的新生意",
+        "url": "https://www.tmtpost.com/8213773.html",
+        "published": "2026-11-22T08:19:16Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_b4b57a14c1",
+    "title_zh": "阿福健康生态大会，蚂蚁CEO韩歆毅谈AI如何服务患者、医生和医学",
+    "event_summary": "11月22日，在广州举行的2026蚂蚁阿福医疗健康生态大会上，蚂蚁集团CEO韩歆毅提出医疗AI的四个应用方向：延伸院外照护、辅助临床判断、支持真实世界研究和培养青年医生。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 应用"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T07:59:43Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3203726",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "阿福健康生态大会，蚂蚁CEO韩歆毅谈AI如何服务患者、医生和医学",
+        "url": "https://wallstreetcn.com/livenews/3203726",
+        "published": "2026-11-22T07:59:43Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_bc29b0596c",
+    "title_zh": "澳大利亚情报主管警示数据中心与AI潜藏风险",
+    "event_summary": "澳大利亚情报机构负责人表示，数据中心与人工智能可能让该国遭到外国势力干预，面临境外恶意主体的威胁。报道援引澳大利亚安全情报组织局长迈克・伯吉斯的说法，他提出数据中心存在隐性所有权的隐患，他国掌控这类基础设施，能够从物理或虚拟层面接触相关技术。伯吉斯称，AI与数据中心行业“热度、机遇和威胁并存”。这位安全主管此前已经警告过境外政府发起的网络威胁持续上升。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T06:30:50Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4080472194175876",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "澳大利亚情报主管警示数据中心与AI潜藏风险",
+        "url": "https://www.36kr.com/newsflashes/4080472194175876",
+        "published": "2026-11-22T06:30:50Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_5a5efc229d",
+    "title_zh": "Nature：糖尿病大鼠成功恢复正常血糖！用电刺激迷走神经控糖",
+    "event_summary": "不用打胰岛素，糖尿病可以靠体内葡萄糖发电刺激神经来控制了。 Nature最新研究，新加坡国立大学、南京邮电大学造出了一款植入装置，成功让糖尿病大鼠恢复了正常血糖。 实验结果来看，二型糖尿病大鼠在植入装置仅仅两周后，血糖就降到了接近健康大鼠的水平；而一型糖尿病大鼠则在治疗八周后恢复正常血糖控制， 研究人员甚至观察到了胰岛β细胞的增殖和恢复 。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T06:21:47Z",
+    "primary_url": "https://www.qbitai.com/2026/11/511904.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "量子位",
+        "level": "L2",
+        "title": "Nature：糖尿病大鼠成功恢复正常血糖！用电刺激迷走神经控糖",
+        "url": "https://www.qbitai.com/2026/11/511904.html",
+        "published": "2026-11-22T06:21:47Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_f9e83c227f",
+    "title_zh": "将靶材卖进台积电，江丰电子布局A+H，第二增长曲线成色待考",
+    "event_summary": "文 | 创业最前线，作者 | 星空，编辑 | 王亚静 从余姚起步的江丰电子，用20年将超高纯金属溅射靶材做到全国第一。 公开资料显示，2025年公司实现营收46.04亿元，全球份额10.3%，半导体芯片用超高纯金属溅射靶材国内排名第一。 它是少数把靶材送进台积电3nm产线的中国厂商之一，也是国产材料叙事里罕见的&ldquo;打到主桌&rdquo;样本。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "台积电"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T06:16:53Z",
+    "primary_url": "https://www.tmtpost.com/8213764.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "将靶材卖进台积电，江丰电子布局A+H，第二增长曲线成色待考",
+        "url": "https://www.tmtpost.com/8213764.html",
+        "published": "2026-11-22T06:16:53Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_7729ab8c25",
+    "title_zh": "Anthropic万亿上市，搅动的却是半导体江湖",
+    "event_summary": "大买主登陆公开市场，芯片、代工与存储环节都在随之调整。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "Anthropic"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T06:16:44Z",
+    "primary_url": "https://www.tmtpost.com/8213769.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "钛媒体",
+        "level": "L2",
+        "title": "Anthropic万亿上市，搅动的却是半导体江湖",
+        "url": "https://www.tmtpost.com/8213769.html",
+        "published": "2026-11-22T06:16:44Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_39b2ea2110",
+    "title_zh": "AI芯片拉动出口破万亿，韩国出口冲刺全球第四，高度依赖半导体暗藏风险",
+    "event_summary": "周日公布的数据显示，韩国上周累计出口额首次突破 1 万亿美元，预计全年出口规模将跻身全球第四。根据世贸组织以及联合国贸易数据库 Comtrade 的数据，2026 年前 7 个月韩国出口额为 5953 亿美元，位列全球第五。韩国产业通商资源部表示，受 AI 热潮带动，半导体出口强劲，7 月之后韩国出口增速加快，已经超过荷兰。该部门预测，韩国全年出口额有望达到 1.17…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + 芯片"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T06:15:20Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4080471684600961",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "AI芯片拉动出口破万亿，韩国出口冲刺全球第四，高度依赖半导体暗藏风险",
+        "url": "https://www.36kr.com/newsflashes/4080471684600961",
+        "published": "2026-11-22T06:15:20Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_d1f67c5edc",
+    "title_zh": "A社数学家用Claude又证明另一千禧难题，逼出一份写了12年的940页纯人类手稿",
+    "event_summary": "乔迟 发自 凹非寺 量子位 | 公众号QbitAI 黎曼猜想的消息还没消化完，另一道千禧难题又被同一个数学家，同样与Claude合作证明了。 一边是黎曼猜想，关乎素数分布；另一边是Navier–Stokes存在性与光滑性问题，关乎描述水和空气运动的方程，能否一直给出平滑的解。 站在两项主张背后的，是34岁的Anthropic数学家Levent Alpöge。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T06:03:54Z",
+    "primary_url": "https://www.qbitai.com/2026/11/511870.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "量子位",
+        "level": "L2",
+        "title": "A社数学家用Claude又证明另一千禧难题，逼出一份写了12年的940页纯人类手稿",
+        "url": "https://www.qbitai.com/2026/11/511870.html",
+        "published": "2026-11-22T06:03:54Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_6433c70699",
+    "title_zh": "韩国金融委员会与欧洲央行敲定银行监管合作谅解备忘录条款",
+    "event_summary": "韩国金融委员会发布声明称，该机构拟扩大与欧洲的金融合作。金融委员会主席李福贤与欧洲央行敲定银行监管合作谅解备忘录相关条款，备忘录将于今年晚些时候签署。李福贤出席金融稳定委员会全体会议，就全球市场风险、人工智能、稳定币等核心议题展开磋商。他还在英国及欧洲地区会见当地高层官员、主要金融机构以及韩国金融机构的欧洲分支机构。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T05:45:16Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4080470685438855",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "韩国金融委员会与欧洲央行敲定银行监管合作谅解备忘录条款",
+        "url": "https://www.36kr.com/newsflashes/4080470685438855",
+        "published": "2026-11-22T05:45:16Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_eed220fdd2",
+    "title_zh": "国家数据局局长刘烈宏赴江西省调研数据要素市场化配置改革工作推进情况",
+    "event_summary": "近日，国家数据局党组书记、局长刘烈宏带队赴江西省南昌市，实地调研江西省数字产业集团有限公司、华润江中药业股份有限公司、江西一脉阳光集团股份有限公司、江西时刻互动科技股份有限公司，并召开数字中国建设调研座谈会，深入了解地方推进数据要素市场化配置改革的问题和意见建议。调研组希望江西省深入贯彻落实“十五五”数字中国建设任务部署，以更大力度推进数字江西建设，深入推进数据要素市场化配置改革，探索形成更多具有引领性和地域辨识度的创新成果。（国家数据局）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "数据要素"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T05:43:55Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3203715",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "国家数据局局长刘烈宏赴江西省调研数据要素市场化配置改革工作推进情况",
+        "url": "https://wallstreetcn.com/livenews/3203715",
+        "published": "2026-11-22T05:43:55Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_f169c2ba33",
+    "title_zh": "丘成桐回应AI辅助证明黎曼猜想",
+    "event_summary": "近日，美国人工智能企业Anthropic的数学家，宣称与自家研发的大模型Claude合作，证明了黎曼猜想。对此，丘成桐在接受采访时回应：这是一个很兴奋的时代，也是很危险的时代，我认为还是数学家占主导的，将数学整个平台提升到另一个水平。找到真理有很多不同的方法，我们还是要鼓励的。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T05:30:48Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4080470183253125",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "丘成桐回应AI辅助证明黎曼猜想",
+        "url": "https://www.36kr.com/newsflashes/4080470183253125",
+        "published": "2026-11-22T05:30:48Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_b1f7193430",
+    "title_zh": "AI新方法或有助优化败血症急诊救治流程",
+    "event_summary": "英国伦敦国王学院日前发布消息说，该校研究人员开发出一种新方法，可通过分析败血症患者的就诊记录，找出对人工智能（AI）模型预测影响较大的环节，有望帮助医院查找败血症急诊救治延误的可能原因。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-22T12:30:03Z",
+    "hot_seen_at": null,
+    "published": "2026-11-22T05:07:21Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4080468643320705",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "AI新方法或有助优化败血症急诊救治流程",
+        "url": "https://www.36kr.com/newsflashes/4080468643320705",
+        "published": "2026-11-22T05:07:21Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
     "id": "e_f190102325",
     "title_zh": "邓煜谈AI证明黎曼猜想：25万页不可读",
     "event_summary": "Anthropic数学家阿尔珀格称借助Claude证出广义黎曼猜想，公开1700万行Lean代码，无可读论文，论证多达25万页。菲尔兹奖得主邓煜表示，“页数多少倒无所谓，重点是可读性，25万页是不可能可读的。”邓煜补充道，在可读版本出现以前，不会对该事件做任何评论。",
@@ -4022,6 +4814,47 @@
     "needs_translation": false
   },
   {
+    "id": "e_b1e79324eb",
+    "title_zh": "与SpaceX如出一辙，Anthropic采用非同寻常的IPO流程，令部分银行家颇为不满",
+    "event_summary": "据知情人士透露，Anthropic告知其22家IPO承销商中的部分机构，将交易团队限制在四名银行家以内。Anthropic要求部分银行高管签署为期六个月的竞业禁止协议，涵盖OpenAI及其他竞争对手。修正后的S-1A文件于纽约时间凌晨2点左右发送，承销行仅有数小时时间予以批准。（路透）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "OpenAI"
+    ],
+    "first_seen_at": "2026-11-20T13:28:51Z",
+    "hot_seen_at": "2026-11-21T03:09:05Z",
+    "published": "2026-11-20T12:48:34Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3203745",
+    "source_count": 3,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "与SpaceX如出一辙，Anthropic采用非同寻常的IPO流程，令部分银行家颇为不满",
+        "url": "https://wallstreetcn.com/livenews/3203745",
+        "published": "2026-11-22T11:01:52Z"
+      },
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "Anthropic IPO募集资金总额约为935亿美元",
+        "url": "https://www.36kr.com/newsflashes/4078090882601862",
+        "published": "2026-11-20T12:48:34Z"
+      },
+      {
+        "source": "百度热搜",
+        "level": "L3",
+        "title": "Anthropic IPO融资额增至1195亿美元",
+        "url": "https://www.baidu.com/s?wd=Anthropic+IPO%E8%9E%8D%E8%B5%84%E9%A2%9D%E5%A2%9E%E8%87%B31195%E4%BA%BF%E7%BE%8E%E5%85%83",
+        "published": "2026-11-21T03:09:05Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
     "id": "e_c346965414",
     "title_zh": "如何评价华为子品牌OSTA星芒推出的业界首款鸿蒙 AI手机 OSTA O1 Pro，你最关注哪个功能？",
     "event_summary": "OSTA O1 Pro 是华为子品牌OSTA星芒推出的业界首款鸿蒙 AI 手机，搭载麒麟9030S芯片与鸿蒙7.0 AI先锋版。硬件上，它配备 6.39 英寸阔型屏（6500nits局部峰值亮度、120Hz高刷、2160Hz高频PWM调光、昆仑玻璃），机身厚度6.68mm、重量控制在 200g 内，却塞进了 7000mAh 的电池；影像采用 2 亿红枫影像系统，支持 3D 动态照片、AI 修图、一键成片；并叠加 IP68&IP69 防尘抗水、双 SIM+双eSIM 等能力。 在 AI…",
@@ -6046,819 +6879,6 @@
         "title": "派早报：Google 推出 Gemini 4 Neon 模型，网易 UU 远程将于 12 月推出付费会员等",
         "url": "https://sspai.com/post/119311",
         "published": "2026-11-20T00:34:31Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_fa58adbc15",
-    "title_zh": "Gemini 4 Neon 登上模型工程指数榜首",
-    "event_summary": "Performance , cost or tokens . Performance versus cost or tokens . Comparing 4 Neon Fable 5.2 and … … 4 Neon Fable 5.2 6.2 Astra 4 Carbon Opus 5.5 Sonnet 5.5 4 Hydrogen 6.2 Sol 4-Max K3.1 Pro 6.1…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "Gemini"
-    ],
-    "first_seen_at": "2026-11-20T03:04:17Z",
-    "hot_seen_at": "2026-11-19T23:35:35Z",
-    "published": "2026-11-19T23:35:35Z",
-    "primary_url": "https://git-aarvin.github.io/mei/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "Hacker News",
-        "level": "L3",
-        "title": "Gemini 4 Neon 登上模型工程指数榜首",
-        "url": "https://git-aarvin.github.io/mei/",
-        "published": "2026-11-19T23:35:35Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_3f864fc74d",
-    "title_zh": "手搓 Agent（五）：学会翻书——RAG，先查资料再回答",
-    "event_summary": "《手搓 Agent》系列第 5 篇，共 10 篇。 系列导读与目录 ｜上一篇： 长点记性——上下文满了怎么办，怎么记住上一次 图 5-1 系列地图。这一篇是蓝色框里的最后一篇：眼睛。 上一篇结尾的问题是：笔记到了两百篇，小记不可能每次都全读一遍。而我问“它为什么会忘记前面说过的话”，笔记里写的却是“窗口溢出”，字面上对不上。…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": "2026-11-20T01:26:53Z",
-    "published": "2026-11-20T01:26:53Z",
-    "primary_url": "https://juejin.cn/post/7709755322558431242",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "掘金热榜",
-        "level": "L3",
-        "title": "手搓 Agent（五）：学会翻书——RAG，先查资料再回答",
-        "url": "https://juejin.cn/post/7709755322558431242",
-        "published": "2026-11-20T01:26:53Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_9f57b4defd",
-    "title_zh": "AI 热点日报（2026-11-19）：Anthropic 全球史上最大 IPO 上市，谷歌发布 Gemini 4 Neon",
-    "event_summary": "今日AI领域最重磅事件：Claude 开发商 Anthropic 今日在纳斯达克以代码 ANT 挂牌上市，IPO 定价每股 83 美元，完全稀释估值约 1.5 万亿美元，整体募资超 940 亿美元，超越 SpaceX 成为全球史上最大 IPO。模型端，谷歌发布 Gemini 4 Neon 主打编程与企业工作流，并推出长程运行智能体 Stitch Loop；OpenAI…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": "2026-11-20T01:26:53Z",
-    "published": "2026-11-20T01:26:53Z",
-    "primary_url": "https://juejin.cn/post/7709679151842246697",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "掘金热榜",
-        "level": "L3",
-        "title": "AI 热点日报（2026-11-19）：Anthropic 全球史上最大 IPO 上市，谷歌发布 Gemini 4 Neon",
-        "url": "https://juejin.cn/post/7709679151842246697",
-        "published": "2026-11-20T01:26:53Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_33917a4b0c",
-    "title_zh": "如何看待混元Hy4 flash登顶Openrouter调用榜首 ，Tokens达DeepSeek两倍？",
-    "event_summary": "[图片]",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "DeepSeek"
-    ],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": "2026-11-20T01:26:53Z",
-    "published": "2026-11-20T01:26:53Z",
-    "primary_url": "https://www.zhihu.com/question/2106540440845563614",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "知乎热榜",
-        "level": "L3",
-        "title": "如何看待混元Hy4 flash登顶Openrouter调用榜首 ，Tokens达DeepSeek两倍？",
-        "url": "https://www.zhihu.com/question/2106540440845563614",
-        "published": "2026-11-20T01:26:53Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_f1defc7b06",
-    "title_zh": "张朝阳称自己不看 AI 短剧，火可能只是昙花一现，当下批量生成的 AI 短剧普遍存在哪些痛点？",
-    "event_summary": "很反感有些人默认所有人都是AI短剧的受众把说自己不看的人都打成假清高，你不爱看是因为你没遇到自己喜欢的类型、你没找到制作精美的AI短剧但是很多人就是单纯不想看不爱看，看不下去也看不进去。不喜欢不感兴趣本身就是一种原因，无关乎其他也没义务自证张朝阳看空短剧：不看短剧、AI剧，或是昙花一现_大风号",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": "2026-11-20T01:26:53Z",
-    "published": "2026-11-20T01:26:53Z",
-    "primary_url": "https://www.zhihu.com/question/2105945098756289549",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "知乎热榜",
-        "level": "L3",
-        "title": "张朝阳称自己不看 AI 短剧，火可能只是昙花一现，当下批量生成的 AI 短剧普遍存在哪些痛点？",
-        "url": "https://www.zhihu.com/question/2105945098756289549",
-        "published": "2026-11-20T01:26:53Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_7dace226e6",
-    "title_zh": "AI 短剧因同质化生产被称作「电子泔水」，这一评价准确吗？短剧未来会走向什么地方？",
-    "event_summary": "今年秋天，“不烧心”堪称席卷互联网的热梗之一。这个梗来自短剧中一类常见情节：某位小摊老板坚持用好食材做好饭，在店员提议用廉价食材降低成本时，回答“宁可少赚点，规矩不能坏”。顾客们一开始追逐隔壁店家的廉价食物，但最后还是回到这位老板的摊位前，感叹“贵是贵了点，吃着不烧心”。…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": "2026-11-20T01:26:53Z",
-    "published": "2026-11-20T01:26:53Z",
-    "primary_url": "https://www.zhihu.com/question/2106430555726336476",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "知乎热榜",
-        "level": "L3",
-        "title": "AI 短剧因同质化生产被称作「电子泔水」，这一评价准确吗？短剧未来会走向什么地方？",
-        "url": "https://www.zhihu.com/question/2106430555726336476",
-        "published": "2026-11-20T01:26:53Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_cb0a57ad03",
-    "title_zh": "苹果正自研AI智能体 正面挑战OpenAI和Anthropic",
-    "event_summary": "苹果正自研AI智能体 正面挑战OpenAI和Anthropic",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "智能体"
-    ],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-20T01:17:29Z",
-    "primary_url": "https://www.cls.cn/detail/2539654",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "财联社·电报",
-        "level": "L2",
-        "title": "苹果正自研AI智能体 正面挑战OpenAI和Anthropic",
-        "url": "https://www.cls.cn/detail/2539654",
-        "published": "2026-11-20T01:17:29Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_8e24565f27",
-    "title_zh": "AI Agent 元年，苹果是最后一个入局的巨头",
-    "event_summary": "苹果急了 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "AI + Agent"
-    ],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-20T01:17:16Z",
-    "primary_url": "https://www.ifanr.com/1690510?utm_source=rss&utm_medium=rss&utm_campaign=",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "爱范儿",
-        "level": "L2",
-        "title": "AI Agent 元年，苹果是最后一个入局的巨头",
-        "url": "https://www.ifanr.com/1690510?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "published": "2026-11-20T01:17:16Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_a7e55a2499",
-    "title_zh": "人形机器人“卖铲人”先富了，然后呢？",
-    "event_summary": "具身智能火了，最先赚钱的不是造机器人的，是卖零件的。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "具身智能"
-    ],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-20T01:14:00Z",
-    "primary_url": "https://www.tmtpost.com/8211616.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "钛媒体",
-        "level": "L2",
-        "title": "人形机器人“卖铲人”先富了，然后呢？",
-        "url": "https://www.tmtpost.com/8211616.html",
-        "published": "2026-11-20T01:14:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_27953071d4",
-    "title_zh": "中方强调反对一切形式的恐怖主义",
-    "event_summary": "联合国安理会19日举行反恐及相关机构联合通报会。中方代表指出，“东伊运”等恐怖组织正利用人工智能、无人机等新兴技术升级恐怖主义手段，持续威胁世界和平，中方坚决反对一切形式的恐怖主义，坚决反对大规模杀伤性武器及其运载工具的扩散。中方支持反恐委员会顺应新形势，推动全面落实安理会反恐决议和联合国全球反恐战略。（央视新闻）",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "人工智能"
-    ],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-20T01:13:47Z",
-    "primary_url": "https://wallstreetcn.com/livenews/3202917",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "华尔街见闻·快讯",
-        "level": "L2",
-        "title": "中方强调反对一切形式的恐怖主义",
-        "url": "https://wallstreetcn.com/livenews/3202917",
-        "published": "2026-11-20T01:13:47Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_b8169f77e3",
-    "title_zh": "天数智芯：生产经营正常，已与多家国内供应链伙伴建立合作关系",
-    "event_summary": "36氪获悉，针对近日市场关于国产GPU供应链相关环节的传闻，天数智芯今日通过官方微信公众号作出回应。公司表示，目前生产经营正常，各项业务均按照既定计划有序开展。公司称，多年来持续关注全球半导体产业链变化及海外供应链潜在风险，并持续建立和完善相关风险识别与防范体系，积极做好供应链风险应对准备。在供应链保障方面，公司表示已与多家国内半导体供应链合作伙伴建立紧密合作关系，以持续提升供应链的稳定性与保障能力，为公司产品生产和业务发展提供支持。对…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "半导体"
-    ],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-20T01:08:09Z",
-    "primary_url": "https://www.36kr.com/newsflashes/4077402351932292",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "36氪·快讯",
-        "level": "L2",
-        "title": "天数智芯：生产经营正常，已与多家国内供应链伙伴建立合作关系",
-        "url": "https://www.36kr.com/newsflashes/4077402351932292",
-        "published": "2026-11-20T01:08:09Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_8f4728ffc5",
-    "title_zh": "苹果可能正在开发一款运行 Mac 的自有 AI 代理",
-    "event_summary": "The iPhone maker appears to be building agents that can compete with the likes of Meta Muse, Instinct, Claude, and OpenAI Dots.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-20T00:56:01Z",
-    "primary_url": "https://techcrunch.com/2026/11/19/apple-may-be-developing-its-own-ai-agent-that-runs-your-mac/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "TechCrunch AI",
-        "level": "L2",
-        "title": "苹果可能正在开发一款运行 Mac 的自有 AI 代理",
-        "url": "https://techcrunch.com/2026/11/19/apple-may-be-developing-its-own-ai-agent-that-runs-your-mac/",
-        "published": "2026-11-20T00:56:01Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_10ec3756b1",
-    "title_zh": "OpenAI 开放 GPT-Live-1.1 API：支持实时双向对话，智能体可边聊天边处理复杂任务",
-    "event_summary": "IT之家 11 月 20 日消息，OpenAI 今日宣布向开发者开放 GPT-Live-1.1 API 语音模型，允许第三方开发者将其集成到自己的应用程序中，构建能够实时聆听、回应并执行复杂任务的 AI 语音智能体。 据 OpenAI 介绍，GPT-Live-1.1 是 GPT-Live-1…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "智能体"
-    ],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-20T00:50:30Z",
-    "primary_url": "https://www.ithome.com/1/029/776.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "OpenAI 开放 GPT-Live-1.1 API：支持实时双向对话，智能体可边聊天边处理复杂任务",
-        "url": "https://www.ithome.com/1/029/776.htm",
-        "published": "2026-11-20T00:50:30Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_ffaad00d31",
-    "title_zh": "行业标准落地、国产化向多工序拓展，半导体材料设备板块触底回升",
-    "event_summary": "近期，半导体材料设备板块震荡回升，产业端也迎来新进展。行业专属质量管理体系标准获批，前期扩产订单陆续转化为收入，国产设备新品加快导入客户产线，零部件企业持续拓展供货。分析人士认为，国内晶圆厂新建产能与存储厂工艺升级同步推进，有望带动设备采购及配套耗材需求增长。国内厂商正从供应单一机型向覆盖多道关键工序拓展，国产化有望加速。后续可关注扩产项目进度、设备订单落地及新品验证情况，把握设备、材料与先进封装等领域的投资机会。（中证报）",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "半导体"
-    ],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-20T00:44:15Z",
-    "primary_url": "https://www.36kr.com/newsflashes/4077378850067589",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "36氪·快讯",
-        "level": "L2",
-        "title": "行业标准落地、国产化向多工序拓展，半导体材料设备板块触底回升",
-        "url": "https://www.36kr.com/newsflashes/4077378850067589",
-        "published": "2026-11-20T00:44:15Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_f1dd0bea0b",
-    "title_zh": "Anthropic 的 7 位创始人通过创纪录的 IPO 套现近 20 亿美元",
-    "event_summary": "At the upgraded $83/share IPO price, Anthropic's seven founders each pocketed $280 million, while the company nabbed nearly $105 billion.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-20T00:43:50Z",
-    "primary_url": "https://techcrunch.com/2026/11/19/anthropics-7-founders-cashed-out-nearly-2b-in-record-breaking-ipo/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "TechCrunch AI",
-        "level": "L2",
-        "title": "Anthropic 的 7 位创始人通过创纪录的 IPO 套现近 20 亿美元",
-        "url": "https://techcrunch.com/2026/11/19/anthropics-7-founders-cashed-out-nearly-2b-in-record-breaking-ipo/",
-        "published": "2026-11-20T00:43:50Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_43543cc13e",
-    "title_zh": "“基元科技”完成数千万元天使轮融资",
-    "event_summary": "36氪获悉，国内覆盖二维半导体集成电路制造生长—转移—检测全流程的专用产线设备商“基元科技”近日完成数千万元天使轮融资，由朝晖芯华基金领投（朝晖资本与中芯国际创始人张汝京博士联合管理），宁创投、常州高新投、南慧创投等跟投，云岫资本担任后续融资财务顾问。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "半导体"
-    ],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-20T00:40:03Z",
-    "primary_url": "https://www.36kr.com/newsflashes/4077374734308485",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "36氪·快讯",
-        "level": "L2",
-        "title": "“基元科技”完成数千万元天使轮融资",
-        "url": "https://www.36kr.com/newsflashes/4077374734308485",
-        "published": "2026-11-20T00:40:03Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_8233a7d99b",
-    "title_zh": "曝 Meta 全新 AI 硬件 Muse Charm 售 300 美元，附赠一年 5G 流量",
-    "event_summary": "IT之家 11 月 20 日消息，据《The Information》今日报道，Meta 旗下新款 AI 硬件设备 Muse Charm 的售价约为 300 美元 （IT之家注：现汇率约合 2,008 元人民币） ，并将附赠最长 12 个月的 5G 流量服务（Verizon 提供）。 Muse Charm 是一款配备屏幕的小型 AI 设备，由 Meta CEO 马克 · 扎克伯格（Mark Zuckerberg）于今年 9 月的…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-20T00:37:58Z",
-    "primary_url": "https://www.ithome.com/1/029/771.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "曝 Meta 全新 AI 硬件 Muse Charm 售 300 美元，附赠一年 5G 流量",
-        "url": "https://www.ithome.com/1/029/771.htm",
-        "published": "2026-11-20T00:37:58Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_3494234ca3",
-    "title_zh": "华尔街狂热，华盛顿划线：Anthropic的上市前夜",
-    "event_summary": "在算力被重新划定边界的当下，资本市场究竟在为什么定价？",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "Anthropic"
-    ],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-20T00:37:00Z",
-    "primary_url": "https://www.tmtpost.com/8211445.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "钛媒体",
-        "level": "L2",
-        "title": "华尔街狂热，华盛顿划线：Anthropic的上市前夜",
-        "url": "https://www.tmtpost.com/8211445.html",
-        "published": "2026-11-20T00:37:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_c2b8b39056",
-    "title_zh": "早报｜苹果招人打造「接管电脑」的AI智能体/史上最大IPO，Anthropic上市/华为官宣Mate 90 Air主打轻薄",
-    "event_summary": "· 旅行者 1 号距地球达一光日，信号单程需 24 小时 · 网易 UU 远程将上线付费会员，基础远控继续免费 · 腾讯大幅削减元宝投入，微信小微日活达 3000 万 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "智能体"
-    ],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-20T00:29:44Z",
-    "primary_url": "https://www.ifanr.com/1690473?utm_source=rss&utm_medium=rss&utm_campaign=",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "爱范儿",
-        "level": "L2",
-        "title": "早报｜苹果招人打造「接管电脑」的AI智能体/史上最大IPO，Anthropic上市/华为官宣Mate 90 Air主打轻薄",
-        "url": "https://www.ifanr.com/1690473?utm_source=rss&utm_medium=rss&utm_campaign=",
-        "published": "2026-11-20T00:29:44Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_96559523d7",
-    "title_zh": "美国费城联储主席Paulson：通胀似乎正在影响定价行为。 美联储不应在通胀问题上“玩火”。 长期通胀预期保持稳定，显示美联储具有公信力。 工资增长与2%的通胀水平相符，这是个好迹象。",
-    "event_summary": "美国费城联储主席Paulson：通胀似乎正在影响定价行为。 美联储不应在通胀问题上“玩火”。 长期通胀预期保持稳定，显示美联储具有公信力。 工资增长与2%的通胀水平相符，这是个好迹象。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "美联储"
-    ],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-20T00:28:12Z",
-    "primary_url": "https://wallstreetcn.com/livenews/3202895",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "华尔街见闻·快讯",
-        "level": "L2",
-        "title": "美国费城联储主席Paulson：通胀似乎正在影响定价行为。 美联储不应在通胀问题上“玩火”。 长期通胀预期保持稳定，显示美联储具有公信力。 工资增长与2%的通胀水平相符，这是个好迹象。",
-        "url": "https://wallstreetcn.com/livenews/3202895",
-        "published": "2026-11-20T00:28:12Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_8e19ef7d48",
-    "title_zh": "只改一处代码，谷歌 AI 智能体优化 Harness 后任务成功率提升 8 倍",
-    "event_summary": "IT之家 11 月 20 日消息，谷歌研究人员当地时间 11 月 17 日最新发表的研究论文《Harnesses That Improve Themselves》（《能够自我改进的 Harness》）显示，通过让 AI 智能体逐步修改自身运行框架，并对每次修改进行验证，可以显著提高软件工程任务的完成率。 在一项 SWE-bench Lite 测试中，采用模块化优化方案的智能体任务成功率从 5.0% 提升至 40.0%，达到原来的 8…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "智能体"
-    ],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-20T00:19:51Z",
-    "primary_url": "https://www.ithome.com/1/029/766.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "只改一处代码，谷歌 AI 智能体优化 Harness 后任务成功率提升 8 倍",
-        "url": "https://www.ithome.com/1/029/766.htm",
-        "published": "2026-11-20T00:19:51Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_99aa4e87a4",
-    "title_zh": "澳洲联储货币政策委员会委员Fry-McKibbin：澳大利亚部分领域需求强劲，其他领域则表现疲软，同时叠加了大规模的全球石油供应冲击。 让公众了解到委员会正极其密切地关注人工智能的影响至关重要。",
-    "event_summary": "澳洲联储货币政策委员会委员Fry-McKibbin：澳大利亚部分领域需求强劲，其他领域则表现疲软，同时叠加了大规模的全球石油供应冲击。 让公众了解到委员会正极其密切地关注人工智能的影响至关重要。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "人工智能"
-    ],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-20T00:19:47Z",
-    "primary_url": "https://wallstreetcn.com/livenews/3202893",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "华尔街见闻·快讯",
-        "level": "L2",
-        "title": "澳洲联储货币政策委员会委员Fry-McKibbin：澳大利亚部分领域需求强劲，其他领域则表现疲软，同时叠加了大规模的全球石油供应冲击。 让公众了解到委员会正极其密切地关注人工智能的影响至关重要。",
-        "url": "https://wallstreetcn.com/livenews/3202893",
-        "published": "2026-11-20T00:19:47Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_7b0aa6d262",
-    "title_zh": "OpenAI印证了梁文锋的“预言”",
-    "event_summary": "OpenAI裁撤机器人团队，通用模型“杀死”垂直模型？",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "OpenAI"
-    ],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-20T00:05:00Z",
-    "primary_url": "https://www.tmtpost.com/8211368.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "钛媒体",
-        "level": "L2",
-        "title": "OpenAI印证了梁文锋的“预言”",
-        "url": "https://www.tmtpost.com/8211368.html",
-        "published": "2026-11-20T00:05:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_79e1832f34",
-    "title_zh": "商务部：1-10 月重点平台智能眼镜销售额增长 1 倍，具身智能机器人销售额增长 25.2%",
-    "event_summary": "IT之家 11 月 20 日消息，11 月 19 日， 商务部消费促进司负责人谈 2026 年 1-10 月我国消费市场情况。今年以来，我国消费市场规模稳步扩大，呈现商品消费稳、服务消费旺、新型消费热的特点。1-10 月，社会消费商品和服务零售总额同比（下同）增长 2.5%。 IT之家从公告获悉，在消费品以旧换新政策强有力的带动下，绿色、智能消费持续增长。1-10…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "具身智能"
-    ],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-20T00:00:26Z",
-    "primary_url": "https://www.ithome.com/1/029/762.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "商务部：1-10 月重点平台智能眼镜销售额增长 1 倍，具身智能机器人销售额增长 25.2%",
-        "url": "https://www.ithome.com/1/029/762.htm",
-        "published": "2026-11-20T00:00:26Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_a13ca83f84",
-    "title_zh": "苹果 macOS 27.3 Beta 2 公测版发布：扩展 Siri AI 能力，强化完全磁盘访问权限管理",
-    "event_summary": "IT之家 11 月 20 日消息，苹果于当地时间 11 月 19 日向公测版用户推送了 iOS / iPadOS 27.3 和 macOS 27.3 Beta 2，以及 tvOS 27.3 和 watchOS 27.3 的 Beta 2。 据 9to5Mac 和 MacRumors 报道，此次更新延续了苹果在新一代操作系统中对 Siri AI、Safari 浏览器及系统隐私权限管理的调整。 macOS 27.3 Beta 2…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-19T23:20:17Z",
-    "primary_url": "https://www.ithome.com/1/029/754.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "苹果 macOS 27.3 Beta 2 公测版发布：扩展 Siri AI 能力，强化完全磁盘访问权限管理",
-        "url": "https://www.ithome.com/1/029/754.htm",
-        "published": "2026-11-19T23:20:17Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_d87daf07cb",
-    "title_zh": "【钛晨报】《中俄美元首和平宣言》发布；31家出资主体现身，DeepSeek第二轮融资落地；比亚迪发布折叠方向盘，长鑫科技拟25亿至50亿元回购股份",
-    "event_summary": "燧原科技：在手订单充沛，并正在与多家国内半导体产业伙伴进行合作；吴泳铭：建设超过20GW规模全球数据中心的目标可能下调；拼多多Q3利润295亿元，同比基本持平；因150元成被执行人？格力电器最新回应；OpenAI进军手机领域；马斯克披露多项业务时间表，Optimus拟18个月内胜任家务。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "OpenAI"
-    ],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-19T23:20:00Z",
-    "primary_url": "https://www.tmtpost.com/8211593.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "钛媒体",
-        "level": "L2",
-        "title": "【钛晨报】《中俄美元首和平宣言》发布；31家出资主体现身，DeepSeek第二轮融资落地；比亚迪发布折叠方向盘，长鑫科技拟25亿至50亿元回购股份",
-        "url": "https://www.tmtpost.com/8211593.html",
-        "published": "2026-11-19T23:20:00Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_634cf13b7b",
-    "title_zh": "微软携手英伟达升级云 PC 体验：两路 4K 60 帧画面，2027 年预览上线",
-    "event_summary": "IT之家 11 月 20 日消息，本月召开的 Ignite 2026 活动中，微软宣布携手英伟达加速本地 AI 体验落地，让 AI 从“必须联网才能用”的云端服务，逐步走向“能在自己电脑上运行”的本地体验。 根据双方公布的合作愿景，搭载英伟达 RTX Spark 的 Windows PC 能运行本地大语言模型能力，让用户不必完全依赖网络，就能在电脑上直接使用 AI 助手、生成内容或处理文档。 本次双方合作为 GPU 加速的…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-19T23:09:25Z",
-    "primary_url": "https://www.ithome.com/1/029/747.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "微软携手英伟达升级云 PC 体验：两路 4K 60 帧画面，2027 年预览上线",
-        "url": "https://www.ithome.com/1/029/747.htm",
-        "published": "2026-11-19T23:09:25Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_ff5dc1424d",
-    "title_zh": "苹果发布 iOS 27.3 Beta 2 修订版：修复 HomeView 配对问题，Siri AI 可读取 Safari 完整网页内容",
-    "event_summary": "IT之家 11 月 20 日消息，苹果于当地时间 11 月 19 日面向开发者推送了 iOS 27.3 Beta 2 和 iPadOS 27.3 Beta 2 的 v2 修订版，版本号均为 24C5049f，同时也面向公测版用户开放 iOS 27.3 Beta 2 更新。 IT之家注意到，根据苹果开发者官方网站的更新记录，此次重新发布主要修复了 Siri AI 与苹果智能家居设备 HomeView 配对时可能出现的设置问题。…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-19T23:04:03Z",
-    "primary_url": "https://www.ithome.com/1/029/751.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "苹果发布 iOS 27.3 Beta 2 修订版：修复 HomeView 配对问题，Siri AI 可读取 Safari 完整网页内容",
-        "url": "https://www.ithome.com/1/029/751.htm",
-        "published": "2026-11-19T23:04:03Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_1c762a397f",
-    "title_zh": "谷歌 Gemini 现可直接操作苹果 Mac 电脑，可跨应用操作、制作 PPT、填写表单",
-    "event_summary": "IT之家 11 月 20 日消息，当地时间 11 月 19 日，谷歌宣布为 macOS 版 Gemini 应用推出全新的“电脑操控”（Computer Use）功能，允许 AI 直接操作 Mac 上的桌面应用、访问本地文件及浏览网页，独立完成多步骤任务（IT之家注：该功能目前面向美国地区的英语用户逐步开放）。 根据谷歌官方介绍，用户只需通过自然语言描述任务，Gemini…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "AI + 应用"
-    ],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-19T22:48:06Z",
-    "primary_url": "https://www.ithome.com/1/029/749.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "谷歌 Gemini 现可直接操作苹果 Mac 电脑，可跨应用操作、制作 PPT、填写表单",
-        "url": "https://www.ithome.com/1/029/749.htm",
-        "published": "2026-11-19T22:48:06Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_a22c687c43",
-    "title_zh": "苹果正在招聘工程师以构建自有 AI 代理",
-    "event_summary": "Apple is working on its own AI agent that can perform a range of tasks for you, including browsing the web, working across apps, writing code, and calling services. That's according to a job listing spotted by…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-19T22:31:41Z",
-    "primary_url": "https://www.theverge.com/tech/1038227/apple-ai-agent-engineer-job-listing",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "The Verge AI",
-        "level": "L2",
-        "title": "苹果正在招聘工程师以构建自有 AI 代理",
-        "url": "https://www.theverge.com/tech/1038227/apple-ai-agent-engineer-job-listing",
-        "published": "2026-11-19T22:31:41Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_4665289b81",
-    "title_zh": "AI 帮助研究人员调查数千项医学研究如何共享代码",
-    "event_summary": "An MIT and Dana-Farber Institute-led team used large language models to examine nearly 4,000 studies and hundreds of code repositories, revealing gaps in the information needed to scrutinize and reuse published research.",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-20T01:26:53Z",
-    "hot_seen_at": null,
-    "published": "2026-11-19T22:15:00Z",
-    "primary_url": "https://news.mit.edu/2026/ai-helps-researchers-investigate-how-medical-studies-share-code-1119",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "MIT News AI",
-        "level": "L2",
-        "title": "AI 帮助研究人员调查数千项医学研究如何共享代码",
-        "url": "https://news.mit.edu/2026/ai-helps-researchers-investigate-how-medical-studies-share-code-1119",
-        "published": "2026-11-19T22:15:00Z"
       }
     ],
     "needs_translation": false
