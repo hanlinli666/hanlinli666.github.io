@@ -1,5 +1,585 @@
 [
   {
+    "id": "e_3c36a94255",
+    "title_zh": "测试全绿，不等于没改坏：AI 拆一个 1572 行函数后，我又做了四件事",
+    "event_summary": "一个 1572 行的函数，让 AI 按开源工具 rulemason 的清理流程拆成了 150 行，测试全绿。但测试绿了，只说明写过的用例没坏。这篇讲我们又做了哪四件事，才敢说「行为一点没变」。 项目里有一个后台任务函数，负责调用上游服务、处理限流和重试、写入结果、发通知。全部写在一个函数里，1572 行。谁要改它，得先在 1500 多行里找到自己要改的那几行。 这次由 AI…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-23T15:12:43Z",
+    "hot_seen_at": "2026-11-23T15:12:43Z",
+    "published": "2026-11-23T15:12:43Z",
+    "primary_url": "https://juejin.cn/post/7710166772066058276",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "测试全绿，不等于没改坏：AI 拆一个 1572 行函数后，我又做了四件事",
+        "url": "https://juejin.cn/post/7710166772066058276",
+        "published": "2026-11-23T15:12:43Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_f6208a29f8",
+    "title_zh": "一个 Android 老兵的十年开源路：从 167 star 的滑动控件，到本地优先的 AI Agent",
+    "event_summary": "2019 年 3 月，我最后一次提交 StickScrollView 。那个仓库当时有 167 个 star、23 个 fork，是我 GitHub 上最好看的数字。 按常理，接下来该是趁热打铁：再抽几个通用控件、写几篇源码解析、把 star 数往上堆。 但我干了一件相反的事——在那个项目的 README 里，我写下了一段话，大意是： Android 官方的 AppBarLayout +…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "AI + Agent"
+    ],
+    "first_seen_at": "2026-11-23T15:12:43Z",
+    "hot_seen_at": "2026-11-23T15:12:43Z",
+    "published": "2026-11-23T15:12:43Z",
+    "primary_url": "https://juejin.cn/post/7710529903347138560",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "一个 Android 老兵的十年开源路：从 167 star 的滑动控件，到本地优先的 AI Agent",
+        "url": "https://juejin.cn/post/7710529903347138560",
+        "published": "2026-11-23T15:12:43Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_4973deca18",
+    "title_zh": "在「黎曼猜想被AI证明」后，你认为 Anthropic的数学家莱文特·阿尔珀格有资格拿菲尔兹奖吗？",
+    "event_summary": "2026年11月20日，人工智能公司Anthropic的数学家莱文特·阿尔珀格（Levent Alpöge）在个人网站发布声明，称他与AI模型Claude合作，找到了黎曼猜想及其更强版本——广义黎曼猜想的证明。",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-23T15:12:43Z",
+    "hot_seen_at": "2026-11-23T15:12:43Z",
+    "published": "2026-11-23T15:12:43Z",
+    "primary_url": "https://www.zhihu.com/question/2108195438826349055",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "知乎热榜",
+        "level": "L3",
+        "title": "在「黎曼猜想被AI证明」后，你认为 Anthropic的数学家莱文特·阿尔珀格有资格拿菲尔兹奖吗？",
+        "url": "https://www.zhihu.com/question/2108195438826349055",
+        "published": "2026-11-23T15:12:43Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_39bf18c2dd",
+    "title_zh": "美国总统特朗普：强烈认为黄仁勋应该复出。 我们必须保护我们的天才，失去黄仁勋的智慧才是最大的威胁。 黄仁勋生产了不起的芯片。 我们已经对黄仁勋进行了“非常彻底的调查”。 （我曾）直接与英伟达董事会对话。 发现董事会是理性的。（CNBC）",
+    "event_summary": "美国总统特朗普：强烈认为黄仁勋应该复出。 我们必须保护我们的天才，失去黄仁勋的智慧才是最大的威胁。 黄仁勋生产了不起的芯片。 我们已经对黄仁勋进行了“非常彻底的调查”。 （我曾）直接与英伟达董事会对话。 发现董事会是理性的。（CNBC）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "英伟达"
+    ],
+    "first_seen_at": "2026-11-23T15:12:43Z",
+    "hot_seen_at": null,
+    "published": "2026-11-23T15:08:57Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3204384",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "美国总统特朗普：强烈认为黄仁勋应该复出。 我们必须保护我们的天才，失去黄仁勋的智慧才是最大的威胁。 黄仁勋生产了不起的芯片。 我们已经对黄仁勋进行了“非常彻底的调查”。 （我曾）直接与英伟达董事会对话。 发现董事会是理性的。（CNBC）",
+        "url": "https://wallstreetcn.com/livenews/3204384",
+        "published": "2026-11-23T15:08:57Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_6afca4c394",
+    "title_zh": "美国参议院民主党成员Ruben Gallego：英伟达声明发布之前的交易必须接受调查。 我们需要调查这项公告发布前有哪些股票头寸被建立。",
+    "event_summary": "美国参议院民主党成员Ruben Gallego：英伟达声明发布之前的交易必须接受调查。 我们需要调查这项公告发布前有哪些股票头寸被建立。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "英伟达"
+    ],
+    "first_seen_at": "2026-11-23T15:12:43Z",
+    "hot_seen_at": null,
+    "published": "2026-11-23T15:08:06Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3204383",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "美国参议院民主党成员Ruben Gallego：英伟达声明发布之前的交易必须接受调查。 我们需要调查这项公告发布前有哪些股票头寸被建立。",
+        "url": "https://wallstreetcn.com/livenews/3204383",
+        "published": "2026-11-23T15:08:06Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_93a59dffc9",
+    "title_zh": "美国总统特朗普通过连线参加了英伟达董事会会议。 特朗普主张让黄仁勋复出。（Semafor）",
+    "event_summary": "美国总统特朗普通过连线参加了英伟达董事会会议。 特朗普主张让黄仁勋复出。（Semafor）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "英伟达"
+    ],
+    "first_seen_at": "2026-11-23T15:12:43Z",
+    "hot_seen_at": null,
+    "published": "2026-11-23T15:05:46Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3204382",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "美国总统特朗普通过连线参加了英伟达董事会会议。 特朗普主张让黄仁勋复出。（Semafor）",
+        "url": "https://wallstreetcn.com/livenews/3204382",
+        "published": "2026-11-23T15:05:46Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_aa93777566",
+    "title_zh": "特朗普支持黄仁勋重返Nvidia，称美国无不当行为证据",
+    "event_summary": "The president cited the U.S. Attorney General in defending Huang's return, while urging Nvidia to continue its export-control investigation.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-23T15:12:43Z",
+    "hot_seen_at": null,
+    "published": "2026-11-23T15:04:01Z",
+    "primary_url": "https://techcrunch.com/2026/11/23/trump-endorses-jensen-huangs-return-to-nvidia-says-us-has-no-evidence-of-wrongdoing/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "TechCrunch AI",
+        "level": "L2",
+        "title": "特朗普支持黄仁勋重返Nvidia，称美国无不当行为证据",
+        "url": "https://techcrunch.com/2026/11/23/trump-endorses-jensen-huangs-return-to-nvidia-says-us-has-no-evidence-of-wrongdoing/",
+        "published": "2026-11-23T15:04:01Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_8f9476e777",
+    "title_zh": "财联社11月23日电，英伟达涨幅一度扩大至35%，刷新日高。",
+    "event_summary": "财联社11月23日电，英伟达涨幅一度扩大至35%，刷新日高。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "英伟达"
+    ],
+    "first_seen_at": "2026-11-23T15:12:43Z",
+    "hot_seen_at": null,
+    "published": "2026-11-23T15:01:59Z",
+    "primary_url": "https://www.cls.cn/detail/2542260",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "财联社11月23日电，英伟达涨幅一度扩大至35%，刷新日高。",
+        "url": "https://www.cls.cn/detail/2542260",
+        "published": "2026-11-23T15:01:59Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_3bfb7889ec",
+    "title_zh": "财联社11月23日电，美国参议员沃伦表示，黄仁勋和英伟达仍需向国会作出解释。沃伦并且表示，让黄仁勋复职是“鲁莽的决定”。",
+    "event_summary": "财联社11月23日电，美国参议员沃伦表示，黄仁勋和英伟达仍需向国会作出解释。沃伦并且表示，让黄仁勋复职是“鲁莽的决定”。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "英伟达"
+    ],
+    "first_seen_at": "2026-11-23T15:12:43Z",
+    "hot_seen_at": null,
+    "published": "2026-11-23T15:00:15Z",
+    "primary_url": "https://www.cls.cn/detail/2542259",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "财联社11月23日电，美国参议员沃伦表示，黄仁勋和英伟达仍需向国会作出解释。沃伦并且表示，让黄仁勋复职是“鲁莽的决定”。",
+        "url": "https://www.cls.cn/detail/2542259",
+        "published": "2026-11-23T15:00:15Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_bdb1ea6b71",
+    "title_zh": "美国参议院民主党Warren：黄仁勋和英伟达仍然需要向国会山做出解释。 让黄仁勋复出是“鲁莽的决定”。",
+    "event_summary": "美国参议院民主党Warren：黄仁勋和英伟达仍然需要向国会山做出解释。 让黄仁勋复出是“鲁莽的决定”。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "英伟达"
+    ],
+    "first_seen_at": "2026-11-23T15:12:43Z",
+    "hot_seen_at": null,
+    "published": "2026-11-23T15:00:02Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3204376",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "美国参议院民主党Warren：黄仁勋和英伟达仍然需要向国会山做出解释。 让黄仁勋复出是“鲁莽的决定”。",
+        "url": "https://wallstreetcn.com/livenews/3204376",
+        "published": "2026-11-23T15:00:02Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_a9dfd2a508",
+    "title_zh": "华为星芒 OSTA O1 Pro 新机确认支持 eSIM 能力：最多四号，允许同时启用双卡",
+    "event_summary": "IT之家 11 月 23 日消息，首款为 AI 而生的鸿蒙手机 —— 华为星芒 OSTA O1 Pro 已于 11 月 20 日下午正式发布 ，叠加国补后 4999 元起。 ▲ IT之家开箱：华为全新子品牌星芒 OSTA O1 Pro 手机实拍 IT之家注意到，华为官网最新显示， 星芒 OSTA O1 Pro 支持 eSIM 能力 。 该功能需开通运营商相关业务使用，同一个手机可以存储最多 2 个 eSIM…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-23T15:12:43Z",
+    "hot_seen_at": null,
+    "published": "2026-11-23T14:58:55Z",
+    "primary_url": "https://www.ithome.com/1/031/219.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "华为星芒 OSTA O1 Pro 新机确认支持 eSIM 能力：最多四号，允许同时启用双卡",
+        "url": "https://www.ithome.com/1/031/219.htm",
+        "published": "2026-11-23T14:58:55Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_03cd0d33e9",
+    "title_zh": "马斯克转发黄仁勋复职声明",
+    "event_summary": "美国企业家马斯克今天（11月23日）在社交媒体转发英伟达公司对黄仁勋的复职声明，并配文“错误已经被纠正”。（CCTV国际时讯）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "英伟达"
+    ],
+    "first_seen_at": "2026-11-23T15:12:43Z",
+    "hot_seen_at": null,
+    "published": "2026-11-23T14:58:35Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3204375",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "马斯克转发黄仁勋复职声明",
+        "url": "https://wallstreetcn.com/livenews/3204375",
+        "published": "2026-11-23T14:58:35Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_d02e3bfd7a",
+    "title_zh": "财联社11月23日电，Melius Research将英伟达的评级从“持有”上调至“买入”，目标价为220美元。",
+    "event_summary": "财联社11月23日电，Melius Research将英伟达的评级从“持有”上调至“买入”，目标价为220美元。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "英伟达"
+    ],
+    "first_seen_at": "2026-11-23T15:12:43Z",
+    "hot_seen_at": null,
+    "published": "2026-11-23T14:58:20Z",
+    "primary_url": "https://www.cls.cn/detail/2542258",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "财联社11月23日电，Melius Research将英伟达的评级从“持有”上调至“买入”，目标价为220美元。",
+        "url": "https://www.cls.cn/detail/2542258",
+        "published": "2026-11-23T14:58:20Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_0a198c4dda",
+    "title_zh": "英伟达恢复黄仁勋 CEO 职务，马斯克称“错误已更正”",
+    "event_summary": "IT之家 11 月 23 日消息，英伟达今日宣布， 即日起恢复黄仁勋（Jensen Huang）总裁兼首席执行官及董事会成员职务 。 对于此消息，马斯克在 X 平台转发英伟达公司对黄仁勋的复职声明，并配文“错误已更正。” 马斯克稍早还发布了一条疑似回应此事的消息称，“搞定了 (It is done)。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "英伟达"
+    ],
+    "first_seen_at": "2026-11-23T15:12:43Z",
+    "hot_seen_at": null,
+    "published": "2026-11-23T14:49:24Z",
+    "primary_url": "https://www.ithome.com/1/031/218.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "英伟达恢复黄仁勋 CEO 职务，马斯克称“错误已更正”",
+        "url": "https://www.ithome.com/1/031/218.htm",
+        "published": "2026-11-23T14:49:24Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_d6a5b08e3f",
+    "title_zh": "Sierra六个月内估值翻倍至300亿美元，AI在CX领域需求激增",
+    "event_summary": "Enterprise customer experience company Sierra, co-founded by former Salesforce co-CEO Bret Taylor, said on Monday that it has raised $1.75 billion in a Series F round.",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-23T15:12:43Z",
+    "hot_seen_at": null,
+    "published": "2026-11-23T14:43:03Z",
+    "primary_url": "https://techcrunch.com/2026/11/23/sierra-doubles-valuation-to-30b-within-six-months-as-demand-for-ai-in-cx-takes-off/",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "TechCrunch AI",
+        "level": "L2",
+        "title": "Sierra六个月内估值翻倍至300亿美元，AI在CX领域需求激增",
+        "url": "https://techcrunch.com/2026/11/23/sierra-doubles-valuation-to-30b-within-six-months-as-demand-for-ai-in-cx-takes-off/",
+        "published": "2026-11-23T14:43:03Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_e47711c481",
+    "title_zh": "财联社11月23日电，英伟达涨幅收窄至25%，此前一度上涨33%。",
+    "event_summary": "财联社11月23日电，英伟达涨幅收窄至25%，此前一度上涨33%。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "英伟达"
+    ],
+    "first_seen_at": "2026-11-23T15:12:43Z",
+    "hot_seen_at": null,
+    "published": "2026-11-23T14:42:58Z",
+    "primary_url": "https://www.cls.cn/detail/2542251",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "财联社11月23日电，英伟达涨幅收窄至25%，此前一度上涨33%。",
+        "url": "https://www.cls.cn/detail/2542251",
+        "published": "2026-11-23T14:42:58Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_b729255676",
+    "title_zh": "特朗普祝贺黄仁勋重返英伟达：美国需要其领导才能确保公司以及整个美国经济的繁荣与成功",
+    "event_summary": "IT之家 11 月 23 日消息，英伟达今日宣布， 即日起恢复黄仁勋（Jensen Huang）总裁兼首席执行官及董事会成员职务 。英伟达表示，在与黄仁勋进行一系列讨论和会议后，董事会一致投票决定恢复其职务，董事会随后对黄仁勋的坦诚及其领导英伟达的能力表示满意。 IT之家注意到，美国总统唐纳德 · 特朗普随后发文向黄仁勋表示祝贺，称英伟达董事会作出了正确的决定，将黄仁勋重新任命为 CEO。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "英伟达"
+    ],
+    "first_seen_at": "2026-11-23T15:12:43Z",
+    "hot_seen_at": null,
+    "published": "2026-11-23T14:41:11Z",
+    "primary_url": "https://www.ithome.com/1/031/216.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "特朗普祝贺黄仁勋重返英伟达：美国需要其领导才能确保公司以及整个美国经济的繁荣与成功",
+        "url": "https://www.ithome.com/1/031/216.htm",
+        "published": "2026-11-23T14:41:11Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_0a33ba4e88",
+    "title_zh": "特朗普称美国政府没有证据表明黄仁勋有不合法行为",
+    "event_summary": "【特朗普称美国政府没有证据表明黄仁勋有不合法行为】财联社11月23日电，美国总统特朗普23日在社交媒体发文说，英伟达董事会让黄仁勋重新担任首席执行官一职是“正确且恰当的决定”。他表示，美国政府没有理由认为黄仁勋回归英伟达会对国家安全构成任何风险。美国司法部长已确认，美国政府没有证据表明其有任何不合法行为。 (新华社)",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "英伟达"
+    ],
+    "first_seen_at": "2026-11-23T15:12:43Z",
+    "hot_seen_at": null,
+    "published": "2026-11-23T14:40:39Z",
+    "primary_url": "https://www.cls.cn/detail/2542249",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "特朗普称美国政府没有证据表明黄仁勋有不合法行为",
+        "url": "https://www.cls.cn/detail/2542249",
+        "published": "2026-11-23T14:40:39Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_2e7ee16c30",
+    "title_zh": "美股纳指高开近7% 英伟达大涨33% 芯片股集体高开",
+    "event_summary": "【美股纳指高开近7% 英伟达大涨33%…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "英伟达"
+    ],
+    "first_seen_at": "2026-11-23T15:12:43Z",
+    "hot_seen_at": null,
+    "published": "2026-11-23T14:30:48Z",
+    "primary_url": "https://www.cls.cn/detail/2542229",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "财联社·电报",
+        "level": "L2",
+        "title": "美股纳指高开近7% 英伟达大涨33% 芯片股集体高开",
+        "url": "https://www.cls.cn/detail/2542229",
+        "published": "2026-11-23T14:30:48Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_89bcc345a3",
+    "title_zh": "突发！黄仁勋恢复英伟达 CEO 职位，董事会全票通过",
+    "event_summary": "黄仁勋回来了 #欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "英伟达"
+    ],
+    "first_seen_at": "2026-11-23T15:12:43Z",
+    "hot_seen_at": null,
+    "published": "2026-11-23T14:30:00Z",
+    "primary_url": "https://www.ifanr.com/1691096?utm_source=rss&utm_medium=rss&utm_campaign=",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "爱范儿",
+        "level": "L2",
+        "title": "突发！黄仁勋恢复英伟达 CEO 职位，董事会全票通过",
+        "url": "https://www.ifanr.com/1691096?utm_source=rss&utm_medium=rss&utm_campaign=",
+        "published": "2026-11-23T14:30:00Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_7c6f78cd75",
+    "title_zh": "黄仁勋： 很荣幸重返英伟达",
+    "event_summary": "黄仁勋表示：“我很荣幸重返英伟达，在新一轮工业革命开启之际，带领这家全球最重要的科技企业之一。我怀着极大的谦卑之心扛起这份责任，并重申我的承诺。感谢英伟达董事会在整个过程中审慎考量、给予信任。特别感谢哈维·琼斯作为董事会主席的担当，也感谢科莱特·克雷斯以及高管团队在此期间带领公司稳步前行。我由衷感谢全体员工、股东、行业同仁以及全球合作伙伴给予的鼎力支持。最重要的是，感谢家人的关爱与支持。我已经迫不及待重返工作岗位。”",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "英伟达"
+    ],
+    "first_seen_at": "2026-11-23T14:28:13Z",
+    "hot_seen_at": "2026-11-23T15:12:43Z",
+    "published": "2026-11-23T14:02:31Z",
+    "primary_url": "https://wallstreetcn.com/livenews/3204338",
+    "source_count": 4,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "黄仁勋：很荣幸重返英伟达，迫不及待想回去工作",
+        "url": "https://www.ithome.com/1/031/211.htm",
+        "published": "2026-11-23T14:18:34Z"
+      },
+      {
+        "source": "华尔街见闻·快讯",
+        "level": "L2",
+        "title": "黄仁勋： 很荣幸重返英伟达",
+        "url": "https://wallstreetcn.com/livenews/3204338",
+        "published": "2026-11-23T14:02:31Z"
+      },
+      {
+        "source": "百度热搜",
+        "level": "L3",
+        "title": "黄仁勋：很荣幸重返英伟达",
+        "url": "https://www.baidu.com/s?wd=%E9%BB%84%E4%BB%81%E5%8B%8B%EF%BC%9A%E5%BE%88%E8%8D%A3%E5%B9%B8%E9%87%8D%E8%BF%94%E8%8B%B1%E4%BC%9F%E8%BE%BE",
+        "published": "2026-11-23T15:12:43Z"
+      },
+      {
+        "source": "今日头条热榜",
+        "level": "L3",
+        "title": "黄仁勋：很荣幸回到英伟达",
+        "url": "https://www.toutiao.com/trending/7711369945560387135/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%225%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227711369945560387135%22%2C%22hot_board_impr_id%22%3A%22202611232311498E0204B731EF6AC4C032%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E9%BB%84%E4%BB%81%E5%8B%8B%EF%BC%9A%E5%BE%88%E8%8D%A3%E5%B9%B8%E5%9B%9E%E5%88%B0%E8%8B%B1%E4%BC%9F%E8%BE%BE%22%7D&rank=&style_id=40132&topic_id=7711369945560387135",
+        "published": "2026-11-23T15:12:43Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
     "id": "e_b0f6be2993",
     "title_zh": "英伟达董事会恢复黄仁勋CEO职务",
     "event_summary": "当地时间11月23日，英伟达公司发布声明称，公司董事会一致投票决定，即日起恢复黄仁勋担任公司总裁、首席执行官及董事会成员职务。",
@@ -215,34 +795,27 @@
     "needs_translation": false
   },
   {
-    "id": "e_7c6f78cd75",
-    "title_zh": "黄仁勋： 很荣幸重返英伟达",
-    "event_summary": "黄仁勋表示：“我很荣幸重返英伟达，在新一轮工业革命开启之际，带领这家全球最重要的科技企业之一。我怀着极大的谦卑之心扛起这份责任，并重申我的承诺。感谢英伟达董事会在整个过程中审慎考量、给予信任。特别感谢哈维·琼斯作为董事会主席的担当，也感谢科莱特·克雷斯以及高管团队在此期间带领公司稳步前行。我由衷感谢全体员工、股东、行业同仁以及全球合作伙伴给予的鼎力支持。最重要的是，感谢家人的关爱与支持。我已经迫不及待重返工作岗位。”",
-    "source_level": "L2",
+    "id": "e_b7024c07cb",
+    "title_zh": "一款运行在 DSH（DeepSeek Harness）中的工作区文件管理插件",
+    "event_summary": "一款运行在 DSH（DeepSeek Harness）中的工作区文件管理插件。左侧栏提供入口，可在中央面板浏览当前工作区的文件、预览与编辑文本，并进行基础的文件/文件夹增删改操作。 所有路由前缀 /api/dsh-file-manager/ ： 1.1 通过github地址安装： github.com/gougou1993/… 1.2…",
+    "source_level": "L3",
     "policy_stage": "不适用",
     "key_entities": [],
     "potential_impact": null,
     "topics": [
-      "英伟达"
+      "DeepSeek"
     ],
     "first_seen_at": "2026-11-23T14:28:13Z",
     "hot_seen_at": "2026-11-23T14:28:13Z",
-    "published": "2026-11-23T14:02:31Z",
-    "primary_url": "https://wallstreetcn.com/livenews/3204338",
-    "source_count": 2,
+    "published": "2026-11-23T14:28:13Z",
+    "primary_url": "https://juejin.cn/post/7710552727352950793",
+    "source_count": 1,
     "links": [
       {
-        "source": "华尔街见闻·快讯",
-        "level": "L2",
-        "title": "黄仁勋： 很荣幸重返英伟达",
-        "url": "https://wallstreetcn.com/livenews/3204338",
-        "published": "2026-11-23T14:02:31Z"
-      },
-      {
-        "source": "今日头条热榜",
+        "source": "掘金热榜",
         "level": "L3",
-        "title": "黄仁勋：很荣幸回到英伟达",
-        "url": "https://www.toutiao.com/trending/7711369945560387135/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%225%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227711369945560387135%22%2C%22hot_board_impr_id%22%3A%22202611232227146484625AB06EE2088D73%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E9%BB%84%E4%BB%81%E5%8B%8B%EF%BC%9A%E5%BE%88%E8%8D%A3%E5%B9%B8%E5%9B%9E%E5%88%B0%E8%8B%B1%E4%BC%9F%E8%BE%BE%22%7D&rank=&style_id=40132&topic_id=7711369945560387135",
+        "title": "一款运行在 DSH（DeepSeek Harness）中的工作区文件管理插件",
+        "url": "https://juejin.cn/post/7710552727352950793",
         "published": "2026-11-23T14:28:13Z"
       }
     ],
@@ -418,33 +991,6 @@
         "title": "Nvidia董事会恢复Jensen Huang总裁CEO及董事职务",
         "url": "https://nvidianews.nvidia.com/news/nvidia-board-reinstates-jensen-huang-as-president-ceo-and-board-director",
         "published": "2026-11-23T14:01:23Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_2a6672cb95",
-    "title_zh": "黄仁勋：很荣幸重返英伟达，迫不及待想回去工作",
-    "event_summary": "IT之家 11 月 23 日消息，今日英伟达宣布，即日起恢复黄仁勋（Jensen Huang）总裁兼首席执行官及董事会成员职务。英伟达表示，在与黄仁勋进行一系列讨论和会议后，董事会一致投票决定恢复其职务，董事会随后对黄仁勋的坦诚及其领导英伟达的能力表示满意。…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "英伟达"
-    ],
-    "first_seen_at": "2026-11-23T14:28:13Z",
-    "hot_seen_at": null,
-    "published": "2026-11-23T14:18:34Z",
-    "primary_url": "https://www.ithome.com/1/031/211.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "黄仁勋：很荣幸重返英伟达，迫不及待想回去工作",
-        "url": "https://www.ithome.com/1/031/211.htm",
-        "published": "2026-11-23T14:18:34Z"
       }
     ],
     "needs_translation": false
@@ -2902,33 +3448,6 @@
     "needs_translation": false
   },
   {
-    "id": "e_9b4a55165b",
-    "title_zh": "选择样式规范",
-    "event_summary": "Tool: Select Styling Specimens I got frustrated at how HTML <select> boxes default to looking different in different browsers, and are (I think) quite ugly in Chrome: So I had Claude Fable 5.2 build me this page…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "Claude"
-    ],
-    "first_seen_at": "2026-11-23T00:28:10Z",
-    "hot_seen_at": "2026-11-22T19:45:06Z",
-    "published": "2026-11-22T19:45:06Z",
-    "primary_url": "https://simonwillison.net/2026/Nov/22/select-styling/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "Simon Willison",
-        "level": "L3",
-        "title": "选择样式规范",
-        "url": "https://simonwillison.net/2026/Nov/22/select-styling/",
-        "published": "2026-11-22T19:45:06Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
     "id": "e_950a5c8717",
     "title_zh": "AI攻克黎曼猜想给人类好几个想不到",
     "event_summary": "北京时间11月22日，Lean与Mathlib社区声明阿尔珀格与AI大模型Claude证明黎曼猜想正确。此前11月20日阿尔珀格发文。作者指出，悬置167年的难题被AI超乎想象地攻克，AI贡献核心创造力使人类沦为旁观者。同日纯人类证明被AI查出硬伤，基础科学议程或向硅谷转移。",
@@ -2978,218 +3497,6 @@
         "title": "黎曼猜想真的被AI证明了吗",
         "url": "https://www.baidu.com/s?wd=%E9%BB%8E%E6%9B%BC%E7%8C%9C%E6%83%B3%E7%9C%9F%E7%9A%84%E8%A2%ABAI%E8%AF%81%E6%98%8E%E4%BA%86%E5%90%97",
         "published": "2026-11-22T20:41:38Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_28d6c29588",
-    "title_zh": "AI与人类数学家同日提出黎曼猜想证明",
-    "event_summary": "北京时间11月22日，媒体称Anthropic数学家与AI合作提出的黎曼猜想证明，与另一数学家独立完成的证明几乎同时公布。两份证明目前均未获数学界最终确认，正接受第三方检查。此前，黎曼猜想自1859年提出已困扰数学界167年。该事件反映出AI正改变数学发现的产生及确认过程。",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "Anthropic"
-    ],
-    "first_seen_at": "2026-11-22T20:41:38Z",
-    "hot_seen_at": "2026-11-22T20:41:38Z",
-    "published": "2026-11-22T20:41:38Z",
-    "primary_url": "https://www.baidu.com/s?wd=AI%E4%B8%8E%E4%BA%BA%E7%B1%BB%E6%95%B0%E5%AD%A6%E5%AE%B6%E5%90%8C%E6%97%A5%E6%8F%90%E5%87%BA%E9%BB%8E%E6%9B%BC%E7%8C%9C%E6%83%B3%E8%AF%81%E6%98%8E",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "百度热搜",
-        "level": "L3",
-        "title": "AI与人类数学家同日提出黎曼猜想证明",
-        "url": "https://www.baidu.com/s?wd=AI%E4%B8%8E%E4%BA%BA%E7%B1%BB%E6%95%B0%E5%AD%A6%E5%AE%B6%E5%90%8C%E6%97%A5%E6%8F%90%E5%87%BA%E9%BB%8E%E6%9B%BC%E7%8C%9C%E6%83%B3%E8%AF%81%E6%98%8E",
-        "published": "2026-11-22T20:41:38Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_9e661216f8",
-    "title_zh": "OpenAI首席科学家呼吁业界限制模型开发 首席执行官Altman表示赞同",
-    "event_summary": "【OpenAI首席科学家呼吁业界限制模型开发 首席执行官Altman表示赞同】财联社11月23日电，OpenAI首席科学家Pachocki提议，人工智能公司应同意对开发能力日益强大的模型设限，直到研究人员有更好的方法来理解和监控这些模型的行为。Pachocki警告称，最早到2027年，AI就可能加速自身进化，其速度可能超过研究人员提高监控和理解这项技术能力的速度。OpenAI首席执行官Sam…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "人工智能"
-    ],
-    "first_seen_at": "2026-11-22T20:41:38Z",
-    "hot_seen_at": null,
-    "published": "2026-11-22T20:22:17Z",
-    "primary_url": "https://www.cls.cn/detail/2541067",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "财联社·电报",
-        "level": "L2",
-        "title": "OpenAI首席科学家呼吁业界限制模型开发 首席执行官Altman表示赞同",
-        "url": "https://www.cls.cn/detail/2541067",
-        "published": "2026-11-22T20:22:17Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_a0e7584fa0",
-    "title_zh": "高盛“恐慌指数”逼近最大值：美股恐还有一波大规模抛售",
-    "event_summary": "【高盛“恐慌指数”逼近最大值：美股恐还有一波大规模抛售】财联社11月23日电，高盛交易部门表示，抛售潮已蔓延至所谓的系统性投资者，该行“恐慌指数”已升至9，最大值为10。这表明未来一周或出现另一波大规模抛售。该行的模型预测，在市场平稳的情况下，CTA可能会再抛售658亿美元股票；如果股市上涨，则可能抛售286亿美元股票；如果股市继续下跌，则可能再抛售高达806亿美元股票。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "美股"
-    ],
-    "first_seen_at": "2026-11-22T20:41:38Z",
-    "hot_seen_at": null,
-    "published": "2026-11-22T18:09:05Z",
-    "primary_url": "https://www.cls.cn/detail/2541048",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "财联社·电报",
-        "level": "L2",
-        "title": "高盛“恐慌指数”逼近最大值：美股恐还有一波大规模抛售",
-        "url": "https://www.cls.cn/detail/2541048",
-        "published": "2026-11-22T18:09:05Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_74f939e081",
-    "title_zh": "为什么数据中心处于大科技反弹的中心",
-    "event_summary": "Journalist Paris Marx unpacks his new book \"Hyperscale.\"",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-22T20:41:38Z",
-    "hot_seen_at": null,
-    "published": "2026-11-22T18:08:43Z",
-    "primary_url": "https://techcrunch.com/2026/11/22/why-data-centers-are-at-the-center-of-the-big-tech-backlash/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "TechCrunch AI",
-        "level": "L2",
-        "title": "为什么数据中心处于大科技反弹的中心",
-        "url": "https://techcrunch.com/2026/11/22/why-data-centers-are-at-the-center-of-the-big-tech-backlash/",
-        "published": "2026-11-22T18:08:43Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_265c68ec3a",
-    "title_zh": "《以撒的结合》开发者从 Repentance Plus 中移除 AI 音乐",
-    "event_summary": "The Binding of Isaac: Repentance Plus has spent the last few days getting review-bombed on Steam after it was discovered that a particular segment of the game used AI music. Reddit user ShweetsStuff discovered the…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-22T20:41:38Z",
-    "hot_seen_at": null,
-    "published": "2026-11-22T17:25:20Z",
-    "primary_url": "https://www.theverge.com/games/1039770/binding-of-isaac-ai-music",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "The Verge AI",
-        "level": "L2",
-        "title": "《以撒的结合》开发者从 Repentance Plus 中移除 AI 音乐",
-        "url": "https://www.theverge.com/games/1039770/binding-of-isaac-ai-music",
-        "published": "2026-11-22T17:25:20Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_10282854b0",
-    "title_zh": "财联社11月23日电，OpenAI表示，到2027年可能会出现预训练进展的重大突破。",
-    "event_summary": "财联社11月23日电，OpenAI表示，到2027年可能会出现预训练进展的重大突破。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "OpenAI"
-    ],
-    "first_seen_at": "2026-11-22T20:41:38Z",
-    "hot_seen_at": null,
-    "published": "2026-11-22T17:16:12Z",
-    "primary_url": "https://www.cls.cn/detail/2541057",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "财联社·电报",
-        "level": "L2",
-        "title": "财联社11月23日电，OpenAI表示，到2027年可能会出现预训练进展的重大突破。",
-        "url": "https://www.cls.cn/detail/2541057",
-        "published": "2026-11-22T17:16:12Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_835b035501",
-    "title_zh": "财联社11月23日电，OpenAI呼吁对与Perplexity相关的AI开发实施联合限制。",
-    "event_summary": "财联社11月23日电，OpenAI呼吁对与Perplexity相关的AI开发实施联合限制。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "OpenAI"
-    ],
-    "first_seen_at": "2026-11-22T20:41:38Z",
-    "hot_seen_at": null,
-    "published": "2026-11-22T17:08:42Z",
-    "primary_url": "https://www.cls.cn/detail/2541054",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "财联社·电报",
-        "level": "L2",
-        "title": "财联社11月23日电，OpenAI呼吁对与Perplexity相关的AI开发实施联合限制。",
-        "url": "https://www.cls.cn/detail/2541054",
-        "published": "2026-11-22T17:08:42Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_4f94a30d29",
-    "title_zh": "美财长贝森特警告美联储过度紧缩风险 指出金融体系出现脆弱迹象",
-    "event_summary": "【美财长贝森特警告美联储过度紧缩风险 指出金融体系出现脆弱迹象】财联社11月23日电，美国财政部长斯科特·贝森特警告称，美联储若针对最新通胀数据而过度收紧政策，则可能危及美国经济，并指出金融体系出现脆弱迹象。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "美联储"
-    ],
-    "first_seen_at": "2026-11-22T20:41:38Z",
-    "hot_seen_at": null,
-    "published": "2026-11-22T16:42:31Z",
-    "primary_url": "https://www.cls.cn/detail/2541052",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "财联社·电报",
-        "level": "L2",
-        "title": "美财长贝森特警告美联储过度紧缩风险 指出金融体系出现脆弱迹象",
-        "url": "https://www.cls.cn/detail/2541052",
-        "published": "2026-11-22T16:42:31Z"
       }
     ],
     "needs_translation": false
@@ -6602,301 +6909,6 @@
         "title": "英伟达董事会为何对黄仁勋态度转变？婚外情无关紧要，核心问题在于诚信",
         "url": "https://www.ithome.com/1/030/325.htm",
         "published": "2026-11-21T02:10:48Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_bdad53770a",
-    "title_zh": "财跃星辰发布金融智能体FinWork V1.0",
-    "event_summary": "【财跃星辰发布金融智能体FinWork V1.0】《科创板日报》21日讯，界面财联社旗下财跃星辰正式发布金融垂类办公智能体FinWork V1.0。该产品以AI桌面助手为入口，搭建覆盖个人、部门、产线的全员Agent能力底座，内置220余项金融Skill，3分钟可完成客户持仓分析，单条内容生成成本约3分钱、耗时8秒，配套全链路溯源与企业级安全权限管控。…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "智能体"
-    ],
-    "first_seen_at": "2026-11-21T03:09:05Z",
-    "hot_seen_at": null,
-    "published": "2026-11-21T02:06:14Z",
-    "primary_url": "https://www.cls.cn/detail/2540744",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "财联社·电报",
-        "level": "L2",
-        "title": "财跃星辰发布金融智能体FinWork V1.0",
-        "url": "https://www.cls.cn/detail/2540744",
-        "published": "2026-11-21T02:06:14Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_54ae3b6f14",
-    "title_zh": "近 200 万条请求揭开 AI 隐私漏洞：“零数据保留”也会泄密",
-    "event_summary": "IT之家 11 月 21 日消息，科技媒体 Ars Technica 今天（11 月 21 日）发布博文，报道称安全公司 Dragos 首席研究官 HD Moore 向多家 AI 服务商发送近 200 万条带有可追踪“诱饵”的请求， 发现 AI 服务链存在黑客窃取提示词、转售商泄露数据及未遵守隐私设置等问题。 研究人员故意把一批可追踪的“测试秘密”（并非从真实用户渠道收集）发给…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "提示词"
-    ],
-    "first_seen_at": "2026-11-21T03:09:05Z",
-    "hot_seen_at": null,
-    "published": "2026-11-21T02:03:24Z",
-    "primary_url": "https://www.ithome.com/1/030/322.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "近 200 万条请求揭开 AI 隐私漏洞：“零数据保留”也会泄密",
-        "url": "https://www.ithome.com/1/030/322.htm",
-        "published": "2026-11-21T02:03:24Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_5144e87165",
-    "title_zh": "黄仁勋下台后有人挖出英伟达 20 年前员工投诉记录，指控其威胁下属、发表色情言论",
-    "event_summary": "IT之家 11 月 21 日消息，彭博社今日报道称，一份 2007 年提交的加州诉讼文件显示，英伟达两名前员工曾对时任 CEO 黄仁勋的管理方式提出投诉，指控其存在辱骂、威胁员工以及发表色情言论等行为。 这些指控涉及大约二十年前的职场事件，近期随着黄仁勋寻求重返英伟达管理层而重新受到关注。 根据这份加州高等法院的诉讼文件，英伟达首任内部法律顾问斯蒂芬・佩蒂格鲁（Stephen…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "英伟达"
-    ],
-    "first_seen_at": "2026-11-21T03:09:05Z",
-    "hot_seen_at": null,
-    "published": "2026-11-21T01:33:53Z",
-    "primary_url": "https://www.ithome.com/1/030/316.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "黄仁勋下台后有人挖出英伟达 20 年前员工投诉记录，指控其威胁下属、发表色情言论",
-        "url": "https://www.ithome.com/1/030/316.htm",
-        "published": "2026-11-21T01:33:53Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_3eb4076fc2",
-    "title_zh": "Edge AI Daily 早报（11月21日）",
-    "event_summary": "苹果以Siri争夺系统级代理入口，OpenAI将ChatGPT改为多模块工作台，微软用USB4 RDMA聚合多机算力，谷歌直采HBM重构TPU供应链。亚洲股市创2020年3月以来最大单周跌幅，AI支出进入回报审计。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "AI + 算力"
-    ],
-    "first_seen_at": "2026-11-21T03:09:05Z",
-    "hot_seen_at": null,
-    "published": "2026-11-21T01:19:52Z",
-    "primary_url": "https://www.tmtpost.com/8213305.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "钛媒体",
-        "level": "L2",
-        "title": "Edge AI Daily 早报（11月21日）",
-        "url": "https://www.tmtpost.com/8213305.html",
-        "published": "2026-11-21T01:19:52Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_5b22035fe4",
-    "title_zh": "“几乎所有人将永久失业”：Anthropic 研究员预测 2027 年底 AI 在几乎所有领域超越顶尖专家",
-    "event_summary": "IT之家 11 月 21 日消息，11 月 15 日在接受 Palisade Research 采访时，Anthropic 公司技术团队成员 Tao Lin 预测到 2027 年年底，在编程、电影制作等几乎所有领域， 人工智能（AI）在发展大约还有 1.3 年后，可以媲美或超过世界顶尖人类专家的水平。 IT之家查询公开资料，Tao Lin 在 Anthropic…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "人工智能"
-    ],
-    "first_seen_at": "2026-11-21T03:09:05Z",
-    "hot_seen_at": null,
-    "published": "2026-11-21T00:53:29Z",
-    "primary_url": "https://www.ithome.com/1/030/308.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "“几乎所有人将永久失业”：Anthropic 研究员预测 2027 年底 AI 在几乎所有领域超越顶尖专家",
-        "url": "https://www.ithome.com/1/030/308.htm",
-        "published": "2026-11-21T00:53:29Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_7164dc2889",
-    "title_zh": "现价近 7000 欧元的英伟达 RTX 5090 FE 显卡送修后被销毁，平台只愿退原价 2369 欧元",
-    "event_summary": "IT之家 11 月 21 日消息，Reddit 用户 @xw1y 昨日发帖称，自己送修的一张 NVIDIA GeForce RTX 5090 Founders Edition 显卡，疑似在欧洲零售商 Proshop 的维修合作方手中被销毁或丢弃。 据该用户披露，这张 RTX 5090 Founders Edition 32GB 于 2025 年 2 月以为 2,369 欧元 （IT之家注：现汇率约合 17,394 元人民币）…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "英伟达"
-    ],
-    "first_seen_at": "2026-11-21T03:09:05Z",
-    "hot_seen_at": null,
-    "published": "2026-11-21T00:44:56Z",
-    "primary_url": "https://www.ithome.com/1/030/307.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "现价近 7000 欧元的英伟达 RTX 5090 FE 显卡送修后被销毁，平台只愿退原价 2369 欧元",
-        "url": "https://www.ithome.com/1/030/307.htm",
-        "published": "2026-11-21T00:44:56Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_11f79f6f88",
-    "title_zh": "限制移动操作系统平台上的 AI 代理捕获数据",
-    "event_summary": "Meredith Whittaker on 20 Nov 2026 Privacy is our mission; it’s why we exist, and we do everything we can to protect it. This means that we are restricting the latest AI agents built into mobile…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "AI + Agent"
-    ],
-    "first_seen_at": "2026-11-21T03:09:05Z",
-    "hot_seen_at": "2026-11-20T09:42:16Z",
-    "published": "2026-11-20T09:42:16Z",
-    "primary_url": "https://signal.org/blog/protecting-your-privacy/",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "Hacker News",
-        "level": "L3",
-        "title": "限制移动操作系统平台上的 AI 代理捕获数据",
-        "url": "https://signal.org/blog/protecting-your-privacy/",
-        "published": "2026-11-20T09:42:16Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_3a75a0678c",
-    "title_zh": "两部门关于公布首批高标准数字园区建设对象名单的通知",
-    "event_summary": "工业和信息化部办公厅 商务部办公厅关于公布首批高标准数字园区建设对象名单的通知 工信厅联规函〔2026〕547号 各省、自治区、直辖市及计划单列市、新疆生产建设兵团工业和信息化主管部门、商务主管部门、国家高新区主管部门： 为落实《制造业数字化转型行动方案》部署，根据《工业和信息化部办公厅…",
-    "source_level": "L1",
-    "policy_stage": "已发布",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "信息化"
-    ],
-    "first_seen_at": "2026-11-21T03:09:05Z",
-    "hot_seen_at": null,
-    "published": "2026-11-20T01:49:50Z",
-    "primary_url": "https://www.miit.gov.cn/zwgk/zcwj/wjfb/tz/art/2026/art_d2059f428fed46b0b24903f6d5008bf4.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "工信部·政策文件",
-        "level": "L1",
-        "title": "两部门关于公布首批高标准数字园区建设对象名单的通知",
-        "url": "https://www.miit.gov.cn/zwgk/zcwj/wjfb/tz/art/2026/art_d2059f428fed46b0b24903f6d5008bf4.html",
-        "published": "2026-11-20T01:49:50Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_fd343645b3",
-    "title_zh": "黎曼猜想被AI证明？多位数学家回应",
-    "event_summary": "北京时间11月21日，Anthropic数学家阿尔珀格宣称与Claude合作找到黎曼猜想证明方法，并公开约1700万行Lean代码。陶哲轩等数学家正尝试验证其正确性。此前，他于当地时间11月15日完成关键工作。目前该成果仍有待检验。",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "Anthropic"
-    ],
-    "first_seen_at": "2026-11-21T00:57:52Z",
-    "hot_seen_at": "2026-11-21T00:57:52Z",
-    "published": "2026-11-21T00:57:52Z",
-    "primary_url": "https://www.baidu.com/s?wd=%E9%BB%8E%E6%9B%BC%E7%8C%9C%E6%83%B3%E8%A2%ABAI%E8%AF%81%E6%98%8E%EF%BC%9F%E5%A4%9A%E4%BD%8D%E6%95%B0%E5%AD%A6%E5%AE%B6%E5%9B%9E%E5%BA%94",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "百度热搜",
-        "level": "L3",
-        "title": "黎曼猜想被AI证明？多位数学家回应",
-        "url": "https://www.baidu.com/s?wd=%E9%BB%8E%E6%9B%BC%E7%8C%9C%E6%83%B3%E8%A2%ABAI%E8%AF%81%E6%98%8E%EF%BC%9F%E5%A4%9A%E4%BD%8D%E6%95%B0%E5%AD%A6%E5%AE%B6%E5%9B%9E%E5%BA%94",
-        "published": "2026-11-21T00:57:52Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_e04b880d0b",
-    "title_zh": "AI疑证明黎曼猜想 数学家高兴不起来",
-    "event_summary": "11月20日，Anthropic数学家称借助Claude完成黎曼猜想证明，相关代码共1700万行，该猜想已困扰数学界167年，目前证明尚未经过独立同行核验。此事引发学界担忧，学者质疑AI证明的可靠性、署名权问题，呼吁建立AI参与数学研究的新规范。",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "Anthropic"
-    ],
-    "first_seen_at": "2026-11-21T00:57:52Z",
-    "hot_seen_at": "2026-11-21T00:57:52Z",
-    "published": "2026-11-21T00:57:52Z",
-    "primary_url": "https://www.baidu.com/s?wd=AI%E7%96%91%E8%AF%81%E6%98%8E%E9%BB%8E%E6%9B%BC%E7%8C%9C%E6%83%B3+%E6%95%B0%E5%AD%A6%E5%AE%B6%E9%AB%98%E5%85%B4%E4%B8%8D%E8%B5%B7%E6%9D%A5",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "百度热搜",
-        "level": "L3",
-        "title": "AI疑证明黎曼猜想 数学家高兴不起来",
-        "url": "https://www.baidu.com/s?wd=AI%E7%96%91%E8%AF%81%E6%98%8E%E9%BB%8E%E6%9B%BC%E7%8C%9C%E6%83%B3+%E6%95%B0%E5%AD%A6%E5%AE%B6%E9%AB%98%E5%85%B4%E4%B8%8D%E8%B5%B7%E6%9D%A5",
-        "published": "2026-11-21T00:57:52Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_b988a54353",
-    "title_zh": "韩国首次用「紧急灾难通知」让全国手机响铃 10.5 秒防高考作弊，此举合理吗？",
-    "event_summary": "IT之家 11 月 19 日消息，据韩联社报道，当地时间 11 月 19 日上午 8 时 30 分，韩国 2027 学年度大学修学能力考试（韩国高考）开考前，全国手机同时收到紧急灾难通知短信，警报以最大音量鸣响 10.5 秒。 据韩国教育部与行政安全部介绍，此次短信内容为“2027 学年度大学修学能力考试即将开始，请协助公平的考试运营。[教育部]”，音量至少为 40 分贝。报道称，这是韩国首次为防范考试作弊而发送危急灾难短信。 报道提到，此举针对近期利用 AI…",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-21T00:57:52Z",
-    "hot_seen_at": "2026-11-21T00:57:52Z",
-    "published": "2026-11-21T00:57:52Z",
-    "primary_url": "https://www.zhihu.com/question/2106706684672471150",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "知乎热榜",
-        "level": "L3",
-        "title": "韩国首次用「紧急灾难通知」让全国手机响铃 10.5 秒防高考作弊，此举合理吗？",
-        "url": "https://www.zhihu.com/question/2106706684672471150",
-        "published": "2026-11-21T00:57:52Z"
       }
     ],
     "needs_translation": false
