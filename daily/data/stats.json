@@ -1,14 +1,14 @@
 {
-  "run_at": "2026-11-24T04:26:47Z",
+  "run_at": "2026-11-24T14:46:40Z",
   "stages": {
     "sources": 34,
-    "sources_ok": 29,
-    "raw": 586,
-    "after_keywords": 36,
-    "merged": 636,
+    "sources_ok": 30,
+    "raw": 622,
+    "after_keywords": 61,
+    "merged": 661,
     "written": 600,
-    "body_filled": 3,
-    "new_today": 102
+    "body_filled": 12,
+    "new_today": 150
   },
   "sources": [
     {
@@ -18,7 +18,7 @@
       "ok": false,
       "raw": 0,
       "kept": 0,
-      "ms": 105716,
+      "ms": 62820,
       "mirror": "",
       "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/zhengce/zuixin :: HTTP Error 503: Service Unavailable"
     },
@@ -29,7 +29,7 @@
       "ok": false,
       "raw": 0,
       "kept": 0,
-      "ms": 106770,
+      "ms": 63177,
       "mirror": "",
       "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/yjzj :: HTTP Error 503: Service Unavailable"
     },
@@ -37,12 +37,12 @@
       "id": "miit-zcwj",
       "name": "工信部·政策文件",
       "level": "L1",
-      "ok": false,
-      "raw": 0,
-      "kept": 0,
-      "ms": 107472,
-      "mirror": "",
-      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/zcwj :: HTTP Error 503: Service Unavailable"
+      "ok": true,
+      "raw": 10,
+      "kept": 2,
+      "ms": 52161,
+      "mirror": "https://hub.slarker.me",
+      "error": ""
     },
     {
       "id": "mofcom-home",
@@ -51,7 +51,7 @@
       "ok": true,
       "raw": 7,
       "kept": 0,
-      "ms": 1626,
+      "ms": 461,
       "mirror": "",
       "error": ""
     },
@@ -62,7 +62,7 @@
       "ok": true,
       "raw": 16,
       "kept": 0,
-      "ms": 1392,
+      "ms": 1597,
       "mirror": "",
       "error": ""
     },
@@ -72,8 +72,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 3,
-      "ms": 974,
+      "kept": 5,
+      "ms": 1935,
       "mirror": "https://rsshub.rssforever.com",
       "error": ""
     },
@@ -83,8 +83,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 0,
-      "ms": 26,
+      "kept": 1,
+      "ms": 103,
       "mirror": "",
       "error": ""
     },
@@ -94,8 +94,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 3,
-      "ms": 219,
+      "kept": 6,
+      "ms": 134,
       "mirror": "https://hub.slarker.me",
       "error": ""
     },
@@ -106,7 +106,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 116,
+      "ms": 90,
       "mirror": "",
       "error": ""
     },
@@ -116,8 +116,8 @@
       "level": "L2",
       "ok": true,
       "raw": 30,
-      "kept": 0,
-      "ms": 1879,
+      "kept": 2,
+      "ms": 2916,
       "mirror": "",
       "error": ""
     },
@@ -128,7 +128,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 226,
+      "ms": 197,
       "mirror": "",
       "error": ""
     },
@@ -138,8 +138,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 1,
-      "ms": 1100,
+      "kept": 4,
+      "ms": 1108,
       "mirror": "",
       "error": ""
     },
@@ -150,7 +150,7 @@
       "ok": false,
       "raw": 0,
       "kept": 0,
-      "ms": 1451,
+      "ms": 1168,
       "mirror": "",
       "error": "HTTP Error 404: Not Found"
     },
@@ -160,8 +160,8 @@
       "level": "L2",
       "ok": true,
       "raw": 40,
-      "kept": 10,
-      "ms": 514,
+      "kept": 9,
+      "ms": 355,
       "mirror": "",
       "error": ""
     },
@@ -171,8 +171,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 3,
-      "ms": 2871,
+      "kept": 4,
+      "ms": 2941,
       "mirror": "",
       "error": ""
     },
@@ -183,7 +183,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 98,
+      "ms": 113,
       "mirror": "",
       "error": ""
     },
@@ -193,8 +193,8 @@
       "level": "L2",
       "ok": true,
       "raw": 10,
-      "kept": 0,
-      "ms": 111,
+      "kept": 1,
+      "ms": 61,
       "mirror": "",
       "error": ""
     },
@@ -205,7 +205,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 375,
+      "ms": 249,
       "mirror": "",
       "error": ""
     },
@@ -216,7 +216,7 @@
       "ok": true,
       "raw": 10,
       "kept": 4,
-      "ms": 1425,
+      "ms": 1605,
       "mirror": "",
       "error": ""
     },
@@ -227,7 +227,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 693,
+      "ms": 1596,
       "mirror": "",
       "error": ""
     },
@@ -238,7 +238,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 1321,
+      "ms": 1017,
       "mirror": "",
       "error": ""
     },
@@ -249,7 +249,7 @@
       "ok": true,
       "raw": 20,
       "kept": 2,
-      "ms": 137,
+      "ms": 45,
       "mirror": "",
       "error": ""
     },
@@ -260,7 +260,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 1771,
+      "ms": 521,
       "mirror": "",
       "error": ""
     },
@@ -269,9 +269,9 @@
       "name": "钛媒体",
       "level": "L2",
       "ok": true,
-      "raw": 19,
-      "kept": 2,
-      "ms": 3609,
+      "raw": 20,
+      "kept": 8,
+      "ms": 2244,
       "mirror": "",
       "error": ""
     },
@@ -282,7 +282,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 93,
+      "ms": 33,
       "mirror": "",
       "error": ""
     },
@@ -290,23 +290,23 @@
       "id": "wallstreetcn-live",
       "name": "华尔街见闻·快讯",
       "level": "L2",
-      "ok": true,
-      "raw": 30,
-      "kept": 4,
-      "ms": 1763,
+      "ok": false,
+      "raw": 0,
+      "kept": 0,
+      "ms": 256,
       "mirror": "",
-      "error": ""
+      "error": "GET failed after 1 attempts: https://api-one.wallstcn.com/apiv1/content/lives?channel=global-channel&limit=30 :: <urlopen error [Errno -2] Name or service not known>"
     },
     {
       "id": "baidu-top",
       "name": "百度热搜",
       "level": "L3",
-      "ok": false,
-      "raw": 0,
-      "kept": 0,
-      "ms": 120658,
-      "mirror": "",
-      "error": "all mirrors failed :: GET failed after 1 attempts: https://hub.slarker.me/baidu/top :: HTTP Error 504: Gateway Time-out"
+      "ok": true,
+      "raw": 50,
+      "kept": 3,
+      "ms": 542,
+      "mirror": "https://rsshub.rssforever.com",
+      "error": ""
     },
     {
       "id": "github-trending",
@@ -315,7 +315,7 @@
       "ok": true,
       "raw": 16,
       "kept": 0,
-      "ms": 1482,
+      "ms": 1773,
       "mirror": "",
       "error": ""
     },
@@ -324,9 +324,9 @@
       "name": "Hacker News",
       "level": "L3",
       "ok": true,
-      "raw": 13,
-      "kept": 0,
-      "ms": 263,
+      "raw": 18,
+      "kept": 2,
+      "ms": 355,
       "mirror": "",
       "error": ""
     },
@@ -336,8 +336,8 @@
       "level": "L3",
       "ok": true,
       "raw": 50,
-      "kept": 0,
-      "ms": 1072,
+      "kept": 5,
+      "ms": 930,
       "mirror": "",
       "error": ""
     },
@@ -348,7 +348,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 128,
+      "ms": 338,
       "mirror": "",
       "error": ""
     },
@@ -358,8 +358,8 @@
       "level": "L3",
       "ok": true,
       "raw": 20,
-      "kept": 1,
-      "ms": 100,
+      "kept": 2,
+      "ms": 124,
       "mirror": "",
       "error": ""
     },
@@ -369,8 +369,8 @@
       "level": "L3",
       "ok": true,
       "raw": 50,
-      "kept": 2,
-      "ms": 584,
+      "kept": 0,
+      "ms": 628,
       "mirror": "",
       "error": ""
     },
@@ -381,17 +381,17 @@
       "ok": true,
       "raw": 30,
       "kept": 1,
-      "ms": 1166,
+      "ms": 638,
       "mirror": "",
       "error": ""
     }
   ],
   "events": {
-    "run_at": "2026-11-24T04:27:04Z",
+    "run_at": "2026-11-24T14:46:46Z",
     "items": 600,
     "events": 260,
-    "translated": 6,
-    "new_today": 94,
+    "translated": 5,
+    "new_today": 141,
     "model": "glm-4.7-flash"
   }
 }
