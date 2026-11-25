@@ -1,26 +1,26 @@
 {
-  "run_at": "2026-11-25T11:11:18Z",
+  "run_at": "2026-11-25T15:15:05Z",
   "stages": {
     "sources": 34,
     "sources_ok": 29,
-    "raw": 608,
-    "after_keywords": 67,
-    "merged": 667,
+    "raw": 611,
+    "after_keywords": 47,
+    "merged": 647,
     "written": 600,
-    "body_filled": 12,
-    "new_today": 120
+    "body_filled": 4,
+    "new_today": 150
   },
   "sources": [
     {
       "id": "gov-zuixin",
       "name": "国务院·最新政策",
       "level": "L1",
-      "ok": true,
-      "raw": 20,
+      "ok": false,
+      "raw": 0,
       "kept": 0,
-      "ms": 1766,
-      "mirror": "https://hub.slarker.me",
-      "error": ""
+      "ms": 62621,
+      "mirror": "",
+      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/zhengce/zuixin :: HTTP Error 503: Service Unavailable"
     },
     {
       "id": "miit-yjzj",
@@ -29,7 +29,7 @@
       "ok": false,
       "raw": 0,
       "kept": 0,
-      "ms": 61126,
+      "ms": 63368,
       "mirror": "",
       "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/yjzj :: HTTP Error 503: Service Unavailable"
     },
@@ -40,7 +40,7 @@
       "ok": false,
       "raw": 0,
       "kept": 0,
-      "ms": 66396,
+      "ms": 66434,
       "mirror": "",
       "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/gov/miit/zcwj :: HTTP Error 503: Service Unavailable"
     },
@@ -51,7 +51,7 @@
       "ok": true,
       "raw": 8,
       "kept": 0,
-      "ms": 667,
+      "ms": 653,
       "mirror": "",
       "error": ""
     },
@@ -62,7 +62,7 @@
       "ok": true,
       "raw": 16,
       "kept": 0,
-      "ms": 1424,
+      "ms": 1230,
       "mirror": "",
       "error": ""
     },
@@ -72,8 +72,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 2,
-      "ms": 909,
+      "kept": 4,
+      "ms": 585,
       "mirror": "https://rsshub.rssforever.com",
       "error": ""
     },
@@ -83,8 +83,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 0,
-      "ms": 154,
+      "kept": 1,
+      "ms": 134,
       "mirror": "",
       "error": ""
     },
@@ -92,12 +92,12 @@
       "id": "cls-telegraph",
       "name": "财联社·电报",
       "level": "L2",
-      "ok": false,
-      "raw": 0,
-      "kept": 0,
-      "ms": 66946,
-      "mirror": "",
-      "error": "all mirrors failed :: GET failed after 1 attempts: https://rsshub.rssforever.com/cls/telegraph :: HTTP Error 503: Service Unavailable"
+      "ok": true,
+      "raw": 20,
+      "kept": 2,
+      "ms": 216,
+      "mirror": "https://hub.slarker.me",
+      "error": ""
     },
     {
       "id": "deepmind",
@@ -106,7 +106,7 @@
       "ok": true,
       "raw": 15,
       "kept": 1,
-      "ms": 163,
+      "ms": 194,
       "mirror": "",
       "error": ""
     },
@@ -116,8 +116,8 @@
       "level": "L2",
       "ok": true,
       "raw": 30,
-      "kept": 3,
-      "ms": 4358,
+      "kept": 0,
+      "ms": 10696,
       "mirror": "",
       "error": ""
     },
@@ -128,7 +128,7 @@
       "ok": true,
       "raw": 15,
       "kept": 1,
-      "ms": 249,
+      "ms": 233,
       "mirror": "",
       "error": ""
     },
@@ -138,8 +138,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 1,
-      "ms": 1407,
+      "kept": 0,
+      "ms": 1084,
       "mirror": "",
       "error": ""
     },
@@ -150,7 +150,7 @@
       "ok": false,
       "raw": 0,
       "kept": 0,
-      "ms": 1346,
+      "ms": 1091,
       "mirror": "",
       "error": "HTTP Error 404: Not Found"
     },
@@ -160,8 +160,8 @@
       "level": "L2",
       "ok": true,
       "raw": 40,
-      "kept": 11,
-      "ms": 479,
+      "kept": 4,
+      "ms": 473,
       "mirror": "",
       "error": ""
     },
@@ -171,8 +171,8 @@
       "level": "L2",
       "ok": true,
       "raw": 20,
-      "kept": 4,
-      "ms": 3100,
+      "kept": 5,
+      "ms": 3052,
       "mirror": "",
       "error": ""
     },
@@ -183,7 +183,7 @@
       "ok": true,
       "raw": 15,
       "kept": 1,
-      "ms": 122,
+      "ms": 99,
       "mirror": "",
       "error": ""
     },
@@ -194,7 +194,7 @@
       "ok": true,
       "raw": 10,
       "kept": 2,
-      "ms": 114,
+      "ms": 149,
       "mirror": "",
       "error": ""
     },
@@ -205,7 +205,7 @@
       "ok": true,
       "raw": 15,
       "kept": 1,
-      "ms": 264,
+      "ms": 252,
       "mirror": "",
       "error": ""
     },
@@ -215,8 +215,8 @@
       "level": "L2",
       "ok": true,
       "raw": 10,
-      "kept": 10,
-      "ms": 1793,
+      "kept": 1,
+      "ms": 1345,
       "mirror": "",
       "error": ""
     },
@@ -227,7 +227,7 @@
       "ok": true,
       "raw": 15,
       "kept": 0,
-      "ms": 2399,
+      "ms": 954,
       "mirror": "",
       "error": ""
     },
@@ -237,8 +237,8 @@
       "level": "L2",
       "ok": true,
       "raw": 10,
-      "kept": 1,
-      "ms": 1169,
+      "kept": 0,
+      "ms": 1026,
       "mirror": "",
       "error": ""
     },
@@ -249,7 +249,7 @@
       "ok": true,
       "raw": 20,
       "kept": 7,
-      "ms": 91,
+      "ms": 47,
       "mirror": "",
       "error": ""
     },
@@ -260,7 +260,7 @@
       "ok": true,
       "raw": 20,
       "kept": 0,
-      "ms": 605,
+      "ms": 4001,
       "mirror": "",
       "error": ""
     },
@@ -269,9 +269,9 @@
       "name": "钛媒体",
       "level": "L2",
       "ok": true,
-      "raw": 17,
-      "kept": 3,
-      "ms": 1795,
+      "raw": 16,
+      "kept": 1,
+      "ms": 2033,
       "mirror": "",
       "error": ""
     },
@@ -281,8 +281,8 @@
       "level": "L2",
       "ok": true,
       "raw": 10,
-      "kept": 3,
-      "ms": 119,
+      "kept": 5,
+      "ms": 73,
       "mirror": "",
       "error": ""
     },
@@ -293,7 +293,7 @@
       "ok": false,
       "raw": 0,
       "kept": 0,
-      "ms": 82,
+      "ms": 100,
       "mirror": "",
       "error": "GET failed after 1 attempts: https://api-one.wallstcn.com/apiv1/content/lives?channel=global-channel&limit=30 :: <urlopen error [Errno -2] Name or service not known>"
     },
@@ -303,8 +303,8 @@
       "level": "L3",
       "ok": true,
       "raw": 50,
-      "kept": 4,
-      "ms": 1359,
+      "kept": 2,
+      "ms": 2812,
       "mirror": "https://rsshub.rssforever.com",
       "error": ""
     },
@@ -315,7 +315,7 @@
       "ok": true,
       "raw": 16,
       "kept": 0,
-      "ms": 1293,
+      "ms": 1757,
       "mirror": "",
       "error": ""
     },
@@ -324,9 +324,9 @@
       "name": "Hacker News",
       "level": "L3",
       "ok": true,
-      "raw": 16,
-      "kept": 3,
-      "ms": 1306,
+      "raw": 20,
+      "kept": 1,
+      "ms": 1449,
       "mirror": "",
       "error": ""
     },
@@ -336,8 +336,8 @@
       "level": "L3",
       "ok": true,
       "raw": 50,
-      "kept": 5,
-      "ms": 1282,
+      "kept": 1,
+      "ms": 1103,
       "mirror": "",
       "error": ""
     },
@@ -348,7 +348,7 @@
       "ok": true,
       "raw": 10,
       "kept": 0,
-      "ms": 99,
+      "ms": 152,
       "mirror": "",
       "error": ""
     },
@@ -358,8 +358,8 @@
       "level": "L3",
       "ok": true,
       "raw": 20,
-      "kept": 1,
-      "ms": 133,
+      "kept": 2,
+      "ms": 119,
       "mirror": "",
       "error": ""
     },
@@ -369,8 +369,8 @@
       "level": "L3",
       "ok": true,
       "raw": 50,
-      "kept": 0,
-      "ms": 1200,
+      "kept": 1,
+      "ms": 614,
       "mirror": "",
       "error": ""
     },
@@ -380,18 +380,18 @@
       "level": "L3",
       "ok": true,
       "raw": 30,
-      "kept": 3,
-      "ms": 1296,
+      "kept": 4,
+      "ms": 1825,
       "mirror": "",
       "error": ""
     }
   ],
   "events": {
-    "run_at": "2026-11-25T11:13:52Z",
+    "run_at": "2026-11-25T15:17:33Z",
     "items": 600,
     "events": 260,
-    "translated": 0,
-    "new_today": 119,
+    "translated": 11,
+    "new_today": 148,
     "model": "glm-4.7-flash"
   }
 }
