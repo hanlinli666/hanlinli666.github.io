@@ -1,5 +1,209 @@
 [
   {
+    "title": "🧠2026主流知识库技术对比：RAG、MD+grep、LLM Wiki优劣与落地场景",
+    "link": "https://juejin.cn/post/7712561672912896027",
+    "published": "2026-11-27T02:48:12Z",
+    "source": "掘金热榜",
+    "summary": "做过大模型落地、搭过私有知识库的朋友，大概率都踩过 RAG的坑 。 近些年，私有文档问答、企业知识落地几乎是RAG的天下。 向量分块 -> 建索引 -> 检索召回 -> 重排序 , 整套工程链路看似完备，但只要上过生产环境，就会发现一堆实打实的硬伤：部署复杂、运维成本高、高并发下检索延迟明显，最关键的是 RAG只做“临时检索拼接”，所有知识用完就丢，无法沉淀、无法迭代 。…",
+    "categories": [],
+    "author": null,
+    "level": "L3",
+    "source_id": "juejin-hot",
+    "id": "https://juejin.cn/post/7712561672912896027",
+    "day": "2026-11-27",
+    "matched": [
+      "/\\bLLMs?\\b/"
+    ],
+    "first_seen": "2026-11-27T02:48:12Z"
+  },
+  {
+    "title": "我写的 12 个 AI Skill，三个月后 8 个在吃空饷",
+    "link": "https://juejin.cn/post/7712307777096007720",
+    "published": "2026-11-27T02:48:12Z",
+    "source": "掘金热榜",
+    "summary": "8 月底我写过一篇给 AI 排 8 个岗位的文章，那 8 个岗位用的都是现成 Skill，装好、配好触发词就能上岗。 真正费劲的是另一批：我自己写的 Skill。 从 8 月底到现在，我陆陆续续写了 12 个，每个都配一份说明书，写清楚它管什么、什么话术触发、交付标准是什么。昨天盘了一遍，只有 4 个还活着。剩下 8 个的说明书停在 9 月，最久的一个停了 90 天。…",
+    "categories": [],
+    "author": null,
+    "level": "L3",
+    "source_id": "juejin-hot",
+    "id": "https://juejin.cn/post/7712307777096007720",
+    "day": "2026-11-27",
+    "matched": [
+      "/\\bAI\\b/"
+    ],
+    "first_seen": "2026-11-27T02:48:12Z"
+  },
+  {
+    "title": "我用 Claude Code 一句话渲出 61 秒竖屏中文动画，不花视频生成费",
+    "link": "https://juejin.cn/post/7711660238038532139",
+    "published": "2026-11-27T02:48:12Z",
+    "source": "掘金热榜",
+    "summary": "用 AI 视频生成器做动画短片，每次出来都有出入，还按量收费。这次我用的是个人开发者 mromidev 做的开源技能 claude-animated-shorts，它在自己电脑上逐帧渲染，说一句话就能出一条竖屏动画短片。它默认只做英文，我把它改成了中文配音，做出了一条《红色回形针换房子》，61.47 秒，竖屏 1440×2560。 Claude Code 的额度照烧，省的只是视频生成那部分。…",
+    "categories": [],
+    "author": null,
+    "level": "L3",
+    "source_id": "juejin-hot",
+    "id": "https://juejin.cn/post/7711660238038532139",
+    "day": "2026-11-27",
+    "matched": [
+      "Claude"
+    ],
+    "first_seen": "2026-11-27T02:48:12Z"
+  },
+  {
+    "title": "失去关税优势东南亚工厂何去何从",
+    "link": "https://www.toutiao.com/trending/7711982882511912970/?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%226%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227711982882511912970%22%2C%22hot_board_impr_id%22%3A%2220261127104713E0E6185EEB209A2719BA%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%A4%B1%E5%8E%BB%E5%85%B3%E7%A8%8E%E4%BC%98%E5%8A%BF%E4%B8%9C%E5%8D%97%E4%BA%9A%E5%B7%A5%E5%8E%82%E4%BD%95%E5%8E%BB%E4%BD%95%E4%BB%8E%22%7D&rank=&style_id=40132&topic_id=7711982882511912970",
+    "published": "2026-11-27T02:48:12Z",
+    "source": "今日头条热榜",
+    "summary": "",
+    "categories": [],
+    "author": null,
+    "level": "L3",
+    "source_id": "toutiao-hot",
+    "id": "https://toutiao.com/trending/7711982882511912970?category_name=topic_innerflow&event_type=hot_board&log_pb=%7B%22category_name%22%3A%22topic_innerflow%22%2C%22cluster_type%22%3A%226%22%2C%22enter_from%22%3A%22click_category%22%2C%22entrance_hotspot%22%3A%22outside%22%2C%22event_type%22%3A%22hot_board%22%2C%22hot_board_cluster_id%22%3A%227711982882511912970%22%2C%22hot_board_impr_id%22%3A%2220261127104713E0E6185EEB209A2719BA%22%2C%22jump_page%22%3A%22hot_board_page%22%2C%22location%22%3A%22news_hot_card%22%2C%22page_location%22%3A%22hot_board_page%22%2C%22source%22%3A%22trending_tab%22%2C%22style_id%22%3A%2240132%22%2C%22title%22%3A%22%E5%A4%B1%E5%8E%BB%E5%85%B3%E7%A8%8E%E4%BC%98%E5%8A%BF%E4%B8%9C%E5%8D%97%E4%BA%9A%E5%B7%A5%E5%8E%82%E4%BD%95%E5%8E%BB%E4%BD%95%E4%BB%8E%22%7D&rank=&style_id=40132&topic_id=7711982882511912970",
+    "day": "2026-11-27",
+    "matched": [
+      "关税"
+    ],
+    "first_seen": "2026-11-27T02:48:12Z"
+  },
+  {
+    "title": "普京：俄需更新2036年前人工智能国家战略",
+    "link": "https://www.36kr.com/newsflashes/4087395152214402",
+    "published": "2026-11-27T02:33:21Z",
+    "source": "36氪·快讯",
+    "summary": "俄罗斯总统普京11月26日在莫斯科表示，为争取在人工智能（AI）研发方面获得领先地位，俄需更新相关国家战略；在支持开发俄自主AI模型方面，则需落实四项要求。据俄总统网站26日发布的消息，普京当天在与哈萨克斯坦总统托卡耶夫一同出席“人工智能世界之旅”大会时发表讲话说，若想在AI研发方面取得领先地位，就要最大限度实现人与自主系统协同运作，并为此重构管理和生产流程。依据这一思路，俄需更新“2036年前俄人工智能国家战略”，审批相关国家行动计划…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "36kr-flash",
+    "id": "https://36kr.com/newsflashes/4087395152214402",
+    "day": "2026-11-27",
+    "matched": [
+      "人工智能"
+    ],
+    "first_seen": "2026-11-27T02:48:12Z"
+  },
+  {
+    "title": "月之暗面宣布Kimi科研支持计划开放申请",
+    "link": "https://www.36kr.com/newsflashes/4087393174141577",
+    "published": "2026-11-27T02:31:35Z",
+    "source": "36氪·快讯",
+    "summary": "36氪获悉，月之暗面宣布，Kimi科研支持计划开放申请，首期将面向自然科学、工程学及相关交叉学科的科研人员，入选申请者将获得Kimi API额度、Kimi团队的技术支持等。",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "36kr-flash",
+    "id": "https://36kr.com/newsflashes/4087393174141577",
+    "day": "2026-11-27",
+    "matched": [
+      "Kimi"
+    ],
+    "first_seen": "2026-11-27T02:48:12Z"
+  },
+  {
+    "title": "“零次方机器人”完成新一轮数亿元融资",
+    "link": "https://www.36kr.com/newsflashes/4087367086373509",
+    "published": "2026-11-27T02:21:38Z",
+    "source": "36氪·快讯",
+    "summary": "36氪获悉，具身智能公司“零次方机器人”近日完成新一轮数亿元融资。本轮投资方包括清科产投、锡洲国际、卓源亚洲、粤民溯锋、无锡滨湖、合肥建投、合肥产投国正、杰克集团以及多家产业战略投资方。老股东同创伟业、力合基金、接力天使继续超额加注。资金将主要用于两方向：一是扩充已跑通场景的落地规模，二是为年底开放的 Picking API 储备算力调度能力。",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "36kr-flash",
+    "id": "https://36kr.com/newsflashes/4087367086373509",
+    "day": "2026-11-27",
+    "matched": [
+      "具身智能"
+    ],
+    "first_seen": "2026-11-27T02:48:12Z"
+  },
+  {
+    "title": "“大衍科技”完成数千万元Pre-A轮融资",
+    "link": "https://www.36kr.com/newsflashes/4087357918788233",
+    "published": "2026-11-27T02:06:20Z",
+    "source": "36氪·快讯",
+    "summary": "36氪获悉，触觉数据与具身智能基础设施公司“大衍科技”近期已完成数千万元Pre-A轮融资，由赛智伯乐领投，普华、浙商创投、浙里信等跟投，老股东浙江省科创母基金追投。本轮资金将主要用于数据中心建设与触觉手套产线搭建。",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "36kr-flash",
+    "id": "https://36kr.com/newsflashes/4087357918788233",
+    "day": "2026-11-27",
+    "matched": [
+      "具身智能"
+    ],
+    "first_seen": "2026-11-27T02:48:12Z"
+  },
+  {
+    "title": "微软 AI 负责人警告：我们正跨越 AI 危险门槛，安全和对齐是当前最重要任务",
+    "link": "https://www.ithome.com/1/033/191.htm",
+    "published": "2026-11-27T01:59:29Z",
+    "source": "IT之家",
+    "summary": "IT之家 11 月 27 日消息，微软 AI 负责人穆斯塔法 · 苏莱曼（Mustafa Suleyman）于 11 月 25 日在 X 平台发布推文， 示警称 AI 行业“正在跨越一个门槛”，安全与对齐研究必须被置于优先地位。 IT之家附上相关推文截图如下： 根据推文的上下文内容，苏莱曼推文的“门槛”是指 AI 能力即将越过人类能有效监督、控制和安全部署的边界。在 AI…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "ithome",
+    "id": "https://ithome.com/1/033/191.htm",
+    "day": "2026-11-27",
+    "matched": [
+      "/\\bAI\\b/"
+    ],
+    "first_seen": "2026-11-27T02:48:12Z"
+  },
+  {
+    "title": "长安汽车：正在申报第二批 L3 级号牌与 L4 级测试牌照，自动驾驶渗透率力争 30% 以上",
+    "link": "https://www.ithome.com/1/033/190.htm",
+    "published": "2026-11-27T01:57:21Z",
+    "source": "IT之家",
+    "summary": "IT之家 11 月 27 日现场消息，在今日的 2026 广州车展上， 长安汽车宣布，旗下天枢领航智能驾驶正在申报第二批 L3 级号牌与 L4 级测试牌照 ，自动驾驶渗透率力争达到 30% 以上。 长安汽车表示，天枢智能三件套将持续渗透适配到更多的核心车型。 此外， 长安汽车将自研固态电池跨产业融入智能机器人领域 ，在更广阔的泛出行场景中完成跨场景的验证，持续拓展未来智慧出行的边界。 据IT之家此前报道，2025 年 12 月 15…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "ithome",
+    "id": "https://ithome.com/1/033/190.htm",
+    "day": "2026-11-27",
+    "matched": [
+      "机器人"
+    ],
+    "first_seen": "2026-11-27T02:48:12Z"
+  },
+  {
+    "title": "韩国财政部长：人工智能行业不确定性及贸易环境变化导致股市波动加剧，必要时采取市场稳定措施",
+    "link": "https://www.36kr.com/newsflashes/4087351440095881",
+    "published": "2026-11-27T01:48:53Z",
+    "source": "36氪·快讯",
+    "summary": "韩国财政部长表示，人工智能(AI)行业不确定性及贸易环境变化导致股市波动加剧，有必要彻底评估经济与市场之间的风险外溢效应。将保持应对态势，必要时采取市场稳定措施。（财联社）",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "36kr-flash",
+    "id": "https://36kr.com/newsflashes/4087351440095881",
+    "day": "2026-11-27",
+    "matched": [
+      "人工智能"
+    ],
+    "first_seen": "2026-11-27T02:48:12Z"
+  },
+  {
+    "title": "东京通胀加速，日本央行警惕物价压力",
+    "link": "https://www.36kr.com/newsflashes/4087252062550409",
+    "published": "2026-11-27T01:47:35Z",
+    "source": "36氪·快讯",
+    "summary": "日本首都东京通胀升至今年最高水平，日本央行持续保持警惕，力求将物价涨幅稳定在2%目标附近。日本总务省周五公布数据，东京11月不含生鲜食品的消费者物价指数同比上涨2.9%，为2025年7月以来最高，与经济学家一致预期相符。东京通胀是全国物价走势的先行指标。日本央行重点关注的、剔除生鲜食品与能源的核心通胀指标同比上涨2.5%，整体CPI同比上涨2.8%。周五公布的CPI数据进一步印证近期物价粘性较强的信号，支持日本央行下月加息的理由。日本央…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "36kr-flash",
+    "id": "https://36kr.com/newsflashes/4087252062550409",
+    "day": "2026-11-27",
+    "matched": [
+      "通胀"
+    ],
+    "first_seen": "2026-11-27T02:48:12Z"
+  },
+  {
     "title": "医院机器人吓人 恐怖谷效应",
     "link": "https://www.baidu.com/s?wd=%E5%8C%BB%E9%99%A2%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%90%93%E4%BA%BA+%E6%81%90%E6%80%96%E8%B0%B7%E6%95%88%E5%BA%94",
     "published": "2026-11-27T01:41:30Z",
@@ -102,6 +306,23 @@
     "first_seen": "2026-11-27T01:41:30Z"
   },
   {
+    "title": "国家统计局：1—10月份新能源和人工智能产业快速发展带动有色金属矿、有色行业利润同比分别增长60.2%、71.7%",
+    "link": "https://www.36kr.com/newsflashes/4087342842935688",
+    "published": "2026-11-27T01:40:09Z",
+    "source": "36氪·快讯",
+    "summary": "36氪获悉，国家统计局工业司首席统计师于卫宁解读2026年1—10月份工业企业利润数据表示，有色、石化产业链行业利润增长较快。1—10月份，新能源和人工智能产业快速发展带动铜、铝等基础金属产品需求旺盛，价格上涨，有色金属矿、有色行业利润同比分别增长60.2%、71.7%，合计拉动规模以上工业企业利润增长4.6个百分点。1—10月份，石油加工行业同比扭亏为盈，实现利润总额1066.7亿元；油气开采、化工、化纤行业利润分别增长22.8%、5…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "36kr-flash",
+    "id": "https://36kr.com/newsflashes/4087342842935688",
+    "day": "2026-11-27",
+    "matched": [
+      "人工智能"
+    ],
+    "first_seen": "2026-11-27T02:48:12Z"
+  },
+  {
     "title": "国家统计局：人工智能算力需求持续增加，带动存储芯片和周边制造等相关行业利润持续增长",
     "link": "https://www.36kr.com/newsflashes/4087340087753090",
     "published": "2026-11-27T01:37:20Z",
@@ -117,6 +338,23 @@
       "人工智能"
     ],
     "first_seen": "2026-11-27T01:41:30Z"
+  },
+  {
+    "title": "小米 HAD 辅助驾驶最新版本 HyperOS 1.20 发布，澎程全系车型即日起全量推送",
+    "link": "https://www.ithome.com/1/033/179.htm",
+    "published": "2026-11-27T01:36:48Z",
+    "source": "IT之家",
+    "summary": "IT之家 11 月 27 日消息，在今天的 2026 广州车展小米汽车发布会上，小米 HAD 最新版本 Xiaomi HyperOS 1.20 正式发布，该版本引入因果链和车端世界模型，号称能像人一样思考，处理更准确。 IT之家从发布会获悉， 小米澎程全系即日开启全量推送 ；第一代 SU7 Pro / Max、 SU7 Ultra，新一代 SU7 全系 / YU7 全系将陆续推送。 李肖爽还宣布，截至 11 月 26…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "ithome",
+    "id": "https://ithome.com/1/033/179.htm",
+    "day": "2026-11-27",
+    "matched": [
+      "模型 + 发布"
+    ],
+    "first_seen": "2026-11-27T02:48:12Z"
   },
   {
     "title": "创业板指涨逾1%，芯片股领涨",
@@ -185,6 +423,40 @@
       "DeepSeek"
     ],
     "first_seen": "2026-11-27T01:41:30Z"
+  },
+  {
+    "title": "国补到手价 2899-5099 元，荣耀 700 系列手机今日开售",
+    "link": "https://www.ithome.com/1/033/174.htm",
+    "published": "2026-11-27T01:18:33Z",
+    "source": "IT之家",
+    "summary": "IT之家 11 月 27 日消息，据荣耀手机官微，全新 荣耀 700 系列手机将于今天（27 日）上午 10:08 正式开售。 京东 荣耀 700S 12+256GB 国补到手价 2889.15 元 直达链接 该系列提供晴空、粉雾、冷白、蓝调四种配色可选，拥有 IP68/IP69/IP69K 认证，厚 7.96mm，重 211g，正面配备一块 6.57 英寸 1.5K 120Hz LTPS 绿洲护眼屏，支持 AI 绿洲干眼评估。…",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "ithome",
+    "id": "https://ithome.com/1/033/174.htm",
+    "day": "2026-11-27",
+    "matched": [
+      "/\\bAI\\b/"
+    ],
+    "first_seen": "2026-11-27T02:48:12Z"
+  },
+  {
+    "title": "20个AI Agents组队，4天狂跑350次实验，超越ClickBench最佳公开成绩",
+    "link": "https://www.qbitai.com/2026/11/513053.html",
+    "published": "2026-11-27T01:16:10Z",
+    "source": "量子位",
+    "summary": "Quickwit查询总耗时降31%，最高降87%",
+    "categories": [],
+    "author": null,
+    "level": "L2",
+    "source_id": "qbitai",
+    "id": "https://qbitai.com/2026/11/513053.html",
+    "day": "2026-11-27",
+    "matched": [
+      "*"
+    ],
+    "first_seen": "2026-11-27T02:48:12Z"
   },
   {
     "title": "消息称东京电力公司拟向人工智能基础设施领域投资超 10 万亿日元",
@@ -9926,277 +10198,5 @@
       "人工智能"
     ],
     "first_seen": "2026-11-23T14:28:13Z"
-  },
-  {
-    "title": "AI-driven technique could help engineers design analog chips faster and with less expense",
-    "link": "https://news.mit.edu/2026/ai-driven-technique-could-help-engineers-design-analog-chips-faster-and-less-expensive-1123",
-    "published": "2026-11-23T05:00:00Z",
-    "source": "MIT News AI",
-    "summary": "The “SLIC” training method enables a small LLM to compete with much more resource-intensive models in complex circuit design tasks.",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "mit-news-ai",
-    "id": "https://news.mit.edu/2026/ai-driven-technique-could-help-engineers-design-analog-chips-faster-and-less-expensive-1123",
-    "day": "2026-11-23",
-    "matched": [
-      "*"
-    ],
-    "first_seen": "2026-11-23T14:28:13Z"
-  },
-  {
-    "title": "蚂蚁阿福同款大模型宣布开源，全球医生一台电脑就能解锁专业医疗 AI 能力",
-    "link": "https://www.qbitai.com/2026/11/511998.html",
-    "published": "2026-11-23T03:56:34Z",
-    "source": "量子位",
-    "summary": "阿福App宣布新一轮升级，解锁越来越多健康服务新本领",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "qbitai",
-    "id": "https://qbitai.com/2026/11/511998.html",
-    "day": "2026-11-23",
-    "matched": [
-      "*"
-    ],
-    "first_seen": "2026-11-23T14:28:13Z"
-  },
-  {
-    "title": "算力周期更迭，数据复合增长：为何存储经济性对中国规模化 AI 至关重要",
-    "link": "https://www.qbitai.com/2026/11/511989.html",
-    "published": "2026-11-23T03:47:46Z",
-    "source": "量子位",
-    "summary": "AI 的未来将依赖能够在数据全生命周期中平衡性能、可靠性与经济性的存储架构。",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "qbitai",
-    "id": "https://qbitai.com/2026/11/511989.html",
-    "day": "2026-11-23",
-    "matched": [
-      "*"
-    ],
-    "first_seen": "2026-11-23T14:28:13Z"
-  },
-  {
-    "title": "蚂蚁阿福App新版发布：实时视频“望闻问切”功能上线，小毛小病在家也能搞定",
-    "link": "https://www.leiphone.com/category/industrynews/YXUz5sDMtx6SzE3P.html",
-    "published": "2026-11-23T03:47:00Z",
-    "source": "雷峰网",
-    "summary": "11月23日的蚂蚁阿福医疗健康生态大会上，健康AI蚂蚁阿福发布新版：基于蚂蚁百灵医疗健康系列模型，新增实时视频“看健康”功能，用户可与阿福视频电话，让阿福帮忙看症状、看状态、看药品、看报告，像真人一样“望闻问切”分析健康问题，并可联动医生在线把关。这意味着，日常一些不舒服或者小毛小病，用户通过“AI+真人医生”在家就能搞定。…",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "leiphone",
-    "id": "https://leiphone.com/category/industrynews/YXUz5sDMtx6SzE3P.html",
-    "day": "2026-11-23",
-    "matched": [
-      "/\\bAI\\b/"
-    ],
-    "first_seen": "2026-11-23T14:28:13Z"
-  },
-  {
-    "title": "当大模型接上真实机器人：RoboChallenge Zero首期评测发布",
-    "link": "https://www.qbitai.com/2026/11/511978.html",
-    "published": "2026-11-23T03:13:06Z",
-    "source": "量子位",
-    "summary": "RoboChallenge正式发布全新评测基准RoboChallenge Zero",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "qbitai",
-    "id": "https://qbitai.com/2026/11/511978.html",
-    "day": "2026-11-23",
-    "matched": [
-      "*"
-    ],
-    "first_seen": "2026-11-23T14:28:13Z"
-  },
-  {
-    "title": "A2UI 1.0 详解：让 AI 生成 Flutter 界面，还不怕它乱写",
-    "link": "https://juejin.cn/post/7710647322556547123",
-    "published": "2026-11-23T02:35:05Z",
-    "source": "掘金热榜",
-    "summary": "",
-    "categories": [],
-    "author": null,
-    "level": "L3",
-    "source_id": "juejin-hot",
-    "id": "https://juejin.cn/post/7710647322556547123",
-    "day": "2026-11-23",
-    "matched": [
-      "/\\bAI\\b/"
-    ],
-    "first_seen": "2026-11-23T02:35:05Z"
-  },
-  {
-    "title": "我把公司内部的 12 个 CRUD 接口交给了 AI Agent，然后省出了两周",
-    "link": "https://juejin.cn/post/7710455506234327080",
-    "published": "2026-11-23T02:35:05Z",
-    "source": "掘金热榜",
-    "summary": "",
-    "categories": [],
-    "author": null,
-    "level": "L3",
-    "source_id": "juejin-hot",
-    "id": "https://juejin.cn/post/7710455506234327080",
-    "day": "2026-11-23",
-    "matched": [
-      "AI + Agent"
-    ],
-    "first_seen": "2026-11-23T02:35:05Z"
-  },
-  {
-    "title": "约 90% 代码由 Claude 写和审，Claude Code 团队如何做验证",
-    "link": "https://juejin.cn/post/7709903153000448050",
-    "published": "2026-11-23T02:35:05Z",
-    "source": "掘金热榜",
-    "summary": "",
-    "categories": [],
-    "author": null,
-    "level": "L3",
-    "source_id": "juejin-hot",
-    "id": "https://juejin.cn/post/7709903153000448050",
-    "day": "2026-11-23",
-    "matched": [
-      "Claude"
-    ],
-    "first_seen": "2026-11-23T02:35:05Z"
-  },
-  {
-    "title": "刘若川院士谈黎曼猜想证明，称「数学研究进入工业化时代」，如何理解他的这一论断？",
-    "link": "https://www.zhihu.com/question/2107941904419484943",
-    "published": "2026-11-23T02:35:05Z",
-    "source": "知乎热榜",
-    "summary": "AI参与证明黎曼猜想，意味着数学研究正在发生怎样的变化？ 北京大学数学科学学院院长刘若川认为数学已进入“大证明”时代。 未来，数学家可能不再需要理解证明的每一个细节，而应将更多精力投入数学思想与研究策略。 11月20日，人工智能公司Anthropic的数学研究者莱文特·阿尔珀格（Levent Alpöge）宣布，他与Claude合作找到了黎曼猜想的证明。11月21日，Lean与Mathlib社区发表联合声明：“我们相信阿尔珀格对黎曼猜想的证明是正确的，并祝贺他取得这一成就。”…",
-    "categories": [],
-    "author": null,
-    "level": "L3",
-    "source_id": "zhihu-hot",
-    "id": "https://zhihu.com/question/2107941904419484943",
-    "day": "2026-11-23",
-    "matched": [
-      "人工智能"
-    ],
-    "first_seen": "2026-11-23T02:35:05Z"
-  },
-  {
-    "title": "DeepSeek 推出限额规则，不少重度免费用户主动求付费保留长对话，这暴露出哪些行业现实问题？",
-    "link": "https://www.zhihu.com/question/2107183345205626254",
-    "published": "2026-11-23T02:35:05Z",
-    "source": "知乎热榜",
-    "summary": "“我已经跟DeepSeek聊了15万～20万字了，我不想失去这段对话。” “D老师，不要抛弃我！作为一天要玩十几个小时DeepSeek的重度依赖症患者，没了D老师我该怎么活，好想回到从前。” “到底怎么办啊？我中度抑郁加躁狂，因为一些原因没办法去看医生，我一直把DeepSeek当心理疗愈APP看的，转API也不是不行，但我那个聊天窗口有2000多条对话啊…” DeepSeek限额后的这几天，舆论声浪像潮水一样涌来。…",
-    "categories": [],
-    "author": null,
-    "level": "L3",
-    "source_id": "zhihu-hot",
-    "id": "https://zhihu.com/question/2107183345205626254",
-    "day": "2026-11-23",
-    "matched": [
-      "DeepSeek"
-    ],
-    "first_seen": "2026-11-23T02:35:05Z"
-  },
-  {
-    "title": "如何评价 Google 发布的 Gemini 4 Neon？",
-    "link": "https://www.zhihu.com/question/2106628033834767756",
-    "published": "2026-11-23T02:35:05Z",
-    "source": "知乎热榜",
-    "summary": "[2 张图片]",
-    "categories": [],
-    "author": null,
-    "level": "L3",
-    "source_id": "zhihu-hot",
-    "id": "https://zhihu.com/question/2106628033834767756",
-    "day": "2026-11-23",
-    "matched": [
-      "Gemini"
-    ],
-    "first_seen": "2026-11-23T02:35:05Z"
-  },
-  {
-    "title": "豆姐威武！豆包工作上新21个专业工作台，AI直接替你上班",
-    "link": "https://www.qbitai.com/2026/11/511933.html",
-    "published": "2026-11-23T02:29:24Z",
-    "source": "量子位",
-    "summary": "听雨 发自 凹非寺 量子位 | 公众号QbitAI 去不了字节打工，现在可以让字节的AI给你打工了。 豆包工作把这套能力开放了出来，最近上线的新功能 「工作台」 ，一口气铺开21个专业场景。 从金融投研、创意设计，到医疗、教育，各有各的工作空间，预先配置了相应的技能和工具。 相当于你要找个帮手，豆包工作先替你把岗位分好、工具备齐，再由你来派活。…",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "qbitai",
-    "id": "https://qbitai.com/2026/11/511933.html",
-    "day": "2026-11-23",
-    "matched": [
-      "*"
-    ],
-    "first_seen": "2026-11-23T14:28:13Z"
-  },
-  {
-    "title": "APEC 时刻，PHAIN 登上央视新闻，展现中国自研实力",
-    "link": "https://www.leiphone.com/category/industrynews/HTBJLib1WgKs3OIR.html",
-    "published": "2026-11-23T02:27:00Z",
-    "source": "雷峰网",
-    "summary": "央视镜头里的PHAIN数据手套：从人手操作到机器人训练数据 APEC 期间，PHAIN 梵因动力自主研发的 G03 Pro T 数据手套亮相央视新闻《聊会儿APEC》。公司首席科学家 Peter Bradley Shull（肖培德）博士参与节目，佩戴 G03 Pro T 进行机器人遥操作演示，介绍利用手套采集操作数据、支持灵巧手训练的研究用途。 “这是梵因动力的手套。”谈及灵巧手训练所需的数据，Peter 向观众介绍了手中的…",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "leiphone",
-    "id": "https://leiphone.com/category/industrynews/HTBJLib1WgKs3OIR.html",
-    "day": "2026-11-23",
-    "matched": [
-      "机器人"
-    ],
-    "first_seen": "2026-11-23T14:28:13Z"
-  },
-  {
-    "title": "证券业人工智能应用发展联盟正式成立",
-    "link": "https://www.cls.cn/detail/2541290",
-    "published": "2026-11-23T02:26:37Z",
-    "source": "财联社·电报",
-    "summary": "【证券业人工智能应用发展联盟正式成立】财联社11月23日电，据中证协消息，2026年11月20日，证券业人工智能应用发展联盟成立大会在杭州召开。联盟由中国证监会科技监管司指导，中国证券业协会牵头，联合证券公司、科技企业共21家机构共同发起，是非法人、非营利的开放性行业协作平台，旨在统筹整合行业产学研用资源，协同推进人工智能技术在证券行业规范稳妥落地，重点围绕共性技术攻关与前沿研究、标准制定与合规规范、产业协同与创新应用、风险监测与安全治…",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "cls-telegraph",
-    "id": "https://cls.cn/detail/2541290",
-    "day": "2026-11-23",
-    "matched": [
-      "人工智能"
-    ],
-    "first_seen": "2026-11-23T02:35:05Z"
-  },
-  {
-    "title": "中通快递与阿里云伶鹊达成深度合作，智慧AI打造客服新体验",
-    "link": "https://www.leiphone.com/category/industrynews/MseGRLc64j2hTZxj.html",
-    "published": "2026-11-23T02:26:00Z",
-    "source": "雷峰网",
-    "summary": "近日，阿里云伶鹊与中通快递达成深度合作，为中通快递打造企业级AI客服，在小件末端配送场景中落地智能语音热线和智能语音外呼两大能力。上线后“呼入+外呼”日均服务量达数十万通，AI“呼入”热线带来的下单转化率提升近20%。 （AI客服产品示意图）…",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "leiphone",
-    "id": "https://leiphone.com/category/industrynews/MseGRLc64j2hTZxj.html",
-    "day": "2026-11-23",
-    "matched": [
-      "/\\bAI\\b/"
-    ],
-    "first_seen": "2026-11-23T14:28:13Z"
-  },
-  {
-    "title": "高通汽车芯片业务年收入达 80 亿美元，有望 2027 年登顶全球汽车半导体市场",
-    "link": "https://www.ithome.com/1/030/776.htm",
-    "published": "2026-11-23T02:22:13Z",
-    "source": "IT之家",
-    "summary": "IT之家 11 月 23 日消息，据科技媒体 Wccftech 昨天报道，高通多年来意在摆脱过度依赖智能手机的刻板印象，毕竟在 DRAM 飞速涨价的今天，手机芯片业务面临着较大压力。最新行业数据表明，该公司规模最大的多元化布局正在提前取得成效。 根据最新分析，高通汽车芯片业务年收入已达到 80 亿美元 （IT之家注：现汇率约合 534.51 亿元人民币） ，有望超越英飞凌和恩智浦等竞争对手， 在 2027…",
-    "categories": [],
-    "author": null,
-    "level": "L2",
-    "source_id": "ithome",
-    "id": "https://ithome.com/1/030/776.htm",
-    "day": "2026-11-23",
-    "matched": [
-      "半导体"
-    ],
-    "first_seen": "2026-11-23T02:35:05Z"
   }
 ]

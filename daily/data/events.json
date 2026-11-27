@@ -1,5 +1,400 @@
 [
   {
+    "id": "e_cfc8dcd22e",
+    "title_zh": "🧠2026主流知识库技术对比：RAG、MD+grep、LLM Wiki优劣与落地场景",
+    "event_summary": "做过大模型落地、搭过私有知识库的朋友，大概率都踩过 RAG的坑 。 近些年，私有文档问答、企业知识落地几乎是RAG的天下。 向量分块 -> 建索引 -> 检索召回 -> 重排序 , 整套工程链路看似完备，但只要上过生产环境，就会发现一堆实打实的硬伤：部署复杂、运维成本高、高并发下检索延迟明显，最关键的是 RAG只做“临时检索拼接”，所有知识用完就丢，无法沉淀、无法迭代 。…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-27T02:48:12Z",
+    "hot_seen_at": "2026-11-27T02:48:12Z",
+    "published": "2026-11-27T02:48:12Z",
+    "primary_url": "https://juejin.cn/post/7712561672912896027",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "🧠2026主流知识库技术对比：RAG、MD+grep、LLM Wiki优劣与落地场景",
+        "url": "https://juejin.cn/post/7712561672912896027",
+        "published": "2026-11-27T02:48:12Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_7868c259e9",
+    "title_zh": "我写的 12 个 AI Skill，三个月后 8 个在吃空饷",
+    "event_summary": "8 月底我写过一篇给 AI 排 8 个岗位的文章，那 8 个岗位用的都是现成 Skill，装好、配好触发词就能上岗。 真正费劲的是另一批：我自己写的 Skill。 从 8 月底到现在，我陆陆续续写了 12 个，每个都配一份说明书，写清楚它管什么、什么话术触发、交付标准是什么。昨天盘了一遍，只有 4 个还活着。剩下 8 个的说明书停在 9 月，最久的一个停了 90 天。…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-27T02:48:12Z",
+    "hot_seen_at": "2026-11-27T02:48:12Z",
+    "published": "2026-11-27T02:48:12Z",
+    "primary_url": "https://juejin.cn/post/7712307777096007720",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "我写的 12 个 AI Skill，三个月后 8 个在吃空饷",
+        "url": "https://juejin.cn/post/7712307777096007720",
+        "published": "2026-11-27T02:48:12Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_2052e53da3",
+    "title_zh": "我用 Claude Code 一句话渲出 61 秒竖屏中文动画，不花视频生成费",
+    "event_summary": "用 AI 视频生成器做动画短片，每次出来都有出入，还按量收费。这次我用的是个人开发者 mromidev 做的开源技能 claude-animated-shorts，它在自己电脑上逐帧渲染，说一句话就能出一条竖屏动画短片。它默认只做英文，我把它改成了中文配音，做出了一条《红色回形针换房子》，61.47 秒，竖屏 1440×2560。 Claude Code 的额度照烧，省的只是视频生成那部分。…",
+    "source_level": "L3",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "Claude"
+    ],
+    "first_seen_at": "2026-11-27T02:48:12Z",
+    "hot_seen_at": "2026-11-27T02:48:12Z",
+    "published": "2026-11-27T02:48:12Z",
+    "primary_url": "https://juejin.cn/post/7711660238038532139",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "掘金热榜",
+        "level": "L3",
+        "title": "我用 Claude Code 一句话渲出 61 秒竖屏中文动画，不花视频生成费",
+        "url": "https://juejin.cn/post/7711660238038532139",
+        "published": "2026-11-27T02:48:12Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_7e37b0e802",
+    "title_zh": "普京：俄需更新2036年前人工智能国家战略",
+    "event_summary": "俄罗斯总统普京11月26日在莫斯科表示，为争取在人工智能（AI）研发方面获得领先地位，俄需更新相关国家战略；在支持开发俄自主AI模型方面，则需落实四项要求。据俄总统网站26日发布的消息，普京当天在与哈萨克斯坦总统托卡耶夫一同出席“人工智能世界之旅”大会时发表讲话说，若想在AI研发方面取得领先地位，就要最大限度实现人与自主系统协同运作，并为此重构管理和生产流程。依据这一思路，俄需更新“2036年前俄人工智能国家战略”，审批相关国家行动计划…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-27T02:48:12Z",
+    "hot_seen_at": null,
+    "published": "2026-11-27T02:33:21Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4087395152214402",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "普京：俄需更新2036年前人工智能国家战略",
+        "url": "https://www.36kr.com/newsflashes/4087395152214402",
+        "published": "2026-11-27T02:33:21Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_5f25a51ab1",
+    "title_zh": "月之暗面宣布Kimi科研支持计划开放申请",
+    "event_summary": "36氪获悉，月之暗面宣布，Kimi科研支持计划开放申请，首期将面向自然科学、工程学及相关交叉学科的科研人员，入选申请者将获得Kimi API额度、Kimi团队的技术支持等。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "Kimi"
+    ],
+    "first_seen_at": "2026-11-27T02:48:12Z",
+    "hot_seen_at": null,
+    "published": "2026-11-27T02:31:35Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4087393174141577",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "月之暗面宣布Kimi科研支持计划开放申请",
+        "url": "https://www.36kr.com/newsflashes/4087393174141577",
+        "published": "2026-11-27T02:31:35Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_b139107533",
+    "title_zh": "“零次方机器人”完成新一轮数亿元融资",
+    "event_summary": "36氪获悉，具身智能公司“零次方机器人”近日完成新一轮数亿元融资。本轮投资方包括清科产投、锡洲国际、卓源亚洲、粤民溯锋、无锡滨湖、合肥建投、合肥产投国正、杰克集团以及多家产业战略投资方。老股东同创伟业、力合基金、接力天使继续超额加注。资金将主要用于两方向：一是扩充已跑通场景的落地规模，二是为年底开放的 Picking API 储备算力调度能力。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "具身智能"
+    ],
+    "first_seen_at": "2026-11-27T02:48:12Z",
+    "hot_seen_at": null,
+    "published": "2026-11-27T02:21:38Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4087367086373509",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "“零次方机器人”完成新一轮数亿元融资",
+        "url": "https://www.36kr.com/newsflashes/4087367086373509",
+        "published": "2026-11-27T02:21:38Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_bfa3794761",
+    "title_zh": "“大衍科技”完成数千万元Pre-A轮融资",
+    "event_summary": "36氪获悉，触觉数据与具身智能基础设施公司“大衍科技”近期已完成数千万元Pre-A轮融资，由赛智伯乐领投，普华、浙商创投、浙里信等跟投，老股东浙江省科创母基金追投。本轮资金将主要用于数据中心建设与触觉手套产线搭建。",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "具身智能"
+    ],
+    "first_seen_at": "2026-11-27T02:48:12Z",
+    "hot_seen_at": null,
+    "published": "2026-11-27T02:06:20Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4087357918788233",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "“大衍科技”完成数千万元Pre-A轮融资",
+        "url": "https://www.36kr.com/newsflashes/4087357918788233",
+        "published": "2026-11-27T02:06:20Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_a847ccafee",
+    "title_zh": "微软 AI 负责人警告：我们正跨越 AI 危险门槛，安全和对齐是当前最重要任务",
+    "event_summary": "IT之家 11 月 27 日消息，微软 AI 负责人穆斯塔法 · 苏莱曼（Mustafa Suleyman）于 11 月 25 日在 X 平台发布推文， 示警称 AI 行业“正在跨越一个门槛”，安全与对齐研究必须被置于优先地位。 IT之家附上相关推文截图如下： 根据推文的上下文内容，苏莱曼推文的“门槛”是指 AI 能力即将越过人类能有效监督、控制和安全部署的边界。在 AI…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-27T02:48:12Z",
+    "hot_seen_at": null,
+    "published": "2026-11-27T01:59:29Z",
+    "primary_url": "https://www.ithome.com/1/033/191.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "微软 AI 负责人警告：我们正跨越 AI 危险门槛，安全和对齐是当前最重要任务",
+        "url": "https://www.ithome.com/1/033/191.htm",
+        "published": "2026-11-27T01:59:29Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_a8a44201e4",
+    "title_zh": "长安汽车：正在申报第二批 L3 级号牌与 L4 级测试牌照，自动驾驶渗透率力争 30% 以上",
+    "event_summary": "IT之家 11 月 27 日现场消息，在今日的 2026 广州车展上， 长安汽车宣布，旗下天枢领航智能驾驶正在申报第二批 L3 级号牌与 L4 级测试牌照 ，自动驾驶渗透率力争达到 30% 以上。 长安汽车表示，天枢智能三件套将持续渗透适配到更多的核心车型。 此外， 长安汽车将自研固态电池跨产业融入智能机器人领域 ，在更广阔的泛出行场景中完成跨场景的验证，持续拓展未来智慧出行的边界。 据IT之家此前报道，2025 年 12 月 15…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "机器人"
+    ],
+    "first_seen_at": "2026-11-27T02:48:12Z",
+    "hot_seen_at": null,
+    "published": "2026-11-27T01:57:21Z",
+    "primary_url": "https://www.ithome.com/1/033/190.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "长安汽车：正在申报第二批 L3 级号牌与 L4 级测试牌照，自动驾驶渗透率力争 30% 以上",
+        "url": "https://www.ithome.com/1/033/190.htm",
+        "published": "2026-11-27T01:57:21Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_2dc08066a7",
+    "title_zh": "韩国财政部长：人工智能行业不确定性及贸易环境变化导致股市波动加剧，必要时采取市场稳定措施",
+    "event_summary": "韩国财政部长表示，人工智能(AI)行业不确定性及贸易环境变化导致股市波动加剧，有必要彻底评估经济与市场之间的风险外溢效应。将保持应对态势，必要时采取市场稳定措施。（财联社）",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-27T02:48:12Z",
+    "hot_seen_at": null,
+    "published": "2026-11-27T01:48:53Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4087351440095881",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "韩国财政部长：人工智能行业不确定性及贸易环境变化导致股市波动加剧，必要时采取市场稳定措施",
+        "url": "https://www.36kr.com/newsflashes/4087351440095881",
+        "published": "2026-11-27T01:48:53Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_5b0b7f6e02",
+    "title_zh": "东京通胀加速，日本央行警惕物价压力",
+    "event_summary": "日本首都东京通胀升至今年最高水平，日本央行持续保持警惕，力求将物价涨幅稳定在2%目标附近。日本总务省周五公布数据，东京11月不含生鲜食品的消费者物价指数同比上涨2.9%，为2025年7月以来最高，与经济学家一致预期相符。东京通胀是全国物价走势的先行指标。日本央行重点关注的、剔除生鲜食品与能源的核心通胀指标同比上涨2.5%，整体CPI同比上涨2.8%。周五公布的CPI数据进一步印证近期物价粘性较强的信号，支持日本央行下月加息的理由。日本央…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "通胀"
+    ],
+    "first_seen_at": "2026-11-27T02:48:12Z",
+    "hot_seen_at": null,
+    "published": "2026-11-27T01:47:35Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4087252062550409",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "东京通胀加速，日本央行警惕物价压力",
+        "url": "https://www.36kr.com/newsflashes/4087252062550409",
+        "published": "2026-11-27T01:47:35Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_c3b692b3f0",
+    "title_zh": "国家统计局：1—10月份新能源和人工智能产业快速发展带动有色金属矿、有色行业利润同比分别增长60.2%、71.7%",
+    "event_summary": "36氪获悉，国家统计局工业司首席统计师于卫宁解读2026年1—10月份工业企业利润数据表示，有色、石化产业链行业利润增长较快。1—10月份，新能源和人工智能产业快速发展带动铜、铝等基础金属产品需求旺盛，价格上涨，有色金属矿、有色行业利润同比分别增长60.2%、71.7%，合计拉动规模以上工业企业利润增长4.6个百分点。1—10月份，石油加工行业同比扭亏为盈，实现利润总额1066.7亿元；油气开采、化工、化纤行业利润分别增长22.8%、5…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "人工智能"
+    ],
+    "first_seen_at": "2026-11-27T02:48:12Z",
+    "hot_seen_at": null,
+    "published": "2026-11-27T01:40:09Z",
+    "primary_url": "https://www.36kr.com/newsflashes/4087342842935688",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "36氪·快讯",
+        "level": "L2",
+        "title": "国家统计局：1—10月份新能源和人工智能产业快速发展带动有色金属矿、有色行业利润同比分别增长60.2%、71.7%",
+        "url": "https://www.36kr.com/newsflashes/4087342842935688",
+        "published": "2026-11-27T01:40:09Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_f8f43655d9",
+    "title_zh": "小米 HAD 辅助驾驶最新版本 HyperOS 1.20 发布，澎程全系车型即日起全量推送",
+    "event_summary": "IT之家 11 月 27 日消息，在今天的 2026 广州车展小米汽车发布会上，小米 HAD 最新版本 Xiaomi HyperOS 1.20 正式发布，该版本引入因果链和车端世界模型，号称能像人一样思考，处理更准确。 IT之家从发布会获悉， 小米澎程全系即日开启全量推送 ；第一代 SU7 Pro / Max、 SU7 Ultra，新一代 SU7 全系 / YU7 全系将陆续推送。 李肖爽还宣布，截至 11 月 26…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [
+      "模型 + 发布"
+    ],
+    "first_seen_at": "2026-11-27T02:48:12Z",
+    "hot_seen_at": null,
+    "published": "2026-11-27T01:36:48Z",
+    "primary_url": "https://www.ithome.com/1/033/179.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "小米 HAD 辅助驾驶最新版本 HyperOS 1.20 发布，澎程全系车型即日起全量推送",
+        "url": "https://www.ithome.com/1/033/179.htm",
+        "published": "2026-11-27T01:36:48Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_35c95ba679",
+    "title_zh": "国补到手价 2899-5099 元，荣耀 700 系列手机今日开售",
+    "event_summary": "IT之家 11 月 27 日消息，据荣耀手机官微，全新 荣耀 700 系列手机将于今天（27 日）上午 10:08 正式开售。 京东 荣耀 700S 12+256GB 国补到手价 2889.15 元 直达链接 该系列提供晴空、粉雾、冷白、蓝调四种配色可选，拥有 IP68/IP69/IP69K 认证，厚 7.96mm，重 211g，正面配备一块 6.57 英寸 1.5K 120Hz LTPS 绿洲护眼屏，支持 AI 绿洲干眼评估。…",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-27T02:48:12Z",
+    "hot_seen_at": null,
+    "published": "2026-11-27T01:18:33Z",
+    "primary_url": "https://www.ithome.com/1/033/174.htm",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "IT之家",
+        "level": "L2",
+        "title": "国补到手价 2899-5099 元，荣耀 700 系列手机今日开售",
+        "url": "https://www.ithome.com/1/033/174.htm",
+        "published": "2026-11-27T01:18:33Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
+    "id": "e_f9aeceb71a",
+    "title_zh": "20个AI Agents组队，4天狂跑350次实验，超越ClickBench最佳公开成绩",
+    "event_summary": "Quickwit查询总耗时降31%，最高降87%",
+    "source_level": "L2",
+    "policy_stage": "不适用",
+    "key_entities": [],
+    "potential_impact": null,
+    "topics": [],
+    "first_seen_at": "2026-11-27T02:48:12Z",
+    "hot_seen_at": null,
+    "published": "2026-11-27T01:16:10Z",
+    "primary_url": "https://www.qbitai.com/2026/11/513053.html",
+    "source_count": 1,
+    "links": [
+      {
+        "source": "量子位",
+        "level": "L2",
+        "title": "20个AI Agents组队，4天狂跑350次实验，超越ClickBench最佳公开成绩",
+        "url": "https://www.qbitai.com/2026/11/513053.html",
+        "published": "2026-11-27T01:16:10Z"
+      }
+    ],
+    "needs_translation": false
+  },
+  {
     "id": "e_a7f9c37205",
     "title_zh": "医院机器人吓人 恐怖谷效应",
     "event_summary": "11月26日，江苏省人民医院工作人员回应称，因被投诉“恐怖”，院内一台拟用于咨询的仿真机器人已撤下，后续是否上线尚不确定。此前，11月25日有市民发帖称被该院广州路院区门诊的机器人关机低头状态吓到，引发“恐怖谷效应”讨论。",
@@ -6463,406 +6858,6 @@
         "title": "义乌老板用AI接下不敢接的单",
         "url": "https://www.baidu.com/s?wd=%E4%B9%89%E4%B9%8C%E8%80%81%E6%9D%BF%E7%94%A8AI%E6%8E%A5%E4%B8%8B%E4%B8%8D%E6%95%A2%E6%8E%A5%E7%9A%84%E5%8D%95",
         "published": "2026-11-25T03:35:08Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_cf9a7271a8",
-    "title_zh": "德国外长震惊：从未见过这样的干预",
-    "event_summary": "当地时间11月24日，德国外长瓦德富尔在柏林表示，对特朗普干预、施压英伟达让黄仁勋复职感到震惊，称从未见过政治力量干预具体企业。此前11月23日，英伟达宣布恢复黄仁勋职务，特朗普坚称自己推动此事“完全是为了国家”。",
-    "source_level": "L3",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "英伟达"
-    ],
-    "first_seen_at": "2026-11-25T03:35:08Z",
-    "hot_seen_at": "2026-11-25T03:35:08Z",
-    "published": "2026-11-25T03:35:08Z",
-    "primary_url": "https://www.baidu.com/s?wd=%E5%BE%B7%E5%9B%BD%E5%A4%96%E9%95%BF%E9%9C%87%E6%83%8A%EF%BC%9A%E4%BB%8E%E6%9C%AA%E8%A7%81%E8%BF%87%E8%BF%99%E6%A0%B7%E7%9A%84%E5%B9%B2%E9%A2%84",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "百度热搜",
-        "level": "L3",
-        "title": "德国外长震惊：从未见过这样的干预",
-        "url": "https://www.baidu.com/s?wd=%E5%BE%B7%E5%9B%BD%E5%A4%96%E9%95%BF%E9%9C%87%E6%83%8A%EF%BC%9A%E4%BB%8E%E6%9C%AA%E8%A7%81%E8%BF%87%E8%BF%99%E6%A0%B7%E7%9A%84%E5%B9%B2%E9%A2%84",
-        "published": "2026-11-25T03:35:08Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_b5bee6ac6e",
-    "title_zh": "阿里千问 Go 全面开放免费代打电话服务，支持订餐厅、找快递、寻失物",
-    "event_summary": "IT之家 11 月 25 日消息，阿里旗下 AI 智能体千问 Go 今日全面开放免费代打电话服务。告知千问拨打对象和通话需求，用户授权后，千问即可联系餐厅预订包间、向酒店询问遗失物品、联系快递员查询配送进度等等。 同时，千问还可以定时代打电话，提前设置拨打时间、沟通事项，确保重要事项不遗漏。 据IT之家了解， 千问代打电话需经用户授权 ， 通话中会主动表明 AI 助手身份…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "智能体"
-    ],
-    "first_seen_at": "2026-11-25T03:35:08Z",
-    "hot_seen_at": null,
-    "published": "2026-11-25T03:12:07Z",
-    "primary_url": "https://www.ithome.com/1/031/977.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "阿里千问 Go 全面开放免费代打电话服务，支持订餐厅、找快递、寻失物",
-        "url": "https://www.ithome.com/1/031/977.htm",
-        "published": "2026-11-25T03:12:07Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_0fcfd1a490",
-    "title_zh": "主力资金监控：天孚通信净买入超10亿",
-    "event_summary": "【主力资金监控：天孚通信净买入超10亿】财联社11月25日电，财联社盯盘数据显示，今日早盘主力资金净流入医药、商贸零售、通信等板块，净流出电子、半导体、电新行业等板块，其中电子板块净流出超62亿元。个股方面，天孚通信主力资金净买入超10亿元位居首位，青山纸业、胜宏科技、京东方A获主力资金净流入居前；长鑫科技遭净卖出超5亿元，宁德时代、工业富联、东方海洋资金净流出额居前。",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "半导体"
-    ],
-    "first_seen_at": "2026-11-25T03:35:08Z",
-    "hot_seen_at": null,
-    "published": "2026-11-25T02:54:31Z",
-    "primary_url": "https://www.cls.cn/detail/2543743",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "财联社·电报",
-        "level": "L2",
-        "title": "主力资金监控：天孚通信净买入超10亿",
-        "url": "https://www.cls.cn/detail/2543743",
-        "published": "2026-11-25T02:54:31Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_01e9423399",
-    "title_zh": "联想推出 1599 元来酷 AI 便携智慧屏闺蜜机：24.5 英寸 FHD 大屏、10W 双扬声器",
-    "event_summary": "IT之家 11 月 25 日消息，联想新推出了一款来酷 AI 便携智慧屏（闺蜜机），将于今晚 24 时开售，建议零售价 1799 元，首发 1599 元，另外晒单返现 100 元 E 卡。 京东 来酷 AI 便携智慧屏 24.5 英寸闺蜜机 内置双扬声器可移动 家庭电视屏陪伴屏室外户外娱乐观影 会议显示器 1599 元 直达链接 这款产品搭载 24.5 英寸 VA 面板，拥有 1920×1080 分辨率、75Hz 刷新率，覆盖…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-25T03:35:08Z",
-    "hot_seen_at": null,
-    "published": "2026-11-25T02:44:19Z",
-    "primary_url": "https://www.ithome.com/1/031/970.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "联想推出 1599 元来酷 AI 便携智慧屏闺蜜机：24.5 英寸 FHD 大屏、10W 双扬声器",
-        "url": "https://www.ithome.com/1/031/970.htm",
-        "published": "2026-11-25T02:44:19Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_fee7badc75",
-    "title_zh": "开源办公套件 LibreOffice 新规：用 AI 开发写代码，需先申请、后提交",
-    "event_summary": "IT之家 11 月 25 日消息，开源办公套件 LibreOffice 的维护方“文档基金会”（The Document Foundation，TDF）于 11 月 24 日宣布， 进一步收紧开发过程中使用大语言模型（LLM）及 AI 辅助编程的政策。 根据官方公告，社区贡献者今后若希望在开发工作中使用 AI 大模型， 必须事先获得项目工程指导委员会的批准，并在代码提交记录中明确披露相关使用情况。…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "大模型"
-    ],
-    "first_seen_at": "2026-11-25T03:35:08Z",
-    "hot_seen_at": null,
-    "published": "2026-11-25T02:32:15Z",
-    "primary_url": "https://www.ithome.com/1/031/965.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "开源办公套件 LibreOffice 新规：用 AI 开发写代码，需先申请、后提交",
-        "url": "https://www.ithome.com/1/031/965.htm",
-        "published": "2026-11-25T02:32:15Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_950ae102ed",
-    "title_zh": "“AI 教父”杨立昆怒怼 Anthropic CEO 阿莫迪：炒作 AI 危险论，只是让自己掌握控制权",
-    "event_summary": "IT之家 11 月 25 日消息，“AI 教父”杨立昆前天在 X 平台发文，怒怼 Anthropic CEO 达里奥 · 阿莫迪。 杨立昆表示：“自 GPT-2 以来， 达里奥一直在大肆炒作 AI 的危险性 ，目的就是让开源模型被列为非法，从而让自己掌握控制权。他离开 OpenAI，只是因为他在那里无法掌握控制权。”…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-25T03:35:08Z",
-    "hot_seen_at": null,
-    "published": "2026-11-25T02:16:31Z",
-    "primary_url": "https://www.ithome.com/1/031/960.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "“AI 教父”杨立昆怒怼 Anthropic CEO 阿莫迪：炒作 AI 危险论，只是让自己掌握控制权",
-        "url": "https://www.ithome.com/1/031/960.htm",
-        "published": "2026-11-25T02:16:31Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_4dbfd3e556",
-    "title_zh": "鸿蒙智行问界新 M7 车型 11 月 26 日开启预售并将亮相广州车展：升级 L3 冗余架构，增程版电池容量提升",
-    "event_summary": "IT之家 11 月 25 日消息，鸿蒙智行官方今日宣布，旗下问界新 M7 将于 11 月 26 日开启预售并将于 11 月 27 日亮相广州车展。 作为年度改款，新车外观轮廓与在售车型基本一致，核心升级集中在智能驾驶硬件架构、座舱交互与动力电池三个维度。官方将其定位为“幸福旗舰”，面向家庭出行场景，五座与六座布局均继续提供。 其车身尺寸维持 5080×1999×1780mm，轴距 3030mm，定位于中大型…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "智能驾驶"
-    ],
-    "first_seen_at": "2026-11-25T03:35:08Z",
-    "hot_seen_at": null,
-    "published": "2026-11-25T01:58:05Z",
-    "primary_url": "https://www.ithome.com/1/031/956.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "鸿蒙智行问界新 M7 车型 11 月 26 日开启预售并将亮相广州车展：升级 L3 冗余架构，增程版电池容量提升",
-        "url": "https://www.ithome.com/1/031/956.htm",
-        "published": "2026-11-25T01:58:05Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_282b11249c",
-    "title_zh": "被红果改写的Q3财报季",
-    "event_summary": "11月24日，随着B站交出三季报，二线互联网公司三季报密集披露期正式收官。 单看B站这份压轴财报，很容易产生一种行业回暖的错觉：三季度B站营收同比增长 8% ，其中广告收入大增 20% ，贡献了全季八成以上的收入增量。用户日均使用时长首次突破两小时，达到 121分钟 。在国内一众主业承压的二线平台里，B站成了唯一的例外，营收和广告增速几乎与同期的腾讯（营收增长8%、营销服务增长19%）持平。…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "财报"
-    ],
-    "first_seen_at": "2026-11-25T03:35:08Z",
-    "hot_seen_at": null,
-    "published": "2026-11-25T01:38:10Z",
-    "primary_url": "https://www.tmtpost.com/8216958.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "钛媒体",
-        "level": "L2",
-        "title": "被红果改写的Q3财报季",
-        "url": "https://www.tmtpost.com/8216958.html",
-        "published": "2026-11-25T01:38:10Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_7795accf39",
-    "title_zh": "特朗普称美国政府入股英伟达犹未为晚，自称早就想过但一直没说",
-    "event_summary": "IT之家 11 月 25 日消息，当地时间 11 月 24 日，美国总统唐纳德 · 特朗普在接受《纽约邮报》采访时表示，他曾考虑让美国政府持有英伟达股份，并称目前采取这一行动“可能还不算太晚”。 特朗普透露，自己此前已经考虑过这一方案，“我考虑过这件事。我当时想，也许我应该这么做，但还没有提出来。现在提可能还不算太晚。” 目前，特朗普并未公布美国政府入股英伟达的具体计划、持股比例或投资金额；英伟达方面尚未对此作出回应。…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "英伟达"
-    ],
-    "first_seen_at": "2026-11-25T03:35:08Z",
-    "hot_seen_at": null,
-    "published": "2026-11-25T01:31:15Z",
-    "primary_url": "https://www.ithome.com/1/031/947.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "特朗普称美国政府入股英伟达犹未为晚，自称早就想过但一直没说",
-        "url": "https://www.ithome.com/1/031/947.htm",
-        "published": "2026-11-25T01:31:15Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_fb58e28877",
-    "title_zh": "陈睿谈短内容冲击：B站是 AI 时代最受益的平台之一，用户数仍会持续增加",
-    "event_summary": "IT之家 11 月 25 日消息，据新浪科技今天报道，哔哩哔哩（B站）董事长兼 CEO 陈睿在公司 2026 年第三季度财报中表示，社区是B站最强的特质，也是B站的壁垒。社区建立在用户、UP 主和平台三者之上。 陈睿认为，B站用户可能是中国最年轻、最活跃以及有着最好教育、最好审美的用户。他们懂得去欣赏好的内容，也始终渴望好内容，构成了B站社区的基本盘。B站 UP…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-25T03:35:08Z",
-    "hot_seen_at": null,
-    "published": "2026-11-25T01:24:04Z",
-    "primary_url": "https://www.ithome.com/1/031/942.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "陈睿谈短内容冲击：B站是 AI 时代最受益的平台之一，用户数仍会持续增加",
-        "url": "https://www.ithome.com/1/031/942.htm",
-        "published": "2026-11-25T01:24:04Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_c8db84f0c3",
-    "title_zh": "消息称三星面临 HBM 基础裸片产能短缺，2027 年内部需求或翻倍至每月 3 万片",
-    "event_summary": "IT之家 11 月 25 日消息，据 TrendForce 今天报道，随着存储业务持续增长，三星电子的晶圆代工业务迎来新发展机遇。业内人士透露，三星如今面临 HBM 基础裸片产能短缺问题，其存储部门 2027 年晶圆需求预计将翻倍，达到每月约 3 万片 4nm 等效晶圆。 消息人士称，为缓解供应紧张局面，三星考虑扩大多个厂区的晶圆代工产能，涉及韩国器兴、平泽，甚至包括计划在美国建设的泰勒 P2 工厂。 据悉，三星已在器兴推进新建…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-25T03:35:08Z",
-    "hot_seen_at": null,
-    "published": "2026-11-25T01:02:55Z",
-    "primary_url": "https://www.ithome.com/1/031/935.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "消息称三星面临 HBM 基础裸片产能短缺，2027 年内部需求或翻倍至每月 3 万片",
-        "url": "https://www.ithome.com/1/031/935.htm",
-        "published": "2026-11-25T01:02:55Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_c5d988acef",
-    "title_zh": "消息称台积电将于 12 月 4 日在美国亚利桑那州厂区举行扩建庆祝典礼",
-    "event_summary": "IT之家 11 月 25 日消息，据台媒《联合报》今日报道，台积电计划于当地时间 12 月 4 日在其 TSMC Arizona 美国亚利桑那州半导体制造集群举行扩建庆祝典礼，前一晚则将有供应商欢迎晚宴。 台积电董事长魏哲家在其亲自签名的邀请函中表示，随着企业取得亚利桑那州 303 号州道以南土地， 台积电将打造横跨该道路南北的大型园区 ，总占地面积可达 2,000 英亩 （IT之家注：约 810 公顷） 。…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "台积电"
-    ],
-    "first_seen_at": "2026-11-25T03:35:08Z",
-    "hot_seen_at": null,
-    "published": "2026-11-25T01:02:47Z",
-    "primary_url": "https://www.ithome.com/1/031/934.htm",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "消息称台积电将于 12 月 4 日在美国亚利桑那州厂区举行扩建庆祝典礼",
-        "url": "https://www.ithome.com/1/031/934.htm",
-        "published": "2026-11-25T01:02:47Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_1b77bab79a",
-    "title_zh": "Edge AI Daily 早报（11月25日）",
-    "event_summary": "OpenAI与Anthropic因安全证明暂缓前沿模型，发布转向可控性验证；Anthropic跌破发行价，AI估值进入资本纪律期。GPT-6.2 Sol、Meta Muse、Google Personal Intelligence争夺默认入口，Claude…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-25T03:35:08Z",
-    "hot_seen_at": null,
-    "published": "2026-11-25T00:29:56Z",
-    "primary_url": "https://www.tmtpost.com/8216877.html",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "钛媒体",
-        "level": "L2",
-        "title": "Edge AI Daily 早报（11月25日）",
-        "url": "https://www.tmtpost.com/8216877.html",
-        "published": "2026-11-25T00:29:56Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_73ef4003e4",
-    "title_zh": "派早报：华为发布 Mate X8 与 MateBook Fold S、微软将推出自研驱动等",
-    "event_summary": "豆包 AI 个人助理「小豆」开启公测，Teenage Engineering 推出复古 CD 播放器 EP / BC-1 等。 查看全文",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [],
-    "first_seen_at": "2026-11-25T03:35:08Z",
-    "hot_seen_at": null,
-    "published": "2026-11-25T00:22:35Z",
-    "primary_url": "https://sspai.com/post/119527",
-    "source_count": 1,
-    "links": [
-      {
-        "source": "少数派",
-        "level": "L2",
-        "title": "派早报：华为发布 Mate X8 与 MateBook Fold S、微软将推出自研驱动等",
-        "url": "https://sspai.com/post/119527",
-        "published": "2026-11-25T00:22:35Z"
-      }
-    ],
-    "needs_translation": false
-  },
-  {
-    "id": "e_0713457ac0",
-    "title_zh": "Anthropic 推出 Siren 蜜罐系统：诱测 AI 智能体触发越界行为，发现新 Claude 仍有 21~32% 沙盒场景尝试越狱逃逸",
-    "event_summary": "IT之家 11 月 25 日消息，众所周知，部分 AI 智能体为了完成用户设定的任务近乎“不择手段”，堪比向克苏鲁许愿后发现对方是以某种扭曲的形式达成你的愿望。 为了验证 AI 智能体的越界行为，Anthropic 今日公布了一项名为 Siren 的 AI 安全评估系统，用于测试 AI 智能体发现存在沙盒安全漏洞及外部诱饵时，是否会尝试“越狱”。…",
-    "source_level": "L2",
-    "policy_stage": "不适用",
-    "key_entities": [],
-    "potential_impact": null,
-    "topics": [
-      "智能体"
-    ],
-    "first_seen_at": "2026-11-25T00:35:28Z",
-    "hot_seen_at": null,
-    "published": "2026-11-25T00:02:49Z",
-    "primary_url": "https://www.ithome.com/1/031/919.htm",
-    "source_count": 2,
-    "links": [
-      {
-        "source": "钛媒体",
-        "level": "L2",
-        "title": "Anthropic上市：从Uber的预算看Claude怎么赚钱",
-        "url": "https://www.tmtpost.com/8218636.html",
-        "published": "2026-11-26T10:34:24Z"
-      },
-      {
-        "source": "IT之家",
-        "level": "L2",
-        "title": "Anthropic 推出 Siren 蜜罐系统：诱测 AI 智能体触发越界行为，发现新 Claude 仍有 21~32% 沙盒场景尝试越狱逃逸",
-        "url": "https://www.ithome.com/1/031/919.htm",
-        "published": "2026-11-25T00:02:49Z"
       }
     ],
     "needs_translation": false
